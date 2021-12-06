@@ -6,9 +6,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
-using ScreenTest.Objects;
+using MyGame.Objects;
 
-namespace ScreenTest.Screens
+namespace MyGame.Screens
 {
     public class Screen1 : GameScreen
     {
@@ -19,7 +19,7 @@ namespace ScreenTest.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.HasBeenPressed(Keys.Escape))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
             {
                 // back to menu
                 Game.LoadMenuScreen();
@@ -32,7 +32,7 @@ namespace ScreenTest.Screens
         {
             Game.DrawStart();
 
-            Game.SpriteBatch.DrawString(Assets.font, "this is game", Vector2.Zero, Color.Blue);
+            Game.SpriteBatch.DrawString(Assets.font, "this is game you can escape to menu", Vector2.Zero, Color.White);
             player.Draw(Game.SpriteBatch);
 
             Game.DrawEnd();

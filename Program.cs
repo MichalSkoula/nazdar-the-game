@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScreenTest
+namespace MyGame
 {
     public static class Program
     {

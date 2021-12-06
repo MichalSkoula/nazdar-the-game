@@ -5,14 +5,8 @@ using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using System;
 
-namespace ScreenTest
+namespace MyGame
 {
-    enum ScreenNames
-    {
-        MenuScreen,
-        Screen1
-    }
-
     public class Game1 : Game
     {
         public GraphicsDeviceManager graphics;
@@ -22,8 +16,7 @@ namespace ScreenTest
 
         private readonly ScreenManager _screenManager;
         private AssetsLoader _assetsLoader = new AssetsLoader();
-        private ScreenNames _currentScreen = ScreenNames.MenuScreen;
-        private float scale;
+        public static float Scale { get; set; }
 
         public Game1()
         {
@@ -50,7 +43,7 @@ namespace ScreenTest
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
             // start it with menu
-            LoadMenuScreen();
+            LoadMenuScreen(false);
         }
 
         protected override void LoadContent()
@@ -66,28 +59,33 @@ namespace ScreenTest
         {
             deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Keyboard.GetState();
-            Mouse.GetState();
+            Controls.Keyboard.GetState();
+            Controls.Mouse.GetState();
 
             base.Update(gameTime);
         }
 
-        public void LoadMenuScreen()
+        public void LoadMenuScreen(bool transition = true)
         {
-            _currentScreen = ScreenNames.MenuScreen;
-            _screenManager.LoadScreen(new Screens.MenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black));
+            if (transition)
+            {
+                _screenManager.LoadScreen(new Screens.MenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black));
+            }
+            else
+            {
+                _screenManager.LoadScreen(new Screens.MenuScreen(this));
+            }
         }
 
         public void LoadScreen1()
         {
-            _currentScreen = ScreenNames.Screen1;
             _screenManager.LoadScreen(new Screens.Screen1(this), new FadeTransition(GraphicsDevice, Color.Black));
         }
 
         // draw renderTarget to screen 
         public void DrawStart()
         {
-            scale = 1f / (1080f / graphics.GraphicsDevice.Viewport.Height);
+            Scale = 1f / (1080f / graphics.GraphicsDevice.Viewport.Height);
 
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -101,7 +99,7 @@ namespace ScreenTest
             GraphicsDevice.SetRenderTarget(null);
             GraphicsDevice.Clear(Color.CornflowerBlue);
             SpriteBatch.Begin();
-            SpriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, scale, SpriteEffects.None, 0f);
+            SpriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
             SpriteBatch.End();
         }
     }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace ScreenTest.Objects
+namespace MyGame.Objects
 {
     class Player
     {
@@ -14,15 +14,15 @@ namespace ScreenTest.Objects
 
         public void Update(float deltaTime)
         {
-            if (Keyboard.IsPressed(Keys.Right))
+            if (Controls.Keyboard.IsPressed(Keys.Right))
             {
                 posX += deltaTime * speed;
             }
         }
 
-        public void Draw(SpriteBatch _spriteBatch)
+        public void Draw(SpriteBatch SpriteBatch)
         {
-            _spriteBatch.Draw(Assets.player, new Vector2(posX, 20), Color.White);
+            SpriteBatch.Draw(Assets.player, new Vector2(posX, 20), Color.White);
         }
     }
 }

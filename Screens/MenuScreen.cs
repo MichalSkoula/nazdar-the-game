@@ -7,13 +7,19 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 
-namespace ScreenTest.Screens
+namespace MyGame.Screens
 {
     public class MenuScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
         public MenuScreen(Game1 game) : base(game) { }
+        private Button startButton;
 
+        public override void Initialize()
+        {
+            startButton = new Button(new Vector2(10, 100), new Point(150, 60), "Start");
+            base.Initialize();
+        }
         public override void LoadContent()
         {
             base.LoadContent();
@@ -21,44 +27,36 @@ namespace ScreenTest.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.HasBeenPressed(Keys.Escape))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
             {
                 // exit game from menu
                 Game.Exit();
             }
-            else if (Keyboard.HasBeenPressed(Keys.LeftAlt))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.LeftAlt))
             {
                 // change resolution
                 Game.graphics.PreferredBackBufferWidth = 640;
                 Game.graphics.PreferredBackBufferHeight = 360;
                 Game.graphics.ApplyChanges();
             }
-            else if (Keyboard.HasBeenPressed(Keys.LeftControl))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
             {
                 // change resolution
                 Game.graphics.PreferredBackBufferWidth = 1280;
                 Game.graphics.PreferredBackBufferHeight = 720;
                 Game.graphics.ApplyChanges();
             }
-            else if (Keyboard.HasBeenPressed(Keys.Enter))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
             {
                 // to game
                 Game.LoadScreen1();
             }
 
-            if (Mouse.HasBeenPressed(true))
+            startButton.Update();
+            if (startButton.HasBeenClicked())
             {
-                // change resolution
-                Game.graphics.PreferredBackBufferWidth = 640;
-                Game.graphics.PreferredBackBufferHeight = 360;
-                Game.graphics.ApplyChanges();
-            }
-            else if (Mouse.HasBeenPressed(false))
-            {
-                // change resolution
-                Game.graphics.PreferredBackBufferWidth = 1280;
-                Game.graphics.PreferredBackBufferHeight = 720;
-                Game.graphics.ApplyChanges();
+                // to game
+                Game.LoadScreen1();
             }
         }
 
@@ -66,7 +64,9 @@ namespace ScreenTest.Screens
         {
             Game.DrawStart();
 
-            Game.SpriteBatch.DrawString(Assets.font, "MENU press enter to start; press ctrl for 720p; press alt for 360p", Vector2.Zero, Color.Blue);
+            Game.SpriteBatch.DrawString(Assets.font, "MENU; press enter or click button to start; press ctrl for 720p; press alt for 360p", Vector2.Zero, Color.White);
+
+            startButton.Draw(Game.SpriteBatch);
 
             Game.DrawEnd();
         }
