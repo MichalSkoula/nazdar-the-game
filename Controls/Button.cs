@@ -37,21 +37,13 @@ namespace MyGame
 
         public bool HasBeenClicked()
         {
-            if (!Controls.Mouse.HasBeenPressed(true))
-            {
-                return false;
+            if (Controls.Mouse.HasBeenPressed(true) && Hitbox.Contains(new Point(Controls.Mouse.Position.X, Controls.Mouse.Position.Y))) { 
+                // perform click animation & return
+                AnimationTime = 30;
+                _texture = _clickedTexture;
+                return true;
             }
 
-            if (Controls.Mouse.Position.X >= Hitbox.X && Controls.Mouse.Position.X <= (Hitbox.X + Hitbox.Width))
-            {
-                if (Controls.Mouse.Position.Y >= Hitbox.Y && Controls.Mouse.Position.Y <= (Hitbox.Y + Hitbox.Height))
-                {
-                    // perform click animation & return
-                    AnimationTime = 30;
-                    _texture = _clickedTexture;
-                    return true;
-                }
-            }
             return false;
         }
 
