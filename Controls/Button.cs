@@ -12,27 +12,26 @@ namespace MyGame
         private Texture2D _clickedTexture;
         private Texture2D _texture { get; set; }
         private int _padding;
-        public Vector2 Position { get; set; }
-        public Point Dimensions { get; set; }
         public string Text { get; set; }
         public int AnimationTime { get; set; }
+        public Rectangle Hitbox;
 
-        public Button(Vector2 position, Point dimensions, string text, bool autoresize = true)
+        public Button(int x, int y, int width, int height, string text, bool autoresize = true)
         {
             _staticTexture = Assets.button;
             _clickedTexture = Assets.buttonPressed;
             _texture = _staticTexture;
             _padding = 5;
-            Dimensions = dimensions;
-            Position = position;
             Text = text;
             AnimationTime = 0;
+            Hitbox = new Rectangle(x, y, width, height);
 
             // resize button to fit text
             if (autoresize)
             {
                 Vector2 textSize = Assets.font.MeasureString(Text);
-                Dimensions = new Point((int)textSize.X + _padding * 2, (int)textSize.Y + _padding * 2);
+                Hitbox.Width = (int)textSize.X + _padding * 2;
+                Hitbox.Height = (int)textSize.Y + _padding * 2;
             }
         }
 
@@ -43,9 +42,9 @@ namespace MyGame
                 return false;
             }
 
-            if (Controls.Mouse.Position.X >= Position.X && Controls.Mouse.Position.X <= (Position.X + Dimensions.X))
+            if (Controls.Mouse.Position.X >= Hitbox.X && Controls.Mouse.Position.X <= (Hitbox.X + Hitbox.Width))
             {
-                if (Controls.Mouse.Position.Y >= Position.Y && Controls.Mouse.Position.Y <= (Position.Y + Dimensions.Y))
+                if (Controls.Mouse.Position.Y >= Hitbox.Y && Controls.Mouse.Position.Y <= (Hitbox.Y + Hitbox.Height))
                 {
                     // perform click animation & return
                     AnimationTime = 30;
@@ -71,8 +70,8 @@ namespace MyGame
 
         public void Draw(SpriteBatch SpriteBatch)
         {
-            SpriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, (int)Dimensions.X, (int)Dimensions.Y), Color.White);
-            SpriteBatch.DrawString(Assets.font, Text, new Vector2(Position.X + _padding, Position.Y + _padding), Color.Black);
+            SpriteBatch.Draw(_texture, Hitbox, Color.White);
+            SpriteBatch.DrawString(Assets.font, Text, new Vector2(Hitbox.X + _padding, Hitbox.Y + _padding), Color.Black);
         }
     }
 }

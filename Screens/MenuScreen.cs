@@ -17,7 +17,7 @@ namespace MyGame.Screens
 
         public override void Initialize()
         {
-            startButton = new Button(new Vector2(10, 100), new Point(150, 60), "Start");
+            startButton = new Button(10, 100, 150, 60, "Start");
             base.Initialize();
         }
         public override void LoadContent()
