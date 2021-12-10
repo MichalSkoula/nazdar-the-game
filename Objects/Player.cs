@@ -7,22 +7,37 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MyGame.Objects
 {
-    class Player
+    public class Player : Component
     {
-        private float posX = 0;
-        private int speed = 1000;
+        private int speed = 300;
 
-        public void Update(float deltaTime)
+        public Player(Texture2D sprite, int x, int y)
         {
-            if (Controls.Keyboard.IsPressed(Keys.Right))
-            {
-                posX += deltaTime * speed;
-            }
+            Sprite = sprite;
+            Hitbox = new Rectangle(x, y, Sprite.Width, Sprite.Height);
         }
 
-        public void Draw(SpriteBatch SpriteBatch)
+        public override void Update(float deltaTime)
         {
-            SpriteBatch.Draw(Assets.player, new Vector2(posX, 20), Color.White);
+            Rectangle newHitbox = Hitbox;
+            if (Controls.Keyboard.IsPressed(Keys.Right))
+            {
+                newHitbox.X += (int)(deltaTime * speed);
+            }
+            if (Controls.Keyboard.IsPressed(Keys.Left))
+            {
+                newHitbox.X -= (int)(deltaTime * speed);
+            }
+            if (Controls.Keyboard.IsPressed(Keys.Up))
+            {
+                newHitbox.Y -= (int)(deltaTime * speed);
+            }
+            if (Controls.Keyboard.IsPressed(Keys.Down))
+            {
+                newHitbox.Y += (int)(deltaTime * speed);
+            }
+
+            Hitbox = newHitbox;
         }
     }
 }

@@ -13,10 +13,12 @@ namespace MyGame
         public SpriteBatch SpriteBatch;
         public RenderTarget2D renderTarget;
         public float deltaTime;
-
+        
         private readonly ScreenManager _screenManager;
         private AssetsLoader _assetsLoader = new AssetsLoader();
         public static float Scale { get; set; }
+        public const int screenWidth = 1920;
+        public const int screenHeight = 1080;
 
         public Game1()
         {
@@ -52,7 +54,7 @@ namespace MyGame
             _assetsLoader.Load(Content);
 
             // internal resolution will always be 1080p
-            renderTarget = new RenderTarget2D(GraphicsDevice, 1920, 1080);
+            renderTarget = new RenderTarget2D(GraphicsDevice, screenWidth, screenHeight);
         }
 
         protected override void Update(GameTime gameTime)
@@ -91,6 +93,15 @@ namespace MyGame
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             SpriteBatch.Begin();
+        }
+        public void DrawStart(Matrix transform)
+        {
+            Scale = 1f / (1080f / graphics.GraphicsDevice.Viewport.Height);
+
+            GraphicsDevice.SetRenderTarget(renderTarget);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            SpriteBatch.Begin(transformMatrix: transform);
         }
         public void DrawEnd()
         {

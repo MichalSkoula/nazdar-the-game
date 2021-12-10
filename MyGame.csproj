@@ -10,6 +10,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="MonogameExtended\**" />
+    <EmbeddedResource Remove="MonogameExtended\**" />
+    <None Remove="MonogameExtended\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -27,8 +32,5 @@
     <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MonogameExtended\" />
   </ItemGroup>
 </Project>

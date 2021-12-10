@@ -65,7 +65,6 @@ namespace MyGame.Screens
             Game.DrawStart();
 
             Game.SpriteBatch.DrawString(Assets.font, "MENU; press enter or click button to start; press ctrl for 720p; press alt for 360p", Vector2.Zero, Color.White);
-
             startButton.Draw(Game.SpriteBatch);
 
             Game.DrawEnd();

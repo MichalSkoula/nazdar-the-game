@@ -15,7 +15,9 @@ namespace MyGame.Screens
         private new Game1 Game => (Game1)base.Game;
         public Screen1(Game1 game) : base(game) { }
 
-        private Player player = new Player();
+        private Camera _camera = new Camera();
+
+        private Player _player = new Player(Assets.player, 50, 50);
 
         public override void Update(GameTime gameTime)
         {
@@ -24,16 +26,19 @@ namespace MyGame.Screens
                 // back to menu
                 Game.LoadMenuScreen();
             }
-            
-            player.Update(Game.deltaTime);
+
+            _player.Update(Game.deltaTime);
+
+            _camera.Follow(_player);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            Game.DrawStart();
+            Game.DrawStart(_camera.Transform);
 
-            Game.SpriteBatch.DrawString(Assets.font, "this is game you can escape to menu", Vector2.Zero, Color.White);
-            player.Draw(Game.SpriteBatch);
+            Game.SpriteBatch.Draw(Assets.background, Vector2.Zero, Color.White); // background
+            Game.SpriteBatch.DrawString(Assets.font, "this is game you can escape to menu", new Vector2(0 - _camera.Transform.Translation.X, 0 - _camera.Transform.Translation.Y), Color.White); // minus translation to stay in place
+            _player.Draw(Game.SpriteBatch); // camera follows
 
             Game.DrawEnd();
         }
