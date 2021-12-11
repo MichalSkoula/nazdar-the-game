@@ -37,7 +37,7 @@ namespace MyGame.Screens
             Game.DrawStart(_camera.Transform);
 
             Game.SpriteBatch.Draw(Assets.background, Vector2.Zero, Color.White); // background
-            Game.SpriteBatch.DrawString(Assets.font, "this is game you can escape to menu", new Vector2(0 - _camera.Transform.Translation.X, 0 - _camera.Transform.Translation.Y), Color.White); // minus translation to stay in place
+            Game.SpriteBatch.DrawString(Assets.fontLarge, "this is game you can escape to menu", new Vector2(0 - _camera.Transform.Translation.X, 0 - _camera.Transform.Translation.Y), Color.White); // minus translation to stay in place
             _player.Draw(Game.SpriteBatch); // camera follows
 
             Game.DrawEnd();

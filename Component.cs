@@ -11,10 +11,7 @@ namespace MyGame
         public Rectangle Hitbox { get; protected set; }
         public Texture2D Sprite { get; protected set; }
 
-        public void Draw(SpriteBatch spriteBatch) 
-        {
-            spriteBatch.Draw(Sprite, Hitbox, Color.White);
-        }
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public abstract void Update(float deltaTime);
     }

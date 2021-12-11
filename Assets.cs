@@ -14,7 +14,9 @@ namespace MyGame
         public static Texture2D buttonPressed;
         public static Texture2D background;
 
-        public static SpriteFont font;
+        public static SpriteFont fontSmall;
+        public static SpriteFont fontMedium;
+        public static SpriteFont fontLarge;
     }
 
     class AssetsLoader
@@ -26,7 +28,9 @@ namespace MyGame
             Assets.buttonPressed = Content.Load<Texture2D>("button_pressed");
             Assets.background = Content.Load<Texture2D>("Background");
 
-            Assets.font = Content.Load<SpriteFont>("spaceFont");
+            Assets.fontSmall = Content.Load<SpriteFont>("fontSmall");
+            Assets.fontMedium = Content.Load<SpriteFont>("fontMedium");
+            Assets.fontLarge = Content.Load<SpriteFont>("fontLarge");
         }
     }
 }

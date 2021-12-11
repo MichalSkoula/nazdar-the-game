@@ -39,5 +39,10 @@ namespace MyGame.Objects
 
             Hitbox = newHitbox;
         }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Sprite, Hitbox, Color.White);
+        }
     }
 }

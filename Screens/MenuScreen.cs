@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using MyGame.Controls;
 
 namespace MyGame.Screens
 {
@@ -13,11 +14,43 @@ namespace MyGame.Screens
     {
         private new Game1 Game => (Game1)base.Game;
         public MenuScreen(Game1 game) : base(game) { }
-        private Button startButton;
+
+        private Button _startButton;
+        private List<Button> _resolutionButtons = new List<Button>();
 
         public override void Initialize()
         {
-            startButton = new Button(10, 100, 150, 60, "Start");
+            _startButton = new Button(Game1.screenWidth / 2 - 60, 50, null, ButtonSize.large, "Start");
+
+            // get allowed resolutions (+for fullscreen mode)
+            int i = 0;
+            foreach (DisplayMode mode in GraphicsAdapter.DefaultAdapter.SupportedDisplayModes)
+            {
+                bool is169 = (Math.Round((double)mode.Width / mode.Height, 2) == 1.78);
+                if (!is169)
+                {
+                    continue;
+                }
+
+                i++;
+                _resolutionButtons.Add(new Button(
+                    10, 150 + i * ((int)ButtonSize.small + 10), 
+                    null, ButtonSize.small, 
+                    mode.Width + "x" + mode.Height, 
+                    true, 
+                    mode.Width + "x" + mode.Height + "xFalse"
+                ));
+
+                i++;
+                _resolutionButtons.Add(new Button(
+                    10, 150 + i * ((int)ButtonSize.small + 10), 
+                    null, ButtonSize.small, 
+                    mode.Width + "x" + mode.Height + " Fullscreen", 
+                    true, 
+                    mode.Width + "x" + mode.Height + "xTrue"
+                ));
+            }
+
             base.Initialize();
         }
         public override void LoadContent()
@@ -32,31 +65,32 @@ namespace MyGame.Screens
                 // exit game from menu
                 Game.Exit();
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.LeftAlt))
-            {
-                // change resolution
-                Game.graphics.PreferredBackBufferWidth = 640;
-                Game.graphics.PreferredBackBufferHeight = 360;
-                Game.graphics.ApplyChanges();
-            }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
-            {
-                // change resolution
-                Game.graphics.PreferredBackBufferWidth = 1280;
-                Game.graphics.PreferredBackBufferHeight = 720;
-                Game.graphics.ApplyChanges();
-            }
             else if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
             {
                 // to game
                 Game.LoadScreen1();
             }
 
-            startButton.Update();
-            if (startButton.HasBeenClicked())
+            // start
+            _startButton.Update();
+            if (_startButton.HasBeenClicked())
             {
-                // to game
+                
                 Game.LoadScreen1();
+            }
+
+            // resolution
+            foreach (Button btn in _resolutionButtons)
+            {
+                btn.Update();
+                if (btn.HasBeenClicked())
+                {
+                    string[] resolution = btn.Data.Split('x');
+                    Game.graphics.PreferredBackBufferWidth = Int32.Parse(resolution[0]);
+                    Game.graphics.PreferredBackBufferHeight = Int32.Parse(resolution[1]);
+                    Game.graphics.IsFullScreen = resolution[2] == "True";
+                    Game.graphics.ApplyChanges();
+                }
             }
         }
 
@@ -64,8 +98,16 @@ namespace MyGame.Screens
         {
             Game.DrawStart();
 
-            Game.SpriteBatch.DrawString(Assets.font, "MENU; press enter or click button to start; press ctrl for 720p; press alt for 360p", Vector2.Zero, Color.White);
-            startButton.Draw(Game.SpriteBatch);
+            _startButton.Draw(Game.SpriteBatch);
+
+            if (_resolutionButtons.Count > 0)
+            {
+                Game.SpriteBatch.DrawString(Assets.fontMedium, "Choose resolution", new Vector2(10, 140), Color.White);
+                foreach (Button btn in _resolutionButtons)
+                {
+                    btn.Draw(Game.SpriteBatch);
+                }
+            }
 
             Game.DrawEnd();
         }

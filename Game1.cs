@@ -37,12 +37,18 @@ namespace MyGame
 
             base.Initialize();
 
+            // no border
+            Window.IsBorderless = true;
+
             // window size
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
             graphics.ApplyChanges();
 
             SpriteBatch = new SpriteBatch(GraphicsDevice);
+
+            // internal resolution will always be 1080p
+            renderTarget = new RenderTarget2D(GraphicsDevice, screenWidth, screenHeight);
 
             // start it with menu
             LoadMenuScreen(false);
@@ -52,9 +58,6 @@ namespace MyGame
         {
             // load all assets
             _assetsLoader.Load(Content);
-
-            // internal resolution will always be 1080p
-            renderTarget = new RenderTarget2D(GraphicsDevice, screenWidth, screenHeight);
         }
 
         protected override void Update(GameTime gameTime)
