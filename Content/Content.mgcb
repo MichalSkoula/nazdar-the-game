@@ -37,6 +37,18 @@
 /processorParam:TextureFormat=Color
 /build:button.png
 
+#begin button_hover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:button_hover.png
+
 #begin button_pressed.png
 /importer:TextureImporter
 /processor:TextureProcessor

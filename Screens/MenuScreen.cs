@@ -16,39 +16,25 @@ namespace MyGame.Screens
         public MenuScreen(Game1 game) : base(game) { }
 
         private Button _startButton;
+        private Button _fullscreenButton;
         private List<Button> _resolutionButtons = new List<Button>();
 
         public override void Initialize()
         {
             _startButton = new Button(Game1.screenWidth / 2 - 60, 50, null, ButtonSize.large, "Start");
+            _fullscreenButton = new Button(10, 190, null, ButtonSize.small, "Toggle Fullscreen");
 
-            // get allowed resolutions (+for fullscreen mode)
+            // get allowed resolutions 
             int i = 0;
             foreach (DisplayMode mode in GraphicsAdapter.DefaultAdapter.SupportedDisplayModes)
             {
-                bool is169 = (Math.Round((double)mode.Width / mode.Height, 2) == 1.78);
-                if (!is169)
+                if (GraphicsDevice.DisplayMode.Height < mode.Height || GraphicsDevice.DisplayMode.Width < mode.Width)
                 {
                     continue;
                 }
 
                 i++;
-                _resolutionButtons.Add(new Button(
-                    10, 150 + i * ((int)ButtonSize.small + 10), 
-                    null, ButtonSize.small, 
-                    mode.Width + "x" + mode.Height, 
-                    true, 
-                    mode.Width + "x" + mode.Height + "xFalse"
-                ));
-
-                i++;
-                _resolutionButtons.Add(new Button(
-                    10, 150 + i * ((int)ButtonSize.small + 10), 
-                    null, ButtonSize.small, 
-                    mode.Width + "x" + mode.Height + " Fullscreen", 
-                    true, 
-                    mode.Width + "x" + mode.Height + "xTrue"
-                ));
+                _resolutionButtons.Add(new Button(10, 210 + i * ((int)ButtonSize.small + 10), null, ButtonSize.small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height ));
             }
 
             base.Initialize();
@@ -79,6 +65,14 @@ namespace MyGame.Screens
                 Game.LoadScreen1();
             }
 
+            // fullscreen
+            _fullscreenButton.Update();
+            if (_fullscreenButton.HasBeenClicked())
+            {
+                Game.graphics.IsFullScreen = !Game.graphics.IsFullScreen;
+                Game.graphics.ApplyChanges();
+            }
+
             // resolution
             foreach (Button btn in _resolutionButtons)
             {
@@ -88,7 +82,6 @@ namespace MyGame.Screens
                     string[] resolution = btn.Data.Split('x');
                     Game.graphics.PreferredBackBufferWidth = Int32.Parse(resolution[0]);
                     Game.graphics.PreferredBackBufferHeight = Int32.Parse(resolution[1]);
-                    Game.graphics.IsFullScreen = resolution[2] == "True";
                     Game.graphics.ApplyChanges();
                 }
             }
@@ -99,6 +92,7 @@ namespace MyGame.Screens
             Game.DrawStart();
 
             _startButton.Draw(Game.SpriteBatch);
+            _fullscreenButton.Draw(Game.SpriteBatch);
 
             if (_resolutionButtons.Count > 0)
             {

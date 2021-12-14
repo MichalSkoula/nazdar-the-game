@@ -16,9 +16,19 @@ namespace MyGame
         
         private readonly ScreenManager _screenManager;
         private AssetsLoader _assetsLoader = new AssetsLoader();
-        public static float Scale { get; set; }
+
+        // default window size
+        public const int screenWidthDefault = 1280;
+        public const int screenHeightDefault = 720;
+
+        // internal screen resolution
         public const int screenWidth = 1920;
         public const int screenHeight = 1080;
+
+        // scaling + top / left bar
+        public static float Scale { get; private set; }
+        public static int BarHeight { get; private set; }
+        public static int BarWidth { get; private set; }
 
         public Game1()
         {
@@ -41,13 +51,13 @@ namespace MyGame
             Window.IsBorderless = true;
 
             // window size
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = screenWidthDefault;
+            graphics.PreferredBackBufferHeight = screenHeightDefault;
             graphics.ApplyChanges();
 
             SpriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // internal resolution will always be 1080p
+            // internal resolution
             renderTarget = new RenderTarget2D(GraphicsDevice, screenWidth, screenHeight);
 
             // start it with menu
@@ -90,8 +100,6 @@ namespace MyGame
         // draw renderTarget to screen 
         public void DrawStart()
         {
-            Scale = 1f / (1080f / graphics.GraphicsDevice.Viewport.Height);
-
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -99,8 +107,6 @@ namespace MyGame
         }
         public void DrawStart(Matrix transform)
         {
-            Scale = 1f / (1080f / graphics.GraphicsDevice.Viewport.Height);
-
             GraphicsDevice.SetRenderTarget(renderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -110,10 +116,35 @@ namespace MyGame
         {
             SpriteBatch.End();
 
+            // calculate Scale and bars
+            float outputAspect = Window.ClientBounds.Width / (float)Window.ClientBounds.Height;
+            float preferredAspect = screenWidth / (float)screenHeight;
+            BarHeight = 0;
+            BarWidth = 0;
+            Rectangle dst;
+            if (outputAspect <= preferredAspect)
+            {
+                // output is taller than it is wider, bars on top/bottom
+                int presentHeight = (int)((Window.ClientBounds.Width / preferredAspect));
+                BarHeight = (Window.ClientBounds.Height - presentHeight) / 2;
+                dst = new Rectangle(0, BarHeight, Window.ClientBounds.Width, presentHeight);
+
+                Scale = 1f / ((float)screenWidth / Window.ClientBounds.Width);
+            }
+            else
+            {
+                // output is wider than it is tall, bars left/right
+                int presentWidth = (int)((Window.ClientBounds.Height * preferredAspect));
+                BarWidth = (Window.ClientBounds.Width - presentWidth) / 2;
+                dst = new Rectangle(BarWidth, 0, presentWidth, Window.ClientBounds.Height);
+
+                Scale = 1f / ((float)screenHeight / Window.ClientBounds.Height);
+            }
+
             GraphicsDevice.SetRenderTarget(null);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
             SpriteBatch.Begin();
-            SpriteBatch.Draw(renderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, Scale, SpriteEffects.None, 0f);
+            SpriteBatch.Draw(renderTarget, dst, Color.White);
             SpriteBatch.End();
         }
     }

@@ -17,6 +17,7 @@ namespace MyGame.Controls
     {
         private Texture2D _staticTexture;
         private Texture2D _clickedTexture;
+        private Texture2D _hoverTexture;
         private Texture2D _texture { get; set; }
         private int _padding;
         private SpriteFont _font;
@@ -30,6 +31,7 @@ namespace MyGame.Controls
         {
             _staticTexture = Assets.button;
             _clickedTexture = Assets.buttonPressed;
+            _hoverTexture = Assets.buttonHover;
             _texture = _staticTexture;
             _padding = 5;
             Data = data;
@@ -66,7 +68,7 @@ namespace MyGame.Controls
 
         public bool HasBeenClicked()
         {
-            if (Active && Controls.Mouse.HasBeenPressed(true) && Hitbox.Contains(new Point(Controls.Mouse.Position.X, Controls.Mouse.Position.Y))) { 
+            if (Active && Controls.Mouse.HasBeenPressed(true) && Hitbox.Contains(Controls.Mouse.Position)) { 
                 // perform click animation & return
                 AnimationTime = 30;
                 _texture = _clickedTexture;
@@ -78,14 +80,22 @@ namespace MyGame.Controls
 
         public void Update()
         {
-            if (AnimationTime > 0)
-            {
-                AnimationTime--;
-            }
 
-            if (AnimationTime == 0)
+            if (Active && Hitbox.Contains(Controls.Mouse.Position))
             {
-                _texture = _staticTexture;
+                _texture = _hoverTexture;
+            }
+            else
+            {
+                if (AnimationTime > 0)
+                {
+                    AnimationTime--;
+                }
+
+                if (AnimationTime == 0)
+                {
+                    _texture = _staticTexture;
+                }
             }
         }
 

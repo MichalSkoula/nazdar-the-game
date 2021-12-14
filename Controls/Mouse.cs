@@ -17,8 +17,9 @@ namespace MyGame.Controls
             previousMouseState = currentMouseState;
             currentMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
 
-            // deal with renderTarget scale
-            Point newPosition = new Point((int)(currentMouseState.Position.X / Game1.Scale), (int)(currentMouseState.Position.Y / Game1.Scale));
+            // deal with renderTarget scale and bars
+            Point newPosition = new Point((int)((currentMouseState.Position.X - Game1.BarWidth) / Game1.Scale), (int)((currentMouseState.Position.Y - Game1.BarHeight) / Game1.Scale));
+            System.Diagnostics.Debug.WriteLine(((currentMouseState.Position.X - Game1.BarWidth) / Game1.Scale) + " " + ((currentMouseState.Position.Y - Game1.BarHeight) / Game1.Scale));
             Position = newPosition;
 
             return currentMouseState;
