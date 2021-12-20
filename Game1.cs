@@ -48,7 +48,7 @@ namespace MyGame
             base.Initialize();
 
             // no border
-            Window.IsBorderless = true;
+            //Window.IsBorderless = true;
 
             // window size
             graphics.PreferredBackBufferWidth = screenWidthDefault;

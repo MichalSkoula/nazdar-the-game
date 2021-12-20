@@ -37,6 +37,7 @@ namespace MyGame.Objects
 
         public override void Update(float deltaTime)
         {
+            // movement
             bool isMoving = true;
             Rectangle newHitbox = Hitbox;
 
@@ -76,6 +77,12 @@ namespace MyGame.Objects
                 _anim.ResetLoop();
             }
             
+            // shoot 
+            if (Controls.Keyboard.HasBeenPressed(Keys.Space))
+            {
+                Assets.blip.Play(1f, 0f, 0f); // volume 0-1, pitch (octaves), left-right (-1 - 1)
+            }
+
             _anim.Update(deltaTime);
         }
 

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace MyGame
 {
     static class Assets
     {
+        // images
         public static Texture2D player;
         public static Texture2D playerDown;
         public static Texture2D playerUp;
@@ -21,9 +23,14 @@ namespace MyGame
 
         public static Texture2D background;
 
+        // fonts
         public static SpriteFont fontSmall;
         public static SpriteFont fontMedium;
         public static SpriteFont fontLarge;
+
+        // audio
+        public static SoundEffect blip;
+        public static Song nature;
     }
 
     class AssetsLoader
@@ -45,6 +52,9 @@ namespace MyGame
             Assets.fontSmall = Content.Load<SpriteFont>("fontSmall");
             Assets.fontMedium = Content.Load<SpriteFont>("fontMedium");
             Assets.fontLarge = Content.Load<SpriteFont>("fontLarge");
+
+            Assets.blip = Content.Load<SoundEffect>("Sounds/blip");
+            Assets.nature = Content.Load<Song>("Sounds/nature");
         }
     }
 }

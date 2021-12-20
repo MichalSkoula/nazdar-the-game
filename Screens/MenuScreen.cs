@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using MyGame.Controls;
@@ -36,6 +37,9 @@ namespace MyGame.Screens
                 i++;
                 _resolutionButtons.Add(new Button(10, 210 + i * ((int)ButtonSize.small + 10), null, ButtonSize.small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height ));
             }
+
+            // play song 
+            MediaPlayer.Play(Assets.nature);
 
             base.Initialize();
         }

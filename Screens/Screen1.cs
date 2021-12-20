@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using MyGame.Objects;
@@ -18,6 +19,14 @@ namespace MyGame.Screens
         private Camera _camera = new Camera();
 
         private Player _player = new Player(Assets.player, 50, 50);
+
+        public override void Initialize()
+        {
+            // stop whatever song is playing 
+            MediaPlayer.Stop();
+
+            base.Initialize();
+        }
 
         public override void Update(GameTime gameTime)
         {

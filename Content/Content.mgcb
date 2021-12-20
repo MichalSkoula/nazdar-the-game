@@ -142,3 +142,15 @@
 /processorParam:TextureFormat=Color
 /build:Player/WalkingUp.png
 
+#begin Sounds/blip.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/blip.wav
+
+#begin Sounds/nature.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/nature.ogg
+
