@@ -4,20 +4,13 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MyGame.Screens;
 
 namespace MyGame.Objects
 {
-    enum Direction
-    {
-        Up,
-        Right,
-        Down,
-        Left
-    }
-
     public class Player : Component
     {
-        private int _speed = 300;
+        private int _speed = 1000;
 
         private Animation _anim;
 
@@ -31,7 +24,7 @@ namespace MyGame.Objects
 
         public Player(Texture2D sprite, int x, int y)
         {
-            _anim = _animations[(int)Direction.Down];
+            _anim = _animations[(int)Enums.Direction.Down];
             Hitbox = new Rectangle(x, y, _anim.FrameWidth, _anim.FrameHeight);
         }
 
@@ -41,25 +34,15 @@ namespace MyGame.Objects
             bool isMoving = true;
             Rectangle newHitbox = Hitbox;
 
-            if (Controls.Keyboard.IsPressed(Keys.Up))
-            {
-                newHitbox.Y -= (int)(deltaTime * _speed);
-                _anim = _animations[(int)Direction.Up];
-            }
-            else if (Controls.Keyboard.IsPressed(Keys.Right))
+            if (Controls.Keyboard.IsPressed(Keys.Right) && Hitbox.X < MapScreen.mapWidth - Hitbox.Width)
             {
                 newHitbox.X += (int)(deltaTime * _speed);
-                _anim = _animations[(int)Direction.Right];
+                _anim = _animations[(int)Enums.Direction.Right];
             }
-            else if (Controls.Keyboard.IsPressed(Keys.Down))
-            {
-                newHitbox.Y += (int)(deltaTime * _speed);
-                _anim = _animations[(int)Direction.Down];
-            }
-            else if (Controls.Keyboard.IsPressed(Keys.Left))
+            else if (Controls.Keyboard.IsPressed(Keys.Left) && Hitbox.X > 0)
             {
                 newHitbox.X -= (int)(deltaTime * _speed);
-                _anim = _animations[(int)Direction.Left];
+                _anim = _animations[(int)Enums.Direction.Left];
             }
             else
             {

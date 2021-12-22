@@ -60,8 +60,8 @@ namespace MyGame
             // internal resolution
             renderTarget = new RenderTarget2D(GraphicsDevice, screenWidth, screenHeight);
 
-            // start it with menu
-            LoadMenuScreen(false);
+            // start it with this scene
+            LoadScreen1(false);
         }
 
         protected override void LoadContent()
@@ -92,9 +92,16 @@ namespace MyGame
             }
         }
 
-        public void LoadScreen1()
+        public void LoadScreen1(bool transition = true)
         {
-            _screenManager.LoadScreen(new Screens.Screen1(this), new FadeTransition(GraphicsDevice, Color.Black));
+            if (transition)
+            {
+                _screenManager.LoadScreen(new Screens.MapScreen(this), new FadeTransition(GraphicsDevice, Color.Black));
+            }
+            else
+            {
+                _screenManager.LoadScreen(new Screens.MapScreen(this));
+            }
         }
 
         // draw renderTarget to screen 
@@ -108,7 +115,7 @@ namespace MyGame
         public void DrawStart(Matrix transform)
         {
             GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             SpriteBatch.Begin(transformMatrix: transform);
         }

@@ -22,6 +22,7 @@ namespace MyGame
         public static Texture2D buttonHover;
 
         public static Texture2D background;
+        public static Texture2D tunnel;
 
         // fonts
         public static SpriteFont fontSmall;
@@ -47,7 +48,8 @@ namespace MyGame
             Assets.buttonPressed = Content.Load<Texture2D>("button_pressed");
             Assets.buttonHover = Content.Load<Texture2D>("button_hover");
 
-            Assets.background = Content.Load<Texture2D>("Background");
+            Assets.background = Content.Load<Texture2D>("Middle");
+            Assets.tunnel = Content.Load<Texture2D>("tunnel");
 
             Assets.fontSmall = Content.Load<SpriteFont>("fontSmall");
             Assets.fontMedium = Content.Load<SpriteFont>("fontMedium");
