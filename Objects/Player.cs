@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MyGame.Screens;
+using System.Collections.Generic;
 
 namespace MyGame.Objects
 {
@@ -26,6 +24,11 @@ namespace MyGame.Objects
         {
             _anim = _animations[(int)Enums.Direction.Down];
             Hitbox = new Rectangle(x, y, _anim.FrameWidth, _anim.FrameHeight);
+        }
+
+        public void Load(dynamic data)
+        {
+            Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Hitbox.Width, (int)data.Hitbox.Height);
         }
 
         public override void Update(float deltaTime)
@@ -54,16 +57,16 @@ namespace MyGame.Objects
                 Hitbox = newHitbox;
                 _anim.Loop = true;
             }
-            else 
+            else
             {
                 _anim.Loop = false;
                 _anim.ResetLoop();
             }
-            
+
             // shoot 
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
             {
-                Assets.blip.Play(1f, 0f, 0f); // volume 0-1, pitch (octaves), left-right (-1 - 1)
+
             }
 
             _anim.Update(deltaTime);

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using System;
@@ -13,7 +12,7 @@ namespace MyGame
         public SpriteBatch SpriteBatch;
         public RenderTarget2D renderTarget;
         public float deltaTime;
-        
+
         private readonly ScreenManager _screenManager;
         private AssetsLoader _assetsLoader = new AssetsLoader();
 
@@ -29,6 +28,9 @@ namespace MyGame
         public static float Scale { get; private set; }
         public static int BarHeight { get; private set; }
         public static int BarWidth { get; private set; }
+
+        // save data
+
 
         public Game1()
         {

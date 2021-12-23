@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyGame
 {
@@ -19,13 +16,15 @@ namespace MyGame
             get; set;
         }
 
-        public int FrameWidth {
+        public int FrameWidth
+        {
             get { return _tiles.Width / _count; }
         }
-        public int FrameHeight { 
+        public int FrameHeight
+        {
             get { return _tiles.Height; }
         }
-        
+
         public Animation(Texture2D tiles, int count, int fps, bool loop = true)
         {
             _count = count;
@@ -65,7 +64,7 @@ namespace MyGame
                 else if (Loop)
                 {
                     _step = 0;
-                }  
+                }
             }
         }
     }

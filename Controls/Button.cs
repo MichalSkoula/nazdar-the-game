@@ -1,8 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyGame.Controls
 {
@@ -55,9 +52,9 @@ namespace MyGame.Controls
 
             // calculate size 
             Hitbox = new Rectangle(
-                x, y, 
+                x, y,
                 (width.HasValue ? (int)width : _calculateButtonSize()) + _padding * 2, (int)size
-            );            
+            );
         }
 
         private int _calculateButtonSize()
@@ -68,7 +65,8 @@ namespace MyGame.Controls
 
         public bool HasBeenClicked()
         {
-            if (Active && Controls.Mouse.HasBeenPressed(true) && Hitbox.Contains(Controls.Mouse.Position)) { 
+            if (Active && Controls.Mouse.HasBeenPressed(true) && Hitbox.Contains(Controls.Mouse.Position))
+            {
                 // perform click animation & return
                 AnimationTime = 30;
                 _texture = _clickedTexture;

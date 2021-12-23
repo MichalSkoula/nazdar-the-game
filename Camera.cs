@@ -1,7 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MyGame
 {
@@ -16,7 +13,7 @@ namespace MyGame
                 0,
                 0
             );
-                
+
             Matrix position = Matrix.CreateTranslation(
                 Game1.screenWidth / 2,
                 0,

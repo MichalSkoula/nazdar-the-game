@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
-using MonoGame.Extended.Screens.Transitions;
 using MyGame.Controls;
+using System;
+using System.Collections.Generic;
 
 namespace MyGame.Screens
 {
@@ -35,7 +33,7 @@ namespace MyGame.Screens
                 }
 
                 i++;
-                _resolutionButtons.Add(new Button(10, 210 + i * ((int)ButtonSize.small + 10), null, ButtonSize.small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height ));
+                _resolutionButtons.Add(new Button(10, 210 + i * ((int)ButtonSize.small + 10), null, ButtonSize.small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height));
             }
 
             // play song 
@@ -43,6 +41,7 @@ namespace MyGame.Screens
 
             base.Initialize();
         }
+
         public override void LoadContent()
         {
             base.LoadContent();
@@ -65,7 +64,7 @@ namespace MyGame.Screens
             _startButton.Update();
             if (_startButton.HasBeenClicked())
             {
-                
+
                 Game.LoadScreen1();
             }
 
