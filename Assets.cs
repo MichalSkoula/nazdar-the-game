@@ -21,6 +21,8 @@ namespace MyGame
         public static Texture2D buttonPressed;
         public static Texture2D buttonHover;
 
+        public static Texture2D bullet;
+
         public static Texture2D background;
         public static Texture2D tunnel;
 
@@ -47,6 +49,8 @@ namespace MyGame
             Assets.button = Content.Load<Texture2D>("button");
             Assets.buttonPressed = Content.Load<Texture2D>("button_pressed");
             Assets.buttonHover = Content.Load<Texture2D>("button_hover");
+
+            Assets.bullet = Content.Load<Texture2D>("bullet");
 
             Assets.background = Content.Load<Texture2D>("Middle");
             Assets.tunnel = Content.Load<Texture2D>("tunnel");

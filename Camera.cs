@@ -6,7 +6,7 @@ namespace MyGame
     {
         public Matrix Transform { get; private set; }
 
-        public void Follow(Objects.Player target)
+        public void Follow(Components.Player target)
         {
             Matrix offset = Matrix.CreateTranslation(
                 -target.Hitbox.X - (target.Hitbox.Width / 2),
