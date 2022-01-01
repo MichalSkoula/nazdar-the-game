@@ -1,18 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MyGame.Screens;
 using System.Collections.Generic;
+using MyGame.Screens;
 
 namespace MyGame.Components
 {
-    public class Player : Component
+    class Enemy : Component
     {
-        private int _speed = 500;
+        private int _speed = 600;
 
         private Animation _anim;
 
         private Enums.Direction _direction;
+
+        public bool ToDelete { get; set; }
 
         private List<Bullet> _bullets = new List<Bullet>();
 
@@ -24,31 +25,32 @@ namespace MyGame.Components
             new Animation(Assets.playerLeft, 3, 10),
         };
 
-        public Player(int x, int y)
+        public Enemy(int x, int y, Enums.Direction direction)
         {
             _anim = _animations[(int)Enums.Direction.Down];
             Hitbox = new Rectangle(x, y, _anim.FrameWidth, _anim.FrameHeight);
+            _direction = direction;
         }
 
+        /*
         public void Load(dynamic data)
         {
             Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Hitbox.Width, (int)data.Hitbox.Height);
         }
+        */
 
         public override void Update(float deltaTime)
         {
-            // is player moving?
+            // is enemy moving?
             bool isMoving = true;
             Rectangle newHitbox = Hitbox;
-            if (Controls.Keyboard.IsPressed(Keys.Right) && Hitbox.X < MapScreen.mapWidth - Hitbox.Width)
+            if (_direction == Enums.Direction.Right)
             {
                 newHitbox.X += (int)(deltaTime * _speed);
-                _direction = Enums.Direction.Right;
             }
-            else if (Controls.Keyboard.IsPressed(Keys.Left) && Hitbox.X > 0)
+            else if (_direction == Enums.Direction.Left)
             {
                 newHitbox.X -= (int)(deltaTime * _speed);
-                _direction = Enums.Direction.Left;
             }
             else
             {
@@ -69,23 +71,16 @@ namespace MyGame.Components
 
             _anim.Update(deltaTime);
 
-            // bullets
-            if (Controls.Keyboard.HasBeenPressed(Keys.Space))
+            // out of game map 
+            if (Hitbox.X < 0 || Hitbox.X > MapScreen.mapWidth)
             {
-                _bullets.Add(new Bullet(Hitbox.X, Hitbox.Y + Hitbox.Height / 2, _direction));
+                ToDelete = true;
             }
-
-            foreach (var bullet in _bullets)
-            {
-                bullet.Update(deltaTime);
-            }
-
-            _bullets.RemoveAll(p => p.ToDelete);           
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            _anim.Draw(spriteBatch, Hitbox);
+            _anim.Draw(spriteBatch, Hitbox, Color.Red);
 
             // bullets
             foreach (var bullet in _bullets)

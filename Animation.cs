@@ -40,9 +40,9 @@ namespace MyGame
             _step = 0;
         }
 
-        public void Draw(SpriteBatch SpriteBatch, Rectangle position)
+        public void Draw(SpriteBatch SpriteBatch, Rectangle position, Color? color = null)
         {
-            SpriteBatch.Draw(_tiles, position, new Rectangle(_step * FrameWidth, 0, FrameWidth, FrameHeight), Color.White);
+            SpriteBatch.Draw(_tiles, position, new Rectangle(_step * FrameWidth, 0, FrameWidth, FrameHeight), color.HasValue ? (Color)color : Color.White);
         }
 
         public void Update(float deltaTime)

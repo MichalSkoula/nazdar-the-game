@@ -6,6 +6,8 @@ using MonoGame.Extended.Screens;
 using MyGame.Components;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace MyGame.Screens
@@ -17,6 +19,8 @@ namespace MyGame.Screens
 
         private Camera _camera = new Camera();
 
+        private Random _rand = new Random();
+
         // how large the map will be
         private int _numberOfScreens = 4;
         // will be calculated
@@ -27,6 +31,7 @@ namespace MyGame.Screens
         public const int FloorPos = 700;
         
         private Player _player;
+        private List<Enemy> _enemies = new List<Enemy>();
 
         public override void Initialize()
         {
@@ -36,7 +41,7 @@ namespace MyGame.Screens
             MediaPlayer.Stop();
 
             // create player in the center of the map
-            _player = new Player(Assets.player, mapWidth / 2, FloorPos);
+            _player = new Player(mapWidth / 2, FloorPos);
 
             // maybe load?
             Load();
@@ -82,6 +87,25 @@ namespace MyGame.Screens
             _player.Update(Game.deltaTime);
 
             _camera.Follow(_player);
+
+            // create enemy?
+            if (_rand.Next(100) < 3)
+            {
+                // choose direction
+                if (_rand.Next(2) == 0)
+                {
+                    _enemies.Add(new Enemy(0, FloorPos, Enums.Direction.Right));
+                } 
+                else
+                {
+                    _enemies.Add(new Enemy(mapWidth, FloorPos, Enums.Direction.Left));
+                }
+            }
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Update(Game.deltaTime);
+            }
+            _enemies.RemoveAll(p => p.ToDelete);
         }
 
         public override void Draw(GameTime gameTime)
@@ -119,6 +143,12 @@ namespace MyGame.Screens
 
             // player - camera follows
             _player.Draw(Game.SpriteBatch);
+
+            // enemies
+            foreach (Enemy enemy in _enemies)
+            {
+                enemy.Draw(Game.SpriteBatch);
+            }
 
             Game.DrawEnd();
         }

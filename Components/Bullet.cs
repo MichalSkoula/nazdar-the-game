@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MyGame.Screens;
 using System.Collections.Generic;
+using MyGame.Screens;
 
 namespace MyGame.Components
 {
