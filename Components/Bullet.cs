@@ -12,7 +12,7 @@
         public bool ToDelete
         {
             get;
-            private set;
+            set;
         }
 
         public Bullet(int x, int y, Enums.Direction direction)

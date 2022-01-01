@@ -92,8 +92,7 @@
                 0f,
                 Vector2.Zero,
                 SpriteEffects.FlipHorizontally,
-                0
-            );
+                0);
 
             // status bar (minus translation to stay in place)
             this.Game.SpriteBatch.DrawString(
@@ -159,6 +158,15 @@
             foreach (Enemy enemy in this.enemies)
             {
                 enemy.Update(this.Game.DeltaTime);
+
+                foreach (Bullet bullet in this.player.Bullets)
+                {
+                    if (enemy.Hitbox.Intersects(bullet.Hitbox))
+                    {
+                        bullet.ToDelete = true;
+                        enemy.ToDelete = true;
+                    }
+                }
             }
 
             this.enemies.RemoveAll(p => p.ToDelete);
