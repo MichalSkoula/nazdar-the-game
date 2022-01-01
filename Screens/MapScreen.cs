@@ -1,63 +1,118 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Screens;
-using MyGame.Components;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-
-namespace MyGame.Screens
+﻿namespace MyGame.Screens
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using Microsoft.Xna.Framework.Media;
+    using MonoGame.Extended.Screens;
+    using MyGame.Components;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+
     public class MapScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public MapScreen(Game1 game) : base(game) { }
 
-        private Camera _camera = new Camera();
+        public MapScreen(Game1 game)
+            : base(game) { }
 
-        private Random _rand = new Random();
+        private Camera camera = new Camera();
+
+        private Random rand = new Random();
 
         // how large the map will be
-        private int _numberOfScreens = 4;
+        private int numberOfScreens = 4;
+
         // will be calculated
-        public static int mapWidth;
+        public static int MapWidth;
 
         // Y positions
         private const int StatusBarPosition = 900;
         public const int FloorPos = 700;
-        
-        private Player _player;
-        private List<Enemy> _enemies = new List<Enemy>();
+
+        private Player player;
+        private List<Enemy> enemies = new List<Enemy>();
 
         public override void Initialize()
         {
-            mapWidth = Game1.screenWidth * _numberOfScreens;
+            MapWidth = Game1.screenWidth * this.numberOfScreens;
 
             // stop whatever menu song is playing 
             MediaPlayer.Stop();
 
             // create player in the center of the map
-            _player = new Player(mapWidth / 2, FloorPos);
+            this.player = new Player(MapWidth / 2, FloorPos);
 
             // maybe load?
-            Load();
+            this.Load();
 
             base.Initialize();
         }
 
-        private void Save()
+        public override void Update(GameTime gameTime)
         {
-            var saveData = new
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
             {
-                player = _player
-            };
-            string json = JsonConvert.SerializeObject(saveData);
-            File.WriteAllText("save.json", json);
-            System.Diagnostics.Debug.WriteLine(json);
+                // save
+                this.Save();
+
+                // back to menu
+                this.Game.LoadMenuScreen();
+            }
+
+            this.player.Update(this.Game.DeltaTime);
+
+            this.camera.Follow(this.player);
+
+            this.EnemiesUpdate();
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            this.Game.DrawStart(this.camera.Transform);
+
+            // background
+            for (int i = 0; i < this.numberOfScreens; i++)
+            {
+                this.Game.SpriteBatch.Draw(Assets.Background, new Vector2(i * Game1.screenWidth, 0), Color.White);
+            }
+
+            // left tunnel
+            this.Game.SpriteBatch.Draw(Assets.Tunnel, Vector2.Zero, Color.White);
+
+            // right tunnel - all this for a flip
+            this.Game.SpriteBatch.Draw(
+                Assets.Tunnel,
+                new Rectangle((Game1.screenWidth * this.numberOfScreens) - Assets.Tunnel.Width, 0, Assets.Tunnel.Width, Assets.Tunnel.Height),
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.FlipHorizontally,
+                0
+            );
+
+            // status bar (minus translation to stay in place)
+            this.Game.SpriteBatch.DrawString(
+                Assets.FontLarge,
+                "this is game you can escape to menu",
+                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition),
+                Color.White
+                );
+
+            // player - camera follows
+            this.player.Draw(this.Game.SpriteBatch);
+
+            // enemies
+            foreach (Enemy enemy in this.enemies)
+            {
+                enemy.Draw(this.Game.SpriteBatch);
+            }
+
+            this.Game.DrawEnd();
         }
 
         public void Load()
@@ -70,87 +125,43 @@ namespace MyGame.Screens
             string json = File.ReadAllText("save.json");
             dynamic saveData = JObject.Parse(json);
 
-            _player.Load(saveData.player);
+            this.player.Load(saveData.player);
         }
 
-        public override void Update(GameTime gameTime)
+        private void Save()
         {
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
+            var saveData = new
             {
-                // save
-                Save();
+                player = this.player,
+            };
+            string json = JsonConvert.SerializeObject(saveData);
+            File.WriteAllText("save.json", json);
+            System.Diagnostics.Debug.WriteLine(json);
+        }
 
-                // back to menu
-                Game.LoadMenuScreen();
-            }
-
-            _player.Update(Game.deltaTime);
-
-            _camera.Follow(_player);
-
+        private void EnemiesUpdate()
+        {
             // create enemy?
-            if (_rand.Next(100) < 3)
+            if (this.rand.Next(120) < 3)
             {
                 // choose direction
-                if (_rand.Next(2) == 0)
+                if (this.rand.Next(2) == 0)
                 {
-                    _enemies.Add(new Enemy(0, FloorPos, Enums.Direction.Right));
-                } 
+                    this.enemies.Add(new Enemy(0, FloorPos, Enums.Direction.Right));
+                }
                 else
                 {
-                    _enemies.Add(new Enemy(mapWidth, FloorPos, Enums.Direction.Left));
+                    this.enemies.Add(new Enemy(MapWidth, FloorPos, Enums.Direction.Left));
                 }
             }
-            foreach (Enemy enemy in _enemies)
-            {
-                enemy.Update(Game.deltaTime);
-            }
-            _enemies.RemoveAll(p => p.ToDelete);
-        }
 
-        public override void Draw(GameTime gameTime)
-        {
-            Game.DrawStart(_camera.Transform);
-
-            // background 
-            for (int i = 0; i < _numberOfScreens; i++)
+            // update enemies
+            foreach (Enemy enemy in this.enemies)
             {
-                Game.SpriteBatch.Draw(Assets.background, new Vector2(i * Game1.screenWidth, 0), Color.White);
+                enemy.Update(this.Game.DeltaTime);
             }
 
-            // left tunnel
-            Game.SpriteBatch.Draw(Assets.tunnel, Vector2.Zero, Color.White);
-
-            // right tunnel - all this for a flip
-            Game.SpriteBatch.Draw(
-                Assets.tunnel,
-                new Rectangle(Game1.screenWidth * _numberOfScreens - Assets.tunnel.Width, 0, Assets.tunnel.Width, Assets.tunnel.Height),
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.FlipHorizontally,
-                0
-            );
-
-            // status bar (minus translation to stay in place)
-            Game.SpriteBatch.DrawString(
-                Assets.fontLarge,
-                "this is game you can escape to menu",
-                new Vector2(10 - _camera.Transform.Translation.X, StatusBarPosition),
-                Color.White
-                );
-
-            // player - camera follows
-            _player.Draw(Game.SpriteBatch);
-
-            // enemies
-            foreach (Enemy enemy in _enemies)
-            {
-                enemy.Draw(Game.SpriteBatch);
-            }
-
-            Game.DrawEnd();
+            this.enemies.RemoveAll(p => p.ToDelete);
         }
     }
 }

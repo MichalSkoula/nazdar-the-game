@@ -1,54 +1,59 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using MyGame.Screens;
-using System.Collections.Generic;
-
-namespace MyGame.Components
+﻿namespace MyGame.Components
 {
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using MyGame.Screens;
+
     public class Player : Component
     {
-        private int _speed = 500;
+        private int speed = 500;
 
-        private Animation _anim;
+        private Animation anim;
 
-        private Enums.Direction _direction;
+        private Enums.Direction direction;
 
-        private List<Bullet> _bullets = new List<Bullet>();
-
-        private List<Animation> _animations = new List<Animation>()
+        public List<Bullet> Bullets
         {
-            new Animation(Assets.playerUp, 3, 10),
-            new Animation(Assets.playerRight, 3, 10),
-            new Animation(Assets.playerDown, 3, 10),
-            new Animation(Assets.playerLeft, 3, 10),
+            get;
+            private set;
+        }
+
+        private List<Animation> animations = new List<Animation>()
+        {
+            new Animation(Assets.PlayerUp, 3, 10),
+            new Animation(Assets.PlayerRight, 3, 10),
+            new Animation(Assets.PlayerDown, 3, 10),
+            new Animation(Assets.PlayerLeft, 3, 10),
         };
 
         public Player(int x, int y)
         {
-            _anim = _animations[(int)Enums.Direction.Down];
-            Hitbox = new Rectangle(x, y, _anim.FrameWidth, _anim.FrameHeight);
+            this.anim = this.animations[(int)Enums.Direction.Down];
+            this.Bullets = new List<Bullet>();
+            this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
         }
 
         public void Load(dynamic data)
         {
-            Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Hitbox.Width, (int)data.Hitbox.Height);
+            this.Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Hitbox.Width, (int)data.Hitbox.Height);
         }
 
         public override void Update(float deltaTime)
         {
             // is player moving?
             bool isMoving = true;
-            Rectangle newHitbox = Hitbox;
-            if (Controls.Keyboard.IsPressed(Keys.Right) && Hitbox.X < MapScreen.mapWidth - Hitbox.Width)
+            Rectangle newHitbox = this.Hitbox;
+            if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < MapScreen.MapWidth - this.Hitbox.Width)
             {
-                newHitbox.X += (int)(deltaTime * _speed);
-                _direction = Enums.Direction.Right;
+                newHitbox.X += (int)(deltaTime * this.speed);
+                this.direction = Enums.Direction.Right;
             }
-            else if (Controls.Keyboard.IsPressed(Keys.Left) && Hitbox.X > 0)
+            else if (Controls.Keyboard.IsPressed(Keys.Left) && this.Hitbox.X > 0)
             {
-                newHitbox.X -= (int)(deltaTime * _speed);
-                _direction = Enums.Direction.Left;
+                newHitbox.X -= (int)(deltaTime * this.speed);
+                this.direction = Enums.Direction.Left;
             }
             else
             {
@@ -57,38 +62,38 @@ namespace MyGame.Components
 
             if (isMoving)
             {
-                Hitbox = newHitbox;
-                _anim.Loop = true;
-                _anim = _animations[(int)_direction];
+                this.Hitbox = newHitbox;
+                this.anim.Loop = true;
+                this.anim = this.animations[(int)this.direction];
             }
             else
             {
-                _anim.Loop = false;
-                _anim.ResetLoop();
+                this.anim.Loop = false;
+                this.anim.ResetLoop();
             }
 
-            _anim.Update(deltaTime);
+            this.anim.Update(deltaTime);
 
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
             {
-                _bullets.Add(new Bullet(Hitbox.X, Hitbox.Y + Hitbox.Height / 2, _direction));
+                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.direction));
             }
 
-            foreach (var bullet in _bullets)
+            foreach (var bullet in this.Bullets)
             {
                 bullet.Update(deltaTime);
             }
 
-            _bullets.RemoveAll(p => p.ToDelete);           
+            this.Bullets.RemoveAll(p => p.ToDelete);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            _anim.Draw(spriteBatch, Hitbox);
+            this.anim.Draw(spriteBatch, this.Hitbox);
 
             // bullets
-            foreach (var bullet in _bullets)
+            foreach (var bullet in this.Bullets)
             {
                 bullet.Draw(spriteBatch);
             }

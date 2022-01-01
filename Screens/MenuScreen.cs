@@ -1,43 +1,45 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using MonoGame.Extended.Screens;
-using MyGame.Controls;
-using System;
-using System.Collections.Generic;
-
-namespace MyGame.Screens
+﻿namespace MyGame.Screens
 {
+    using System;
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using Microsoft.Xna.Framework.Media;
+    using MonoGame.Extended.Screens;
+    using MyGame.Controls;
+
     public class MenuScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
-        public MenuScreen(Game1 game) : base(game) { }
 
-        private Button _startButton;
-        private Button _fullscreenButton;
-        private List<Button> _resolutionButtons = new List<Button>();
+        public MenuScreen(Game1 game)
+            : base(game) { }
+
+        private Button startButton;
+        private Button fullscreenButton;
+        private List<Button> resolutionButtons = new List<Button>();
 
         public override void Initialize()
         {
-            _startButton = new Button(Game1.screenWidth / 2 - 60, 50, null, ButtonSize.large, "Start");
-            _fullscreenButton = new Button(10, 190, null, ButtonSize.small, "Toggle Fullscreen");
+            this.startButton = new Button((Game1.screenWidth / 2) - 60, 50, null, ButtonSize.Large, "Start");
+            this.fullscreenButton = new Button(10, 190, null, ButtonSize.Small, "Toggle Fullscreen");
 
-            // get allowed resolutions 
+            // get allowed resolutions
             int i = 0;
             foreach (DisplayMode mode in GraphicsAdapter.DefaultAdapter.SupportedDisplayModes)
             {
-                if (GraphicsDevice.DisplayMode.Height < mode.Height || GraphicsDevice.DisplayMode.Width < mode.Width)
+                if (this.GraphicsDevice.DisplayMode.Height < mode.Height || this.GraphicsDevice.DisplayMode.Width < mode.Width)
                 {
                     continue;
                 }
 
                 i++;
-                _resolutionButtons.Add(new Button(10, 210 + i * ((int)ButtonSize.small + 10), null, ButtonSize.small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height));
+                this.resolutionButtons.Add(new Button(10, 210 + (i * ((int)ButtonSize.Small + 10)), null, ButtonSize.Small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height));
             }
 
-            // play song 
-            MediaPlayer.Play(Assets.nature);
+            // play song
+            MediaPlayer.Play(Assets.Nature);
 
             base.Initialize();
         }
@@ -52,61 +54,61 @@ namespace MyGame.Screens
             if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
             {
                 // exit game from menu
-                Game.Exit();
+                this.Game.Exit();
             }
             else if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
             {
                 // to game
-                Game.LoadScreen1();
+                this.Game.LoadScreen1();
             }
 
             // start
-            _startButton.Update();
-            if (_startButton.HasBeenClicked())
+            this.startButton.Update();
+            if (this.startButton.HasBeenClicked())
             {
 
-                Game.LoadScreen1();
+                this.Game.LoadScreen1();
             }
 
             // fullscreen
-            _fullscreenButton.Update();
-            if (_fullscreenButton.HasBeenClicked())
+            this.fullscreenButton.Update();
+            if (this.fullscreenButton.HasBeenClicked())
             {
-                Game.graphics.IsFullScreen = !Game.graphics.IsFullScreen;
-                Game.graphics.ApplyChanges();
+                this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
+                this.Game.Graphics.ApplyChanges();
             }
 
             // resolution
-            foreach (Button btn in _resolutionButtons)
+            foreach (Button btn in this.resolutionButtons)
             {
                 btn.Update();
                 if (btn.HasBeenClicked())
                 {
                     string[] resolution = btn.Data.Split('x');
-                    Game.graphics.PreferredBackBufferWidth = Int32.Parse(resolution[0]);
-                    Game.graphics.PreferredBackBufferHeight = Int32.Parse(resolution[1]);
-                    Game.graphics.ApplyChanges();
+                    this.Game.Graphics.PreferredBackBufferWidth = int.Parse(resolution[0]);
+                    this.Game.Graphics.PreferredBackBufferHeight = int.Parse(resolution[1]);
+                    this.Game.Graphics.ApplyChanges();
                 }
             }
         }
 
         public override void Draw(GameTime gameTime)
         {
-            Game.DrawStart();
+            this.Game.DrawStart();
 
-            _startButton.Draw(Game.SpriteBatch);
-            _fullscreenButton.Draw(Game.SpriteBatch);
+            this.startButton.Draw(this.Game.SpriteBatch);
+            this.fullscreenButton.Draw(this.Game.SpriteBatch);
 
-            if (_resolutionButtons.Count > 0)
+            if (this.resolutionButtons.Count > 0)
             {
-                Game.SpriteBatch.DrawString(Assets.fontMedium, "Choose resolution", new Vector2(10, 140), Color.White);
-                foreach (Button btn in _resolutionButtons)
+                this.Game.SpriteBatch.DrawString(Assets.FontMedium, "Choose resolution", new Vector2(10, 140), Color.White);
+                foreach (Button btn in this.resolutionButtons)
                 {
-                    btn.Draw(Game.SpriteBatch);
+                    btn.Draw(this.Game.SpriteBatch);
                 }
             }
 
-            Game.DrawEnd();
+            this.Game.DrawEnd();
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace MyGame
+﻿namespace MyGame
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     class Animation
     {
-        private int _count;
-        private int _step;
-        private int _fps;
-        private float _timeElapsed;
-        private float _timeToUpdate;
-        private Texture2D _tiles;
+        private int count;
+        private int step;
+        private int fps;
+        private float timeElapsed;
+        private float timeToUpdate;
+        private Texture2D tiles;
+
         public bool Loop
         {
             get; set;
@@ -18,52 +19,53 @@ namespace MyGame
 
         public int FrameWidth
         {
-            get { return _tiles.Width / _count; }
+            get { return this.tiles.Width / this.count; }
         }
+
         public int FrameHeight
         {
-            get { return _tiles.Height; }
+            get { return this.tiles.Height; }
         }
 
         public Animation(Texture2D tiles, int count, int fps, bool loop = true)
         {
-            _count = count;
-            _tiles = tiles;
-            _step = 0;
-            _fps = fps;
-            _timeToUpdate = (1f / _fps);
-            Loop = Loop;
+            this.count = count;
+            this.tiles = tiles;
+            this.step = 0;
+            this.fps = fps;
+            this.timeToUpdate = 1f / this.fps;
+            this.Loop = this.Loop;
         }
 
         public void ResetLoop()
         {
-            _step = 0;
+            this.step = 0;
         }
 
-        public void Draw(SpriteBatch SpriteBatch, Rectangle position, Color? color = null)
+        public void Draw(SpriteBatch spriteBatch, Rectangle position, Color? color = null)
         {
-            SpriteBatch.Draw(_tiles, position, new Rectangle(_step * FrameWidth, 0, FrameWidth, FrameHeight), color.HasValue ? (Color)color : Color.White);
+            spriteBatch.Draw(this.tiles, position, new Rectangle(this.step * this.FrameWidth, 0, this.FrameWidth, this.FrameHeight), color.HasValue ? (Color)color : Color.White);
         }
 
         public void Update(float deltaTime)
         {
-            if (!Loop)
+            if (!this.Loop)
             {
                 return;
             }
 
-            _timeElapsed += deltaTime;
-            if (_timeElapsed > _timeToUpdate)
+            this.timeElapsed += deltaTime;
+            if (this.timeElapsed > this.timeToUpdate)
             {
-                _timeElapsed -= _timeToUpdate;
+                this.timeElapsed -= this.timeToUpdate;
 
-                if (_step + 1 < _count)
+                if (this.step + 1 < this.count)
                 {
-                    _step++;
+                    this.step++;
                 }
-                else if (Loop)
+                else if (this.Loop)
                 {
-                    _step = 0;
+                    this.step = 0;
                 }
             }
         }

@@ -20,7 +20,7 @@ namespace MyGame
                 0
             );
 
-            Transform = position * offset;
+            this.Transform = position * offset;
         }
     }
 }

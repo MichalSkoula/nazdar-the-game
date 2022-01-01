@@ -1,35 +1,35 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
-using MyGame.Screens;
-
-namespace MyGame.Components
+﻿namespace MyGame.Components
 {
-    class Enemy : Component
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using MyGame.Screens;
+
+    public class Enemy : Component
     {
-        private int _speed = 600;
+        private int speed = 600;
 
-        private Animation _anim;
+        private Animation anim;
 
-        private Enums.Direction _direction;
+        private Enums.Direction direction;
+
+        private List<Bullet> bullets = new List<Bullet>();
+
+        private List<Animation> animations = new List<Animation>()
+        {
+            new Animation(Assets.PlayerUp, 3, 10),
+            new Animation(Assets.PlayerRight, 3, 10),
+            new Animation(Assets.PlayerDown, 3, 10),
+            new Animation(Assets.PlayerLeft, 3, 10),
+        };
 
         public bool ToDelete { get; set; }
 
-        private List<Bullet> _bullets = new List<Bullet>();
-
-        private List<Animation> _animations = new List<Animation>()
-        {
-            new Animation(Assets.playerUp, 3, 10),
-            new Animation(Assets.playerRight, 3, 10),
-            new Animation(Assets.playerDown, 3, 10),
-            new Animation(Assets.playerLeft, 3, 10),
-        };
-
         public Enemy(int x, int y, Enums.Direction direction)
         {
-            _anim = _animations[(int)Enums.Direction.Down];
-            Hitbox = new Rectangle(x, y, _anim.FrameWidth, _anim.FrameHeight);
-            _direction = direction;
+            this.anim = this.animations[(int)Enums.Direction.Down];
+            this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.direction = direction;
         }
 
         /*
@@ -43,14 +43,14 @@ namespace MyGame.Components
         {
             // is enemy moving?
             bool isMoving = true;
-            Rectangle newHitbox = Hitbox;
-            if (_direction == Enums.Direction.Right)
+            Rectangle newHitbox = this.Hitbox;
+            if (this.direction == Enums.Direction.Right)
             {
-                newHitbox.X += (int)(deltaTime * _speed);
+                newHitbox.X += (int)(deltaTime * this.speed);
             }
-            else if (_direction == Enums.Direction.Left)
+            else if (this.direction == Enums.Direction.Left)
             {
-                newHitbox.X -= (int)(deltaTime * _speed);
+                newHitbox.X -= (int)(deltaTime * this.speed);
             }
             else
             {
@@ -59,31 +59,31 @@ namespace MyGame.Components
 
             if (isMoving)
             {
-                Hitbox = newHitbox;
-                _anim.Loop = true;
-                _anim = _animations[(int)_direction];
+                this.Hitbox = newHitbox;
+                this.anim.Loop = true;
+                this.anim = this.animations[(int)this.direction];
             }
             else
             {
-                _anim.Loop = false;
-                _anim.ResetLoop();
+                this.anim.Loop = false;
+                this.anim.ResetLoop();
             }
 
-            _anim.Update(deltaTime);
+            this.anim.Update(deltaTime);
 
-            // out of game map 
-            if (Hitbox.X < 0 || Hitbox.X > MapScreen.mapWidth)
+            // out of game map
+            if (this.Hitbox.X < 0 || this.Hitbox.X > MapScreen.MapWidth)
             {
-                ToDelete = true;
+                this.ToDelete = true;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            _anim.Draw(spriteBatch, Hitbox, Color.Red);
+            this.anim.Draw(spriteBatch, this.Hitbox, Color.Red);
 
             // bullets
-            foreach (var bullet in _bullets)
+            foreach (var bullet in this.bullets)
             {
                 bullet.Draw(spriteBatch);
             }

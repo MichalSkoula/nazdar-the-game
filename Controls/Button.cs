@@ -1,75 +1,75 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace MyGame.Controls
+﻿namespace MyGame.Controls
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+
     enum ButtonSize
     {
-        small = 30,
-        medium = 45,
-        large = 60
+        Small = 30,
+        Medium = 45,
+        Large = 60,
     }
 
     class Button
     {
-        private Texture2D _staticTexture;
-        private Texture2D _clickedTexture;
-        private Texture2D _hoverTexture;
-        private Texture2D _texture { get; set; }
-        private int _padding;
-        private SpriteFont _font;
+        private Texture2D staticTexture;
+        private Texture2D clickedTexture;
+        private Texture2D hoverTexture;
+
+        private Texture2D Texture { get; set; }
+
+        private int padding;
+        private SpriteFont font;
+
         public bool Active { get; set; }
+
         public string Text { get; set; }
+
         public int AnimationTime { get; set; }
+
         public string Data { get; set; }
+
         public Rectangle Hitbox;
 
         public Button(int x, int y, int? width, ButtonSize size, string text, bool active = true, string data = "")
         {
-            _staticTexture = Assets.button;
-            _clickedTexture = Assets.buttonPressed;
-            _hoverTexture = Assets.buttonHover;
-            _texture = _staticTexture;
-            _padding = 5;
-            Data = data;
-            Text = text;
-            AnimationTime = 0;
-            Active = active;
+            this.staticTexture = Assets.Button;
+            this.clickedTexture = Assets.ButtonPressed;
+            this.hoverTexture = Assets.ButtonHover;
+            this.Texture = this.staticTexture;
+            this.padding = 5;
+            this.Data = data;
+            this.Text = text;
+            this.AnimationTime = 0;
+            this.Active = active;
 
             // add font
             switch (size)
             {
-                case ButtonSize.small:
-                    _font = Assets.fontSmall;
+                case ButtonSize.Small:
+                    this.font = Assets.FontSmall;
                     break;
-                case ButtonSize.medium:
-                    _font = Assets.fontMedium;
+                case ButtonSize.Medium:
+                    this.font = Assets.FontMedium;
                     break;
-                case ButtonSize.large:
-                    _font = Assets.fontLarge;
+                case ButtonSize.Large:
+                    this.font = Assets.FontLarge;
                     break;
             }
 
             // calculate size 
-            Hitbox = new Rectangle(
-                x, y,
-                (width.HasValue ? (int)width : _calculateButtonSize()) + _padding * 2, (int)size
+            this.Hitbox = new Rectangle(
+                x, y, (width.HasValue ? (int)width : this.CalculateButtonSize()) + (this.padding * 2), (int)size
             );
-        }
-
-        private int _calculateButtonSize()
-        {
-            Vector2 textSize = _font.MeasureString(Text);
-            return (int)textSize.X;
         }
 
         public bool HasBeenClicked()
         {
-            if (Active && Controls.Mouse.HasBeenPressed(true) && Hitbox.Contains(Controls.Mouse.Position))
+            if (this.Active && Controls.Mouse.HasBeenPressed(true) && this.Hitbox.Contains(Controls.Mouse.Position))
             {
                 // perform click animation & return
-                AnimationTime = 30;
-                _texture = _clickedTexture;
+                this.AnimationTime = 30;
+                this.Texture = this.clickedTexture;
                 return true;
             }
 
@@ -79,33 +79,39 @@ namespace MyGame.Controls
         public void Update()
         {
 
-            if (Active && Hitbox.Contains(Controls.Mouse.Position))
+            if (this.Active && this.Hitbox.Contains(Controls.Mouse.Position))
             {
-                _texture = _hoverTexture;
+                this.Texture = this.hoverTexture;
             }
             else
             {
-                if (AnimationTime > 0)
+                if (this.AnimationTime > 0)
                 {
-                    AnimationTime--;
+                    this.AnimationTime--;
                 }
 
-                if (AnimationTime == 0)
+                if (this.AnimationTime == 0)
                 {
-                    _texture = _staticTexture;
+                    this.Texture = this.staticTexture;
                 }
             }
         }
 
-        public void Draw(SpriteBatch SpriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (!Active)
+            if (!this.Active)
             {
                 return;
             }
 
-            SpriteBatch.Draw(_texture, Hitbox, Color.White);
-            SpriteBatch.DrawString(_font, Text, new Vector2(Hitbox.X + _padding, Hitbox.Y + _padding), Color.Black);
+            spriteBatch.Draw(this.Texture, this.Hitbox, Color.White);
+            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), Color.Black);
+        }
+
+        private int CalculateButtonSize()
+        {
+            Vector2 textSize = this.font.MeasureString(this.Text);
+            return (int)textSize.X;
         }
     }
 }

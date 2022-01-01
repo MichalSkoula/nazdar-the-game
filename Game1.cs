@@ -8,13 +8,13 @@ namespace MyGame
 {
     public class Game1 : Game
     {
-        public GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager Graphics;
         public SpriteBatch SpriteBatch;
-        public RenderTarget2D renderTarget;
-        public float deltaTime;
+        public RenderTarget2D RenderTarget;
+        public float DeltaTime;
 
-        private readonly ScreenManager _screenManager;
-        private AssetsLoader _assetsLoader = new AssetsLoader();
+        private readonly ScreenManager screenManager;
+        private AssetsLoader assetsLoader = new AssetsLoader();
 
         // default window size
         public const int screenWidthDefault = 1280;
@@ -26,7 +26,9 @@ namespace MyGame
 
         // scaling + top / left bar
         public static float Scale { get; private set; }
+
         public static int BarHeight { get; private set; }
+
         public static int BarWidth { get; private set; }
 
         // save data
@@ -34,18 +36,18 @@ namespace MyGame
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            this.Graphics = new GraphicsDeviceManager(this);
+            this.Content.RootDirectory = "Content";
+            this.IsMouseVisible = true;
 
-            _screenManager = new ScreenManager();
-            Components.Add(_screenManager);
+            this.screenManager = new ScreenManager();
+            this.Components.Add(this.screenManager);
         }
 
         protected override void Initialize()
         {
             // 60 fps
-            TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0f);
+            this.TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0f);
 
             base.Initialize();
 
@@ -53,28 +55,28 @@ namespace MyGame
             //Window.IsBorderless = true;
 
             // window size
-            graphics.PreferredBackBufferWidth = screenWidthDefault;
-            graphics.PreferredBackBufferHeight = screenHeightDefault;
-            graphics.ApplyChanges();
+            this.Graphics.PreferredBackBufferWidth = screenWidthDefault;
+            this.Graphics.PreferredBackBufferHeight = screenHeightDefault;
+            this.Graphics.ApplyChanges();
 
-            SpriteBatch = new SpriteBatch(GraphicsDevice);
+            this.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             // internal resolution
-            renderTarget = new RenderTarget2D(GraphicsDevice, screenWidth, screenHeight);
+            this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, screenWidth, screenHeight);
 
             // start it with this scene
-            LoadScreen1(false);
+            this.LoadScreen1(false);
         }
 
         protected override void LoadContent()
         {
             // load all assets
-            _assetsLoader.Load(Content);
+            this.assetsLoader.Load(this.Content);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            this.DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             Controls.Keyboard.GetState();
             Controls.Mouse.GetState();
@@ -86,11 +88,11 @@ namespace MyGame
         {
             if (transition)
             {
-                _screenManager.LoadScreen(new Screens.MenuScreen(this), new FadeTransition(GraphicsDevice, Color.Black));
+                this.screenManager.LoadScreen(new Screens.MenuScreen(this), new FadeTransition(this.GraphicsDevice, Color.Black));
             }
             else
             {
-                _screenManager.LoadScreen(new Screens.MenuScreen(this));
+                this.screenManager.LoadScreen(new Screens.MenuScreen(this));
             }
         }
 
@@ -98,35 +100,37 @@ namespace MyGame
         {
             if (transition)
             {
-                _screenManager.LoadScreen(new Screens.MapScreen(this), new FadeTransition(GraphicsDevice, Color.Black));
+                this.screenManager.LoadScreen(new Screens.MapScreen(this), new FadeTransition(this.GraphicsDevice, Color.Black));
             }
             else
             {
-                _screenManager.LoadScreen(new Screens.MapScreen(this));
+                this.screenManager.LoadScreen(new Screens.MapScreen(this));
             }
         }
 
         // draw renderTarget to screen 
         public void DrawStart()
         {
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
+            this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteBatch.Begin();
+            this.SpriteBatch.Begin();
         }
+
         public void DrawStart(Matrix transform)
         {
-            GraphicsDevice.SetRenderTarget(renderTarget);
-            GraphicsDevice.Clear(Color.Black);
+            this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
+            this.GraphicsDevice.Clear(Color.Black);
 
-            SpriteBatch.Begin(transformMatrix: transform);
+            this.SpriteBatch.Begin(transformMatrix: transform);
         }
+
         public void DrawEnd()
         {
-            SpriteBatch.End();
+            this.SpriteBatch.End();
 
             // calculate Scale and bars
-            float outputAspect = Window.ClientBounds.Width / (float)Window.ClientBounds.Height;
+            float outputAspect = this.Window.ClientBounds.Width / (float)this.Window.ClientBounds.Height;
             float preferredAspect = screenWidth / (float)screenHeight;
             BarHeight = 0;
             BarWidth = 0;
@@ -134,27 +138,27 @@ namespace MyGame
             if (outputAspect <= preferredAspect)
             {
                 // output is taller than it is wider, bars on top/bottom
-                int presentHeight = (int)((Window.ClientBounds.Width / preferredAspect));
-                BarHeight = (Window.ClientBounds.Height - presentHeight) / 2;
-                dst = new Rectangle(0, BarHeight, Window.ClientBounds.Width, presentHeight);
+                int presentHeight = (int)((this.Window.ClientBounds.Width / preferredAspect));
+                BarHeight = (this.Window.ClientBounds.Height - presentHeight) / 2;
+                dst = new Rectangle(0, BarHeight, this.Window.ClientBounds.Width, presentHeight);
 
-                Scale = 1f / ((float)screenWidth / Window.ClientBounds.Width);
+                Scale = 1f / ((float)screenWidth / this.Window.ClientBounds.Width);
             }
             else
             {
                 // output is wider than it is tall, bars left/right
-                int presentWidth = (int)((Window.ClientBounds.Height * preferredAspect));
-                BarWidth = (Window.ClientBounds.Width - presentWidth) / 2;
-                dst = new Rectangle(BarWidth, 0, presentWidth, Window.ClientBounds.Height);
+                int presentWidth = (int)((this.Window.ClientBounds.Height * preferredAspect));
+                BarWidth = (this.Window.ClientBounds.Width - presentWidth) / 2;
+                dst = new Rectangle(BarWidth, 0, presentWidth, this.Window.ClientBounds.Height);
 
-                Scale = 1f / ((float)screenHeight / Window.ClientBounds.Height);
+                Scale = 1f / ((float)screenHeight / this.Window.ClientBounds.Height);
             }
 
-            GraphicsDevice.SetRenderTarget(null);
-            graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
-            SpriteBatch.Begin();
-            SpriteBatch.Draw(renderTarget, dst, Color.White);
-            SpriteBatch.End();
+            this.GraphicsDevice.SetRenderTarget(null);
+            this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
+            this.SpriteBatch.Begin();
+            this.SpriteBatch.Draw(this.RenderTarget, dst, Color.White);
+            this.SpriteBatch.End();
         }
     }
 }

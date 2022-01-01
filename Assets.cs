@@ -1,66 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
-
-namespace MyGame
+﻿namespace MyGame
 {
-    static class Assets
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Audio;
+    using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Media;
+
+    public static class Assets
     {
         // images
-        public static Texture2D player;
-        public static Texture2D playerDown;
-        public static Texture2D playerUp;
-        public static Texture2D playerLeft;
-        public static Texture2D playerRight;
+        public static Texture2D Player;
+        public static Texture2D PlayerDown;
+        public static Texture2D PlayerUp;
+        public static Texture2D PlayerLeft;
+        public static Texture2D PlayerRight;
 
-        public static Texture2D button;
-        public static Texture2D buttonPressed;
-        public static Texture2D buttonHover;
+        public static Texture2D Button;
+        public static Texture2D ButtonPressed;
+        public static Texture2D ButtonHover;
 
-        public static Texture2D bullet;
+        public static Texture2D Bullet;
 
-        public static Texture2D background;
-        public static Texture2D tunnel;
+        public static Texture2D Background;
+        public static Texture2D Tunnel;
 
         // fonts
-        public static SpriteFont fontSmall;
-        public static SpriteFont fontMedium;
-        public static SpriteFont fontLarge;
+        public static SpriteFont FontSmall;
+        public static SpriteFont FontMedium;
+        public static SpriteFont FontLarge;
 
         // audio
-        public static SoundEffect blip;
-        public static Song nature;
+        public static SoundEffect Blip;
+        public static Song Nature;
     }
 
-    class AssetsLoader
+    public class AssetsLoader
     {
-        public void Load(Microsoft.Xna.Framework.Content.ContentManager Content)
+        public void Load(Microsoft.Xna.Framework.Content.ContentManager content)
         {
-            Assets.player = Content.Load<Texture2D>("player");
-            Assets.playerDown = Content.Load<Texture2D>("Player/walkingDown");
-            Assets.playerUp = Content.Load<Texture2D>("Player/walkingUp");
-            Assets.playerLeft = Content.Load<Texture2D>("Player/walkingLeft");
-            Assets.playerRight = Content.Load<Texture2D>("Player/walkingRight");
+            Assets.Player = content.Load<Texture2D>("player");
+            Assets.PlayerDown = content.Load<Texture2D>("Player/walkingDown");
+            Assets.PlayerUp = content.Load<Texture2D>("Player/walkingUp");
+            Assets.PlayerLeft = content.Load<Texture2D>("Player/walkingLeft");
+            Assets.PlayerRight = content.Load<Texture2D>("Player/walkingRight");
 
-            Assets.button = Content.Load<Texture2D>("button");
-            Assets.buttonPressed = Content.Load<Texture2D>("button_pressed");
-            Assets.buttonHover = Content.Load<Texture2D>("button_hover");
+            Assets.Button = content.Load<Texture2D>("button");
+            Assets.ButtonPressed = content.Load<Texture2D>("button_pressed");
+            Assets.ButtonHover = content.Load<Texture2D>("button_hover");
 
-            Assets.bullet = Content.Load<Texture2D>("bullet");
+            Assets.Bullet = content.Load<Texture2D>("bullet");
 
-            Assets.background = Content.Load<Texture2D>("Middle");
-            Assets.tunnel = Content.Load<Texture2D>("tunnel");
+            Assets.Background = content.Load<Texture2D>("Middle");
+            Assets.Tunnel = content.Load<Texture2D>("tunnel");
 
-            Assets.fontSmall = Content.Load<SpriteFont>("fontSmall");
-            Assets.fontMedium = Content.Load<SpriteFont>("fontMedium");
-            Assets.fontLarge = Content.Load<SpriteFont>("fontLarge");
+            Assets.FontSmall = content.Load<SpriteFont>("fontSmall");
+            Assets.FontMedium = content.Load<SpriteFont>("fontMedium");
+            Assets.FontLarge = content.Load<SpriteFont>("fontLarge");
 
-            Assets.blip = Content.Load<SoundEffect>("Sounds/blip");
-            Assets.nature = Content.Load<Song>("Sounds/nature");
+            Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
+            Assets.Nature = content.Load<Song>("Sounds/nature");
         }
     }
 }

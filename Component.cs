@@ -6,6 +6,7 @@ namespace MyGame
     public abstract class Component
     {
         public Rectangle Hitbox { get; protected set; }
+
         public Texture2D Sprite { get; protected set; }
 
         public abstract void Draw(SpriteBatch spriteBatch);

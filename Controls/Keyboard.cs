@@ -1,7 +1,7 @@
-﻿using Microsoft.Xna.Framework.Input;
-
-namespace MyGame.Controls
+﻿namespace MyGame.Controls
 {
+    using Microsoft.Xna.Framework.Input;
+
     public class Keyboard
     {
         static KeyboardState currentKeyState;

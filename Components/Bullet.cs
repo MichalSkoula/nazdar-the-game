@@ -1,51 +1,53 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using MyGame.Screens;
-
-namespace MyGame.Components
+﻿namespace MyGame.Components
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using MyGame.Screens;
+
     public class Bullet : Component
     {
-        private Enums.Direction _direction;
-        private int _speed = 1200;
+        private Enums.Direction direction;
+        private int speed = 1200;
 
-        public bool ToDelete { get; set; }
+        public bool ToDelete
+        {
+            get;
+            private set;
+        }
 
         public Bullet(int x, int y, Enums.Direction direction)
         {
-            Sprite = Assets.bullet;
-            Hitbox = new Rectangle(x, y - Sprite.Height / 2, Sprite.Width, Sprite.Height);
-            _direction = direction;
+            this.Sprite = Assets.Bullet;
+            this.Hitbox = new Rectangle(x, y - (this.Sprite.Height / 2), this.Sprite.Width, this.Sprite.Height);
+            this.direction = direction;
 
-            Assets.blip.Play();
+            Assets.Blip.Play();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, Hitbox, Color.White);
+            spriteBatch.Draw(this.Sprite, this.Hitbox, Color.White);
         }
 
         public override void Update(float deltaTime)
         {
             // move it
-            Rectangle newHitbox = Hitbox;
-            if (_direction == Enums.Direction.Left)
+            Rectangle newHitbox = this.Hitbox;
+            if (this.direction == Enums.Direction.Left)
             {
-                newHitbox.X -= (int)(deltaTime * _speed);
-            } 
-            else if (_direction == Enums.Direction.Right)
+                newHitbox.X -= (int)(deltaTime * this.speed);
+            }
+            else if (this.direction == Enums.Direction.Right)
             {
-                newHitbox.X += (int)(deltaTime * _speed);
+                newHitbox.X += (int)(deltaTime * this.speed);
             }
 
-            Hitbox = newHitbox;
+            this.Hitbox = newHitbox;
 
-            // out of game map 
-            if (Hitbox.X < 0 || Hitbox.X > MapScreen.mapWidth)
+            // out of game map
+            if (this.Hitbox.X < 0 || this.Hitbox.X > MapScreen.MapWidth)
             {
-                ToDelete = true;
+                this.ToDelete = true;
             }
         }
     }
