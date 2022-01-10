@@ -45,3 +45,7 @@ https://cs.wikipedia.org/wiki/Bitva_u_Lipjag
 
 * Kazaň *
 Srpen, státní zlatý poklad
+
+
+intro:
+Ve velké válce bojovalo na straně RU 1,4 milionu Čechů, nepřežilo XX. Na druhé straně bojovalo 60k legionářů ...
