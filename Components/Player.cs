@@ -37,7 +37,7 @@
 
         public void Load(dynamic data)
         {
-            this.Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Hitbox.Width, (int)data.Hitbox.Height);
+            this.Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
         }
 
         public override void Update(float deltaTime)

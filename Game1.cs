@@ -21,8 +21,8 @@ namespace MyGame
         public const int screenHeightDefault = 720;
 
         // internal screen resolution
-        public const int screenWidth = 1920;
-        public const int screenHeight = 1080;
+        public const int screenWidth = 1280;
+        public const int screenHeight = 720;
 
         // scaling + top / left bar
         public static float Scale { get; private set; }
@@ -51,8 +51,9 @@ namespace MyGame
 
             base.Initialize();
 
-            // no border
-            //Window.IsBorderless = true;
+            // TODO decide
+            // Window.IsBorderless = true;
+            // this.Graphics.IsFullScreen = true;
 
             // window size
             this.Graphics.PreferredBackBufferWidth = screenWidthDefault;
@@ -138,7 +139,7 @@ namespace MyGame
             if (outputAspect <= preferredAspect)
             {
                 // output is taller than it is wider, bars on top/bottom
-                int presentHeight = (int)((this.Window.ClientBounds.Width / preferredAspect));
+                int presentHeight = (int)(this.Window.ClientBounds.Width / preferredAspect);
                 BarHeight = (this.Window.ClientBounds.Height - presentHeight) / 2;
                 dst = new Rectangle(0, BarHeight, this.Window.ClientBounds.Width, presentHeight);
 
@@ -147,7 +148,7 @@ namespace MyGame
             else
             {
                 // output is wider than it is tall, bars left/right
-                int presentWidth = (int)((this.Window.ClientBounds.Height * preferredAspect));
+                int presentWidth = (int)(this.Window.ClientBounds.Height * preferredAspect);
                 BarWidth = (this.Window.ClientBounds.Width - presentWidth) / 2;
                 dst = new Rectangle(BarWidth, 0, presentWidth, this.Window.ClientBounds.Height);
 
