@@ -30,8 +30,8 @@
         public static int MapWidth;
 
         // Y positions
-        private const int StatusBarPosition = 900;
-        public const int FloorPos = 700;
+        private const int StatusBarPosition = 600;
+        public const int FloorPos = 500;
 
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();

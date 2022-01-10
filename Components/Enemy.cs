@@ -7,7 +7,7 @@
 
     public class Enemy : Component
     {
-        private int speed = 600;
+        private int speed = 300;
 
         private Animation anim;
 
@@ -17,10 +17,10 @@
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.PlayerUp, 3, 10),
-            new Animation(Assets.PlayerRight, 3, 10),
-            new Animation(Assets.PlayerDown, 3, 10),
-            new Animation(Assets.PlayerLeft, 3, 10),
+            new Animation(Assets.PlayerUp, 4, 10),
+            new Animation(Assets.PlayerRight, 4, 10),
+            new Animation(Assets.PlayerDown, 4, 10),
+            new Animation(Assets.PlayerLeft, 4, 10),
         };
 
         public bool ToDelete { get; set; }

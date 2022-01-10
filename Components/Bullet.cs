@@ -7,7 +7,7 @@
     public class Bullet : Component
     {
         private Enums.Direction direction;
-        private int speed = 1200;
+        private int speed = 1000;
 
         public bool ToDelete
         {

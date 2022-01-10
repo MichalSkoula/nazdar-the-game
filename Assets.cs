@@ -40,11 +40,10 @@
     {
         public void Load(Microsoft.Xna.Framework.Content.ContentManager content)
         {
-            Assets.Player = content.Load<Texture2D>("player");
-            Assets.PlayerDown = content.Load<Texture2D>("Player/walkingDown");
-            Assets.PlayerUp = content.Load<Texture2D>("Player/walkingUp");
-            Assets.PlayerLeft = content.Load<Texture2D>("Player/walkingLeft");
-            Assets.PlayerRight = content.Load<Texture2D>("Player/walkingRight");
+            Assets.PlayerDown = content.Load<Texture2D>("Player/player_left");
+            Assets.PlayerUp = content.Load<Texture2D>("Player/player_left");
+            Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
+            Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
 
             Assets.Button = content.Load<Texture2D>("button");
             Assets.ButtonPressed = content.Load<Texture2D>("button_pressed");

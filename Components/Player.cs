@@ -8,7 +8,7 @@
 
     public class Player : Component
     {
-        private int speed = 500;
+        private int speed = 250;
 
         private Animation anim;
 
@@ -22,10 +22,10 @@
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.PlayerUp, 3, 10),
-            new Animation(Assets.PlayerRight, 3, 10),
-            new Animation(Assets.PlayerDown, 3, 10),
-            new Animation(Assets.PlayerLeft, 3, 10),
+            new Animation(Assets.PlayerUp, 4, 10),
+            new Animation(Assets.PlayerRight, 4, 10),
+            new Animation(Assets.PlayerDown, 4, 10),
+            new Animation(Assets.PlayerLeft, 4, 10),
         };
 
         public Player(int x, int y)
@@ -37,7 +37,8 @@
 
         public void Load(dynamic data)
         {
-            this.Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+            // only change X
+            this.Hitbox = new Rectangle((int)data.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
         }
 
         public override void Update(float deltaTime)
