@@ -109,7 +109,7 @@ namespace MyGame
             }
         }
 
-        // draw renderTarget to screen 
+        // draw renderTarget to screen
         public void DrawStart()
         {
             this.GraphicsDevice.SetRenderTarget(this.RenderTarget);

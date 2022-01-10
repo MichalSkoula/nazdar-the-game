@@ -15,3 +15,6 @@ dotnet_diagnostic.SA1400.severity = none
 
 # Enums should be documented
 dotnet_diagnostic.SA1602.severity = none
+
+# Default severity for analyzer diagnostics with category 'StyleCop.CSharp.OrderingRules'
+dotnet_analyzer_diagnostic.category-StyleCop.CSharp.OrderingRules.severity = none

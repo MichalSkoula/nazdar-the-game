@@ -11,13 +11,16 @@
     using MyGame.Components;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
+    using static MyGame.Enums;
 
     public class MapScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
         public MapScreen(Game1 game)
-            : base(game) { }
+            : base(game)
+        {
+        }
 
         private Camera camera = new Camera();
 
@@ -33,8 +36,15 @@
         private const int StatusBarPosition = 600;
         public const int FloorPos = 500;
 
+        // game components
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
+
+        // day and night, timer
+        private DayPhase dayPhase = DayPhase.Day;
+        private const int NightLength = 4;
+        private const int DayLength = 8;
+        private double timer = DayLength;
 
         public override void Initialize()
         {
@@ -68,16 +78,24 @@
             this.camera.Follow(this.player);
 
             this.EnemiesUpdate();
+            this.UpdateDayPhase();
         }
 
         public override void Draw(GameTime gameTime)
         {
             this.Game.DrawStart(this.camera.Transform);
 
+            // day or night sky
+            this.GraphicsDevice.Clear(
+                this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.Black);
+
             // background
             for (int i = 0; i < this.numberOfScreens; i++)
             {
-                this.Game.SpriteBatch.Draw(Assets.Background, new Vector2(i * Game1.screenWidth, 0), Color.White);
+                this.Game.SpriteBatch.Draw(
+                    Assets.Background,
+                    new Vector2(i * Game1.screenWidth, 0),
+                    Color.White);
             }
 
             // left tunnel
@@ -99,8 +117,14 @@
                 Assets.FontLarge,
                 "this is game you can escape to menu",
                 new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition),
-                Color.White
-                );
+                Color.White);
+
+            // timer
+            this.Game.SpriteBatch.DrawString(
+                Assets.FontSmall,
+                "timer: " + Math.Ceiling(this.timer).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 60),
+                Color.White);
 
             // player - camera follows
             this.player.Draw(this.Game.SpriteBatch);
@@ -170,6 +194,24 @@
             }
 
             this.enemies.RemoveAll(p => p.ToDelete);
+        }
+
+        private void UpdateDayPhase()
+        {
+            this.timer -= this.Game.DeltaTime;
+            if (this.timer <= 0)
+            {
+                if (this.dayPhase == DayPhase.Day)
+                {
+                    this.dayPhase = DayPhase.Night;
+                    this.timer = NightLength;
+                }
+                else
+                {
+                    this.dayPhase = DayPhase.Day;
+                    this.timer = DayLength;
+                }
+            }
         }
     }
 }
