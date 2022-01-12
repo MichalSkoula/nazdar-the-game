@@ -45,9 +45,9 @@
             Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
 
-            Assets.Button = content.Load<Texture2D>("button");
-            Assets.ButtonPressed = content.Load<Texture2D>("button_pressed");
-            Assets.ButtonHover = content.Load<Texture2D>("button_hover");
+            Assets.Button = content.Load<Texture2D>("Buttons/button");
+            Assets.ButtonPressed = content.Load<Texture2D>("Buttons/button_pressed");
+            Assets.ButtonHover = content.Load<Texture2D>("Buttons/button_hover");
 
             Assets.Bullet = content.Load<Texture2D>("bullet");
 
