@@ -84,7 +84,7 @@
             else if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
             {
                 // to game
-                this.Game.LoadScreen1();
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
             // start
@@ -92,7 +92,7 @@
             if (this.startButton.HasBeenClicked())
             {
 
-                this.Game.LoadScreen1();
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
             // fullscreen

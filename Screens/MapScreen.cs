@@ -70,7 +70,7 @@
                 this.Save();
 
                 // back to menu
-                this.Game.LoadMenuScreen();
+                this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }
 
             this.player.Update(this.Game.DeltaTime);

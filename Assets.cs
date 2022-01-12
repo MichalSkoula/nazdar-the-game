@@ -54,9 +54,9 @@
             Assets.Background = content.Load<Texture2D>("Middle");
             Assets.Tunnel = content.Load<Texture2D>("tunnel");
 
-            Assets.FontSmall = content.Load<SpriteFont>("fontSmall");
-            Assets.FontMedium = content.Load<SpriteFont>("fontMedium");
-            Assets.FontLarge = content.Load<SpriteFont>("fontLarge");
+            Assets.FontSmall = content.Load<SpriteFont>("Fonts/fontSmall");
+            Assets.FontMedium = content.Load<SpriteFont>("Fonts/fontMedium");
+            Assets.FontLarge = content.Load<SpriteFont>("Fonts/fontLarge");
 
             Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
             Assets.Nature = content.Load<Song>("Sounds/nature");

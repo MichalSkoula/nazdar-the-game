@@ -31,9 +31,6 @@ namespace MyGame
 
         public static int BarWidth { get; private set; }
 
-        // save data
-
-
         public Game1()
         {
             this.Graphics = new GraphicsDeviceManager(this);
@@ -66,7 +63,7 @@ namespace MyGame
             this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, screenWidth, screenHeight);
 
             // start it with this scene
-            this.LoadScreen1(false);
+            this.LoadScreen(typeof(Screens.SplashScreen), false);
         }
 
         protected override void LoadContent()
@@ -85,27 +82,16 @@ namespace MyGame
             base.Update(gameTime);
         }
 
-        public void LoadMenuScreen(bool transition = true)
+        public void LoadScreen(Type type, bool transition = true)
         {
+            var screen = Activator.CreateInstance(type, this);
             if (transition)
             {
-                this.screenManager.LoadScreen(new Screens.MenuScreen(this), new FadeTransition(this.GraphicsDevice, Color.Black));
+                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, Color.Black));
             }
             else
             {
-                this.screenManager.LoadScreen(new Screens.MenuScreen(this));
-            }
-        }
-
-        public void LoadScreen1(bool transition = true)
-        {
-            if (transition)
-            {
-                this.screenManager.LoadScreen(new Screens.MapScreen(this), new FadeTransition(this.GraphicsDevice, Color.Black));
-            }
-            else
-            {
-                this.screenManager.LoadScreen(new Screens.MapScreen(this));
+                this.screenManager.LoadScreen((Screen)screen);
             }
         }
 
