@@ -61,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/button_pressed.png
 
+#begin Effects/AllWhite.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/AllWhite.fx
+
+#begin Effects/Pixelate.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Effects/Pixelate.fx
+
 #begin Fonts/fontLarge.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

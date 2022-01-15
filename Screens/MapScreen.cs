@@ -83,13 +83,14 @@
 
         public override void Draw(GameTime gameTime)
         {
-            this.Game.DrawStart(this.camera.Transform);
+            this.Game.Matrix = this.camera.Transform;
+            this.Game.DrawStart();
 
             // day or night sky
-            this.GraphicsDevice.Clear(
-                this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.Black);
+            this.GraphicsDevice.Clear(this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.Black);
 
             // background
+            // this.Game.EffectStart(Assets.Pixelate);
             for (int i = 0; i < this.numberOfScreens; i++)
             {
                 this.Game.SpriteBatch.Draw(
@@ -97,6 +98,7 @@
                     new Vector2(i * Game1.screenWidth, 0),
                     Color.White);
             }
+            // this.Game.EffectEnd();
 
             // left tunnel
             this.Game.SpriteBatch.Draw(Assets.Tunnel, Vector2.Zero, Color.White);

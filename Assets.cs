@@ -34,6 +34,10 @@
         // audio
         public static SoundEffect Blip;
         public static Song Nature;
+
+        // effects
+        public static Effect AllWhite;
+        public static Effect Pixelate;
     }
 
     public class AssetsLoader
@@ -60,6 +64,10 @@
 
             Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
             Assets.Nature = content.Load<Song>("Sounds/nature");
+
+            Assets.AllWhite = content.Load<Effect>("Effects/AllWhite");
+            Assets.Pixelate = content.Load<Effect>("Effects/Pixelate");
+            Assets.Pixelate.Parameters["pixelation"].SetValue(5);
         }
     }
 }

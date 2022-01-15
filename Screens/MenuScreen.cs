@@ -123,6 +123,7 @@
 
         public override void Draw(GameTime gameTime)
         {
+            this.Game.Matrix = null;
             this.Game.DrawStart();
 
             this.startButton.Draw(this.Game.SpriteBatch);

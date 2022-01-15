@@ -11,6 +11,7 @@ namespace MyGame
         public GraphicsDeviceManager Graphics;
         public SpriteBatch SpriteBatch;
         public RenderTarget2D RenderTarget;
+        public Matrix? Matrix = null;
         public float DeltaTime;
 
         private readonly ScreenManager screenManager;
@@ -63,7 +64,8 @@ namespace MyGame
             this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, screenWidth, screenHeight);
 
             // start it with this scene
-            this.LoadScreen(typeof(Screens.SplashScreen), false);
+            // this.LoadScreen(typeof(Screens.SplashScreen), false);
+            this.LoadScreen(typeof(Screens.MapScreen), false);
         }
 
         protected override void LoadContent()
@@ -99,19 +101,27 @@ namespace MyGame
         public void DrawStart()
         {
             this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
-            this.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            this.SpriteBatch.Begin();
-        }
-
-        public void DrawStart(Matrix transform)
-        {
-            this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
             this.GraphicsDevice.Clear(Color.Black);
 
-            this.SpriteBatch.Begin(transformMatrix: transform);
+            this.SpriteBatchStart();
         }
 
+        // when drawing image with effect, use this before and after
+        public void EffectStart(Effect effect = null)
+        {
+            this.SpriteBatch.End();
+
+            this.SpriteBatchStart(effect: effect);
+        }
+
+        public void EffectEnd()
+        {
+            this.SpriteBatch.End();
+
+            this.SpriteBatchStart();
+        }
+
+        // draw it to screen
         public void DrawEnd()
         {
             this.SpriteBatch.End();
@@ -143,9 +153,20 @@ namespace MyGame
 
             this.GraphicsDevice.SetRenderTarget(null);
             this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
+
             this.SpriteBatch.Begin();
             this.SpriteBatch.Draw(this.RenderTarget, dst, Color.White);
             this.SpriteBatch.End();
+        }
+
+        private void SpriteBatchStart(Effect? effect = null)
+        {
+            this.SpriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.PointClamp,
+                transformMatrix: this.Matrix.HasValue ? this.Matrix : null,
+                effect: effect);
         }
     }
 }

@@ -28,6 +28,7 @@
 
         public override void Draw(GameTime gameTime)
         {
+            this.Game.Matrix = null;
             this.Game.DrawStart();
 
             this.Game.SpriteBatch.DrawString(Assets.FontMedium, "MyGame splash screen", new Vector2(10, 140), Color.White);

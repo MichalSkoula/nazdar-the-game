@@ -30,7 +30,8 @@
 
         public Player(int x, int y)
         {
-            this.anim = this.animations[(int)Enums.Direction.Down];
+            this.anim = this.animations[(int)Enums.Direction.Right];
+            this.direction = Enums.Direction.Right;
             this.Bullets = new List<Bullet>();
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
         }
