@@ -7,7 +7,7 @@
 
     public class Enemy : Component
     {
-        private int speed = 300;
+        private int speed = 200;
 
         private Animation anim;
 

@@ -5,9 +5,9 @@
 
     enum ButtonSize
     {
-        Small = 30,
-        Medium = 45,
-        Large = 60,
+        Small = 15,
+        Medium = 22,
+        Large = 30,
     }
 
     class Button
@@ -27,18 +27,15 @@
 
         public int AnimationTime { get; set; }
 
-        public string Data { get; set; }
-
         public Rectangle Hitbox;
 
-        public Button(int x, int y, int? width, ButtonSize size, string text, bool active = true, string data = "")
+        public Button(int x, int y, int? width, ButtonSize size, string text, bool active = true)
         {
             this.staticTexture = Assets.Button;
             this.clickedTexture = Assets.ButtonPressed;
             this.hoverTexture = Assets.ButtonHover;
             this.Texture = this.staticTexture;
             this.padding = 5;
-            this.Data = data;
             this.Text = text;
             this.AnimationTime = 0;
             this.Active = active;

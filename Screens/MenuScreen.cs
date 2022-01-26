@@ -19,49 +19,11 @@
 
         private Button startButton;
         private Button fullscreenButton;
-        private List<Button> resolutionButtons = new List<Button>();
 
         public override void Initialize()
         {
-            this.startButton = new Button((Game1.screenWidth / 2) - 60, 50, null, ButtonSize.Large, "Start");
-            this.fullscreenButton = new Button(10, 190, null, ButtonSize.Small, "Toggle Fullscreen");
-
-            // get allowed resolutions
-            int buttonIndex = 0;
-            string currentResolution = string.Empty;
-            foreach (DisplayMode mode in GraphicsAdapter.DefaultAdapter.SupportedDisplayModes)
-            {
-                if (this.GraphicsDevice.DisplayMode.Height < mode.Height || this.GraphicsDevice.DisplayMode.Width < mode.Width)
-                {
-                    continue;
-                }
-
-                if (mode.Height > mode.Width)
-                {
-                    continue;
-                }
-
-                if (mode.Height == Game1.screenHeightDefault && mode.Width == Game1.screenWidthDefault)
-                {
-                    currentResolution = mode.Width + "x" + mode.Height;
-                }
-
-                buttonIndex++;
-                this.resolutionButtons.Add(new Button(10, 0, null, ButtonSize.Small, mode.Width + "x" + mode.Height, true, mode.Width + "x" + mode.Height));
-            }
-
-            // if more than 10 resolutions, lets remove every second one
-            while (this.resolutionButtons.Count > 10)
-            {
-                for (int y = this.resolutionButtons.Count - 1; y >= 0; y--)
-                {
-                    // every second one, but not current
-                    if (y % 2 == 1 && currentResolution != this.resolutionButtons[y].Data)
-                    {
-                        this.resolutionButtons.RemoveAt(y);
-                    }
-                }
-            }
+            this.startButton = new Button((Game1.screenWidth / 2) - 60, 25, null, ButtonSize.Large, "Start");
+            this.fullscreenButton = new Button((Game1.screenWidth / 2) - 60, 85, null, ButtonSize.Small, "Toggle Fullscreen");
 
             // play song
             MediaPlayer.Play(Assets.Nature);
@@ -102,23 +64,6 @@
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
             }
-
-            // resolution
-            int buttonIndex = 0;
-            foreach (Button btn in this.resolutionButtons)
-            {
-                buttonIndex++;
-                btn.Hitbox = new Rectangle(btn.Hitbox.X, 210 + (buttonIndex * ((int)ButtonSize.Small + 10)), btn.Hitbox.Width, btn.Hitbox.Height);
-
-                btn.Update();
-                if (btn.HasBeenClicked())
-                {
-                    string[] resolution = btn.Data.Split('x');
-                    this.Game.Graphics.PreferredBackBufferWidth = int.Parse(resolution[0]);
-                    this.Game.Graphics.PreferredBackBufferHeight = int.Parse(resolution[1]);
-                    this.Game.Graphics.ApplyChanges();
-                }
-            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -128,15 +73,6 @@
 
             this.startButton.Draw(this.Game.SpriteBatch);
             this.fullscreenButton.Draw(this.Game.SpriteBatch);
-
-            if (this.resolutionButtons.Count > 0)
-            {
-                this.Game.SpriteBatch.DrawString(Assets.FontMedium, "Choose resolution", new Vector2(10, 140), Color.White);
-                foreach (Button btn in this.resolutionButtons)
-                {
-                    btn.Draw(this.Game.SpriteBatch);
-                }
-            }
 
             this.Game.DrawEnd();
         }

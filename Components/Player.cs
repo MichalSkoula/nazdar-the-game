@@ -8,7 +8,7 @@
 
     public class Player : Component
     {
-        private int speed = 250;
+        private int speed = 150;
 
         private Animation anim;
 

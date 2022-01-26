@@ -33,8 +33,8 @@
         public static int MapWidth;
 
         // Y positions
-        private const int StatusBarPosition = 600;
-        public const int FloorPos = 500;
+        private const int StatusBarPosition = 300;
+        public const int FloorPos = 250;
 
         // game components
         private Player player;

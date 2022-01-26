@@ -22,8 +22,8 @@ namespace MyGame
         public const int screenHeightDefault = 720;
 
         // internal screen resolution
-        public const int screenWidth = 1280;
-        public const int screenHeight = 720;
+        public const int screenWidth = 640;
+        public const int screenHeight = 360;
 
         // scaling + top / left bar
         public static float Scale { get; private set; }
@@ -51,7 +51,7 @@ namespace MyGame
 
             // TODO decide
             // Window.IsBorderless = true;
-            // this.Graphics.IsFullScreen = true;
+            //this.Graphics.IsFullScreen = true;
 
             // window size
             this.Graphics.PreferredBackBufferWidth = screenWidthDefault;
@@ -154,7 +154,10 @@ namespace MyGame
             this.GraphicsDevice.SetRenderTarget(null);
             this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
 
-            this.SpriteBatch.Begin();
+            this.SpriteBatch.Begin(
+                SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.PointClamp);
             this.SpriteBatch.Draw(this.RenderTarget, dst, Color.White);
             this.SpriteBatch.End();
         }
@@ -162,9 +165,6 @@ namespace MyGame
         private void SpriteBatchStart(Effect? effect = null)
         {
             this.SpriteBatch.Begin(
-                SpriteSortMode.Deferred,
-                BlendState.AlphaBlend,
-                SamplerState.PointClamp,
                 transformMatrix: this.Matrix.HasValue ? this.Matrix : null,
                 effect: effect);
         }
