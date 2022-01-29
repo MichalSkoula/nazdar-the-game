@@ -47,7 +47,7 @@
             Assets.PlayerDown = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerUp = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
-            Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
+            Assets.PlayerRight = content.Load<Texture2D>("Player/player_left");
 
             Assets.Button = content.Load<Texture2D>("Buttons/button");
             Assets.ButtonPressed = content.Load<Texture2D>("Buttons/button_pressed");
@@ -58,9 +58,9 @@
             Assets.Background = content.Load<Texture2D>("Middle");
             Assets.Tunnel = content.Load<Texture2D>("tunnel");
 
-            Assets.FontSmall = content.Load<SpriteFont>("Fonts/fontSmall");
-            Assets.FontMedium = content.Load<SpriteFont>("Fonts/fontMedium");
-            Assets.FontLarge = content.Load<SpriteFont>("Fonts/fontLarge");
+            Assets.FontSmall = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
+            Assets.FontMedium = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
+            Assets.FontLarge = content.Load<SpriteFont>("Fonts/fontPublicPixelLarge");
 
             Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
             Assets.Nature = content.Load<Song>("Sounds/nature");

@@ -18,12 +18,14 @@
             : base(game) { }
 
         private Button startButton;
+        private Button exitButton;
         private Button fullscreenButton;
 
         public override void Initialize()
         {
             this.startButton = new Button((Game1.screenWidth / 2) - 60, 25, null, ButtonSize.Large, "Start");
-            this.fullscreenButton = new Button((Game1.screenWidth / 2) - 60, 85, null, ButtonSize.Small, "Toggle Fullscreen");
+            this.fullscreenButton = new Button((Game1.screenWidth / 2) - 60, 85, null, ButtonSize.Medium, "Toggle Fullscreen");
+            this.exitButton = new Button((Game1.screenWidth / 2) - 60, 125, null, ButtonSize.Small, "Exit");
 
             // play song
             MediaPlayer.Play(Assets.Nature);
@@ -38,31 +40,28 @@
 
         public override void Update(GameTime gameTime)
         {
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
-            {
-                // exit game from menu
-                this.Game.Exit();
-            }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
-            {
-                // to game
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
-            }
-
-            // start
+            // update buttons
             this.startButton.Update();
-            if (this.startButton.HasBeenClicked())
-            {
-
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
-            }
+            this.fullscreenButton.Update();
+            this.exitButton.Update();
 
             // fullscreen
-            this.fullscreenButton.Update();
-            if (this.fullscreenButton.HasBeenClicked())
+            if (Controls.Keyboard.HasBeenPressed(Keys.F) || this.fullscreenButton.HasBeenClicked())
             {
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
+            }
+
+            // exit game from menu
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || this.exitButton.HasBeenClicked())
+            {
+                this.Game.Exit();
+            }
+
+            // start game
+            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || this.startButton.HasBeenClicked())
+            {
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
         }
 
@@ -73,6 +72,7 @@
 
             this.startButton.Draw(this.Game.SpriteBatch);
             this.fullscreenButton.Draw(this.Game.SpriteBatch);
+            this.exitButton.Draw(this.Game.SpriteBatch);
 
             this.Game.DrawEnd();
         }

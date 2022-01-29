@@ -73,26 +73,26 @@
 /processorParam:DebugMode=Auto
 /build:Effects/Pixelate.fx
 
-#begin Fonts/fontLarge.spritefont
+#begin Fonts/fontPublicPixelLarge.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/fontLarge.spritefont
+/build:Fonts/fontPublicPixelLarge.spritefont
 
-#begin Fonts/fontMedium.spritefont
+#begin Fonts/fontPublicPixelMedium.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/fontMedium.spritefont
+/build:Fonts/fontPublicPixelMedium.spritefont
 
-#begin Fonts/fontSmall.spritefont
+#begin Fonts/fontPublicPixelSmall.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/fontSmall.spritefont
+/build:Fonts/fontPublicPixelSmall.spritefont
 
 #begin Middle.png
 /importer:TextureImporter
@@ -117,18 +117,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Player/player_left.png
-
-#begin Player/player_right.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Player/player_right.png
 
 #begin Sounds/blip.wav
 /importer:WavImporter

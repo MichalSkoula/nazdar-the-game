@@ -54,7 +54,7 @@
                     break;
             }
 
-            // calculate size 
+            // calculate size
             this.Hitbox = new Rectangle(
                 x, y, (width.HasValue ? (int)width : this.CalculateButtonSize()) + (this.padding * 2), (int)size
             );
@@ -75,7 +75,6 @@
 
         public void Update()
         {
-
             if (this.Active && this.Hitbox.Contains(Controls.Mouse.Position))
             {
                 this.Texture = this.hoverTexture;
