@@ -30,6 +30,7 @@
             this.anim = this.animations[(int)Enums.Direction.Down];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.direction = direction;
+            this.Health = 100;
         }
 
         /*
@@ -81,6 +82,7 @@
         public override void Draw(SpriteBatch spriteBatch)
         {
             this.anim.Draw(spriteBatch, this.Hitbox, Color.Red);
+            this.DrawHealth(spriteBatch);
 
             // bullets
             foreach (var bullet in this.bullets)

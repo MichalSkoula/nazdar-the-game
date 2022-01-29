@@ -9,6 +9,7 @@
     public class Player : Component
     {
         private int speed = 150;
+        private int caliber;
 
         private Animation anim;
 
@@ -34,6 +35,8 @@
             this.direction = Enums.Direction.Right;
             this.Bullets = new List<Bullet>();
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Health = 100;
+            this.caliber = 30;
         }
 
         public void Load(dynamic data)
@@ -79,7 +82,7 @@
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
             {
-                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.direction));
+                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.direction, this.caliber));
             }
 
             foreach (var bullet in this.Bullets)

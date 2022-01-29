@@ -9,17 +9,16 @@
         private Enums.Direction direction;
         private int speed = 1000;
 
-        public bool ToDelete
-        {
-            get;
-            set;
-        }
+        public int Caliber { get; set; }
 
-        public Bullet(int x, int y, Enums.Direction direction)
+        public bool ToDelete { get; set; }
+
+        public Bullet(int x, int y, Enums.Direction direction, int caliber)
         {
             this.Sprite = Assets.Bullet;
             this.Hitbox = new Rectangle(x, y - (this.Sprite.Height / 2), this.Sprite.Width, this.Sprite.Height);
             this.direction = direction;
+            this.Caliber = caliber;
 
             Assets.Blip.Play();
         }

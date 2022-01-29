@@ -190,7 +190,11 @@
                     if (enemy.Hitbox.Intersects(bullet.Hitbox))
                     {
                         bullet.ToDelete = true;
-                        enemy.ToDelete = true;
+
+                        if (!enemy.TakeHit(bullet.Caliber))
+                        {
+                            enemy.ToDelete = true;
+                        }
                     }
                 }
             }
