@@ -116,7 +116,7 @@
 
             // status bar (minus translation to stay in place)
             this.Game.SpriteBatch.DrawString(
-                Assets.FontLarge,
+                Assets.FontMedium,
                 "this is game you can escape to menu",
                 new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition),
                 Color.White);
@@ -125,7 +125,7 @@
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
                 "timer: " + Math.Ceiling(this.timer).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 60),
+                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 20),
                 Color.White);
 
             // player - camera follows

@@ -17,10 +17,6 @@
         public static Texture2D PlayerLeft;
         public static Texture2D PlayerRight;
 
-        public static Texture2D Button;
-        public static Texture2D ButtonPressed;
-        public static Texture2D ButtonHover;
-
         public static Texture2D Bullet;
 
         public static Texture2D Background;
@@ -48,10 +44,6 @@
             Assets.PlayerUp = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerRight = content.Load<Texture2D>("Player/player_left");
-
-            Assets.Button = content.Load<Texture2D>("Buttons/button");
-            Assets.ButtonPressed = content.Load<Texture2D>("Buttons/button_pressed");
-            Assets.ButtonHover = content.Load<Texture2D>("Buttons/button_hover");
 
             Assets.Bullet = content.Load<Texture2D>("bullet");
 
