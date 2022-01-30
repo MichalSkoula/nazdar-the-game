@@ -2,24 +2,13 @@
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-
-    enum ButtonSize
-    {
-        Small = 15,
-        Medium = 22,
-        Large = 30,
-    }
+    using MonoGame.Extended;
 
     class Button
     {
-        private Texture2D staticTexture;
-        private Texture2D clickedTexture;
-        private Texture2D hoverTexture;
-
-        private Texture2D Texture { get; set; }
-
         private int padding;
         private SpriteFont font;
+        private Enums.ButtonState state;
 
         public bool Active { get; set; }
 
@@ -27,14 +16,11 @@
 
         public int AnimationTime { get; set; }
 
-        public Rectangle Hitbox;
+        private Rectangle hitbox;
 
-        public Button(int x, int y, int? width, ButtonSize size, string text, bool active = true)
+        public Button(int x, int y, int? width, Enums.ButtonSize size, string text, bool active = true)
         {
-            this.staticTexture = Assets.Button;
-            this.clickedTexture = Assets.ButtonPressed;
-            this.hoverTexture = Assets.ButtonHover;
-            this.Texture = this.staticTexture;
+            this.state = Enums.ButtonState.StaticState;
             this.padding = 5;
             this.Text = text;
             this.AnimationTime = 0;
@@ -43,30 +29,30 @@
             // add font
             switch (size)
             {
-                case ButtonSize.Small:
+                case Enums.ButtonSize.Small:
                     this.font = Assets.FontSmall;
                     break;
-                case ButtonSize.Medium:
+                case Enums.ButtonSize.Medium:
                     this.font = Assets.FontMedium;
                     break;
-                case ButtonSize.Large:
+                case Enums.ButtonSize.Large:
                     this.font = Assets.FontLarge;
                     break;
             }
 
             // calculate size
-            this.Hitbox = new Rectangle(
+            this.hitbox = new Rectangle(
                 x, y, (width.HasValue ? (int)width : this.CalculateButtonSize()) + (this.padding * 2), (int)size
             );
         }
 
         public bool HasBeenClicked()
         {
-            if (this.Active && Controls.Mouse.HasBeenPressed(true) && this.Hitbox.Contains(Controls.Mouse.Position))
+            if (this.Active && Controls.Mouse.HasBeenPressed(true) && this.hitbox.Contains(Controls.Mouse.Position))
             {
                 // perform click animation & return
                 this.AnimationTime = 30;
-                this.Texture = this.clickedTexture;
+                this.state = Enums.ButtonState.ClickedState;
                 return true;
             }
 
@@ -75,9 +61,9 @@
 
         public void Update()
         {
-            if (this.Active && this.Hitbox.Contains(Controls.Mouse.Position))
+            if (this.Active && this.hitbox.Contains(Controls.Mouse.Position))
             {
-                this.Texture = this.hoverTexture;
+                this.state = Enums.ButtonState.HoverState;
             }
             else
             {
@@ -88,7 +74,7 @@
 
                 if (this.AnimationTime == 0)
                 {
-                    this.Texture = this.staticTexture;
+                    this.state = Enums.ButtonState.StaticState;
                 }
             }
         }
@@ -100,8 +86,18 @@
                 return;
             }
 
-            spriteBatch.Draw(this.Texture, this.Hitbox, Color.White);
-            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), Color.Black);
+            var bgColor = Color.Green;
+            if (this.state == Enums.ButtonState.ClickedState)
+            {
+                bgColor = Color.DarkGreen;
+            }
+            else if (this.state == Enums.ButtonState.HoverState)
+            {
+                bgColor = Color.LightGreen;
+            }
+
+            spriteBatch.DrawRectangle(this.hitbox, bgColor, (this.hitbox.Height / 2) + 5);
+            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.hitbox.X + this.padding, this.hitbox.Y + this.padding), Color.Black);
         }
 
         private int CalculateButtonSize()

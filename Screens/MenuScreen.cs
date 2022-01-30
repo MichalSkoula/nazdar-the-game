@@ -23,9 +23,9 @@
 
         public override void Initialize()
         {
-            this.startButton = new Button((Game1.screenWidth / 2) - 100, 25, null, ButtonSize.Large, "Start");
-            this.fullscreenButton = new Button((Game1.screenWidth / 2) - 100, 85, null, ButtonSize.Medium, "Toggle Fullscreen");
-            this.exitButton = new Button((Game1.screenWidth / 2) - 100, 125, null, ButtonSize.Small, "Exit");
+            this.startButton = new Button((Game1.screenWidth / 2) - 100, 25, null, Enums.ButtonSize.Large, "Start");
+            this.fullscreenButton = new Button((Game1.screenWidth / 2) - 100, 85, null, Enums.ButtonSize.Medium, "Toggle Fullscreen");
+            this.exitButton = new Button((Game1.screenWidth / 2) - 100, 125, null, Enums.ButtonSize.Small, "Exit");
 
             // play song
             MediaPlayer.Play(Assets.Nature);

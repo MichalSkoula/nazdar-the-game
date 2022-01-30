@@ -19,5 +19,19 @@
             Night, // 0
             Day, // 1
         }
+
+        public enum ButtonSize
+        {
+            Small = 15,
+            Medium = 22,
+            Large = 30,
+        }
+
+        public enum ButtonState
+        {
+            StaticState,
+            ClickedState,
+            HoverState,
+        }
     }
 }
