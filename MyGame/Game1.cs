@@ -64,7 +64,7 @@ namespace MyGame
 
             // start it with this scene
             #if DEBUG
-                this.LoadScreen(typeof(Screens.SplashScreen), false);
+                this.LoadScreen(typeof(Screens.MenuScreen), false);
             #else
                 this.LoadScreen(typeof(Screens.SplashScreen), false);
             #endif
