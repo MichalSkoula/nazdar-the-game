@@ -147,10 +147,16 @@
                 return;
             }
 
+            // parse
             string json = File.ReadAllText("save.json");
             dynamic saveData = JObject.Parse(json);
 
+            // create objects
             this.player.Load(saveData.player);
+            foreach (var enemy in saveData.enemies)
+            {
+                this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Enums.Direction)enemy.Direction, (int)enemy.Health));
+            }
         }
 
         private void Save()
@@ -158,10 +164,11 @@
             var saveData = new
             {
                 player = this.player,
+                enemies = this.enemies,
             };
             string json = JsonConvert.SerializeObject(saveData);
             File.WriteAllText("save.json", json);
-            System.Diagnostics.Debug.WriteLine(json);
+            // System.Diagnostics.Debug.WriteLine(json);
         }
 
         private void EnemiesUpdate()

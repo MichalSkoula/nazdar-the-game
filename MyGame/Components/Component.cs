@@ -12,6 +12,8 @@
 
         public Texture2D Sprite { get; protected set; }
 
+        public Enums.Direction Direction { get; protected set; }
+
         public abstract void Draw(SpriteBatch spriteBatch);
 
         public abstract void Update(float deltaTime);

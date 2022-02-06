@@ -17,6 +17,15 @@
         public SplashScreen(Game1 game)
             : base(game) { }
 
+        public override void Initialize()
+        {
+            // load and apply settings from json file
+            // we load this also in menuscreen
+            Settings.LoadSettings(Game);
+
+            base.Initialize();
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Keyboard.HasBeenPressed(Keys.Enter))

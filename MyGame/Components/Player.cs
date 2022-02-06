@@ -13,8 +13,6 @@
 
         private Animation anim;
 
-        private Enums.Direction direction;
-
         public List<Bullet> Bullets
         {
             get;
@@ -32,7 +30,7 @@
         public Player(int x, int y)
         {
             this.anim = this.animations[(int)Enums.Direction.Right];
-            this.direction = Enums.Direction.Right;
+            this.Direction = Enums.Direction.Right;
             this.Bullets = new List<Bullet>();
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = 100;
@@ -53,12 +51,12 @@
             if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < MapScreen.MapWidth - this.Hitbox.Width)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
-                this.direction = Enums.Direction.Right;
+                this.Direction = Enums.Direction.Right;
             }
             else if (Controls.Keyboard.IsPressed(Keys.Left) && this.Hitbox.X > 0)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
-                this.direction = Enums.Direction.Left;
+                this.Direction = Enums.Direction.Left;
             }
             else
             {
@@ -69,7 +67,7 @@
             {
                 this.Hitbox = newHitbox;
                 this.anim.Loop = true;
-                this.anim = this.animations[(int)this.direction];
+                this.anim = this.animations[(int)this.Direction];
             }
             else
             {
@@ -82,7 +80,7 @@
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
             {
-                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.direction, this.caliber));
+                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.Direction, this.caliber));
             }
 
             foreach (var bullet in this.Bullets)

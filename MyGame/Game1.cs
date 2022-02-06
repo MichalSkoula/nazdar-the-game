@@ -65,7 +65,7 @@ namespace MyGame
 
             // start it with this scene
             // this.LoadScreen(typeof(Screens.SplashScreen), false);
-            this.LoadScreen(typeof(Screens.MapScreen), false);
+            this.LoadScreen(typeof(Screens.SplashScreen), false);
         }
 
         protected override void LoadContent()

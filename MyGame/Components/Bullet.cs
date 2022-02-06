@@ -6,7 +6,6 @@
 
     public class Bullet : Component
     {
-        private Enums.Direction direction;
         private int speed = 1000;
 
         public int Caliber { get; set; }
@@ -17,7 +16,7 @@
         {
             this.Sprite = Assets.Bullet;
             this.Hitbox = new Rectangle(x, y - (this.Sprite.Height / 2), this.Sprite.Width, this.Sprite.Height);
-            this.direction = direction;
+            this.Direction = direction;
             this.Caliber = caliber;
 
             Assets.Blip.Play();
@@ -32,11 +31,11 @@
         {
             // move it
             Rectangle newHitbox = this.Hitbox;
-            if (this.direction == Enums.Direction.Left)
+            if (this.Direction == Enums.Direction.Left)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
             }
-            else if (this.direction == Enums.Direction.Right)
+            else if (this.Direction == Enums.Direction.Right)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
             }

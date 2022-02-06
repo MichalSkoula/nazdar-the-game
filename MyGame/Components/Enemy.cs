@@ -11,8 +11,6 @@
 
         private Animation anim;
 
-        private Enums.Direction direction;
-
         private List<Bullet> bullets = new List<Bullet>();
 
         private List<Animation> animations = new List<Animation>()
@@ -25,31 +23,24 @@
 
         public bool ToDelete { get; set; }
 
-        public Enemy(int x, int y, Enums.Direction direction)
+        public Enemy(int x, int y, Enums.Direction direction, int health = 100)
         {
             this.anim = this.animations[(int)Enums.Direction.Down];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
-            this.direction = direction;
-            this.Health = 100;
+            this.Direction = direction;
+            this.Health = health;
         }
-
-        /*
-        public void Load(dynamic data)
-        {
-            Hitbox = new Rectangle((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Hitbox.Width, (int)data.Hitbox.Height);
-        }
-        */
 
         public override void Update(float deltaTime)
         {
             // is enemy moving?
             bool isMoving = true;
             Rectangle newHitbox = this.Hitbox;
-            if (this.direction == Enums.Direction.Right)
+            if (this.Direction == Enums.Direction.Right)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
             }
-            else if (this.direction == Enums.Direction.Left)
+            else if (this.Direction == Enums.Direction.Left)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
             }
@@ -62,7 +53,7 @@
             {
                 this.Hitbox = newHitbox;
                 this.anim.Loop = true;
-                this.anim = this.animations[(int)this.direction];
+                this.anim = this.animations[(int)this.Direction];
             }
             else
             {

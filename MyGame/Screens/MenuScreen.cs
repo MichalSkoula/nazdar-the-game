@@ -30,6 +30,10 @@
             // play song
             MediaPlayer.Play(Assets.Nature);
 
+            // load and apply settings from json file
+            // we load this also in splashscreen
+            Settings.LoadSettings(Game);
+
             base.Initialize();
         }
 
@@ -50,6 +54,8 @@
             {
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
+
+                Settings.SaveSettings(Game);
             }
 
             // exit game from menu
@@ -64,7 +70,6 @@
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
         }
-
         public override void Draw(GameTime gameTime)
         {
             this.Game.Matrix = null;
