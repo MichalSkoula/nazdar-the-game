@@ -23,7 +23,7 @@
             return currentMouseState;
         }
 
-        public static bool IsPressed(bool left)
+        public static bool IsPressed(bool left = true)
         {
             if (left)
             {
@@ -35,7 +35,7 @@
             }
         }
 
-        public static bool HasBeenPressed(bool left)
+        public static bool HasBeenPressed(bool left = true)
         {
             if (left)
             {

@@ -152,10 +152,17 @@
             dynamic saveData = JObject.Parse(json);
 
             // create objects
-            this.player.Load(saveData.player);
-            foreach (var enemy in saveData.enemies)
+            if (saveData.ContainsKey("player"))
             {
-                this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Enums.Direction)enemy.Direction, (int)enemy.Health));
+                this.player.Load(saveData.GetValue("player"));
+            }
+
+            if (saveData.ContainsKey("enemies"))
+            {
+                foreach (var enemy in saveData.GetValue("enemies"))
+                {
+                    this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Enums.Direction)enemy.Direction, (int)enemy.Health));
+                }
             }
         }
 
@@ -174,7 +181,7 @@
         private void EnemiesUpdate()
         {
             // create enemy?
-            if (this.rand.Next(120) < 3)
+            if (this.rand.Next(120) < 3 && this.dayPhase == DayPhase.Night)
             {
                 // choose direction
                 if (this.rand.Next(2) == 0)

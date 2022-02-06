@@ -51,7 +51,6 @@ namespace MyGame
 
             // TODO decide
             // Window.IsBorderless = true;
-            //this.Graphics.IsFullScreen = true;
 
             // window size
             this.Graphics.PreferredBackBufferWidth = screenWidthDefault;
@@ -64,8 +63,11 @@ namespace MyGame
             this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, screenWidth, screenHeight);
 
             // start it with this scene
-            // this.LoadScreen(typeof(Screens.SplashScreen), false);
-            this.LoadScreen(typeof(Screens.SplashScreen), false);
+            #if DEBUG
+                this.LoadScreen(typeof(Screens.SplashScreen), false);
+            #else
+                this.LoadScreen(typeof(Screens.SplashScreen), false);
+            #endif
         }
 
         protected override void LoadContent()

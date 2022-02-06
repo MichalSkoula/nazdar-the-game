@@ -28,7 +28,7 @@
 
         public override void Update(GameTime gameTime)
         {
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Keyboard.HasBeenPressed(Keys.Enter))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Mouse.HasBeenPressed())
             {
                 // skip splash screen
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));

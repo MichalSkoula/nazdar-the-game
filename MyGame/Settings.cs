@@ -23,9 +23,7 @@ namespace MyGame
             dynamic settings = JObject.Parse(json);
 
             // apply fullscreen?
-            System.Diagnostics.Debug.WriteLine(game.Graphics.IsFullScreen);
-            System.Diagnostics.Debug.WriteLine((bool)settings.fullscreen);
-            if (game.Graphics.IsFullScreen != (bool)settings.fullscreen)
+            if (settings.ContainsKey("fullscreen") && game.Graphics.IsFullScreen != (bool)settings.fullscreen)
             {
                 game.Graphics.IsFullScreen = !game.Graphics.IsFullScreen;
                 game.Graphics.ApplyChanges();
