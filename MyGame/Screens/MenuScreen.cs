@@ -14,8 +14,7 @@
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public MenuScreen(Game1 game)
-            : base(game) { }
+        public MenuScreen(Game1 game) : base(game) { }
 
         private Button startButton;
         private Button exitButton;

@@ -17,10 +17,7 @@
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public MapScreen(Game1 game)
-            : base(game)
-        {
-        }
+        public MapScreen(Game1 game) : base(game) { }
 
         private Camera camera = new Camera();
 

@@ -14,8 +14,9 @@
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public SplashScreen(Game1 game)
-            : base(game) { }
+        private double timer = 2;
+
+        public SplashScreen(Game1 game) : base(game) { }
 
         public override void Initialize()
         {
@@ -31,6 +32,12 @@
             if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Mouse.HasBeenPressed())
             {
                 // skip splash screen
+                this.Game.LoadScreen(typeof(Screens.MenuScreen));
+            }
+
+            timer -= Game.DeltaTime;
+            if (timer < 0)
+            {
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }
         }
