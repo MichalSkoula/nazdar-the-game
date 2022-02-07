@@ -23,6 +23,8 @@
 
         private Random rand = new Random();
 
+        private string saveFile;
+
         // how large the map will be
         private int numberOfScreens = 4;
 
@@ -54,6 +56,7 @@
             this.player = new Player(MapWidth / 2, FloorPos);
 
             // maybe load?
+            this.saveFile = "save_slot_" + Game.Slot + ".json";
             this.Load();
 
             base.Initialize();
@@ -139,21 +142,22 @@
 
         public void Load()
         {
-            if (!File.Exists("save.json"))
+            if (!File.Exists(this.saveFile))
             {
                 return;
             }
 
             // parse
-            string json = File.ReadAllText("save.json");
+            string json = File.ReadAllText(this.saveFile);
             dynamic saveData = JObject.Parse(json);
 
-            // create objects
+            // load player
             if (saveData.ContainsKey("player"))
             {
                 this.player.Load(saveData.GetValue("player"));
             }
 
+            // load enemies
             if (saveData.ContainsKey("enemies"))
             {
                 foreach (var enemy in saveData.GetValue("enemies"))
@@ -171,7 +175,7 @@
                 enemies = this.enemies,
             };
             string json = JsonConvert.SerializeObject(saveData);
-            File.WriteAllText("save.json", json);
+            File.WriteAllText(this.saveFile, json);
             // System.Diagnostics.Debug.WriteLine(json);
         }
 

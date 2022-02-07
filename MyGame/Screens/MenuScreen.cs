@@ -16,15 +16,21 @@
 
         public MenuScreen(Game1 game) : base(game) { }
 
-        private Button startButton;
+        private Button startButton1;
+        private Button startButton2;
+        private Button startButton3;
+
         private Button exitButton;
         private Button fullscreenButton;
 
         public override void Initialize()
         {
-            this.startButton = new Button((Game1.screenWidth / 2) - 100, 25, null, Enums.ButtonSize.Large, "Start");
-            this.fullscreenButton = new Button((Game1.screenWidth / 2) - 100, 85, null, Enums.ButtonSize.Medium, "Toggle Fullscreen");
-            this.exitButton = new Button((Game1.screenWidth / 2) - 100, 125, null, Enums.ButtonSize.Small, "Exit");
+            this.startButton1 = new Button(20, 60, null, Enums.ButtonSize.Large, "Slot #1");
+            this.startButton2 = new Button(20, 100, null, Enums.ButtonSize.Large, "Slot #2");
+            this.startButton3 = new Button(20, 140, null, Enums.ButtonSize.Large, "Slot #3");
+
+            this.fullscreenButton = new Button(20, 240, null, Enums.ButtonSize.Medium, "Toggle Fullscreen");
+            this.exitButton = new Button(20, 280, null, Enums.ButtonSize.Medium, "Exit");
 
             // play song
             MediaPlayer.Play(Assets.Nature);
@@ -44,7 +50,10 @@
         public override void Update(GameTime gameTime)
         {
             // update buttons
-            this.startButton.Update();
+            this.startButton1.Update();
+            this.startButton2.Update();
+            this.startButton3.Update();
+
             this.fullscreenButton.Update();
             this.exitButton.Update();
 
@@ -64,8 +73,19 @@
             }
 
             // start game
-            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || this.startButton.HasBeenClicked())
+            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || this.startButton1.HasBeenClicked())
             {
+                this.Game.Slot = 1;
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
+            } 
+            else if (this.startButton2.HasBeenClicked())
+            {
+                this.Game.Slot = 2;
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
+            } 
+            else if (this.startButton3.HasBeenClicked())
+            {
+                this.Game.Slot = 3;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
         }
@@ -74,7 +94,11 @@
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.startButton.Draw(this.Game.SpriteBatch);
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start the game", new Vector2(20, 20), Color.White);
+            this.startButton1.Draw(this.Game.SpriteBatch);
+            this.startButton2.Draw(this.Game.SpriteBatch);
+            this.startButton3.Draw(this.Game.SpriteBatch);
+
             this.fullscreenButton.Draw(this.Game.SpriteBatch);
             this.exitButton.Draw(this.Game.SpriteBatch);
 

@@ -37,10 +37,19 @@
             this.caliber = 30;
         }
 
-        public void Load(dynamic data)
+        public void Load(dynamic saveData)
         {
             // only change X
-            this.Hitbox = new Rectangle((int)data.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+
+            // load bullets
+            if (saveData.ContainsKey("Bullets"))
+            {
+                foreach (var bullet in saveData.GetValue("Bullets"))
+                {
+                    this.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Enums.Direction)bullet.Direction, (int)bullet.Caliber));
+                }
+            }
         }
 
         public override void Update(float deltaTime)

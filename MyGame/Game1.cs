@@ -32,6 +32,8 @@ namespace MyGame
 
         public static int BarWidth { get; private set; }
 
+        public int Slot { get; set; }
+
         public Game1()
         {
             this.Graphics = new GraphicsDeviceManager(this);
