@@ -162,7 +162,7 @@
             {
                 foreach (var enemy in saveData.GetValue("enemies"))
                 {
-                    this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Enums.Direction)enemy.Direction, (int)enemy.Health));
+                    this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Direction)enemy.Direction, (int)enemy.Health));
                 }
             }
         }
@@ -187,11 +187,11 @@
                 // choose direction
                 if (this.rand.Next(2) == 0)
                 {
-                    this.enemies.Add(new Enemy(0, FloorPos, Enums.Direction.Right));
+                    this.enemies.Add(new Enemy(0, FloorPos, Direction.Right));
                 }
                 else
                 {
-                    this.enemies.Add(new Enemy(MapWidth, FloorPos, Enums.Direction.Left));
+                    this.enemies.Add(new Enemy(MapWidth, FloorPos, Direction.Left));
                 }
             }
 

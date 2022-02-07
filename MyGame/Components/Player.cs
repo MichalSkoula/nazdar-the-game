@@ -5,6 +5,7 @@
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
     using MyGame.Screens;
+    using static MyGame.Enums;
 
     public class Player : Component
     {
@@ -29,8 +30,8 @@
 
         public Player(int x, int y)
         {
-            this.anim = this.animations[(int)Enums.Direction.Right];
-            this.Direction = Enums.Direction.Right;
+            this.anim = this.animations[(int)Direction.Right];
+            this.Direction = Direction.Right;
             this.Bullets = new List<Bullet>();
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = 100;
@@ -47,7 +48,7 @@
             {
                 foreach (var bullet in saveData.GetValue("Bullets"))
                 {
-                    this.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Enums.Direction)bullet.Direction, (int)bullet.Caliber));
+                    this.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Direction)bullet.Direction, (int)bullet.Caliber));
                 }
             }
         }
@@ -60,12 +61,12 @@
             if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < MapScreen.MapWidth - this.Hitbox.Width)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
-                this.Direction = Enums.Direction.Right;
+                this.Direction = Direction.Right;
             }
             else if (Controls.Keyboard.IsPressed(Keys.Left) && this.Hitbox.X > 0)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
-                this.Direction = Enums.Direction.Left;
+                this.Direction = Direction.Left;
             }
             else
             {

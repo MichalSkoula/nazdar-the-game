@@ -9,6 +9,7 @@
     using Microsoft.Xna.Framework.Media;
     using MonoGame.Extended.Screens;
     using MyGame.Controls;
+    using static MyGame.Enums;
 
     public class MenuScreen : GameScreen
     {
@@ -16,21 +17,16 @@
 
         public MenuScreen(Game1 game) : base(game) { }
 
-        private Button startButton1;
-        private Button startButton2;
-        private Button startButton3;
-
-        private Button exitButton;
-        private Button fullscreenButton;
+        Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         public override void Initialize()
         {
-            this.startButton1 = new Button(20, 60, null, Enums.ButtonSize.Large, "Slot #1");
-            this.startButton2 = new Button(20, 100, null, Enums.ButtonSize.Large, "Slot #2");
-            this.startButton3 = new Button(20, 140, null, Enums.ButtonSize.Large, "Slot #3");
-
-            this.fullscreenButton = new Button(20, 240, null, Enums.ButtonSize.Medium, "Toggle Fullscreen");
-            this.exitButton = new Button(20, 280, null, Enums.ButtonSize.Medium, "Exit");
+            // add buttons
+            buttons.Add("startButton1", new Button(20, 60, null, ButtonSize.Large, "Slot #1", true));
+            buttons.Add("startButton2", new Button(20, 100, null, ButtonSize.Large, "Slot #2"));
+            buttons.Add("startButton3", new Button(20, 140, null, ButtonSize.Large, "Slot #3"));
+            buttons.Add("fullscreenButton", new Button(20, 240, null, ButtonSize.Medium, "Toggle Fullscreen"));
+            buttons.Add("exitButton", new Button(20, 280, null, ButtonSize.Medium, "Exit"));
 
             // play song
             MediaPlayer.Play(Assets.Nature);
@@ -50,15 +46,53 @@
         public override void Update(GameTime gameTime)
         {
             // update buttons
-            this.startButton1.Update();
-            this.startButton2.Update();
-            this.startButton3.Update();
+            foreach (KeyValuePair<string, Button> button in this.buttons)
+            {
+                button.Value.Update();
+            }
 
-            this.fullscreenButton.Update();
-            this.exitButton.Update();
+            // iterate through buttons up/down
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down))
+            {
+                this.ButtonsIterateWithKeys(Direction.Down);
+            }
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up))
+            {
+                this.ButtonsIterateWithKeys(Direction.Up);
+            }
+
+            // enter? some button has focus? click!
+            if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
+            {
+                foreach (KeyValuePair<string, Button> button in this.buttons)
+                {
+                    if (button.Value.Focus)
+                    {
+                        button.Value.Clicked = true;
+                        break;
+                    }
+                }
+            }
+
+            // start game
+            if (this.buttons.GetValueOrDefault("startButton1").HasBeenClicked())
+            {
+                this.Game.Slot = 1;
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
+            } 
+            else if (this.buttons.GetValueOrDefault("startButton2").HasBeenClicked())
+            {
+                this.Game.Slot = 2;
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
+            } 
+            else if (this.buttons.GetValueOrDefault("startButton3").HasBeenClicked())
+            {
+                this.Game.Slot = 3;
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
+            }
 
             // fullscreen
-            if (Controls.Keyboard.HasBeenPressed(Keys.F) || this.fullscreenButton.HasBeenClicked())
+            if (Controls.Keyboard.HasBeenPressed(Keys.F) || this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked())
             {
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
@@ -67,42 +101,47 @@
             }
 
             // exit game from menu
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || this.exitButton.HasBeenClicked())
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || this.buttons.GetValueOrDefault("exitButton").HasBeenClicked())
             {
                 this.Game.Exit();
             }
-
-            // start game
-            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || this.startButton1.HasBeenClicked())
-            {
-                this.Game.Slot = 1;
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
-            } 
-            else if (this.startButton2.HasBeenClicked())
-            {
-                this.Game.Slot = 2;
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
-            } 
-            else if (this.startButton3.HasBeenClicked())
-            {
-                this.Game.Slot = 3;
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
-            }
         }
+
         public override void Draw(GameTime gameTime)
         {
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
             this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start the game", new Vector2(20, 20), Color.White);
-            this.startButton1.Draw(this.Game.SpriteBatch);
-            this.startButton2.Draw(this.Game.SpriteBatch);
-            this.startButton3.Draw(this.Game.SpriteBatch);
-
-            this.fullscreenButton.Draw(this.Game.SpriteBatch);
-            this.exitButton.Draw(this.Game.SpriteBatch);
+            foreach (KeyValuePair<string, Button> button in this.buttons)
+            {
+                button.Value.Draw(this.Game.SpriteBatch);
+            }
 
             this.Game.DrawEnd();
+        }
+
+        private void ButtonsIterateWithKeys(Direction direction)
+        {
+            bool focusNext = false;
+            int i = 0;
+            foreach (KeyValuePair<string, Button> button in (direction == Direction.Up) ? this.buttons.Reverse() : this.buttons)
+            {
+                if (focusNext)
+                {
+                    button.Value.Focus = true;
+                    focusNext = false;
+                    break;
+                }
+
+                if (button.Value.Focus && i < this.buttons.Count - 1)
+                {
+                    button.Value.Focus = false;
+                    focusNext = true;
+                }
+
+                i++;
+            }
         }
     }
 }

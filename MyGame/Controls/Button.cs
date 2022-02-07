@@ -3,39 +3,39 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using MonoGame.Extended;
+    using static MyGame.Enums;
 
     class Button
     {
         private int padding;
         private SpriteFont font;
-        private Enums.ButtonState state;
-
-        public bool Active { get; set; }
+        private ButtonState state;
 
         public string Text { get; set; }
 
-        public int AnimationTime { get; set; }
-
         private Rectangle hitbox;
 
-        public Button(int x, int y, int? width, Enums.ButtonSize size, string text, bool active = true)
+        public bool Focus = false;
+
+        public bool Clicked = false;
+
+        public Button(int x, int y, int? width, ButtonSize size, string text, bool focus = false)
         {
-            this.state = Enums.ButtonState.StaticState;
+            this.state = ButtonState.StaticState;
             this.padding = 5;
             this.Text = text;
-            this.AnimationTime = 0;
-            this.Active = active;
+            this.Focus = focus;
 
             // add font
             switch (size)
             {
-                case Enums.ButtonSize.Small:
+                case ButtonSize.Small:
                     this.font = Assets.FontSmall;
                     break;
-                case Enums.ButtonSize.Medium:
+                case ButtonSize.Medium:
                     this.font = Assets.FontMedium;
                     break;
-                case Enums.ButtonSize.Large:
+                case ButtonSize.Large:
                     this.font = Assets.FontLarge;
                     break;
             }
@@ -48,11 +48,9 @@
 
         public bool HasBeenClicked()
         {
-            if (this.Active && Controls.Mouse.HasBeenPressed(true) && this.hitbox.Contains(Controls.Mouse.Position))
+            if ((Mouse.HasBeenPressed(true) && this.hitbox.Contains(Mouse.Position)) || this.Clicked)
             {
-                // perform click animation & return
-                this.AnimationTime = 30;
-                this.state = Enums.ButtonState.ClickedState;
+                this.Clicked = false;
                 return true;
             }
 
@@ -61,37 +59,24 @@
 
         public void Update()
         {
-            if (this.Active && this.hitbox.Contains(Controls.Mouse.Position))
+            if (this.hitbox.Contains(Mouse.Position))
             {
-                this.state = Enums.ButtonState.HoverState;
+                this.state = ButtonState.HoverState;
+            }
+            else if (this.Focus) 
+            {
+                this.state = ButtonState.HoverState;
             }
             else
             {
-                if (this.AnimationTime > 0)
-                {
-                    this.AnimationTime--;
-                }
-
-                if (this.AnimationTime == 0)
-                {
-                    this.state = Enums.ButtonState.StaticState;
-                }
+                this.state = ButtonState.StaticState;
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (!this.Active)
-            {
-                return;
-            }
-
             var bgColor = Color.Green;
-            if (this.state == Enums.ButtonState.ClickedState)
-            {
-                bgColor = Color.DarkGreen;
-            }
-            else if (this.state == Enums.ButtonState.HoverState)
+            if (this.state == ButtonState.HoverState)
             {
                 bgColor = Color.LightGreen;
             }

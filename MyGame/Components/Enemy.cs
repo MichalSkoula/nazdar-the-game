@@ -4,6 +4,7 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using MyGame.Screens;
+    using static MyGame.Enums;
 
     public class Enemy : Component
     {
@@ -23,9 +24,9 @@
 
         public bool ToDelete { get; set; }
 
-        public Enemy(int x, int y, Enums.Direction direction, int health = 100)
+        public Enemy(int x, int y, Direction direction, int health = 100)
         {
-            this.anim = this.animations[(int)Enums.Direction.Down];
+            this.anim = this.animations[(int)Direction.Down];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Direction = direction;
             this.Health = health;
@@ -36,11 +37,11 @@
             // is enemy moving?
             bool isMoving = true;
             Rectangle newHitbox = this.Hitbox;
-            if (this.Direction == Enums.Direction.Right)
+            if (this.Direction == Direction.Right)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
             }
-            else if (this.Direction == Enums.Direction.Left)
+            else if (this.Direction == Direction.Left)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
             }

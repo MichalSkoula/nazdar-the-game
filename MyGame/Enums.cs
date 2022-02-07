@@ -1,9 +1,5 @@
 ﻿namespace MyGame
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     public static class Enums
     {
         public enum Direction
@@ -30,7 +26,6 @@
         public enum ButtonState
         {
             StaticState,
-            ClickedState,
             HoverState,
         }
     }

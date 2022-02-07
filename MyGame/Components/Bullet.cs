@@ -3,6 +3,7 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using MyGame.Screens;
+    using static MyGame.Enums;
 
     public class Bullet : Component
     {
@@ -12,7 +13,7 @@
 
         public bool ToDelete { get; set; }
 
-        public Bullet(int x, int y, Enums.Direction direction, int caliber)
+        public Bullet(int x, int y, Direction direction, int caliber)
         {
             this.Sprite = Assets.Bullet;
             this.Hitbox = new Rectangle(x, y - (this.Sprite.Height / 2), this.Sprite.Width, this.Sprite.Height);
@@ -31,11 +32,11 @@
         {
             // move it
             Rectangle newHitbox = this.Hitbox;
-            if (this.Direction == Enums.Direction.Left)
+            if (this.Direction == Direction.Left)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
             }
-            else if (this.Direction == Enums.Direction.Right)
+            else if (this.Direction == Direction.Right)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
             }
