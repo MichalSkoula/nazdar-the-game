@@ -10,7 +10,7 @@
 
         public Rectangle Hitbox { get; protected set; }
 
-        public Texture2D Sprite { get; protected set; }
+        protected Texture2D Sprite { get; set; }
 
         public Enums.Direction Direction { get; protected set; }
 
