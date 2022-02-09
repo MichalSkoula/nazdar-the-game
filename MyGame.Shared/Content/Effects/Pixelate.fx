@@ -1,4 +1,12 @@
-﻿sampler inputTexture;
+﻿#if OPENGL
+#define VS_SHADERMODEL vs_3_0
+#define PS_SHADERMODEL ps_3_0
+#else
+#define VS_SHADERMODEL vs_4_0_level_9_1
+#define PS_SHADERMODEL ps_4_0_level_9_1
+#endif
+
+sampler inputTexture;
 int pixelation;
 
 float4 MainPS(float2 originalUV: TEXCOORD0): COLOR0
@@ -20,6 +28,6 @@ technique Techninque1
 {
 	pass Pass1
 	{
-		PixelShader = compile ps_3_0 MainPS();
+		PixelShader = compile PS_SHADERMODEL MainPS();
 	}
 };

@@ -10,11 +10,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="MonogameExtended\**" />
-    <EmbeddedResource Remove="MonogameExtended\**" />
-    <None Remove="MonogameExtended\**" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>
@@ -23,17 +18,16 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
-  </ItemGroup>
-  <ItemGroup>
     <TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Extended" Version="3.8.0" />
-    <PackageReference Include="MonoGame.Extended.Graphics" Version="3.8.0" />
-    <PackageReference Include="MonoGame.Extended.Particles" Version="3.8.0" />
+    <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+  <Import Project="..\MyGame.Shared\MyGame.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <MonoGameContentReference Update="C:\projects\MyGame\MyGame.Shared\Content\Content.mgcb" Link="Content\Content.mgcb" />
   </ItemGroup>
 </Project>
