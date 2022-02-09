@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGame.UWP2", "MyGame.UWP2\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D3933DE-71EE-4146-84D7-47850FA48A30}"
 	ProjectSection(SolutionItems) = preProject
+		history.md = history.md
 		readme.md = readme.md
 	EndProjectSection
 EndProject
