@@ -1,11 +1,11 @@
-﻿namespace MyGame.Components
-{
-    using System.Collections.Generic;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using MyGame.Screens;
-    using static MyGame.Enums;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MyGame.Screens;
+using static MyGame.Enums;
 
+namespace MyGame.Components
+{
     public class Enemy : Component
     {
         private int speed = 200;

@@ -1,23 +1,25 @@
-﻿namespace MyGame.Screens
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-    using Microsoft.Xna.Framework.Media;
-    using MonoGame.Extended.Screens;
-    using MyGame.Controls;
-    using static MyGame.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended.Screens;
+using MyGame.Controls;
+using static MyGame.Enums;
 
+namespace MyGame.Screens
+{
     public class MenuScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
         public MenuScreen(Game1 game) : base(game) { }
 
-        Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+
+        private FileIO settingsFile = new FileIO("settings.json");
 
         public override void Initialize()
         {
@@ -31,9 +33,8 @@
             // play song
             MediaPlayer.Play(Assets.Nature);
 
-            // load and apply settings from json file
-            // we load this also in splashscreen
-            Settings.LoadSettings(Game);
+            // load settings
+            this.LoadSettings();
 
             base.Initialize();
         }
@@ -97,7 +98,8 @@
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
 
-                Settings.SaveSettings(Game);
+                // save settings
+                this.SaveSettings();
             }
 
             // exit game from menu
@@ -141,6 +143,26 @@
                 }
 
                 i++;
+            }
+        }
+
+        private void SaveSettings()
+        {
+            this.settingsFile.Save(new
+                {
+                    fullscreen = this.Game.Graphics.IsFullScreen,
+                }
+            );
+        }
+
+        private void LoadSettings()
+        {
+            dynamic settings = this.settingsFile.Load();
+            if (settings.ContainsKey("fullscreen") && this.Game.Graphics.IsFullScreen != (bool)settings.fullscreen)
+            {
+                
+                this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
+                this.Game.Graphics.ApplyChanges();
             }
         }
     }

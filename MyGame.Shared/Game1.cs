@@ -1,11 +1,11 @@
-﻿namespace MyGame
-{
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using MonoGame.Extended.Screens;
-    using MonoGame.Extended.Screens.Transitions;
-    using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
+using System;
 
+namespace MyGame
+{
     public class Game1 : Game
     {
         public GraphicsDeviceManager Graphics;

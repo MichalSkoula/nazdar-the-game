@@ -1,9 +1,9 @@
-﻿namespace MyGame.Components
-{
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using MonoGame.Extended;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 
+namespace MyGame.Components
+{
     public abstract class Component
     {
         public int Health { get; protected set; }

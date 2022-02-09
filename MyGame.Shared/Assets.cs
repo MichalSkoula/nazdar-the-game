@@ -1,13 +1,13 @@
-﻿namespace MyGame
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Audio;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Media;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
+namespace MyGame
+{
     public static class Assets
     {
         // images

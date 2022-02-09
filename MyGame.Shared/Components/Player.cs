@@ -1,12 +1,12 @@
-﻿namespace MyGame.Components
-{
-    using System.Collections.Generic;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-    using MyGame.Screens;
-    using static MyGame.Enums;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using MyGame.Screens;
+using static MyGame.Enums;
 
+namespace MyGame.Components
+{
     public class Player : Component
     {
         private int speed = 150;

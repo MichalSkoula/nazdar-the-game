@@ -1,10 +1,10 @@
-﻿namespace MyGame.Components
-{
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using MyGame.Screens;
-    using static MyGame.Enums;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MyGame.Screens;
+using static MyGame.Enums;
 
+namespace MyGame.Components
+{
     public class Bullet : Component
     {
         private int speed = 1000;

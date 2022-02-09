@@ -1,18 +1,18 @@
-﻿namespace MyGame.Screens
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-    using Microsoft.Xna.Framework.Media;
-    using MonoGame.Extended.Screens;
-    using MyGame.Components;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
-    using static MyGame.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended.Screens;
+using MyGame.Components;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using static MyGame.Enums;
 
+namespace MyGame.Screens
+{
     public class MapScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
@@ -23,7 +23,7 @@
 
         private Random rand = new Random();
 
-        private string saveFile;
+        private FileIO saveFile = new FileIO();
 
         // how large the map will be
         private int numberOfScreens = 4;
@@ -55,8 +55,8 @@
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, FloorPos);
 
-            // maybe load?
-            this.saveFile = "save_slot_" + Game.Slot + ".json";
+            // set save slot and maybe load?
+            this.saveFile.File = "save_slot_" + Game.Slot + ".json";
             this.Load();
 
             base.Initialize();
@@ -140,16 +140,13 @@
             this.Game.DrawEnd();
         }
 
-        public void Load()
+        private void Load()
         {
-            if (!File.Exists(this.saveFile))
+            dynamic saveData = this.saveFile.Load();
+            if (saveData == null)
             {
                 return;
             }
-
-            // parse
-            string json = File.ReadAllText(this.saveFile);
-            dynamic saveData = JObject.Parse(json);
 
             // load player
             if (saveData.ContainsKey("player"))
@@ -169,14 +166,12 @@
 
         private void Save()
         {
-            var saveData = new
-            {
-                player = this.player,
-                enemies = this.enemies,
-            };
-            string json = JsonConvert.SerializeObject(saveData);
-            File.WriteAllText(this.saveFile, json);
-            // System.Diagnostics.Debug.WriteLine(json);
+            this.saveFile.Save(new
+                {
+                    player = this.player,
+                    enemies = this.enemies,
+                }
+            );
         }
 
         private void EnemiesUpdate()

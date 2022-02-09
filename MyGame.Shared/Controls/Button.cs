@@ -1,10 +1,10 @@
-﻿namespace MyGame.Controls
-{
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using MonoGame.Extended;
-    using static MyGame.Enums;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
+using static MyGame.Enums;
 
+namespace MyGame.Controls
+{
     class Button
     {
         private int padding;

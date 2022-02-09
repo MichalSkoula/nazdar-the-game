@@ -1,8 +1,8 @@
-﻿namespace MyGame
-{
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
+namespace MyGame
+{
     class Animation
     {
         private int count;

@@ -1,15 +1,15 @@
-﻿namespace MyGame.Screens
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Graphics;
-    using Microsoft.Xna.Framework.Input;
-    using Microsoft.Xna.Framework.Media;
-    using MonoGame.Extended.Screens;
-    using MyGame.Controls;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using MonoGame.Extended.Screens;
+using MyGame.Controls;
 
+namespace MyGame.Screens
+{
     public class SplashScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
@@ -20,10 +20,6 @@
 
         public override void Initialize()
         {
-            // load and apply settings from json file
-            // we load this also in menuscreen
-            Settings.LoadSettings(Game);
-
             base.Initialize();
         }
 

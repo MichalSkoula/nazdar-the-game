@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MenuScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FileIO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsIsolatedExample.cs" />
   </ItemGroup>
 </Project>
