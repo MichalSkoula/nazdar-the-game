@@ -28,8 +28,17 @@ namespace MyGame
                     using (StreamReader reader = new StreamReader(isoStream))
                     {
                         string json = reader.ReadToEnd();
-                        dynamic data = JObject.Parse(json);
-                        return data;
+
+                        try
+                        {
+                            dynamic data = JObject.Parse(json);
+                            return data;
+                        } 
+                        catch
+                        {
+                            return null;
+                        }
+                        
                     }
                 }
             }

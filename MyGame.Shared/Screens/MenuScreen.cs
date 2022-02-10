@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -27,14 +28,16 @@ namespace MyGame.Screens
             buttons.Add("startButton1", new Button(20, 60, null, ButtonSize.Large, "Slot #1", true));
             buttons.Add("startButton2", new Button(20, 100, null, ButtonSize.Large, "Slot #2"));
             buttons.Add("startButton3", new Button(20, 140, null, ButtonSize.Large, "Slot #3"));
-            buttons.Add("fullscreenButton", new Button(20, 240, null, ButtonSize.Medium, "Toggle Fullscreen"));
-            buttons.Add("exitButton", new Button(20, 280, null, ButtonSize.Medium, "Exit"));
-
-            // play song
-            MediaPlayer.Play(Assets.Nature);
+            buttons.Add("fullscreenButton", new Button(20, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
+            buttons.Add("musicButton", new Button(20, 270, null, ButtonSize.Small, "Toggle Music"));
+            buttons.Add("soundsButton", new Button(20, 290, null, ButtonSize.Small, "Toggle Sounds"));
+            buttons.Add("exitButton", new Button(20, 310, null, ButtonSize.Small, "Exit"));
 
             // load settings
             this.LoadSettings();
+
+            // play song
+            MediaPlayer.Play(Assets.Nature);
 
             base.Initialize();
         }
@@ -92,13 +95,33 @@ namespace MyGame.Screens
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
-            // fullscreen
+            // settings - fullscreen
             if (Controls.Keyboard.HasBeenPressed(Keys.F) || this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked())
             {
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
+                this.SaveSettings();
+            }
 
-                // save settings
+            // settings - music
+            if (Controls.Keyboard.HasBeenPressed(Keys.M) || this.buttons.GetValueOrDefault("musicButton").HasBeenClicked())
+            {
+                MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
+                this.SaveSettings();
+            }
+
+            // settings - sounds
+            if (Controls.Keyboard.HasBeenPressed(Keys.S) || this.buttons.GetValueOrDefault("soundsButton").HasBeenClicked())
+            {
+                if (SoundEffect.MasterVolume == 0)
+                {
+                    SoundEffect.MasterVolume = 1;
+                    Assets.Blip.Play();
+                }
+                else
+                {
+                    SoundEffect.MasterVolume = 0;
+                }
                 this.SaveSettings();
             }
 
@@ -148,21 +171,35 @@ namespace MyGame.Screens
 
         private void SaveSettings()
         {
-            this.settingsFile.Save(new
-                {
-                    fullscreen = this.Game.Graphics.IsFullScreen,
-                }
-            );
+            this.settingsFile.Save(new {
+                fullscreen = this.Game.Graphics.IsFullScreen,
+                musicMuted = MediaPlayer.IsMuted,
+                soundsVolume = SoundEffect.MasterVolume,
+            });
         }
 
         private void LoadSettings()
         {
             dynamic settings = this.settingsFile.Load();
+            if (settings == null)
+            {
+                return;
+            }
+
             if (settings.ContainsKey("fullscreen") && this.Game.Graphics.IsFullScreen != (bool)settings.fullscreen)
             {
-                
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
+            }
+
+            if (settings.ContainsKey("musicMuted"))
+            {
+                MediaPlayer.IsMuted = (bool)settings.musicMuted;
+            }
+
+            if (settings.ContainsKey("soundsVolume"))
+            {
+                SoundEffect.MasterVolume = (int)settings.soundsVolume;
             }
         }
     }

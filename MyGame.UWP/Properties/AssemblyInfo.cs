@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MyGame.UWP2")]
+[assembly: AssemblyTitle("MyGame.UWP")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("MyGame.UWP2")]
-[assembly: AssemblyProduct("MyGame.UWP2")]
+[assembly: AssemblyCompany("MyGame.UWP")]
+[assembly: AssemblyProduct("MyGame.UWP")]
 [assembly: AssemblyCopyright("Copyright © 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

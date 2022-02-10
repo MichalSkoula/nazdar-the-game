@@ -59,6 +59,9 @@ namespace MyGame.Screens
             this.saveFile.File = "save_slot_" + Game.Slot + ".json";
             this.Load();
 
+            // play song
+            MediaPlayer.Play(Assets.Map);
+
             base.Initialize();
         }
 

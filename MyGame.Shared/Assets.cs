@@ -30,6 +30,7 @@ namespace MyGame
         // audio
         public static SoundEffect Blip;
         public static Song Nature;
+        public static Song Map;
 
         // effects
         public static Effect AllWhite;
@@ -56,6 +57,7 @@ namespace MyGame
 
             Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
             Assets.Nature = content.Load<Song>("Sounds/nature");
+            Assets.Map = content.Load<Song>("Sounds/map");
 
             Assets.AllWhite = content.Load<Effect>("Effects/AllWhite");
             Assets.Pixelate = content.Load<Effect>("Effects/Pixelate");

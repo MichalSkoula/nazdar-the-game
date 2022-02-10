@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyGame.UWP2
+namespace MyGame
 {
     /// <summary>
     /// The main class.

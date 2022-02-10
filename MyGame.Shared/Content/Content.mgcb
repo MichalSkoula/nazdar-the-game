@@ -100,6 +100,12 @@
 /processorParam:Quality=Best
 /build:Sounds/blip.wav
 
+#begin Sounds/Map.wav
+/importer:WavImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Sounds/Map.wav
+
 #begin Sounds/nature.ogg
 /importer:OggImporter
 /processor:SongProcessor
