@@ -44,7 +44,10 @@ namespace MyGame.Components
             // load player
             this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = (int)saveData.Health;
-            this.Money = (int)saveData.Money;
+            if (saveData.Money != null)
+            {
+                this.Money = (int)saveData.Money;
+            }
 
             // load bullets
             if (saveData.ContainsKey("Bullets"))

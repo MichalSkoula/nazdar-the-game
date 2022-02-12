@@ -37,9 +37,7 @@ namespace MyGame.Screens
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
-        private const int NightLength = 4;
-        private const int DayLength = 8;
-        private double timer = DayLength;
+        private double dayPhaseTimer = (int)DayNightLength.Day;
 
         public override void Initialize()
         {
@@ -124,7 +122,7 @@ namespace MyGame.Screens
             // timer
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
-                "timer: " + Math.Ceiling(this.timer).ToString(),
+                "timer: " + Math.Ceiling(this.dayPhaseTimer).ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
                 Color.Black);
 
@@ -174,16 +172,23 @@ namespace MyGame.Screens
                     this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Direction)enemy.Direction, (int)enemy.Health, (int)enemy.Caliber));
                 }
             }
+
+            // load day phase
+            if (saveData.ContainsKey("dayPhase") && saveData.ContainsKey("dayPhaseTimer"))
+            {
+                this.dayPhase = (DayPhase)saveData.GetValue("dayPhase");
+                this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
+            }
         }
 
         private void Save()
         {
-            this.saveFile.Save(new
-                {
-                    player = this.player,
-                    enemies = this.enemies,
-                }
-            );
+            this.saveFile.Save(new {
+                player = this.player,
+                enemies = this.enemies,
+                dayPhase = this.dayPhase,
+                dayPhaseTimer = this.dayPhaseTimer,
+            });
         }
 
         private void EnemiesUpdate()
@@ -238,18 +243,18 @@ namespace MyGame.Screens
 
         private void UpdateDayPhase()
         {
-            this.timer -= this.Game.DeltaTime;
-            if (this.timer <= 0)
+            this.dayPhaseTimer -= this.Game.DeltaTime;
+            if (this.dayPhaseTimer <= 0)
             {
                 if (this.dayPhase == DayPhase.Day)
                 {
                     this.dayPhase = DayPhase.Night;
-                    this.timer = NightLength;
+                    this.dayPhaseTimer = (int)DayNightLength.Night;
                 }
                 else
                 {
                     this.dayPhase = DayPhase.Day;
-                    this.timer = DayLength;
+                    this.dayPhaseTimer = (int)DayNightLength.Day;
                 }
             }
         }
