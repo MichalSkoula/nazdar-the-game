@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using System;
+using static MyGame.Enums;
 
 namespace MyGame
 {
@@ -32,7 +33,7 @@ namespace MyGame
 
         public static int BarWidth { get; private set; }
 
-        public int Slot { get; set; }
+        public string SaveSlot;
 
         public Game1()
         {

@@ -65,6 +65,11 @@ namespace MyGame
             }
         }
 
+        public void Delete()
+        {
+            this.isoStore.DeleteFile(this.File);
+        }
+
         public string GetPath()
         {
             return typeof(IsolatedStorageFileStream)

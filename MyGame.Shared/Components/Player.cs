@@ -27,6 +27,8 @@ namespace MyGame.Components
             new Animation(Assets.PlayerLeft, 4, 10),
         };
 
+        public int Money;
+
         public Player(int x, int y)
         {
             this.anim = this.animations[(int)Direction.Right];
@@ -39,8 +41,10 @@ namespace MyGame.Components
 
         public void Load(dynamic saveData)
         {
-            // only change X
+            // load player
             this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Health = (int)saveData.Health;
+            this.Money = (int)saveData.Money;
 
             // load bullets
             if (saveData.ContainsKey("Bullets"))

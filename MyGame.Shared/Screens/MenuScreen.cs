@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MyGame.Controls;
+using MyGame.Shared;
 using static MyGame.Enums;
 
 namespace MyGame.Screens
@@ -25,13 +26,13 @@ namespace MyGame.Screens
         public override void Initialize()
         {
             // add buttons
-            buttons.Add("startButton1", new Button(20, 60, null, ButtonSize.Large, "Slot #1", true));
-            buttons.Add("startButton2", new Button(20, 100, null, ButtonSize.Large, "Slot #2"));
-            buttons.Add("startButton3", new Button(20, 140, null, ButtonSize.Large, "Slot #3"));
-            buttons.Add("fullscreenButton", new Button(20, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
-            buttons.Add("musicButton", new Button(20, 270, null, ButtonSize.Small, "Toggle Music"));
-            buttons.Add("soundsButton", new Button(20, 290, null, ButtonSize.Small, "Toggle Sounds"));
-            buttons.Add("exitButton", new Button(20, 310, null, ButtonSize.Small, "Exit"));
+            buttons.Add("startButton1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Slot #1", true));
+            buttons.Add("startButton2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Slot #2"));
+            buttons.Add("startButton3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Slot #3"));
+            buttons.Add("fullscreenButton", new Button(Offset.MenuX, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
+            buttons.Add("musicButton", new Button(Offset.MenuX, 270, null, ButtonSize.Small, "Toggle Music"));
+            buttons.Add("soundsButton", new Button(Offset.MenuX, 290, null, ButtonSize.Small, "Toggle Sounds"));
+            buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Exit"));
 
             // load settings
             this.LoadSettings();
@@ -58,11 +59,11 @@ namespace MyGame.Screens
             // iterate through buttons up/down
             if (Controls.Keyboard.HasBeenPressed(Keys.Down))
             {
-                this.ButtonsIterateWithKeys(Direction.Down);
+                Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
             else if (Controls.Keyboard.HasBeenPressed(Keys.Up))
             {
-                this.ButtonsIterateWithKeys(Direction.Up);
+                Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
             }
 
             // enter? some button has focus? click!
@@ -81,17 +82,17 @@ namespace MyGame.Screens
             // start game
             if (this.buttons.GetValueOrDefault("startButton1").HasBeenClicked())
             {
-                this.Game.Slot = 1;
+                this.Game.SaveSlot = Save.Slot1;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             } 
             else if (this.buttons.GetValueOrDefault("startButton2").HasBeenClicked())
             {
-                this.Game.Slot = 2;
+                this.Game.SaveSlot = Save.Slot2;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             } 
             else if (this.buttons.GetValueOrDefault("startButton3").HasBeenClicked())
             {
-                this.Game.Slot = 3;
+                this.Game.SaveSlot = Save.Slot3;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
@@ -137,37 +138,19 @@ namespace MyGame.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start the game", new Vector2(20, 20), Color.White);
+            // title
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+
+            // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
             {
                 button.Value.Draw(this.Game.SpriteBatch);
             }
-            this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(20, 340), Color.White);
+
+            // save path
+            this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(Offset.MenuX, Offset.MenuFooter), Color.Gray);
 
             this.Game.DrawEnd();
-        }
-
-        private void ButtonsIterateWithKeys(Direction direction)
-        {
-            bool focusNext = false;
-            int i = 0;
-            foreach (KeyValuePair<string, Button> button in (direction == Direction.Up) ? this.buttons.Reverse() : this.buttons)
-            {
-                if (focusNext)
-                {
-                    button.Value.Focus = true;
-                    focusNext = false;
-                    break;
-                }
-
-                if (button.Value.Focus && i < this.buttons.Count - 1)
-                {
-                    button.Value.Focus = false;
-                    focusNext = true;
-                }
-
-                i++;
-            }
         }
 
         private void SaveSettings()

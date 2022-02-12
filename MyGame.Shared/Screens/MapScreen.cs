@@ -31,10 +31,6 @@ namespace MyGame.Screens
         // will be calculated
         public static int MapWidth;
 
-        // Y positions
-        private const int StatusBarPosition = 300;
-        public const int FloorPos = 250;
-
         // game components
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
@@ -53,11 +49,11 @@ namespace MyGame.Screens
             MediaPlayer.Stop();
 
             // create player in the center of the map
-            this.player = new Player(MapWidth / 2, FloorPos);
+            this.player = new Player(MapWidth / 2, Offset.Floor);
 
             // set save slot and maybe load?
-            this.saveFile.File = "save_slot_" + Game.Slot + ".json";
-            System.Diagnostics.Debug.WriteLine("save_slot_" + Game.Slot + ".json");
+            this.saveFile.File = Game.SaveSlot;
+            // System.Diagnostics.Debug.WriteLine("save_slot_" + Game.Slot + ".json");
             this.Load();
 
             // play song
@@ -122,22 +118,27 @@ namespace MyGame.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.FontMedium,
                 "this is game you can escape to menu",
-                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition),
-                Color.White);
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar),
+                Color.Black);
 
             // timer
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
                 "timer: " + Math.Ceiling(this.timer).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 20),
-                Color.White);
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
+                Color.Black);
 
             // player stats
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
                 "health: " + (this.player.Health).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 40),
-                Color.White);
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 30),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.FontSmall,
+                "money: " + (this.player.Money).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 40),
+                Color.Black);
 
             // player - camera follows
             this.player.Draw(this.Game.SpriteBatch);
@@ -193,11 +194,11 @@ namespace MyGame.Screens
                 // choose direction
                 if (this.rand.Next(2) == 0)
                 {
-                    this.enemies.Add(new Enemy(0, FloorPos, Direction.Right));
+                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right));
                 }
                 else
                 {
-                    this.enemies.Add(new Enemy(MapWidth, FloorPos, Direction.Left));
+                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left));
                 }
             }
 

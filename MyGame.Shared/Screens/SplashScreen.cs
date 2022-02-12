@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MyGame.Controls;
+using static MyGame.Enums;
 
 namespace MyGame.Screens
 {
@@ -43,7 +44,7 @@ namespace MyGame.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.FontMedium, "MyGame splash screen", new Vector2(10, 140), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "MyGame splash screen", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             this.Game.DrawEnd();
         }

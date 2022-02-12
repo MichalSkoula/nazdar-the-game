@@ -5,7 +5,7 @@ using static MyGame.Enums;
 
 namespace MyGame.Controls
 {
-    class Button
+    public class Button
     {
         private int padding;
         private SpriteFont font;
