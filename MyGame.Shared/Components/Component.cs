@@ -6,7 +6,9 @@ namespace MyGame.Components
 {
     public abstract class Component
     {
-        public int Health { get; protected set; }
+        public int Health { get; set; }
+
+        public int Caliber { get; set; }
 
         public Rectangle Hitbox { get; protected set; }
 
@@ -43,6 +45,8 @@ namespace MyGame.Components
                 this.Health -= caliber;
                 return true;
             }
+
+            this.Health = 0;
 
             return false;
         }

@@ -57,6 +57,7 @@ namespace MyGame.Screens
 
             // set save slot and maybe load?
             this.saveFile.File = "save_slot_" + Game.Slot + ".json";
+            System.Diagnostics.Debug.WriteLine("save_slot_" + Game.Slot + ".json");
             this.Load();
 
             // play song
@@ -131,6 +132,13 @@ namespace MyGame.Screens
                 new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 20),
                 Color.White);
 
+            // player stats
+            this.Game.SpriteBatch.DrawString(
+                Assets.FontSmall,
+                "health: " + (this.player.Health).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X, StatusBarPosition + 40),
+                Color.White);
+
             // player - camera follows
             this.player.Draw(this.Game.SpriteBatch);
 
@@ -162,7 +170,7 @@ namespace MyGame.Screens
             {
                 foreach (var enemy in saveData.GetValue("enemies"))
                 {
-                    this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Direction)enemy.Direction, (int)enemy.Health));
+                    this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Direction)enemy.Direction, (int)enemy.Health, (int)enemy.Caliber));
                 }
             }
         }
@@ -198,6 +206,7 @@ namespace MyGame.Screens
             {
                 enemy.Update(this.Game.DeltaTime);
 
+                // enemies and bullets
                 foreach (Bullet bullet in this.player.Bullets)
                 {
                     if (enemy.Hitbox.Intersects(bullet.Hitbox))
@@ -208,6 +217,17 @@ namespace MyGame.Screens
                         {
                             enemy.ToDelete = true;
                         }
+                    }
+                }
+
+                // enemies and player
+                if (this.player.Hitbox.Intersects(enemy.Hitbox))
+                {
+                    enemy.ToDelete = true;
+
+                    if (!this.player.TakeHit(enemy.Caliber))
+                    {
+                        this.Game.LoadScreen(typeof(Screens.GameOverScreen));
                     }
                 }
             }

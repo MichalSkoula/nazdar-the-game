@@ -9,8 +9,6 @@ namespace MyGame.Components
     {
         private int speed = 1000;
 
-        public int Caliber { get; set; }
-
         public bool ToDelete { get; set; }
 
         public Bullet(int x, int y, Direction direction, int caliber)

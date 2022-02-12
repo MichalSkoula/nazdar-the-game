@@ -50,7 +50,9 @@ namespace MyGame
         {
             IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
 
-            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(this.File, FileMode.OpenOrCreate, isoStore))
+            FileMode fm = isoStore.FileExists(this.File) ? FileMode.Truncate : FileMode.Create;
+
+            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(this.File, fm, isoStore))
             {
                 using (StreamWriter writer = new StreamWriter(isoStream))
                 {

@@ -10,8 +10,7 @@ namespace MyGame.Components
     public class Player : Component
     {
         private int speed = 150;
-        private int caliber;
-
+        
         private Animation anim;
 
         public List<Bullet> Bullets
@@ -35,7 +34,7 @@ namespace MyGame.Components
             this.Bullets = new List<Bullet>();
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = 100;
-            this.caliber = 30;
+            this.Caliber = 30;
         }
 
         public void Load(dynamic saveData)
@@ -90,7 +89,7 @@ namespace MyGame.Components
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
             {
-                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.Direction, this.caliber));
+                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.Direction, this.Caliber));
             }
 
             foreach (var bullet in this.Bullets)
