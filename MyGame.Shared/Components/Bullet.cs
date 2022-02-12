@@ -42,7 +42,7 @@ namespace MyGame.Components
             this.Hitbox = newHitbox;
 
             // out of game map
-            if (this.Hitbox.X < 0 || this.Hitbox.X > MapScreen.MapWidth)
+            if (this.Hitbox.X < 0 || this.Hitbox.X > DetailScreen.MapWidth)
             {
                 this.ToDelete = true;
             }

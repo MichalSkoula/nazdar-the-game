@@ -72,10 +72,20 @@ namespace MyGame
 
         public string GetPath()
         {
-            return typeof(IsolatedStorageFileStream)
+            IsolatedStorageFileStream tempIsoFileStream = this.isoStream;
+
+            if (tempIsoFileStream == null) {
+                tempIsoFileStream = new IsolatedStorageFileStream(this.File, FileMode.OpenOrCreate, this.isoStore);
+            }
+
+            string result = typeof(IsolatedStorageFileStream)
                 .GetField("_fullPath", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(isoStream)
+                .GetValue(tempIsoFileStream)
                 .ToString();
+
+            tempIsoFileStream.Close();
+
+            return result;
         }
     }
 }

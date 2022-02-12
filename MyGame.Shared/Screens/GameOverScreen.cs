@@ -63,7 +63,7 @@ namespace MyGame.Screens
             // load game
             if (this.buttons.GetValueOrDefault("load").HasBeenClicked())
             {
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                this.Game.LoadScreen(typeof(Screens.DetailScreen));
             }
 
             // main menu
@@ -79,7 +79,7 @@ namespace MyGame.Screens
                 FileIO saveFile = new FileIO(Game.SaveSlot);
                 saveFile.Delete();
 
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                this.Game.LoadScreen(typeof(Screens.DetailScreen));
             }
         }
 

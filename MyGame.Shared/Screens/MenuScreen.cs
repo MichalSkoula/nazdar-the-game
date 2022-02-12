@@ -83,17 +83,17 @@ namespace MyGame.Screens
             if (this.buttons.GetValueOrDefault("startButton1").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot1;
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                this.Game.LoadScreen(typeof(Screens.DetailScreen));
             } 
             else if (this.buttons.GetValueOrDefault("startButton2").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot2;
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                this.Game.LoadScreen(typeof(Screens.DetailScreen));
             } 
             else if (this.buttons.GetValueOrDefault("startButton3").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot3;
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                this.Game.LoadScreen(typeof(Screens.DetailScreen));
             }
 
             // settings - fullscreen
