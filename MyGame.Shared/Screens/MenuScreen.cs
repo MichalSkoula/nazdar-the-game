@@ -142,6 +142,7 @@ namespace MyGame.Screens
             {
                 button.Value.Draw(this.Game.SpriteBatch);
             }
+            this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(20, 340), Color.White);
 
             this.Game.DrawEnd();
         }

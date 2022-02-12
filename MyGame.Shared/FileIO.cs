@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Reflection;
 using System.Text;
 
 namespace MyGame
@@ -11,23 +12,26 @@ namespace MyGame
     public class FileIO
     {
         public string File { get; set; }
+        private IsolatedStorageFile isoStore;
+        private IsolatedStorageFileStream isoStream;
 
         public FileIO(string file = null)
         {
             this.File = file;
+            this.isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
         }
 
         public object Load()
         {
-            IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
-
             if (isoStore.FileExists(this.File))
             {
-                using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(this.File, FileMode.Open, isoStore))
+                this.isoStream = new IsolatedStorageFileStream(this.File, FileMode.Open, this.isoStore);
+                using (this.isoStream)
                 {
                     using (StreamReader reader = new StreamReader(isoStream))
                     {
                         string json = reader.ReadToEnd();
+                        this.isoStream.Close();
 
                         try
                         {
@@ -38,7 +42,6 @@ namespace MyGame
                         {
                             return null;
                         }
-                        
                     }
                 }
             }
@@ -48,18 +51,26 @@ namespace MyGame
 
         public void Save(object data)
         {
-            IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
-
-            FileMode fm = isoStore.FileExists(this.File) ? FileMode.Truncate : FileMode.Create;
-
-            using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(this.File, fm, isoStore))
+            FileMode fm = this.isoStore.FileExists(this.File) ? FileMode.Truncate : FileMode.Create;
+            this.isoStream = new IsolatedStorageFileStream(this.File, fm, this.isoStore);
+            using (this.isoStream)
             {
                 using (StreamWriter writer = new StreamWriter(isoStream))
                 {
                     string json = JsonConvert.SerializeObject(data);
                     writer.WriteLine(json);
+                    
                 }
+                this.isoStream.Close();
             }
+        }
+
+        public string GetPath()
+        {
+            return typeof(IsolatedStorageFileStream)
+                .GetField("_fullPath", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetValue(isoStream)
+                .ToString();
         }
     }
 }
