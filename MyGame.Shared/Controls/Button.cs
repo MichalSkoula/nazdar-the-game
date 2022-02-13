@@ -13,18 +13,21 @@ namespace MyGame.Controls
 
         public string Text { get; set; }
 
-        private Rectangle hitbox;
+        public Rectangle Hitbox { get; private set; }
 
         public bool Focus = false;
 
         public bool Clicked = false;
 
-        public Button(int x, int y, int? width, ButtonSize size, string text, bool focus = false)
+        public string[] Data { get; set; }
+
+        public Button(int x, int y, int? width, ButtonSize size, string text, bool focus = false, string[] data = null)
         {
             this.state = ButtonState.StaticState;
             this.padding = 5;
             this.Text = text;
             this.Focus = focus;
+            this.Data = data;
 
             // add font
             switch (size)
@@ -41,14 +44,14 @@ namespace MyGame.Controls
             }
 
             // calculate size
-            this.hitbox = new Rectangle(
+            this.Hitbox = new Rectangle(
                 x, y, (width.HasValue ? (int)width : this.CalculateButtonSize()) + (this.padding * 2), (int)size
             );
         }
 
         public bool HasBeenClicked()
         {
-            if ((Mouse.HasBeenPressed(true) && this.hitbox.Contains(Mouse.Position)) || this.Clicked)
+            if ((Mouse.HasBeenPressed(true) && this.Hitbox.Contains(Mouse.Position)) || this.Clicked)
             {
                 this.Clicked = false;
                 return true;
@@ -59,7 +62,7 @@ namespace MyGame.Controls
 
         public void Update()
         {
-            if (this.hitbox.Contains(Mouse.Position))
+            if (this.Hitbox.Contains(Mouse.Position))
             {
                 this.state = ButtonState.HoverState;
             }
@@ -81,8 +84,8 @@ namespace MyGame.Controls
                 bgColor = Color.LightGreen;
             }
 
-            spriteBatch.DrawRectangle(this.hitbox, bgColor, (this.hitbox.Height / 2) + 5);
-            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.hitbox.X + this.padding, this.hitbox.Y + this.padding), Color.Black);
+            spriteBatch.DrawRectangle(this.Hitbox, bgColor, (this.Hitbox.Height / 2) + 5);
+            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), Color.Black);
         }
 
         private int CalculateButtonSize()

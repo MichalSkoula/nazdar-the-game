@@ -32,10 +32,13 @@ namespace MyGame.Screens
             buttons.Add("fullscreenButton", new Button(Offset.MenuX, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
             buttons.Add("musicButton", new Button(Offset.MenuX, 270, null, ButtonSize.Small, "Toggle Music"));
             buttons.Add("soundsButton", new Button(Offset.MenuX, 290, null, ButtonSize.Small, "Toggle Sounds"));
-            buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Exit"));
+            buttons.Add("exitButton", new Button(Offset.MenuX, 320, null, ButtonSize.Small, "Exit"));
 
             // load settings
             this.LoadSettings();
+
+            // load saves to show info next to slot button
+            this.LoadSaves();
 
             // play song
             MediaPlayer.Play(Assets.Nature);
@@ -83,17 +86,17 @@ namespace MyGame.Screens
             if (this.buttons.GetValueOrDefault("startButton1").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot1;
-                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             } 
             else if (this.buttons.GetValueOrDefault("startButton2").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot2;
-                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             } 
             else if (this.buttons.GetValueOrDefault("startButton3").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot3;
-                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
             // settings - fullscreen
@@ -142,9 +145,32 @@ namespace MyGame.Screens
             this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
+            int i = 0;
             foreach (KeyValuePair<string, Button> button in this.buttons)
             {
+                // draw button
                 button.Value.Draw(this.Game.SpriteBatch);
+                
+                // draw save slot content next to button
+                if (button.Value.Data != null && button.Value.Data.Length > 0)
+                {
+                    this.Game.SpriteBatch.DrawString(
+                        Assets.FontSmall, 
+                        button.Value.Data[0], 
+                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y), 
+                        Color.White);
+                    this.Game.SpriteBatch.DrawString(
+                        Assets.FontSmall,
+                        button.Value.Data[1],
+                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 10),
+                        Color.White);
+                    this.Game.SpriteBatch.DrawString(
+                        Assets.FontSmall,
+                        button.Value.Data[2],
+                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 20),
+                        Color.White);
+                }
+                i++;
             }
 
             // save path
@@ -184,6 +210,25 @@ namespace MyGame.Screens
             if (settings.ContainsKey("soundsVolume"))
             {
                 SoundEffect.MasterVolume = (int)settings.soundsVolume;
+            }
+        }
+
+        // take a look at whats inside the save slots to show it in main menu
+        private void LoadSaves()
+        {
+            string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3 };
+
+            for (int i = 0; i < 3; i++) {
+                FileIO saveFile = new FileIO(slots[i]);
+                dynamic saveData = saveFile.Load();
+                if (saveData != null)
+                {
+                    this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = new string[] {
+                        "Village: " + saveData.GetValue("village"),
+                        "Money: " + saveData.GetValue("player").Money,
+                        "Days: " + saveData.GetValue("player").Days,
+                    };
+                }
             }
         }
     }

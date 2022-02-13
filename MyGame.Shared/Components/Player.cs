@@ -27,7 +27,8 @@ namespace MyGame.Components
             new Animation(Assets.PlayerLeft, 4, 10),
         };
 
-        public int Money;
+        public int Money { get; set; }
+        public int Days { get; set; }
 
         public Player(int x, int y)
         {
@@ -37,6 +38,7 @@ namespace MyGame.Components
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = 100;
             this.Caliber = 30;
+            this.Days = 0;
         }
 
         public void Load(dynamic saveData)
@@ -44,10 +46,8 @@ namespace MyGame.Components
             // load player
             this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = (int)saveData.Health;
-            if (saveData.Money != null)
-            {
-                this.Money = (int)saveData.Money;
-            }
+            this.Days = (int)saveData.Days;
+            this.Money = (int)saveData.Money;
 
             // load bullets
             if (saveData.ContainsKey("Bullets"))

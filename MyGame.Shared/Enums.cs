@@ -44,7 +44,7 @@
 
         public static class Offset
         {
-            public const int StatusBar = 300;
+            public const int StatusBar = 290;
             public const int Floor = 250;
 
             public static int MenuX = 20;

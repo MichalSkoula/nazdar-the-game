@@ -12,21 +12,43 @@ using static MyGame.Enums;
 
 namespace MyGame.Screens
 {
-    public class GameOverScreen : GameScreen
+    public class MapScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public GameOverScreen(Game1 game) : base(game) { }
+        public MapScreen(Game1 game) : base(game) { }
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
+        private FileIO saveFile = new FileIO();
+
         public override void Initialize()
         {
-            buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Load last save", true));
-            buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "New game"));
-            buttons.Add("menu", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Main menu"));
+            buttons.Add("village1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Village 1", true));
+            buttons.Add("village2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Village 2"));
+
+            buttons.Add("menuButton", new Button(Offset.MenuX, 320, null, ButtonSize.Small, "Menu"));
+
+            // set save slot and maybe load?
+            this.saveFile.File = Game.SaveSlot;
+            this.Load();
 
             base.Initialize();
+        }
+
+        private void Load()
+        {
+            dynamic saveData = this.saveFile.Load();
+            if (saveData == null)
+            {
+                return;
+            }
+
+            // TODO load detail - show where on map we are
+            if (saveData.ContainsKey("detail"))
+            {
+                // this.player.Load(saveData.GetValue("player"));
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -60,26 +82,22 @@ namespace MyGame.Screens
                 }
             }
 
-            // load game
-            if (this.buttons.GetValueOrDefault("load").HasBeenClicked())
+            // start game - villages
+            if (this.buttons.GetValueOrDefault("village1").HasBeenClicked())
             {
+                this.Game.Village = 1;
+                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+            }
+            if (this.buttons.GetValueOrDefault("village2").HasBeenClicked())
+            {
+                this.Game.Village = 2;
                 this.Game.LoadScreen(typeof(Screens.DetailScreen));
             }
 
-            // main menu
-            if (this.buttons.GetValueOrDefault("menu").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
+            // back to main menu
+            if (this.buttons.GetValueOrDefault("menuButton").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
             {
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
-            }
-
-            // new game
-            if (this.buttons.GetValueOrDefault("new").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
-            {
-                // delete save
-                FileIO saveFile = new FileIO(Game.SaveSlot);
-                saveFile.Delete();
-
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
         }
 
@@ -88,8 +106,7 @@ namespace MyGame.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            // title
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "select map", new Vector2(Offset.MenuX, Offset.MenuY), Color.Red);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

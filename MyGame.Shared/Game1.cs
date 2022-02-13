@@ -33,7 +33,9 @@ namespace MyGame
 
         public static int BarWidth { get; private set; }
 
-        public string SaveSlot;
+        public string SaveSlot { get; set; }
+
+        public int Village { get; set; }
 
         public Game1()
         {

@@ -4,8 +4,6 @@
 
 TODOS:
 
-* game timer - how many days
-* map selector hmm between menu and map
 * messages from top down 
 * status bar with health
 * audio - day chill, night deathmetal

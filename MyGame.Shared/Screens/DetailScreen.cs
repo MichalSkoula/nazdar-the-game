@@ -51,7 +51,6 @@ namespace MyGame.Screens
 
             // set save slot and maybe load?
             this.saveFile.File = Game.SaveSlot;
-            // System.Diagnostics.Debug.WriteLine("save_slot_" + Game.Slot + ".json");
             this.Load();
 
             // play song
@@ -68,7 +67,7 @@ namespace MyGame.Screens
                 this.Save();
 
                 // back to menu
-                this.Game.LoadScreen(typeof(Screens.MenuScreen));
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
             this.player.Update(this.Game.DeltaTime);
@@ -112,30 +111,31 @@ namespace MyGame.Screens
                 SpriteEffects.FlipHorizontally,
                 0);
 
-            // status bar (minus translation to stay in place)
-            this.Game.SpriteBatch.DrawString(
-                Assets.FontMedium,
-                "this is game you can escape to menu",
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar),
-                Color.Black);
-
             // timer
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
-                "timer: " + Math.Ceiling(this.dayPhaseTimer).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
+                "Village " + this.Game.Village.ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 10),
                 Color.Black);
-
-            // player stats
+            this.Game.SpriteBatch.DrawString(
+               Assets.FontSmall,
+               "Days " + this.player.Days.ToString(),
+               new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
+               Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
-                "health: " + (this.player.Health).ToString(),
+                "Timer: " + Math.Ceiling(this.dayPhaseTimer).ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 30),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
-                "money: " + (this.player.Money).ToString(),
+                "Health: " + (this.player.Health).ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 40),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.FontSmall,
+                "Money: " + (this.player.Money).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 50),
                 Color.Black);
 
             // player - camera follows
@@ -188,6 +188,7 @@ namespace MyGame.Screens
                 enemies = this.enemies,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
+                village = this.Game.Village
             });
         }
 
@@ -253,6 +254,7 @@ namespace MyGame.Screens
                 }
                 else
                 {
+                    this.player.Days++;
                     this.dayPhase = DayPhase.Day;
                     this.dayPhaseTimer = (int)DayNightLength.Day;
                 }
