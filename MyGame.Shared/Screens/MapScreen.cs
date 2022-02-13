@@ -86,12 +86,12 @@ namespace MyGame.Screens
             if (this.buttons.GetValueOrDefault("village1").HasBeenClicked())
             {
                 this.Game.Village = 1;
-                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+                this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
             if (this.buttons.GetValueOrDefault("village2").HasBeenClicked())
             {
                 this.Game.Village = 2;
-                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+                this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
 
             // back to main menu

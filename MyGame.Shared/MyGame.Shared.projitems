@@ -29,7 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Screens\DetailScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MenuScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />

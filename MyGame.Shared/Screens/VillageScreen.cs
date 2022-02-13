@@ -13,11 +13,11 @@ using static MyGame.Enums;
 
 namespace MyGame.Screens
 {
-    public class DetailScreen : GameScreen
+    public class VillageScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public DetailScreen(Game1 game) : base(game) { }
+        public VillageScreen(Game1 game) : base(game) { }
 
         private Camera camera = new Camera();
 

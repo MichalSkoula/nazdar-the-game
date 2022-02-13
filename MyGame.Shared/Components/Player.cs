@@ -64,7 +64,7 @@ namespace MyGame.Components
             // is player moving?
             bool isMoving = true;
             Rectangle newHitbox = this.Hitbox;
-            if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < DetailScreen.MapWidth - this.Hitbox.Width)
+            if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < VillageScreen.MapWidth - this.Hitbox.Width)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
                 this.Direction = Direction.Right;

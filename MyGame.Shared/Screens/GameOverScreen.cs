@@ -63,7 +63,7 @@ namespace MyGame.Screens
             // load game
             if (this.buttons.GetValueOrDefault("load").HasBeenClicked())
             {
-                this.Game.LoadScreen(typeof(Screens.DetailScreen));
+                this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
 
             // main menu
