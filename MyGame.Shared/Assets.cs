@@ -57,7 +57,7 @@ namespace MyGame
 
             Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
             Assets.Nature = content.Load<Song>("Sounds/nature");
-            Assets.Map = content.Load<Song>("Sounds/map");
+            Assets.Map = content.Load<Song>("Sounds/Map");
 
             Assets.AllWhite = content.Load<Effect>("Effects/AllWhite");
             Assets.Pixelate = content.Load<Effect>("Effects/Pixelate");
