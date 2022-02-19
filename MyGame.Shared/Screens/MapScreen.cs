@@ -24,12 +24,11 @@ namespace MyGame.Screens
 
         public override void Initialize()
         {
-            buttons.Add("village1", new Button(Offset.MenuX + 000, 120, null, ButtonSize.Medium, "Village 1", true));
-            buttons.Add("village2", new Button(Offset.MenuX + 80, 160, null, ButtonSize.Medium, "Village 2"));
-            buttons.Add("village3", new Button(Offset.MenuX + 250, 90, null, ButtonSize.Medium, "Village 3"));
-            buttons.Add("village4", new Button(Offset.MenuX + 410, 200, null, ButtonSize.Medium, "Village 4")); ;
-
-            buttons.Add("menuButton", new Button(Offset.MenuX, 320, null, ButtonSize.Small, "Menu"));
+            buttons.Add("village1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Village 1", true));
+            buttons.Add("village2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Village 2"));
+            buttons.Add("village3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Village 3"));
+            buttons.Add("village4", new Button(Offset.MenuX, 180, null, ButtonSize.Large, "Village 4"));
+            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Back to Main Menu"));
 
             // set save slot and maybe load?
             this.saveFile.File = Game.SaveSlot;
@@ -46,10 +45,20 @@ namespace MyGame.Screens
                 return;
             }
 
-            // TODO load detail - show where on map we are
-            if (saveData.ContainsKey("detail"))
+            // focus on current village
+            if (saveData.ContainsKey("village"))
             {
-                // this.player.Load(saveData.GetValue("player"));
+                foreach (KeyValuePair<string, Button> button in this.buttons)
+                {
+                    if (button.Key == "village" + saveData.village)
+                    {
+                        button.Value.Focus = true;
+                    }
+                    else
+                    {
+                        button.Value.Focus = false;
+                    }
+                }
             }
         }
 
@@ -62,11 +71,11 @@ namespace MyGame.Screens
             }
 
             // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Right))
-            {
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down))
+            { 
                 Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Left))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
             }

@@ -32,7 +32,7 @@ namespace MyGame.Screens
             buttons.Add("fullscreenButton", new Button(Offset.MenuX, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
             buttons.Add("musicButton", new Button(Offset.MenuX, 270, null, ButtonSize.Small, "Toggle Music"));
             buttons.Add("soundsButton", new Button(Offset.MenuX, 290, null, ButtonSize.Small, "Toggle Sounds"));
-            buttons.Add("exitButton", new Button(Offset.MenuX, 320, null, ButtonSize.Small, "Exit"));
+            buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Exit"));
 
             // load settings
             this.LoadSettings();

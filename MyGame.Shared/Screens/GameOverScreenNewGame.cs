@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MyGame.Controls;
 using MyGame.Shared;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using static MyGame.Enums;
 
 namespace MyGame.Screens
 {
-    public class GameOverScreen : GameScreen
+    class GameOverScreenNewGame : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public GameOverScreen(Game1 game) : base(game) { }
+        public GameOverScreenNewGame(Game1 game) : base(game) { }
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         public override void Initialize()
         {
-            buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Load last save", true));
-            buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "New game"));
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Back to Main Menu"));
+            buttons.Add("yes", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Yes", true));
+            buttons.Add("no", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "No"));
 
             base.Initialize();
         }
@@ -60,22 +57,20 @@ namespace MyGame.Screens
                 }
             }
 
-            // load game
-            if (this.buttons.GetValueOrDefault("load").HasBeenClicked())
+            // main menu - NO
+            if (this.buttons.GetValueOrDefault("no").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
             {
-                this.Game.LoadScreen(typeof(Screens.VillageScreen));
+                this.Game.LoadScreen(typeof(Screens.GameOverScreen));
             }
 
-            // main menu
-            if (this.buttons.GetValueOrDefault("menu").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
+            // new game -YES
+            if (this.buttons.GetValueOrDefault("yes").HasBeenClicked())
             {
-                this.Game.LoadScreen(typeof(Screens.MenuScreen));
-            }
+                // delete save
+                FileIO saveFile = new FileIO(Game.SaveSlot);
+                saveFile.Delete();
 
-            // new game - to confirm screen
-            if (this.buttons.GetValueOrDefault("new").HasBeenClicked())
-            {
-                this.Game.LoadScreen(typeof(Screens.GameOverScreenNewGame));
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
         }
 
@@ -85,7 +80,7 @@ namespace MyGame.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start a new game?", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
