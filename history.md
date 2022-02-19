@@ -50,4 +50,4 @@ Srpen, státní zlatý poklad
 
 
 intro:
-Ve velké válce bojovalo na straně RU 1,4 milionu Čechů, nepřežilo XX. Na druhé straně bojovalo 60k legionářů ...
+Ve velké válce bojovalo na straně RU 1,4 milionu Čechů, nepřežilo XX. Na druhé straně bojovalo 60k legionářů

@@ -24,8 +24,10 @@ namespace MyGame.Screens
 
         public override void Initialize()
         {
-            buttons.Add("village1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Village 1", true));
-            buttons.Add("village2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Village 2"));
+            buttons.Add("village1", new Button(Offset.MenuX + 000, 120, null, ButtonSize.Medium, "Village 1", true));
+            buttons.Add("village2", new Button(Offset.MenuX + 80, 160, null, ButtonSize.Medium, "Village 2"));
+            buttons.Add("village3", new Button(Offset.MenuX + 250, 90, null, ButtonSize.Medium, "Village 3"));
+            buttons.Add("village4", new Button(Offset.MenuX + 410, 200, null, ButtonSize.Medium, "Village 4")); ;
 
             buttons.Add("menuButton", new Button(Offset.MenuX, 320, null, ButtonSize.Small, "Menu"));
 
@@ -60,11 +62,11 @@ namespace MyGame.Screens
             }
 
             // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Right))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Left))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
             }
@@ -93,6 +95,16 @@ namespace MyGame.Screens
                 this.Game.Village = 2;
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
+            if (this.buttons.GetValueOrDefault("village3").HasBeenClicked())
+            {
+                this.Game.Village = 3;
+                this.Game.LoadScreen(typeof(Screens.VillageScreen));
+            }
+            if (this.buttons.GetValueOrDefault("village4").HasBeenClicked())
+            {
+                this.Game.Village = 4;
+                this.Game.LoadScreen(typeof(Screens.VillageScreen));
+            }
 
             // back to main menu
             if (this.buttons.GetValueOrDefault("menuButton").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
@@ -106,7 +118,7 @@ namespace MyGame.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "select map", new Vector2(Offset.MenuX, Offset.MenuY), Color.Red);
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "select map", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
