@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using System;
-using static MyGame.Enums;
 
 namespace MyGame
 {
@@ -36,6 +35,7 @@ namespace MyGame
         public string SaveSlot { get; set; }
 
         public int Village { get; set; }
+        public int VillageAccess { get; set; }
 
         public Game1()
         {

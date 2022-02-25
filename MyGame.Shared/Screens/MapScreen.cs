@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using MyGame.Controls;
 using MyGame.Shared;
+using System.Collections.Generic;
 using static MyGame.Enums;
 
 namespace MyGame.Screens
@@ -25,9 +21,9 @@ namespace MyGame.Screens
         public override void Initialize()
         {
             buttons.Add("village1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Village 1", true));
-            buttons.Add("village2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Village 2"));
-            buttons.Add("village3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Village 3"));
-            buttons.Add("village4", new Button(Offset.MenuX, 180, null, ButtonSize.Large, "Village 4"));
+            buttons.Add("village2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Village 2", active: false));
+            buttons.Add("village3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Village 3", active: false));
+            buttons.Add("village4", new Button(Offset.MenuX, 180, null, ButtonSize.Large, "Village 4", active: false));
             buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Back to Main Menu"));
 
             // set save slot and maybe load?
@@ -45,11 +41,14 @@ namespace MyGame.Screens
                 return;
             }
 
-            // focus on current village
-            if (saveData.ContainsKey("village"))
+            // focus on current village & active accessed villages
+            if (saveData.ContainsKey("village") && saveData.ContainsKey("villageAccess"))
             {
+                int i = 0;
                 foreach (KeyValuePair<string, Button> button in this.buttons)
                 {
+                    i++;
+
                     if (button.Key == "village" + saveData.village)
                     {
                         button.Value.Focus = true;
@@ -58,7 +57,13 @@ namespace MyGame.Screens
                     {
                         button.Value.Focus = false;
                     }
-                }
+
+                    // access villages
+                    if ((int)saveData.villageAccess >= i)
+                    {
+                        button.Value.Active = true;
+                    }
+                } 
             }
         }
 
@@ -72,7 +77,7 @@ namespace MyGame.Screens
 
             // iterate through buttons up/down
             if (Controls.Keyboard.HasBeenPressed(Keys.Down))
-            { 
+            {
                 Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
             else if (Controls.Keyboard.HasBeenPressed(Keys.Up))
@@ -127,7 +132,7 @@ namespace MyGame.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "select map", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Map", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

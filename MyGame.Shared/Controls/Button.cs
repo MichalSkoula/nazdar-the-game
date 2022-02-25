@@ -19,15 +19,18 @@ namespace MyGame.Controls
 
         public bool Clicked = false;
 
+        public bool Active { get; set; }
+
         public string[] Data { get; set; }
 
-        public Button(int x, int y, int? width, ButtonSize size, string text, bool focus = false, string[] data = null)
+        public Button(int x, int y, int? width, ButtonSize size, string text, bool focus = false, string[] data = null, bool active = true)
         {
             this.state = ButtonState.StaticState;
             this.padding = 5;
             this.Text = text;
             this.Focus = focus;
             this.Data = data;
+            this.Active = active;
 
             // add font
             switch (size)
@@ -51,6 +54,11 @@ namespace MyGame.Controls
 
         public bool HasBeenClicked()
         {
+            if (this.Active == false)
+            {
+                return false;
+            }
+
             if ((Mouse.HasBeenPressed(true) && this.Hitbox.Contains(Mouse.Position)) || this.Clicked)
             {
                 this.Clicked = false;
@@ -66,7 +74,7 @@ namespace MyGame.Controls
             {
                 this.state = ButtonState.HoverState;
             }
-            else if (this.Focus) 
+            else if (this.Focus)
             {
                 this.state = ButtonState.HoverState;
             }
@@ -79,7 +87,11 @@ namespace MyGame.Controls
         public void Draw(SpriteBatch spriteBatch)
         {
             var bgColor = Color.Green;
-            if (this.state == ButtonState.HoverState)
+             
+            if (this.Active == false)
+            {
+                bgColor = Color.Gray;
+            } else if (this.state == ButtonState.HoverState)
             {
                 bgColor = Color.LightGreen;
             }

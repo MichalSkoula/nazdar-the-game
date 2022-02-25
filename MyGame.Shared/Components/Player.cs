@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MyGame.Screens;
+using System.Collections.Generic;
 using static MyGame.Enums;
 
 namespace MyGame.Components
@@ -10,7 +10,7 @@ namespace MyGame.Components
     public class Player : Component
     {
         private int speed = 150;
-        
+
         private Animation anim;
 
         public List<Bullet> Bullets

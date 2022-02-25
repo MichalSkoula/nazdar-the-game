@@ -179,6 +179,13 @@ namespace MyGame.Screens
                 this.dayPhase = (DayPhase)saveData.GetValue("dayPhase");
                 this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
             }
+
+            // load village access
+            if (saveData.ContainsKey("village") && saveData.ContainsKey("villageAccess"))
+            {
+                this.Game.Village = (int)saveData.GetValue("village");
+                this.Game.VillageAccess = (int)saveData.GetValue("villageAccess");
+            }
         }
 
         private void Save()
@@ -188,7 +195,8 @@ namespace MyGame.Screens
                 enemies = this.enemies,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
-                village = this.Game.Village
+                village = this.Game.Village,
+                villageAccess = this.Game.VillageAccess,
             });
         }
 
