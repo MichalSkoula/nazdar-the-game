@@ -41,10 +41,15 @@ namespace MyGame.Components
             this.Days = 0;
         }
 
-        public void Load(dynamic saveData)
+        public void Load(dynamic saveData, bool traveling)
         {
+            // load player X position - only if not traveling :)) if traveling, let it reset
+            if (! traveling)
+            {
+                this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+                this.Direction = (Direction)saveData.Direction;
+            }
             // load player
-            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
             this.Money = (int)saveData.Money;

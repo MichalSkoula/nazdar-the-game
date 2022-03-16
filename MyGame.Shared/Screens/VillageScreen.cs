@@ -111,7 +111,7 @@ namespace MyGame.Screens
                 SpriteEffects.FlipHorizontally,
                 0);
 
-            // timer
+            // stats
             this.Game.SpriteBatch.DrawString(
                 Assets.FontSmall,
                 "Village " + this.Game.Village.ToString(),
@@ -152,6 +152,9 @@ namespace MyGame.Screens
 
         private void Load()
         {
+            var traveling = this.Game.Traveling;
+            this.Game.Traveling = true;
+
             dynamic saveData = this.saveFile.Load();
             if (saveData == null)
             {
@@ -161,7 +164,7 @@ namespace MyGame.Screens
             // load player
             if (saveData.ContainsKey("player"))
             {
-                this.player.Load(saveData.GetValue("player"));
+                this.player.Load(saveData.GetValue("player"), traveling);
             }
 
             // load enemies
@@ -183,7 +186,8 @@ namespace MyGame.Screens
             // load village access
             if (saveData.ContainsKey("village") && saveData.ContainsKey("villageAccess"))
             {
-                this.Game.Village = (int)saveData.GetValue("village");
+                // do not set village number - it is set from main menu
+                // this.Game.Village = (int)saveData.GetValue("village");
                 this.Game.VillageAccess = (int)saveData.GetValue("villageAccess");
             }
         }

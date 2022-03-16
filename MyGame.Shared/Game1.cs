@@ -34,8 +34,10 @@ namespace MyGame
 
         public string SaveSlot { get; set; }
 
+        // world variables
         public int Village { get; set; }
         public int VillageAccess { get; set; }
+        public bool Traveling { get; set; }
 
         public Game1()
         {

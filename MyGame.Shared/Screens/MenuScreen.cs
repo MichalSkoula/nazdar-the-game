@@ -43,6 +43,8 @@ namespace MyGame.Screens
             // play song
             MediaPlayer.Play(Assets.Nature);
 
+            this.Game.Traveling = false;
+
             base.Initialize();
         }
 

@@ -49,20 +49,38 @@ namespace MyGame.Screens
                 {
                     i++;
 
-                    if (button.Key == "village" + saveData.village)
+                    // If not traveling (game just started) you can only select current village
+                    if (this.Game.Traveling)
                     {
-                        button.Value.Focus = true;
-                    }
+                        if (button.Key == "village" + saveData.village)
+                        {
+                            button.Value.Focus = true;
+                        }
+                        else
+                        {
+                            button.Value.Focus = false;
+                        }
+
+                        // access villages
+                        if ((int)saveData.villageAccess >= i)
+                        {
+                            button.Value.Active = true;
+                        }
+                    } 
                     else
                     {
-                        button.Value.Focus = false;
+                        if (button.Key == "village" + saveData.village)
+                        {
+                            button.Value.Focus = true;
+                            button.Value.Active = true;
+                        }
+                        else
+                        {
+                            button.Value.Focus = false;
+                            button.Value.Active = button.Key == "menuButton";
+                        }
                     }
-
-                    // access villages
-                    if ((int)saveData.villageAccess >= i)
-                    {
-                        button.Value.Active = true;
-                    }
+                    
                 } 
             }
         }
@@ -101,21 +119,37 @@ namespace MyGame.Screens
             // start game - villages
             if (this.buttons.GetValueOrDefault("village1").HasBeenClicked())
             {
+                if (this.Game.Village == 1)
+                {
+                    this.Game.Traveling = false;
+                }
                 this.Game.Village = 1;
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
             if (this.buttons.GetValueOrDefault("village2").HasBeenClicked())
             {
+                if (this.Game.Village == 2)
+                {
+                    this.Game.Traveling = false;
+                }
                 this.Game.Village = 2;
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
             if (this.buttons.GetValueOrDefault("village3").HasBeenClicked())
             {
+                if (this.Game.Village == 3)
+                {
+                    this.Game.Traveling = false;
+                }
                 this.Game.Village = 3;
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
             if (this.buttons.GetValueOrDefault("village4").HasBeenClicked())
             {
+                if (this.Game.Village == 4)
+                {
+                    this.Game.Traveling = false;
+                }
                 this.Game.Village = 4;
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }

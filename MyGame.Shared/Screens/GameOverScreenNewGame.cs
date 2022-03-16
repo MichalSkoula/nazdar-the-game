@@ -70,7 +70,11 @@ namespace MyGame.Screens
                 FileIO saveFile = new FileIO(Game.SaveSlot);
                 saveFile.Delete();
 
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                // reset some variables
+                this.Game.VillageAccess = 1;
+
+                // back to menu
+                this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }
         }
 

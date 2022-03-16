@@ -24,7 +24,7 @@ namespace MyGame.Components
 
         public bool ToDelete { get; set; }
 
-        public Enemy(int x, int y, Direction direction, int health = 100, int caliber = 30)
+        public Enemy(int x, int y, Direction direction, int health = 100, int caliber = 10)
         {
             this.anim = this.animations[(int)Direction.Down];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);

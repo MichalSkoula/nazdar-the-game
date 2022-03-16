@@ -57,7 +57,7 @@ namespace MyGame
             {
                 using (StreamWriter writer = new StreamWriter(isoStream))
                 {
-                    string json = JsonConvert.SerializeObject(data);
+                    string json = JsonConvert.SerializeObject(data, Formatting.Indented);
                     writer.WriteLine(json);
                     
                 }
