@@ -4,6 +4,9 @@
 
 TODO:
 
+* Traveling can be done only sometimes! Maybe when you have train and no enemies are nearby
+* Enemies, bullets, dayPhase should be deleted when travelling, they will not wait for you nor transfer with you
+
 * audio - day chill, night deathmetal
 * messages
 * show in which village player is on map
