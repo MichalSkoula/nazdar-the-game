@@ -152,9 +152,6 @@ namespace MyGame.Screens
 
         private void Load()
         {
-            var traveling = this.Game.Traveling;
-            this.Game.Traveling = true;
-
             dynamic saveData = this.saveFile.Load();
             if (saveData == null)
             {
@@ -164,7 +161,7 @@ namespace MyGame.Screens
             // load player
             if (saveData.ContainsKey("player"))
             {
-                this.player.Load(saveData.GetValue("player"), traveling);
+                this.player.Load(saveData.GetValue("player"));
             }
 
             // load enemies
@@ -182,14 +179,6 @@ namespace MyGame.Screens
                 this.dayPhase = (DayPhase)saveData.GetValue("dayPhase");
                 this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
             }
-
-            // load village access
-            if (saveData.ContainsKey("village") && saveData.ContainsKey("villageAccess"))
-            {
-                // do not set village number - it is set from main menu
-                // this.Game.Village = (int)saveData.GetValue("village");
-                this.Game.VillageAccess = (int)saveData.GetValue("villageAccess");
-            }
         }
 
         private void Save()
@@ -200,7 +189,6 @@ namespace MyGame.Screens
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
                 village = this.Game.Village,
-                villageAccess = this.Game.VillageAccess,
             });
         }
 

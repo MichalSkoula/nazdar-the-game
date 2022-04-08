@@ -20,10 +20,7 @@ namespace MyGame.Screens
 
         public override void Initialize()
         {
-            buttons.Add("village1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Village 1", true));
-            buttons.Add("village2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Village 2", active: false));
-            buttons.Add("village3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Village 3", active: false));
-            buttons.Add("village4", new Button(Offset.MenuX, 180, null, ButtonSize.Large, "Village 4", active: false));
+            buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Start", true));
             buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Back to Main Menu"));
 
             // set save slot and maybe load?
@@ -42,46 +39,8 @@ namespace MyGame.Screens
             }
 
             // focus on current village & active accessed villages
-            if (saveData.ContainsKey("village") && saveData.ContainsKey("villageAccess"))
-            {
-                int i = 0;
-                foreach (KeyValuePair<string, Button> button in this.buttons)
-                {
-                    i++;
-
-                    // If not traveling (game just started) you can only select current village
-                    if (this.Game.Traveling)
-                    {
-                        if (button.Key == "village" + saveData.village)
-                        {
-                            button.Value.Focus = true;
-                        }
-                        else
-                        {
-                            button.Value.Focus = false;
-                        }
-
-                        // access villages
-                        if ((int)saveData.villageAccess >= i)
-                        {
-                            button.Value.Active = true;
-                        }
-                    } 
-                    else
-                    {
-                        if (button.Key == "village" + saveData.village)
-                        {
-                            button.Value.Focus = true;
-                            button.Value.Active = true;
-                        }
-                        else
-                        {
-                            button.Value.Focus = false;
-                            button.Value.Active = button.Key == "menuButton";
-                        }
-                    }
-                    
-                } 
+            if (saveData.ContainsKey("village")) {
+                this.Game.Village = (int)saveData.village;
             }
         }
 
@@ -117,40 +76,8 @@ namespace MyGame.Screens
             }
 
             // start game - villages
-            if (this.buttons.GetValueOrDefault("village1").HasBeenClicked())
+            if (this.buttons.GetValueOrDefault("startButton").HasBeenClicked())
             {
-                if (this.Game.Village == 1)
-                {
-                    this.Game.Traveling = false;
-                }
-                this.Game.Village = 1;
-                this.Game.LoadScreen(typeof(Screens.VillageScreen));
-            }
-            if (this.buttons.GetValueOrDefault("village2").HasBeenClicked())
-            {
-                if (this.Game.Village == 2)
-                {
-                    this.Game.Traveling = false;
-                }
-                this.Game.Village = 2;
-                this.Game.LoadScreen(typeof(Screens.VillageScreen));
-            }
-            if (this.buttons.GetValueOrDefault("village3").HasBeenClicked())
-            {
-                if (this.Game.Village == 3)
-                {
-                    this.Game.Traveling = false;
-                }
-                this.Game.Village = 3;
-                this.Game.LoadScreen(typeof(Screens.VillageScreen));
-            }
-            if (this.buttons.GetValueOrDefault("village4").HasBeenClicked())
-            {
-                if (this.Game.Village == 4)
-                {
-                    this.Game.Traveling = false;
-                }
-                this.Game.Village = 4;
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
 

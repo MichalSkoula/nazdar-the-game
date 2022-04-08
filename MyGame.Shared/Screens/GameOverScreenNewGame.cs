@@ -71,7 +71,7 @@ namespace MyGame.Screens
                 saveFile.Delete();
 
                 // reset some variables
-                this.Game.VillageAccess = 1;
+                this.Game.Village = 1;
 
                 // back to menu
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
