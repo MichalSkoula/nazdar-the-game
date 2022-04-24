@@ -6,7 +6,7 @@ using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Components
 {
-    public class Enemy : Component
+    public class Soldier : Component
     {
         private int speed = 110;
 
@@ -16,15 +16,15 @@ namespace SiberianAnabasis.Components
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.EnemyRight, 4, 10),
-            new Animation(Assets.EnemyRight, 4, 10),
-            new Animation(Assets.EnemyLeft, 4, 10),
-            new Animation(Assets.EnemyLeft, 4, 10),
+            new Animation(Assets.SoldierRight, 4, 10),
+            new Animation(Assets.SoldierRight, 4, 10),
+            new Animation(Assets.SoldierLeft, 4, 10),
+            new Animation(Assets.SoldierLeft, 4, 10),
         };
 
         public bool ToDelete { get; set; }
 
-        public Enemy(int x, int y, Direction direction, int health = 100, int caliber = 10)
+        public Soldier(int x, int y, Direction direction, int health = 100, int caliber = 10)
         {
             this.anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
@@ -35,7 +35,7 @@ namespace SiberianAnabasis.Components
 
         public override void Update(float deltaTime)
         {
-            // is enemy moving?
+            // is soldier moving?
             bool isMoving = true;
             Rectangle newHitbox = this.Hitbox;
             if (this.Direction == Direction.Right)
@@ -66,10 +66,12 @@ namespace SiberianAnabasis.Components
             this.anim.Update(deltaTime);
 
             // out of game map
+            /*
             if (this.Hitbox.X < 0 || this.Hitbox.X > VillageScreen.MapWidth)
             {
                 this.ToDelete = true;
             }
+            */
         }
 
         public override void Draw(SpriteBatch spriteBatch)

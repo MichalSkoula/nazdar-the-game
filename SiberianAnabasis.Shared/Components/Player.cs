@@ -9,7 +9,7 @@ namespace SiberianAnabasis.Components
 {
     public class Player : Component
     {
-        private int speed = 150;
+        private int speed = 120;
 
         private Animation anim;
 
@@ -21,9 +21,9 @@ namespace SiberianAnabasis.Components
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.PlayerUp, 4, 10),
             new Animation(Assets.PlayerRight, 4, 10),
-            new Animation(Assets.PlayerDown, 4, 10),
+            new Animation(Assets.PlayerRight, 4, 10),
+            new Animation(Assets.PlayerLeft, 4, 10),
             new Animation(Assets.PlayerLeft, 4, 10),
         };
 

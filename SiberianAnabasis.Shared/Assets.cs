@@ -7,11 +7,14 @@ namespace SiberianAnabasis
     public static class Assets
     {
         // images
-        public static Texture2D Player;
-        public static Texture2D PlayerDown;
-        public static Texture2D PlayerUp;
         public static Texture2D PlayerLeft;
         public static Texture2D PlayerRight;
+
+        public static Texture2D SoldierLeft;
+        public static Texture2D SoldierRight;
+
+        public static Texture2D EnemyLeft;
+        public static Texture2D EnemyRight;
 
         public static Texture2D Bullet;
 
@@ -37,10 +40,14 @@ namespace SiberianAnabasis
     {
         public void Load(Microsoft.Xna.Framework.Content.ContentManager content)
         {
-            Assets.PlayerDown = content.Load<Texture2D>("Player/player_left");
-            Assets.PlayerUp = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
-            Assets.PlayerRight = content.Load<Texture2D>("Player/player_left");
+            Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
+
+            Assets.SoldierLeft = content.Load<Texture2D>("Soldier/soldier_left");
+            Assets.SoldierRight = content.Load<Texture2D>("Soldier/soldier_right");
+
+            Assets.EnemyLeft = content.Load<Texture2D>("Enemy/enemy_left");
+            Assets.EnemyRight = content.Load<Texture2D>("Enemy/enemy_right");
 
             Assets.Bullet = content.Load<Texture2D>("bullet");
 

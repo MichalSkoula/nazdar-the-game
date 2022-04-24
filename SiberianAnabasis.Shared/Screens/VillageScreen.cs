@@ -7,8 +7,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Components;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Screens
@@ -34,6 +32,7 @@ namespace SiberianAnabasis.Screens
         // game components
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
+        private List<Soldier> soldiers = new List<Soldier>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
@@ -74,8 +73,132 @@ namespace SiberianAnabasis.Screens
 
             this.camera.Follow(this.player);
 
-            this.EnemiesUpdate();
+            this.UpdateEnemies();
+            this.UpdateSoldiers();
+            this.UpdateCollisions();
             this.UpdateDayPhase();
+        }
+
+        private void UpdateEnemies()
+        {
+            // create enemy?
+            if (this.rand.Next(360) < 8 && this.dayPhase == DayPhase.Night)
+            {
+                // choose direction
+                if (this.rand.Next(2) == 0)
+                {
+                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right));
+                }
+                else
+                {
+                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left));
+                }
+            }
+
+            // update enemies
+            foreach (Enemy enemy in this.enemies)
+            {
+                enemy.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateSoldiers()
+        {
+            // create soldier?
+            if (this.rand.Next(360) < 2 && this.dayPhase == DayPhase.Day)
+            {
+                // choose direction
+                if (this.rand.Next(2) == 0)
+                {
+                    this.soldiers.Add(new Soldier(player.Hitbox.X + player.Hitbox.Width, Offset.Floor, Direction.Right));
+                }
+                else
+                {
+                    this.soldiers.Add(new Soldier(player.Hitbox.X - player.Hitbox.Width, Offset.Floor, Direction.Left));
+                }
+            }
+
+            // update soldiers
+            foreach (var soldier in this.soldiers)
+            {
+                soldier.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateCollisions()
+        {
+            // enemies
+            foreach (Enemy enemy in this.enemies)
+            {
+                // enemies and bullets
+                foreach (Bullet bullet in this.player.Bullets)
+                {
+                    if (enemy.Hitbox.Intersects(bullet.Hitbox))
+                    {
+                        bullet.ToDelete = true;
+
+                        if (!enemy.TakeHit(bullet.Caliber))
+                        {
+                            enemy.ToDelete = true;
+                        }
+                    }
+                }
+
+                // enemies and player
+                if (this.player.Hitbox.Intersects(enemy.Hitbox))
+                {
+                    enemy.ToDelete = true;
+
+                    if (!this.player.TakeHit(enemy.Caliber))
+                    {
+                        this.Game.LoadScreen(typeof(Screens.GameOverScreen));
+                    }
+                }
+            }
+
+            this.enemies.RemoveAll(p => p.ToDelete);
+
+            // soldiers
+            foreach (var soldier in this.soldiers)
+            {
+                // enemies and soldiers
+                foreach (var enemy in this.enemies)
+                {
+                    if (enemy.Hitbox.Intersects(soldier.Hitbox))
+                    {
+                        if (!enemy.TakeHit(soldier.Caliber))
+                        {
+                            enemy.ToDelete = true;
+                        }
+                        else if (!soldier.TakeHit(enemy.Caliber))
+                        {
+                            soldier.ToDelete = true;
+                        }
+                    }
+                }
+            }
+
+            this.enemies.RemoveAll(p => p.ToDelete);
+            this.soldiers.RemoveAll(p => p.ToDelete);
+        }
+
+        private void UpdateDayPhase()
+        {
+            this.dayPhaseTimer -= this.Game.DeltaTime;
+            if (this.dayPhaseTimer <= 0)
+            {
+                if (this.dayPhase == DayPhase.Day)
+                {
+                    this.dayPhase = DayPhase.Night;
+                    this.dayPhaseTimer = (int)DayNightLength.Night;
+                }
+                else
+                {
+                    this.player.Days++;
+                    this.dayPhase = DayPhase.Day;
+                    this.dayPhaseTimer = (int)DayNightLength.Day;
+                }
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -147,6 +270,12 @@ namespace SiberianAnabasis.Screens
                 enemy.Draw(this.Game.SpriteBatch);
             }
 
+            // soldiers
+            foreach (Soldier soldier in this.soldiers)
+            {
+                soldier.Draw(this.Game.SpriteBatch);
+            }
+
             this.Game.DrawEnd();
         }
 
@@ -173,6 +302,15 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
+            // load soldiers
+            if (saveData.ContainsKey("soldiers"))
+            {
+                foreach (var soldier in saveData.GetValue("soldiers"))
+                {
+                    this.soldiers.Add(new Soldier((int)soldier.Hitbox.X, (int)soldier.Hitbox.Y, (Direction)soldier.Direction, (int)soldier.Health, (int)soldier.Caliber));
+                }
+            }
+
             // load day phase
             if (saveData.ContainsKey("dayPhase") && saveData.ContainsKey("dayPhaseTimer"))
             {
@@ -183,82 +321,15 @@ namespace SiberianAnabasis.Screens
 
         private void Save()
         {
-            this.saveFile.Save(new {
+            this.saveFile.Save(new
+            {
                 player = this.player,
                 enemies = this.enemies,
+                soldiers = this.soldiers,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
                 village = this.Game.Village,
             });
-        }
-
-        private void EnemiesUpdate()
-        {
-            // create enemy?
-            if (this.rand.Next(120) < 3 && this.dayPhase == DayPhase.Night)
-            {
-                // choose direction
-                if (this.rand.Next(2) == 0)
-                {
-                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right));
-                }
-                else
-                {
-                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left));
-                }
-            }
-
-            // update enemies
-            foreach (Enemy enemy in this.enemies)
-            {
-                enemy.Update(this.Game.DeltaTime);
-
-                // enemies and bullets
-                foreach (Bullet bullet in this.player.Bullets)
-                {
-                    if (enemy.Hitbox.Intersects(bullet.Hitbox))
-                    {
-                        bullet.ToDelete = true;
-
-                        if (!enemy.TakeHit(bullet.Caliber))
-                        {
-                            enemy.ToDelete = true;
-                        }
-                    }
-                }
-
-                // enemies and player
-                if (this.player.Hitbox.Intersects(enemy.Hitbox))
-                {
-                    enemy.ToDelete = true;
-
-                    if (!this.player.TakeHit(enemy.Caliber))
-                    {
-                        this.Game.LoadScreen(typeof(Screens.GameOverScreen));
-                    }
-                }
-            }
-
-            this.enemies.RemoveAll(p => p.ToDelete);
-        }
-
-        private void UpdateDayPhase()
-        {
-            this.dayPhaseTimer -= this.Game.DeltaTime;
-            if (this.dayPhaseTimer <= 0)
-            {
-                if (this.dayPhase == DayPhase.Day)
-                {
-                    this.dayPhase = DayPhase.Night;
-                    this.dayPhaseTimer = (int)DayNightLength.Night;
-                }
-                else
-                {
-                    this.player.Days++;
-                    this.dayPhase = DayPhase.Day;
-                    this.dayPhaseTimer = (int)DayNightLength.Day;
-                }
-            }
         }
     }
 }

@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\Soldier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Keyboard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Mouse.cs" />

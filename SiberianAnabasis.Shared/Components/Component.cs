@@ -22,11 +22,13 @@ namespace SiberianAnabasis.Components
 
         public void DrawHealth(SpriteBatch spriteBatch)
         {
-            float alpha = 0.25f;
-            if (this.Health < 100)
+            float alpha = 1f;
+            /*
+            if (this.Health == 100)
             {
-                alpha = 1f;
+                alpha = 0.25f;
             }
+            */
 
             // border
             spriteBatch.DrawRectangle(new Rectangle(this.Hitbox.X, this.Hitbox.Y - 6, this.Hitbox.Width, 4), Color.Black * alpha);
