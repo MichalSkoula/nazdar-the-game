@@ -122,6 +122,9 @@
     </PackageReference>
     <PackageReference Include="MonoGame.Framework.WindowsUniversal" Version="3.8.0.1641" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
+    <PackageReference Include="TiledCS">
+      <Version>3.1.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />

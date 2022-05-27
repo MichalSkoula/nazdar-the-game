@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\packages\monogame.framework.content.pipeline.portable\3.6.0.1625\lib\portable-net45+win8+wpa81\MonoGame.Framework.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -61,6 +62,24 @@
 /processorParam:TextureFormat=Color
 /build:Enemy/enemy_right.png
 
+#begin Envs/first-village.tmx
+/copy:Envs/first-village.tmx
+
+#begin Envs/Rocky Roads/tileset forest.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Envs/Rocky Roads/tileset forest.png
+
+#begin Envs/tileset forest.tsx
+/copy:Envs/tileset forest.tsx
+
 #begin Fonts/fontPublicPixelLarge.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -81,18 +100,6 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/fontPublicPixelSmall.spritefont
-
-#begin Middle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Middle.png
 
 #begin Player/player_left.png
 /importer:TextureImporter
@@ -159,16 +166,4 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Sounds/nature.ogg
-
-#begin tunnel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tunnel.png
 

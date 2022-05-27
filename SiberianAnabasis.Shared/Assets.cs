@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using TiledCS;
 
 namespace SiberianAnabasis
 {
@@ -18,9 +19,6 @@ namespace SiberianAnabasis
 
         public static Texture2D Bullet;
 
-        public static Texture2D Background;
-        public static Texture2D Tunnel;
-
         // fonts
         public static SpriteFont FontSmall;
         public static SpriteFont FontMedium;
@@ -34,6 +32,15 @@ namespace SiberianAnabasis
         // effects
         public static Effect AllWhite;
         public static Effect Pixelate;
+
+        // envs
+        public static Texture2D TilesetTexture;
+        public static TiledMap TilesetMap;
+        public static TiledTileset Tileset;
+        public static int TileWidth;
+        public static int TileHeight;
+        public static int TilesetTilesWide;
+        public static int TilesetTilesHeight;
     }
 
     public class AssetsLoader
@@ -51,9 +58,6 @@ namespace SiberianAnabasis
 
             Assets.Bullet = content.Load<Texture2D>("bullet");
 
-            Assets.Background = content.Load<Texture2D>("Middle");
-            Assets.Tunnel = content.Load<Texture2D>("tunnel");
-
             Assets.FontSmall = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
             Assets.FontMedium = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
             Assets.FontLarge = content.Load<SpriteFont>("Fonts/fontPublicPixelLarge");
@@ -65,6 +69,15 @@ namespace SiberianAnabasis
             Assets.AllWhite = content.Load<Effect>("Effects/AllWhite");
             Assets.Pixelate = content.Load<Effect>("Effects/Pixelate");
             Assets.Pixelate.Parameters["pixelation"].SetValue(5);
+
+            // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
+            Assets.TilesetMap = new TiledMap(content.RootDirectory + "\\Envs\\first-village.tmx");
+            Assets.Tileset = new TiledTileset(content.RootDirectory + "\\Envs\\tileset forest.tsx");
+            Assets.TilesetTexture = content.Load<Texture2D>("Envs/Rocky Roads/tileset forest");
+            Assets.TileWidth = Assets.Tileset.TileWidth;
+            Assets.TileHeight = Assets.Tileset.TileHeight;
+            Assets.TilesetTilesWide = Assets.Tileset.Columns; // Amount of tiles on each row (left right)
+            Assets.TilesetTilesHeight = Assets.Tileset.TileCount / Assets.Tileset.Columns; // Amount of tiels on each column (up down)
         }
     }
 }

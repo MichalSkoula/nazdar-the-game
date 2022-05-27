@@ -9,9 +9,6 @@
     <Import_RootNamespace>SiberianAnabasis.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Content\" />
-  </ItemGroup>
-  <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
   </ItemGroup>
@@ -37,5 +34,66 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileIO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Effects\AllWhite.fx" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Effects\Pixelate.fx" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy.psd" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy_config.zip" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Envs\first-village.tmx" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\first-map.tmx" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Envs\tileset forest.tsx" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelLarge.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelMedium.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelSmall.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Player\player.psd" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Player\player_config.zip" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier.psd" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier_config.zip" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Sounds\nature.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\bullet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy_left.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy_right.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\background1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\background2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\background3.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\bomb explosion.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\bomb.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\bounce pad.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\bullet windtrail.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\bullet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\button.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\cannon fire smoke.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\cannon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\clouds.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\coin.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\crate.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\fire.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\heart.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\ladder.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\lava.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\saw blade.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\shine.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\sign.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\slime.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\spikes.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\sun.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\tileset forest.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\tileset lava.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\tileset snow.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\ui.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\water_8frames.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Fonts\PublicPixel.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Player\player_left.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Player\player_right.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Player\sprite.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier_left.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier_right.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Soldier\sprite.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\blip.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Map.wav" />
   </ItemGroup>
 </Project>

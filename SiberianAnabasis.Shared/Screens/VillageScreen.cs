@@ -23,9 +23,6 @@ namespace SiberianAnabasis.Screens
 
         private FileIO saveFile = new FileIO();
 
-        // how large the map will be
-        private int numberOfScreens = 4;
-
         // will be calculated
         public static int MapWidth;
 
@@ -40,7 +37,7 @@ namespace SiberianAnabasis.Screens
 
         public override void Initialize()
         {
-            MapWidth = Game1.screenWidth * this.numberOfScreens;
+            MapWidth = Game1.screenWidth * 4; // 640 * 4 = 2560px
 
             // stop whatever menu song is playing 
             MediaPlayer.Stop();
@@ -207,32 +204,27 @@ namespace SiberianAnabasis.Screens
             this.Game.DrawStart();
 
             // day or night sky
-            this.GraphicsDevice.Clear(this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.Black);
+            this.GraphicsDevice.Clear(this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.DarkBlue);
 
-            // background
-            // this.Game.EffectStart(Assets.Pixelate);
-            for (int i = 0; i < this.numberOfScreens; i++)
+            // background - tileset
+            for (var i = 0; i < Assets.TilesetMap.Layers[0].data.Length; i++)
             {
-                this.Game.SpriteBatch.Draw(
-                    Assets.Background,
-                    new Vector2(i * Game1.screenWidth, 0),
-                    Color.White);
+                int gid = Assets.TilesetMap.Layers[0].data[i];
+                if (gid != 0)
+                {
+                    int tileFrame = gid - 1;
+
+                    int column = tileFrame % Assets.TilesetTilesWide;
+                    int row = (int)Math.Floor((double)tileFrame / (double)Assets.TilesetTilesWide);
+
+                    float x = (i % Assets.TilesetMap.Width) * Assets.TilesetMap.TileWidth;
+                    float y = (float)Math.Floor(i / (double)Assets.TilesetMap.Width) * Assets.TilesetMap.TileHeight;
+
+                    Rectangle tilesetRec = new Rectangle(Assets.TileWidth * column, Assets.TileHeight * row, Assets.TileWidth, Assets.TileHeight);
+
+                    this.Game.SpriteBatch.Draw(Assets.TilesetTexture, new Rectangle((int)x, (int)y, Assets.TileWidth, Assets.TileHeight), tilesetRec, Color.White);
+                }
             }
-            // this.Game.EffectEnd();
-
-            // left tunnel
-            this.Game.SpriteBatch.Draw(Assets.Tunnel, Vector2.Zero, Color.White);
-
-            // right tunnel - all this for a flip
-            this.Game.SpriteBatch.Draw(
-                Assets.Tunnel,
-                new Rectangle((Game1.screenWidth * this.numberOfScreens) - Assets.Tunnel.Width, 0, Assets.Tunnel.Width, Assets.Tunnel.Height),
-                null,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                SpriteEffects.FlipHorizontally,
-                0);
 
             // stats
             this.Game.SpriteBatch.DrawString(
