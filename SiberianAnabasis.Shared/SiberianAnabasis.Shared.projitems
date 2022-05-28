@@ -33,6 +33,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MenuScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileIO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
   </ItemGroup>
   <ItemGroup>

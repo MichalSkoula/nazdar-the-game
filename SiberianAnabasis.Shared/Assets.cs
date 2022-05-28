@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using TiledCS;
+using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
+using SiberianAnabasis.Shared;
 
 namespace SiberianAnabasis
 {
@@ -33,19 +35,13 @@ namespace SiberianAnabasis
         public static Effect AllWhite;
         public static Effect Pixelate;
 
-        // envs
-        public static Texture2D TilesetTexture;
-        public static TiledMap TilesetMap;
-        public static TiledTileset Tileset;
-        public static int TileWidth;
-        public static int TileHeight;
-        public static int TilesetTilesWide;
-        public static int TilesetTilesHeight;
+        // tileset groups
+        public static Dictionary<string, TilesetGroup> TilesetGroups;
     }
 
     public class AssetsLoader
     {
-        public void Load(Microsoft.Xna.Framework.Content.ContentManager content)
+        public void Load(ContentManager content)
         {
             Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
@@ -71,13 +67,15 @@ namespace SiberianAnabasis
             Assets.Pixelate.Parameters["pixelation"].SetValue(5);
 
             // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
-            Assets.TilesetMap = new TiledMap(content.RootDirectory + "\\Envs\\first-village.tmx");
-            Assets.Tileset = new TiledTileset(content.RootDirectory + "\\Envs\\tileset forest.tsx");
-            Assets.TilesetTexture = content.Load<Texture2D>("Envs/Rocky Roads/tileset forest");
-            Assets.TileWidth = Assets.Tileset.TileWidth;
-            Assets.TileHeight = Assets.Tileset.TileHeight;
-            Assets.TilesetTilesWide = Assets.Tileset.Columns; // Amount of tiles on each row (left right)
-            Assets.TilesetTilesHeight = Assets.Tileset.TileCount / Assets.Tileset.Columns; // Amount of tiels on each column (up down)
+            Assets.TilesetGroups = new Dictionary<string, TilesetGroup>();
+            Assets.TilesetGroups.Add(
+                "village1",
+                new TilesetGroup(
+                    content.RootDirectory + "\\Envs\\first-village.tmx",
+                    content.RootDirectory + "\\Envs\\tileset forest.tsx", 
+                    content.Load<Texture2D>("Envs/Rocky Roads/tileset forest")
+                )
+            );
         }
     }
 }
