@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Components;
 using static SiberianAnabasis.Enums;
+using System.Diagnostics;
+using System.Linq;
+using MonoGame.Extended;
 
 namespace SiberianAnabasis.Screens
 {
@@ -207,23 +210,13 @@ namespace SiberianAnabasis.Screens
             this.GraphicsDevice.Clear(this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.DarkBlue);
 
             // background - tileset
-            for (var i = 0; i < Assets.TilesetMap.Layers[0].data.Length; i++)
+            Assets.TilesetGroups["village1"].Draw("ground", this.Game.SpriteBatch);
+
+            // objects from tileset
+            var building = Assets.TilesetGroups["village1"].GetObjects("objects", "building");
+            if (building != null)
             {
-                int gid = Assets.TilesetMap.Layers[0].data[i];
-                if (gid != 0)
-                {
-                    int tileFrame = gid - 1;
-
-                    int column = tileFrame % Assets.TilesetTilesWide;
-                    int row = (int)Math.Floor((double)tileFrame / (double)Assets.TilesetTilesWide);
-
-                    float x = (i % Assets.TilesetMap.Width) * Assets.TilesetMap.TileWidth;
-                    float y = (float)Math.Floor(i / (double)Assets.TilesetMap.Width) * Assets.TilesetMap.TileHeight;
-
-                    Rectangle tilesetRec = new Rectangle(Assets.TileWidth * column, Assets.TileHeight * row, Assets.TileWidth, Assets.TileHeight);
-
-                    this.Game.SpriteBatch.Draw(Assets.TilesetTexture, new Rectangle((int)x, (int)y, Assets.TileWidth, Assets.TileHeight), tilesetRec, Color.White);
-                }
+                this.Game.SpriteBatch.DrawRectangle(new Rectangle((int)building.x, (int)building.y, (int)building.width, (int)building.height), Color.Blue);
             }
 
             // stats
