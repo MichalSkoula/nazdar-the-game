@@ -11,7 +11,7 @@ Monogame platform/strategic game (awesome).
 * messages
 * show in which village player is on map
 * Namísto mediaplayeru používat soundeffect a soundeffectinstance umí toho víc. Soundmanager Claas c knížce umí loopovat nad listem soundu
-* dotykové ovládání možná
+* dotykové ovládání možná ... asi ne
 * gamepad
 
 ## NOTES:
