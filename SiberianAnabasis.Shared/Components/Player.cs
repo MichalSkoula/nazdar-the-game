@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SiberianAnabasis.Screens;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Components
@@ -62,22 +64,20 @@ namespace SiberianAnabasis.Components
 
         public override void Update(float deltaTime)
         {
-            // is player moving?
-            bool isMoving = true;
+            // moving?
+            bool isMoving = false;
             Rectangle newHitbox = this.Hitbox;
             if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < VillageScreen.MapWidth - this.Hitbox.Width)
             {
                 newHitbox.X += (int)(deltaTime * this.speed);
                 this.Direction = Direction.Right;
+                isMoving = true;
             }
             else if (Controls.Keyboard.IsPressed(Keys.Left) && this.Hitbox.X > 0)
             {
                 newHitbox.X -= (int)(deltaTime * this.speed);
                 this.Direction = Direction.Left;
-            }
-            else
-            {
-                isMoving = false;
+                isMoving = true;
             }
 
             if (isMoving)
@@ -93,6 +93,13 @@ namespace SiberianAnabasis.Components
             }
 
             this.anim.Update(deltaTime);
+
+            // jump?
+            if (Controls.Keyboard.IsPressed(Keys.Up) && this.Hitbox.Y == Enums.Offset.Floor)
+            {
+                this.Jump();
+                isMoving = true;
+            }
 
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
@@ -116,6 +123,35 @@ namespace SiberianAnabasis.Components
             foreach (var bullet in this.Bullets)
             {
                 bullet.Draw(spriteBatch);
+            }
+        }
+
+        private async void Jump()
+        {
+            int h0 = Enums.Offset.Floor;
+            int v0 = 25;
+            int g = 10;
+            float timeDivider = 5;
+
+            for (int i = 0; i < 200; i++) 
+            {
+                Rectangle newHitbox = this.Hitbox;
+
+                float t = i / timeDivider;
+                int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2)); // https://cs.wikipedia.org/wiki/Vrh_svisl%C3%BD
+                System.Diagnostics.Debug.WriteLine(newY);
+                if (newY > h0)
+                {
+                    newHitbox.Y = h0;
+                    this.Hitbox = newHitbox;
+
+                    break;
+                }
+
+                newHitbox.Y = newY;
+                this.Hitbox = newHitbox;
+
+                await Task.Delay(20);
             }
         }
     }
