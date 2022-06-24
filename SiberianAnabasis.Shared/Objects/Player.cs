@@ -139,7 +139,7 @@ namespace SiberianAnabasis.Components
 
                 float t = i / timeDivider;
                 int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2)); // https://cs.wikipedia.org/wiki/Vrh_svisl%C3%BD
-                System.Diagnostics.Debug.WriteLine(newY);
+                // System.Diagnostics.Debug.WriteLine(newY);
                 if (newY > h0)
                 {
                     newHitbox.Y = h0;
