@@ -69,16 +69,16 @@ namespace SiberianAnabasis
 
             // start it with this scene
             #if DEBUG
-                this.LoadScreen(typeof(Screens.MenuScreen), false);
+                this.LoadScreen(typeof(Screens.MenuScreen));
             #else
-                this.LoadScreen(typeof(Screens.SplashScreen), false);
+                this.LoadScreen(typeof(Screens.SplashScreen));
             #endif
         }
 
         protected override void LoadContent()
         {
             // load all assets
-            this.assetsLoader.Load(this.Content);
+            this.assetsLoader.Load(this.Content, this.GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
@@ -91,7 +91,7 @@ namespace SiberianAnabasis
             base.Update(gameTime);
         }
 
-        public void LoadScreen(Type type, bool transition = true)
+        public void LoadScreen(Type type, bool transition = false)
         {
             var screen = Activator.CreateInstance(type, this);
             if (transition)

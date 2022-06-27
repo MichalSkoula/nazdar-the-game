@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using SiberianAnabasis.Shared;
+using MonoGame.Extended.TextureAtlases;
+using Microsoft.Xna.Framework;
 
 namespace SiberianAnabasis
 {
@@ -37,11 +39,15 @@ namespace SiberianAnabasis
 
         // tileset groups
         public static Dictionary<string, TilesetGroup> TilesetGroups;
+
+        // particles
+        public static Texture2D ParticleTexture;
+        public static TextureRegion2D ParticleTextureRegion;
     }
 
     public class AssetsLoader
     {
-        public void Load(ContentManager content)
+        public void Load(ContentManager content, GraphicsDevice graphicsDevice)
         {
             Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
             Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
@@ -76,6 +82,11 @@ namespace SiberianAnabasis
                     content.Load<Texture2D>("Envs/Rocky Roads/tileset forest")
                 )
             );
+
+            // load particle texture
+            Assets.ParticleTexture = new Texture2D(graphicsDevice, 1, 1);
+            Assets.ParticleTexture.SetData(new[] { Color.Red });
+            Assets.ParticleTextureRegion = new TextureRegion2D(Assets.ParticleTexture);
         }
     }
 }
