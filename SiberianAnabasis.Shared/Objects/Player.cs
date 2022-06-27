@@ -6,6 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static SiberianAnabasis.Enums;
+using MonoGame.Extended;
+using MonoGame.Extended.Particles;
+using MonoGame.Extended.Particles.Modifiers;
+using MonoGame.Extended.Particles.Modifiers.Containers;
+using MonoGame.Extended.Particles.Modifiers.Interpolators;
+using MonoGame.Extended.Particles.Profiles;
+using MonoGame.Extended.TextureAtlases;
 
 namespace SiberianAnabasis.Components
 {
@@ -29,6 +36,7 @@ namespace SiberianAnabasis.Components
             new Animation(Assets.PlayerLeft, 4, 10),
         };
 
+        private ParticleEffect particleEffect;
         public int Money { get; set; }
         public int Days { get; set; }
 
@@ -41,6 +49,43 @@ namespace SiberianAnabasis.Components
             this.Health = 100;
             this.Caliber = 30;
             this.Days = 0;
+
+            this.particleEffect = new ParticleEffect(autoTrigger: false)
+            {
+                Position = new Vector2(this.Hitbox.X, this.Hitbox.Y),
+                Emitters = new List<ParticleEmitter>
+                {
+                    new ParticleEmitter(Assets.ParticleTextureRegion, 500, TimeSpan.FromSeconds(2.5), Profile.Point())
+                    {
+                        Parameters = new ParticleReleaseParameters
+                        {
+                            Speed = new Range<float>(0f, 50f),
+                            Quantity = 3,
+                            Rotation = new Range<float>(-1f, 1f),
+                            Scale = new Range<float>(3.0f, 4.0f)
+                        },
+                        Modifiers =
+                        {
+                            /*
+                            new AgeModifier
+                            {
+                                Interpolators =
+                                {
+                                    new ColorInterpolator
+                                    {
+                                        StartValue = new HslColor(0.33f, 0.5f, 0.5f),
+                                        EndValue = new HslColor(0.5f, 0.9f, 1.0f)
+                                    }
+                                }
+                            },
+                            */
+                            new RotationModifier {RotationRate = -2.1f},
+                            //new RectangleContainerModifier {Width = 800, Height = 480},
+                            new LinearGravityModifier {Direction = -Vector2.UnitY, Strength = 30f},
+                        }
+                    }
+                }
+            };
         }
 
         public void Load(dynamic saveData)
@@ -113,6 +158,10 @@ namespace SiberianAnabasis.Components
             }
 
             this.Bullets.RemoveAll(p => p.ToDelete);
+
+            // particles
+            this.particleEffect.Position = new Vector2(this.Hitbox.X, this.Hitbox.Y);
+            this.particleEffect.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -124,6 +173,9 @@ namespace SiberianAnabasis.Components
             {
                 bullet.Draw(spriteBatch);
             }
+
+            // particles
+            spriteBatch.Draw(particleEffect);
         }
 
         private async void Jump()
