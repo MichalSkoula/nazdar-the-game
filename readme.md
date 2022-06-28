@@ -7,13 +7,11 @@ Monogame platform/strategic game (awesome).
 ## TODO:
 
 * gamepad
-* particles - přesunout do classy
 * players soldiers
 * audio - day chill, night deathmetal
 * messages
 * show in which village player is on map
 * Namísto mediaplayeru používat soundeffect a soundeffectinstance umí toho víc. Soundmanager Claas c knížce umí loopovat nad listem soundu
-
 
 ## NOTES:
 
