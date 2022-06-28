@@ -8,7 +8,7 @@ namespace SiberianAnabasis.Components
 {
     public class Soldier : Component
     {
-        private int speed = 110;
+        private int speed = 100;
 
         private Animation anim;
 
