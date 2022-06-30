@@ -7,8 +7,8 @@ namespace SiberianAnabasis.Controls
 {
     public class Button
     {
-        private int padding;
-        private SpriteFont font;
+        private readonly int padding;
+        private readonly SpriteFont font;
         private ButtonState state;
 
         public string Text { get; set; }

@@ -37,14 +37,13 @@ namespace SiberianAnabasis.Components
         {
             // is enemy moving?
             bool isMoving = true;
-            Rectangle newHitbox = this.Hitbox;
             if (this.Direction == Direction.Right)
             {
-                newHitbox.X += (int)(deltaTime * this.speed);
+                this.X += (int)(deltaTime * this.speed);
             }
             else if (this.Direction == Direction.Left)
             {
-                newHitbox.X -= (int)(deltaTime * this.speed);
+                this.X -= (int)(deltaTime * this.speed);
             }
             else
             {
@@ -53,7 +52,6 @@ namespace SiberianAnabasis.Components
 
             if (isMoving)
             {
-                this.Hitbox = newHitbox;
                 this.anim.Loop = true;
                 this.anim = this.animations[(int)this.Direction];
             }
@@ -66,7 +64,7 @@ namespace SiberianAnabasis.Components
             this.anim.Update(deltaTime);
 
             // out of game map
-            if (this.Hitbox.X < 0 || this.Hitbox.X > VillageScreen.MapWidth)
+            if (this.X < 0 || this.X > VillageScreen.MapWidth)
             {
                 this.ToDelete = true;
             }

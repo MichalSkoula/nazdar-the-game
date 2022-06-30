@@ -44,13 +44,13 @@ namespace SiberianAnabasis.Components
             this.Caliber = 30;
             this.Days = 0;
 
-            this.particleSource = new ParticleSource(new Vector2(this.Hitbox.X, this.Hitbox.Y));
+            this.particleSource = new ParticleSource(new Vector2(this.X, this.Y));
         }
 
         public void Load(dynamic saveData)
         {
             // load player
-            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Hitbox.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Direction = (Direction)saveData.Direction;
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
@@ -70,23 +70,21 @@ namespace SiberianAnabasis.Components
         {
             // moving?
             bool isMoving = false;
-            Rectangle newHitbox = this.Hitbox;
-            if (Controls.Keyboard.IsPressed(Keys.Right) && this.Hitbox.X < VillageScreen.MapWidth - this.Hitbox.Width)
+            if (Controls.Keyboard.IsPressed(Keys.Right) && this.X < VillageScreen.MapWidth - this.Hitbox.Width)
             {
-                newHitbox.X += (int)(deltaTime * this.speed);
+                this.X += (int)(deltaTime * this.speed);
                 this.Direction = Direction.Right;
                 isMoving = true;
             }
-            else if (Controls.Keyboard.IsPressed(Keys.Left) && this.Hitbox.X > 0)
+            else if (Controls.Keyboard.IsPressed(Keys.Left) && this.X > 0)
             {
-                newHitbox.X -= (int)(deltaTime * this.speed);
+                this.X -= (int)(deltaTime * this.speed);
                 this.Direction = Direction.Left;
                 isMoving = true;
             }
 
             if (isMoving)
             {
-                this.Hitbox = newHitbox;
                 this.anim.Loop = true;
                 this.anim = this.animations[(int)this.Direction];
             }
@@ -99,7 +97,7 @@ namespace SiberianAnabasis.Components
             this.anim.Update(deltaTime);
 
             // jump?
-            if (Controls.Keyboard.IsPressed(Keys.Up) && this.Hitbox.Y == Enums.Offset.Floor)
+            if (Controls.Keyboard.IsPressed(Keys.Up) && this.Y == Enums.Offset.Floor)
             {
                 this.Jump();
                 isMoving = true;
@@ -108,7 +106,7 @@ namespace SiberianAnabasis.Components
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space))
             {
-                this.Bullets.Add(new Bullet(this.Hitbox.X, this.Hitbox.Y + (this.Hitbox.Height / 2), this.Direction, this.Caliber));
+                this.Bullets.Add(new Bullet(this.X, this.Y + (this.Hitbox.Height / 2), this.Direction, this.Caliber));
             }
 
             foreach (var bullet in this.Bullets)
@@ -119,7 +117,7 @@ namespace SiberianAnabasis.Components
             this.Bullets.RemoveAll(p => p.ToDelete);
 
             // particles
-            this.particleSource.Update(deltaTime, new Vector2(this.Hitbox.X, this.Hitbox.Y));
+            this.particleSource.Update(deltaTime, new Vector2(this.X, this.Y));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -145,21 +143,17 @@ namespace SiberianAnabasis.Components
 
             for (int i = 0; i < 200; i++) 
             {
-                Rectangle newHitbox = this.Hitbox;
-
                 float t = i / timeDivider;
                 int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2)); // https://cs.wikipedia.org/wiki/Vrh_svisl%C3%BD
                 // System.Diagnostics.Debug.WriteLine(newY);
                 if (newY > h0)
                 {
-                    newHitbox.Y = h0;
-                    this.Hitbox = newHitbox;
+                    this.Y = h0;
 
                     break;
                 }
 
-                newHitbox.Y = newY;
-                this.Hitbox = newHitbox;
+                this.Y = newY;
 
                 await Task.Delay(20);
             }

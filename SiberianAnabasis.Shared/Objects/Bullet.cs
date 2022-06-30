@@ -42,7 +42,7 @@ namespace SiberianAnabasis.Components
             this.Hitbox = newHitbox;
 
             // out of game map
-            if (this.Hitbox.X < 0 || this.Hitbox.X > VillageScreen.MapWidth)
+            if (this.X < 0 || this.X > VillageScreen.MapWidth)
             {
                 this.ToDelete = true;
             }
