@@ -12,6 +12,33 @@ namespace SiberianAnabasis.Components
 
         public Rectangle Hitbox { get; protected set; }
 
+        public int X
+        {
+            get
+            {
+                return Hitbox.X;
+            }
+            protected set
+            {
+                var temp = this.Hitbox;
+                temp.X = value;
+                this.Hitbox = temp;
+            }
+        }
+        public int Y
+        {
+            get
+            {
+                return Hitbox.Y;
+            }
+            protected set
+            {
+                var temp = this.Hitbox;
+                temp.Y = value;
+                this.Hitbox = temp;
+            }
+        }
+
         protected Texture2D Sprite { get; set; }
 
         public Enums.Direction Direction { get; protected set; }
@@ -31,11 +58,11 @@ namespace SiberianAnabasis.Components
             */
 
             // border
-            spriteBatch.DrawRectangle(new Rectangle(this.Hitbox.X, this.Hitbox.Y - 6, this.Hitbox.Width, 4), Color.Black * alpha);
+            spriteBatch.DrawRectangle(new Rectangle(this.X, this.Y - 6, this.Hitbox.Width, 4), Color.Black * alpha);
 
             // inside
             int inside = (int)((this.Health / 100f) * (this.Hitbox.Width - 2));
-            spriteBatch.DrawRectangle(new Rectangle(this.Hitbox.X + 1, this.Hitbox.Y - 5, inside, 2), Color.Green * alpha);
+            spriteBatch.DrawRectangle(new Rectangle(this.X + 1, this.Y - 5, inside, 2), Color.Green * alpha);
         }
 
         // returns true if it can take hit
