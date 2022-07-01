@@ -46,10 +46,22 @@
         {
             public const int StatusBar = 290;
             public const int Floor = 252;
+            public const int MessagesX = Screen.Width - 200;
 
             public static int MenuX = 20;
             public static int MenuY = 20;
             public static int MenuFooter = 340;
+        }
+
+        public static class Screen
+        {
+            // default window size
+            public const int WidthDefault = 1280;
+            public const int HeightDefault = 720;
+
+            // internal screen resolution
+            public const int Width = 640;
+            public const int Height = 360;
         }
     }
 }

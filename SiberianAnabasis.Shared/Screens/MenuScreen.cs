@@ -176,6 +176,9 @@ namespace SiberianAnabasis.Screens
             // save path
             this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(Offset.MenuX, Offset.MenuFooter), Color.Gray);
 
+            // messages
+            this.Game.MessageBuffer.Draw(Game.SpriteBatch);
+
             this.Game.DrawEnd();
         }
 

@@ -15,7 +15,7 @@ namespace SiberianAnabasis
             );
 
             Matrix position = Matrix.CreateTranslation(
-                Game1.screenWidth / 2,
+                Enums.Screen.Width / 2,
                 0,
                 0
             );
