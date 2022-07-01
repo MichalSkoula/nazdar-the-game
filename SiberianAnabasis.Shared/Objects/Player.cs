@@ -141,6 +141,8 @@ namespace SiberianAnabasis.Components
             int g = 10;
             float timeDivider = 5;
 
+            this.particleSource.Start();
+
             for (int i = 0; i < 200; i++) 
             {
                 float t = i / timeDivider;
@@ -149,7 +151,7 @@ namespace SiberianAnabasis.Components
                 if (newY > h0)
                 {
                     this.Y = h0;
-
+                    this.particleSource.Stop();
                     break;
                 }
 

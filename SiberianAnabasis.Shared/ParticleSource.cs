@@ -52,6 +52,25 @@ namespace SiberianAnabasis.Shared
                     }
                 }
             };
+
+            // default - stopped
+            this.Stop();
+        }
+
+        public void Start()
+        {
+            foreach (var emi in this.particleEffect.Emitters)
+            {
+                emi.AutoTrigger = true;
+            }
+        }
+
+        public void Stop()
+        {
+            foreach (var emi in this.particleEffect.Emitters)
+            {
+                emi.AutoTrigger = false;
+            }
         }
 
         public void Update(float deltaTime, Vector2? position = null)
