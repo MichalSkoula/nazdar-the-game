@@ -93,6 +93,9 @@ namespace SiberianAnabasis.Screens
                 button.Value.Draw(this.Game.SpriteBatch);
             }
 
+            // messages
+            this.Game.MessageBuffer.Draw(Game.SpriteBatch);
+
             this.Game.DrawEnd();
         }
     }

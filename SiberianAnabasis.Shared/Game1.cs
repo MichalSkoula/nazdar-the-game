@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using SiberianAnabasis.Shared.Messages;
 using System;
 
 namespace SiberianAnabasis
@@ -17,13 +18,7 @@ namespace SiberianAnabasis
         private readonly ScreenManager screenManager;
         private AssetsLoader assetsLoader = new AssetsLoader();
 
-        // default window size
-        public const int screenWidthDefault = 1280;
-        public const int screenHeightDefault = 720;
-
-        // internal screen resolution
-        public const int screenWidth = 640;
-        public const int screenHeight = 360;
+        
 
         // scaling + top / left bar
         public static float Scale { get; private set; }
@@ -36,6 +31,7 @@ namespace SiberianAnabasis
 
         // world variables
         public int Village { get; set; }
+        public MessageBuffer MessageBuffer = new MessageBuffer();
 
         public Game1()
         {
@@ -58,14 +54,14 @@ namespace SiberianAnabasis
             // Window.IsBorderless = true;
 
             // window size
-            this.Graphics.PreferredBackBufferWidth = screenWidthDefault;
-            this.Graphics.PreferredBackBufferHeight = screenHeightDefault;
+            this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
+            this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
             this.Graphics.ApplyChanges();
 
             this.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
             // internal resolution
-            this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, screenWidth, screenHeight);
+            this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, Enums.Screen.Width, Enums.Screen.Height);
 
             // start it with this scene
             #if DEBUG
@@ -87,6 +83,8 @@ namespace SiberianAnabasis
 
             Controls.Keyboard.GetState();
             Controls.Mouse.GetState();
+
+            this.MessageBuffer.Update(this.DeltaTime);
 
             base.Update(gameTime);
         }
@@ -135,7 +133,7 @@ namespace SiberianAnabasis
 
             // calculate Scale and bars
             float outputAspect = this.Window.ClientBounds.Width / (float)this.Window.ClientBounds.Height;
-            float preferredAspect = screenWidth / (float)screenHeight;
+            float preferredAspect = Enums.Screen.Width / (float)Enums.Screen.Height;
             BarHeight = 0;
             BarWidth = 0;
             Rectangle dst;
@@ -146,7 +144,7 @@ namespace SiberianAnabasis
                 BarHeight = (this.Window.ClientBounds.Height - presentHeight) / 2;
                 dst = new Rectangle(0, BarHeight, this.Window.ClientBounds.Width, presentHeight);
 
-                Scale = 1f / ((float)screenWidth / this.Window.ClientBounds.Width);
+                Scale = 1f / ((float)Enums.Screen.Width / this.Window.ClientBounds.Width);
             }
             else
             {
@@ -155,7 +153,7 @@ namespace SiberianAnabasis
                 BarWidth = (this.Window.ClientBounds.Width - presentWidth) / 2;
                 dst = new Rectangle(BarWidth, 0, presentWidth, this.Window.ClientBounds.Height);
 
-                Scale = 1f / ((float)screenHeight / this.Window.ClientBounds.Height);
+                Scale = 1f / ((float)Enums.Screen.Height / this.Window.ClientBounds.Height);
             }
 
             this.GraphicsDevice.SetRenderTarget(null);

@@ -11,6 +11,7 @@ using static SiberianAnabasis.Enums;
 using System.Diagnostics;
 using System.Linq;
 using MonoGame.Extended;
+using SiberianAnabasis.Shared.Messages;
 
 namespace SiberianAnabasis.Screens
 {
@@ -40,7 +41,7 @@ namespace SiberianAnabasis.Screens
 
         public override void Initialize()
         {
-            MapWidth = Game1.screenWidth * 4; // 640 * 4 = 2560px
+            MapWidth = Enums.Screen.Width * 4; // 640 * 4 = 2560px
 
             // stop whatever menu song is playing 
             MediaPlayer.Stop();
@@ -140,14 +141,16 @@ namespace SiberianAnabasis.Screens
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
                             enemy.ToDelete = true;
+                            Game.MessageBuffer.AddMessage("Kill by bullet");
                         }
                     }
                 }
 
                 // enemies and player
-                if (this.player.Hitbox.Intersects(enemy.Hitbox))
+                if (!enemy.ToDelete && this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.ToDelete = true;
+                    Game.MessageBuffer.AddMessage("Kill by hands");
 
                     if (!this.player.TakeHit(enemy.Caliber))
                     {
@@ -246,6 +249,9 @@ namespace SiberianAnabasis.Screens
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 50),
                 Color.Black);
 
+            // messages
+            Game.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
+
             // player - camera follows
             this.player.Draw(this.Game.SpriteBatch);
 
@@ -302,6 +308,8 @@ namespace SiberianAnabasis.Screens
                 this.dayPhase = (DayPhase)saveData.GetValue("dayPhase");
                 this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
             }
+
+            Game.MessageBuffer.AddMessage("Game loaded");
         }
 
         private void Save()
