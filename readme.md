@@ -15,7 +15,8 @@ Monogame platform/strategic game (awesome).
 
 ## NOTES:
 
-* MonoGame.Extended 3.8 is ***** - we are using 3.7 instead
+* MonoGame.Extended 3.8 is placing crazy amount of files all over the solution - we are using 3.7 instead
+* C# 10, .NET 6, Monogame
 
 ## CREDITS
 
