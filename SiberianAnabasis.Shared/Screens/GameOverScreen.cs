@@ -38,17 +38,17 @@ namespace SiberianAnabasis.Screens
             }
 
             // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
             }
 
             // enter? some button has focus? click!
-            if (Controls.Keyboard.HasBeenPressed(Keys.Enter))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Gamepad.HasBeenPressed(Buttons.A))
             {
                 foreach (KeyValuePair<string, Button> button in this.buttons)
                 {
@@ -67,7 +67,7 @@ namespace SiberianAnabasis.Screens
             }
 
             // main menu
-            if (this.buttons.GetValueOrDefault("menu").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape))
+            if (this.buttons.GetValueOrDefault("menu").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.B))
             {
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }

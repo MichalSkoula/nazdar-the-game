@@ -26,7 +26,7 @@ namespace SiberianAnabasis.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Mouse.HasBeenPressed())
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Gamepad.HasBeenPressed(Buttons.A) || Controls.Mouse.HasBeenPressed())
             {
                 // skip splash screen
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));

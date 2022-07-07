@@ -70,13 +70,13 @@ namespace SiberianAnabasis.Components
         {
             // moving?
             bool isMoving = false;
-            if (Controls.Keyboard.IsPressed(Keys.Right) && this.X < VillageScreen.MapWidth - this.Hitbox.Width)
+            if ((Controls.Keyboard.IsPressed(Keys.Right) || Controls.Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Hitbox.Width)
             {
                 this.X += (int)(deltaTime * this.speed);
                 this.Direction = Direction.Right;
                 isMoving = true;
             }
-            else if (Controls.Keyboard.IsPressed(Keys.Left) && this.X > 0)
+            else if ((Controls.Keyboard.IsPressed(Keys.Left) || Controls.Gamepad.Thumbstick(Direction.Left)) && this.X > 0)
             {
                 this.X -= (int)(deltaTime * this.speed);
                 this.Direction = Direction.Left;
@@ -97,14 +97,14 @@ namespace SiberianAnabasis.Components
             this.anim.Update(deltaTime);
 
             // jump?
-            if (Controls.Keyboard.IsPressed(Keys.Up) && this.Y == Enums.Offset.Floor)
+            if ((Controls.Keyboard.IsPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
             {
                 this.Jump();
                 isMoving = true;
             }
 
             // bullets
-            if (Controls.Keyboard.HasBeenPressed(Keys.Space))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Space) || Controls.Gamepad.HasBeenPressed(Buttons.X) || Controls.Gamepad.HasBeenPressed(Buttons.RightTrigger))
             {
                 this.Bullets.Add(new Bullet(this.X, this.Y + (this.Hitbox.Height / 2), this.Direction, this.Caliber));
             }
