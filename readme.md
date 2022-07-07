@@ -6,8 +6,9 @@ Monogame platform/strategic game (awesome).
 
 ## TODO:
 
-* gamepad
+* buildings
 * players soldiers
+* money system
 * audio - day chill, night deathmetal
 * show in which village player is on map
 * Namísto mediaplayeru používat soundeffect a soundeffectinstance umí toho víc. Soundmanager Claas c knížce umí loopovat nad listem soundu

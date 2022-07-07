@@ -61,7 +61,7 @@ namespace SiberianAnabasis.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.Start))
             {
                 // save
                 this.Save();
@@ -141,7 +141,7 @@ namespace SiberianAnabasis.Screens
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
                             enemy.ToDelete = true;
-                            Game.MessageBuffer.AddMessage("Kill by bullet");
+                            Game.MessageBuffer.AddMessage("Bullet kill");
                         }
                     }
                 }
@@ -150,7 +150,7 @@ namespace SiberianAnabasis.Screens
                 if (!enemy.ToDelete && this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.ToDelete = true;
-                    Game.MessageBuffer.AddMessage("Kill by hands");
+                    Game.MessageBuffer.AddMessage("Bare hands kill");
 
                     if (!this.player.TakeHit(enemy.Caliber))
                     {
