@@ -4,9 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 using SiberianAnabasis.Screens;
 using static SiberianAnabasis.Enums;
 
-namespace SiberianAnabasis.Components
+namespace SiberianAnabasis.Objects
 {
-    public class Enemy : Component
+    public class Enemy : BaseObject
     {
         private int speed = 110;
 

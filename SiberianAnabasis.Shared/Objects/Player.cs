@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using static SiberianAnabasis.Enums;
 using SiberianAnabasis.Shared;
+using MonoGame.Extended;
 
-namespace SiberianAnabasis.Components
+namespace SiberianAnabasis.Objects
 {
-    public class Player : Component
+    public class Player : BaseObject
     {
         private int speed = 120;
 
@@ -33,6 +34,8 @@ namespace SiberianAnabasis.Components
         private ParticleSource particleSource;
         public int Money { get; set; }
         public int Days { get; set; }
+
+        public bool ActiveButton { get; set; }
 
         public Player(int x, int y)
         {
@@ -132,6 +135,12 @@ namespace SiberianAnabasis.Components
 
             // particles
             this.particleSource.Draw(spriteBatch);
+
+            // active button?
+            if (this.ActiveButton)
+            {
+                spriteBatch.DrawCircle(this.X + this.Hitbox.Width / 2, this.Y - 10, 5, 100, Color.Yellow);
+            }
         }
 
         private async void Jump()

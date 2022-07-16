@@ -19,8 +19,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Gamepad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Building.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Component.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Soldier.cs" />
@@ -46,7 +47,9 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Effects\Pixelate.fx" />
     <None Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy.psd" />
     <None Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy_config.zip" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Envs\first-village.tmx" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Envs\first-village.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\first-map.tmx" />
     <None Include="$(MSBuildThisFileDirectory)Content\Envs\tileset forest.tsx" />
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelLarge.spritefont" />

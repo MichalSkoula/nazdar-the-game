@@ -6,12 +6,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
-using SiberianAnabasis.Components;
+using SiberianAnabasis.Objects;
 using static SiberianAnabasis.Enums;
-using System.Diagnostics;
-using System.Linq;
-using MonoGame.Extended;
-using SiberianAnabasis.Shared.Messages;
 
 namespace SiberianAnabasis.Screens
 {
@@ -21,19 +17,20 @@ namespace SiberianAnabasis.Screens
 
         public VillageScreen(Game1 game) : base(game) { }
 
-        private Camera camera = new Camera();
+        private readonly Camera camera = new Camera();
 
-        private Random rand = new Random();
+        private readonly Random rand = new Random();
 
-        private FileIO saveFile = new FileIO();
+        private readonly FileIO saveFile = new FileIO();
 
         // will be calculated
-        public static int MapWidth;
+        public static int MapWidth = Enums.Screen.Width * 4; // 640 * 4 = 2560px
 
         // game components
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
         private List<Soldier> soldiers = new List<Soldier>();
+        private List<Building> buildings = new List<Building>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
@@ -41,13 +38,17 @@ namespace SiberianAnabasis.Screens
 
         public override void Initialize()
         {
-            MapWidth = Enums.Screen.Width * 4; // 640 * 4 = 2560px
-
             // stop whatever menu song is playing 
             MediaPlayer.Stop();
 
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, Offset.Floor);
+
+            // load objects from tileset
+            foreach (var building in Assets.TilesetGroups["village1"].GetObjects("objects", "building"))
+            {
+                this.buildings.Add(new Building((int)building.x, (int)building.y, (int)building.width, (int)building.height));
+            }
 
             // set save slot and maybe load?
             this.saveFile.File = Game.SaveSlot;
@@ -183,6 +184,16 @@ namespace SiberianAnabasis.Screens
 
             this.enemies.RemoveAll(p => p.ToDelete);
             this.soldiers.RemoveAll(p => p.ToDelete);
+
+            // buildings
+            this.player.ActiveButton = false;
+            foreach (var building in this.buildings)
+            {
+                if (this.player.Hitbox.Intersects(building.Hitbox))
+                {
+                    this.player.ActiveButton = true;
+                }
+            }
         }
 
         private void UpdateDayPhase()
@@ -215,11 +226,10 @@ namespace SiberianAnabasis.Screens
             // background - tileset
             Assets.TilesetGroups["village1"].Draw("ground", this.Game.SpriteBatch);
 
-            // objects from tileset
-            var building = Assets.TilesetGroups["village1"].GetObjects("objects", "building");
-            if (building != null)
+            // buildings
+            foreach (Building building in this.buildings)
             {
-                this.Game.SpriteBatch.DrawRectangle(new Rectangle((int)building.x, (int)building.y, (int)building.width, (int)building.height), Color.Blue);
+                building.Draw(this.Game.SpriteBatch);
             }
 
             // stats
