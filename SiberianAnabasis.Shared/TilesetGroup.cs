@@ -21,11 +21,18 @@ namespace SiberianAnabasis.Shared
             this.TilesetTexture = texture;
         }
 
-        public TiledObject GetObjects(string layerName, string objectName)
+        public IEnumerable<TiledObject> GetObjects(string layerName, string objectName)
+        {
+            var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
+            return layer.objects.Where(o => o.name == "building");
+        }
+
+        public TiledObject GetObject(string layerName, string objectName)
         {
             var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
             return layer.objects.First(o => o.name == "building");
         }
+
         public void Draw(string layerName, SpriteBatch spriteBatch)
         {
             var layer = this.TilesetMap.Layers.First(l => l.name == layerName);

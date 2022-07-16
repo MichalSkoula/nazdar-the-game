@@ -15,11 +15,11 @@ Monogame platform/strategic game (awesome).
 
 ## NOTES:
 
-* MonoGame.Extended 3.8 is placing crazy amount of files all over the solution - we are using 3.7 instead
-* C# 10, .NET 6, Monogame
+* MonoGame 3.8
+* MonoGame.Extended 3.7 (3.8 is bugged)
+* C# 10, .NET 6
 
 ## CREDITS
 
-* https://skoula.cz (myself haha)
 * https://0x72.itch.io/pixeldudesmaker
 * https://essssam.itch.io/rocky-roads

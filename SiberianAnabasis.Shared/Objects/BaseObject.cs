@@ -2,9 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace SiberianAnabasis.Components
+namespace SiberianAnabasis.Objects
 {
-    public abstract class Component
+    public abstract class BaseObject
     {
         public int Health { get; set; }
 
