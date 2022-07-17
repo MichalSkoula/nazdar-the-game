@@ -13,7 +13,7 @@ namespace SiberianAnabasis.Objects
 {
     public class Player : BaseObject
     {
-        private int speed = 120;
+        private int speed = 121;
 
         private Animation anim;
 

@@ -21,6 +21,9 @@ namespace SiberianAnabasis
         public static Texture2D EnemyLeft;
         public static Texture2D EnemyRight;
 
+        public static Texture2D HomelessLeft;
+        public static Texture2D HomelessRight;
+
         public static Texture2D BulletLeft;
         public static Texture2D BulletRight;
 
@@ -58,6 +61,9 @@ namespace SiberianAnabasis
 
             Assets.EnemyLeft = content.Load<Texture2D>("Enemy/enemy_left");
             Assets.EnemyRight = content.Load<Texture2D>("Enemy/enemy_right");
+
+            Assets.HomelessLeft = content.Load<Texture2D>("Homeless/homeless_left");
+            Assets.HomelessRight = content.Load<Texture2D>("Homeless/homeless_right");
 
             Assets.BulletLeft = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.BulletRight = content.Load<Texture2D>("Bullet/bullet_right");

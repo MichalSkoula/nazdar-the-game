@@ -30,6 +30,7 @@ namespace SiberianAnabasis.Screens
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
         private List<Soldier> soldiers = new List<Soldier>();
+        private List<Homeless> homelesses = new List<Homeless>();
         private List<Building> buildings = new List<Building>();
 
         // day and night, timer
@@ -77,6 +78,7 @@ namespace SiberianAnabasis.Screens
 
             this.UpdateEnemies();
             this.UpdateSoldiers();
+            this.UpdateHomelesses();
             this.UpdateCollisions();
             this.UpdateDayPhase();
         }
@@ -84,7 +86,7 @@ namespace SiberianAnabasis.Screens
         private void UpdateEnemies()
         {
             // create enemy?
-            if (this.rand.Next(360) < 8 && this.dayPhase == DayPhase.Night)
+            if (this.rand.Next(540) < 8 && this.dayPhase == DayPhase.Night)
             {
                 // choose direction
                 if (this.rand.Next(2) == 0)
@@ -106,10 +108,10 @@ namespace SiberianAnabasis.Screens
 
         private void UpdateSoldiers()
         {
-            // create soldier?
-            if (this.rand.Next(360) < 2 && this.dayPhase == DayPhase.Day)
+            // create new?
+            if (this.rand.Next(720) < 2 && this.dayPhase == DayPhase.Day)
             {
-                // choose direction
+                // choose side 
                 if (this.rand.Next(2) == 0)
                 {
                     this.soldiers.Add(new Soldier(player.Hitbox.X + player.Hitbox.Width, Offset.Floor, Direction.Right));
@@ -120,10 +122,33 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
-            // update soldiers
+            // update
             foreach (var soldier in this.soldiers)
             {
                 soldier.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateHomelesses()
+        {
+            // create new?
+            if (this.rand.Next(2000) < 2)
+            {
+                // choose side 
+                if (this.rand.Next(2) == 0)
+                {
+                    this.homelesses.Add(new Homeless(0, Offset.Floor, Direction.Right));
+                }
+                else
+                {
+                    this.homelesses.Add(new Homeless(MapWidth, Offset.Floor, Direction.Left));
+                }
+            }
+
+            // update 
+            foreach (var homeless in this.homelesses)
+            {
+                homeless.Update(this.Game.DeltaTime);
             }
         }
 
@@ -277,6 +302,12 @@ namespace SiberianAnabasis.Screens
                 soldier.Draw(this.Game.SpriteBatch);
             }
 
+            // homelesses
+            foreach (Homeless homeless in this.homelesses)
+            {
+                homeless.Draw(this.Game.SpriteBatch);
+            }
+
             this.Game.DrawEnd();
         }
 
@@ -312,6 +343,15 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
+            // load homeless men
+            if (saveData.ContainsKey("homelesses"))
+            {
+                foreach (var homeless in saveData.GetValue("homelesses"))
+                {
+                    this.homelesses.Add(new Homeless((int)homeless.Hitbox.X, (int)homeless.Hitbox.Y, (Direction)homeless.Direction, (int)homeless.Health));
+                }
+            }
+
             // load day phase
             if (saveData.ContainsKey("dayPhase") && saveData.ContainsKey("dayPhaseTimer"))
             {
@@ -329,6 +369,7 @@ namespace SiberianAnabasis.Screens
                 player = this.player,
                 enemies = this.enemies,
                 soldiers = this.soldiers,
+                homelesses = this.homelesses,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
                 village = this.Game.Village,
