@@ -21,5 +21,5 @@ Monogame platform/strategic game (awesome).
 
 ## CREDITS
 
-* https://0x72.itch.io/pixeldudesmaker
+* https://0x72.itch.io/pixeldudesmaker CC-29 color palette
 * https://essssam.itch.io/rocky-roads

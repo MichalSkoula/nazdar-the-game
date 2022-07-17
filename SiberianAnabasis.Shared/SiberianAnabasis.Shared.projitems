@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Homeless.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Soldier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
@@ -42,6 +43,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Bullet\bullet_right.psd" />
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
     <None Include="$(MSBuildThisFileDirectory)Content\Effects\AllWhite.fx" />
     <None Include="$(MSBuildThisFileDirectory)Content\Effects\Pixelate.fx" />
@@ -62,7 +64,8 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Sounds\nature.ogg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Content\bullet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Bullet\bullet_left.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Bullet\bullet_right.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy_left.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Enemy\enemy_right.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\background1.png" />

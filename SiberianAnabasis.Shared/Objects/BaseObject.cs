@@ -47,9 +47,8 @@ namespace SiberianAnabasis.Objects
 
         public abstract void Update(float deltaTime);
 
-        public void DrawHealth(SpriteBatch spriteBatch)
+        public void DrawHealth(SpriteBatch spriteBatch, float alpha = 1)
         {
-            float alpha = 1f;
             /*
             if (this.Health == 100)
             {
@@ -78,6 +77,18 @@ namespace SiberianAnabasis.Objects
             this.Health = 0;
 
             return false;
+        }
+
+        public void ChangeDirection()
+        {
+            if (this.Direction == Enums.Direction.Left)
+            {
+                this.Direction = Enums.Direction.Right;
+            }
+            else if (this.Direction == Enums.Direction.Right)
+            {
+                this.Direction = Enums.Direction.Left;
+            }
         }
     }
 }

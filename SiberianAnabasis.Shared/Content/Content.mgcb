@@ -113,6 +113,30 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/fontPublicPixelSmall.spritefont
 
+#begin Homeless/homeless_left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Homeless/homeless_left.png
+
+#begin Homeless/homeless_right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Homeless/homeless_right.png
+
 #begin Player/player_left.png
 /importer:TextureImporter
 /processor:TextureProcessor
