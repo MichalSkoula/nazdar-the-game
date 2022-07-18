@@ -6,9 +6,12 @@ Monogame platform/strategic game (awesome).
 
 ## TODO:
 
-* buildings
-* players soldiers
-* money system
+* sometimes find money
+* with money can hire soldiers!!
+..
+
+## IDEAS:
+
 * audio - day chill, night deathmetal
 * show in which village player is on map
 * Namísto mediaplayeru používat soundeffect a soundeffectinstance umí toho víc. Soundmanager Claas c knížce umí loopovat nad listem soundu

@@ -108,20 +108,6 @@ namespace SiberianAnabasis.Screens
 
         private void UpdateSoldiers()
         {
-            // create new?
-            if (this.rand.Next(720) < 2 && this.dayPhase == DayPhase.Day)
-            {
-                // choose side 
-                if (this.rand.Next(2) == 0)
-                {
-                    this.soldiers.Add(new Soldier(player.Hitbox.X + player.Hitbox.Width, Offset.Floor, Direction.Right));
-                }
-                else
-                {
-                    this.soldiers.Add(new Soldier(player.Hitbox.X - player.Hitbox.Width, Offset.Floor, Direction.Left));
-                }
-            }
-
             // update
             foreach (var soldier in this.soldiers)
             {
@@ -211,14 +197,34 @@ namespace SiberianAnabasis.Screens
             this.soldiers.RemoveAll(p => p.ToDelete);
 
             // buildings
-            this.player.ActiveButton = false;
+            this.player.Action = null;
             foreach (var building in this.buildings)
             {
                 if (this.player.Hitbox.Intersects(building.Hitbox))
                 {
-                    this.player.ActiveButton = true;
+                    this.player.Action = Enums.PlayerAction.Build;
+                    break;
                 }
             }
+
+            // homelesses
+            foreach (var homeless in this.homelesses)
+            {
+                if (this.player.Hitbox.Intersects(homeless.Hitbox))
+                {
+                    this.player.Action = Enums.PlayerAction.Hire;
+
+                    // hire homeless man?
+                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                    {
+                        homeless.ToDelete = true;
+                        this.soldiers.Add(new Soldier(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
+                    }
+                    break;
+                }
+            }
+
+            this.homelesses.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateDayPhase()

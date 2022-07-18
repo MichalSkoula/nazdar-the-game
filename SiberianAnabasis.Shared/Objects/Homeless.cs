@@ -37,7 +37,7 @@ namespace SiberianAnabasis.Objects
         {
             // is he moving?
             bool isMoving = false;
-            if (rand.Next(4) < 2 /*Game1.GlobalTimer % 2 == 0*/)
+            if (rand.Next(16) < 2 /*Game1.GlobalTimer % 2 == 0*/)
             {
                 if (this.Direction == Direction.Right)
                 {
@@ -73,8 +73,8 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox, Color.White * 0.75f);
-            this.DrawHealth(spriteBatch, 0.75f);
+            this.anim.Draw(spriteBatch, this.Hitbox, Color.White * 0.5f);
+            this.DrawHealth(spriteBatch, 0.5f);
         }
     }
 }
