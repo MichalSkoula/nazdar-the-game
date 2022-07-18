@@ -35,7 +35,7 @@ namespace SiberianAnabasis.Objects
         public int Money { get; set; }
         public int Days { get; set; }
 
-        public bool ActiveButton { get; set; }
+        public Enums.PlayerAction? Action { get; set; }
 
         public Player(int x, int y)
         {
@@ -136,10 +136,18 @@ namespace SiberianAnabasis.Objects
             // particles
             this.particleSource.Draw(spriteBatch);
 
-            // active button?
-            if (this.ActiveButton)
+            // some action?
+            switch (this.Action)
             {
-                spriteBatch.DrawCircle(this.X + this.Hitbox.Width / 2, this.Y - 10, 5, 100, Color.Yellow);
+                case Enums.PlayerAction.Build:
+                    spriteBatch.DrawCircle(this.X + this.Hitbox.Width / 2, this.Y - 10, 5, 100, Color.Brown);
+                    break;
+                case Enums.PlayerAction.Hire:
+                    spriteBatch.DrawCircle(this.X + this.Hitbox.Width / 2, this.Y - 10, 5, 100, Color.Yellow);
+                    break;
+                default:
+                    break;
+
             }
         }
 

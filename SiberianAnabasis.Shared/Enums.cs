@@ -35,6 +35,12 @@
             HoverState,
         }
 
+        public enum PlayerAction
+        {
+            Hire,
+            Build
+        }
+
         public static class Save
         {
             public const string Slot1 = "save_slot_1.json";
