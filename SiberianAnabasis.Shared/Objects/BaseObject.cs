@@ -12,6 +12,7 @@ namespace SiberianAnabasis.Objects
 
         public Rectangle Hitbox { get; protected set; }
 
+        public bool ToDelete { get; set; }
         public int X
         {
             get

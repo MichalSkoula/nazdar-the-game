@@ -22,8 +22,6 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.SoldierLeft, 4, 10),
         };
 
-        public bool ToDelete { get; set; }
-
         public Soldier(int x, int y, Direction direction, int health = 100, int caliber = 10)
         {
             this.anim = this.animations[(int)Direction.Left];
