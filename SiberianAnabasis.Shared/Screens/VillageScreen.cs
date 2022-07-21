@@ -242,9 +242,10 @@ namespace SiberianAnabasis.Screens
                     this.player.Action = Enums.PlayerAction.Hire;
 
                     // hire homeless man?
-                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
                     {
                         homeless.ToDelete = true;
+                        this.player.Money -= homeless.Cost;
                         this.soldiers.Add(new Soldier(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
                     }
                     break;
