@@ -9,8 +9,6 @@ namespace SiberianAnabasis.Objects
     {
         private int speed = 500;
 
-        public bool ToDelete { get; set; }
-
         public Bullet(int x, int y, Direction direction, int caliber)
         {
             this.Direction = direction;

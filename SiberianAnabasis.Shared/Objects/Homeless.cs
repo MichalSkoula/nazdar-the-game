@@ -23,8 +23,6 @@ namespace SiberianAnabasis.Objects
 
         private readonly Random rand = new Random();
 
-        public bool ToDelete { get; set; }
-
         public Homeless(int x, int y, Direction direction, int health = 100)
         {
             this.anim = this.animations[(int)Direction.Left];

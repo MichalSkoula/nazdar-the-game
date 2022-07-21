@@ -27,6 +27,8 @@ namespace SiberianAnabasis
         public static Texture2D BulletLeft;
         public static Texture2D BulletRight;
 
+        public static Texture2D Coin;
+
         // fonts
         public static SpriteFont FontSmall;
         public static SpriteFont FontMedium;
@@ -67,6 +69,8 @@ namespace SiberianAnabasis
 
             Assets.BulletLeft = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.BulletRight = content.Load<Texture2D>("Bullet/bullet_right");
+
+            Assets.Coin = content.Load<Texture2D>("Coin/coin");
 
             Assets.FontSmall = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
             Assets.FontMedium = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
