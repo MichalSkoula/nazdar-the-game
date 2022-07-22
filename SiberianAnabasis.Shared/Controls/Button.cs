@@ -91,7 +91,8 @@ namespace SiberianAnabasis.Controls
             if (this.Active == false)
             {
                 bgColor = Color.Gray;
-            } else if (this.state == ButtonState.HoverState)
+            } 
+            else if (this.state == ButtonState.HoverState)
             {
                 bgColor = Color.LightGreen;
             }
