@@ -34,6 +34,10 @@ namespace SiberianAnabasis.Screens
             buttons.Add("soundsButton", new Button(Offset.MenuX, 290, null, ButtonSize.Small, "Toggle Sounds"));
             buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Exit"));
 
+            #if DEBUG
+                buttons.Add("openFolderButton", new Button(Offset.MenuX, Offset.MenuFooter, null, ButtonSize.Small, "open"));
+            #endif
+
             // load settings
             this.LoadSettings();
 
@@ -134,6 +138,17 @@ namespace SiberianAnabasis.Screens
             {
                 this.Game.Exit();
             }
+
+            // open save folder (only if DEBUG)
+            if (this.buttons.GetValueOrDefault("openFolderButton").HasBeenClicked())
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
+                {
+                    FileName = this.settingsFile.GetFolder(),
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -174,7 +189,7 @@ namespace SiberianAnabasis.Screens
             }
 
             // save path
-            this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(Offset.MenuX, Offset.MenuFooter), Color.Gray);
+            this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(Offset.MenuX + this.buttons.GetValueOrDefault("openFolderButton").Hitbox.Width + 5, Offset.MenuFooter), Color.Gray);
 
             // messages
             this.Game.MessageBuffer.Draw(Game.SpriteBatch);

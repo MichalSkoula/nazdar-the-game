@@ -84,5 +84,14 @@ namespace SiberianAnabasis
 
             return result;
         }
+
+        public string GetFolder()
+        {
+            string filePath = this.GetPath();
+            int index = filePath.LastIndexOf('\\');
+            filePath = filePath.Remove(index + 1);
+            
+            return filePath;
+        }
     }
 }
