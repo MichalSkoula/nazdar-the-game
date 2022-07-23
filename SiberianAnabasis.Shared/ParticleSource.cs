@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
@@ -17,7 +18,7 @@ namespace SiberianAnabasis.Shared
 
         private Tuple<int, int> offset;
 
-        public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, Color startColor, Color endColor)
+        public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null)
         {
             this.offset = offset;
             this.particleEffect = new ParticleEffect(autoTrigger: false)
@@ -25,7 +26,7 @@ namespace SiberianAnabasis.Shared
                 Position = new Vector2(position.X, position.Y),
                 Emitters = new List<ParticleEmitter>
                 {
-                    new ParticleEmitter(Assets.ParticleTextureRegion, 500, TimeSpan.FromSeconds(2.5), Profile.Point())
+                    new ParticleEmitter(textureRegion, 500, TimeSpan.FromSeconds(2.5), Profile.Point())
                     {
                         Parameters = new ParticleReleaseParameters
                         {
@@ -35,15 +36,15 @@ namespace SiberianAnabasis.Shared
                             Scale = new Range<float>(3.0f, 4.0f)
                         },
                         Modifiers =
-                        {
+                        {  
                             new AgeModifier
                             {
                                 Interpolators =
                                 {
                                     new ColorInterpolator
                                     {
-                                        StartValue = HslColor.FromRgb(startColor),
-                                        EndValue = HslColor.FromRgb(endColor),
+                                        StartValue = HslColor.FromRgb(startColor.HasValue ? (Color)startColor : Color.White),
+                                        EndValue = HslColor.FromRgb(endColor.HasValue ? (Color)endColor : Color.White),
                                     }
                                 }
                             },
@@ -59,22 +60,6 @@ namespace SiberianAnabasis.Shared
             this.Stop();
         }
 
-        public void Start()
-        {
-            foreach (var emi in this.particleEffect.Emitters)
-            {
-                emi.AutoTrigger = true;
-            }
-        }
-
-        public void Stop()
-        {
-            foreach (var emi in this.particleEffect.Emitters)
-            {
-                emi.AutoTrigger = false;
-            }
-        }
-
         public void Update(float deltaTime, Vector2? position = null)
         {
             if (position.HasValue)
@@ -88,6 +73,29 @@ namespace SiberianAnabasis.Shared
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.particleEffect);
+        }
+
+        public async void Run(int duration)
+        {
+            this.Start();
+            await Task.Delay(duration);
+            this.Stop();
+        }
+
+        private void Start()
+        {
+            foreach (var emi in this.particleEffect.Emitters)
+            {
+                emi.AutoTrigger = true;
+            }
+        }
+
+        private void Stop()
+        {
+            foreach (var emi in this.particleEffect.Emitters)
+            {
+                emi.AutoTrigger = false;
+            }
         }
 
         private Vector2 convertDirection(Enums.Direction direction)

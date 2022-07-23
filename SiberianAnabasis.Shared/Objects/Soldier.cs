@@ -34,10 +34,9 @@ namespace SiberianAnabasis.Objects
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
-                new Tuple<int, int>(this.Hitbox.Width / 2, this.Hitbox.Height / 2),
+                new Tuple<int, int>(this.Width / 2, this.Height / 2),
                 Direction.Down,
-                Color.Red,
-                Color.DarkRed
+                Assets.ParticleTextureRegionBlood
             );
         }
 

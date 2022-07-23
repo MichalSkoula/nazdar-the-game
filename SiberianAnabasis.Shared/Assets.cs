@@ -47,8 +47,8 @@ namespace SiberianAnabasis
         public static Dictionary<string, TilesetGroup> TilesetGroups;
 
         // particles
-        public static Texture2D ParticleTexture;
-        public static TextureRegion2D ParticleTextureRegion;
+        public static TextureRegion2D ParticleTextureRegionBlood;
+        public static TextureRegion2D ParticleTextureRegionSmoke;
     }
 
     public class AssetsLoader
@@ -95,10 +95,14 @@ namespace SiberianAnabasis
                 )
             );
 
-            // load particle texture
-            Assets.ParticleTexture = new Texture2D(graphicsDevice, 1, 1);
-            Assets.ParticleTexture.SetData(new[] { Color.Red });
-            Assets.ParticleTextureRegion = new TextureRegion2D(Assets.ParticleTexture);
+            // load particle textures
+            Texture2D blood = new Texture2D(graphicsDevice, 1, 1);
+            blood.SetData(new[] { Color.Red });
+            Assets.ParticleTextureRegionBlood = new TextureRegion2D(blood);
+
+            Texture2D smoke = new Texture2D(graphicsDevice, 1, 1);
+            smoke.SetData(new[] { Color.DarkGray });
+            Assets.ParticleTextureRegionSmoke = new TextureRegion2D(smoke);
         }
     }
 }

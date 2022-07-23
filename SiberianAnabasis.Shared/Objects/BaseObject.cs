@@ -12,9 +12,10 @@ namespace SiberianAnabasis.Objects
 
         public int Caliber { get; set; }
 
+        public bool ToDelete { get; set; }
+
         public Rectangle Hitbox { get; protected set; }
 
-        public bool ToDelete { get; set; }
         public int X
         {
             get
@@ -42,6 +43,30 @@ namespace SiberianAnabasis.Objects
             }
         }
 
+        public int Width
+        {
+            get
+            {
+                return Hitbox.Width;
+            }
+        }
+
+        public int Height
+        {
+            get
+            {
+                return Hitbox.Height;
+            }
+        }
+
+        public Vector2 Position
+        {
+            get
+            {
+                return new Vector2(Hitbox.X, Hitbox.Y);
+            }
+        }
+
         protected Texture2D Sprite { get; set; }
 
         public Enums.Direction Direction { get; protected set; }
@@ -62,10 +87,10 @@ namespace SiberianAnabasis.Objects
             */
 
             // border
-            spriteBatch.DrawRectangle(new Rectangle(this.X, this.Y - 6, this.Hitbox.Width, 4), Color.Black * alpha);
+            spriteBatch.DrawRectangle(new Rectangle(this.X, this.Y - 6, this.Width, 4), Color.Black * alpha);
 
             // inside
-            int inside = (int)((this.Health / 100f) * (this.Hitbox.Width - 2));
+            int inside = (int)((this.Health / 100f) * (this.Width - 2));
             spriteBatch.DrawRectangle(new Rectangle(this.X + 1, this.Y - 5, inside, 2), Color.Green * alpha);
         }
 
@@ -75,7 +100,7 @@ namespace SiberianAnabasis.Objects
         {
             if (this.Health - caliber > 0)
             {
-                this.Bleed();
+                this.particleBlood.Run(100);
                 this.Health -= caliber;
                 return true;
             }
@@ -95,17 +120,6 @@ namespace SiberianAnabasis.Objects
             {
                 this.Direction = Enums.Direction.Left;
             }
-        }
-        private async void Bleed()
-        {
-            if (this.particleBlood == null)
-            {
-                return;
-            }
-
-            this.particleBlood.Start();
-            await Task.Delay(100);
-            this.particleBlood.Stop();
         }
     }
 }

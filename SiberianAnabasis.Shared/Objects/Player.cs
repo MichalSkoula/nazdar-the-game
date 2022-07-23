@@ -48,10 +48,9 @@ namespace SiberianAnabasis.Objects
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
-                new Tuple<int, int>(this.Hitbox.Width / 2, this.Hitbox.Height / 2),
-                Direction.Down, 
-                Color.Red, 
-                Color.DarkRed
+                new Tuple<int, int>(this.Width / 2, this.Height / 2),
+                Direction.Down,
+                Assets.ParticleTextureRegionBlood
             );
         }
 
@@ -78,7 +77,7 @@ namespace SiberianAnabasis.Objects
         {
             // moving?
             bool isMoving = false;
-            if ((Controls.Keyboard.IsPressed(Keys.Right) || Controls.Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Hitbox.Width)
+            if ((Controls.Keyboard.IsPressed(Keys.Right) || Controls.Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
             {
                 this.X += (int)(deltaTime * this.speed);
                 this.Direction = Direction.Right;
@@ -114,7 +113,7 @@ namespace SiberianAnabasis.Objects
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space) || Controls.Gamepad.HasBeenPressed(Buttons.X) || Controls.Gamepad.HasBeenPressed(Buttons.RightTrigger))
             {
-                this.Bullets.Add(new Bullet(this.X, this.Y + (this.Hitbox.Height / 2), this.Direction, this.Caliber));
+                this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
             }
             foreach (var bullet in this.Bullets)
             {
@@ -123,7 +122,7 @@ namespace SiberianAnabasis.Objects
             this.Bullets.RemoveAll(p => p.ToDelete);
 
             // particles
-            this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
+            this.particleBlood.Update(deltaTime, this.Position);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -143,10 +142,10 @@ namespace SiberianAnabasis.Objects
             switch (this.Action)
             {
                 case Enums.PlayerAction.Build:
-                    spriteBatch.DrawCircle(this.X + this.Hitbox.Width / 2, this.Y - 10, 5, 100, Color.Brown);
+                    spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 10, 5, 100, Color.Brown);
                     break;
                 case Enums.PlayerAction.Hire:
-                    spriteBatch.DrawCircle(this.X + this.Hitbox.Width / 2, this.Y - 10, 5, 100, Color.Yellow);
+                    spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 10, 5, 100, Color.Yellow);
                     break;
                 default:
                     break;
