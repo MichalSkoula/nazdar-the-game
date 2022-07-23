@@ -37,7 +37,7 @@ namespace SiberianAnabasis.Shared.Messages
         {
             for (int i = 0; i < this.Messages.Count; i++)
             {
-                spriteBatch.DrawString(Assets.FontSmall, this.Messages[i].Text, new Vector2(Enums.Offset.MessagesX - translationX, 10 + 15 * i), Color.White);
+                spriteBatch.DrawString(Assets.Fonts["Small"], this.Messages[i].Text, new Vector2(Enums.Offset.MessagesX - translationX, 10 + 15 * i), Color.White);
             }
         }
     }

@@ -18,10 +18,10 @@ namespace SiberianAnabasis.Objects
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.EnemyRight, 4, 10),
-            new Animation(Assets.EnemyRight, 4, 10),
-            new Animation(Assets.EnemyLeft, 4, 10),
-            new Animation(Assets.EnemyLeft, 4, 10),
+            new Animation(Assets.Images["EnemyRight"], 4, 10),
+            new Animation(Assets.Images["EnemyRight"], 4, 10),
+            new Animation(Assets.Images["EnemyLeft"], 4, 10),
+            new Animation(Assets.Images["EnemyLeft"], 4, 10),
         };
 
         public Enemy(int x, int y, Direction direction, int health = 100, int caliber = 10)
@@ -36,7 +36,7 @@ namespace SiberianAnabasis.Objects
                 new Vector2(this.X, this.Y),
                 new Tuple<int, int>(this.Width / 2, this.Height / 2),
                 Direction.Down,
-                Assets.ParticleTextureRegionBlood
+                Assets.ParticleTextureRegions["Blood"]
             );
         }
 

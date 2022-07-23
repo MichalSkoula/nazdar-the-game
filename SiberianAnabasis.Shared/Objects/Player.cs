@@ -25,10 +25,10 @@ namespace SiberianAnabasis.Objects
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.PlayerRight, 4, 10),
-            new Animation(Assets.PlayerRight, 4, 10),
-            new Animation(Assets.PlayerLeft, 4, 10),
-            new Animation(Assets.PlayerLeft, 4, 10),
+            new Animation(Assets.Images["PlayerRight"], 4, 10),
+            new Animation(Assets.Images["PlayerRight"], 4, 10),
+            new Animation(Assets.Images["PlayerLeft"], 4, 10),
+            new Animation(Assets.Images["PlayerLeft"], 4, 10),
         };
 
         public int Money { get; set; }
@@ -50,7 +50,7 @@ namespace SiberianAnabasis.Objects
                 new Vector2(this.X, this.Y),
                 new Tuple<int, int>(this.Width / 2, this.Height / 2),
                 Direction.Down,
-                Assets.ParticleTextureRegionBlood
+                Assets.ParticleTextureRegions["Blood"]
             );
         }
 

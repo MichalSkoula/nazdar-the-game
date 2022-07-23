@@ -45,7 +45,7 @@ namespace SiberianAnabasis.Screens
             this.LoadSaves();
 
             // play song
-            MediaPlayer.Play(Assets.Nature);
+            MediaPlayer.Play(Assets.Songs["Nature"]);
 
             base.Initialize();
         }
@@ -124,7 +124,7 @@ namespace SiberianAnabasis.Screens
                 if (SoundEffect.MasterVolume == 0)
                 {
                     SoundEffect.MasterVolume = 1;
-                    Assets.Blip.Play();
+                    Assets.Sounds["Blip"].Play();
                 }
                 else
                 {
@@ -160,7 +160,7 @@ namespace SiberianAnabasis.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             int i = 0;
@@ -173,17 +173,17 @@ namespace SiberianAnabasis.Screens
                 if (button.Value.Data != null && button.Value.Data.Length > 0)
                 {
                     this.Game.SpriteBatch.DrawString(
-                        Assets.FontSmall, 
+                        Assets.Fonts["Small"], 
                         button.Value.Data[0], 
                         new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y), 
                         Color.White);
                     this.Game.SpriteBatch.DrawString(
-                        Assets.FontSmall,
+                        Assets.Fonts["Small"],
                         button.Value.Data[1],
                         new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 10),
                         Color.White);
                     this.Game.SpriteBatch.DrawString(
-                        Assets.FontSmall,
+                        Assets.Fonts["Small"],
                         button.Value.Data[2],
                         new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 20),
                         Color.White);
@@ -192,7 +192,7 @@ namespace SiberianAnabasis.Screens
             }
 
             // save path
-            this.Game.SpriteBatch.DrawString(Assets.FontSmall, this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 50, Offset.MenuFooter), Color.Gray);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 50, Offset.MenuFooter), Color.Gray);
 
             // messages
             this.Game.MessageBuffer.Draw(Game.SpriteBatch);

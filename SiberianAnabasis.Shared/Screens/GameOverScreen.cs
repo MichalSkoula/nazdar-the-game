@@ -85,7 +85,7 @@ namespace SiberianAnabasis.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

@@ -57,7 +57,7 @@ namespace SiberianAnabasis.Screens
             this.Load();
 
             // play song
-            MediaPlayer.Play(Assets.Map);
+            MediaPlayer.Play(Assets.Songs["Map"]);
 
             base.Initialize();
         }
@@ -286,27 +286,27 @@ namespace SiberianAnabasis.Screens
 
             // stats
             this.Game.SpriteBatch.DrawString(
-                Assets.FontSmall,
+                Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 10),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
-               Assets.FontSmall,
+               Assets.Fonts["Small"],
                "Days " + this.player.Days.ToString(),
                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
                Color.Black);
             this.Game.SpriteBatch.DrawString(
-                Assets.FontSmall,
+                Assets.Fonts["Small"],
                 "Timer: " + Math.Ceiling(this.dayPhaseTimer).ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 30),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
-                Assets.FontSmall,
+                Assets.Fonts["Small"],
                 "Health: " + (this.player.Health).ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 40),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
-                Assets.FontSmall,
+                Assets.Fonts["Small"],
                 "Money: " + (this.player.Money).ToString(),
                 new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 50),
                 Color.Black);
