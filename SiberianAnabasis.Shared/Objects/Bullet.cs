@@ -12,7 +12,7 @@ namespace SiberianAnabasis.Objects
     {
         private readonly int speed = 500;
 
-        private ParticleSource particleSmoke;
+        
 
         public Bullet(int x, int y, Direction direction, int caliber)
         {
@@ -23,21 +23,12 @@ namespace SiberianAnabasis.Objects
 
             Assets.Sounds["Blip"].Play();
 
-            this.particleSmoke = new ParticleSource(
-                new Vector2(this.X, this.Y),
-                new Tuple<int, int>(this.Width / 2, this.Height / 2),
-                direction == Direction.Left ? Direction.Right : Direction.Left,
-                Assets.ParticleTextureRegions["Smoke"]
-            );
-            this.particleSmoke.Run(50);
+           
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Sprite, this.Hitbox, Color.White);
-
-            // particles
-            this.particleSmoke.Draw(spriteBatch);
         }
 
         public override void Update(float deltaTime)
@@ -57,8 +48,6 @@ namespace SiberianAnabasis.Objects
             {
                 this.ToDelete = true;
             }
-
-            this.particleSmoke.Update(deltaTime, this.Position);
         }
     }
 }
