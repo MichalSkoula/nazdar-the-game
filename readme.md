@@ -6,7 +6,7 @@ Monogame platform/strategic game (awesome).
 
 ## TODO:
 
-
+* move particles after creation to some list in villagescreen
 
 ## IDEAS:
 
