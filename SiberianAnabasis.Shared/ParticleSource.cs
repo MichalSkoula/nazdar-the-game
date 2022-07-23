@@ -18,6 +18,7 @@ namespace SiberianAnabasis.Shared
 
         private Tuple<int, int> offset;
 
+        // ttl - time to live of one particle
         public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, float ttl, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null)
         {
             this.offset = offset;
@@ -75,6 +76,7 @@ namespace SiberianAnabasis.Shared
             spriteBatch.Draw(this.particleEffect);
         }
 
+        // duration - how many ms will it be emitting
         public async void Run(int duration)
         {
             this.Start();

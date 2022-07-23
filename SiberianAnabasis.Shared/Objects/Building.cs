@@ -19,9 +19,9 @@ namespace SiberianAnabasis.Objects
             spriteBatch.DrawRectangle(this.Hitbox, Color.Wheat);
         }
 
-        public override void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
-            
+            base.Update(deltaTime);
         }
     }
 }

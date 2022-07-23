@@ -41,8 +41,18 @@ namespace SiberianAnabasis.Objects
             );
         }
 
-        public override void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
+            // particles
+            this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
+
+            if (this.Dead)
+            {
+                return;
+            }
+
             // is enemy moving?
             bool isMoving = true;
             if (this.Direction == Direction.Right)
@@ -77,13 +87,12 @@ namespace SiberianAnabasis.Objects
                 this.ToDelete = true;
             }
 
-            // particles
-            this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox, Color.White);
+            this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
 
             // bullets
