@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using SiberianAnabasis.Shared;
+using System.Threading.Tasks;
 
 namespace SiberianAnabasis.Objects
 {
@@ -48,6 +50,8 @@ namespace SiberianAnabasis.Objects
 
         public abstract void Update(float deltaTime);
 
+        protected ParticleSource particleBlood;
+
         public void DrawHealth(SpriteBatch spriteBatch, float alpha = 1)
         {
             /*
@@ -71,6 +75,7 @@ namespace SiberianAnabasis.Objects
         {
             if (this.Health - caliber > 0)
             {
+                this.Bleed();
                 this.Health -= caliber;
                 return true;
             }
@@ -90,6 +95,17 @@ namespace SiberianAnabasis.Objects
             {
                 this.Direction = Enums.Direction.Left;
             }
+        }
+        private async void Bleed()
+        {
+            if (this.particleBlood == null)
+            {
+                return;
+            }
+
+            this.particleBlood.Start();
+            await Task.Delay(100);
+            this.particleBlood.Stop();
         }
     }
 }

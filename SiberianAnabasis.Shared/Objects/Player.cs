@@ -31,7 +31,6 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.PlayerLeft, 4, 10),
         };
 
-        private ParticleSource particleSource;
         public int Money { get; set; }
         public int Days { get; set; }
 
@@ -47,7 +46,13 @@ namespace SiberianAnabasis.Objects
             this.Caliber = 30;
             this.Days = 0;
 
-            this.particleSource = new ParticleSource(new Vector2(this.X, this.Y));
+            this.particleBlood = new ParticleSource(
+                new Vector2(this.X, this.Y),
+                new Tuple<int, int>(this.Hitbox.Width / 2, this.Hitbox.Height / 2),
+                Direction.Down, 
+                Color.Red, 
+                Color.DarkRed
+            );
         }
 
         public void Load(dynamic saveData)
@@ -111,16 +116,14 @@ namespace SiberianAnabasis.Objects
             {
                 this.Bullets.Add(new Bullet(this.X, this.Y + (this.Hitbox.Height / 2), this.Direction, this.Caliber));
             }
-
             foreach (var bullet in this.Bullets)
             {
                 bullet.Update(deltaTime);
             }
-
             this.Bullets.RemoveAll(p => p.ToDelete);
 
             // particles
-            this.particleSource.Update(deltaTime, new Vector2(this.X, this.Y));
+            this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -134,7 +137,7 @@ namespace SiberianAnabasis.Objects
             }
 
             // particles
-            this.particleSource.Draw(spriteBatch);
+            this.particleBlood.Draw(spriteBatch);
 
             // some action?
             switch (this.Action)
@@ -158,17 +161,13 @@ namespace SiberianAnabasis.Objects
             int g = 10;
             float timeDivider = 5;
 
-            this.particleSource.Start();
-
             for (int i = 0; i < 200; i++) 
             {
                 float t = i / timeDivider;
-                int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2)); // https://cs.wikipedia.org/wiki/Vrh_svisl%C3%BD
-                // System.Diagnostics.Debug.WriteLine(newY);
+                int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2)); 
                 if (newY > h0)
                 {
                     this.Y = h0;
-                    this.particleSource.Stop();
                     break;
                 }
 
