@@ -31,10 +31,13 @@ namespace SiberianAnabasis.Objects
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Direction = direction;
             this.Health = health;
+            this.Alpha = 0.5f;
         }
 
-        public override void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
             // is he moving?
             bool isMoving = false;
             if (rand.Next(16) < 2 /*Game1.GlobalTimer % 2 == 0*/)
@@ -73,8 +76,8 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox, Color.White * 0.5f);
-            this.DrawHealth(spriteBatch, 0.5f);
+            this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
+            this.DrawHealth(spriteBatch);
         }
     }
 }

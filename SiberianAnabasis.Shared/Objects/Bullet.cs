@@ -31,8 +31,10 @@ namespace SiberianAnabasis.Objects
             spriteBatch.Draw(this.Sprite, this.Hitbox, Color.White);
         }
 
-        public override void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
             // move it
             if (this.Direction == Direction.Left)
             {

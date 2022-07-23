@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -158,7 +159,7 @@ namespace SiberianAnabasis.Screens
         private void UpdateCollisions()
         {
             // enemies
-            foreach (Enemy enemy in this.enemies)
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
                 // enemies and bullets
                 foreach (Bullet bullet in this.player.Bullets)
@@ -169,7 +170,7 @@ namespace SiberianAnabasis.Screens
 
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
-                            enemy.ToDelete = true;
+                            enemy.Dead = true;
                             Game.MessageBuffer.AddMessage("Bullet kill");
                         }
                     }
@@ -178,7 +179,7 @@ namespace SiberianAnabasis.Screens
                 // enemies and player
                 if (!enemy.ToDelete && this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
-                    enemy.ToDelete = true;
+                    enemy.Dead = true;
                     Game.MessageBuffer.AddMessage("Bare hands kill");
 
                     if (!this.player.TakeHit(enemy.Caliber))
@@ -187,29 +188,27 @@ namespace SiberianAnabasis.Screens
                     }
                 }
             }
-            this.enemies.RemoveAll(p => p.ToDelete);
+            
 
             // soldiers
-            foreach (var soldier in this.soldiers)
+            foreach (var soldier in this.soldiers.Where(soldier => soldier.Dead == false))
             {
                 // enemies and soldiers
-                foreach (var enemy in this.enemies)
+                foreach (var enemy in this.enemies.Where(enemy => enemy.Dead == false))
                 {
                     if (enemy.Hitbox.Intersects(soldier.Hitbox))
                     {
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
-                            enemy.ToDelete = true;
+                            enemy.Dead = true;
                         }
                         else if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            soldier.ToDelete = true;
+                            soldier.Dead = true;
                         }
                     }
                 }
             }
-            this.enemies.RemoveAll(p => p.ToDelete);
-            this.soldiers.RemoveAll(p => p.ToDelete);
 
             // coins
             foreach (var coin in this.coins)
@@ -252,6 +251,9 @@ namespace SiberianAnabasis.Screens
                 }
             }
             this.homelesses.RemoveAll(p => p.ToDelete);
+
+            this.enemies.RemoveAll(p => p.ToDelete);
+            this.soldiers.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateDayPhase()

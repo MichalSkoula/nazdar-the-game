@@ -16,8 +16,10 @@ namespace SiberianAnabasis.Objects
             
         }
 
-        public override void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
             this.anim.Loop = true;
             //this.anim.ResetLoop();
             this.anim.Update(deltaTime);

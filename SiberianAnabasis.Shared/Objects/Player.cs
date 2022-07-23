@@ -84,8 +84,10 @@ namespace SiberianAnabasis.Objects
             }
         }
 
-        public override void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
             // moving?
             bool isMoving = false;
             if ((Controls.Keyboard.IsPressed(Keys.Right) || Controls.Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
