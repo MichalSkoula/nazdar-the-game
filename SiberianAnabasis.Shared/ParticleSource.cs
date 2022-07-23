@@ -18,7 +18,7 @@ namespace SiberianAnabasis.Shared
 
         private Tuple<int, int> offset;
 
-        public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null)
+        public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, float ttl, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null)
         {
             this.offset = offset;
             this.particleEffect = new ParticleEffect(autoTrigger: false)
@@ -26,7 +26,7 @@ namespace SiberianAnabasis.Shared
                 Position = new Vector2(position.X, position.Y),
                 Emitters = new List<ParticleEmitter>
                 {
-                    new ParticleEmitter(textureRegion, 500, TimeSpan.FromSeconds(2.5), Profile.Point())
+                    new ParticleEmitter(textureRegion, 500, TimeSpan.FromSeconds(ttl), Profile.Point())
                     {
                         Parameters = new ParticleReleaseParameters
                         {

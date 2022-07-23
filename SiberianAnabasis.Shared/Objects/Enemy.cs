@@ -36,6 +36,7 @@ namespace SiberianAnabasis.Objects
                 new Vector2(this.X, this.Y),
                 new Tuple<int, int>(this.Width / 2, this.Height / 2),
                 Direction.Down,
+                2,
                 Assets.ParticleTextureRegions["Blood"]
             );
         }

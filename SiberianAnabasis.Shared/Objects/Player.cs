@@ -36,6 +36,8 @@ namespace SiberianAnabasis.Objects
 
         public Enums.PlayerAction? Action { get; set; }
 
+        private ParticleSource particleSmoke;
+
         public Player(int x, int y)
         {
             this.anim = this.animations[(int)Direction.Right];
@@ -50,7 +52,16 @@ namespace SiberianAnabasis.Objects
                 new Vector2(this.X, this.Y),
                 new Tuple<int, int>(this.Width / 2, this.Height / 2),
                 Direction.Down,
+                2,
                 Assets.ParticleTextureRegions["Blood"]
+            );
+
+            this.particleSmoke = new ParticleSource(
+               new Vector2(this.X, this.Y),
+               new Tuple<int, int>(0, this.Height / 2),
+               Direction.Up,
+               0.5f,
+               Assets.ParticleTextureRegions["Smoke"]
             );
         }
 
@@ -114,6 +125,7 @@ namespace SiberianAnabasis.Objects
             if (Controls.Keyboard.HasBeenPressed(Keys.Space) || Controls.Gamepad.HasBeenPressed(Buttons.X) || Controls.Gamepad.HasBeenPressed(Buttons.RightTrigger))
             {
                 this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
+                this.particleSmoke.Run(50);
             }
             foreach (var bullet in this.Bullets)
             {
@@ -123,6 +135,7 @@ namespace SiberianAnabasis.Objects
 
             // particles
             this.particleBlood.Update(deltaTime, this.Position);
+            this.particleSmoke.Update(deltaTime, new Vector2(this.X + (this.Direction == Direction.Left ? 0 : this.Width), this.Y));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -137,6 +150,7 @@ namespace SiberianAnabasis.Objects
 
             // particles
             this.particleBlood.Draw(spriteBatch);
+            this.particleSmoke.Draw(spriteBatch);
 
             // some action?
             switch (this.Action)
