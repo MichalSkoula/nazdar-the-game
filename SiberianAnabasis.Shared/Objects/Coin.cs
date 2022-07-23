@@ -11,7 +11,7 @@ namespace SiberianAnabasis.Objects
 
         public Coin(int x, int y)
         {
-            this.anim = new Animation(Assets.Coin, 4, 10);
+            this.anim = new Animation(Assets.Images["Coin"], 4, 10);
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             
         }

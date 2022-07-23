@@ -11,98 +11,63 @@ namespace SiberianAnabasis
 {
     public static class Assets
     {
-        // images
-        public static Texture2D PlayerLeft;
-        public static Texture2D PlayerRight;
-
-        public static Texture2D SoldierLeft;
-        public static Texture2D SoldierRight;
-
-        public static Texture2D EnemyLeft;
-        public static Texture2D EnemyRight;
-
-        public static Texture2D HomelessLeft;
-        public static Texture2D HomelessRight;
-
-        public static Texture2D BulletLeft;
-        public static Texture2D BulletRight;
-
-        public static Texture2D Coin;
-
-        // fonts
-        public static SpriteFont FontSmall;
-        public static SpriteFont FontMedium;
-        public static SpriteFont FontLarge;
-
-        // audio
-        public static SoundEffect Blip;
-        public static Song Nature;
-        public static Song Map;
-
-        // effects
-        public static Effect AllWhite;
-        public static Effect Pixelate;
-
-        // tileset groups
-        public static Dictionary<string, TilesetGroup> TilesetGroups;
-
-        // particles
-        public static TextureRegion2D ParticleTextureRegionBlood;
-        public static TextureRegion2D ParticleTextureRegionSmoke;
+        public static Dictionary<string, Texture2D> Images = new Dictionary<string, Texture2D>();
+        public static Dictionary<string, SpriteFont> Fonts = new Dictionary<string, SpriteFont>();
+        public static Dictionary<string, SoundEffect> Sounds = new Dictionary<string, SoundEffect>();
+        public static Dictionary<string, Song> Songs = new Dictionary<string, Song>();
+        public static Dictionary<string, Effect> Effects = new Dictionary<string, Effect>();
+        public static Dictionary<string, TilesetGroup> TilesetGroups = new Dictionary<string, TilesetGroup>();
+        public static Dictionary<string, TextureRegion2D> ParticleTextureRegions = new Dictionary<string, TextureRegion2D>();
     }
 
     public class AssetsLoader
     {
         public void Load(ContentManager content, GraphicsDevice graphicsDevice)
         {
-            Assets.PlayerLeft = content.Load<Texture2D>("Player/player_left");
-            Assets.PlayerRight = content.Load<Texture2D>("Player/player_right");
+            // load images
+            Assets.Images["PlayerLeft"] = content.Load<Texture2D>("Player/player_left");
+            Assets.Images["PlayerRight"] = content.Load<Texture2D>("Player/player_right");
+            Assets.Images["SoldierLeft"] = content.Load<Texture2D>("Soldier/soldier_left");
+            Assets.Images["SoldierRight"] = content.Load<Texture2D>("Soldier/soldier_right");
+            Assets.Images["EnemyLeft"] = content.Load<Texture2D>("Enemy/enemy_left");
+            Assets.Images["EnemyRight"] = content.Load<Texture2D>("Enemy/enemy_right");
+            Assets.Images["HomelessLeft"] = content.Load<Texture2D>("Homeless/homeless_left");
+            Assets.Images["HomelessRight"] = content.Load<Texture2D>("Homeless/homeless_right");
+            Assets.Images["BulletLeft"] = content.Load<Texture2D>("Bullet/bullet_left");
+            Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
+            Assets.Images["Coin"] = content.Load<Texture2D>("Coin/coin");
 
-            Assets.SoldierLeft = content.Load<Texture2D>("Soldier/soldier_left");
-            Assets.SoldierRight = content.Load<Texture2D>("Soldier/soldier_right");
+            // load fonts
+            Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
+            Assets.Fonts["Medium"] = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
+            Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontPublicPixelLarge");
 
-            Assets.EnemyLeft = content.Load<Texture2D>("Enemy/enemy_left");
-            Assets.EnemyRight = content.Load<Texture2D>("Enemy/enemy_right");
+            // load audio
+            Assets.Sounds["Blip"] = content.Load<SoundEffect>("Sounds/blip");
+            Assets.Songs["Nature"] = content.Load<Song>("Sounds/nature");
+            Assets.Songs["Map"] = content.Load<Song>("Sounds/Map");
 
-            Assets.HomelessLeft = content.Load<Texture2D>("Homeless/homeless_left");
-            Assets.HomelessRight = content.Load<Texture2D>("Homeless/homeless_right");
+            // load effects
+            Assets.Effects["AllWhite"] = content.Load<Effect>("Effects/AllWhite");
+            Assets.Effects["Pixelate"] = content.Load<Effect>("Effects/Pixelate");
+            Assets.Effects["Pixelate"].Parameters["pixelation"].SetValue(5);
 
-            Assets.BulletLeft = content.Load<Texture2D>("Bullet/bullet_left");
-            Assets.BulletRight = content.Load<Texture2D>("Bullet/bullet_right");
-
-            Assets.Coin = content.Load<Texture2D>("Coin/coin");
-
-            Assets.FontSmall = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
-            Assets.FontMedium = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
-            Assets.FontLarge = content.Load<SpriteFont>("Fonts/fontPublicPixelLarge");
-
-            Assets.Blip = content.Load<SoundEffect>("Sounds/blip");
-            Assets.Nature = content.Load<Song>("Sounds/nature");
-            Assets.Map = content.Load<Song>("Sounds/Map");
-
-            Assets.AllWhite = content.Load<Effect>("Effects/AllWhite");
-            Assets.Pixelate = content.Load<Effect>("Effects/Pixelate");
-            Assets.Pixelate.Parameters["pixelation"].SetValue(5);
-
+            // load tilesets
             // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
-            Assets.TilesetGroups = new Dictionary<string, TilesetGroup>();
-            Assets.TilesetGroups.Add(
-                "village1",
-                new TilesetGroup(
-                    content.RootDirectory + "\\Envs\\first-village.tmx",
-                    content.RootDirectory + "\\Envs\\tileset forest.tsx", 
-                    content.Load<Texture2D>("Envs/Rocky Roads/tileset forest")
-                )
+            Assets.TilesetGroups["village1"] = new TilesetGroup(
+                content.RootDirectory + "\\Envs\\first-village.tmx",
+                content.RootDirectory + "\\Envs\\tileset forest.tsx", 
+                content.Load<Texture2D>("Envs/Rocky Roads/tileset forest")
             );
 
             // load particle textures
             Texture2D blood = new Texture2D(graphicsDevice, 1, 1);
             blood.SetData(new[] { Color.Red });
-            Assets.ParticleTextureRegionBlood = new TextureRegion2D(blood);
+            Assets.ParticleTextureRegions["Blood"] = new TextureRegion2D(blood);
 
             Texture2D smoke = new Texture2D(graphicsDevice, 1, 1);
             smoke.SetData(new[] { Color.DarkGray });
-            Assets.ParticleTextureRegionSmoke = new TextureRegion2D(smoke);
+            Assets.ParticleTextureRegions["Smoke"] = new TextureRegion2D(smoke);
         }
     }
 }

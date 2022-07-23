@@ -17,17 +17,17 @@ namespace SiberianAnabasis.Objects
         public Bullet(int x, int y, Direction direction, int caliber)
         {
             this.Direction = direction;
-            this.Sprite = direction == Direction.Left ? Assets.BulletLeft : Assets.BulletRight;
+            this.Sprite = direction == Direction.Left ? Assets.Images["BulletLeft"] : Assets.Images["BulletRight"];
             this.Hitbox = new Rectangle(direction == Direction.Left ? x - this.Sprite.Width : x, y, this.Sprite.Width, this.Sprite.Height);
             this.Caliber = caliber;
 
-            Assets.Blip.Play();
+            Assets.Sounds["Blip"].Play();
 
             this.particleSmoke = new ParticleSource(
                 new Vector2(this.X, this.Y),
                 new Tuple<int, int>(this.Width / 2, this.Height / 2),
                 direction == Direction.Left ? Direction.Right : Direction.Left,
-                Assets.ParticleTextureRegionSmoke
+                Assets.ParticleTextureRegions["Smoke"]
             );
             this.particleSmoke.Run(50);
         }

@@ -36,13 +36,13 @@ namespace SiberianAnabasis.Controls
             switch (size)
             {
                 case ButtonSize.Small:
-                    this.font = Assets.FontSmall;
+                    this.font = Assets.Fonts["Small"];
                     break;
                 case ButtonSize.Medium:
-                    this.font = Assets.FontMedium;
+                    this.font = Assets.Fonts["Medium"];
                     break;
                 case ButtonSize.Large:
-                    this.font = Assets.FontLarge;
+                    this.font = Assets.Fonts["Large"];
                     break;
             }
 

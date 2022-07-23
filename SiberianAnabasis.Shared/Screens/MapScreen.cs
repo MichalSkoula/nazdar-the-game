@@ -93,7 +93,7 @@ namespace SiberianAnabasis.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "Map", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Map", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

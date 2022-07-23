@@ -15,10 +15,10 @@ namespace SiberianAnabasis.Objects
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.HomelessRight, 4, 10),
-            new Animation(Assets.HomelessRight, 4, 10),
-            new Animation(Assets.HomelessLeft, 4, 10),
-            new Animation(Assets.HomelessLeft, 4, 10),
+            new Animation(Assets.Images["HomelessRight"], 4, 10),
+            new Animation(Assets.Images["HomelessRight"], 4, 10),
+            new Animation(Assets.Images["HomelessLeft"], 4, 10),
+            new Animation(Assets.Images["HomelessLeft"], 4, 10),
         };
 
         private readonly Random rand = new Random();

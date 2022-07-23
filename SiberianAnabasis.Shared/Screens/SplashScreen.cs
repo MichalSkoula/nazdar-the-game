@@ -44,7 +44,7 @@ namespace SiberianAnabasis.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.FontLarge, "MyGame splash screen", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "MyGame splash screen", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             this.Game.DrawEnd();
         }
