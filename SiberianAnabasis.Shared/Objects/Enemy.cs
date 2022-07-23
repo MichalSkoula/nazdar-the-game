@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SiberianAnabasis.Screens;
+using SiberianAnabasis.Shared;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
@@ -29,6 +31,14 @@ namespace SiberianAnabasis.Objects
             this.Direction = direction;
             this.Health = health;
             this.Caliber = caliber;
+
+            this.particleBlood = new ParticleSource(
+                new Vector2(this.X, this.Y),
+                new Tuple<int, int>(this.Hitbox.Width / 2, this.Hitbox.Height / 2),
+                Direction.Down,
+                Color.Red,
+                Color.DarkRed
+            );
         }
 
         public override void Update(float deltaTime)
@@ -66,6 +76,9 @@ namespace SiberianAnabasis.Objects
             {
                 this.ToDelete = true;
             }
+
+            // particles
+            this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -78,6 +91,9 @@ namespace SiberianAnabasis.Objects
             {
                 bullet.Draw(spriteBatch);
             }
+
+            // particles
+            this.particleBlood.Draw(spriteBatch);
         }
     }
 }
