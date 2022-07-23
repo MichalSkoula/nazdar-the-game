@@ -126,6 +126,7 @@ namespace SiberianAnabasis.Objects
             // bullets
             if (Controls.Keyboard.HasBeenPressed(Keys.Space) || Controls.Gamepad.HasBeenPressed(Buttons.X) || Controls.Gamepad.HasBeenPressed(Buttons.RightTrigger))
             {
+                Audio.PlaySound("GunFire");
                 this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
                 this.particleSmoke.Run(50);
             }
@@ -171,6 +172,7 @@ namespace SiberianAnabasis.Objects
 
         private async void Jump()
         {
+            Audio.PlaySound("Jump");
             int h0 = Enums.Offset.Floor;
             int v0 = 25;
             int g = 10;

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using SiberianAnabasis.Shared;
 using SiberianAnabasis.Shared.Messages;
 using System;
 
@@ -91,6 +92,9 @@ namespace SiberianAnabasis
             {
                 GlobalTimer = 0;
             }
+
+            // bg music
+            Audio.PlaySongCollection();
 
             base.Update(gameTime);
         }

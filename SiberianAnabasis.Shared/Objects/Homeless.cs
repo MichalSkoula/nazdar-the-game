@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SiberianAnabasis.Screens;
+using SiberianAnabasis.Shared;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
@@ -21,8 +22,6 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.Images["HomelessLeft"], 4, 10),
         };
 
-        private readonly Random rand = new Random();
-
         public int Cost { get; internal set; } = 1;
 
         public Homeless(int x, int y, Direction direction, int health = 100)
@@ -40,7 +39,7 @@ namespace SiberianAnabasis.Objects
 
             // is he moving?
             bool isMoving = false;
-            if (rand.Next(16) < 2 /*Game1.GlobalTimer % 2 == 0*/)
+            if (Tools.GetRandom(16) < 2 /*Game1.GlobalTimer % 2 == 0*/)
             {
                 if (this.Direction == Direction.Right)
                 {

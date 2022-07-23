@@ -197,21 +197,183 @@
 /processorParam:TextureFormat=Color
 /build:Soldier/soldier_right.png
 
+#begin Songs/a_cup_of_tea.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/a_cup_of_tea.mp3
+
+#begin Songs/bartender.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/bartender.mp3
+
+#begin Songs/chill_lofi.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/chill_lofi.ogg
+
+#begin Songs/cue.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/cue.mp3
+
+#begin Songs/lofiagain.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/lofiagain.ogg
+
 #begin Sounds/blip.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/blip.wav
 
-#begin Sounds/Map.wav
+#begin Sounds/coin.wav
 /importer:WavImporter
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Map.wav
+/build:Sounds/coin.wav
 
-#begin Sounds/nature.ogg
+#begin Sounds/explosion.ogg
 /importer:OggImporter
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/nature.ogg
+/build:Sounds/explosion.ogg
+
+#begin Sounds/gun_fire.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gun_fire.wav
+
+#begin Sounds/jump.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jump.ogg
+
+#begin Sounds/soldiers/die1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/die1.ogg
+
+#begin Sounds/soldiers/hit1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/hit1.ogg
+
+#begin Sounds/soldiers/hit2.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/hit2.ogg
+
+#begin Sounds/soldiers/hit3.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/hit3.ogg
+
+#begin Sounds/soldiers/hit4.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/hit4.ogg
+
+#begin Sounds/soldiers/hit5.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/hit5.ogg
+
+#begin Sounds/soldiers/metal_03.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/soldiers/metal_03.ogg
+
+#begin Sounds/zombies/Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/Death.wav
+
+#begin Sounds/zombies/Death2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/Death2.wav
+
+#begin Sounds/zombies/Death3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/Death3.wav
+
+#begin Sounds/zombies/monster-1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-1.wav
+
+#begin Sounds/zombies/monster-15.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-15.wav
+
+#begin Sounds/zombies/monster-16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-16.wav
+
+#begin Sounds/zombies/monster-17.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-17.wav
+
+#begin Sounds/zombies/monster-4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-4.wav
+
+#begin Sounds/zombies/monster-6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-6.wav
+
+#begin Sounds/zombies/monster-9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/monster-9.wav
+
+#begin Sounds/zombies/Roar1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/Roar1.wav
+
+#begin Sounds/zombies/Roar2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/Roar2.wav
+
+#begin Sounds/zombies/Roar3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombies/Roar3.wav
 

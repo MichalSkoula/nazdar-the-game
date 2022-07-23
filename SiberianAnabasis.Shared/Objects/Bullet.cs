@@ -21,9 +21,7 @@ namespace SiberianAnabasis.Objects
             this.Hitbox = new Rectangle(direction == Direction.Left ? x - this.Sprite.Width : x, y, this.Sprite.Width, this.Sprite.Height);
             this.Caliber = caliber;
 
-            Assets.Sounds["Blip"].Play();
-
-           
+            Audio.PlaySound("Blip");
         }
 
         public override void Draw(SpriteBatch spriteBatch)

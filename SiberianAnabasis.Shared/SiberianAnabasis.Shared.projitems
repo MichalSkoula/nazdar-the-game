@@ -15,6 +15,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Animation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Assets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Audio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Gamepad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
@@ -58,6 +59,8 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelLarge.spritefont" />
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelMedium.spritefont" />
     <None Include="$(MSBuildThisFileDirectory)Content\Fonts\fontPublicPixelSmall.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Homeless\homeless.psd" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Homeless\pixel_dudes_config.zip" />
     <None Include="$(MSBuildThisFileDirectory)Content\Player\player.psd" />
     <None Include="$(MSBuildThisFileDirectory)Content\Player\player_config.zip" />
     <None Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier.psd" />
@@ -99,6 +102,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\ui.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Envs\Rocky Roads\water_8frames.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Fonts\PublicPixel.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Homeless\homeless_left.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Homeless\homeless_right.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Homeless\sprite.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Player\player_left.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Player\player_right.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Player\sprite.png" />

@@ -44,8 +44,9 @@ namespace SiberianAnabasis.Screens
             // load saves to show info next to slot button
             this.LoadSaves();
 
-            // play song
-            MediaPlayer.Play(Assets.Songs["Nature"]);
+            // play song(s)
+            Audio.StopSong();
+            Audio.CurrentSongCollection = "Menu";
 
             base.Initialize();
         }
@@ -124,7 +125,7 @@ namespace SiberianAnabasis.Screens
                 if (SoundEffect.MasterVolume == 0)
                 {
                     SoundEffect.MasterVolume = 1;
-                    Assets.Sounds["Blip"].Play();
+                    Audio.PlaySound("Blip");
                 }
                 else
                 {
