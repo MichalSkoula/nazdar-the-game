@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Objects;
+using SiberianAnabasis.Shared;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Screens
@@ -19,8 +20,6 @@ namespace SiberianAnabasis.Screens
         public VillageScreen(Game1 game) : base(game) { }
 
         private readonly Camera camera = new Camera();
-
-        private readonly Random rand = new Random();
 
         private readonly FileIO saveFile = new FileIO();
 
@@ -41,9 +40,6 @@ namespace SiberianAnabasis.Screens
 
         public override void Initialize()
         {
-            // stop whatever menu song is playing 
-            MediaPlayer.Stop();
-
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, Offset.Floor);
 
@@ -57,8 +53,9 @@ namespace SiberianAnabasis.Screens
             this.saveFile.File = Game.SaveSlot;
             this.Load();
 
-            // play song
-            MediaPlayer.Play(Assets.Songs["Map"]);
+            // play songs
+            Audio.StopSong();
+            Audio.CurrentSongCollection = "Game";
 
             base.Initialize();
         }
@@ -89,10 +86,12 @@ namespace SiberianAnabasis.Screens
         private void UpdateEnemies()
         {
             // create enemy?
-            if (this.rand.Next(540) < 8 && this.dayPhase == DayPhase.Night)
+            if (Tools.GetRandom(540) < 8 && this.dayPhase == DayPhase.Night)
             {
+                Audio.PlayRandomSound("EnemySpawns");
+
                 // choose direction
-                if (this.rand.Next(2) == 0)
+                if (Tools.GetRandom(2) == 0)
                 {
                     this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right));
                 }
@@ -121,10 +120,10 @@ namespace SiberianAnabasis.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            if (this.rand.Next(2000) < 2)
+            if (Tools.GetRandom(2000) < 2)
             {
                 // choose side 
-                if (this.rand.Next(2) == 0)
+                if (Tools.GetRandom(2) == 0)
                 {
                     this.homelesses.Add(new Homeless(0, Offset.Floor, Direction.Right));
                 }
@@ -144,9 +143,9 @@ namespace SiberianAnabasis.Screens
         private void UpdateCoins()
         {
             // create new?
-            if (this.rand.Next(1000) < 2)
+            if (Tools.GetRandom(1000) < 2)
             {
-                this.coins.Add(new Coin(this.rand.Next(VillageScreen.MapWidth), Offset.Floor2));
+                this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
             }
 
             // update 
@@ -171,6 +170,7 @@ namespace SiberianAnabasis.Screens
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
                             enemy.Dead = true;
+                            Audio.PlayRandomSound("EnemyDeaths");
                             Game.MessageBuffer.AddMessage("Bullet kill");
                         }
                     }
@@ -180,6 +180,7 @@ namespace SiberianAnabasis.Screens
                 if (!enemy.ToDelete && this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.Dead = true;
+                    Audio.PlayRandomSound("EnemyDeaths");
                     Game.MessageBuffer.AddMessage("Bare hands kill");
 
                     if (!this.player.TakeHit(enemy.Caliber))
@@ -200,10 +201,12 @@ namespace SiberianAnabasis.Screens
                     {
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
+                            Audio.PlayRandomSound("EnemyDeaths");
                             enemy.Dead = true;
                         }
                         else if (!soldier.TakeHit(enemy.Caliber))
                         {
+                            Audio.PlayRandomSound("SoldierDeaths");
                             soldier.Dead = true;
                         }
                     }
@@ -215,6 +218,7 @@ namespace SiberianAnabasis.Screens
             {
                 if (this.player.Hitbox.Intersects(coin.Hitbox))
                 {
+                    Audio.PlaySound("Coin");
                     this.player.Money++;
                     coin.ToDelete = true;
                     break;
@@ -243,6 +247,7 @@ namespace SiberianAnabasis.Screens
                     // hire homeless man?
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
                     {
+                        Audio.PlaySound("SoldierSpawn");
                         homeless.ToDelete = true;
                         this.player.Money -= homeless.Cost;
                         this.soldiers.Add(new Soldier(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
@@ -365,6 +370,10 @@ namespace SiberianAnabasis.Screens
             {
                 foreach (var enemy in saveData.GetValue("enemies"))
                 {
+                    if ((bool)enemy.Dead)
+                    {
+                        continue;
+                    }
                     this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Direction)enemy.Direction, (int)enemy.Health, (int)enemy.Caliber));
                 }
             }
@@ -373,6 +382,10 @@ namespace SiberianAnabasis.Screens
             {
                 foreach (var soldier in saveData.GetValue("soldiers"))
                 {
+                    if ((bool)soldier.Dead)
+                    {
+                        continue;
+                    }
                     this.soldiers.Add(new Soldier((int)soldier.Hitbox.X, (int)soldier.Hitbox.Y, (Direction)soldier.Direction, (int)soldier.Health, (int)soldier.Caliber));
                 }
             }

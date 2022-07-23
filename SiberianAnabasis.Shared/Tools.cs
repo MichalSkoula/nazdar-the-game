@@ -8,6 +8,8 @@ namespace SiberianAnabasis.Shared
 {
     public static class Tools
     {
+        public static Random Rand = new Random();
+
         public static void ButtonsIterateWithKeys(Direction direction, Dictionary<string, Button> buttons)
         {
             // count the active buttons in collection
@@ -45,6 +47,11 @@ namespace SiberianAnabasis.Shared
 
                 i++;
             }
+        }
+
+        public static int GetRandom(int limit)
+        {
+            return Rand.Next(limit);
         }
     }
 }

@@ -13,11 +13,12 @@ namespace SiberianAnabasis
     {
         public static Dictionary<string, Texture2D> Images = new Dictionary<string, Texture2D>();
         public static Dictionary<string, SpriteFont> Fonts = new Dictionary<string, SpriteFont>();
-        public static Dictionary<string, SoundEffect> Sounds = new Dictionary<string, SoundEffect>();
-        public static Dictionary<string, Song> Songs = new Dictionary<string, Song>();
         public static Dictionary<string, Effect> Effects = new Dictionary<string, Effect>();
         public static Dictionary<string, TilesetGroup> TilesetGroups = new Dictionary<string, TilesetGroup>();
         public static Dictionary<string, TextureRegion2D> ParticleTextureRegions = new Dictionary<string, TextureRegion2D>();
+        public static Dictionary<string, List<Song>> SongsCollection = new Dictionary<string, List<Song>>();
+        public static Dictionary<string, List<SoundEffect>> SoundsCollection = new Dictionary<string, List<SoundEffect>>();
+        public static Dictionary<string, SoundEffect> Sounds = new Dictionary<string, SoundEffect>();
     }
 
     public class AssetsLoader
@@ -42,10 +43,52 @@ namespace SiberianAnabasis
             Assets.Fonts["Medium"] = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
             Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontPublicPixelLarge");
 
-            // load audio
+            // load sounds
             Assets.Sounds["Blip"] = content.Load<SoundEffect>("Sounds/blip");
-            Assets.Songs["Nature"] = content.Load<Song>("Sounds/nature");
-            Assets.Songs["Map"] = content.Load<Song>("Sounds/Map");
+            Assets.Sounds["Explosion"] = content.Load<SoundEffect>("Sounds/explosion");
+            Assets.Sounds["GunFire"] = content.Load<SoundEffect>("Sounds/gun_fire");
+            Assets.Sounds["Jump"] = content.Load<SoundEffect>("Sounds/jump");
+            Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coin");
+            Assets.SoundsCollection["EnemyDeaths"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/zombies/Death"),
+                content.Load<SoundEffect>("Sounds/zombies/Death2"),
+                content.Load<SoundEffect>("Sounds/zombies/Death3"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-6"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-15"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-16"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-17"),
+
+            };
+            Assets.SoundsCollection["EnemySpawns"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/zombies/Roar1"),
+                content.Load<SoundEffect>("Sounds/zombies/Roar2"),
+                content.Load<SoundEffect>("Sounds/zombies/Roar3"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-1"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-4"),
+                content.Load<SoundEffect>("Sounds/zombies/monster-9"),
+            };
+            Assets.SoundsCollection["SoldierDeaths"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/soldiers/die1"),
+                content.Load<SoundEffect>("Sounds/soldiers/hit1"),
+                content.Load<SoundEffect>("Sounds/soldiers/hit2"),
+                content.Load<SoundEffect>("Sounds/soldiers/hit3"),
+                content.Load<SoundEffect>("Sounds/soldiers/hit4"),
+                content.Load<SoundEffect>("Sounds/soldiers/hit5"),
+
+            };
+            Assets.Sounds["SoldierSpawn"] = content.Load<SoundEffect>("Sounds/soldiers/metal_03");
+
+            // load songs
+            Assets.SongsCollection["Menu"] = new List<Song> {
+                content.Load<Song>("Songs/lofiagain")
+            };
+            Assets.SongsCollection["Game"] = new List<Song>
+            {
+                content.Load<Song>("Songs/a_cup_of_tea"),
+                content.Load<Song>("Songs/bartender"),
+                content.Load<Song>("Songs/cue"),
+                content.Load<Song>("Songs/chill_lofi"),
+            };
 
             // load effects
             Assets.Effects["AllWhite"] = content.Load<Effect>("Effects/AllWhite");
