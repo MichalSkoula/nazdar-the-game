@@ -65,7 +65,6 @@
     <None Include="$(MSBuildThisFileDirectory)Content\Player\player_config.zip" />
     <None Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier.psd" />
     <None Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier_config.zip" />
-    <None Include="$(MSBuildThisFileDirectory)Content\Sounds\nature.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Content\Bullet\bullet_left.png" />
@@ -112,6 +111,5 @@
     <Content Include="$(MSBuildThisFileDirectory)Content\Soldier\soldier_right.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Soldier\sprite.png" />
     <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\blip.wav" />
-    <Content Include="$(MSBuildThisFileDirectory)Content\Sounds\Map.wav" />
   </ItemGroup>
 </Project>
