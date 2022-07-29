@@ -69,6 +69,10 @@ namespace SiberianAnabasis
             #else
                 this.LoadScreen(typeof(Screens.SplashScreen));
             #endif
+
+            System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
+            System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);
+            System.Diagnostics.Debug.WriteLine(GraphicsDevice.Adapter.CurrentDisplayMode.Width + " " + GraphicsDevice.Adapter.CurrentDisplayMode.Height);
         }
 
         protected override void LoadContent()
@@ -166,6 +170,9 @@ namespace SiberianAnabasis
                 Scale = 1f / ((float)Enums.Screen.Height / this.Window.ClientBounds.Height);
             }
 
+            // sometimes this helps for xbox
+            //dst = new Rectangle(0, 0, Enums.Screen.WidthDefault, Enums.Screen.HeightDefault);
+
             this.GraphicsDevice.SetRenderTarget(null);
             this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
 
@@ -173,7 +180,7 @@ namespace SiberianAnabasis
                 SpriteSortMode.Deferred,
                 BlendState.AlphaBlend,
                 SamplerState.PointClamp);
-            this.SpriteBatch.Draw(this.RenderTarget, dst, Color.White);
+            this.SpriteBatch.Draw(texture: this.RenderTarget, destinationRectangle: dst, color: Color.White);
             this.SpriteBatch.End();
         }
 
