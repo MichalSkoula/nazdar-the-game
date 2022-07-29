@@ -55,7 +55,7 @@ namespace SiberianAnabasis.Screens
 
             // play songs
             Audio.StopSong();
-            Audio.CurrentSongCollection = "Game";
+            Audio.CurrentSongCollection = this.dayPhase == DayPhase.Day ? "Day" : "Night";
 
             base.Initialize();
         }
@@ -86,7 +86,8 @@ namespace SiberianAnabasis.Screens
         private void UpdateEnemies()
         {
             // create enemy?
-            if (Tools.GetRandom(540) < 8 && this.dayPhase == DayPhase.Night)
+            // at night AND in first half on night AND random
+            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(256) < 8)
             {
                 Audio.PlayRandomSound("EnemySpawns");
 
@@ -266,6 +267,7 @@ namespace SiberianAnabasis.Screens
             this.dayPhaseTimer -= this.Game.DeltaTime;
             if (this.dayPhaseTimer <= 0)
             {
+                
                 if (this.dayPhase == DayPhase.Day)
                 {
                     this.dayPhase = DayPhase.Night;
@@ -277,6 +279,9 @@ namespace SiberianAnabasis.Screens
                     this.dayPhase = DayPhase.Day;
                     this.dayPhaseTimer = (int)DayNightLength.Day;
                 }
+
+                Audio.StopSong();
+                Audio.CurrentSongCollection = this.dayPhase == DayPhase.Day ? "Day" : "Night";
             }
         }
 

@@ -82,12 +82,20 @@ namespace SiberianAnabasis
             Assets.SongsCollection["Menu"] = new List<Song> {
                 content.Load<Song>("Songs/lofiagain")
             };
-            Assets.SongsCollection["Game"] = new List<Song>
+            Assets.SongsCollection["Day"] = new List<Song>
             {
                 content.Load<Song>("Songs/a_cup_of_tea"),
                 content.Load<Song>("Songs/bartender"),
                 content.Load<Song>("Songs/cue"),
                 content.Load<Song>("Songs/chill_lofi"),
+            };
+            Assets.SongsCollection["Night"] = new List<Song>
+            {
+                content.Load<Song>("Songs/metal/Dragged_Through_Hellfire"),
+                content.Load<Song>("Songs/metal/Fight_Them_Until_We_Cant"),
+                content.Load<Song>("Songs/metal/Oklahoma_Motel_Larvae"),
+                content.Load<Song>("Songs/metal/The_Reach_Of_Hunger"),
+                content.Load<Song>("Songs/metal/The_Recon_Mission"),
             };
 
             // load effects
