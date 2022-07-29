@@ -6,9 +6,8 @@ Monogame platform/strategic game (awesome).
 
 ## TODO:
 
-* https://github.com/MonoGame/MonoGame/issues/6333 xbox screen size problem
-* audio - metal at night and longer dayphases
 * buildings - different types of buildings and action = build that - like homeless => soldier...different class
+* day and night music - some transition, volume at least?
 * show in which village player is on map ... or simply levels? IDK
 
 ## NOTES:
@@ -32,3 +31,4 @@ Monogame platform/strategic game (awesome).
 * https://opengameart.org/content/monster-sound-effects-2 monster
 * https://opengameart.org/content/monster-sound-effects-pack monster
 * https://opengameart.org/content/80-cc0-rpg-sfx metal sound
+* https://opengameart.org/content/the-reach-of-hunger all metal songs

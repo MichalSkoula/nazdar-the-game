@@ -18,8 +18,8 @@
 
         public enum DayNightLength
         {
-            Night = 4,
-            Day = 8
+            Night = 16,
+            Day = 32
         }
 
         public enum ButtonSize

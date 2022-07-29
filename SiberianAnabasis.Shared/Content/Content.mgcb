@@ -227,6 +227,36 @@
 /processorParam:Quality=Best
 /build:Songs/lofiagain.ogg
 
+#begin Songs/metal/Dragged_Through_Hellfire.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/Dragged_Through_Hellfire.mp3
+
+#begin Songs/metal/Fight_Them_Until_We_Cant.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/Fight_Them_Until_We_Cant.mp3
+
+#begin Songs/metal/Oklahoma_Motel_Larvae.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/Oklahoma_Motel_Larvae.mp3
+
+#begin Songs/metal/The_Reach_Of_Hunger.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/The_Reach_Of_Hunger.mp3
+
+#begin Songs/metal/The_Recon_Mission.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/The_Recon_Mission.mp3
+
 #begin Sounds/blip.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
