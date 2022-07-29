@@ -6,6 +6,7 @@ Monogame platform/strategic game (awesome).
 
 ## TODO:
 
+* https://github.com/MonoGame/MonoGame/issues/6333 xbox screen size problem
 * audio - metal at night and longer dayphases
 * buildings - different types of buildings and action = build that - like homeless => soldier...different class
 * show in which village player is on map ... or simply levels? IDK
