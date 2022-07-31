@@ -6,7 +6,13 @@ Monogame platform/strategic game (awesome).
 
 ## TODO:
 
-* buildings - different types of buildings and action = build that - like homeless => soldier...different class
+* building - villagescreen - we can afford it, so go ahead and create that object
+	* also loading
+	* it should cover up building spot so no other building should be build there
+	* what...it should not be build, it should wait for builders!!!
+* different sound for hiring homeless - not metal
+* different sound for building building, laying foundations
+* decide controls - keyboard and gamepad
 * day and night music - some transition, volume at least?
 * show in which village player is on map ... or simply levels? IDK
 

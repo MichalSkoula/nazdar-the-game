@@ -20,12 +20,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Gamepad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Building.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Basecamp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BuildingSpot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Coin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Homeless.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Peasant.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Soldier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
