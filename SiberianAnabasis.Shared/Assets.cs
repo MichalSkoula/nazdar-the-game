@@ -30,6 +30,8 @@ namespace SiberianAnabasis
             Assets.Images["PlayerRight"] = content.Load<Texture2D>("Player/player_right");
             Assets.Images["SoldierLeft"] = content.Load<Texture2D>("Soldier/soldier_left");
             Assets.Images["SoldierRight"] = content.Load<Texture2D>("Soldier/soldier_right");
+            Assets.Images["PeasantLeft"] = content.Load<Texture2D>("Peasant/peasant_left");
+            Assets.Images["PeasantRight"] = content.Load<Texture2D>("Peasant/peasant_right");
             Assets.Images["EnemyLeft"] = content.Load<Texture2D>("Enemy/enemy_left");
             Assets.Images["EnemyRight"] = content.Load<Texture2D>("Enemy/enemy_right");
             Assets.Images["HomelessLeft"] = content.Load<Texture2D>("Homeless/homeless_left");

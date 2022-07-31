@@ -31,7 +31,8 @@ namespace SiberianAnabasis.Screens
         private List<Enemy> enemies = new List<Enemy>();
         private List<Soldier> soldiers = new List<Soldier>();
         private List<Homeless> homelesses = new List<Homeless>();
-        private List<Building> buildings = new List<Building>();
+        private List<Peasant> peasants = new List<Peasant>();
+        private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private List<Coin> coins = new List<Coin>();
 
         // day and night, timer
@@ -43,10 +44,18 @@ namespace SiberianAnabasis.Screens
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, Offset.Floor);
 
-            // load objects from tileset
-            foreach (var building in Assets.TilesetGroups["village1"].GetObjects("objects", "building"))
+            // load building spots from tileset
+            foreach (var buildingSpot in Assets.TilesetGroups["village1"].GetObjects("objects", "BuildingSpot"))
             {
-                this.buildings.Add(new Building((int)building.x, (int)building.y, (int)building.width, (int)building.height));
+                this.buildingSpots.Add(
+                    new BuildingSpot(
+                        (int)buildingSpot.x, 
+                        (int)buildingSpot.y, 
+                        (int)buildingSpot.width, 
+                        (int)buildingSpot.height, 
+                        (string)buildingSpot.type
+                    )
+                );
             }
 
             // set save slot and maybe load?
@@ -77,6 +86,7 @@ namespace SiberianAnabasis.Screens
 
             this.UpdateEnemies();
             this.UpdateSoldiers();
+            this.UpdatePeasants();
             this.UpdateHomelesses();
             this.UpdateCoins();
             this.UpdateCollisions();
@@ -87,7 +97,7 @@ namespace SiberianAnabasis.Screens
         {
             // create enemy?
             // at night AND in first half on night AND random
-            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(256) < 8)
+            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(2560000) < 8)
             {
                 Audio.PlayRandomSound("EnemySpawns");
 
@@ -115,6 +125,15 @@ namespace SiberianAnabasis.Screens
             foreach (var soldier in this.soldiers)
             {
                 soldier.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdatePeasants()
+        {
+            // update
+            foreach (var peasant in this.peasants)
+            {
+                peasant.Update(this.Game.DeltaTime);
             }
         }
 
@@ -158,10 +177,9 @@ namespace SiberianAnabasis.Screens
 
         private void UpdateCollisions()
         {
-            // enemies
+            // enemies and bullets
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
-                // enemies and bullets
                 foreach (Bullet bullet in this.player.Bullets)
                 {
                     if (enemy.Hitbox.Intersects(bullet.Hitbox))
@@ -176,8 +194,12 @@ namespace SiberianAnabasis.Screens
                         }
                     }
                 }
+            }
+            this.enemies.RemoveAll(p => p.ToDelete);
 
-                // enemies and player
+            // enemies and player
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            {
                 if (!enemy.ToDelete && this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.Dead = true;
@@ -190,13 +212,12 @@ namespace SiberianAnabasis.Screens
                     }
                 }
             }
-            
+            this.enemies.RemoveAll(p => p.ToDelete);
 
-            // soldiers
-            foreach (var soldier in this.soldiers.Where(soldier => soldier.Dead == false))
+            // enemies and soldiers
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
-                // enemies and soldiers
-                foreach (var enemy in this.enemies.Where(enemy => enemy.Dead == false))
+                foreach (var soldier in this.soldiers.Where(soldier => soldier.Dead == false))
                 {
                     if (enemy.Hitbox.Intersects(soldier.Hitbox))
                     {
@@ -212,6 +233,22 @@ namespace SiberianAnabasis.Screens
                         }
                     }
                 }
+                this.soldiers.RemoveAll(p => p.ToDelete);
+            }
+            this.enemies.RemoveAll(p => p.ToDelete);
+
+            // enemies and peasants
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            {
+                foreach (var peasant in this.peasants.Where(peasant => peasant.Dead == false))
+                {
+                    if (enemy.Hitbox.Intersects(peasant.Hitbox))
+                    {
+                        peasant.ToDelete = true;
+                        this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction, peasant.Health));
+                    }
+                }
+                this.peasants.RemoveAll(p => p.ToDelete);
             }
 
             // coins
@@ -227,13 +264,20 @@ namespace SiberianAnabasis.Screens
             }
             this.coins.RemoveAll(p => p.ToDelete);
 
-            // buildings
+            // buildingSpots
             this.player.Action = null;
-            foreach (var building in this.buildings)
+            foreach (var buildingSpot in this.buildingSpots)
             {
-                if (this.player.Hitbox.Intersects(building.Hitbox))
+                if (this.player.Hitbox.Intersects(buildingSpot.Hitbox))
                 {
                     this.player.Action = Enums.PlayerAction.Build;
+
+                    // build something?
+                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
+                    {
+                        Audio.PlaySound("SoldierSpawn");
+                        this.player.Money -= buildingSpot.Cost;
+                    }
                     break;
                 }
             }
@@ -245,21 +289,18 @@ namespace SiberianAnabasis.Screens
                 {
                     this.player.Action = Enums.PlayerAction.Hire;
 
-                    // hire homeless man?
+                    // hire homeless man? create peasant
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
                     {
                         Audio.PlaySound("SoldierSpawn");
                         homeless.ToDelete = true;
                         this.player.Money -= homeless.Cost;
-                        this.soldiers.Add(new Soldier(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
+                        this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
                     }
                     break;
                 }
             }
             this.homelesses.RemoveAll(p => p.ToDelete);
-
-            this.enemies.RemoveAll(p => p.ToDelete);
-            this.soldiers.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateDayPhase()
@@ -330,9 +371,9 @@ namespace SiberianAnabasis.Screens
             this.player.Draw(this.Game.SpriteBatch);
 
             // game objects
-            foreach (Building building in this.buildings)
+            foreach (BuildingSpot buildingSpot in this.buildingSpots)
             {
-                building.Draw(this.Game.SpriteBatch);
+                buildingSpot.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Enemy enemy in this.enemies)
@@ -348,6 +389,11 @@ namespace SiberianAnabasis.Screens
             foreach (Homeless homeless in this.homelesses)
             {
                 homeless.Draw(this.Game.SpriteBatch);
+            }
+
+            foreach (Peasant peasant in this.peasants)
+            {
+                peasant.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Coin coin in this.coins)
@@ -403,6 +449,14 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
+            if (saveData.ContainsKey("peasants"))
+            {
+                foreach (var peasant in saveData.GetValue("peasants"))
+                {
+                    this.peasants.Add(new Peasant((int)peasant.Hitbox.X, (int)peasant.Hitbox.Y, (Direction)peasant.Direction, (int)peasant.Health));
+                }
+            }
+
             if (saveData.ContainsKey("coins"))
             {
                 foreach (var coin in saveData.GetValue("coins"))
@@ -428,6 +482,7 @@ namespace SiberianAnabasis.Screens
                 enemies = this.enemies,
                 soldiers = this.soldiers,
                 homelesses = this.homelesses,
+                peasants = this.peasants,
                 coins = this.coins,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,

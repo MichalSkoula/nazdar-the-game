@@ -41,6 +41,17 @@
             Build
         }
 
+        public static class Building
+        {
+            public enum Type
+            {
+                Basecamp,
+                Armory,
+                Farm,
+                Hardware
+            }
+        }
+
         public static class Save
         {
             public const string Slot1 = "save_slot_1.json";
