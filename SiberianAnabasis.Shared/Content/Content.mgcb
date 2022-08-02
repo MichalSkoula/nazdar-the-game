@@ -14,6 +14,18 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Buildings/Basecamp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Basecamp.png
+
 #begin Bullet/bullet_left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -86,8 +98,11 @@
 /processorParam:TextureFormat=Color
 /build:Enemy/enemy_right.png
 
-#begin Envs/first-village.tmx
-/copy:Envs/first-village.tmx
+#begin Envs/1_village.tmx
+/copy:Envs/1_village.tmx
+
+#begin Envs/1_village.tsx
+/copy:Envs/1_village.tsx
 
 #begin Envs/Rocky Roads/tileset forest.png
 /importer:TextureImporter
@@ -101,8 +116,17 @@
 /processorParam:TextureFormat=Color
 /build:Envs/Rocky Roads/tileset forest.png
 
-#begin Envs/tileset forest.tsx
-/copy:Envs/tileset forest.tsx
+#begin Envs/tileset1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Envs/tileset1.png
 
 #begin Fonts/fontPublicPixelLarge.spritefont
 /importer:FontDescriptionImporter
