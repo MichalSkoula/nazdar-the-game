@@ -24,12 +24,6 @@ namespace SiberianAnabasis.Objects
                 case "Armory":
                     this.Type = Building.Type.Armory;
                     break;
-                case "Farm":
-                    this.Type = Building.Type.Farm;
-                    break;
-                case "Hardware":
-                    this.Type = Building.Type.Hardware;
-                    break;
                 default:
                     throw new ArgumentException();
             }
@@ -37,7 +31,7 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawRectangle(this.Hitbox, Color.Wheat);
+            //spriteBatch.DrawRectangle(this.Hitbox, Color.Wheat * 0.2f);
         }
 
         public new void Update(float deltaTime)

@@ -47,8 +47,12 @@
             {
                 Basecamp,
                 Armory,
-                Farm,
-                Hardware
+            }
+
+            public enum Status
+            {
+                InProcess,
+                Built
             }
         }
 

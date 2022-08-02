@@ -4,18 +4,6 @@ Monogame platform/strategic game (awesome).
 
 ![obrazek](https://user-images.githubusercontent.com/5922575/170603421-4e43bfbb-54b7-4a4a-a8b8-801adf2a7a9d.png)
 
-## TODO:
-
-* building - villagescreen - we can afford it, so go ahead and create that object
-	* also loading
-	* it should cover up building spot so no other building should be build there
-	* what...it should not be build, it should wait for builders!!!
-* different sound for hiring homeless - not metal
-* different sound for building building, laying foundations
-* decide controls - keyboard and gamepad
-* day and night music - some transition, volume at least?
-* show in which village player is on map ... or simply levels? IDK
-
 ## NOTES:
 
 * MonoGame 3.8
@@ -24,8 +12,12 @@ Monogame platform/strategic game (awesome).
 
 ## CREDITS 
 
+### images
 * https://0x72.itch.io/pixeldudesmaker CC-29 color palette
 * https://essssam.itch.io/rocky-roads
+* https://mariaparragames.itch.io/free-retro-city-assetpack
+
+### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue
 * https://opengameart.org/content/chill-lofi-inspired chill_lofi
 * https://opengameart.org/content/lofi-again lofiagain

@@ -12,7 +12,7 @@ namespace SiberianAnabasis.Objects
     {
         private bool isFast = false;
         private int speed = 61;
-        private int basecampRadius = 100;
+        private int basecampRadius = 128;
 
         private Animation anim;
 

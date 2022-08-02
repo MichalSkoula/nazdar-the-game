@@ -39,6 +39,7 @@ namespace SiberianAnabasis
             Assets.Images["BulletLeft"] = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
             Assets.Images["Coin"] = content.Load<Texture2D>("Coin/coin");
+            Assets.Images["Basecamp"] = content.Load<Texture2D>("Buildings/Basecamp");
 
             // load fonts
             Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
@@ -108,9 +109,9 @@ namespace SiberianAnabasis
             // load tilesets
             // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
             Assets.TilesetGroups["village1"] = new TilesetGroup(
-                content.RootDirectory + "\\Envs\\first-village.tmx",
-                content.RootDirectory + "\\Envs\\tileset forest.tsx", 
-                content.Load<Texture2D>("Envs/Rocky Roads/tileset forest")
+                content.RootDirectory + "\\Envs\\1_village.tmx",
+                content.RootDirectory + "\\Envs\\1_village.tsx", 
+                content.Load<Texture2D>("Envs/tileset1")
             );
 
             // load particle textures
