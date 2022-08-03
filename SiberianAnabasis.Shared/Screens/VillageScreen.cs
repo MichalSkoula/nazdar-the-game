@@ -32,9 +32,12 @@ namespace SiberianAnabasis.Screens
         private List<Soldier> soldiers = new List<Soldier>();
         private List<Homeless> homelesses = new List<Homeless>();
         private List<Peasant> peasants = new List<Peasant>();
+
         private List<Coin> coins = new List<Coin>();
+
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private Basecamp basecamp;
+        private List<Armory> armories = new List<Armory>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
@@ -96,6 +99,8 @@ namespace SiberianAnabasis.Screens
             {
                 this.basecamp.Update(this.Game.DeltaTime);
             }
+
+            this.UpdateArmories();
         }
 
         private void UpdateEnemies()
@@ -126,7 +131,7 @@ namespace SiberianAnabasis.Screens
 
         private void UpdateSoldiers()
         {
-            foreach (var soldier in this.soldiers)
+            foreach (Soldier soldier in this.soldiers)
             {
                 soldier.Update(this.Game.DeltaTime);
             }
@@ -134,7 +139,7 @@ namespace SiberianAnabasis.Screens
 
         private void UpdatePeasants()
         {
-            foreach (var peasant in this.peasants)
+            foreach (Peasant peasant in this.peasants)
             {
                 peasant.Update(this.Game.DeltaTime);
             }
@@ -157,7 +162,7 @@ namespace SiberianAnabasis.Screens
             }
 
             // update 
-            foreach (var homeless in this.homelesses)
+            foreach (Homeless homeless in this.homelesses)
             {
                 homeless.Update(this.Game.DeltaTime);
             }
@@ -172,15 +177,18 @@ namespace SiberianAnabasis.Screens
             }
 
             // update 
-            foreach (var coin in this.coins)
+            foreach (Coin coin in this.coins)
             {
                 coin.Update(this.Game.DeltaTime);
             }
         }
 
-        private void UpdateBasecamp()
-        {
-            this.basecamp.Update(this.Game.DeltaTime);
+        private void UpdateArmories()
+        { 
+            foreach (Armory armory in this.armories)
+            {
+                armory.Update(this.Game.DeltaTime);
+            }
         }
 
         private void UpdateCollisions()
@@ -272,36 +280,38 @@ namespace SiberianAnabasis.Screens
             }
             this.coins.RemoveAll(p => p.ToDelete);
 
-            // buildingSpots
+            // buildingSpots - can we build something?
             this.player.Action = null;
             foreach (var buildingSpot in this.buildingSpots)
             {
-                if (this.player.Hitbox.Intersects(buildingSpot.Hitbox))
+                if (!this.player.Hitbox.Intersects(buildingSpot.Hitbox))
+                {
+                    continue;
+                }
+
+                // Basecamp?
+                if (buildingSpot.Type == Building.Type.Basecamp && this.basecamp == null)
                 {
                     this.player.Action = Enums.PlayerAction.Build;
 
-                    // build something?
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
                     {
-                        switch (buildingSpot.Type)
-                        {
-                            case Building.Type.Basecamp:
-                                if (this.basecamp == null)
-                                {
-                                    Audio.PlaySound("SoldierSpawn");
-                                    this.player.Money -= buildingSpot.Cost;
-                                    this.basecamp = new Basecamp(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
-                                }
-                                break;
-
-                            case Building.Type.Armory:
-                                // check hitbox with existing armories...
-                                break;
-                            default:
-                                break;
-                        }
+                        Audio.PlaySound("SoldierSpawn");
+                        this.player.Money -= buildingSpot.Cost;
+                        this.basecamp = new Basecamp(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                     }
-                    break;
+                }
+                // Armory?
+                else if (buildingSpot.Type == Building.Type.Armory && this.armories.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox)).Count() == 0)
+                {                    
+                    this.player.Action = Enums.PlayerAction.Build;
+
+                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
+                    {
+                        Audio.PlaySound("SoldierSpawn");
+                        this.player.Money -= buildingSpot.Cost;
+                        this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                    }
                 }
             }
 
@@ -390,7 +400,6 @@ namespace SiberianAnabasis.Screens
             // messages
             Game.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
 
-
             // game objects
             foreach (BuildingSpot buildingSpot in this.buildingSpots)
             {
@@ -400,6 +409,11 @@ namespace SiberianAnabasis.Screens
             if (this.basecamp != null)
             {
                 this.basecamp.Draw(this.Game.SpriteBatch);
+            }
+
+            foreach (Armory armory in this.armories)
+            {
+                armory.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Enemy enemy in this.enemies)
@@ -500,9 +514,17 @@ namespace SiberianAnabasis.Screens
                 this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
             }
 
-            if (saveData.ContainsKey("basecamp"))
+            if (saveData.ContainsKey("basecamp") && saveData.GetValue("basecamp") != null)
             {
                 this.basecamp = new Basecamp((int)saveData.GetValue("basecamp").X, (int)saveData.GetValue("basecamp").Y, (Building.Status)saveData.GetValue("basecamp").Status);
+            }
+
+            if (saveData.ContainsKey("armories"))
+            {
+                foreach (var armory in saveData.GetValue("armories"))
+                {
+                    this.armories.Add(new Armory((int)armory.Hitbox.X, (int)armory.Hitbox.Y, (Building.Status)armory.Status));
+                }
             }
 
             Game.MessageBuffer.AddMessage("Game loaded");
@@ -518,6 +540,7 @@ namespace SiberianAnabasis.Screens
                 homelesses = this.homelesses,
                 peasants = this.peasants,
                 basecamp = this.basecamp,
+                armories = this.armories,
                 coins = this.coins,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,

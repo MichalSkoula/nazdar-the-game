@@ -40,6 +40,7 @@ namespace SiberianAnabasis
             Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
             Assets.Images["Coin"] = content.Load<Texture2D>("Coin/coin");
             Assets.Images["Basecamp"] = content.Load<Texture2D>("Buildings/Basecamp");
+            Assets.Images["Armory"] = content.Load<Texture2D>("Buildings/Armory");
 
             // load fonts
             Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");

@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Gamepad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Armory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Basecamp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BuildingSpot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
