@@ -23,6 +23,7 @@ namespace SiberianAnabasis.Objects
                     break;
                 case "Armory":
                     this.Type = Building.Type.Armory;
+                    this.Cost = Armory.Cost;
                     break;
                 default:
                     throw new ArgumentException();
