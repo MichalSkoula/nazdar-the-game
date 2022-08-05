@@ -141,10 +141,43 @@ namespace SiberianAnabasis.Screens
         {
             foreach (Peasant peasant in this.peasants)
             {
+                peasant.IsBuildingHere = null;
+            }
+
+            // something to build?
+            foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(armory);
+            }
+            if (this.basecamp != null && this.basecamp.Status == Building.Status.InProcess)
+            {
+                this.Build(this.basecamp);
+            }
+
+            foreach (Peasant peasant in this.peasants)
+            {
                 peasant.Update(this.Game.DeltaTime);
             }
         }
 
+        private void Build(BaseObject building)
+        {
+            // is someone building it?
+            building.IsBeingBuilt = false;
+            foreach (var peasant in this.peasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
+            {
+                building.IsBeingBuilt = true;
+                peasant.IsBuildingHere = building.Hitbox;
+                break;
+            }
+
+            // noone is building it
+            if (building.IsBeingBuilt == false && this.peasants.Count > 0)
+            {
+                var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
+                nearestPeasant.IsBuildingHere = building.Hitbox;
+            }
+        }
         private void UpdateHomelesses()
         {
             // create new?
@@ -315,25 +348,28 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
-            // homelesses
-            foreach (var homeless in this.homelesses)
+            // hire homelesses?
+            if (this.player.Action == null)
             {
-                if (this.player.Hitbox.Intersects(homeless.Hitbox))
+                foreach (var homeless in this.homelesses)
                 {
-                    this.player.Action = Enums.PlayerAction.Hire;
-
-                    // hire homeless man? create peasant
-                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
+                    if (this.player.Hitbox.Intersects(homeless.Hitbox))
                     {
-                        Audio.PlaySound("SoldierSpawn");
-                        homeless.ToDelete = true;
-                        this.player.Money -= homeless.Cost;
-                        this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
+                        this.player.Action = Enums.PlayerAction.Hire;
+
+                        // hire homeless man? create peasant
+                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
+                        {
+                            Audio.PlaySound("SoldierSpawn");
+                            homeless.ToDelete = true;
+                            this.player.Money -= homeless.Cost;
+                            this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
+                        }
+                        break;
                     }
-                    break;
                 }
+                this.homelesses.RemoveAll(p => p.ToDelete);
             }
-            this.homelesses.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateDayPhase()
