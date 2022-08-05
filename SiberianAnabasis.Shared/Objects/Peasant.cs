@@ -12,7 +12,8 @@ namespace SiberianAnabasis.Objects
     {
         private bool isFast = false;
         private int speed = 61;
-        private int basecampRadius = 128;
+        private int basecampRadius = 64;
+        public Rectangle? IsBuildingHere = null;
 
         private Animation anim;
 
@@ -66,28 +67,41 @@ namespace SiberianAnabasis.Objects
 
             this.anim.Update(deltaTime);
 
-            // always run towards basecamp
-            if (this.X < VillageScreen.MapWidth / 2 - this.basecampRadius)
-            {
-                this.Direction = Direction.Right;
-            } 
-            else if (this.X > VillageScreen.MapWidth / 2 + this.basecampRadius)
-            {
-                this.Direction = Direction.Left;
-            }
+            this.isFast = true;
 
-            // fast, but when near the base, can be slow and randomly change direction
-            if (this.X < VillageScreen.MapWidth / 2 + this.basecampRadius && this.X > VillageScreen.MapWidth / 2 - this.basecampRadius)
+            // is he building something? should run there
+            if (this.IsBuildingHere.HasValue)
             {
-                this.isFast = false;
-                if (Tools.GetRandom(128) < 2)
+                if (this.X < IsBuildingHere.GetValueOrDefault().X)
                 {
-                    this.ChangeDirection();
+                    this.Direction = Direction.Right;
                 }
-            } 
+                if (this.X >= (IsBuildingHere.GetValueOrDefault().X + IsBuildingHere.GetValueOrDefault().Width - this.Width))
+                {
+                    this.Direction = Direction.Left;
+                }
+            }
             else
             {
-                this.isFast = true;
+                // otherwise always run towards basecamp
+                if (this.X < VillageScreen.MapWidth / 2 - this.basecampRadius)
+                {
+                    this.Direction = Direction.Right;
+                }
+                else if (this.X > VillageScreen.MapWidth / 2 + this.basecampRadius)
+                {
+                    this.Direction = Direction.Left;
+                }
+
+                // when near the base, can be slow and randomly change direction
+                if (this.X < VillageScreen.MapWidth / 2 + this.basecampRadius && this.X > VillageScreen.MapWidth / 2 - this.basecampRadius)
+                {
+                    this.isFast = false;
+                    if (Tools.GetRandom(128) < 2)
+                    {
+                        this.ChangeDirection();
+                    }
+                }
             }
         }
 

@@ -13,6 +13,8 @@ namespace SiberianAnabasis.Objects
 
         public bool ToDelete { get; set; }
 
+        public bool IsBeingBuilt { get; set; }
+
         // draw colors and alpha
         public Color Color { private get; set; } = Color.White;
         public float Alpha { private get; set; } = 1;

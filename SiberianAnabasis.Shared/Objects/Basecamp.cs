@@ -10,6 +10,7 @@ namespace SiberianAnabasis.Objects
     public class Basecamp : BaseObject
     {
         public const int Cost = 1;
+        public float TimeToBuilt = 10;
         public Building.Type Type = Building.Type.Basecamp;
         public Building.Status Status = Building.Status.InProcess;
 
@@ -28,6 +29,17 @@ namespace SiberianAnabasis.Objects
         public new void Update(float deltaTime)
         {
             this.Alpha = this.Status == Building.Status.InProcess ? 0.25f : 1;
+
+            if (this.TimeToBuilt > 0 && this.IsBeingBuilt)
+            {
+                this.TimeToBuilt -= deltaTime;
+            }
+
+            if (this.TimeToBuilt <= 0)
+            {
+                this.Status = Building.Status.Built;
+            }
+
             base.Update(deltaTime);            
         }
     }
