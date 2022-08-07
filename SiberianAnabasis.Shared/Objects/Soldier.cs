@@ -8,7 +8,7 @@ using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
 {
-    public class Soldier : BaseObject
+    public class Soldier : BasePerson
     {
         private int speed = 100;
 

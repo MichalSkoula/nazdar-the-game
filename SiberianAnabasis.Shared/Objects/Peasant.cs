@@ -8,11 +8,11 @@ using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
 {
-    public class Peasant : BaseObject
+    public class Peasant : BasePerson
     {
         private bool isFast = false;
         private int speed = 61;
-        private int basecampRadius = 64;
+        private int centerRadius = 96;
         public Rectangle? IsBuildingHere = null;
 
         private Animation anim;
@@ -83,18 +83,18 @@ namespace SiberianAnabasis.Objects
             }
             else
             {
-                // otherwise always run towards basecamp
-                if (this.X < VillageScreen.MapWidth / 2 - this.basecampRadius)
+                // otherwise always run towards town center
+                if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + this.basecampRadius)
+                else if (this.X > VillageScreen.MapWidth / 2 + this.centerRadius)
                 {
                     this.Direction = Direction.Left;
                 }
 
                 // when near the base, can be slow and randomly change direction
-                if (this.X < VillageScreen.MapWidth / 2 + this.basecampRadius && this.X > VillageScreen.MapWidth / 2 - this.basecampRadius)
+                if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
                 {
                     this.isFast = false;
                     if (Tools.GetRandom(128) < 2)

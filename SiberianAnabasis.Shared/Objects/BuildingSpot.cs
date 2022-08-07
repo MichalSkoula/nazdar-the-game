@@ -6,7 +6,7 @@ using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
 {
-    public class BuildingSpot : BaseObject
+    public class BuildingSpot : BaseBuilding
     {
         public Building.Type Type;
         public int Cost;
@@ -17,9 +17,9 @@ namespace SiberianAnabasis.Objects
             
             switch (type)
             {
-                case "Basecamp":
-                    this.Type = Building.Type.Basecamp;
-                    this.Cost = Basecamp.Cost;
+                case "Center":
+                    this.Type = Building.Type.Center;
+                    this.Cost = Center.Cost;
                     break;
                 case "Armory":
                     this.Type = Building.Type.Armory;

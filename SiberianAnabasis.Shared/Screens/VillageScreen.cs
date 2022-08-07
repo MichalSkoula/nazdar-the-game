@@ -36,12 +36,17 @@ namespace SiberianAnabasis.Screens
         private List<Coin> coins = new List<Coin>();
 
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
-        private Basecamp basecamp;
+        private Center center;
         private List<Armory> armories = new List<Armory>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
+
+        // some settings
+        private int newEnemyProbability = 256;
+        private int newHomelessProbability = 2048;
+        private int newCoinProbability = 1024;
 
         public override void Initialize()
         {
@@ -95,9 +100,9 @@ namespace SiberianAnabasis.Screens
             this.UpdateCollisions();
             this.UpdateDayPhase();
 
-            if (this.basecamp != null)
+            if (this.center != null)
             {
-                this.basecamp.Update(this.Game.DeltaTime);
+                this.center.Update(this.Game.DeltaTime);
             }
 
             this.UpdateArmories();
@@ -107,9 +112,10 @@ namespace SiberianAnabasis.Screens
         {
             // create enemy?
             // at night AND in first half on night AND random
-            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(2560000) < 8)
+            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(this.newEnemyProbability) == 1)
             {
                 Audio.PlayRandomSound("EnemySpawns");
+                Game.MessageBuffer.AddMessage("New enemy!", MessageType.Danger);
 
                 // choose direction
                 if (Tools.GetRandom(2) == 0)
@@ -149,9 +155,9 @@ namespace SiberianAnabasis.Screens
             {
                 this.Build(armory);
             }
-            if (this.basecamp != null && this.basecamp.Status == Building.Status.InProcess)
+            if (this.center != null && this.center.Status == Building.Status.InProcess)
             {
-                this.Build(this.basecamp);
+                this.Build(this.center);
             }
 
             foreach (Peasant peasant in this.peasants)
@@ -160,7 +166,7 @@ namespace SiberianAnabasis.Screens
             }
         }
 
-        private void Build(BaseObject building)
+        private void Build(BaseBuilding building)
         {
             // is someone building it?
             building.IsBeingBuilt = false;
@@ -181,8 +187,9 @@ namespace SiberianAnabasis.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            if (Tools.GetRandom(2000) < 2)
+            if (Tools.GetRandom(this.newHomelessProbability) == 1)
             {
+                Game.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
                 // choose side 
                 if (Tools.GetRandom(2) == 0)
                 {
@@ -204,8 +211,9 @@ namespace SiberianAnabasis.Screens
         private void UpdateCoins()
         {
             // create new?
-            if (Tools.GetRandom(1000) < 2)
+            if (Tools.GetRandom(this.newCoinProbability) == 1)
             {
+                Game.MessageBuffer.AddMessage("New coin!", MessageType.Opportunity);
                 this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
             }
 
@@ -239,7 +247,7 @@ namespace SiberianAnabasis.Screens
                         {
                             enemy.Dead = true;
                             Audio.PlayRandomSound("EnemyDeaths");
-                            Game.MessageBuffer.AddMessage("Bullet kill");
+                            Game.MessageBuffer.AddMessage("Bullet kill", MessageType.Success);
                         }
                     }
                 }
@@ -253,7 +261,7 @@ namespace SiberianAnabasis.Screens
                 {
                     enemy.Dead = true;
                     Audio.PlayRandomSound("EnemyDeaths");
-                    Game.MessageBuffer.AddMessage("Bare hands kill");
+                    Game.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
 
                     if (!this.player.TakeHit(enemy.Caliber))
                     {
@@ -272,11 +280,13 @@ namespace SiberianAnabasis.Screens
                     {
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
+                            Game.MessageBuffer.AddMessage("Enemy killed by soldier", MessageType.Success);
                             Audio.PlayRandomSound("EnemyDeaths");
                             enemy.Dead = true;
                         }
-                        else if (!soldier.TakeHit(enemy.Caliber))
+                        if (!soldier.TakeHit(enemy.Caliber))
                         {
+                            Game.MessageBuffer.AddMessage("Soldier killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             soldier.Dead = true;
                         }
@@ -293,6 +303,7 @@ namespace SiberianAnabasis.Screens
                 {
                     if (enemy.Hitbox.Intersects(peasant.Hitbox))
                     {
+                        Game.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
                         peasant.ToDelete = true;
                         this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction, peasant.Health));
                     }
@@ -305,6 +316,7 @@ namespace SiberianAnabasis.Screens
             {
                 if (this.player.Hitbox.Intersects(coin.Hitbox))
                 {
+                    Game.MessageBuffer.AddMessage("Coin acquired", MessageType.Success);
                     Audio.PlaySound("Coin");
                     this.player.Money++;
                     coin.ToDelete = true;
@@ -322,16 +334,17 @@ namespace SiberianAnabasis.Screens
                     continue;
                 }
 
-                // Basecamp?
-                if (buildingSpot.Type == Building.Type.Basecamp && this.basecamp == null)
+                // Center?
+                if (buildingSpot.Type == Building.Type.Center && this.center == null)
                 {
                     this.player.Action = Enums.PlayerAction.Build;
 
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
                     {
+                        Game.MessageBuffer.AddMessage("Building started", MessageType.Info);
                         Audio.PlaySound("SoldierSpawn");
                         this.player.Money -= buildingSpot.Cost;
-                        this.basecamp = new Basecamp(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
+                        this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                     }
                 }
                 // Armory?
@@ -341,6 +354,7 @@ namespace SiberianAnabasis.Screens
 
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
                     {
+                        Game.MessageBuffer.AddMessage("Building started", MessageType.Info);
                         Audio.PlaySound("SoldierSpawn");
                         this.player.Money -= buildingSpot.Cost;
                         this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -360,6 +374,7 @@ namespace SiberianAnabasis.Screens
                         // hire homeless man? create peasant
                         if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
                         {
+                            Game.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
                             Audio.PlaySound("SoldierSpawn");
                             homeless.ToDelete = true;
                             this.player.Money -= homeless.Cost;
@@ -380,11 +395,13 @@ namespace SiberianAnabasis.Screens
                 
                 if (this.dayPhase == DayPhase.Day)
                 {
+                    Game.MessageBuffer.AddMessage("Brace yourself", MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
                 }
                 else
                 {
+                    Game.MessageBuffer.AddMessage("New dawn", MessageType.Info);
                     this.player.Days++;
                     this.dayPhase = DayPhase.Day;
                     this.dayPhaseTimer = (int)DayNightLength.Day;
@@ -410,27 +427,43 @@ namespace SiberianAnabasis.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 10),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                "Days " + this.player.Days.ToString(),
-               new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
+               new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 10),
                Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Timer: " + Math.Ceiling(this.dayPhaseTimer).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 30),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Health: " + (this.player.Health).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 40),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 30),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Money: " + (this.player.Money).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 50),
+                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 40),
+                Color.Black);
+
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Homelesses: " + (this.homelesses.Count).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X + 450, Offset.StatusBar),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Peasants: " + (this.peasants.Count).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X + 450, Offset.StatusBar + 10),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Soldiers: " + (this.soldiers.Count).ToString(),
+                new Vector2(10 - this.camera.Transform.Translation.X + 450, Offset.StatusBar + 20),
                 Color.Black);
 
             // messages
@@ -442,9 +475,9 @@ namespace SiberianAnabasis.Screens
                 buildingSpot.Draw(this.Game.SpriteBatch);
             }
 
-            if (this.basecamp != null)
+            if (this.center != null)
             {
-                this.basecamp.Draw(this.Game.SpriteBatch);
+                this.center.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Armory armory in this.armories)
@@ -550,9 +583,9 @@ namespace SiberianAnabasis.Screens
                 this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
             }
 
-            if (saveData.ContainsKey("basecamp") && saveData.GetValue("basecamp") != null)
+            if (saveData.ContainsKey("center") && saveData.GetValue("center") != null)
             {
-                this.basecamp = new Basecamp((int)saveData.GetValue("basecamp").X, (int)saveData.GetValue("basecamp").Y, (Building.Status)saveData.GetValue("basecamp").Status);
+                this.center = new Center((int)saveData.GetValue("center").X, (int)saveData.GetValue("center").Y, (Building.Status)saveData.GetValue("center").Status);
             }
 
             if (saveData.ContainsKey("armories"))
@@ -563,7 +596,7 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
-            Game.MessageBuffer.AddMessage("Game loaded");
+            Game.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
         }
 
         private void Save()
@@ -575,7 +608,7 @@ namespace SiberianAnabasis.Screens
                 soldiers = this.soldiers,
                 homelesses = this.homelesses,
                 peasants = this.peasants,
-                basecamp = this.basecamp,
+                center = this.center,
                 armories = this.armories,
                 coins = this.coins,
                 dayPhase = this.dayPhase,

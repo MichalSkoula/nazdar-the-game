@@ -11,7 +11,7 @@ using MonoGame.Extended;
 
 namespace SiberianAnabasis.Objects
 {
-    public class Player : BaseObject
+    public class Player : BasePerson
     {
         private int speed = 121;
 
