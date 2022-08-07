@@ -13,8 +13,6 @@ namespace SiberianAnabasis.Objects
 
         public bool ToDelete { get; set; }
 
-        public bool IsBeingBuilt { get; set; }
-
         // draw colors and alpha
         public Color Color { private get; set; } = Color.White;
         public float Alpha { private get; set; } = 1;
@@ -23,27 +21,6 @@ namespace SiberianAnabasis.Objects
             get
             {
                 return this.Color * this.Alpha;
-            }
-        }
-
-        // dying ... ttd - time to die
-        private float ttd = 0f;
-        private bool dead = false;
-        public bool Dead
-        {
-            get
-            {
-                return this.dead;
-            }
-            set
-            {
-                this.dead = value;
-                if (this.dead == true && this.ttd == 0)
-                {
-                    this.Color = Color.Red;
-                    this.Alpha = 0.2f;
-                    this.ttd = 3;
-                }
             }
         }
 
@@ -102,35 +79,7 @@ namespace SiberianAnabasis.Objects
         protected Texture2D Sprite { get; set; }
         protected ParticleSource particleBlood;
 
-        // base update method - should be called as base.Update() 
-        public void Update(float deltaTime)
-        {
-            if (this.dead)
-            {
-                this.ttd -= deltaTime;
-                if (this.ttd <= 0)
-                {
-                    this.ToDelete = true;
-                }
-            }
-        }
-
         public abstract void Draw(SpriteBatch spriteBatch);
-
-        public void DrawHealth(SpriteBatch spriteBatch)
-        {
-            if (this.Dead)
-            {
-                return;
-            }
-
-            // border
-            spriteBatch.DrawRectangle(new Rectangle(this.X, this.Y - 6, this.Width, 4), Color.Black * this.Alpha);
-
-            // inside
-            int inside = (int)((this.Health / 100f) * (this.Width - 2));
-            spriteBatch.DrawRectangle(new Rectangle(this.X + 1, this.Y - 5, inside, 2), Color.Green * this.Alpha);
-        }
 
         // returns true if it can take hit
         // returns false if it should die

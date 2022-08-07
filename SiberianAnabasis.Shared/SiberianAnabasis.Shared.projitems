@@ -21,7 +21,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Armory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Objects\Basecamp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseBuilding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Center.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BasePerson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BuildingSpot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />

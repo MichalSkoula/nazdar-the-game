@@ -29,7 +29,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="3" name="BuildingSpot" type="Basecamp" x="1248" y="224" width="64" height="48"/>
+  <object id="3" name="BuildingSpot" type="Center" x="1248" y="224" width="64" height="48"/>
   <object id="6" name="BuildingSpot" type="Armory" x="1520" y="240" width="32" height="32"/>
   <object id="9" name="BuildingSpot" type="Armory" x="1056" y="240" width="32" height="32"/>
  </objectgroup>

@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using SiberianAnabasis.Messages;
 using SiberianAnabasis.Shared;
-using SiberianAnabasis.Shared.Messages;
 using System;
 
 namespace SiberianAnabasis

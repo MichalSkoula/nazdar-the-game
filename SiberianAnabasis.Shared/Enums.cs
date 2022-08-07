@@ -18,8 +18,8 @@
 
         public enum DayNightLength
         {
-            Night = 16,
-            Day = 32
+            Night = 8,
+            Day = 16
         }
 
         public enum ButtonSize
@@ -41,11 +41,20 @@
             Build
         }
 
+        public enum MessageType
+        {
+            Info,
+            Success,
+            Fail,
+            Danger,
+            Opportunity
+        }
+
         public static class Building
         {
             public enum Type
             {
-                Basecamp,
+                Center,
                 Armory,
             }
 
@@ -68,7 +77,7 @@
             public const int StatusBar = 290;
             public const int Floor = 252;
             public const int Floor2 = 260;
-            public const int MessagesX = Screen.Width - 200;
+            public const int MessagesX = Screen.Width - 230;
 
             public static int MenuX = 20;
             public static int MenuY = 20;
