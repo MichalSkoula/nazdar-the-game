@@ -15,7 +15,7 @@ namespace SiberianAnabasis.Objects
 
         // draw colors and alpha
         public Color Color { private get; set; } = Color.White;
-        public float Alpha { private get; set; } = 1;
+        public float Alpha { protected get; set; } = 1;
         public Color FinalColor
         {
             get
@@ -77,26 +77,8 @@ namespace SiberianAnabasis.Objects
 
         // assets
         protected Texture2D Sprite { get; set; }
-        protected ParticleSource particleBlood;
-
+        
         public abstract void Draw(SpriteBatch spriteBatch);
-
-        // returns true if it can take hit
-        // returns false if it should die
-        public bool TakeHit(int caliber)
-        {
-            this.particleBlood.Run(100);
-
-            if (this.Health - caliber > 0)
-            {
-                this.Health -= caliber;
-                return true;
-            }
-
-            this.Health = 0;
-
-            return false;
-        }
 
         public void ChangeDirection()
         {

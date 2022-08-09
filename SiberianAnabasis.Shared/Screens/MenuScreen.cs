@@ -196,7 +196,7 @@ namespace SiberianAnabasis.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 50, Offset.MenuFooter), Color.Gray);
 
             // messages
-            this.Game.MessageBuffer.Draw(Game.SpriteBatch);
+            Game1.MessageBuffer.Draw(Game.SpriteBatch);
 
             this.Game.DrawEnd();
         }

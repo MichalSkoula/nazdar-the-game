@@ -21,9 +21,11 @@ namespace SiberianAnabasis.Objects
                 this.TimeToBuilt -= deltaTime;
             }
 
-            if (this.TimeToBuilt <= 0)
+            if (this.TimeToBuilt < 0)
             {
                 this.Status = Building.Status.Built;
+                this.TimeToBuilt = 0;
+                Game1.MessageBuffer.AddMessage("Building built", MessageType.Success);
             }
         }
     }

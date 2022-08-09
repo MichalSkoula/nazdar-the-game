@@ -76,7 +76,7 @@ namespace SiberianAnabasis.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
-            this.DrawHealth(spriteBatch);
+            //this.DrawHealth(spriteBatch);
         }
     }
 }

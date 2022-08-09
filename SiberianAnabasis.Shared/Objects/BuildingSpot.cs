@@ -8,7 +8,6 @@ namespace SiberianAnabasis.Objects
 {
     public class BuildingSpot : BaseBuilding
     {
-        public Building.Type Type;
         public int Cost;
 
         public BuildingSpot(int x, int y, int width, int height, string type)

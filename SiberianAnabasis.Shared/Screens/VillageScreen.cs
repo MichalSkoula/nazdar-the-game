@@ -115,7 +115,7 @@ namespace SiberianAnabasis.Screens
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(this.newEnemyProbability) == 1)
             {
                 Audio.PlayRandomSound("EnemySpawns");
-                Game.MessageBuffer.AddMessage("New enemy!", MessageType.Danger);
+                Game1.MessageBuffer.AddMessage("New enemy!", MessageType.Danger);
 
                 // choose direction
                 if (Tools.GetRandom(2) == 0)
@@ -189,7 +189,7 @@ namespace SiberianAnabasis.Screens
             // create new?
             if (Tools.GetRandom(this.newHomelessProbability) == 1)
             {
-                Game.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
+                Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
                 // choose side 
                 if (Tools.GetRandom(2) == 0)
                 {
@@ -213,7 +213,7 @@ namespace SiberianAnabasis.Screens
             // create new?
             if (Tools.GetRandom(this.newCoinProbability) == 1)
             {
-                Game.MessageBuffer.AddMessage("New coin!", MessageType.Opportunity);
+                Game1.MessageBuffer.AddMessage("New coin!", MessageType.Opportunity);
                 this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
             }
 
@@ -247,7 +247,7 @@ namespace SiberianAnabasis.Screens
                         {
                             enemy.Dead = true;
                             Audio.PlayRandomSound("EnemyDeaths");
-                            Game.MessageBuffer.AddMessage("Bullet kill", MessageType.Success);
+                            Game1.MessageBuffer.AddMessage("Bullet kill", MessageType.Success);
                         }
                     }
                 }
@@ -261,7 +261,7 @@ namespace SiberianAnabasis.Screens
                 {
                     enemy.Dead = true;
                     Audio.PlayRandomSound("EnemyDeaths");
-                    Game.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
+                    Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
 
                     if (!this.player.TakeHit(enemy.Caliber))
                     {
@@ -280,13 +280,13 @@ namespace SiberianAnabasis.Screens
                     {
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
-                            Game.MessageBuffer.AddMessage("Enemy killed by soldier", MessageType.Success);
+                            Game1.MessageBuffer.AddMessage("Enemy killed by soldier", MessageType.Success);
                             Audio.PlayRandomSound("EnemyDeaths");
                             enemy.Dead = true;
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            Game.MessageBuffer.AddMessage("Soldier killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Soldier killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             soldier.Dead = true;
                         }
@@ -303,9 +303,13 @@ namespace SiberianAnabasis.Screens
                 {
                     if (enemy.Hitbox.Intersects(peasant.Hitbox))
                     {
-                        Game.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
-                        peasant.ToDelete = true;
-                        this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction, peasant.Health));
+                        if (!peasant.TakeHit(enemy.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            peasant.ToDelete = true;
+                            this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction, peasant.Health));
+                        }                        
                     }
                 }
                 this.peasants.RemoveAll(p => p.ToDelete);
@@ -316,7 +320,7 @@ namespace SiberianAnabasis.Screens
             {
                 if (this.player.Hitbox.Intersects(coin.Hitbox))
                 {
-                    Game.MessageBuffer.AddMessage("Coin acquired", MessageType.Success);
+                    Game1.MessageBuffer.AddMessage("Coin acquired", MessageType.Success);
                     Audio.PlaySound("Coin");
                     this.player.Money++;
                     coin.ToDelete = true;
@@ -341,7 +345,7 @@ namespace SiberianAnabasis.Screens
 
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
                     {
-                        Game.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                        Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                         Audio.PlaySound("SoldierSpawn");
                         this.player.Money -= buildingSpot.Cost;
                         this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
@@ -354,7 +358,7 @@ namespace SiberianAnabasis.Screens
 
                     if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
                     {
-                        Game.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                        Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                         Audio.PlaySound("SoldierSpawn");
                         this.player.Money -= buildingSpot.Cost;
                         this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -374,7 +378,7 @@ namespace SiberianAnabasis.Screens
                         // hire homeless man? create peasant
                         if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
                         {
-                            Game.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
+                            Game1.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
                             Audio.PlaySound("SoldierSpawn");
                             homeless.ToDelete = true;
                             this.player.Money -= homeless.Cost;
@@ -395,13 +399,13 @@ namespace SiberianAnabasis.Screens
                 
                 if (this.dayPhase == DayPhase.Day)
                 {
-                    Game.MessageBuffer.AddMessage("Brace yourself", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage("Brace yourself", MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
                 }
                 else
                 {
-                    Game.MessageBuffer.AddMessage("New dawn", MessageType.Info);
+                    Game1.MessageBuffer.AddMessage("New dawn", MessageType.Info);
                     this.player.Days++;
                     this.dayPhase = DayPhase.Day;
                     this.dayPhaseTimer = (int)DayNightLength.Day;
@@ -467,7 +471,7 @@ namespace SiberianAnabasis.Screens
                 Color.Black);
 
             // messages
-            Game.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
+            Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
 
             // game objects
             foreach (BuildingSpot buildingSpot in this.buildingSpots)
@@ -596,7 +600,7 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
-            Game.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
+            Game1.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
         }
 
         private void Save()
