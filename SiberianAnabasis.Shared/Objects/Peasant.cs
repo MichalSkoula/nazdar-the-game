@@ -32,11 +32,22 @@ namespace SiberianAnabasis.Objects
             this.Direction = direction;
             this.Health = health;
             this.Alpha = 1f;
+
+            this.particleBlood = new ParticleSource(
+                new Vector2(this.X, this.Y),
+                new Tuple<int, int>(this.Width / 2, this.Height / 2),
+                Direction.Down,
+                2,
+                Assets.ParticleTextureRegions["Blood"]
+            );
         }
 
         public new void Update(float deltaTime)
         {
             base.Update(deltaTime);
+
+            // particles
+            this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
 
             // is he moving?
             bool isMoving = false;
@@ -108,7 +119,9 @@ namespace SiberianAnabasis.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
-            this.DrawHealth(spriteBatch);
+            //this.DrawHealth(spriteBatch);
+            // particles
+            this.particleBlood.Draw(spriteBatch);
         }
     }
 }

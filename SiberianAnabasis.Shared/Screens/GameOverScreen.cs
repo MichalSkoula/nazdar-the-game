@@ -94,7 +94,7 @@ namespace SiberianAnabasis.Screens
             }
 
             // messages
-            this.Game.MessageBuffer.Draw(Game.SpriteBatch);
+            Game1.MessageBuffer.Draw(Game.SpriteBatch);
 
             this.Game.DrawEnd();
         }

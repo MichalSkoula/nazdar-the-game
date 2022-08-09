@@ -30,7 +30,7 @@ namespace SiberianAnabasis
 
         // world variables
         public int Village { get; set; }
-        public MessageBuffer MessageBuffer = new MessageBuffer();
+        public static MessageBuffer MessageBuffer = new MessageBuffer();
         public static int GlobalTimer { get; private set; }
 
         public Game1()
@@ -89,7 +89,7 @@ namespace SiberianAnabasis
             Controls.Gamepad.GetState();
             Controls.Mouse.GetState();
 
-            this.MessageBuffer.Update(this.DeltaTime);
+            MessageBuffer.Update(this.DeltaTime);
 
             GlobalTimer++;
             if (GlobalTimer > 100)
