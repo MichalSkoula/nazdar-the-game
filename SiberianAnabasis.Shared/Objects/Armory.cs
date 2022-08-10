@@ -9,7 +9,8 @@ namespace SiberianAnabasis.Objects
 {
     public class Armory : BaseBuilding
     {
-        public const int Cost = 1;
+        public const int Cost = 2;
+        public const int ItemCost = 1;
 
         public Armory(int x, int y, Building.Status status)
         {

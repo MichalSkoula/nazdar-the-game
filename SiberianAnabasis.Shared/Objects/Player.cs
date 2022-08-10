@@ -35,6 +35,7 @@ namespace SiberianAnabasis.Objects
         public int Days { get; set; }
 
         public Enums.PlayerAction? Action { get; set; }
+        public int ActionCost { get; set; }
 
         private ParticleSource particleSmoke;
 
@@ -156,18 +157,15 @@ namespace SiberianAnabasis.Objects
             this.particleSmoke.Draw(spriteBatch);
 
             // some action?
-            switch (this.Action)
+            if (this.Action != null)
             {
-                case Enums.PlayerAction.Build:
-                    spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 10, 5, 100, Color.Brown);
-                    break;
-                case Enums.PlayerAction.Hire:
-                    spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 10, 5, 100, Color.Yellow);
-                    break;
-                default:
-                    break;
-
+                for (int i = 0; i < this.ActionCost; i++)
+                {
+                    spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 5 - 10 * i, 4, 50, Color.Yellow);
+                }
+                spriteBatch.DrawString(Assets.Fonts["Small"], this.Action.ToString(), new Vector2(this.X + this.Width + 5, this.Y - 10), Color.White);
             }
+            
         }
 
         private async void Jump()
