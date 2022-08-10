@@ -89,23 +89,31 @@ namespace SiberianAnabasis.Screens
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
+            // player
             this.player.Update(this.Game.DeltaTime);
             this.camera.Follow(this.player);
 
+            // game objects
             this.UpdateEnemies();
             this.UpdateSoldiers();
             this.UpdatePeasants();
             this.UpdateHomelesses();
             this.UpdateCoins();
-            this.UpdateCollisions();
-            this.UpdateDayPhase();
 
+            // buildings
             if (this.center != null)
             {
                 this.center.Update(this.Game.DeltaTime);
             }
-
             this.UpdateArmories();
+
+            // collisions
+            this.UpdatePeoplesCollisions();
+            this.UpdateActionsCollisions();
+            this.UpdateThingsCollisions();
+
+            // other
+            this.UpdateDayPhase();
         }
 
         private void UpdateEnemies()
@@ -232,7 +240,7 @@ namespace SiberianAnabasis.Screens
             }
         }
 
-        private void UpdateCollisions()
+        private void UpdatePeoplesCollisions()
         {
             // enemies and bullets
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
@@ -308,13 +316,16 @@ namespace SiberianAnabasis.Screens
                             Game1.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             peasant.ToDelete = true;
-                            this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction, peasant.Health));
+                            this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction));
                         }                        
                     }
                 }
                 this.peasants.RemoveAll(p => p.ToDelete);
             }
+        }
 
+        private void UpdateThingsCollisions()
+        {
             // coins
             foreach (var coin in this.coins)
             {
@@ -328,8 +339,10 @@ namespace SiberianAnabasis.Screens
                 }
             }
             this.coins.RemoveAll(p => p.ToDelete);
+        }
 
-            // buildingSpots - can we build something?
+        private void UpdateActionsCollisions()
+        {
             this.player.Action = null;
             foreach (var buildingSpot in this.buildingSpots)
             {
@@ -342,27 +355,49 @@ namespace SiberianAnabasis.Screens
                 if (buildingSpot.Type == Building.Type.Center && this.center == null)
                 {
                     this.player.Action = Enums.PlayerAction.Build;
+                    this.player.ActionCost = Center.Cost;
 
-                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
+                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Center.Cost)
                     {
                         Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                         Audio.PlaySound("SoldierSpawn");
-                        this.player.Money -= buildingSpot.Cost;
+                        this.player.Money -= Center.Cost;
                         this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                     }
                 }
                 // Armory?
-                else if (buildingSpot.Type == Building.Type.Armory && this.armories.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox)).Count() == 0)
-                {                    
-                    this.player.Action = Enums.PlayerAction.Build;
-
-                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= buildingSpot.Cost)
+                else if (buildingSpot.Type == Building.Type.Armory)
+                {
+                    var armories = this.armories.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (armories.Count() == 0)
                     {
-                        Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                        Audio.PlaySound("SoldierSpawn");
-                        this.player.Money -= buildingSpot.Cost;
-                        this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                        // no armory - we can build something
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Armory.Cost;
+
+                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Armory.Cost)
+                        {
+                            Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                            Audio.PlaySound("SoldierSpawn");
+                            this.player.Money -= Armory.Cost;
+                            this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                        }
                     }
+                    else
+                    {
+                        // armory exists - create weapons?
+                        this.player.Action = Enums.PlayerAction.Create;
+                        this.player.ActionCost = Armory.ItemCost;
+                        //var armory = armories.First();
+
+                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Armory.ItemCost)
+                        {
+                            Game1.MessageBuffer.AddMessage("Item purchased", MessageType.Info);
+                            Audio.PlaySound("SoldierSpawn");
+                            this.player.Money -= Armory.ItemCost;
+                        }
+                    }
+
                 }
             }
 
@@ -374,15 +409,16 @@ namespace SiberianAnabasis.Screens
                     if (this.player.Hitbox.Intersects(homeless.Hitbox))
                     {
                         this.player.Action = Enums.PlayerAction.Hire;
+                        this.player.ActionCost = Homeless.Cost;
 
                         // hire homeless man? create peasant
-                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= homeless.Cost)
+                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Homeless.Cost)
                         {
                             Game1.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
                             Audio.PlaySound("SoldierSpawn");
                             homeless.ToDelete = true;
-                            this.player.Money -= homeless.Cost;
-                            this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction, homeless.Health));
+                            this.player.Money -= Homeless.Cost;
+                            this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction));
                         }
                         break;
                     }
@@ -561,7 +597,7 @@ namespace SiberianAnabasis.Screens
             {
                 foreach (var homeless in saveData.GetValue("homelesses"))
                 {
-                    this.homelesses.Add(new Homeless((int)homeless.Hitbox.X, (int)homeless.Hitbox.Y, (Direction)homeless.Direction, (int)homeless.Health));
+                    this.homelesses.Add(new Homeless((int)homeless.Hitbox.X, (int)homeless.Hitbox.Y, (Direction)homeless.Direction));
                 }
             }
 
@@ -569,7 +605,7 @@ namespace SiberianAnabasis.Screens
             {
                 foreach (var peasant in saveData.GetValue("peasants"))
                 {
-                    this.peasants.Add(new Peasant((int)peasant.Hitbox.X, (int)peasant.Hitbox.Y, (Direction)peasant.Direction, (int)peasant.Health));
+                    this.peasants.Add(new Peasant((int)peasant.Hitbox.X, (int)peasant.Hitbox.Y, (Direction)peasant.Direction));
                 }
             }
 

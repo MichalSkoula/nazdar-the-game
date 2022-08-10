@@ -11,7 +11,6 @@ namespace SiberianAnabasis.Objects
     public class Homeless : BasePerson
     {
         private int speed = 61;
-
         private Animation anim;
 
         private List<Animation> animations = new List<Animation>()
@@ -22,14 +21,14 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.Images["HomelessLeft"], 4, 10),
         };
 
-        public int Cost { get; internal set; } = 1;
+        public const int Cost = 1;
 
-        public Homeless(int x, int y, Direction direction, int health = 100)
+        public Homeless(int x, int y, Direction direction)
         {
             this.anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Direction = direction;
-            this.Health = health;
+            this.Health = 100;
             this.Alpha = 0.5f;
         }
 

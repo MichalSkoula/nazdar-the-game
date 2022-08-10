@@ -25,12 +25,12 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.Images["PeasantLeft"], 4, 10),
         };
 
-        public Peasant(int x, int y, Direction direction, int health = 100)
+        public Peasant(int x, int y, Direction direction)
         {
             this.anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
             this.Direction = direction;
-            this.Health = health;
+            this.Health = 100;
             this.Alpha = 1f;
 
             this.particleBlood = new ParticleSource(

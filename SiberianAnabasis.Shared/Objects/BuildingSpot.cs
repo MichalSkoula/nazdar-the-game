@@ -8,8 +8,6 @@ namespace SiberianAnabasis.Objects
 {
     public class BuildingSpot : BaseBuilding
     {
-        public int Cost;
-
         public BuildingSpot(int x, int y, int width, int height, string type)
         {
             this.Hitbox = new Rectangle(x, y, width, height);
@@ -18,11 +16,9 @@ namespace SiberianAnabasis.Objects
             {
                 case "Center":
                     this.Type = Building.Type.Center;
-                    this.Cost = Center.Cost;
                     break;
                 case "Armory":
                     this.Type = Building.Type.Armory;
-                    this.Cost = Armory.Cost;
                     break;
                 default:
                     throw new ArgumentException();

@@ -38,7 +38,8 @@
         public enum PlayerAction
         {
             Hire,
-            Build
+            Build,
+            Create
         }
 
         public enum MessageType
