@@ -11,11 +11,8 @@ namespace SiberianAnabasis.Objects
     public class Peasant : BasePerson
     {
         private bool isFast = false;
-        private int speed = 61;
         private int centerRadius = 96;
         public Rectangle? IsBuildingHere = null;
-
-        private Animation anim;
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -27,11 +24,12 @@ namespace SiberianAnabasis.Objects
 
         public Peasant(int x, int y, Direction direction)
         {
-            this.anim = this.animations[(int)Direction.Left];
-            this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Anim = this.animations[(int)Direction.Left];
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = 100;
             this.Alpha = 1f;
+            this.Speed = 61;
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
@@ -55,28 +53,28 @@ namespace SiberianAnabasis.Objects
             {
                 if (this.Direction == Direction.Right)
                 {
-                    this.X += (int)(deltaTime * this.speed);
+                    this.X += (int)(deltaTime * this.Speed);
                     isMoving = true;
                 }
                 else if (this.Direction == Direction.Left)
                 {
-                    this.X -= (int)(deltaTime * this.speed);
+                    this.X -= (int)(deltaTime * this.Speed);
                     isMoving = true;
                 }
             }
 
             if (isMoving)
             {
-                this.anim.Loop = true;
-                this.anim = this.animations[(int)this.Direction];
+                this.Anim.Loop = true;
+                this.Anim = this.animations[(int)this.Direction];
             }
             else
             {
-                this.anim.Loop = false;
-                this.anim.ResetLoop();
+                this.Anim.Loop = false;
+                this.Anim.ResetLoop();
             }
 
-            this.anim.Update(deltaTime);
+            this.Anim.Update(deltaTime);
 
             this.isFast = true;
 
@@ -118,7 +116,7 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
+            this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             //this.DrawHealth(spriteBatch);
             // particles
             this.particleBlood.Draw(spriteBatch);

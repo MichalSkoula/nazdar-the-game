@@ -10,10 +10,6 @@ namespace SiberianAnabasis.Objects
 {
     public class Soldier : BasePerson
     {
-        private int speed = 100;
-
-        private Animation anim;
-
         private List<Bullet> bullets = new List<Bullet>();
 
         private List<Animation> animations = new List<Animation>()
@@ -26,11 +22,12 @@ namespace SiberianAnabasis.Objects
 
         public Soldier(int x, int y, Direction direction, int health = 100, int caliber = 10)
         {
-            this.anim = this.animations[(int)Direction.Left];
-            this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Anim = this.animations[(int)Direction.Left];
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = health;
             this.Caliber = caliber;
+            this.Speed = 100;
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
@@ -57,11 +54,11 @@ namespace SiberianAnabasis.Objects
             bool isMoving = true;
             if (this.Direction == Direction.Right)
             {
-                this.X += (int)(deltaTime * this.speed);
+                this.X += (int)(deltaTime * this.Speed);
             }
             else if (this.Direction == Direction.Left)
             {
-                this.X -= (int)(deltaTime * this.speed);
+                this.X -= (int)(deltaTime * this.Speed);
             }
             else
             {
@@ -70,16 +67,16 @@ namespace SiberianAnabasis.Objects
 
             if (isMoving)
             {
-                this.anim.Loop = true;
-                this.anim = this.animations[(int)this.Direction];
+                this.Anim.Loop = true;
+                this.Anim = this.animations[(int)this.Direction];
             }
             else
             {
-                this.anim.Loop = false;
-                this.anim.ResetLoop();
+                this.Anim.Loop = false;
+                this.Anim.ResetLoop();
             }
 
-            this.anim.Update(deltaTime);
+            this.Anim.Update(deltaTime);
 
             // out of game map
             if (this.X < 0 || this.X > VillageScreen.MapWidth)
@@ -90,7 +87,7 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
+            this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
 
             // bullets

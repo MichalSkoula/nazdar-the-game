@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SiberianAnabasis
 {
-    class Animation
+    public class Animation
     {
         private int count;
         private int step;

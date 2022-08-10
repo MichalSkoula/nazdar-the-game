@@ -11,6 +11,9 @@ namespace SiberianAnabasis.Objects
 {
     public abstract class BasePerson : BaseObject
     {
+        protected Animation Anim { get; set; }
+        protected int Speed { get; set; }
+
         // dying ... ttd - time to die
         private float ttd = 0f;
         private bool dead = false;

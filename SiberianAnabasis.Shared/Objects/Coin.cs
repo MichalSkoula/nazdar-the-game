@@ -13,13 +13,12 @@ namespace SiberianAnabasis.Objects
         {
             this.anim = new Animation(Assets.Images["Coin"], 4, 10);
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
-            
         }
 
         public void Update(float deltaTime)
         {
             this.anim.Loop = true;
-            //this.anim.ResetLoop();
+            //this.Anim.ResetLoop();
             this.anim.Update(deltaTime);
         }
 

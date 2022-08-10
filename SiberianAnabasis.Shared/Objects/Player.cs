@@ -13,10 +13,6 @@ namespace SiberianAnabasis.Objects
 {
     public class Player : BasePerson
     {
-        private int speed = 121;
-
-        private Animation anim;
-
         public List<Bullet> Bullets
         {
             get;
@@ -41,13 +37,14 @@ namespace SiberianAnabasis.Objects
 
         public Player(int x, int y)
         {
-            this.anim = this.animations[(int)Direction.Right];
+            this.Anim = this.animations[(int)Direction.Right];
             this.Direction = Direction.Right;
             this.Bullets = new List<Bullet>();
-            this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Health = 100;
             this.Caliber = 30;
             this.Days = 0;
+            this.Speed = 121;
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
@@ -69,7 +66,7 @@ namespace SiberianAnabasis.Objects
         public void Load(dynamic saveData)
         {
             // load player
-            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = (Direction)saveData.Direction;
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
@@ -93,29 +90,29 @@ namespace SiberianAnabasis.Objects
             bool isMoving = false;
             if ((Controls.Keyboard.IsPressed(Keys.Right) || Controls.Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
             {
-                this.X += (int)(deltaTime * this.speed);
+                this.X += (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Right;
                 isMoving = true;
             }
             else if ((Controls.Keyboard.IsPressed(Keys.Left) || Controls.Gamepad.Thumbstick(Direction.Left)) && this.X > 0)
             {
-                this.X -= (int)(deltaTime * this.speed);
+                this.X -= (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Left;
                 isMoving = true;
             }
 
             if (isMoving)
             {
-                this.anim.Loop = true;
-                this.anim = this.animations[(int)this.Direction];
+                this.Anim.Loop = true;
+                this.Anim = this.animations[(int)this.Direction];
             }
             else
             {
-                this.anim.Loop = false;
-                this.anim.ResetLoop();
+                this.Anim.Loop = false;
+                this.Anim.ResetLoop();
             }
 
-            this.anim.Update(deltaTime);
+            this.Anim.Update(deltaTime);
 
             // jump?
             if ((Controls.Keyboard.IsPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
@@ -144,7 +141,7 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox);
+            this.Anim.Draw(spriteBatch, this.Hitbox);
 
             // bullets
             foreach (var bullet in this.Bullets)

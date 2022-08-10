@@ -357,12 +357,19 @@ namespace SiberianAnabasis.Screens
                     this.player.Action = Enums.PlayerAction.Build;
                     this.player.ActionCost = Center.Cost;
 
-                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Center.Cost)
+                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
                     {
-                        Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                        Audio.PlaySound("SoldierSpawn");
-                        this.player.Money -= Center.Cost;
-                        this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
+                        if (this.player.Money >= Center.Cost)
+                        {
+                            Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                            Audio.PlaySound("SoldierSpawn");
+                            this.player.Money -= Center.Cost;
+                            this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
+                        }
+                        else
+                        {
+                            Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                        }
                     }
                 }
                 // Armory?
@@ -375,29 +382,52 @@ namespace SiberianAnabasis.Screens
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Armory.Cost;
 
-                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Armory.Cost)
+                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
                         {
-                            Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                            Audio.PlaySound("SoldierSpawn");
-                            this.player.Money -= Armory.Cost;
-                            this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            if (this.player.Money >= Armory.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("SoldierSpawn");
+                                this.player.Money -= Armory.Cost;
+                                this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
                         }
                     }
                     else
                     {
                         // armory exists - create weapons?
-                        this.player.Action = Enums.PlayerAction.Create;
-                        this.player.ActionCost = Armory.ItemCost;
-                        //var armory = armories.First();
-
-                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Armory.ItemCost)
+                        var armory = armories.First();
+                        if (armory.Status == Building.Status.Built)
                         {
-                            Game1.MessageBuffer.AddMessage("Item purchased", MessageType.Info);
-                            Audio.PlaySound("SoldierSpawn");
-                            this.player.Money -= Armory.ItemCost;
+                            this.player.Action = Enums.PlayerAction.Create;
+                            this.player.ActionCost = Armory.WeaponCost;
+
+                            if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                            {
+                                if (this.player.Money >= Armory.WeaponCost)
+                                {
+                                    if (armory.AddWeapon())
+                                    {
+                                        Game1.MessageBuffer.AddMessage("Item purchased", MessageType.Info);
+                                        Audio.PlaySound("SoldierSpawn");
+                                        this.player.Money -= Armory.WeaponCost;
+                                    }
+                                    else
+                                    {
+                                        Game1.MessageBuffer.AddMessage("Armory is full", MessageType.Fail);
+                                    }
+                                }
+                                else
+                                {
+                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                }
+                            }
                         }
                     }
-
                 }
             }
 
@@ -412,13 +442,20 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionCost = Homeless.Cost;
 
                         // hire homeless man? create peasant
-                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl) && this.player.Money >= Homeless.Cost)
+                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
                         {
-                            Game1.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
-                            Audio.PlaySound("SoldierSpawn");
-                            homeless.ToDelete = true;
-                            this.player.Money -= Homeless.Cost;
-                            this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction));
+                            if (this.player.Money >= Homeless.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
+                                Audio.PlaySound("SoldierSpawn");
+                                homeless.ToDelete = true;
+                                this.player.Money -= Homeless.Cost;
+                                this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction));
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
                         }
                         break;
                     }
@@ -632,7 +669,7 @@ namespace SiberianAnabasis.Screens
             {
                 foreach (var armory in saveData.GetValue("armories"))
                 {
-                    this.armories.Add(new Armory((int)armory.Hitbox.X, (int)armory.Hitbox.Y, (Building.Status)armory.Status));
+                    this.armories.Add(new Armory((int)armory.Hitbox.X, (int)armory.Hitbox.Y, (Building.Status)armory.Status, (int)armory.WeaponsCount));
                 }
             }
 

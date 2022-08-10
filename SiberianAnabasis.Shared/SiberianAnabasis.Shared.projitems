@@ -27,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BuildingSpot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Weapon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Coin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Enemy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Homeless.cs" />
