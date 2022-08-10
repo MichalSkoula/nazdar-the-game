@@ -10,9 +10,6 @@ namespace SiberianAnabasis.Objects
 {
     public class Homeless : BasePerson
     {
-        private int speed = 61;
-        private Animation anim;
-
         private List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["HomelessRight"], 4, 10),
@@ -25,11 +22,12 @@ namespace SiberianAnabasis.Objects
 
         public Homeless(int x, int y, Direction direction)
         {
-            this.anim = this.animations[(int)Direction.Left];
-            this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
+            this.Anim = this.animations[(int)Direction.Left];
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = 100;
             this.Alpha = 0.5f;
+            this.Speed = 61;
         }
 
         public new void Update(float deltaTime)
@@ -42,28 +40,28 @@ namespace SiberianAnabasis.Objects
             {
                 if (this.Direction == Direction.Right)
                 {
-                    this.X += (int)(deltaTime * this.speed);
+                    this.X += (int)(deltaTime * this.Speed);
                     isMoving = true;
                 }
                 else if (this.Direction == Direction.Left)
                 {
-                    this.X -= (int)(deltaTime * this.speed);
+                    this.X -= (int)(deltaTime * this.Speed);
                     isMoving = true;
                 }
             }
 
             if (isMoving)
             {
-                this.anim.Loop = true;
-                this.anim = this.animations[(int)this.Direction];
+                this.Anim.Loop = true;
+                this.Anim = this.animations[(int)this.Direction];
             }
             else
             {
-                this.anim.Loop = false;
-                this.anim.ResetLoop();
+                this.Anim.Loop = false;
+                this.Anim.ResetLoop();
             }
 
-            this.anim.Update(deltaTime);
+            this.Anim.Update(deltaTime);
 
             // out of game map - change direction
             if (this.X < 0 || this.X > VillageScreen.MapWidth)
@@ -74,7 +72,7 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            this.anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
+            this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             //this.DrawHealth(spriteBatch);
         }
     }

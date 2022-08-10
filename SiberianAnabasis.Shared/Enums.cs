@@ -78,7 +78,7 @@
             public const int StatusBar = 290;
             public const int Floor = 252;
             public const int Floor2 = 260;
-            public const int MessagesX = Screen.Width - 230;
+            public const int MessagesX = Screen.Width - 250;
 
             public static int MenuX = 20;
             public static int MenuY = 20;

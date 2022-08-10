@@ -73,6 +73,12 @@ namespace SiberianAnabasis.Objects
             {
                 return new Vector2(Hitbox.X, Hitbox.Y);
             }
+
+            set
+            {
+                this.X = (int)value.X;
+                this.Y = (int)value.Y;
+            }
         }
 
         // assets
