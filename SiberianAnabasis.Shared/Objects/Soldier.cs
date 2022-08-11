@@ -81,7 +81,7 @@ namespace SiberianAnabasis.Objects
             // out of game map
             if (this.X < 0 || this.X > VillageScreen.MapWidth)
             {
-                this.ToDelete = true;
+                this.ChangeDirection();
             }
         }
 
