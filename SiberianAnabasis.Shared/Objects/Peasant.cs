@@ -13,6 +13,7 @@ namespace SiberianAnabasis.Objects
         private bool isFast = false;
         private int centerRadius = 96;
         public Rectangle? IsBuildingHere = null;
+        public Rectangle? IsRunningForItem = null;
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -78,9 +79,10 @@ namespace SiberianAnabasis.Objects
 
             this.isFast = true;
 
-            // is he building something? should run there
+            
             if (this.IsBuildingHere.HasValue)
             {
+                // 1/ is he building something? should run there
                 if (this.X < IsBuildingHere.GetValueOrDefault().X)
                 {
                     this.Direction = Direction.Right;
@@ -90,9 +92,21 @@ namespace SiberianAnabasis.Objects
                     this.Direction = Direction.Left;
                 }
             }
+            else if (this.IsRunningForItem.HasValue)
+            {
+                // 2/ is he going to get weapon etc? 
+                if (this.X < IsRunningForItem.GetValueOrDefault().X)
+                {
+                    this.Direction = Direction.Right;
+                }
+                if (this.X >= (IsRunningForItem.GetValueOrDefault().X + IsRunningForItem.GetValueOrDefault().Width - this.Width))
+                {
+                    this.Direction = Direction.Left;
+                }
+            }
             else
             {
-                // otherwise always run towards town center
+                // 3/ otherwise always run towards town center
                 if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
                 {
                     this.Direction = Direction.Right;

@@ -153,9 +153,11 @@ namespace SiberianAnabasis.Screens
 
         private void UpdatePeasants()
         {
+            // reset his intentions
             foreach (Peasant peasant in this.peasants)
             {
                 peasant.IsBuildingHere = null;
+                peasant.IsRunningForItem = null;
             }
 
             // something to build?
@@ -166,6 +168,12 @@ namespace SiberianAnabasis.Screens
             if (this.center != null && this.center.Status == Building.Status.InProcess)
             {
                 this.Build(this.center);
+            }
+
+            // something to get?
+            foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
+            {
+                this.Pick(armory);
             }
 
             foreach (Peasant peasant in this.peasants)
@@ -192,6 +200,16 @@ namespace SiberianAnabasis.Screens
                 nearestPeasant.IsBuildingHere = building.Hitbox;
             }
         }
+
+        private void Pick(BaseBuilding building)
+        {
+            if (this.peasants.Count > 0)
+            {
+                var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
+                nearestPeasant.IsRunningForItem = building.Hitbox;
+            }
+        }
+
         private void UpdateHomelesses()
         {
             // create new?
@@ -339,6 +357,24 @@ namespace SiberianAnabasis.Screens
                 }
             }
             this.coins.RemoveAll(p => p.ToDelete);
+
+            // weapons
+            foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
+            {
+                foreach (var peasant in this.peasants)
+                {
+                    if (peasant.Hitbox.Intersects(armory.Hitbox) && armory.WeaponsCount > 0)
+                    {
+                        // ok, peasant get weapon and turns into soldier
+                        Game1.MessageBuffer.AddMessage("Peasant => soldier", MessageType.Success);
+                        Audio.PlaySound("SoldierSpawn");
+                        peasant.ToDelete = true;
+                        armory.DropWeapon();
+                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction));
+                    }
+                }
+            }
+            this.peasants.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateActionsCollisions()

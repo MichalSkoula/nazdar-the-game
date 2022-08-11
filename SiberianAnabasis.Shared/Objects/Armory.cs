@@ -41,6 +41,17 @@ namespace SiberianAnabasis.Objects
             return false;
         }
 
+        public bool DropWeapon()
+        {
+            if (this.weapons.Count > 0)
+            {
+                this.weapons.RemoveAt(0);
+                return true;
+            }
+
+            return false;
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
