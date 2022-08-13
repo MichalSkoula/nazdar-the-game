@@ -16,6 +16,8 @@ Monogame platform/strategic game (awesome).
 * https://0x72.itch.io/pixeldudesmaker CC-29 color palette
 * https://essssam.itch.io/rocky-roads
 * https://mariaparragames.itch.io/free-retro-city-assetpack
+* https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
+* https://dreammix.itch.io/keyboard-keys-for-ui keyboard
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue
