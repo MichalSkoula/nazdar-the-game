@@ -11,7 +11,7 @@ namespace SiberianAnabasis.Objects
     {
         public const int Cost = 2;
         public const int WeaponCost = 1;
-        private int weaponLimit = 2;
+        private int weaponLimit = 6;
 
         private List<Weapon> weapons = new List<Weapon>();
         public int WeaponsCount => weapons.Count;

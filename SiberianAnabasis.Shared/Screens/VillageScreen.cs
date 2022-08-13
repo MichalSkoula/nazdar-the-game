@@ -7,9 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
+using SiberianAnabasis.Controls;
 using SiberianAnabasis.Objects;
 using SiberianAnabasis.Shared;
 using static SiberianAnabasis.Enums;
+using Keyboard = SiberianAnabasis.Controls.Keyboard;
 
 namespace SiberianAnabasis.Screens
 {
@@ -43,10 +45,10 @@ namespace SiberianAnabasis.Screens
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
-        // some settings
+        // some settings - random 0-X == 1
         private int newEnemyProbability = 256;
         private int newHomelessProbability = 2048;
-        private int newCoinProbability = 1024;
+        private int newCoinProbability = 768;
 
         public override void Initialize()
         {
@@ -80,7 +82,7 @@ namespace SiberianAnabasis.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.Start))
+            if (Keyboard.HasBeenPressed(Keys.Escape) || Gamepad.HasBeenPressed(Buttons.Start) || Gamepad.HasBeenPressed(Buttons.B))
             {
                 // save
                 this.Save();
@@ -393,7 +395,7 @@ namespace SiberianAnabasis.Screens
                     this.player.Action = Enums.PlayerAction.Build;
                     this.player.ActionCost = Center.Cost;
 
-                    if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                    if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                     {
                         if (this.player.Money >= Center.Cost)
                         {
@@ -418,7 +420,7 @@ namespace SiberianAnabasis.Screens
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Armory.Cost;
 
-                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                        if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                         {
                             if (this.player.Money >= Armory.Cost)
                             {
@@ -442,7 +444,7 @@ namespace SiberianAnabasis.Screens
                             this.player.Action = Enums.PlayerAction.Create;
                             this.player.ActionCost = Armory.WeaponCost;
 
-                            if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                            if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                             {
                                 if (this.player.Money >= Armory.WeaponCost)
                                 {
@@ -478,7 +480,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionCost = Homeless.Cost;
 
                         // hire homeless man? create peasant
-                        if (Controls.Keyboard.HasBeenPressed(Keys.LeftControl))
+                        if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                         {
                             if (this.player.Money >= Homeless.Cost)
                             {

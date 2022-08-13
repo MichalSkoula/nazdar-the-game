@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using static SiberianAnabasis.Enums;
 using SiberianAnabasis.Shared;
 using MonoGame.Extended;
+using SiberianAnabasis.Controls;
+using Keyboard = SiberianAnabasis.Controls.Keyboard;
 
 namespace SiberianAnabasis.Objects
 {
@@ -88,13 +90,13 @@ namespace SiberianAnabasis.Objects
 
             // moving?
             bool isMoving = false;
-            if ((Controls.Keyboard.IsPressed(Keys.Right) || Controls.Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
+            if ((Keyboard.IsPressed(Keys.Right) || Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
             {
                 this.X += (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Right;
                 isMoving = true;
             }
-            else if ((Controls.Keyboard.IsPressed(Keys.Left) || Controls.Gamepad.Thumbstick(Direction.Left)) && this.X > 0)
+            else if ((Keyboard.IsPressed(Keys.Left) || Gamepad.Thumbstick(Direction.Left)) && this.X > 0)
             {
                 this.X -= (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Left;
@@ -115,14 +117,14 @@ namespace SiberianAnabasis.Objects
             this.Anim.Update(deltaTime);
 
             // jump?
-            if ((Controls.Keyboard.IsPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
+            if ((Keyboard.IsPressed(Keys.Space) || Keyboard.IsPressed(Keys.C) || Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
             {
                 this.Jump();
                 isMoving = true;
             }
 
             // bullets
-            if (Controls.Keyboard.HasBeenPressed(Keys.Space) || Controls.Gamepad.HasBeenPressed(Buttons.X) || Controls.Gamepad.HasBeenPressed(Buttons.RightTrigger))
+            if (Keyboard.HasBeenPressed(Keys.X) || Gamepad.HasBeenPressed(Buttons.X) || Gamepad.HasBeenPressed(Buttons.RightTrigger))
             {
                 Audio.PlaySound("GunFire");
                 this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
