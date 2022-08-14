@@ -10,6 +10,7 @@ namespace SiberianAnabasis.Objects
     public class Armory : BaseBuilding
     {
         public const int Cost = 2;
+        public const string Name = "Armory";
         public const int WeaponCost = 1;
         private int weaponLimit = 6;
 

@@ -82,9 +82,7 @@ namespace SiberianAnabasis.Objects
             if (this.X < 0 || this.X > VillageScreen.MapWidth)
             {
                 this.ToDelete = true;
-            }
-
-            
+            }            
         }
 
         public override void Draw(SpriteBatch spriteBatch)

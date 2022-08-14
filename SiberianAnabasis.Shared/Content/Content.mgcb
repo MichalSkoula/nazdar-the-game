@@ -38,6 +38,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Center.png
 
+#begin Buildings/Tower.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Tower.png
+
 #begin Bullet/bullet_left.png
 /importer:TextureImporter
 /processor:TextureProcessor

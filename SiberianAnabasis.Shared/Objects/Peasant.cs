@@ -23,13 +23,14 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.Images["PeasantLeft"], 4, 10),
         };
 
-        public Peasant(int x, int y, Direction direction)
+        public Peasant(int x, int y, Direction direction, int caliber = 2)
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = 100;
             this.Alpha = 1f;
+            this.Caliber = caliber;
             this.Speed = 61;
 
             this.particleBlood = new ParticleSource(

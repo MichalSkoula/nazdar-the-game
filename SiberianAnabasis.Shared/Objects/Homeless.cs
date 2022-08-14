@@ -19,6 +19,7 @@ namespace SiberianAnabasis.Objects
         };
 
         public const int Cost = 1;
+        public const string Name = "Homeless";
 
         public Homeless(int x, int y, Direction direction)
         {
@@ -64,8 +65,14 @@ namespace SiberianAnabasis.Objects
             this.Anim.Update(deltaTime);
 
             // out of game map - change direction
-            if (this.X < 0 || this.X > VillageScreen.MapWidth)
+            if (this.X < 0)
             {
+                this.X = 0;
+                this.ChangeDirection();
+            }
+            else if (this.X > VillageScreen.MapWidth)
+            {
+                this.X = VillageScreen.MapWidth;
                 this.ChangeDirection();
             }
         }

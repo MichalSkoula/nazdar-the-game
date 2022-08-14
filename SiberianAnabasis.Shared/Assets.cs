@@ -42,6 +42,7 @@ namespace SiberianAnabasis
             Assets.Images["Crate"] = content.Load<Texture2D>("Items/crate");
             Assets.Images["Center"] = content.Load<Texture2D>("Buildings/Center");
             Assets.Images["Armory"] = content.Load<Texture2D>("Buildings/Armory");
+            Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
             Assets.Images["Keyboard"] = content.Load<Texture2D>("Controls/Keyboard");
             Assets.Images["Gamepad"] = content.Load<Texture2D>("Controls/Gamepad");
 
