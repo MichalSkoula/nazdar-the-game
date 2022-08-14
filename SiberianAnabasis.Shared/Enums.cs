@@ -57,6 +57,7 @@
             {
                 Center,
                 Armory,
+                Tower,
             }
 
             public enum Status

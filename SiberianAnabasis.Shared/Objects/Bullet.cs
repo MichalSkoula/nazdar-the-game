@@ -2,8 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using SiberianAnabasis.Screens;
 using SiberianAnabasis.Shared;
-using System;
-using System.Threading.Tasks;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
@@ -11,8 +9,6 @@ namespace SiberianAnabasis.Objects
     public class Bullet : BaseObject
     {
         private readonly int speed = 500;
-
-        
 
         public Bullet(int x, int y, Direction direction, int caliber)
         {

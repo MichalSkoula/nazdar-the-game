@@ -34,6 +34,7 @@ namespace SiberianAnabasis.Objects
 
         public Enums.PlayerAction? Action { get; set; }
         public int ActionCost { get; set; }
+        public string ActionName { get; set; }
 
         private ParticleSource particleSmoke;
 
@@ -117,7 +118,7 @@ namespace SiberianAnabasis.Objects
             this.Anim.Update(deltaTime);
 
             // jump?
-            if ((Keyboard.IsPressed(Keys.Space) || Keyboard.IsPressed(Keys.C) || Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
+            if ((Keyboard.IsPressed(Keys.Space) || Keyboard.IsPressed(Keys.C) || Keyboard.IsPressed(Keys.Up) || Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
             {
                 this.Jump();
                 isMoving = true;
@@ -162,7 +163,7 @@ namespace SiberianAnabasis.Objects
                 {
                     spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 5 - 10 * i, 4, 50, Color.Yellow);
                 }
-                spriteBatch.DrawString(Assets.Fonts["Small"], this.Action.ToString(), new Vector2(this.X + this.Width + 5, this.Y - 10), Color.White);
+                spriteBatch.DrawString(Assets.Fonts["Small"], this.Action.ToString() + " " + this.ActionName, new Vector2(this.X + this.Width + 5, this.Y - 10), Color.White);
             }
             
         }

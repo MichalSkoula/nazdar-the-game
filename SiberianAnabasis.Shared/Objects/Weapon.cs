@@ -7,6 +7,8 @@ namespace SiberianAnabasis.Objects
 {
     public class Weapon : BaseObject
     {
+        public const string Name = "Weapon";
+
         public Weapon()
         {
             this.Sprite = Assets.Images["Crate"];

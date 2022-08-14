@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Objects;
@@ -40,6 +38,7 @@ namespace SiberianAnabasis.Screens
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private Center center;
         private List<Armory> armories = new List<Armory>();
+        private List<Tower> towers = new List<Tower>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
@@ -47,8 +46,8 @@ namespace SiberianAnabasis.Screens
 
         // some settings - random 0-X == 1
         private int newEnemyProbability = 256;
-        private int newHomelessProbability = 2048;
-        private int newCoinProbability = 768;
+        private int newHomelessProbability = 4096;
+        private int newCoinProbability = 512;
 
         public override void Initialize()
         {
@@ -108,6 +107,7 @@ namespace SiberianAnabasis.Screens
                 this.center.Update(this.Game.DeltaTime);
             }
             this.UpdateArmories();
+            this.UpdateTowers();
 
             // collisions
             this.UpdatePeoplesCollisions();
@@ -166,6 +166,10 @@ namespace SiberianAnabasis.Screens
             foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(armory);
+            }
+            foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(tower);
             }
             if (this.center != null && this.center.Status == Building.Status.InProcess)
             {
@@ -260,6 +264,14 @@ namespace SiberianAnabasis.Screens
             }
         }
 
+        private void UpdateTowers()
+        {
+            foreach (Tower tower in this.towers)
+            {
+                tower.Update(this.Game.DeltaTime);
+            }
+        }
+
         private void UpdatePeoplesCollisions()
         {
             // enemies and bullets
@@ -314,9 +326,10 @@ namespace SiberianAnabasis.Screens
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Soldier killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Soldier killed, now homeless", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
-                            soldier.Dead = true;
+                            soldier.ToDelete = true;
+                            this.homelesses.Add(new Homeless(soldier.X, Offset.Floor, soldier.Direction));
                         }
                     }
                 }
@@ -331,12 +344,18 @@ namespace SiberianAnabasis.Screens
                 {
                     if (enemy.Hitbox.Intersects(peasant.Hitbox))
                     {
+                        if (!enemy.TakeHit(peasant.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Enemy killed by peasant", MessageType.Success);
+                            Audio.PlayRandomSound("EnemyDeaths");
+                            enemy.Dead = true;
+                        }
                         if (!peasant.TakeHit(enemy.Caliber))
                         {
                             Game1.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             peasant.ToDelete = true;
-                            this.homelesses.Add(new Homeless(peasant.Hitbox.X, Offset.Floor, peasant.Direction));
+                            this.homelesses.Add(new Homeless(peasant.X, Offset.Floor, peasant.Direction));
                         }                        
                     }
                 }
@@ -382,6 +401,8 @@ namespace SiberianAnabasis.Screens
         private void UpdateActionsCollisions()
         {
             this.player.Action = null;
+            this.player.ActionCost = 0;
+            this.player.ActionName = null;
             foreach (var buildingSpot in this.buildingSpots)
             {
                 if (!this.player.Hitbox.Intersects(buildingSpot.Hitbox))
@@ -394,6 +415,7 @@ namespace SiberianAnabasis.Screens
                 {
                     this.player.Action = Enums.PlayerAction.Build;
                     this.player.ActionCost = Center.Cost;
+                    this.player.ActionName = Center.Name;
 
                     if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                     {
@@ -419,6 +441,7 @@ namespace SiberianAnabasis.Screens
                         // no armory - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Armory.Cost;
+                        this.player.ActionName = Armory.Name;
 
                         if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                         {
@@ -443,6 +466,7 @@ namespace SiberianAnabasis.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Create;
                             this.player.ActionCost = Armory.WeaponCost;
+                            this.player.ActionName = Weapon.Name;
 
                             if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                             {
@@ -467,6 +491,33 @@ namespace SiberianAnabasis.Screens
                         }
                     }
                 }
+                // Tower?
+                else if (buildingSpot.Type == Building.Type.Tower)
+                {
+                    var towers = this.towers.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (towers.Count() == 0)
+                    {
+                        // no tower - we can build something
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Tower.Cost;
+                        this.player.ActionName = Tower.Name;
+
+                        if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
+                        {
+                            if (this.player.Money >= Tower.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("SoldierSpawn");
+                                this.player.Money -= Tower.Cost;
+                                this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                        }
+                    }
+                }
             }
 
             // hire homelesses?
@@ -478,6 +529,7 @@ namespace SiberianAnabasis.Screens
                     {
                         this.player.Action = Enums.PlayerAction.Hire;
                         this.player.ActionCost = Homeless.Cost;
+                        this.player.ActionName = Homeless.Name;
 
                         // hire homeless man? create peasant
                         if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
@@ -532,8 +584,15 @@ namespace SiberianAnabasis.Screens
             this.Game.Matrix = this.camera.Transform;
             this.Game.DrawStart();
 
-            // day or night sky
-            this.GraphicsDevice.Clear(this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.DarkBlue);
+            // day or night sky - color transition
+            float dayPhaseLength = this.dayPhase == DayPhase.Day ? (float)DayNightLength.Day : (float)DayNightLength.Night;
+            float dayProgress = (float)((dayPhaseLength - this.dayPhaseTimer) / dayPhaseLength);
+            Color currentColor = Color.Lerp(
+                this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.DarkBlue,
+                this.dayPhase == DayPhase.Day ? Color.DarkBlue : Color.CornflowerBlue,
+                dayProgress
+            );
+            this.GraphicsDevice.Clear(currentColor);
 
             // background - tileset
             Assets.TilesetGroups["village1"].Draw("ground", this.Game.SpriteBatch);
@@ -598,6 +657,11 @@ namespace SiberianAnabasis.Screens
             foreach (Armory armory in this.armories)
             {
                 armory.Draw(this.Game.SpriteBatch);
+            }
+
+            foreach (Tower tower in this.towers)
+            {
+                tower.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Enemy enemy in this.enemies)
@@ -711,6 +775,14 @@ namespace SiberianAnabasis.Screens
                 }
             }
 
+            if (saveData.ContainsKey("towers"))
+            {
+                foreach (var tower in saveData.GetValue("towers"))
+                {
+                    this.towers.Add(new Tower((int)tower.Hitbox.X, (int)tower.Hitbox.Y, (Building.Status)tower.Status));
+                }
+            }
+
             Game1.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
         }
 
@@ -725,6 +797,7 @@ namespace SiberianAnabasis.Screens
                 peasants = this.peasants,
                 center = this.center,
                 armories = this.armories,
+                towers = this.towers,
                 coins = this.coins,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
