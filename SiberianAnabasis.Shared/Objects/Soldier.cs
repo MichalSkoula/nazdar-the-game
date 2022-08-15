@@ -11,6 +11,10 @@ namespace SiberianAnabasis.Objects
     public class Soldier : BasePerson
     {
         private List<Bullet> bullets = new List<Bullet>();
+        private int centerRadius = 96;
+        private bool isFast = true;
+
+        public int? DeploymentX { get; set; } = null;
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -51,18 +55,19 @@ namespace SiberianAnabasis.Objects
             }
 
             // is soldier moving?
-            bool isMoving = true;
-            if (this.Direction == Direction.Right)
+            bool isMoving = false;
+            if (Tools.GetRandom(4) == 1 || this.isFast)
             {
-                this.X += (int)(deltaTime * this.Speed);
-            }
-            else if (this.Direction == Direction.Left)
-            {
-                this.X -= (int)(deltaTime * this.Speed);
-            }
-            else
-            {
-                isMoving = false;
+                if (this.Direction == Direction.Right)
+                {
+                    this.X += (int)(deltaTime * this.Speed);
+                    isMoving = true;
+                }
+                else if (this.Direction == Direction.Left)
+                {
+                    this.X -= (int)(deltaTime * this.Speed);
+                    isMoving = true;
+                }
             }
 
             if (isMoving)
@@ -78,11 +83,64 @@ namespace SiberianAnabasis.Objects
 
             this.Anim.Update(deltaTime);
 
-            // out of game map
-            if (this.X < 0 || this.X > VillageScreen.MapWidth)
+            this.isFast = true;
+
+            if (this.DeploymentX == null)
             {
-                this.ChangeDirection();
+                // run towards town center
+                if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
+                {
+                    this.Direction = Direction.Right;
+                }
+                else if (this.X > VillageScreen.MapWidth / 2 + this.centerRadius)
+                {
+                    this.Direction = Direction.Left;
+                }
+
+                // when near the base, can be slow and randomly change direction
+                if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
+                {
+                    this.isFast = false;
+                    if (Tools.GetRandom(128) < 2)
+                    {
+                        this.ChangeDirection();
+                    }
+                }
+            } 
+            else
+            {
+                if (this.X < this.DeploymentX - this.centerRadius / 2)
+                {
+                    this.Direction = Direction.Right;
+                }
+                else if (this.X > this.DeploymentX + this.centerRadius / 2)
+                {
+                    this.Direction = Direction.Left;
+                }
+
+                // when near the base, can be slow and randomly change direction
+                if (this.X < this.DeploymentX + this.centerRadius / 2 && this.X > this.DeploymentX - this.centerRadius / 2)
+                {
+                    this.isFast = false;
+                    if (Tools.GetRandom(128) == 1)
+                    {
+                        this.ChangeDirection();
+                    }
+                }
             }
+            
+
+            /*
+            // when near the base, can be slow and randomly change direction
+            if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
+            {
+                this.isFast = false;
+                if (Tools.GetRandom(128) < 2)
+                {
+                    this.ChangeDirection();
+                }
+            }
+            */
         }
 
         public override void Draw(SpriteBatch spriteBatch)
