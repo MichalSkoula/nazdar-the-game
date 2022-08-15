@@ -29,6 +29,7 @@ namespace SiberianAnabasis.Screens
             buttons.Add("startButton1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Slot #1", true));
             buttons.Add("startButton2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Slot #2"));
             buttons.Add("startButton3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Slot #3"));
+            buttons.Add("controlsButton", new Button(Offset.MenuX, 230, null, ButtonSize.Small, "Controls"));
             buttons.Add("fullscreenButton", new Button(Offset.MenuX, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
             buttons.Add("musicButton", new Button(Offset.MenuX, 270, null, ButtonSize.Small, "Toggle Music"));
             buttons.Add("soundsButton", new Button(Offset.MenuX, 290, null, ButtonSize.Small, "Toggle Sounds"));
@@ -138,6 +139,12 @@ namespace SiberianAnabasis.Screens
             if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || this.buttons.GetValueOrDefault("exitButton").HasBeenClicked())
             {
                 this.Game.Exit();
+            }
+
+            // back to splash screen
+            if (this.buttons.GetValueOrDefault("controlsButton").HasBeenClicked())
+            {
+                this.Game.LoadScreen(typeof(Screens.SplashScreen));
             }
 
             // open save folder (only if DEBUG)

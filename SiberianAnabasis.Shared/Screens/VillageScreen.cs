@@ -49,6 +49,9 @@ namespace SiberianAnabasis.Screens
         private int newHomelessProbability = 4096;
         private int newCoinProbability = 512;
 
+        private int? leftmostTowerX = null;
+        private int? rightmostTowerX = null;
+
         public override void Initialize()
         {
             // create player in the center of the map
@@ -147,8 +150,23 @@ namespace SiberianAnabasis.Screens
 
         private void UpdateSoldiers()
         {
+            bool left = true;
             foreach (Soldier soldier in this.soldiers)
             {
+                left = !left;
+
+                soldier.DeploymentX = null; 
+                if (left && this.leftmostTowerX != null)
+                {
+                    // leftmost tower exists?
+                    soldier.DeploymentX = this.leftmostTowerX;
+                }
+                else if (!left && this.rightmostTowerX != null)
+                {
+                    // rightmost tower exists?
+                    soldier.DeploymentX = this.rightmostTowerX;
+                }
+
                 soldier.Update(this.Game.DeltaTime);
             }
         }
@@ -266,8 +284,22 @@ namespace SiberianAnabasis.Screens
 
         private void UpdateTowers()
         {
+            this.leftmostTowerX = this.rightmostTowerX = null;
             foreach (Tower tower in this.towers)
             {
+                // is it left or rightmost tower (to send soldiers to this tower)
+                if (this.center != null)
+                {
+                    if (tower.X < this.center.X && (this.leftmostTowerX == null || tower.X < this.leftmostTowerX))
+                    {
+                        this.leftmostTowerX = tower.X;
+                    }
+                    else if (tower.X > (this.center.X + this.center.Width) && (this.rightmostTowerX == null || tower.X > this.rightmostTowerX))
+                    {
+                        this.rightmostTowerX = tower.X + tower.Width;
+                    }
+                }
+
                 tower.Update(this.Game.DeltaTime);
             }
         }
@@ -438,23 +470,23 @@ namespace SiberianAnabasis.Screens
                     var armories = this.armories.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
                     if (armories.Count() == 0)
                     {
-                        // no armory - we can build something
+                        // no armory here - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Armory.Cost;
                         this.player.ActionName = Armory.Name;
 
                         if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                         {
-                            if (this.player.Money >= Armory.Cost)
+                            if (this.player.Money < Armory.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("SoldierSpawn");
                                 this.player.Money -= Armory.Cost;
                                 this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
-                            }
-                            else
-                            {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
                         }
                     }
@@ -504,16 +536,16 @@ namespace SiberianAnabasis.Screens
 
                         if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
                         {
-                            if (this.player.Money >= Tower.Cost)
+                            if (this.player.Money < Tower.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("SoldierSpawn");
                                 this.player.Money -= Tower.Cost;
                                 this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
-                            }
-                            else
-                            {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
                         }
                     }

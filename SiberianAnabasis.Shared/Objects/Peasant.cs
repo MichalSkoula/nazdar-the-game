@@ -10,7 +10,7 @@ namespace SiberianAnabasis.Objects
 {
     public class Peasant : BasePerson
     {
-        private bool isFast = false;
+        private bool isFast = true;
         private int centerRadius = 96;
         public Rectangle? IsBuildingHere = null;
         public Rectangle? IsRunningForItem = null;
@@ -51,7 +51,7 @@ namespace SiberianAnabasis.Objects
 
             // is he moving?
             bool isMoving = false;
-            if (Tools.GetRandom(8) < 2 || this.isFast)
+            if (Tools.GetRandom(8) == 1 || this.isFast)
             {
                 if (this.Direction == Direction.Right)
                 {
@@ -79,7 +79,6 @@ namespace SiberianAnabasis.Objects
             this.Anim.Update(deltaTime);
 
             this.isFast = true;
-
             
             if (this.IsBuildingHere.HasValue)
             {
