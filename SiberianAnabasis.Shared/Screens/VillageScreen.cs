@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Objects;
@@ -46,8 +47,8 @@ namespace SiberianAnabasis.Screens
 
         // some settings - random 0-X == 1
         private int newEnemyProbability = 256;
-        private int newHomelessProbability = 4096;
-        private int newCoinProbability = 512;
+        private int newHomelessProbability = 2048;
+        private int newCoinProbability = 768;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
@@ -324,12 +325,11 @@ namespace SiberianAnabasis.Screens
                     }
                 }
             }
-            this.enemies.RemoveAll(p => p.ToDelete);
 
             // enemies and player
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
-                if (!enemy.ToDelete && this.player.Hitbox.Intersects(enemy.Hitbox))
+                if (this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.Dead = true;
                     Audio.PlayRandomSound("EnemyDeaths");
@@ -341,14 +341,13 @@ namespace SiberianAnabasis.Screens
                     }
                 }
             }
-            this.enemies.RemoveAll(p => p.ToDelete);
 
             // enemies and soldiers
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
-                foreach (var soldier in this.soldiers.Where(soldier => soldier.Dead == false))
+                foreach (Soldier soldier in this.soldiers.Where(soldier => soldier.Dead == false))
                 {
-                    if (enemy.Hitbox.Intersects(soldier.Hitbox))
+                    if (!enemy.Dead && !soldier.Dead && enemy.Hitbox.Intersects(soldier.Hitbox))
                     {
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
@@ -358,23 +357,21 @@ namespace SiberianAnabasis.Screens
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Soldier killed, now homeless", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Soldier killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
-                            soldier.ToDelete = true;
-                            this.homelesses.Add(new Homeless(soldier.X, Offset.Floor, soldier.Direction));
+                            soldier.Dead = true;
                         }
                     }
                 }
-                this.soldiers.RemoveAll(p => p.ToDelete);
             }
-            this.enemies.RemoveAll(p => p.ToDelete);
+            
 
             // enemies and peasants
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
-                foreach (var peasant in this.peasants.Where(peasant => peasant.Dead == false))
+                foreach (Peasant peasant in this.peasants.Where(peasant => peasant.Dead == false))
                 {
-                    if (enemy.Hitbox.Intersects(peasant.Hitbox))
+                    if (!enemy.Dead && !peasant.Dead && enemy.Hitbox.Intersects(peasant.Hitbox))
                     {
                         if (!enemy.TakeHit(peasant.Caliber))
                         {
@@ -386,13 +383,16 @@ namespace SiberianAnabasis.Screens
                         {
                             Game1.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
-                            peasant.ToDelete = true;
-                            this.homelesses.Add(new Homeless(peasant.X, Offset.Floor, peasant.Direction));
+                            peasant.Dead = true;
                         }                        
                     }
                 }
-                this.peasants.RemoveAll(p => p.ToDelete);
+                
             }
+
+            this.soldiers.RemoveAll(p => p.ToDelete);
+            this.enemies.RemoveAll(p => p.ToDelete);
+            this.peasants.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateThingsCollisions()
@@ -600,7 +600,7 @@ namespace SiberianAnabasis.Screens
                 }
                 else
                 {
-                    Game1.MessageBuffer.AddMessage("New dawn", MessageType.Info);
+                    Game1.MessageBuffer.AddMessage("New dawn", MessageType.Success);
                     this.player.Days++;
                     this.dayPhase = DayPhase.Day;
                     this.dayPhaseTimer = (int)DayNightLength.Day;
@@ -629,48 +629,61 @@ namespace SiberianAnabasis.Screens
             // background - tileset
             Assets.TilesetGroups["village1"].Draw("ground", this.Game.SpriteBatch);
 
-            // stats
+            // stats ------------------------------------------------------------------------------------
+            int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
+            
+            // healthbar
+            this.Game.SpriteBatch.DrawRectangle(
+                new Rectangle(leftOffset, Offset.StatusBarY, 100, 10),
+                Color.Black
+            );
+            this.Game.SpriteBatch.DrawRectangle(
+                new Rectangle(leftOffset + 1, Offset.StatusBarY + 1, 98, 8),
+                Color.LightGreen,
+                8
+            );
+            this.Game.SpriteBatch.DrawRectangle(
+                new Rectangle(leftOffset + 1, Offset.StatusBarY + 1, (int)((this.player.Health / 100f) * 98), 8),
+                Color.Green,
+                8
+            );
+
+            // money
+            Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, (int)(leftOffset), Offset.StatusBarY + 40, 1);
+
+            // day or night
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Village " + this.Game.Village.ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar),
-                Color.Black);
-            this.Game.SpriteBatch.DrawString(
-               Assets.Fonts["Small"],
-               "Days " + this.player.Days.ToString(),
-               new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 10),
-               Color.Black);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Timer: " + Math.Ceiling(this.dayPhaseTimer).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 20),
-                Color.Black);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Health: " + (this.player.Health).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 30),
-                Color.Black);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Money: " + (this.player.Money).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X, Offset.StatusBar + 40),
+                this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
+                new Vector2(leftOffset, Offset.StatusBarY + 35),
                 Color.Black);
 
+            // right stats
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Homelesses: " + (this.homelesses.Count).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X + 450, Offset.StatusBar),
+                new Vector2(leftOffset + 450, Offset.StatusBarY),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Peasants: " + (this.peasants.Count).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X + 450, Offset.StatusBar + 10),
+                new Vector2(leftOffset + 450, Offset.StatusBarY + 10),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Soldiers: " + (this.soldiers.Count).ToString(),
-                new Vector2(10 - this.camera.Transform.Translation.X + 450, Offset.StatusBar + 20),
+                new Vector2(leftOffset + 450, Offset.StatusBarY + 20),
                 Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Village " + this.Game.Village.ToString(),
+                new Vector2(leftOffset + 450, Offset.StatusBarY + 40),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+               Assets.Fonts["Small"],
+               "Days " + this.player.Days.ToString(),
+               new Vector2(leftOffset + 450, Offset.StatusBarY + 50),
+               Color.Black);
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);

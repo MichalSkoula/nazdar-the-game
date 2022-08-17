@@ -13,8 +13,43 @@ namespace SiberianAnabasis.Objects
 
         public bool ToDelete { get; set; }
 
+        // dying ... ttd - time to die
+        private float ttd = 0f;
+        private bool dead = false;
+        public bool Dead
+        {
+            get
+            {
+                return this.dead;
+            }
+            set
+            {
+                this.dead = value;
+                if (this.dead == true && this.ttd == 0)
+                {
+                    this.Color = this.ColorDead;
+                    this.Alpha = 0.25f;
+                    this.ttd = 5;
+                }
+            }
+        }
+
+        // base update method - should be called as base.Update() 
+        public void Update(float deltaTime)
+        {
+            if (this.dead)
+            {
+                this.ttd -= deltaTime;
+                if (this.ttd <= 0)
+                {
+                    this.ToDelete = true;
+                }
+            }
+        }
+
         // draw colors and alpha
         public Color Color { private get; set; } = Color.White;
+        protected Color ColorDead { private get; set; } = Color.Red;
         public float Alpha { protected get; set; } = 1;
         public Color FinalColor
         {

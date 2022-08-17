@@ -18,8 +18,8 @@
 
         public enum DayNightLength
         {
-            Night = 16,
-            Day = 32
+            Night = 8,
+            Day = 16
         }
 
         public enum ButtonSize
@@ -76,7 +76,8 @@
 
         public static class Offset
         {
-            public const int StatusBar = 290;
+            public const int StatusBarY = 290;
+            public const int StatusBarX = 15;
             public const int Floor = 252;
             public const int Floor2 = 260;
             public const int MessagesX = Screen.Width - 250;

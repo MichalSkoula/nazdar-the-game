@@ -128,19 +128,6 @@ namespace SiberianAnabasis.Objects
                     }
                 }
             }
-            
-
-            /*
-            // when near the base, can be slow and randomly change direction
-            if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
-            {
-                this.isFast = false;
-                if (Tools.GetRandom(128) < 2)
-                {
-                    this.ChangeDirection();
-                }
-            }
-            */
         }
 
         public override void Draw(SpriteBatch spriteBatch)

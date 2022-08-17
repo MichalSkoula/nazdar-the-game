@@ -159,13 +159,20 @@ namespace SiberianAnabasis.Objects
             // some action?
             if (this.Action != null)
             {
-                for (int i = 0; i < this.ActionCost; i++)
-                {
-                    spriteBatch.DrawCircle(this.X + this.Width / 2, this.Y - 5 - 10 * i, 4, 50, Color.Yellow);
-                }
-                spriteBatch.DrawString(Assets.Fonts["Small"], this.Action.ToString() + " " + this.ActionName, new Vector2(this.X + this.Width + 5, this.Y - 10), Color.White);
+                // can afford?
+                float alpha = (this.ActionCost < this.Money ? 1f : 0.6f);
+
+                // static image from spritesheet
+                Coin.DrawStatic(spriteBatch, this.ActionCost, this.X, this.Y, alpha);
+
+                // text
+                spriteBatch.DrawString(
+                    Assets.Fonts["Small"], 
+                    this.Action.ToString() + " " + this.ActionName, 
+                    new Vector2(this.X, this.Y - 10), 
+                    Color.White * alpha
+                );
             }
-            
         }
 
         private async void Jump()

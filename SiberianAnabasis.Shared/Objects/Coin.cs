@@ -15,8 +15,10 @@ namespace SiberianAnabasis.Objects
             this.Hitbox = new Rectangle(x, y, this.anim.FrameWidth, this.anim.FrameHeight);
         }
 
-        public void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
             this.anim.Loop = true;
             //this.Anim.ResetLoop();
             this.anim.Update(deltaTime);
@@ -25,6 +27,24 @@ namespace SiberianAnabasis.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             this.anim.Draw(spriteBatch, this.Hitbox, Color.White);
+        }
+
+        public static void DrawStatic(SpriteBatch spriteBatch, int cost, int x, int y, float alpha = 1)
+        {
+            for (int i = 0; i < cost; i++)
+            {
+                spriteBatch.Draw(
+                    Assets.Images["Coin"],
+                    new Rectangle(
+                        x + (Assets.Images["Coin"].Height + 1) * i,
+                        y - Assets.Images["Coin"].Height * 2,
+                        Assets.Images["Coin"].Height,
+                        Assets.Images["Coin"].Height
+                    ),
+                    new Rectangle(0, 0, Assets.Images["Coin"].Height, Assets.Images["Coin"].Height),
+                    Color.White * alpha
+                );
+            }
         }
     }
 }
