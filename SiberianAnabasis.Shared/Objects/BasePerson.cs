@@ -14,40 +14,6 @@ namespace SiberianAnabasis.Objects
         protected Animation Anim { get; set; }
         protected int Speed { get; set; }
 
-        // dying ... ttd - time to die
-        private float ttd = 0f;
-        private bool dead = false;
-        public bool Dead
-        {
-            get
-            {
-                return this.dead;
-            }
-            set
-            {
-                this.dead = value;
-                if (this.dead == true && this.ttd == 0)
-                {
-                    this.Color = Color.Red;
-                    this.Alpha = 0.2f;
-                    this.ttd = 3;
-                }
-            }
-        }
-
-        // base update method - should be called as base.Update() 
-        public void Update(float deltaTime)
-        {
-            if (this.dead)
-            {
-                this.ttd -= deltaTime;
-                if (this.ttd <= 0)
-                {
-                    this.ToDelete = true;
-                }
-            }
-        }
-
         public void DrawHealth(SpriteBatch spriteBatch)
         {
             if (this.Dead)

@@ -12,8 +12,10 @@ namespace SiberianAnabasis.Objects
         public Building.Type Type;
         public Building.Status Status = Building.Status.InProcess;
 
-        public void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
+            base.Update(deltaTime);
+
             this.Alpha = this.Status == Building.Status.InProcess ? 0.25f : 1;
 
             if (this.TimeToBuilt > 0 && this.IsBeingBuilt)

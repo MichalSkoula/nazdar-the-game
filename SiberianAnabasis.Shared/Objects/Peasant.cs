@@ -49,6 +49,11 @@ namespace SiberianAnabasis.Objects
             // particles
             this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
 
+            if (this.Dead)
+            {
+                return;
+            }
+
             // is he moving?
             bool isMoving = false;
             if (Tools.GetRandom(8) == 1 || this.isFast)
