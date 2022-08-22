@@ -75,6 +75,7 @@ namespace SiberianAnabasis.Objects
                 this.Hitbox = temp;
             }
         }
+
         public int Y
         {
             get

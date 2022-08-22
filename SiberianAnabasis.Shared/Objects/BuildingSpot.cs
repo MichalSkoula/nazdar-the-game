@@ -30,7 +30,7 @@ namespace SiberianAnabasis.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawRectangle(this.Hitbox, Color.Wheat * 0.1f);
+            spriteBatch.DrawRectangle(this.Hitbox, Color.Wheat * 0.05f);
         }
 
         public new void Update(float deltaTime)

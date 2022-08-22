@@ -42,6 +42,12 @@
             Create
         }
 
+        public enum BulletType
+        {
+            Bullet,
+            Cannonball
+        }
+
         public enum MessageType
         {
             Info,

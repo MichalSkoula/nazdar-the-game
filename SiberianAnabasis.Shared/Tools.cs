@@ -53,5 +53,10 @@ namespace SiberianAnabasis.Shared
         {
             return Rand.Next(limit);
         }
+
+        public static double ToRadians(double val)
+        {
+            return (Math.PI / 180) * val;
+        }
     }
 }
