@@ -46,7 +46,8 @@ namespace SiberianAnabasis.Screens
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
         // some settings - random 0-X == 1
-        private int newEnemyProbability = 256;
+        private int newEnemyProbability = 256; // every day, it gets -2
+        private int newEnemyProbabilityLowLimit = 64;
         private int newHomelessProbability = 2048;
         private int newCoinProbability = 768;
 
@@ -125,8 +126,16 @@ namespace SiberianAnabasis.Screens
         private void UpdateEnemies()
         {
             // create enemy?
-            // at night AND in first half on night AND random
-            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer > (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(this.newEnemyProbability) == 1)
+            // - at night
+            // - in first half on night
+            // - random - every day it gets more difficult
+            int randomBase = this.newEnemyProbability - this.player.Days * 2;
+            if (randomBase < this.newEnemyProbabilityLowLimit)
+            {
+                randomBase = this.newEnemyProbabilityLowLimit;
+            }
+
+            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
             {
                 Audio.PlayRandomSound("EnemySpawns");
                 Game1.MessageBuffer.AddMessage("New enemy!", MessageType.Danger);
@@ -286,6 +295,7 @@ namespace SiberianAnabasis.Screens
         private void UpdateTowers()
         {
             this.leftmostTowerX = this.rightmostTowerX = null;
+            
             foreach (Tower tower in this.towers)
             {
                 // is it left or rightmost tower (to send soldiers to this tower)
@@ -301,16 +311,33 @@ namespace SiberianAnabasis.Screens
                     }
                 }
 
+                // can shoot at closest enemy?
+                tower.CanShoot = false;
+                int range = Enums.Screen.Width / 2; // half of the visible screen
+                foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - tower.X)))
+                {
+                    if (Math.Abs(enemy.X - tower.X) < range)
+                    {
+                        tower.CanShoot = true;
+                        tower.PrepareToShoot(
+                            (enemy.X + enemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right, 
+                            enemy.X,
+                            range
+                        );
+                        break;
+                    }
+                }
+
                 tower.Update(this.Game.DeltaTime);
             }
         }
 
         private void UpdatePeoplesCollisions()
         {
-            // enemies and bullets
+            // enemies and player bullets
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
-                foreach (Bullet bullet in this.player.Bullets)
+                foreach (Bullet bullet in this.player.Bullets.Where(bullet => bullet.ToDelete == false))
                 {
                     if (enemy.Hitbox.Intersects(bullet.Hitbox))
                     {
@@ -320,7 +347,29 @@ namespace SiberianAnabasis.Screens
                         {
                             enemy.Dead = true;
                             Audio.PlayRandomSound("EnemyDeaths");
-                            Game1.MessageBuffer.AddMessage("Bullet kill", MessageType.Success);
+                            Game1.MessageBuffer.AddMessage("Bullet kill by player", MessageType.Success);
+                        }
+                    }
+                }
+            }
+
+            // enemies and tower bullets
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            {
+                foreach (Tower tower in this.towers)
+                {
+                    foreach (Bullet bullet in tower.Bullets.Where(bullet => bullet.ToDelete == false))
+                    {
+                        if (enemy.Hitbox.Intersects(bullet.Hitbox))
+                        {
+                            bullet.ToDelete = true;
+
+                            if (!enemy.TakeHit(bullet.Caliber))
+                            {
+                                enemy.Dead = true;
+                                Audio.PlayRandomSound("EnemyDeaths");
+                                Game1.MessageBuffer.AddMessage("Bullet kill by tower", MessageType.Success);
+                            }
                         }
                     }
                 }
@@ -824,7 +873,15 @@ namespace SiberianAnabasis.Screens
             {
                 foreach (var tower in saveData.GetValue("towers"))
                 {
-                    this.towers.Add(new Tower((int)tower.Hitbox.X, (int)tower.Hitbox.Y, (Building.Status)tower.Status));
+                    var newTower = new Tower((int)tower.Hitbox.X, (int)tower.Hitbox.Y, (Building.Status)tower.Status);
+                    if (tower.ContainsKey("Bullets"))
+                    {
+                        foreach (var bullet in tower.GetValue("Bullets")) 
+                        {
+                            newTower.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Direction)bullet.Direction, (int)bullet.Caliber, BulletType.Cannonball));
+                        }
+                    }
+                    this.towers.Add(newTower);
                 }
             }
 
