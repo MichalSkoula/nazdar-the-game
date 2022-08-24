@@ -7,6 +7,7 @@ namespace SiberianAnabasis.Objects
 {
     public class Coin : BaseObject
     {
+        private static int moneyRowLimit = 30;
         private Animation anim;
 
         public Coin(int x, int y)
@@ -36,8 +37,8 @@ namespace SiberianAnabasis.Objects
                 spriteBatch.Draw(
                     Assets.Images["Coin"],
                     new Rectangle(
-                        x + (Assets.Images["Coin"].Height + 1) * i,
-                        y - Assets.Images["Coin"].Height * 2,
+                        x + (Assets.Images["Coin"].Height + 1) * (i - (i >= moneyRowLimit ? moneyRowLimit : 0)),
+                        y - Assets.Images["Coin"].Height * 2 + (i >= moneyRowLimit ? Assets.Images["Coin"].Height : 0),
                         Assets.Images["Coin"].Height,
                         Assets.Images["Coin"].Height
                     ),

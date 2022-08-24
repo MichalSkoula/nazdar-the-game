@@ -54,6 +54,7 @@ namespace SiberianAnabasis.Screens
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
 
+
         public override void Initialize()
         {
             // create player in the center of the map
@@ -346,6 +347,7 @@ namespace SiberianAnabasis.Screens
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
                             enemy.Dead = true;
+                            this.player.Kills++;
                             Audio.PlayRandomSound("EnemyDeaths");
                             Game1.MessageBuffer.AddMessage("Bullet kill by player", MessageType.Success);
                         }
@@ -367,6 +369,7 @@ namespace SiberianAnabasis.Screens
                             if (!enemy.TakeHit(bullet.Caliber))
                             {
                                 enemy.Dead = true;
+                                this.player.Kills++;
                                 Audio.PlayRandomSound("EnemyDeaths");
                                 Game1.MessageBuffer.AddMessage("Bullet kill by tower", MessageType.Success);
                             }
@@ -381,6 +384,8 @@ namespace SiberianAnabasis.Screens
                 if (this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
                     enemy.Dead = true;
+                    this.player.Kills++;
+
                     Audio.PlayRandomSound("EnemyDeaths");
                     Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
 
@@ -403,6 +408,7 @@ namespace SiberianAnabasis.Screens
                             Game1.MessageBuffer.AddMessage("Enemy killed by soldier", MessageType.Success);
                             Audio.PlayRandomSound("EnemyDeaths");
                             enemy.Dead = true;
+                            this.player.Kills++;
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
@@ -427,6 +433,7 @@ namespace SiberianAnabasis.Screens
                             Game1.MessageBuffer.AddMessage("Enemy killed by peasant", MessageType.Success);
                             Audio.PlayRandomSound("EnemyDeaths");
                             enemy.Dead = true;
+                            this.player.Kills++;
                         }
                         if (!peasant.TakeHit(enemy.Caliber))
                         {
@@ -704,7 +711,7 @@ namespace SiberianAnabasis.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-                new Vector2(leftOffset, Offset.StatusBarY + 35),
+                new Vector2(leftOffset, Offset.StatusBarY + 45),
                 Color.Black);
 
             // right stats
@@ -725,12 +732,17 @@ namespace SiberianAnabasis.Screens
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
+                "Score: " + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills),
+                new Vector2(leftOffset + 450, Offset.StatusBarY + 30),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
                 new Vector2(leftOffset + 450, Offset.StatusBarY + 40),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
-               "Days " + this.player.Days.ToString(),
+               "Day " + this.player.Days.ToString() + ".",
                new Vector2(leftOffset + 450, Offset.StatusBarY + 50),
                Color.Black);
 

@@ -252,10 +252,19 @@ namespace SiberianAnabasis.Screens
                 dynamic saveData = saveFile.Load();
                 if (saveData != null)
                 {
+                    // get score
+                    int score = Tools.GetScore(
+                        (int)saveData.GetValue("player").Days,
+                        (int)saveData.GetValue("player").Money,
+                        (int)saveData.GetValue("peasants").Count,
+                        (int)saveData.GetValue("soldiers").Count,
+                        (int)saveData.GetValue("player").Kills
+                    );
+
                     this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = new string[] {
-                        "Village: " + saveData.GetValue("village"),
-                        "Money: " + saveData.GetValue("player").Money,
-                        "Days: " + saveData.GetValue("player").Days,
+                        "Village " + saveData.GetValue("village"),
+                        "Day " + saveData.GetValue("player").Days + ".",
+                        "Score: " + score,
                     };
                 }
             }

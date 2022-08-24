@@ -58,5 +58,16 @@ namespace SiberianAnabasis.Shared
         {
             return (Math.PI / 180) * val;
         }
+
+        public static int GetScore(int days, int money, int peasants, int soldiers, int kills)
+        {
+            return (int)(
+                days
+                + money
+                + peasants
+                + soldiers
+                + kills
+            );
+        }
     }
 }
