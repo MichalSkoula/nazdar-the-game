@@ -15,6 +15,8 @@ namespace SiberianAnabasis.Objects
 {
     public class Player : BasePerson
     {
+        private static readonly int moneyLimit = 60;
+
         public List<Bullet> Bullets
         {
             get;
@@ -29,7 +31,26 @@ namespace SiberianAnabasis.Objects
             new Animation(Assets.Images["PlayerLeft"], 4, 10),
         };
 
-        public int Money { get; set; }
+        private int money;
+        public int Money { 
+            get
+            {
+                return this.money;
+            }
+            set
+            {
+                if (value > moneyLimit)
+                {
+                    Game1.MessageBuffer.AddMessage("Cant hold all this money", MessageType.Danger);
+                    this.money = moneyLimit;
+                } 
+                else
+                {
+                    this.money = value;
+                }
+            }
+        }
+
         public int Days { get; set; }
 
         public Enums.PlayerAction? Action { get; set; }
@@ -37,6 +58,8 @@ namespace SiberianAnabasis.Objects
         public string ActionName { get; set; }
 
         private ParticleSource particleSmoke;
+
+        public int Kills { get; set; } = 0;
 
         public Player(int x, int y)
         {
@@ -74,6 +97,7 @@ namespace SiberianAnabasis.Objects
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
             this.Money = (int)saveData.Money;
+            this.Kills = (int)saveData.Kills;
 
             // load bullets
             if (saveData.ContainsKey("Bullets"))
