@@ -74,7 +74,7 @@
 /processorParam:TextureFormat=Color
 /build:Bullet/bullet_right.png
 
-#begin Controls/gamepad.png
+#begin Controls/Gamepad.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -84,9 +84,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Controls/gamepad.png
+/build:Controls/Gamepad.png
 
-#begin Controls/keyboard.png
+#begin Controls/Keyboard.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -96,7 +96,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Controls/keyboard.png
+/build:Controls/Keyboard.png
 
 #begin Effects/AllWhite.fx
 /importer:EffectImporter

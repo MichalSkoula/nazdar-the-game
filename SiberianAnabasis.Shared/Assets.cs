@@ -114,8 +114,8 @@ namespace SiberianAnabasis
             // load tilesets
             // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
             Assets.TilesetGroups["village1"] = new TilesetGroup(
-                content.RootDirectory + "\\Envs\\1_village.tmx",
-                content.RootDirectory + "\\Envs\\1_village.tsx", 
+                content.RootDirectory + "/Envs/1_village.tmx",
+                content.RootDirectory + "/Envs/1_village.tsx", 
                 content.Load<Texture2D>("Envs/tileset1")
             );
 
