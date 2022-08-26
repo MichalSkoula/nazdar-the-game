@@ -11,7 +11,7 @@ namespace SiberianAnabasis.Objects
         public BuildingSpot(int x, int y, int width, int height, string type)
         {
             this.Hitbox = new Rectangle(x, y, width, height);
-            
+
             switch (type)
             {
                 case "Center":

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SiberianAnabasis.Screens;
 using SiberianAnabasis.Shared;
+using System.Collections.Generic;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects

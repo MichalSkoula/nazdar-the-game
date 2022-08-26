@@ -87,11 +87,11 @@ namespace SiberianAnabasis.Controls
         public void Draw(SpriteBatch spriteBatch)
         {
             var bgColor = Color.Green;
-             
+
             if (this.Active == false)
             {
                 bgColor = Color.Gray;
-            } 
+            }
             else if (this.state == ButtonState.HoverState)
             {
                 bgColor = Color.LightGreen;

@@ -18,7 +18,7 @@ namespace SiberianAnabasis.Objects
 
         // 1 close, 4 faaar - bigger shootPower => farther it falls (it falls less often)
         // only for cannonbal
-        private int shootPower = 1; 
+        private int shootPower = 1;
 
         public Bullet(int x, int y, Direction direction, int caliber, BulletType type = BulletType.Bullet, int shootPower = 1)
         {
@@ -66,7 +66,7 @@ namespace SiberianAnabasis.Objects
             {
                 this.t0 += deltaTime / 1.5f;
                 this.Y = (int)(this.h0 + 0.5f * g * Math.Pow(this.t0, 2));
-            } 
+            }
             else if (this.type == BulletType.Cannonball)
             {
                 // bigger shootPower => farther it falls (it falls less often)
@@ -74,7 +74,7 @@ namespace SiberianAnabasis.Objects
                 {
                     this.Y += 1;
                 }
-            }          
+            }
 
             // out of game map
             if (this.X < 0 || this.X > VillageScreen.MapWidth)

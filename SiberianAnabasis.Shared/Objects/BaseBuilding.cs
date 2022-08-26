@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static SiberianAnabasis.Enums;
+﻿using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Objects
 {

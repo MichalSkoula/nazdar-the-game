@@ -64,11 +64,11 @@ namespace SiberianAnabasis
             this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, Enums.Screen.Width, Enums.Screen.Height);
 
             // start it with this scene
-            #if DEBUG
-                this.LoadScreen(typeof(Screens.MenuScreen));
-            #else
+#if DEBUG
+            this.LoadScreen(typeof(Screens.MenuScreen));
+#else
                 this.LoadScreen(typeof(Screens.SplashScreen));
-            #endif
+#endif
 
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);

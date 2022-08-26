@@ -1,9 +1,7 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Text;
 using static SiberianAnabasis.Enums;
-using Microsoft.Xna.Framework;
 
 namespace SiberianAnabasis.Objects
 {
@@ -56,7 +54,7 @@ namespace SiberianAnabasis.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
-            
+
             foreach (var weapon in this.weapons)
             {
                 weapon.Draw(spriteBatch);
@@ -68,7 +66,7 @@ namespace SiberianAnabasis.Objects
             int i = 0;
             foreach (var weapon in this.weapons)
             {
-                weapon.SetPosition(this.X + - 5 + i * 5, this.Y + this.Height - weapon.Height);
+                weapon.SetPosition(this.X + -5 + i * 5, this.Y + this.Height - weapon.Height);
                 i++;
             }
             base.Update(deltaTime);

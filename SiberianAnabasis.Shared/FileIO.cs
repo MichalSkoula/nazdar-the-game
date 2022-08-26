@@ -34,7 +34,7 @@ namespace SiberianAnabasis
                         {
                             dynamic data = JObject.Parse(json);
                             return data;
-                        } 
+                        }
                         catch
                         {
                             return null;
@@ -56,7 +56,7 @@ namespace SiberianAnabasis
                 {
                     string json = JsonConvert.SerializeObject(data, Formatting.Indented);
                     writer.WriteLine(json);
-                    
+
                 }
                 this.isoStream.Close();
             }
@@ -71,7 +71,8 @@ namespace SiberianAnabasis
         {
             IsolatedStorageFileStream tempIsoFileStream = this.isoStream;
 
-            if (tempIsoFileStream == null) {
+            if (tempIsoFileStream == null)
+            {
                 tempIsoFileStream = new IsolatedStorageFileStream(this.File, FileMode.OpenOrCreate, this.isoStore);
             }
 
@@ -90,7 +91,7 @@ namespace SiberianAnabasis
             string filePath = this.GetPath();
             int index = filePath.LastIndexOf('\\');
             filePath = filePath.Remove(index + 1);
-            
+
             return filePath;
         }
     }

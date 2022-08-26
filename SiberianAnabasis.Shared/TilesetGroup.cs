@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TiledCS;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using TiledCS;
 
 namespace SiberianAnabasis.Shared
 {
@@ -44,7 +43,7 @@ namespace SiberianAnabasis.Shared
                     int tileFrame = gid - 1;
 
                     int column = tileFrame % this.Tileset.Columns;
-                    int row = (int)Math.Floor((double)tileFrame / (double)this.Tileset.Columns);
+                    int row = (int)Math.Floor(tileFrame / (double)this.Tileset.Columns);
 
                     float x = (i % this.TilesetMap.Width) * this.TilesetMap.TileWidth;
                     float y = (float)Math.Floor(i / (double)this.TilesetMap.Width) * this.TilesetMap.TileHeight;

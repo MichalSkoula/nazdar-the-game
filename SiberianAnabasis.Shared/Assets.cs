@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using Microsoft.Xna.Framework.Content;
-using System.Collections.Generic;
-using SiberianAnabasis.Shared;
 using MonoGame.Extended.TextureAtlases;
-using Microsoft.Xna.Framework;
+using SiberianAnabasis.Shared;
+using System.Collections.Generic;
 
 namespace SiberianAnabasis
 {
@@ -115,7 +115,7 @@ namespace SiberianAnabasis
             // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
             Assets.TilesetGroups["village1"] = new TilesetGroup(
                 content.RootDirectory + "/Envs/1_village.tmx",
-                content.RootDirectory + "/Envs/1_village.tsx", 
+                content.RootDirectory + "/Envs/1_village.tsx",
                 content.Load<Texture2D>("Envs/tileset1")
             );
 

@@ -61,13 +61,13 @@ namespace SiberianAnabasis.Shared
 
         public static int GetScore(int days, int money, int peasants, int soldiers, int kills)
         {
-            return (int)(
+            return
                 days
                 + money
                 + peasants
                 + soldiers
                 + kills
-            );
+            ;
         }
     }
 }

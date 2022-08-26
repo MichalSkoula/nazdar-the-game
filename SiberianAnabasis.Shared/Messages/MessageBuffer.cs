@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SiberianAnabasis.Messages
 {
@@ -11,7 +9,7 @@ namespace SiberianAnabasis.Messages
         public List<Message> Messages = new List<Message>();
         private int messagesLimit = 7;
 
-        public void AddMessage(string text, Enums.MessageType? messageType = Enums.MessageType.Info, double ? ttl = 7)
+        public void AddMessage(string text, Enums.MessageType? messageType = Enums.MessageType.Info, double? ttl = 7)
         {
             this.Messages.Add(new Message(text, (Enums.MessageType)messageType, (double)ttl));
         }
@@ -38,8 +36,8 @@ namespace SiberianAnabasis.Messages
             for (int i = 0; i < this.Messages.Count; i++)
             {
                 spriteBatch.DrawString(
-                    Assets.Fonts["Small"], 
-                    this.Messages[i].Text, 
+                    Assets.Fonts["Small"],
+                    this.Messages[i].Text,
                     new Vector2(Enums.Offset.MessagesX - translationX, 10 + 15 * i),
                     this.Messages[i].Color
                 );

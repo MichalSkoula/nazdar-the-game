@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SiberianAnabasis
+﻿namespace SiberianAnabasis
 {
     /// <summary>
     /// The main class.
