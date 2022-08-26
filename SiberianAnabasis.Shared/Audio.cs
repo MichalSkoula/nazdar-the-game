@@ -1,7 +1,4 @@
 ﻿using Microsoft.Xna.Framework.Media;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SiberianAnabasis.Shared
 {
@@ -11,7 +8,8 @@ namespace SiberianAnabasis.Shared
 
         public static void PlaySound(string soundName)
         {
-            if (!Assets.Sounds.ContainsKey(soundName)) {
+            if (!Assets.Sounds.ContainsKey(soundName))
+            {
                 return;
             }
 

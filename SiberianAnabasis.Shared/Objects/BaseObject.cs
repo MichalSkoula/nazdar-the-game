@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
-using SiberianAnabasis.Shared;
 
 namespace SiberianAnabasis.Objects
 {
@@ -119,7 +117,7 @@ namespace SiberianAnabasis.Objects
 
         // assets
         protected Texture2D Sprite { get; set; }
-        
+
         public abstract void Draw(SpriteBatch spriteBatch);
 
         public void ChangeDirection()

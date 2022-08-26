@@ -39,7 +39,8 @@ namespace SiberianAnabasis.Screens
             }
 
             // focus on current village & active accessed villages
-            if (saveData.ContainsKey("village")) {
+            if (saveData.ContainsKey("village"))
+            {
                 this.Game.Village = (int)saveData.village;
             }
         }

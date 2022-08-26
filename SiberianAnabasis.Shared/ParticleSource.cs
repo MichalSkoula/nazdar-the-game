@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Particles;
@@ -9,6 +6,9 @@ using MonoGame.Extended.Particles.Modifiers;
 using MonoGame.Extended.Particles.Modifiers.Interpolators;
 using MonoGame.Extended.Particles.Profiles;
 using MonoGame.Extended.TextureAtlases;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SiberianAnabasis.Shared
 {
@@ -37,7 +37,7 @@ namespace SiberianAnabasis.Shared
                             Scale = new Range<float>(3.0f, 4.0f)
                         },
                         Modifiers =
-                        {  
+                        {
                             new AgeModifier
                             {
                                 Interpolators =
@@ -108,10 +108,10 @@ namespace SiberianAnabasis.Shared
                     return -Vector2.UnitY;
                 case Enums.Direction.Down:
                     return Vector2.UnitY;
-                case Enums.Direction.Left: 
+                case Enums.Direction.Left:
                     return -Vector2.UnitX;
                 default:
-                case Enums.Direction.Right: 
+                case Enums.Direction.Right:
                     return Vector2.UnitX;
             }
         }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Shared;
+using System.Collections.Generic;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Screens
@@ -93,12 +90,12 @@ namespace SiberianAnabasis.Screens
             {
                 this.Game.SaveSlot = Save.Slot1;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
-            } 
+            }
             else if (this.buttons.GetValueOrDefault("startButton2").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot2;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
-            } 
+            }
             else if (this.buttons.GetValueOrDefault("startButton3").HasBeenClicked())
             {
                 this.Game.SaveSlot = Save.Slot3;
@@ -176,14 +173,14 @@ namespace SiberianAnabasis.Screens
             {
                 // draw button
                 button.Value.Draw(this.Game.SpriteBatch);
-                
+
                 // draw save slot content next to button
                 if (button.Value.Data != null && button.Value.Data.Length > 0)
                 {
                     this.Game.SpriteBatch.DrawString(
-                        Assets.Fonts["Small"], 
-                        button.Value.Data[0], 
-                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y), 
+                        Assets.Fonts["Small"],
+                        button.Value.Data[0],
+                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y),
                         Color.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
@@ -210,7 +207,8 @@ namespace SiberianAnabasis.Screens
 
         private void SaveSettings()
         {
-            this.settingsFile.Save(new {
+            this.settingsFile.Save(new
+            {
                 fullscreen = this.Game.Graphics.IsFullScreen,
                 musicMuted = MediaPlayer.IsMuted,
                 soundsVolume = SoundEffect.MasterVolume,
@@ -247,7 +245,8 @@ namespace SiberianAnabasis.Screens
         {
             string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3 };
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 3; i++)
+            {
                 FileIO saveFile = new FileIO(slots[i]);
                 dynamic saveData = saveFile.Load();
                 if (saveData != null)

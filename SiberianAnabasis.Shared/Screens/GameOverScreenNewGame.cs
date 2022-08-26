@@ -3,9 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Shared;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Screens

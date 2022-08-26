@@ -1,9 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using static SiberianAnabasis.Enums;
-using Microsoft.Xna.Framework;
 
 namespace SiberianAnabasis.Objects
 {
@@ -28,7 +25,7 @@ namespace SiberianAnabasis.Objects
 
         public new void Update(float deltaTime)
         {
-            base.Update(deltaTime);            
+            base.Update(deltaTime);
         }
     }
 }

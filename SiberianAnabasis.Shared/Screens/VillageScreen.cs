@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Objects;
 using SiberianAnabasis.Shared;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using static SiberianAnabasis.Enums;
 using Keyboard = SiberianAnabasis.Controls.Keyboard;
 
@@ -65,11 +64,11 @@ namespace SiberianAnabasis.Screens
             {
                 this.buildingSpots.Add(
                     new BuildingSpot(
-                        (int)buildingSpot.x, 
-                        (int)buildingSpot.y, 
-                        (int)buildingSpot.width, 
-                        (int)buildingSpot.height, 
-                        (string)buildingSpot.type
+                        (int)buildingSpot.x,
+                        (int)buildingSpot.y,
+                        (int)buildingSpot.width,
+                        (int)buildingSpot.height,
+                        buildingSpot.type
                     )
                 );
             }
@@ -166,7 +165,7 @@ namespace SiberianAnabasis.Screens
             {
                 left = !left;
 
-                soldier.DeploymentX = null; 
+                soldier.DeploymentX = null;
                 if (left && this.leftmostTowerX != null)
                 {
                     // leftmost tower exists?
@@ -286,7 +285,7 @@ namespace SiberianAnabasis.Screens
         }
 
         private void UpdateArmories()
-        { 
+        {
             foreach (Armory armory in this.armories)
             {
                 armory.Update(this.Game.DeltaTime);
@@ -296,7 +295,7 @@ namespace SiberianAnabasis.Screens
         private void UpdateTowers()
         {
             this.leftmostTowerX = this.rightmostTowerX = null;
-            
+
             foreach (Tower tower in this.towers)
             {
                 // is it left or rightmost tower (to send soldiers to this tower)
@@ -321,7 +320,7 @@ namespace SiberianAnabasis.Screens
                     {
                         tower.CanShoot = true;
                         tower.PrepareToShoot(
-                            (enemy.X + enemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right, 
+                            (enemy.X + enemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right,
                             enemy.X,
                             range
                         );
@@ -419,7 +418,7 @@ namespace SiberianAnabasis.Screens
                     }
                 }
             }
-            
+
 
             // enemies and peasants
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
@@ -440,10 +439,10 @@ namespace SiberianAnabasis.Screens
                             Game1.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             peasant.Dead = true;
-                        }                        
+                        }
                     }
                 }
-                
+
             }
 
             this.soldiers.RemoveAll(p => p.ToDelete);
@@ -647,7 +646,7 @@ namespace SiberianAnabasis.Screens
             this.dayPhaseTimer -= this.Game.DeltaTime;
             if (this.dayPhaseTimer <= 0)
             {
-                
+
                 if (this.dayPhase == DayPhase.Day)
                 {
                     Game1.MessageBuffer.AddMessage("Brace yourself", MessageType.Danger);
@@ -687,7 +686,7 @@ namespace SiberianAnabasis.Screens
 
             // stats ------------------------------------------------------------------------------------
             int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
-            
+
             // healthbar
             this.Game.SpriteBatch.DrawRectangle(
                 new Rectangle(leftOffset, Offset.StatusBarY, 100, 10),
@@ -705,7 +704,7 @@ namespace SiberianAnabasis.Screens
             );
 
             // money
-            Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, (int)(leftOffset), Offset.StatusBarY + 40, 1);
+            Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
 
             // day or night
             this.Game.SpriteBatch.DrawString(
@@ -888,7 +887,7 @@ namespace SiberianAnabasis.Screens
                     var newTower = new Tower((int)tower.Hitbox.X, (int)tower.Hitbox.Y, (Building.Status)tower.Status);
                     if (tower.ContainsKey("Bullets"))
                     {
-                        foreach (var bullet in tower.GetValue("Bullets")) 
+                        foreach (var bullet in tower.GetValue("Bullets"))
                         {
                             newTower.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Direction)bullet.Direction, (int)bullet.Caliber, BulletType.Cannonball));
                         }

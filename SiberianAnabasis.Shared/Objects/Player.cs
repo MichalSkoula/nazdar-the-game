@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SiberianAnabasis.Controls;
 using SiberianAnabasis.Screens;
+using SiberianAnabasis.Shared;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static SiberianAnabasis.Enums;
-using SiberianAnabasis.Shared;
-using MonoGame.Extended;
-using SiberianAnabasis.Controls;
 using Keyboard = SiberianAnabasis.Controls.Keyboard;
 
 namespace SiberianAnabasis.Objects
@@ -32,7 +31,8 @@ namespace SiberianAnabasis.Objects
         };
 
         private int money;
-        public int Money { 
+        public int Money
+        {
             get
             {
                 return this.money;
@@ -43,7 +43,7 @@ namespace SiberianAnabasis.Objects
                 {
                     Game1.MessageBuffer.AddMessage("Cant hold all this money", MessageType.Danger);
                     this.money = moneyLimit;
-                } 
+                }
                 else
                 {
                     this.money = value;
@@ -191,9 +191,9 @@ namespace SiberianAnabasis.Objects
 
                 // text
                 spriteBatch.DrawString(
-                    Assets.Fonts["Small"], 
-                    this.Action.ToString() + " " + this.ActionName, 
-                    new Vector2(this.X, this.Y - 10), 
+                    Assets.Fonts["Small"],
+                    this.Action.ToString() + " " + this.ActionName,
+                    new Vector2(this.X, this.Y - 10),
                     Color.White * alpha
                 );
             }
@@ -207,10 +207,10 @@ namespace SiberianAnabasis.Objects
             int g = 10;
             float timeDivider = 5;
 
-            for (int i = 0; i < 200; i++) 
+            for (int i = 0; i < 200; i++)
             {
                 float t = i / timeDivider;
-                int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2)); 
+                int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2));
                 if (newY > h0)
                 {
                     this.Y = h0;
