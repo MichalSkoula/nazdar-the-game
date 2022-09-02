@@ -1,4 +1,6 @@
-﻿namespace SiberianAnabasis
+﻿using Microsoft.Xna.Framework.Input;
+
+namespace SiberianAnabasis
 {
     public static class Enums
     {
@@ -55,6 +57,22 @@
             Fail,
             Danger,
             Opportunity
+        }
+
+        public static class ControlKeys
+        {
+            public const Keys Left = Keys.Left;
+            public const Keys Right = Keys.Right;
+            public const Keys Jump = Keys.Up;
+            public const Keys Action = Keys.Down;
+            public const Keys Shoot = Keys.Space;
+        }
+
+        public static class ControlButtons
+        {
+            public const Buttons Jump = Buttons.A;
+            public const Buttons Action = Buttons.Y;
+            public const Buttons Shoot = Buttons.X;
         }
 
         public static class Building

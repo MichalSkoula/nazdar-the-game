@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Screens;
 using SiberianAnabasis.Shared;
@@ -115,13 +114,13 @@ namespace SiberianAnabasis.Objects
 
             // moving?
             bool isMoving = false;
-            if ((Keyboard.IsPressed(Keys.Right) || Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
+            if ((Keyboard.IsPressed(ControlKeys.Right) || Gamepad.Thumbstick(Direction.Right)) && this.X < VillageScreen.MapWidth - this.Width)
             {
                 this.X += (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Right;
                 isMoving = true;
             }
-            else if ((Keyboard.IsPressed(Keys.Left) || Gamepad.Thumbstick(Direction.Left)) && this.X > 0)
+            else if ((Keyboard.IsPressed(ControlKeys.Left) || Gamepad.Thumbstick(Direction.Left)) && this.X > 0)
             {
                 this.X -= (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Left;
@@ -142,14 +141,14 @@ namespace SiberianAnabasis.Objects
             this.Anim.Update(deltaTime);
 
             // jump?
-            if ((Keyboard.IsPressed(Keys.Space) || Keyboard.IsPressed(Keys.C) || Keyboard.IsPressed(Keys.Up) || Gamepad.HasBeenPressed(Buttons.A)) && this.Y == Enums.Offset.Floor)
+            if ((Keyboard.IsPressed(ControlKeys.Jump) || Gamepad.HasBeenPressed(ControlButtons.Jump)) && this.Y == Enums.Offset.Floor)
             {
                 this.Jump();
                 isMoving = true;
             }
 
             // bullets
-            if (Keyboard.HasBeenPressed(Keys.X) || Gamepad.HasBeenPressed(Buttons.X) || Gamepad.HasBeenPressed(Buttons.RightTrigger))
+            if (Keyboard.HasBeenPressed(ControlKeys.Shoot) || Gamepad.HasBeenPressed(ControlButtons.Shoot))
             {
                 Audio.PlaySound("GunFire");
                 this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
