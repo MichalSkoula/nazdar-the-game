@@ -43,8 +43,18 @@ namespace SiberianAnabasis
             Assets.Images["Center"] = content.Load<Texture2D>("Buildings/Center");
             Assets.Images["Armory"] = content.Load<Texture2D>("Buildings/Armory");
             Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
-            Assets.Images["Keyboard"] = content.Load<Texture2D>("Controls/Keyboard");
-            Assets.Images["Gamepad"] = content.Load<Texture2D>("Controls/Gamepad");
+
+            Assets.Images["KeyboardUp"] = content.Load<Texture2D>("Controls/keyboard/up");
+            Assets.Images["KeyboardRight"] = content.Load<Texture2D>("Controls/keyboard/right");
+            Assets.Images["KeyboardDown"] = content.Load<Texture2D>("Controls/keyboard/down");
+            Assets.Images["KeyboardLeft"] = content.Load<Texture2D>("Controls/keyboard/left");
+            Assets.Images["KeyboardSpace"] = content.Load<Texture2D>("Controls/keyboard/space");
+
+            Assets.Images["GamepadLeftStick"] = content.Load<Texture2D>("Controls/gamepad/left_stick");
+            Assets.Images["GamepadA"] = content.Load<Texture2D>("Controls/gamepad/a");
+            Assets.Images["GamepadB"] = content.Load<Texture2D>("Controls/gamepad/b");
+            Assets.Images["GamepadX"] = content.Load<Texture2D>("Controls/gamepad/x");
+            Assets.Images["GamepadY"] = content.Load<Texture2D>("Controls/gamepad/y");
 
             // load fonts
             Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
@@ -88,14 +98,15 @@ namespace SiberianAnabasis
 
             // load songs
             Assets.SongsCollection["Menu"] = new List<Song> {
-                content.Load<Song>("Songs/lofiagain")
+                content.Load<Song>("Songs/menu/sleep_musicv3")
             };
             Assets.SongsCollection["Day"] = new List<Song>
             {
-                content.Load<Song>("Songs/a_cup_of_tea"),
-                content.Load<Song>("Songs/bartender"),
-                content.Load<Song>("Songs/cue"),
-                content.Load<Song>("Songs/chill_lofi"),
+                content.Load<Song>("Songs/chill/a_cup_of_tea"),
+                content.Load<Song>("Songs/chill/bartender"),
+                content.Load<Song>("Songs/chill/cue"),
+                content.Load<Song>("Songs/chill/chill_lofi"),
+                content.Load<Song>("Songs/chill/lofiagain")
             };
             Assets.SongsCollection["Night"] = new List<Song>
             {

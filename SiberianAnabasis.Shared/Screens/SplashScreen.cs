@@ -44,18 +44,27 @@ namespace SiberianAnabasis.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "SiberianAnabasis", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Keyboard", new Vector2(Offset.MenuX, Offset.MenuY + 55), Color.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["Keyboard"], new Vector2(Offset.MenuX, 100), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "action", new Vector2(Offset.MenuX + 43, Offset.MenuY + 95), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "shoot", new Vector2(Offset.MenuX + 78, Offset.MenuY + 128), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "jump", new Vector2(Offset.MenuX + 109, Offset.MenuY + 160), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "movement", new Vector2(Offset.MenuX + 315, Offset.MenuY + 128), Color.White);
 
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Gamepad", new Vector2(Offset.MenuX, Offset.MenuY + 210), Color.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["Gamepad"], new Vector2(Offset.MenuX, Offset.MenuY + 230), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "movement", new Vector2(Offset.MenuX + 45, Offset.MenuY + 275), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "action", new Vector2(Offset.MenuX + 210, Offset.MenuY + 250), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "shoot", new Vector2(Offset.MenuX + 195, Offset.MenuY + 275), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "jump", new Vector2(Offset.MenuX + 225, Offset.MenuY + 300), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardLeft"], new Vector2(Offset.MenuX, 120), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardRight"], new Vector2(Offset.MenuX + 30, 120), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "movement", new Vector2(Offset.MenuX + 70, 125), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardUp"], new Vector2(Offset.MenuX, 150), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "jump", new Vector2(Offset.MenuX + 70, 155), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardDown"], new Vector2(Offset.MenuX, 180), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "action", new Vector2(Offset.MenuX + 70, 185), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardSpace"], new Vector2(Offset.MenuX, 210), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "shoot", new Vector2(Offset.MenuX + 70, 215), Color.White);
+
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Gamepad", new Vector2(Offset.MenuX + 300, Offset.MenuY + 55), Color.White);
+
+            this.Game.SpriteBatch.Draw(Assets.Images["GamepadLeftStick"], new Vector2(Offset.MenuX + 300, 120), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "movement", new Vector2(Offset.MenuX + 340, 127), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["GamepadA"], new Vector2(Offset.MenuX + 302, 154), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "jump", new Vector2(Offset.MenuX + 340, 161), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["GamepadY"], new Vector2(Offset.MenuX + 302, 184), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "action", new Vector2(Offset.MenuX + 340, 191), Color.White);
+            this.Game.SpriteBatch.Draw(Assets.Images["GamepadX"], new Vector2(Offset.MenuX + 302, 214), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "shoot", new Vector2(Offset.MenuX + 340, 221), Color.White);
 
             this.Game.DrawEnd();
         }

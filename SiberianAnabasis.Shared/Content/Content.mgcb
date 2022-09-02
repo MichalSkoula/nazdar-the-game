@@ -74,7 +74,7 @@
 /processorParam:TextureFormat=Color
 /build:Bullet/bullet_right.png
 
-#begin Controls/Gamepad.png
+#begin Controls/gamepad/a.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -84,9 +84,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Controls/Gamepad.png
+/build:Controls/gamepad/a.png
 
-#begin Controls/Keyboard.png
+#begin Controls/gamepad/b.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -96,7 +96,103 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Controls/Keyboard.png
+/build:Controls/gamepad/b.png
+
+#begin Controls/gamepad/left_stick.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/gamepad/left_stick.png
+
+#begin Controls/gamepad/x.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/gamepad/x.png
+
+#begin Controls/gamepad/y.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/gamepad/y.png
+
+#begin Controls/keyboard/down.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/keyboard/down.png
+
+#begin Controls/keyboard/left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/keyboard/left.png
+
+#begin Controls/keyboard/right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/keyboard/right.png
+
+#begin Controls/keyboard/space.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/keyboard/space.png
+
+#begin Controls/keyboard/up.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Controls/keyboard/up.png
 
 #begin Effects/AllWhite.fx
 /importer:EffectImporter
@@ -305,35 +401,41 @@
 /processorParam:TextureFormat=Color
 /build:Soldier/soldier_right.png
 
-#begin Songs/a_cup_of_tea.mp3
+#begin Songs/chill/a_cup_of_tea.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/a_cup_of_tea.mp3
+/build:Songs/chill/a_cup_of_tea.mp3
 
-#begin Songs/bartender.mp3
+#begin Songs/chill/bartender.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/bartender.mp3
+/build:Songs/chill/bartender.mp3
 
-#begin Songs/chill_lofi.ogg
+#begin Songs/chill/chill_lofi.ogg
 /importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill_lofi.ogg
+/build:Songs/chill/chill_lofi.ogg
 
-#begin Songs/cue.mp3
+#begin Songs/chill/cue.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/cue.mp3
+/build:Songs/chill/cue.mp3
 
-#begin Songs/lofiagain.ogg
+#begin Songs/chill/lofiagain.ogg
 /importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/lofiagain.ogg
+/build:Songs/chill/lofiagain.ogg
+
+#begin Songs/menu/sleep_musicv3.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/menu/sleep_musicv3.ogg
 
 #begin Songs/metal/Dragged_Through_Hellfire.mp3
 /importer:Mp3Importer

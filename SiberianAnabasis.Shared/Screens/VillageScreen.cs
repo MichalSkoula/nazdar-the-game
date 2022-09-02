@@ -504,7 +504,7 @@ namespace SiberianAnabasis.Screens
                     this.player.ActionCost = Center.Cost;
                     this.player.ActionName = Center.Name;
 
-                    if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
+                    if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
                     {
                         if (this.player.Money >= Center.Cost)
                         {
@@ -530,7 +530,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionCost = Armory.Cost;
                         this.player.ActionName = Armory.Name;
 
-                        if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
                         {
                             if (this.player.Money < Armory.Cost)
                             {
@@ -555,7 +555,7 @@ namespace SiberianAnabasis.Screens
                             this.player.ActionCost = Armory.WeaponCost;
                             this.player.ActionName = Weapon.Name;
 
-                            if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
                             {
                                 if (this.player.Money >= Armory.WeaponCost)
                                 {
@@ -589,7 +589,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionCost = Tower.Cost;
                         this.player.ActionName = Tower.Name;
 
-                        if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
                         {
                             if (this.player.Money < Tower.Cost)
                             {
@@ -619,7 +619,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionName = Homeless.Name;
 
                         // hire homeless man? create peasant
-                        if (Keyboard.HasBeenPressed(Keys.Y) || Keyboard.HasBeenPressed(Keys.Z) || Gamepad.HasBeenPressed(Buttons.Y))
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
                         {
                             if (this.player.Money >= Homeless.Cost)
                             {
