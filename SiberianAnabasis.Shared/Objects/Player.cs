@@ -200,7 +200,7 @@ namespace SiberianAnabasis.Objects
 
         private async void Jump()
         {
-            Audio.PlaySound("Jump");
+            Audio.PlayRandomSound("Jumps");
             int h0 = Enums.Offset.Floor;
             int v0 = 25;
             int g = 10;

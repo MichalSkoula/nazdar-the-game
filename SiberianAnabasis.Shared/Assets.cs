@@ -65,8 +65,20 @@ namespace SiberianAnabasis
             Assets.Sounds["Blip"] = content.Load<SoundEffect>("Sounds/blip");
             Assets.Sounds["Explosion"] = content.Load<SoundEffect>("Sounds/explosion");
             Assets.Sounds["GunFire"] = content.Load<SoundEffect>("Sounds/gun_fire");
-            Assets.Sounds["Jump"] = content.Load<SoundEffect>("Sounds/jump");
-            Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coin");
+            Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coinsplash");
+            Assets.Sounds["Rock"] = content.Load<SoundEffect>("Sounds/rock");
+            Assets.SoundsCollection["Jumps"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-01"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-02"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-03"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-04"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-05"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-06"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-07"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-08"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-09"),
+                content.Load<SoundEffect>("Sounds/jumps/slightscream-10"),
+            };
             Assets.SoundsCollection["EnemyDeaths"] = new List<SoundEffect> {
                 content.Load<SoundEffect>("Sounds/zombies/Death"),
                 content.Load<SoundEffect>("Sounds/zombies/Death2"),
@@ -75,7 +87,6 @@ namespace SiberianAnabasis
                 content.Load<SoundEffect>("Sounds/zombies/monster-15"),
                 content.Load<SoundEffect>("Sounds/zombies/monster-16"),
                 content.Load<SoundEffect>("Sounds/zombies/monster-17"),
-
             };
             Assets.SoundsCollection["EnemySpawns"] = new List<SoundEffect> {
                 content.Load<SoundEffect>("Sounds/zombies/Roar1"),
@@ -92,7 +103,6 @@ namespace SiberianAnabasis
                 content.Load<SoundEffect>("Sounds/soldiers/hit3"),
                 content.Load<SoundEffect>("Sounds/soldiers/hit4"),
                 content.Load<SoundEffect>("Sounds/soldiers/hit5"),
-
             };
             Assets.Sounds["SoldierSpawn"] = content.Load<SoundEffect>("Sounds/soldiers/metal_03");
 

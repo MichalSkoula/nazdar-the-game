@@ -473,11 +473,11 @@
 /processorParam:Quality=Best
 /build:Sounds/blip.wav
 
-#begin Sounds/coin.wav
-/importer:WavImporter
+#begin Sounds/coinsplash.ogg
+/importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/coin.wav
+/build:Sounds/coinsplash.ogg
 
 #begin Sounds/explosion.ogg
 /importer:OggImporter
@@ -491,11 +491,71 @@
 /processorParam:Quality=Best
 /build:Sounds/gun_fire.wav
 
-#begin Sounds/jump.ogg
-/importer:OggImporter
+#begin Sounds/jumps/slightscream-01.wav
+/importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/jump.ogg
+/build:Sounds/jumps/slightscream-01.wav
+
+#begin Sounds/jumps/slightscream-02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-02.wav
+
+#begin Sounds/jumps/slightscream-03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-03.wav
+
+#begin Sounds/jumps/slightscream-04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-04.wav
+
+#begin Sounds/jumps/slightscream-05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-05.wav
+
+#begin Sounds/jumps/slightscream-06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-06.wav
+
+#begin Sounds/jumps/slightscream-07.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-07.wav
+
+#begin Sounds/jumps/slightscream-08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-08.wav
+
+#begin Sounds/jumps/slightscream-09.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-09.wav
+
+#begin Sounds/jumps/slightscream-10.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/jumps/slightscream-10.wav
+
+#begin Sounds/rock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/rock.wav
 
 #begin Sounds/soldiers/die1.ogg
 /importer:OggImporter
