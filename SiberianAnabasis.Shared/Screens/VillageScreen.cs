@@ -509,7 +509,7 @@ namespace SiberianAnabasis.Screens
                         if (this.player.Money >= Center.Cost)
                         {
                             Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                            Audio.PlaySound("SoldierSpawn");
+                            Audio.PlaySound("Rock");
                             this.player.Money -= Center.Cost;
                             this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                         }
@@ -539,7 +539,7 @@ namespace SiberianAnabasis.Screens
                             else
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                                Audio.PlaySound("SoldierSpawn");
+                                Audio.PlaySound("Rock");
                                 this.player.Money -= Armory.Cost;
                                 this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
@@ -598,7 +598,7 @@ namespace SiberianAnabasis.Screens
                             else
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                                Audio.PlaySound("SoldierSpawn");
+                                Audio.PlaySound("Rock");
                                 this.player.Money -= Tower.Cost;
                                 this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
