@@ -67,7 +67,7 @@ namespace SiberianAnabasis
 #if DEBUG
             this.LoadScreen(typeof(Screens.MenuScreen));
 #else
-                this.LoadScreen(typeof(Screens.SplashScreen));
+            this.LoadScreen(typeof(Screens.SplashScreen));
 #endif
 
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
