@@ -69,5 +69,10 @@ namespace SiberianAnabasis.Shared
                 + kills
             ;
         }
+
+        public static void Dump(string str)
+        {
+            System.Diagnostics.Debug.WriteLine(str);
+        }
     }
 }

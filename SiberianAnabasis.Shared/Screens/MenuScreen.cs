@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Shared;
+using System;
 using System.Collections.Generic;
 using static SiberianAnabasis.Enums;
 
@@ -251,18 +252,32 @@ namespace SiberianAnabasis.Screens
                 dynamic saveData = saveFile.Load();
                 if (saveData != null)
                 {
-                    // get score
-                    int score = Tools.GetScore(
-                        (int)saveData.GetValue("player").Days,
-                        (int)saveData.GetValue("player").Money,
-                        (int)saveData.GetValue("peasants").Count,
-                        (int)saveData.GetValue("soldiers").Count,
-                        (int)saveData.GetValue("player").Kills
-                    );
+                    int score = 0;
+                    int village = 0;
+                    int days = 0;
+
+                    // try to get score and other data from save slots
+                    try
+                    {
+                        score = Tools.GetScore(
+                            saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Days : 0,
+                            saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Money : 0,
+                            saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
+                            saveData.ContainsKey("peasants") ? (int)saveData.GetValue("peasants").Count : 0,
+                            saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0
+                        );
+
+                        days = saveData.GetValue("player").Days;
+                        village = saveData.GetValue("village");
+                    }
+                    catch (Exception e)
+                    {
+                        Tools.Dump(e.ToString());
+                    }
 
                     this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = new string[] {
-                        "Village " + saveData.GetValue("village"),
-                        "Day " + saveData.GetValue("player").Days + ".",
+                        "Village " + village,
+                        "Day " + days,
                         "Score: " + score,
                     };
                 }
