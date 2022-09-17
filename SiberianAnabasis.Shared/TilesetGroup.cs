@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TiledCS;
 
@@ -12,6 +13,13 @@ namespace SiberianAnabasis.Shared
         public Texture2D TilesetTexture;
         public TiledMap TilesetMap;
         public TiledTileset Tileset;
+
+        public TilesetGroup(Stream tmx, Stream tsx, Texture2D texture)
+        {
+            this.TilesetMap = new TiledMap(tmx);
+            this.Tileset = new TiledTileset(tsx);
+            this.TilesetTexture = texture;
+        }
 
         public TilesetGroup(string tmx, string tsx, Texture2D texture)
         {

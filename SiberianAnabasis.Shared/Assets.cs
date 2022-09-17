@@ -132,14 +132,6 @@ namespace SiberianAnabasis
             Assets.Effects["Pixelate"] = content.Load<Effect>("Effects/Pixelate");
             Assets.Effects["Pixelate"].Parameters["pixelation"].SetValue(5);
 
-            // load tilesets
-            // Set the "Copy to Output Directory" property of these two files to `Copy if newer` by clicking them in the solution explorer.
-            Assets.TilesetGroups["village1"] = new TilesetGroup(
-                content.RootDirectory + "/Envs/1_village.tmx",
-                content.RootDirectory + "/Envs/1_village.tsx",
-                content.Load<Texture2D>("Envs/tileset1")
-            );
-
             // load particle textures
             Texture2D blood = new Texture2D(graphicsDevice, 1, 1);
             blood.SetData(new[] { Color.Red });
@@ -148,6 +140,28 @@ namespace SiberianAnabasis
             Texture2D smoke = new Texture2D(graphicsDevice, 1, 1);
             smoke.SetData(new[] { Color.DarkGray });
             Assets.ParticleTextureRegions["Smoke"] = new TextureRegion2D(smoke);
+
+            // load tilesets ---------------------------------------------------------------------------------------
+            // Set the "Copy to Output Directory" property of these two files to `Copy if newer`
+            // by clicking them in the solution explorer.
+            if (Game1.AssetStreams.ContainsKey("1_village.tmx") && Game1.AssetStreams.ContainsKey("1_village.tsx"))
+            {
+                // streams set (android, use them)
+                Assets.TilesetGroups["village1"] = new TilesetGroup(
+                    Game1.AssetStreams.GetValueOrDefault("1_village.tmx"),
+                    Game1.AssetStreams.GetValueOrDefault("1_village.tsx"),
+                    content.Load<Texture2D>("Envs/tileset1")
+                );
+            }
+            else
+            {
+                // streams are not set, load file normally
+                Assets.TilesetGroups["village1"] = new TilesetGroup(
+                    content.RootDirectory + "/Envs/1_village.tmx",
+                    content.RootDirectory + "/Envs/1_village.tsx",
+                    content.Load<Texture2D>("Envs/tileset1")
+                );
+            }
         }
     }
 }
