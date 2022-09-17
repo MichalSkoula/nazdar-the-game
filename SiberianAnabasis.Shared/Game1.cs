@@ -5,6 +5,8 @@ using MonoGame.Extended.Screens.Transitions;
 using SiberianAnabasis.Messages;
 using SiberianAnabasis.Shared;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace SiberianAnabasis
 {
@@ -15,6 +17,8 @@ namespace SiberianAnabasis
         public RenderTarget2D RenderTarget;
         public Matrix? Matrix = null;
         public float DeltaTime;
+
+        public static Dictionary<string, Stream> AssetStreams = new Dictionary<string, Stream>();
 
         private readonly ScreenManager screenManager;
         private AssetsLoader assetsLoader = new AssetsLoader();

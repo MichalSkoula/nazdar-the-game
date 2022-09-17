@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiberianAnabasis.UWP", "SiberianAnabasis.UWP\SiberianAnabasis.UWP.csproj", "{269B6713-E3E3-44FF-8CCE-2156F9065089}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiberianAnabasis.Android", "SiberianAnabasis.Android\SiberianAnabasis.Android.csproj", "{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Xbox|Any CPU = Debug Xbox|Any CPU
@@ -90,6 +92,31 @@ Global
 		{269B6713-E3E3-44FF-8CCE-2156F9065089}.Release|x86.ActiveCfg = Release|x86
 		{269B6713-E3E3-44FF-8CCE-2156F9065089}.Release|x86.Build.0 = Release|x86
 		{269B6713-E3E3-44FF-8CCE-2156F9065089}.Release|x86.Deploy.0 = Release|x86
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|Any CPU.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|ARM.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|ARM.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|x64.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|x64.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|x86.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug Xbox|x86.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|x64.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|ARM.Build.0 = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x64.ActiveCfg = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x64.Build.0 = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +128,6 @@ Global
 		SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems*{20ca00e9-b8a1-4832-a84f-7e50eb85100d}*SharedItemsImports = 5
 		SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems*{269b6713-e3e3-44ff-8cce-2156f9065089}*SharedItemsImports = 4
 		SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
+		SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems*{c6ffe90c-f9a2-4fae-8bb0-9d0d34b7182f}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

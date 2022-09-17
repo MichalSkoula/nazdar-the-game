@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <ApplicationId>com.companyname.SiberianAnabasis.Android</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
+    <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
+    <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="TiledCS" Version="3.3.3" />
+  </ItemGroup>
+  <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
+    <Message Text="Restoring dotnet tools" Importance="High" />
+    <Exec Command="dotnet tool restore" />
+  </Target>
+  <Import Project="..\SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <MonoGameContentReference Update="..\SiberianAnabasis.Shared\Content\Content.mgcb" Link="Content\Content.mgcb" />
+  </ItemGroup>
+</Project>

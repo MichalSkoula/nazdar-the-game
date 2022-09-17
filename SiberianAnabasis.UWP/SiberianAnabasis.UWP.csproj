@@ -193,7 +193,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.9</Version>
+      <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="MonoGame.Extended">
       <Version>3.7.0</Version>
@@ -204,7 +204,7 @@
     <PackageReference Include="MonoGame.Framework.WindowsUniversal" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     <PackageReference Include="TiledCS">
-      <Version>3.1.0</Version>
+      <Version>3.3.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\SiberianAnabasis.Shared\SiberianAnabasis.Shared.projitems" Label="Shared" />

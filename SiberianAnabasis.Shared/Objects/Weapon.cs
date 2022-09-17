@@ -13,11 +13,6 @@ namespace SiberianAnabasis.Objects
             this.Hitbox = new Rectangle(0, 0, this.Sprite.Width, this.Sprite.Height);
         }
 
-        public void Update(float deltaTime)
-        {
-
-        }
-
         public void SetPosition(int x, int y)
         {
             this.Position = new Vector2(x, y);
