@@ -121,5 +121,12 @@ namespace SiberianAnabasis
             public const int Width = 640;
             public const int Height = 360;
         }
+
+        public enum Platform
+        {
+            GL,
+            UWP,
+            Android
+        }
     }
 }

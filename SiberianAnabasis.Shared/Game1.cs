@@ -23,12 +23,16 @@ namespace SiberianAnabasis
         private readonly ScreenManager screenManager;
         private AssetsLoader assetsLoader = new AssetsLoader();
 
+        public static Enums.Platform CurrentPlatform;
+
         // scaling + top / left bar
         public static float Scale { get; private set; }
 
         public static int BarHeight { get; private set; }
+        public static int BarHeightAndroid { get; private set; }
 
         public static int BarWidth { get; private set; }
+        public static int BarWidthAndroid { get; private set; }
 
         public string SaveSlot { get; set; }
 
@@ -54,8 +58,10 @@ namespace SiberianAnabasis
 
             base.Initialize();
 
-            // TODO decide
-            // Window.IsBorderless = true;
+            if (CurrentPlatform == Enums.Platform.Android)
+            {
+                this.Graphics.IsFullScreen = true;
+            }
 
             // window size
             this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
@@ -77,6 +83,7 @@ namespace SiberianAnabasis
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Adapter.CurrentDisplayMode.Width + " " + GraphicsDevice.Adapter.CurrentDisplayMode.Height);
+            System.Diagnostics.Debug.WriteLine(GraphicsDevice.PresentationParameters.BackBufferWidth + " " + GraphicsDevice.PresentationParameters.BackBufferHeight);
         }
 
         protected override void LoadContent()
@@ -92,6 +99,7 @@ namespace SiberianAnabasis
             Controls.Keyboard.GetState();
             Controls.Gamepad.GetState();
             Controls.Mouse.GetState();
+            Controls.Touch.GetState();
 
             MessageBuffer.Update(this.DeltaTime);
 
@@ -124,7 +132,7 @@ namespace SiberianAnabasis
         public void DrawStart()
         {
             this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
-            this.GraphicsDevice.Clear(Color.Black);
+            this.GraphicsDevice.Clear(Color.DarkGray);
 
             this.SpriteBatchStart();
         }
@@ -150,27 +158,28 @@ namespace SiberianAnabasis
             this.SpriteBatch.End();
 
             // calculate Scale and bars
-            float outputAspect = this.Window.ClientBounds.Width / (float)this.Window.ClientBounds.Height;
+            float outputAspect = GraphicsDevice.Adapter.CurrentDisplayMode.Width / (float)GraphicsDevice.Adapter.CurrentDisplayMode.Height;
             float preferredAspect = Enums.Screen.Width / (float)Enums.Screen.Height;
             BarHeight = 0;
             BarWidth = 0;
             Rectangle dst;
+
             if (outputAspect <= preferredAspect)
             {
-                // output is taller than it is wider, bars on top/bottom
+                // bars on top/bottom
                 int presentHeight = (int)(this.Window.ClientBounds.Width / preferredAspect);
                 BarHeight = (this.Window.ClientBounds.Height - presentHeight) / 2;
+                BarHeightAndroid = (GraphicsDevice.Adapter.CurrentDisplayMode.Height - presentHeight) / 2;
                 dst = new Rectangle(0, BarHeight, this.Window.ClientBounds.Width, presentHeight);
-
                 Scale = 1f / ((float)Enums.Screen.Width / this.Window.ClientBounds.Width);
             }
             else
             {
-                // output is wider than it is tall, bars left/right
+                // bars left/right
                 int presentWidth = (int)(this.Window.ClientBounds.Height * preferredAspect);
                 BarWidth = (this.Window.ClientBounds.Width - presentWidth) / 2;
+                BarWidthAndroid = (GraphicsDevice.Adapter.CurrentDisplayMode.Width - presentWidth) / 2;
                 dst = new Rectangle(BarWidth, 0, presentWidth, this.Window.ClientBounds.Height);
-
                 Scale = 1f / ((float)Enums.Screen.Height / this.Window.ClientBounds.Height);
             }
 
