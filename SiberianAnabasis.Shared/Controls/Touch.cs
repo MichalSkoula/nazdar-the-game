@@ -1,14 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
-using System;
 
 namespace SiberianAnabasis.Controls
 {
     class Touch
     {
         private static TouchLocation previousTouchLocation;
-        private static TouchLocation currentTouchLocation;
+        private static TouchLocation currentTouchLocation = new TouchLocation();
 
         public static Point Position { get; set; }
 
@@ -20,8 +18,7 @@ namespace SiberianAnabasis.Controls
             TouchCollection touchCollection = TouchPanel.GetState();
             if (touchCollection.Count > 0)
             {
-                //Only Fire Select Once it's been released
-                if (touchCollection[0].State == TouchLocationState.Moved || touchCollection[0].State == TouchLocationState.Pressed)
+                if (touchCollection[0].State == TouchLocationState.Released)
                 {
                     currentTouchLocation = touchCollection[0];
                 }
@@ -43,7 +40,7 @@ namespace SiberianAnabasis.Controls
 
         public static bool HasBeenPressed()
         {
-            return (currentTouchLocation.State == TouchLocationState.Moved || currentTouchLocation.State == TouchLocationState.Pressed) && previousTouchLocation.State == TouchLocationState.Invalid;
+            return currentTouchLocation.State == TouchLocationState.Released && previousTouchLocation.State != TouchLocationState.Released;
         }
     }
 }
