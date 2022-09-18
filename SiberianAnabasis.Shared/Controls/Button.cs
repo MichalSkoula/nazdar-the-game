@@ -65,6 +65,12 @@ namespace SiberianAnabasis.Controls
                 return true;
             }
 
+            if ((Touch.HasBeenPressed() && this.Hitbox.Contains(Touch.Position)) || this.Clicked)
+            {
+                this.Clicked = false;
+                return true;
+            }
+
             return false;
         }
 

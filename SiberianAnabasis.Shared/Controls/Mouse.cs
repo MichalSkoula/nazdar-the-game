@@ -16,23 +16,16 @@ namespace SiberianAnabasis.Controls
             currentMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
 
             // deal with renderTarget scale and bars
-            Point newPosition = new Point((int)((currentMouseState.Position.X - Game1.BarWidth) / Game1.Scale), (int)((currentMouseState.Position.Y - Game1.BarHeight) / Game1.Scale));
-            // System.Diagnostics.Debug.WriteLine(((currentMouseState.Position.X - Game1.BarWidth) / Game1.Scale) + " " + ((currentMouseState.Position.Y - Game1.BarHeight) / Game1.Scale));
+            int posX = (int)((currentMouseState.Position.X - Game1.BarWidth) / Game1.Scale);
+            int posY = (int)((currentMouseState.Position.Y - Game1.BarHeight) / Game1.Scale);
+            Point newPosition = new Point(posX, posY);
+            if (HasBeenPressed())
+            {
+                System.Diagnostics.Debug.WriteLine(posX + " " + posY);
+            }
             Position = newPosition;
 
             return currentMouseState;
-        }
-
-        public static bool IsPressed(bool left = true)
-        {
-            if (left)
-            {
-                return currentMouseState.LeftButton == ButtonState.Pressed;
-            }
-            else
-            {
-                return currentMouseState.RightButton == ButtonState.Pressed;
-            }
         }
 
         public static bool HasBeenPressed(bool left = true)

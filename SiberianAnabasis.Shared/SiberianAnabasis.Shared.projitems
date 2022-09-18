@@ -18,6 +18,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Audio.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Gamepad.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Touch.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Tower.cs" />

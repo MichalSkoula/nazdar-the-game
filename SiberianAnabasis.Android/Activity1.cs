@@ -13,7 +13,7 @@ namespace SiberianAnabasis.Android
         Icon = "@drawable/icon",
         AlwaysRetainTaskState = true,
         LaunchMode = LaunchMode.SingleInstance,
-        ScreenOrientation = ScreenOrientation.FullUser,
+        ScreenOrientation = ScreenOrientation.Landscape,
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.Keyboard | ConfigChanges.KeyboardHidden | ConfigChanges.ScreenSize
     )]
     public class Activity1 : AndroidGameActivity
@@ -30,10 +30,19 @@ namespace SiberianAnabasis.Android
 
             SetContentView(_view);
 
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.P)
+            {
+                Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+            }
+
+            //_view.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.LayoutStable | SystemUiFlags.LayoutHideNavigation | SystemUiFlags.LayoutFullscreen | SystemUiFlags.HideNavigation | SystemUiFlags.Fullscreen | SystemUiFlags.ImmersiveSticky);
+
             // load some assets, only this way it works on android
             AssetManager assets = this.Assets;
             Game1.AssetStreams.Add("1_village.tmx", assets.Open("Content/Envs/1_village.tmx"));
             Game1.AssetStreams.Add("1_village.tsx", assets.Open("Content/Envs/1_village.tsx"));
+
+            Game1.CurrentPlatform = Enums.Platform.Android;
 
             _game.Run();
         }
