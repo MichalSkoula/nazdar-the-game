@@ -18,8 +18,6 @@ namespace SiberianAnabasis
         public Matrix? Matrix = null;
         public float DeltaTime;
 
-        public static Dictionary<string, Stream> AssetStreams = new Dictionary<string, Stream>();
-
         private readonly ScreenManager screenManager;
         private AssetsLoader assetsLoader = new AssetsLoader();
 
