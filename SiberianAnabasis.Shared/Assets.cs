@@ -143,14 +143,12 @@ namespace SiberianAnabasis
 
             // load tilesets ---------------------------------------------------------------------------------------
             // Set the "Copy to Output Directory" property of these two files to `Copy if newer`
-
-                // streams set (android, use them)
-                Assets.TilesetGroups["village1"] = new TilesetGroup(
-                    TitleContainer.OpenStream(@"Content/Envs/1_village.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                    content.Load<Texture2D>("Envs/tileset1")
-                );
-
+            // streams set (android, use them)
+            Assets.TilesetGroups["village1"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/1_village.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
+                content.Load<Texture2D>("Envs/tileset1")
+            );
         }
     }
 }
