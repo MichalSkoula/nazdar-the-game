@@ -27,11 +27,11 @@ namespace SiberianAnabasis.Screens
             buttons.Add("startButton1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Slot #1", true));
             buttons.Add("startButton2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Slot #2"));
             buttons.Add("startButton3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Slot #3"));
-            buttons.Add("controlsButton", new Button(Offset.MenuX, 230, null, ButtonSize.Small, "Controls"));
-            buttons.Add("fullscreenButton", new Button(Offset.MenuX, 250, null, ButtonSize.Small, "Toggle Fullscreen"));
-            buttons.Add("musicButton", new Button(Offset.MenuX, 270, null, ButtonSize.Small, "Toggle Music"));
-            buttons.Add("soundsButton", new Button(Offset.MenuX, 290, null, ButtonSize.Small, "Toggle Sounds"));
-            buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Exit"));
+            buttons.Add("controlsButton", new Button(Offset.MenuX, 190, null, ButtonSize.Medium, "Controls"));
+            buttons.Add("fullscreenButton", new Button(Offset.MenuX, 220, null, ButtonSize.Medium, "Toggle Fullscreen"));
+            buttons.Add("musicButton", new Button(Offset.MenuX, 250, null, ButtonSize.Medium, "Toggle Music"));
+            buttons.Add("soundsButton", new Button(Offset.MenuX, 280, null, ButtonSize.Medium, "Toggle Sounds"));
+            buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Exit"));
 
 #if DEBUG
             buttons.Add("openFolderButton", new Button(Offset.MenuX, Offset.MenuFooter, null, ButtonSize.Small, "open"));

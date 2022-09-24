@@ -5,8 +5,6 @@ using MonoGame.Extended.Screens.Transitions;
 using SiberianAnabasis.Messages;
 using SiberianAnabasis.Shared;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace SiberianAnabasis
 {

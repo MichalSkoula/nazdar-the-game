@@ -28,6 +28,18 @@ namespace SiberianAnabasis.Controls
             return currentMouseState;
         }
 
+        public static bool IsPressed(bool left = true)
+        {
+            if (left)
+            {
+                return currentMouseState.LeftButton == ButtonState.Pressed;
+            }
+            else
+            {
+                return currentMouseState.RightButton == ButtonState.Pressed;
+            }
+        }
+
         public static bool HasBeenPressed(bool left = true)
         {
             if (left)

@@ -45,7 +45,7 @@ namespace SiberianAnabasis.Screens
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
         // some settings - random 0-X == 1
-        private int newEnemyProbability = 256; // every day, it gets -2
+        private int newEnemyProbability = 25600; // every day, it gets -2
         private int newEnemyProbabilityLowLimit = 64;
         private int newHomelessProbability = 2048;
         private int newCoinProbability = 768;
@@ -86,7 +86,7 @@ namespace SiberianAnabasis.Screens
 
         public override void Update(GameTime gameTime)
         {
-            if (Keyboard.HasBeenPressed(Keys.Escape) || Gamepad.HasBeenPressed(Buttons.Start) || Gamepad.HasBeenPressed(Buttons.B))
+            if (Keyboard.HasBeenPressed(Keys.Escape) || Gamepad.HasBeenPressed(Buttons.Start) || Gamepad.HasBeenPressed(Buttons.B) || TouchControls.HasBeenPressedSelect())
             {
                 // save
                 this.Save();
@@ -504,7 +504,7 @@ namespace SiberianAnabasis.Screens
                     this.player.ActionCost = Center.Cost;
                     this.player.ActionName = Center.Name;
 
-                    if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
+                    if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                     {
                         if (this.player.Money >= Center.Cost)
                         {
@@ -530,7 +530,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionCost = Armory.Cost;
                         this.player.ActionName = Armory.Name;
 
-                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
                             if (this.player.Money < Armory.Cost)
                             {
@@ -555,7 +555,7 @@ namespace SiberianAnabasis.Screens
                             this.player.ActionCost = Armory.WeaponCost;
                             this.player.ActionName = Weapon.Name;
 
-                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
                                 if (this.player.Money >= Armory.WeaponCost)
                                 {
@@ -589,7 +589,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionCost = Tower.Cost;
                         this.player.ActionName = Tower.Name;
 
-                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
                             if (this.player.Money < Tower.Cost)
                             {
@@ -619,7 +619,7 @@ namespace SiberianAnabasis.Screens
                         this.player.ActionName = Homeless.Name;
 
                         // hire homeless man? create peasant
-                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action))
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
                             if (this.player.Money >= Homeless.Cost)
                             {
@@ -747,6 +747,9 @@ namespace SiberianAnabasis.Screens
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
+
+            // touch controls
+            TouchControls.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
 
             // game objects
             foreach (BuildingSpot buildingSpot in this.buildingSpots)
