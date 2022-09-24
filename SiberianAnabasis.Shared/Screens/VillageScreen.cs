@@ -45,7 +45,7 @@ namespace SiberianAnabasis.Screens
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
         // some settings - random 0-X == 1
-        private int newEnemyProbability = 25600; // every day, it gets -2
+        private int newEnemyProbability = 256; // every day, it gets -2
         private int newEnemyProbabilityLowLimit = 64;
         private int newHomelessProbability = 2048;
         private int newCoinProbability = 768;
