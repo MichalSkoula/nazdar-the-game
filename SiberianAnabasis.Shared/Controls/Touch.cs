@@ -18,7 +18,7 @@ namespace SiberianAnabasis.Controls
             TouchCollection touchCollection = TouchPanel.GetState();
             if (touchCollection.Count > 0)
             {
-                if (touchCollection[0].State == TouchLocationState.Released)
+                if (touchCollection[0].State != TouchLocationState.Invalid)
                 {
                     currentTouchLocation = touchCollection[0];
                 }
@@ -40,7 +40,22 @@ namespace SiberianAnabasis.Controls
 
         public static bool HasBeenPressed()
         {
+            if (Game1.CurrentPlatform != Enums.Platform.Android)
+            {
+                return false;
+            }
+
             return currentTouchLocation.State == TouchLocationState.Released && previousTouchLocation.State != TouchLocationState.Released;
+        }
+
+        public static bool IsPressed()
+        {
+            if (Game1.CurrentPlatform != Enums.Platform.Android)
+            {
+                return false;
+            }
+
+            return currentTouchLocation.State == TouchLocationState.Pressed || currentTouchLocation.State == TouchLocationState.Moved;
         }
     }
 }

@@ -1,6 +1,5 @@
 using Android.App;
 using Android.Content.PM;
-using Android.Content.Res;
 using Android.OS;
 using Android.Views;
 using Microsoft.Xna.Framework;

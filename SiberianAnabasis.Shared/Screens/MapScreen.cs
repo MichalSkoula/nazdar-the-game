@@ -21,7 +21,7 @@ namespace SiberianAnabasis.Screens
         public override void Initialize()
         {
             buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Start", true));
-            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Back to Main Menu"));
+            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Main Menu"));
 
             // set save slot and maybe load?
             this.saveFile.File = Game.SaveSlot;

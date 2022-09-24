@@ -51,6 +51,9 @@ namespace SiberianAnabasis
             Assets.Images["KeyboardSpace"] = content.Load<Texture2D>("Controls/keyboard/space");
 
             Assets.Images["GamepadLeftStick"] = content.Load<Texture2D>("Controls/gamepad/left_stick");
+            Assets.Images["GamepadLeft"] = content.Load<Texture2D>("Controls/gamepad/left");
+            Assets.Images["GamepadRight"] = content.Load<Texture2D>("Controls/gamepad/right");
+            Assets.Images["GamepadSelect"] = content.Load<Texture2D>("Controls/gamepad/select");
             Assets.Images["GamepadA"] = content.Load<Texture2D>("Controls/gamepad/a");
             Assets.Images["GamepadB"] = content.Load<Texture2D>("Controls/gamepad/b");
             Assets.Images["GamepadX"] = content.Load<Texture2D>("Controls/gamepad/x");

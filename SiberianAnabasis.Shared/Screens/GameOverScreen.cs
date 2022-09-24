@@ -20,7 +20,7 @@ namespace SiberianAnabasis.Screens
         {
             buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Load last save", true));
             buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "New game"));
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Small, "Back to Main Menu"));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Main Menu"));
 
             base.Initialize();
         }
