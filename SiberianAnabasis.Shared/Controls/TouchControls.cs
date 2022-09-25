@@ -15,32 +15,32 @@ namespace SiberianAnabasis.Controls
 
         public static bool IsPressedLeft()
         {
-            return Touch.IsPressed() && left.Contains(Touch.Position);
+            return Touch.IsPressed(left);
         }
 
         public static bool IsPressedRight()
         {
-            return Touch.IsPressed() && right.Contains(Touch.Position);
+            return Touch.IsPressed(right);
         }
 
         public static bool HasBeenPressedJump()
         {
-            return Touch.HasBeenPressed() && jump.Contains(Touch.Position);
+            return Touch.HasBeenPressed(jump);
         }
 
         public static bool HasBeenPressedAction()
         {
-            return Touch.HasBeenPressed() && action.Contains(Touch.Position);
+            return Touch.HasBeenPressed(action);
         }
 
         public static bool HasBeenPressedShoot()
         {
-            return Touch.HasBeenPressed() && shoot.Contains(Touch.Position);
+            return Touch.HasBeenPressed(shoot);
         }
 
         public static bool HasBeenPressedSelect()
         {
-            return Touch.HasBeenPressed() && select.Contains(Touch.Position);
+            return Touch.HasBeenPressed(select);
         }
 
         public static void Draw(SpriteBatch spriteBatch, float leftOffset)
