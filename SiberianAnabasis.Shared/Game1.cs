@@ -181,7 +181,7 @@ namespace SiberianAnabasis
 
             // sometimes this helps for xbox
             //dst = new Rectangle(0, 0, Enums.Screen.WidthDefault, Enums.Screen.HeightDefault);
-
+             
             this.GraphicsDevice.SetRenderTarget(null);
             this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
 

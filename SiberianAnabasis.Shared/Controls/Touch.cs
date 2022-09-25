@@ -29,7 +29,7 @@ namespace SiberianAnabasis.Controls
             int posX = (int)((currentTouchLocation.Position.X + Game1.BarWidthAndroid) / Game1.Scale);
             int posY = (int)((currentTouchLocation.Position.Y + Game1.BarHeightAndroid) / Game1.Scale);
             Point newPosition = new Point(posX, posY);
-            if (HasBeenPressed())
+            if (HasBeenPressedAnywhere())
             {
                 System.Diagnostics.Debug.WriteLine(posX + " " + posY);
             }
@@ -38,7 +38,7 @@ namespace SiberianAnabasis.Controls
             return currentTouchLocation;
         }
 
-        public static bool HasBeenPressed()
+        public static bool HasBeenPressedAnywhere()
         {
             if (Game1.CurrentPlatform != Enums.Platform.Android)
             {
@@ -48,14 +48,24 @@ namespace SiberianAnabasis.Controls
             return currentTouchLocation.State == TouchLocationState.Released && previousTouchLocation.State != TouchLocationState.Released;
         }
 
-        public static bool IsPressed()
+        public static bool HasBeenPressed(Rectangle hitbox)
         {
             if (Game1.CurrentPlatform != Enums.Platform.Android)
             {
                 return false;
             }
 
-            return currentTouchLocation.State == TouchLocationState.Pressed || currentTouchLocation.State == TouchLocationState.Moved;
+            return hitbox.Contains(Position) && currentTouchLocation.State == TouchLocationState.Released && previousTouchLocation.State != TouchLocationState.Released;
+        }
+
+        public static bool IsPressed(Rectangle hitbox)
+        {
+            if (Game1.CurrentPlatform != Enums.Platform.Android)
+            {
+                return false;
+            }
+
+            return hitbox.Contains(Position) && (currentTouchLocation.State == TouchLocationState.Pressed || currentTouchLocation.State == TouchLocationState.Moved);
         }
     }
 }
