@@ -28,6 +28,7 @@ namespace SiberianAnabasis.Objects
             this.Health = 100;
             this.Alpha = 0.5f;
             this.Speed = 61;
+            this.Color = UniversalColors[Tools.GetRandom(UniversalColors.Length)];
         }
 
         public new void Update(float deltaTime)
@@ -36,7 +37,7 @@ namespace SiberianAnabasis.Objects
 
             // is he moving?
             bool isMoving = false;
-            if (Tools.GetRandom(16) < 2 /*Game1.GlobalTimer % 2 == 0*/)
+            if (Tools.GetRandom(16) < 2)
             {
                 if (this.Direction == Direction.Right)
                 {

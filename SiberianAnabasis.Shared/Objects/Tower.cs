@@ -8,17 +8,13 @@ namespace SiberianAnabasis.Objects
 {
     public class Tower : BaseBuilding
     {
-        public const int Cost = 3;
+        public const int Cost = 5;
         public const string Name = "Tower";
         public bool CanShoot { get; set; } = false;
         private int shootPower = 1;
-        private int shootRate = 60; // 0 fastest, 100 slowest
+        private int shootRate = 90; // 0 fastest, 100 slowest
 
-        public List<Bullet> Bullets
-        {
-            get;
-            private set;
-        }
+        public List<Bullet> Bullets { get; private set; }
 
         public Tower(int x, int y, Building.Status status)
         {
@@ -27,7 +23,7 @@ namespace SiberianAnabasis.Objects
             this.Status = status;
             this.Bullets = new List<Bullet>();
             this.TimeToBuilt = 5;
-            this.Caliber = 50;
+            this.Caliber = 35;
             this.Type = Building.Type.Tower;
         }
 

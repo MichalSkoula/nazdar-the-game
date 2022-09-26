@@ -8,7 +8,14 @@ Monogame platform/strategic game (awesome).
 
 * MonoGame 3.8
 * MonoGame.Extended 3.7 (3.8 is bugged)
-* C# 10, .NET 6
+* C# 10 (well, 8, because of UWP), .NET 6
+
+## PACKAGING
+
+https://docs.monogame.net/articles/packaging_games.html
+
+* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
+* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
 
 ## CREDITS 
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using SiberianAnabasis.Shared;
 using System.Collections.Generic;
 
 namespace SiberianAnabasis.Controls
@@ -67,7 +66,7 @@ namespace SiberianAnabasis.Controls
             {
                 return false;
             }
-            
+
             // at least one finger is touching it
             foreach (var touch in currentTouchLocations)
             {
