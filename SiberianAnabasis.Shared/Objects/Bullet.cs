@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SiberianAnabasis.Screens;
-using SiberianAnabasis.Shared;
 using System;
 using static SiberianAnabasis.Enums;
 
@@ -33,8 +32,6 @@ namespace SiberianAnabasis.Objects
             this.shootPower = shootPower;
 
             this.ColorDead = Color.Gray;
-
-            Audio.PlaySound("Blip");
         }
 
         public override void Draw(SpriteBatch spriteBatch)

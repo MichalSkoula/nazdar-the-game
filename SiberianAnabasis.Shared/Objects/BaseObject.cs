@@ -58,7 +58,7 @@ namespace SiberianAnabasis.Objects
         }
 
         // direction, position, hitbox, dimensions
-        public Enums.Direction Direction { get; protected set; }
+        public Enums.Direction Direction { get; set; }
         public Rectangle Hitbox { get; protected set; }
         public int X
         {

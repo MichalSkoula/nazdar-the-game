@@ -10,11 +10,14 @@ namespace SiberianAnabasis.Objects
 {
     public class Soldier : BasePerson
     {
-        private List<Bullet> bullets = new List<Bullet>();
         private int centerRadius = 96;
         private bool isFast = true;
+        private int shootRate = 70; // 0 fastest, 100 slowest
 
+        public bool CanShoot { get; set; } = false;
         public int? DeploymentX { get; set; } = null;
+
+        public List<Bullet> Bullets { get; private set; }
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -32,6 +35,8 @@ namespace SiberianAnabasis.Objects
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 100;
+            this.Bullets = new List<Bullet>();
+            this.Color = UniversalColors[Tools.GetRandom(UniversalColors.Length)];
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
@@ -85,7 +90,23 @@ namespace SiberianAnabasis.Objects
 
             this.isFast = true;
 
-            if (this.DeploymentX == null)
+            // maybe can shoot - slow down and shoot towards enemy
+            if (this.CanShoot)
+            {
+                this.isFast = false;
+
+                if (Game1.GlobalTimer % this.shootRate == 0)
+                {
+                    Audio.PlaySound("GunFire");
+                    this.Bullets.Add(new Bullet(
+                        this.X + this.Width / 2,
+                        this.Y + this.Height / 4,
+                        this.Direction,
+                        this.Caliber
+                    ));
+                }
+            }
+            else if (this.DeploymentX == null)
             {
                 // run towards town center
                 if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
@@ -109,6 +130,7 @@ namespace SiberianAnabasis.Objects
             }
             else
             {
+                // soldier is deployed somewhere
                 if (this.X < this.DeploymentX - this.centerRadius / 2)
                 {
                     this.Direction = Direction.Right;
@@ -128,6 +150,12 @@ namespace SiberianAnabasis.Objects
                     }
                 }
             }
+
+            foreach (var bullet in this.Bullets)
+            {
+                bullet.Update(deltaTime);
+            }
+            this.Bullets.RemoveAll(p => p.ToDelete);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -136,7 +164,7 @@ namespace SiberianAnabasis.Objects
             this.DrawHealth(spriteBatch);
 
             // bullets
-            foreach (var bullet in this.bullets)
+            foreach (var bullet in this.Bullets)
             {
                 bullet.Draw(spriteBatch);
             }
