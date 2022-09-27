@@ -64,11 +64,11 @@ namespace SiberianAnabasis.Screens
             }
 
             // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown) || Controls.Gamepad.HasBeenPressedThumbstick(Direction.Down))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp) || Controls.Gamepad.HasBeenPressedThumbstick(Direction.Up))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
             }

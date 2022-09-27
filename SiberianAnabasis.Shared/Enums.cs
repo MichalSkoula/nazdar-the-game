@@ -21,8 +21,8 @@ namespace SiberianAnabasis
 
         public enum DayNightLength
         {
-            Night = 8,
-            Day = 16
+            Night = 16,
+            Day = 32
         }
 
         public enum ButtonSize
@@ -60,6 +60,7 @@ namespace SiberianAnabasis
             Opportunity
         }
 
+        // ControlKeys for touchscreen are defined in TouchControl.cs
         public static class ControlKeys
         {
             public const Keys Left = Keys.Left;
@@ -71,8 +72,8 @@ namespace SiberianAnabasis
 
         public static class ControlButtons
         {
-            public const Buttons Jump = Buttons.A;
-            public const Buttons Action = Buttons.Y;
+            public const Buttons Jump = Buttons.Y;
+            public const Buttons Action = Buttons.A;
             public const Buttons Shoot = Buttons.X;
         }
 
@@ -131,13 +132,13 @@ namespace SiberianAnabasis
         }
 
         // http://www.foszor.com/blog/xna-color-chart/
-        public static Color[] UniversalColors = { 
-            Color.White, 
-            Color.Lavender, 
-            Color.LightGray, 
-            Color.Honeydew, 
-            Color.Ivory, 
-            Color.SeaShell, 
+        public static Color[] UniversalColors = {
+            Color.White,
+            Color.Lavender,
+            Color.LightGray,
+            Color.Honeydew,
+            Color.Ivory,
+            Color.SeaShell,
             Color.WhiteSmoke
         };
     }

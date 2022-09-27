@@ -25,10 +25,8 @@ namespace SiberianAnabasis
         public static float Scale { get; private set; }
 
         public static int BarHeight { get; private set; }
-        public static int BarHeightAndroid { get; private set; }
 
         public static int BarWidth { get; private set; }
-        public static int BarWidthAndroid { get; private set; }
 
         public string SaveSlot { get; set; }
 
@@ -56,13 +54,17 @@ namespace SiberianAnabasis
 
             if (CurrentPlatform == Enums.Platform.Android)
             {
+                // on Android, lets go fullscreen
                 this.Graphics.IsFullScreen = true;
+                this.Graphics.ApplyChanges();
             }
-
-            // window size
-            this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
-            this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
-            this.Graphics.ApplyChanges();
+            else if (CurrentPlatform == Enums.Platform.GL)
+            {
+                // on pc, adjust default window size
+                this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
+                this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
+                this.Graphics.ApplyChanges();
+            }
 
             this.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
@@ -165,7 +167,6 @@ namespace SiberianAnabasis
                 // bars on top/bottom
                 int presentHeight = (int)(this.Window.ClientBounds.Width / preferredAspect);
                 BarHeight = (this.Window.ClientBounds.Height - presentHeight) / 2;
-                BarHeightAndroid = (GraphicsDevice.Adapter.CurrentDisplayMode.Height - presentHeight) / 2;
                 dst = new Rectangle(0, BarHeight, this.Window.ClientBounds.Width, presentHeight);
                 Scale = 1f / ((float)Enums.Screen.Width / this.Window.ClientBounds.Width);
             }
@@ -174,13 +175,9 @@ namespace SiberianAnabasis
                 // bars left/right
                 int presentWidth = (int)(this.Window.ClientBounds.Height * preferredAspect);
                 BarWidth = (this.Window.ClientBounds.Width - presentWidth) / 2;
-                BarWidthAndroid = (GraphicsDevice.Adapter.CurrentDisplayMode.Width - presentWidth) / 2;
                 dst = new Rectangle(BarWidth, 0, presentWidth, this.Window.ClientBounds.Height);
                 Scale = 1f / ((float)Enums.Screen.Height / this.Window.ClientBounds.Height);
             }
-
-            // sometimes this helps for xbox
-            //dst = new Rectangle(0, 0, Enums.Screen.WidthDefault, Enums.Screen.HeightDefault);
 
             this.GraphicsDevice.SetRenderTarget(null);
             this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);

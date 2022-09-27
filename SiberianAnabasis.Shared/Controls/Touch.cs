@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
+using SiberianAnabasis.Shared;
 using System.Collections.Generic;
 
 namespace SiberianAnabasis.Controls
@@ -26,8 +27,9 @@ namespace SiberianAnabasis.Controls
         private static Point CalculatePosition(TouchLocation touch)
         {
             // Touch is only for android .. so we put there barwidth or barheight for android
-            int posX = (int)((touch.Position.X + Game1.BarWidthAndroid) / Game1.Scale);
-            int posY = (int)((touch.Position.Y + Game1.BarHeightAndroid) / Game1.Scale);
+            int posX = (int)((touch.Position.X - Game1.BarWidth) / Game1.Scale);
+            int posY = (int)((touch.Position.Y - Game1.BarHeight) / Game1.Scale);
+            Tools.Dump(posX + " " + posY);
             return new Point(posX, posY);
         }
 

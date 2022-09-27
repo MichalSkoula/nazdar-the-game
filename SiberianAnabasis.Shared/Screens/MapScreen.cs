@@ -54,17 +54,17 @@ namespace SiberianAnabasis.Screens
             }
 
             // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Gamepad.HasBeenPressed(Buttons.DPadDown) || Gamepad.HasBeenPressedThumbstick(Direction.Down))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Gamepad.HasBeenPressed(Buttons.DPadUp) || Gamepad.HasBeenPressedThumbstick(Direction.Up))
             {
                 Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
             }
 
             // enter? some button has focus? click!
-            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Gamepad.HasBeenPressed(Buttons.A))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || Gamepad.HasBeenPressed(Buttons.A))
             {
                 foreach (KeyValuePair<string, Button> button in this.buttons)
                 {
