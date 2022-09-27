@@ -32,7 +32,7 @@ namespace SiberianAnabasis.Controls
             return currentState.IsButtonDown(btn) && !previousState.IsButtonDown(btn);
         }
 
-        public static bool Thumbstick(Direction direction)
+        public static bool IsPressedThumbstick(Direction direction)
         {
             if (direction == Direction.Left)
             {
@@ -41,6 +41,36 @@ namespace SiberianAnabasis.Controls
             else if (direction == Direction.Right)
             {
                 return currentState.ThumbSticks.Left.X > 0.5f;
+            }
+            else if (direction == Direction.Up)
+            {
+                return currentState.ThumbSticks.Left.Y < -0.5f;
+            }
+            else if (direction == Direction.Down)
+            {
+                return currentState.ThumbSticks.Left.Y > 0.5f;
+            }
+
+            return false;
+        }
+
+        public static bool HasBeenPressedThumbstick(Direction direction)
+        {
+            if (direction == Direction.Left)
+            {
+                return currentState.ThumbSticks.Left.X < -0.5f && previousState.ThumbSticks.Left.X > -0.5f;
+            }
+            else if (direction == Direction.Right)
+            {
+                return currentState.ThumbSticks.Left.X > 0.5f && previousState.ThumbSticks.Left.X < 0.5f;
+            }
+            else if (direction == Direction.Up)
+            {
+                return currentState.ThumbSticks.Left.Y > 0.5f && previousState.ThumbSticks.Left.Y < 0.5f;
+            }
+            else if (direction == Direction.Down)
+            {
+                return currentState.ThumbSticks.Left.Y < -0.5f && previousState.ThumbSticks.Left.Y > -0.5f;
             }
 
             return false;

@@ -114,13 +114,13 @@ namespace SiberianAnabasis.Objects
 
             // moving?
             bool isMoving = false;
-            if ((Keyboard.IsPressed(ControlKeys.Right) || Gamepad.Thumbstick(Direction.Right) || TouchControls.IsPressedRight()) && this.X < VillageScreen.MapWidth - this.Width)
+            if ((Keyboard.IsPressed(ControlKeys.Right) || Gamepad.IsPressedThumbstick(Direction.Right) || TouchControls.IsPressedRight()) && this.X < VillageScreen.MapWidth - this.Width)
             {
                 this.X += (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Right;
                 isMoving = true;
             }
-            else if ((Keyboard.IsPressed(ControlKeys.Left) || Gamepad.Thumbstick(Direction.Left) || TouchControls.IsPressedLeft()) && this.X > 0)
+            else if ((Keyboard.IsPressed(ControlKeys.Left) || Gamepad.IsPressedThumbstick(Direction.Left) || TouchControls.IsPressedLeft()) && this.X > 0)
             {
                 this.X -= (int)(deltaTime * this.Speed);
                 this.Direction = Direction.Left;
