@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using SiberianAnabasis.Controls;
 using SiberianAnabasis.Shared;
-using System;
 using System.Collections.Generic;
 using static SiberianAnabasis.Enums;
 
@@ -41,7 +40,13 @@ namespace SiberianAnabasis.Screens
             this.LoadSettings();
 
             // load saves to show info next to slot button
-            this.LoadSaves();
+            string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3 };
+            for (int i = 0; i < 3; i++)
+            {
+                FileIO saveFile = new FileIO(slots[i]);
+                dynamic saveData = saveFile.Load();
+                this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = Tools.ParseSaveData(saveData);
+            }
 
             // play song(s)
             Audio.StopSong();
@@ -159,7 +164,6 @@ namespace SiberianAnabasis.Screens
 #endif
         }
 
-
         public override void Draw(GameTime gameTime)
         {
             this.Game.Matrix = null;
@@ -243,46 +247,6 @@ namespace SiberianAnabasis.Screens
         }
 
         // take a look at whats inside the save slots to show it in main menu
-        private void LoadSaves()
-        {
-            string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3 };
 
-            for (int i = 0; i < 3; i++)
-            {
-                FileIO saveFile = new FileIO(slots[i]);
-                dynamic saveData = saveFile.Load();
-                if (saveData != null)
-                {
-                    int score = 0;
-                    int village = 0;
-                    int days = 0;
-
-                    // try to get score and other data from save slots
-                    try
-                    {
-                        score = Tools.GetScore(
-                            saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Days : 0,
-                            saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Money : 0,
-                            saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
-                            saveData.ContainsKey("peasants") ? (int)saveData.GetValue("peasants").Count : 0,
-                            saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0
-                        );
-
-                        days = saveData.GetValue("player").Days;
-                        village = saveData.GetValue("village");
-                    }
-                    catch (Exception e)
-                    {
-                        Tools.Dump(e.ToString());
-                    }
-
-                    this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = new string[] {
-                        "Village " + village,
-                        "Day " + days,
-                        "Score: " + score,
-                    };
-                }
-            }
-        }
     }
 }
