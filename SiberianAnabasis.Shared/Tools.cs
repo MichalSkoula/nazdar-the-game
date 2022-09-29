@@ -70,6 +70,43 @@ namespace SiberianAnabasis.Shared
             ;
         }
 
+        public static string[] ParseSaveData(dynamic saveData)
+        {
+            if (saveData != null)
+            {
+                int score = 0;
+                int village = 0;
+                int days = 0;
+
+                // try to get score and other data from save slots
+                try
+                {
+                    score = GetScore(
+                        saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Days : 0,
+                        saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Money : 0,
+                        saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
+                        saveData.ContainsKey("peasants") ? (int)saveData.GetValue("peasants").Count : 0,
+                        saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0
+                    );
+
+                    days = saveData.GetValue("player").Days;
+                    village = saveData.GetValue("village");
+                }
+                catch (Exception e)
+                {
+                    Dump(e.ToString());
+                }
+
+                return new string[] {
+                    "Village " + village,
+                    "Day " + days,
+                    "Score: " + score,
+                };
+            }
+
+            return new string[] { " ", " ", " " };
+        }
+
         public static void Dump(string str)
         {
             System.Diagnostics.Debug.WriteLine(str);

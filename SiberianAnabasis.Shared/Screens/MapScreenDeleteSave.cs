@@ -8,11 +8,11 @@ using static SiberianAnabasis.Enums;
 
 namespace SiberianAnabasis.Screens
 {
-    class GameOverScreenNewGame : GameScreen
+    class MapScreenDeleteSave : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public GameOverScreenNewGame(Game1 game) : base(game) { }
+        public MapScreenDeleteSave(Game1 game) : base(game) { }
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
@@ -58,7 +58,7 @@ namespace SiberianAnabasis.Screens
             // main menu - NO
             if (this.buttons.GetValueOrDefault("no").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.B))
             {
-                this.Game.LoadScreen(typeof(Screens.GameOverScreen));
+                this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
             // new game - YES
@@ -82,7 +82,7 @@ namespace SiberianAnabasis.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Start a new game?", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Really delete this save?", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

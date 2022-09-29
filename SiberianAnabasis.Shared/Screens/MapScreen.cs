@@ -16,15 +16,14 @@ namespace SiberianAnabasis.Screens
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
-        private FileIO saveFile = new FileIO();
+        private string[] saveDataLines;
 
         public override void Initialize()
         {
             buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Start", true));
+            buttons.Add("deleteButton", new Button(Offset.MenuX, 100, null, ButtonSize.Medium, "Delete save"));
             buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Main Menu"));
 
-            // set save slot and maybe load?
-            this.saveFile.File = Game.SaveSlot;
             this.Load();
 
             base.Initialize();
@@ -32,16 +31,22 @@ namespace SiberianAnabasis.Screens
 
         private void Load()
         {
-            dynamic saveData = this.saveFile.Load();
-            if (saveData == null)
-            {
-                return;
-            }
+            FileIO saveFile = new FileIO(Game.SaveSlot);
 
-            // focus on current village & active accessed villages
-            if (saveData.ContainsKey("village"))
+            dynamic saveData = saveFile.Load();
+            this.saveDataLines = Tools.ParseSaveData(saveData);
+
+            if (saveData != null)
             {
-                this.Game.Village = (int)saveData.village;
+                // focus on current village & active accessed villages
+                if (saveData.ContainsKey("village"))
+                {
+                    this.Game.Village = (int)saveData.village;
+                }
+            }
+            else
+            {
+                buttons.GetValueOrDefault("deleteButton").Active = false;
             }
         }
 
@@ -82,6 +87,12 @@ namespace SiberianAnabasis.Screens
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
 
+            // delete save
+            if (this.buttons.GetValueOrDefault("deleteButton").HasBeenClicked())
+            {
+                this.Game.LoadScreen(typeof(Screens.MapScreenDeleteSave));
+            }
+
             // back to main menu
             if (this.buttons.GetValueOrDefault("menuButton").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.B))
             {
@@ -104,6 +115,16 @@ namespace SiberianAnabasis.Screens
 
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);
+
+            // save data
+            int i = 0;
+
+            foreach (string line in this.saveDataLines)
+            {
+                i++;
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 90 + 30 * i), Color.White);
+
+            }
 
             this.Game.DrawEnd();
         }
