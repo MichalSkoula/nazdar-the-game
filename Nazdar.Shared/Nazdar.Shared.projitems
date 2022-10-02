@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6efba8a9-a407-4029-bdd0-651d22a87386</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Nazdar.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Assets.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Audio.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Camera.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Gamepad.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Touch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\TouchControls.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Tower.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Armory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseBuilding.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Center.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BasePerson.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BuildingSpot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Weapon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Coin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Enemy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Homeless.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Peasant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Soldier.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Keyboard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Mouse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ParticleSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreenDeleteSave.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreenNewGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\MenuScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FileIO.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Envs\1_village.tmx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Content\Envs\1_village.tsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>
