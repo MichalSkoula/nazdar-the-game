@@ -1,4 +1,4 @@
-﻿# Siberian Anabasis
+﻿# Nazdar! The Game
 
 Monogame platform/strategic game (awesome).
 
