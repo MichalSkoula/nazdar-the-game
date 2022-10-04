@@ -1,9 +1,16 @@
+
+
 {{ define "main" }}
-  {{ if .Content }}
-    <div class="index-content {{ if .Params.framed -}}framed{{- end -}}">
-      {{ .Content }}
+
+    <div class="index-content framed">
+      <img src="cover.png">
+      Very good game.
+      </div>
+      <div class="index-content framed">
+      {{ partial "mailchimp.html" }}
     </div>
-  {{ end }}
+
+  
   <div class="posts">
     {{ $isntDefault := not (or (eq (trim $.Site.Params.contentTypeName " ") "posts") (eq (trim $.Site.Params.contentTypeName " ") "")) }}
     {{ $contentTypeName := cond $isntDefault (string $.Site.Params.contentTypeName) "posts" }}
@@ -63,3 +70,4 @@
     {{ partial "pagination.html" . }}
   </div>
 {{ end }}
+
