@@ -1,0 +1,22 @@
+<header class="flex flex-row justify-between items-center my-2">
+  <i>{{ .Site.Params.name }}</i>
+  <i
+    class="toggle-theme cursor-pointer fas {{ if eq .Site.Params.theme `light` }}fa-moon{{ else }}fa-sun{{ end }} text-gray-600 hover:text-gray-800 dark:text-gray-500 dark:hover:text-gray-200"
+    onclick="toggleTheme(this)"
+  ></i>
+</header>
+
+<script>
+  const toggleTheme = (el) => {
+    const html = document.querySelector("html");
+    if (el.classList.contains("fa-moon")) {
+      el.classList.remove("fa-moon");
+      el.classList.add("fa-sun");
+      html.classList.add("dark");
+    } else {
+      el.classList.remove("fa-sun");
+      el.classList.add("fa-moon");
+      html.classList.remove("dark");
+    }
+  };
+</script>

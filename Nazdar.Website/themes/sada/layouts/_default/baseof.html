@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}" class="{{ .Site.Params.theme }}">
+  {{- partial "head.html" . -}}
+  <body class="max-w-screen-md mx-auto prose dark:prose-dark px-2 pb-4 bg-gray-100 dark:bg-dark1 duration-250">
+    {{- partial "header.html" . -}}
+    <main class="flex sm:flex-row-reverse flex-row flex-wrap">{{- block "main" . }}{{ end }}</main>
+  </body>
+</html>
