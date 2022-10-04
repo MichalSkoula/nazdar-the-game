@@ -1,0 +1,10 @@
+<h2>
+  <i class="fas fa-cogs"></i>
+  {{ .Site.Params.skills.title }}
+</h2>
+{{ range.Site.Params.skills.list }}
+<p class="mt-2">{{ .skill }}</p>
+<div class="w-full border border-gray-500 dark:border-gray-300 mt-1 rounded h-5">
+  <div class="bg-blue-500 dark:bg-yellow-500 h-full" style="width: {{ .skillrating }}%;"></div>
+</div>
+{{ end }}

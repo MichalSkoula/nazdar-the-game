@@ -1,0 +1,18 @@
+<div class="mb-8">
+  <h2>
+  <i class="fas fa-graduation-cap"></i>
+  {{ .Site.Params.education.title }}
+</h2>
+{{ range.Site.Params.education.list }}
+<h3>{{ .degree }}</h3>
+  <p class="ml-1 mb-0"><span class="font-semibold">{{ .college }}</span> &middot; {{ .dates }}</p>
+  {{ if .thesis_link }}
+  <p class="ml-2 mb-0">
+    Thesis:
+    <a class="text-warning" href="{{ .thesis_link }}"
+      ><i>{{ .thesis_title }}</i></a
+    >
+  </p>
+  {{ end }}
+{{ end }}
+</div>

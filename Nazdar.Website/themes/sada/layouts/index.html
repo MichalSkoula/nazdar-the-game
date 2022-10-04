@@ -1,0 +1,22 @@
+{{ define "main" }}
+<section
+  class="w-full sm:w-2/5 bg-gray-200 dark:bg-dark2 p-3 rounded shadow flex flex-col justify-between"
+>
+  <div>
+    <h1 class="text-center">{{ .Site.Params.profile.name }}</h1>
+    {{ partial "profilePhoto" . }}
+    {{ partial "social.html" . }}
+    {{ partial "aboutDesc" . }}
+    {{ partial "language.html" . }}
+    {{ partial "hobby.html" . }}
+  </div>
+  {{- partial "footer.html" . -}}
+</section>
+
+<section class="w-full sm:w-3/5 px-3">
+  {{ partial "experience.html" . }}
+  {{ partial "education.html" . }}
+  {{ partial "project.html" . }}
+  {{ partial "skill.html" . }}
+</section>
+{{ end }}

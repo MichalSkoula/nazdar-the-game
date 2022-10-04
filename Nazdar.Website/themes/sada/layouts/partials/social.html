@@ -1,0 +1,7 @@
+<div class="flex mb-1 mt-2 justify-center flex-wrap">
+  {{ range .Site.Params.social.list }}
+  <a href="{{ .url }}">
+    <i class="{{ .icon }} text-2xl py-1 px-2 m-1 rounded hover:bg-gray-300 dark:hover:bg-dark3"></i>
+  </a>
+  {{ end }}
+</div>

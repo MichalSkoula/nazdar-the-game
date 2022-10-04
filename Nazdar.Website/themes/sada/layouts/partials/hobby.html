@@ -1,0 +1,4 @@
+<h3>{{ .Site.Params.hobbies.title }}</h3>
+{{ range .Site.Params.hobbies.list }}
+<p class="ml-1">{{ .interest }}</p>
+{{ end }}
