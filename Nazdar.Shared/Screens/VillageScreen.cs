@@ -48,7 +48,7 @@ namespace Nazdar.Screens
         private int newEnemyProbability = 192; // every day, it gets -2
         private int newEnemyProbabilityLowLimit = 64;
         private int newHomelessProbability = 512 * 3;
-        private int newCoinProbability = 768;
+        private int newCoinProbability = 512;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;

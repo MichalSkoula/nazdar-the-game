@@ -94,10 +94,13 @@ namespace Nazdar
         {
             this.DeltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            Controls.Keyboard.GetState();
-            Controls.Gamepad.GetState();
-            Controls.Mouse.GetState();
-            Controls.Touch.GetState();
+            if (this.IsActive)
+            {
+                Controls.Keyboard.GetState();
+                Controls.Gamepad.GetState();
+                Controls.Mouse.GetState();
+                Controls.Touch.GetState();
+            }
 
             MessageBuffer.Update(this.DeltaTime);
 
