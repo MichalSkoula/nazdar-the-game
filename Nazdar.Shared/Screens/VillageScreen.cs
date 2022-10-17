@@ -48,7 +48,8 @@ namespace Nazdar.Screens
         private int newEnemyProbability = 192; // every day, it gets -2
         private int newEnemyProbabilityLowLimit = 64;
         private int newHomelessProbability = 512 * 3;
-        private int newCoinProbability = 512;
+        private int newCoinProbability = 768;
+        private int enemyDropProbability = 5;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
@@ -360,9 +361,7 @@ namespace Nazdar.Screens
 
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
-                            enemy.Dead = true;
-                            this.player.Kills++;
-                            Audio.PlayRandomSound("EnemyDeaths");
+                            this.EnemyDie(enemy);
                             Game1.MessageBuffer.AddMessage("Bullet kill by player", MessageType.Success);
                         }
                     }
@@ -382,9 +381,7 @@ namespace Nazdar.Screens
 
                             if (!enemy.TakeHit(bullet.Caliber))
                             {
-                                enemy.Dead = true;
-                                this.player.Kills++;
-                                Audio.PlayRandomSound("EnemyDeaths");
+                                this.EnemyDie(enemy);
                                 Game1.MessageBuffer.AddMessage("Bullet kill by tower", MessageType.Success);
                             }
                         }
@@ -405,9 +402,7 @@ namespace Nazdar.Screens
 
                             if (!enemy.TakeHit(bullet.Caliber))
                             {
-                                enemy.Dead = true;
-                                this.player.Kills++;
-                                Audio.PlayRandomSound("EnemyDeaths");
+                                this.EnemyDie(enemy);
                                 Game1.MessageBuffer.AddMessage("Bullet kill by soldier", MessageType.Success);
                             }
                         }
@@ -420,10 +415,7 @@ namespace Nazdar.Screens
             {
                 if (this.player.Hitbox.Intersects(enemy.Hitbox))
                 {
-                    enemy.Dead = true;
-                    this.player.Kills++;
-
-                    Audio.PlayRandomSound("EnemyDeaths");
+                    this.EnemyDie(enemy);
                     Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
 
                     if (!this.player.TakeHit(enemy.Caliber))
@@ -443,9 +435,7 @@ namespace Nazdar.Screens
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
                             Game1.MessageBuffer.AddMessage("Enemy killed by soldier", MessageType.Success);
-                            Audio.PlayRandomSound("EnemyDeaths");
-                            enemy.Dead = true;
-                            this.player.Kills++;
+                            this.EnemyDie(enemy);
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
@@ -468,9 +458,7 @@ namespace Nazdar.Screens
                         if (!enemy.TakeHit(peasant.Caliber))
                         {
                             Game1.MessageBuffer.AddMessage("Enemy killed by peasant", MessageType.Success);
-                            Audio.PlayRandomSound("EnemyDeaths");
-                            enemy.Dead = true;
-                            this.player.Kills++;
+                            this.EnemyDie(enemy);
                         }
                         if (!peasant.TakeHit(enemy.Caliber))
                         {
@@ -486,6 +474,20 @@ namespace Nazdar.Screens
             this.soldiers.RemoveAll(p => p.ToDelete);
             this.enemies.RemoveAll(p => p.ToDelete);
             this.peasants.RemoveAll(p => p.ToDelete);
+        }
+
+        private void EnemyDie(Enemy enemy)
+        {
+            // maybe drop something?
+            if (Tools.GetRandom(this.enemyDropProbability) == 1)
+            {
+                Game1.MessageBuffer.AddMessage("New coin! Enemy drop.", MessageType.Opportunity);
+                this.coins.Add(new Coin(enemy.X, Offset.Floor2));
+            }
+
+            Audio.PlayRandomSound("EnemyDeaths");
+            this.player.Kills++;
+            enemy.Dead = true;
         }
 
         private void UpdateThingsCollisions()

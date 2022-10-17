@@ -18,8 +18,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.UWP", "Nazdar.UWP\Na
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nazdar.Android", "Nazdar.Android\Nazdar.Android.csproj", "{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.Website", "Nazdar.Website\Nazdar.Website.csproj", "{3D67A890-7891-414F-B315-E480AD3CE22B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug Xbox|Any CPU = Debug Xbox|Any CPU
@@ -119,29 +117,6 @@ Global
 		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x64.Build.0 = Release|Any CPU
 		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x86.ActiveCfg = Release|Any CPU
 		{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}.Release|x86.Build.0 = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|Any CPU.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|ARM.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|ARM.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|x64.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|x64.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|x86.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug Xbox|x86.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|ARM.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|x64.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Debug|x86.Build.0 = Debug|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|ARM.ActiveCfg = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|ARM.Build.0 = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|x64.ActiveCfg = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|x64.Build.0 = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|x86.ActiveCfg = Release|Any CPU
-		{3D67A890-7891-414F-B315-E480AD3CE22B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
