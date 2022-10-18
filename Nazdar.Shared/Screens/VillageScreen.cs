@@ -518,7 +518,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         armory.DropWeapon();
-                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction));
+                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber * this.center.Level));
                     }
                 }
             }
@@ -538,29 +538,64 @@ namespace Nazdar.Screens
                 }
 
                 // Center?
-                if (buildingSpot.Type == Building.Type.Center && this.center == null)
+                if (buildingSpot.Type == Building.Type.Center)
                 {
-                    this.player.Action = Enums.PlayerAction.Build;
-                    this.player.ActionCost = Center.Cost;
-                    this.player.ActionName = Center.Name;
-
-                    if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                    if (this.center == null)
                     {
-                        if (this.player.Money >= Center.Cost)
+                        // no center - we can build it
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Center.Cost;
+                        this.player.ActionName = Center.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
-                            Audio.PlaySound("Rock");
-                            this.player.Money -= Center.Cost;
-                            this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
+                            if (this.player.Money >= this.player.ActionCost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= this.player.ActionCost;
+                                this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
                         }
-                        else
+                    }
+                    else if (this.center.Status == Building.Status.Built)
+                    {
+                        // center is built - level up?
+                        this.player.Action = Enums.PlayerAction.Upgrade;
+                        this.player.ActionCost = Center.Cost * (this.center.Level + 1);
+                        this.player.ActionName = Center.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            if (this.player.Money >= this.player.ActionCost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Building upgraded", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= this.player.ActionCost;
+                                this.center.Level++;
+
+                                this.Upgrade(this.center.Level);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
                         }
                     }
                 }
+
+                // center must be built first
+                if (this.center == null || this.center.Status != Building.Status.Built)
+                {
+                    continue;
+                }
+
                 // Armory?
-                else if (buildingSpot.Type == Building.Type.Armory)
+                if (buildingSpot.Type == Building.Type.Armory)
                 {
                     var armories = this.armories.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
                     if (armories.Count() == 0)
@@ -681,6 +716,14 @@ namespace Nazdar.Screens
             }
         }
 
+        private void Upgrade(int newLevel)
+        {
+            foreach (Soldier soldier in this.soldiers)
+            {
+                soldier.Caliber = Soldier.DefaultCaliber * newLevel;
+            }
+        }
+
         private void UpdateDayPhase()
         {
             this.dayPhaseTimer -= this.Game.DeltaTime;
@@ -756,22 +799,22 @@ namespace Nazdar.Screens
             // right stats
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Homelesses: " + (this.homelesses.Count).ToString(),
-                new Vector2(leftOffset + 450, Offset.StatusBarY),
-                Color.Black);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
                 "Peasants: " + (this.peasants.Count).ToString(),
-                new Vector2(leftOffset + 450, Offset.StatusBarY + 10),
+                new Vector2(leftOffset + 450, Offset.StatusBarY + 0),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Soldiers: " + (this.soldiers.Count).ToString(),
+                new Vector2(leftOffset + 450, Offset.StatusBarY + 10),
+                Color.Black);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Kills: " + this.player.Kills.ToString(),
                 new Vector2(leftOffset + 450, Offset.StatusBarY + 20),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Score: " + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills),
+                "Score: " + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0),
                 new Vector2(leftOffset + 450, Offset.StatusBarY + 30),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
@@ -921,7 +964,8 @@ namespace Nazdar.Screens
 
             if (saveData.ContainsKey("center") && saveData.GetValue("center") != null)
             {
-                this.center = new Center((int)saveData.GetValue("center").X, (int)saveData.GetValue("center").Y, (Building.Status)saveData.GetValue("center").Status);
+                var center = saveData.GetValue("center");
+                this.center = new Center((int)center.X, (int)center.Y, (Building.Status)center.Status, (int)center.Level);
             }
 
             if (saveData.ContainsKey("armories"))

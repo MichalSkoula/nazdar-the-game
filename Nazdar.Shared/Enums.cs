@@ -42,7 +42,8 @@ namespace Nazdar
         {
             Hire,
             Build,
-            Create
+            Create,
+            Upgrade
         }
 
         public enum BulletType

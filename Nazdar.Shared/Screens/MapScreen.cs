@@ -122,7 +122,7 @@ namespace Nazdar.Screens
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 90 + 30 * i), Color.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 90 + 28 * i), Color.White);
 
             }
 
