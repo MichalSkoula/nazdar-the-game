@@ -59,7 +59,7 @@ namespace Nazdar.Shared
             return (Math.PI / 180) * val;
         }
 
-        public static int GetScore(int days, int money, int peasants, int soldiers, int kills)
+        public static int GetScore(int days, int money, int peasants, int soldiers, int kills, int centerLevel)
         {
             return
                 days
@@ -67,6 +67,7 @@ namespace Nazdar.Shared
                 + peasants
                 + soldiers
                 + kills
+                + centerLevel
             ;
         }
 
@@ -77,6 +78,7 @@ namespace Nazdar.Shared
                 int score = 0;
                 int village = 0;
                 int days = 0;
+                int money = 0;
 
                 // try to get score and other data from save slots
                 try
@@ -86,11 +88,14 @@ namespace Nazdar.Shared
                         saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Money : 0,
                         saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
                         saveData.ContainsKey("peasants") ? (int)saveData.GetValue("peasants").Count : 0,
-                        saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0
+                        saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0,
+                        saveData.ContainsKey("center") ? (int)saveData.GetValue("center").Level : 0
                     );
 
                     days = saveData.GetValue("player").Days;
+                    money = saveData.GetValue("player").Money;
                     village = saveData.GetValue("village");
+
                 }
                 catch (Exception e)
                 {
@@ -101,6 +106,7 @@ namespace Nazdar.Shared
                     "Village " + village,
                     "Day " + days,
                     "Score: " + score,
+                    "Money: " + money,
                 };
             }
 

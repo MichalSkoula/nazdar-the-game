@@ -9,6 +9,8 @@ namespace Nazdar.Objects
 
         public int Caliber { get; set; }
 
+        public int Level { get; set; } = 1;
+
         public bool ToDelete { get; set; }
 
         // dying ... ttd - time to die

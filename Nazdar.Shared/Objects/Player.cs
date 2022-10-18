@@ -183,7 +183,7 @@ namespace Nazdar.Objects
             if (this.Action != null)
             {
                 // can afford?
-                float alpha = (this.ActionCost < this.Money ? 1f : 0.6f);
+                float alpha = (this.ActionCost <= this.Money ? 1f : 0.6f);
 
                 // static image from spritesheet
                 Coin.DrawStatic(spriteBatch, this.ActionCost, this.X, this.Y, alpha);

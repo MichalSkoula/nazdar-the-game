@@ -14,6 +14,9 @@ namespace Nazdar.Objects
         private bool isFast = true;
         private int shootRate = 70; // 0 fastest, 100 slowest
 
+        public const int DefaultHealth = 100;
+        public const int DefaultCaliber = 10;
+
         public bool CanShoot { get; set; } = false;
         public int? DeploymentX { get; set; } = null;
 
@@ -27,7 +30,7 @@ namespace Nazdar.Objects
             new Animation(Assets.Images["SoldierLeft"], 4, 10),
         };
 
-        public Soldier(int x, int y, Direction direction, int health = 100, int caliber = 10)
+        public Soldier(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
@@ -162,6 +165,7 @@ namespace Nazdar.Objects
         {
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
+            spriteBatch.DrawString(Assets.Fonts["Small"], this.Caliber.ToString(), new Vector2(this.X, this.Y), this.FinalColor);
 
             // bullets
             foreach (var bullet in this.Bullets)
