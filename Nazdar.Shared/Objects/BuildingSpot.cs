@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using Nazdar.Shared;
 using System;
 using static Nazdar.Enums;
 
@@ -11,7 +12,6 @@ namespace Nazdar.Objects
         public BuildingSpot(int x, int y, int width, int height, string type)
         {
             this.Hitbox = new Rectangle(x, y, width, height);
-
             switch (type)
             {
                 case "Center":
@@ -22,6 +22,9 @@ namespace Nazdar.Objects
                     break;
                 case "Tower":
                     this.Type = Building.Type.Tower;
+                    break;
+                case "Farm":
+                    this.Type = Building.Type.Farm;
                     break;
                 default:
                     throw new ArgumentException();

@@ -85,6 +85,7 @@ namespace Nazdar
                 Center,
                 Armory,
                 Tower,
+                Farm
             }
 
             public enum Status
