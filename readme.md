@@ -4,12 +4,6 @@ Monogame platform/strategic game (awesome).
 
 ![obrazek](https://user-images.githubusercontent.com/5922575/192386184-0100011a-ec67-43a7-82ea-13b430e28f80.png)
 
-## NOTES:
-
-* MonoGame 3.8
-* MonoGame.Extended 3.7 (3.8 is bugged)
-* C# 10 (well, 8, because of UWP), .NET 6
-
 ## PACKAGING
 
 https://docs.monogame.net/articles/packaging_games.html
@@ -19,10 +13,17 @@ https://docs.monogame.net/articles/packaging_games.html
 
 ## CREDITS 
 
+### tech
+
+* MonoGame 3.8
+* MonoGame.Extended 3.7 (3.8 is bugged)
+* C# 10 (well, 8, because of UWP), .NET 6
+
 ### images
 * https://0x72.itch.io/pixeldudesmaker CC-29 color palette
 * https://essssam.itch.io/rocky-roads
 * https://mariaparragames.itch.io/free-retro-city-assetpack
+* https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
 * https://dreammix.itch.io/keyboard-keys-for-ui keyboard
 

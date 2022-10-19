@@ -5,6 +5,7 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace Nazdar.Screens
         private Center center;
         private List<Armory> armories = new List<Armory>();
         private List<Tower> towers = new List<Tower>();
+        private List<Farm> farms = new List<Farm>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
@@ -68,7 +70,7 @@ namespace Nazdar.Screens
                         (int)buildingSpot.y,
                         (int)buildingSpot.width,
                         (int)buildingSpot.height,
-                        buildingSpot.type
+                        buildingSpot.@class
                     )
                 );
             }
@@ -113,6 +115,7 @@ namespace Nazdar.Screens
             }
             this.UpdateArmories();
             this.UpdateTowers();
+            this.UpdateFarms();
 
             // collisions
             this.UpdatePeoplesCollisions();
@@ -212,6 +215,10 @@ namespace Nazdar.Screens
             {
                 this.Build(tower);
             }
+            foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(farm);
+            }
             if (this.center != null && this.center.Status == Building.Status.InProcess)
             {
                 this.Build(this.center);
@@ -302,6 +309,14 @@ namespace Nazdar.Screens
             foreach (Armory armory in this.armories)
             {
                 armory.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateFarms()
+        {
+            foreach (Farm farm in this.farms)
+            {
+                farm.Update(this.Game.DeltaTime);
             }
         }
 
@@ -680,6 +695,33 @@ namespace Nazdar.Screens
                         }
                     }
                 }
+                // Farm?
+                else if (buildingSpot.Type == Building.Type.Farm)
+                {
+                    var farms = this.farms.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (farms.Count() == 0)
+                    {
+                        // no tower - we can build something
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Farm.Cost;
+                        this.player.ActionName = Farm.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                        {
+                            if (this.player.Money < Farm.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= Farm.Cost;
+                                this.farms.Add(new Farm(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                        }
+                    }
+                }
             }
 
             // hire homelesses?
@@ -850,6 +892,11 @@ namespace Nazdar.Screens
                 armory.Draw(this.Game.SpriteBatch);
             }
 
+            foreach (Farm farm in this.farms)
+            {
+                farm.Draw(this.Game.SpriteBatch);
+            }
+
             foreach (Tower tower in this.towers)
             {
                 tower.Draw(this.Game.SpriteBatch);
@@ -976,6 +1023,14 @@ namespace Nazdar.Screens
                 }
             }
 
+            if (saveData.ContainsKey("farms"))
+            {
+                foreach (var farm in saveData.GetValue("farms"))
+                {
+                    this.farms.Add(new Farm((int)farm.Hitbox.X, (int)farm.Hitbox.Y, (Building.Status)farm.Status));
+                }
+            }
+
             if (saveData.ContainsKey("towers"))
             {
                 foreach (var tower in saveData.GetValue("towers"))
@@ -1007,6 +1062,7 @@ namespace Nazdar.Screens
                 center = this.center,
                 armories = this.armories,
                 towers = this.towers,
+                farms = this.farms,
                 coins = this.coins,
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,

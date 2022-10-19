@@ -38,6 +38,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Center.png
 
+#begin Buildings/Farm.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Farm.png
+
 #begin Buildings/Tower.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -133,18 +145,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Controls/gamepad/right.png
-
-#begin Controls/gamepad/select.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Controls/gamepad/select.png
 
 #begin Controls/gamepad/select.png
 /importer:TextureImporter
