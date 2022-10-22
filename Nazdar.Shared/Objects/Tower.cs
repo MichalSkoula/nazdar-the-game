@@ -12,7 +12,7 @@ namespace Nazdar.Objects
         public const string Name = "Tower";
         public bool CanShoot { get; set; } = false;
         private int shootPower = 1;
-        private int shootRate = 90; // 0 fastest, 100 slowest
+        private int shootRate = 95; // 0 fastest, 100 slowest
 
         public List<Bullet> Bullets { get; private set; }
 
@@ -23,7 +23,7 @@ namespace Nazdar.Objects
             this.Status = status;
             this.Bullets = new List<Bullet>();
             this.TimeToBuilt = 5;
-            this.Caliber = 35;
+            this.Caliber = 20;
             this.Type = Building.Type.Tower;
         }
 

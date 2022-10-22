@@ -47,12 +47,14 @@ namespace Nazdar.Screens
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
         // some settings - random 0-X == 1
-        private int newEnemyProbability = 192; // every day, it gets -2
-        private int newEnemyProbabilityLowLimit = 64;
+        private int newEnemyProbability = 128; // every day, it gets -2
+        private int newEnemyProbabilityLowLimit = 32;
         private int newHomelessProbability = 512 * 3;
         private int newCoinProbability = 768;
-        private int enemyDropProbability = 5;
-        private int homelessLimit = 10;
+        private int enemyDropProbability = 8;
+        private int homelessLimit = 16;
+        private int farmingMoneyProbability = 1024;
+        private int startingMoney = 3;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
@@ -60,7 +62,7 @@ namespace Nazdar.Screens
         public override void Initialize()
         {
             // create player in the center of the map
-            this.player = new Player(MapWidth / 2, Offset.Floor);
+            this.player = new Player(MapWidth / 2, Offset.Floor, 3);
 
             // load building spots from tileset
             foreach (var buildingSpot in Assets.TilesetGroups["village1"].GetObjects("objects", "BuildingSpot"))
@@ -208,13 +210,18 @@ namespace Nazdar.Screens
                 for (int i = 0; i < farmers.Count; i++, f++)
                 {
                     f = f % farms.Count;
-                    this.farmers.ElementAt(i).DeploymentX = this.farms[f].X;
+                    this.farmers.ElementAt(i).DeploymentX = this.farms[f].X + this.farms[f].Width / 2;
                 }
             }
 
             // update them
             foreach (Farmer farmer in this.farmers)
             {
+                if (farmer.IsFarming && Tools.GetRandom(farmingMoneyProbability) == 1)
+                {
+                    Game1.MessageBuffer.AddMessage("New coin from farming!", MessageType.Opportunity);
+                    this.coins.Add(new Coin(farmer.X + farmer.Width / 2, Offset.Floor2));
+                }
                 farmer.Update(this.Game.DeltaTime);
             }
         }
@@ -261,7 +268,7 @@ namespace Nazdar.Screens
                 peasant.Update(this.Game.DeltaTime);
             }
         }
-
+        
         private void Build(BaseBuilding building)
         {
             // is someone building it?
@@ -273,7 +280,7 @@ namespace Nazdar.Screens
                 break;
             }
 
-            // noone is building it
+            // no one is building it
             if (building.IsBeingBuilt == false && this.peasants.Count > 0)
             {
                 var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
@@ -580,7 +587,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         armory.DropWeapon();
-                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber * this.center.Level));
+                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.center.Level));
                     }
                 }
             }
@@ -597,7 +604,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         farm.DropTool();
-                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber * this.center.Level));
+                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.center.Level));
                     }
                 }
             }
@@ -646,7 +653,7 @@ namespace Nazdar.Screens
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
-                        this.player.ActionCost = Center.Cost * (this.center.Level + 1);
+                        this.player.ActionCost = Center.Cost * (this.center.Level + 1) * 2;
                         this.player.ActionName = Center.Name;
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
@@ -658,7 +665,7 @@ namespace Nazdar.Screens
                                 this.player.Money -= this.player.ActionCost;
                                 this.center.Level++;
 
-                                this.Upgrade(this.center.Level);
+                                this.Upgrade();
                             }
                             else
                             {
@@ -794,7 +801,7 @@ namespace Nazdar.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Create;
                             this.player.ActionCost = Farm.ToolCost;
-                            this.player.ActionName = Farm.Name;
+                            this.player.ActionName = Tool.Name;
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -855,19 +862,19 @@ namespace Nazdar.Screens
             }
         }
 
-        private void Upgrade(int newLevel)
+        private void Upgrade()
         {
             foreach (Soldier soldier in this.soldiers)
             {
-                soldier.Caliber = Soldier.DefaultCaliber * newLevel;
+                soldier.Caliber = Soldier.DefaultCaliber + this.center.Level;
             }
             foreach (Peasant peasant in this.peasants)
             {
-                peasant.Caliber = Peasant.DefaultCaliber * newLevel;
+                peasant.Caliber = Peasant.DefaultCaliber + this.center.Level;
             }
             foreach (Farmer farmer in this.farmers)
             {
-                farmer.Caliber = Farmer.DefaultCaliber * newLevel;
+                farmer.Caliber = Farmer.DefaultCaliber + this.center.Level;
             }
         }
 

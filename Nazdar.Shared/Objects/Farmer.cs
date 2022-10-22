@@ -10,11 +10,13 @@ namespace Nazdar.Objects
 {
     public class Farmer : BasePerson
     {
-        private int centerRadius = 96;
+        private int centerRadius = 24;
         private bool isFast = true;
 
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 2;
+
+        public bool IsFarming { get; set; } = false;
 
         public int? DeploymentX { get; set; } = null;
 
@@ -87,6 +89,7 @@ namespace Nazdar.Objects
             this.Anim.Update(deltaTime);
 
             this.isFast = true;
+            this.IsFarming = false;
 
             // go somewhere
             if (this.DeploymentX == null)
@@ -101,7 +104,7 @@ namespace Nazdar.Objects
                     this.Direction = Direction.Left;
                 }
 
-                // when near the desired spot, can be slow and randomly change direction
+                // when near the base, can be slow and randomly change direction
                 if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
                 {
                     this.isFast = false;
@@ -123,10 +126,12 @@ namespace Nazdar.Objects
                     this.Direction = Direction.Left;
                 }
 
-                // when near the base, can be slow and randomly change direction
+                // when near the desired spot, can be slow and randomly change direction
+                // and also farming
                 if (this.X < this.DeploymentX + this.centerRadius / 2 && this.X > this.DeploymentX - this.centerRadius / 2)
                 {
                     this.isFast = false;
+                    this.IsFarming = true;
                     if (Tools.GetRandom(128) == 1)
                     {
                         this.ChangeDirection();
