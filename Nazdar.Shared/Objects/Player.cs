@@ -60,7 +60,7 @@ namespace Nazdar.Objects
 
         public int Kills { get; set; } = 0;
 
-        public Player(int x, int y)
+        public Player(int x, int y, int startingMoney)
         {
             this.Anim = this.animations[(int)Direction.Right];
             this.Direction = Direction.Right;
@@ -70,6 +70,7 @@ namespace Nazdar.Objects
             this.Caliber = 30;
             this.Days = 0;
             this.Speed = 121;
+            this.Money = startingMoney;
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),

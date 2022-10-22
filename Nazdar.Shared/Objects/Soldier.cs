@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         private int shootRate = 70; // 0 fastest, 100 slowest
 
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 10;
+        public const int DefaultCaliber = 5;
 
         public bool CanShoot { get; set; } = false;
         public int? DeploymentX { get; set; } = null;
