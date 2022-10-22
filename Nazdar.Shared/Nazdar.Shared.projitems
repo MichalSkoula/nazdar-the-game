@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Farm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Farmer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Tower.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Armory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseBuilding.cs" />
@@ -31,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BuildingSpot.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Bullet.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Tool.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Weapon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Coin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Enemy.cs" />

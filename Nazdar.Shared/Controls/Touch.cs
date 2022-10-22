@@ -10,10 +10,15 @@ namespace Nazdar.Controls
         private static List<TouchLocation> previousTouchLocations = new List<TouchLocation>();
         private static List<TouchLocation> currentTouchLocations = new List<TouchLocation>();
 
-        public static void GetState()
+        public static void GetState(bool isActive)
         {
             previousTouchLocations = currentTouchLocations.GetRange(0, previousTouchLocations.Count); // create shallow copy
             currentTouchLocations.Clear();
+
+            if (!isActive)
+            {
+                return;
+            }
 
             foreach (var touch in TouchPanel.GetState())
             {

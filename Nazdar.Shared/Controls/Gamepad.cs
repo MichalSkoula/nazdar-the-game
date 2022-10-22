@@ -9,13 +9,13 @@ namespace Nazdar.Controls
         static GamePadState currentState;
         static GamePadState previousState;
 
-        public static GamePadState GetState()
+        public static GamePadState GetState(bool isActive)
         {
             GamePadCapabilities capabilities = GamePad.GetCapabilities(PlayerIndex.One);
             if (capabilities.IsConnected)
             {
                 previousState = currentState;
-                currentState = GamePad.GetState(PlayerIndex.One);
+                currentState = isActive ? GamePad.GetState(PlayerIndex.One) : new GamePadState();
                 return currentState;
             }
 
