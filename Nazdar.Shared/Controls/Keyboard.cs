@@ -7,10 +7,10 @@ namespace Nazdar.Controls
         static KeyboardState currentKeyState;
         static KeyboardState previousKeyState;
 
-        public static KeyboardState GetState()
+        public static KeyboardState GetState(bool isActive)
         {
             previousKeyState = currentKeyState;
-            currentKeyState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+            currentKeyState = isActive ? Microsoft.Xna.Framework.Input.Keyboard.GetState() : new KeyboardState();
             return currentKeyState;
         }
 

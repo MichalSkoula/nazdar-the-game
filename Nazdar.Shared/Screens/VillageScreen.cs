@@ -5,7 +5,6 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +30,7 @@ namespace Nazdar.Screens
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
         private List<Soldier> soldiers = new List<Soldier>();
+        private List<Farmer> farmers = new List<Farmer>();
         private List<Homeless> homelesses = new List<Homeless>();
         private List<Peasant> peasants = new List<Peasant>();
 
@@ -52,6 +52,7 @@ namespace Nazdar.Screens
         private int newHomelessProbability = 512 * 3;
         private int newCoinProbability = 768;
         private int enemyDropProbability = 5;
+        private int homelessLimit = 10;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
@@ -105,6 +106,7 @@ namespace Nazdar.Screens
             this.UpdateEnemies();
             this.UpdateSoldiers();
             this.UpdatePeasants();
+            this.UpdateFarmers();
             this.UpdateHomelesses();
             this.UpdateCoins();
 
@@ -197,6 +199,26 @@ namespace Nazdar.Screens
             }
         }
 
+        private void UpdateFarmers()
+        {
+            if (this.farmers.Count > 0 && this.farms.Count > 0)
+            {
+                // distribute farmers to farms
+                int f = 0; // indexer for farm
+                for (int i = 0; i < farmers.Count; i++, f++)
+                {
+                    f = f % farms.Count;
+                    this.farmers.ElementAt(i).DeploymentX = this.farms[f].X;
+                }
+            }
+
+            // update them
+            foreach (Farmer farmer in this.farmers)
+            {
+                farmer.Update(this.Game.DeltaTime);
+            }
+        }
+
         private void UpdatePeasants()
         {
             // reset his intentions
@@ -225,6 +247,10 @@ namespace Nazdar.Screens
             }
 
             // something to get?
+            foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
+            {
+                this.Pick(farm);
+            }
             foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
             {
                 this.Pick(armory);
@@ -267,7 +293,7 @@ namespace Nazdar.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            if (Tools.GetRandom(this.newHomelessProbability) == 1)
+            if (Tools.GetRandom(this.newHomelessProbability) == 1 && this.homelesses.Count < this.homelessLimit)
             {
                 Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
                 // choose side 
@@ -462,7 +488,6 @@ namespace Nazdar.Screens
                 }
             }
 
-
             // enemies and peasants
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
@@ -477,18 +502,40 @@ namespace Nazdar.Screens
                         }
                         if (!peasant.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Peasant killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Innocent peasant killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             peasant.Dead = true;
                         }
                     }
                 }
+            }
 
+            // enemies and farmers
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            {
+                foreach (Farmer farmer in this.farmers.Where(farmer => farmer.Dead == false))
+                {
+                    if (!enemy.Dead && !farmer.Dead && enemy.Hitbox.Intersects(farmer.Hitbox))
+                    {
+                        if (!enemy.TakeHit(farmer.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Enemy killed by farmer", MessageType.Success);
+                            this.EnemyDie(enemy);
+                        }
+                        if (!farmer.TakeHit(enemy.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Innocent farmer killed by enemy", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            farmer.Dead = true;
+                        }
+                    }
+                }
             }
 
             this.soldiers.RemoveAll(p => p.ToDelete);
             this.enemies.RemoveAll(p => p.ToDelete);
             this.peasants.RemoveAll(p => p.ToDelete);
+            this.farmers.RemoveAll(p => p.ToDelete);
         }
 
         private void EnemyDie(Enemy enemy)
@@ -537,6 +584,24 @@ namespace Nazdar.Screens
                     }
                 }
             }
+
+            // tools
+            foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
+            {
+                foreach (var peasant in this.peasants)
+                {
+                    if (peasant.Hitbox.Intersects(farm.Hitbox) && farm.ToolsCount > 0)
+                    {
+                        // ok, peasant get tool and turns into soldier
+                        Game1.MessageBuffer.AddMessage("Peasant => farmer", MessageType.Success);
+                        Audio.PlaySound("SoldierSpawn");
+                        peasant.ToDelete = true;
+                        farm.DropTool();
+                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber * this.center.Level));
+                    }
+                }
+            }
+
             this.peasants.RemoveAll(p => p.ToDelete);
         }
 
@@ -701,7 +766,7 @@ namespace Nazdar.Screens
                     var farms = this.farms.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
                     if (farms.Count() == 0)
                     {
-                        // no tower - we can build something
+                        // no farm here on building spot, we can build it
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Farm.Cost;
                         this.player.ActionName = Farm.Name;
@@ -718,6 +783,38 @@ namespace Nazdar.Screens
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= Farm.Cost;
                                 this.farms.Add(new Farm(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // farm exists - create tools?
+                        var farm = farms.First();
+                        if (farm.Status == Building.Status.Built)
+                        {
+                            this.player.Action = Enums.PlayerAction.Create;
+                            this.player.ActionCost = Farm.ToolCost;
+                            this.player.ActionName = Farm.Name;
+
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                            {
+                                if (this.player.Money >= Farm.ToolCost)
+                                {
+                                    if (farm.AddTool())
+                                    {
+                                        Game1.MessageBuffer.AddMessage("Tool purchased", MessageType.Info);
+                                        Audio.PlaySound("SoldierSpawn");
+                                        this.player.Money -= Farm.ToolCost;
+                                    }
+                                    else
+                                    {
+                                        Game1.MessageBuffer.AddMessage("Farm is full", MessageType.Fail);
+                                    }
+                                }
+                                else
+                                {
+                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                }
                             }
                         }
                     }
@@ -763,6 +860,14 @@ namespace Nazdar.Screens
             foreach (Soldier soldier in this.soldiers)
             {
                 soldier.Caliber = Soldier.DefaultCaliber * newLevel;
+            }
+            foreach (Peasant peasant in this.peasants)
+            {
+                peasant.Caliber = Peasant.DefaultCaliber * newLevel;
+            }
+            foreach (Farmer farmer in this.farmers)
+            {
+                farmer.Caliber = Farmer.DefaultCaliber * newLevel;
             }
         }
 
@@ -912,6 +1017,11 @@ namespace Nazdar.Screens
                 soldier.Draw(this.Game.SpriteBatch);
             }
 
+            foreach (Farmer farmer in this.farmers)
+            {
+                farmer.Draw(this.Game.SpriteBatch);
+            }
+
             foreach (Homeless homeless in this.homelesses)
             {
                 homeless.Draw(this.Game.SpriteBatch);
@@ -991,7 +1101,15 @@ namespace Nazdar.Screens
             {
                 foreach (var peasant in saveData.GetValue("peasants"))
                 {
-                    this.peasants.Add(new Peasant((int)peasant.Hitbox.X, (int)peasant.Hitbox.Y, (Direction)peasant.Direction));
+                    this.peasants.Add(new Peasant((int)peasant.Hitbox.X, (int)peasant.Hitbox.Y, (Direction)peasant.Direction, (int)peasant.Health, (int)peasant.Caliber));
+                }
+            }
+
+            if (saveData.ContainsKey("farmers"))
+            {
+                foreach (var farmer in saveData.GetValue("farmers"))
+                {
+                    this.farmers.Add(new Farmer((int)farmer.Hitbox.X, (int)farmer.Hitbox.Y, (Direction)farmer.Direction, (int)farmer.Health, (int)farmer.Caliber));
                 }
             }
 
@@ -1027,7 +1145,7 @@ namespace Nazdar.Screens
             {
                 foreach (var farm in saveData.GetValue("farms"))
                 {
-                    this.farms.Add(new Farm((int)farm.Hitbox.X, (int)farm.Hitbox.Y, (Building.Status)farm.Status));
+                    this.farms.Add(new Farm((int)farm.Hitbox.X, (int)farm.Hitbox.Y, (Building.Status)farm.Status, (int)farm.ToolsCount));
                 }
             }
 
@@ -1057,6 +1175,7 @@ namespace Nazdar.Screens
                 player = this.player,
                 enemies = this.enemies,
                 soldiers = this.soldiers,
+                farmers = this.farmers,
                 homelesses = this.homelesses,
                 peasants = this.peasants,
                 center = this.center,
