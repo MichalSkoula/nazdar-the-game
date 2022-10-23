@@ -50,6 +50,11 @@ namespace Nazdar.Objects
             }
         }
 
+        public bool CanAddMoney()
+        {
+            return this.Money < moneyLimit;
+        }
+
         public int Days { get; set; }
 
         public Enums.PlayerAction? Action { get; set; }
@@ -57,6 +62,8 @@ namespace Nazdar.Objects
         public string ActionName { get; set; }
 
         private ParticleSource particleSmoke;
+
+        private bool canJump = true;
 
         public int Kills { get; set; } = 0;
 
@@ -201,7 +208,14 @@ namespace Nazdar.Objects
 
         private async void Jump()
         {
+            if (!this.canJump)
+            {
+                return;
+            }
+
+            this.canJump = false;
             Audio.PlayRandomSound("Jumps");
+
             int h0 = Enums.Offset.Floor;
             int v0 = 25;
             int g = 10;
@@ -221,6 +235,8 @@ namespace Nazdar.Objects
 
                 await Task.Delay(20);
             }
+
+            this.canJump = true;
         }
     }
 }
