@@ -29,6 +29,7 @@ namespace Nazdar.Shared
         // check if there is a song collection to play; if so, play it
         public static void PlaySongCollection()
         {
+            MediaPlayer.Volume = 0.5f;
             if (CurrentSongCollection != null && MediaPlayer.State != MediaState.Playing/* && MediaPlayer.PlayPosition.TotalSeconds == 0.0f && Assets.SongsCollection.ContainsKey(CurrentSongCollection)*/)
             {
                 MediaPlayer.Play(Assets.SongsCollection[CurrentSongCollection][Tools.GetRandom(Assets.SongsCollection[CurrentSongCollection].Count)]);

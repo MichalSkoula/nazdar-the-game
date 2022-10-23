@@ -564,7 +564,7 @@ namespace Nazdar.Screens
             // coins
             foreach (var coin in this.coins)
             {
-                if (this.player.Hitbox.Intersects(coin.Hitbox))
+                if (this.player.Hitbox.Intersects(coin.Hitbox) && this.player.CanAddMoney())
                 {
                     Game1.MessageBuffer.AddMessage("Coin acquired", MessageType.Success);
                     Audio.PlaySound("Coin");
