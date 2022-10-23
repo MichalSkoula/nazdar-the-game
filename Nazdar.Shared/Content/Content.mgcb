@@ -278,6 +278,12 @@
 /processorParam:TextureFormat=Color
 /build:Enemy/enemy_right.png
 
+#begin Envs/1_village.tmx
+/copy:Envs/1_village.tmx
+
+#begin Envs/1_village.tsx
+/copy:Envs/1_village.tsx
+
 #begin Envs/Rocky Roads/tileset forest.png
 /importer:TextureImporter
 /processor:TextureProcessor

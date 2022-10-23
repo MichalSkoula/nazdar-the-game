@@ -146,8 +146,9 @@ namespace Nazdar
             Assets.ParticleTextureRegions["Smoke"] = new TextureRegion2D(smoke);
 
             // load tilesets ---------------------------------------------------------------------------------------
-            // Set the "Copy to Output Directory" property of these two files to `Copy if newer`
-            // streams set (android, use them)
+            // 1/ Set the "Copy to Output Directory" property of these two files to `Copy if newer`
+            // 2/ Set build action to Copy in MGCB (because of Android)
+            // streams are here because Android, but TitleContainer is cross platform so cool
             Assets.TilesetGroups["village1"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
