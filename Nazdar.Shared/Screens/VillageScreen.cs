@@ -185,14 +185,12 @@ namespace Nazdar.Screens
                 }
 
                 // can shoot at closest enemy?
-                soldier.CanShoot = false;
                 int range = Enums.Screen.Width / 3; // third of the visible screen
                 foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - soldier.X)))
                 {
                     if (Math.Abs(enemy.X - soldier.X) < range)
                     {
-                        soldier.CanShoot = true;
-                        soldier.Direction = (enemy.X + enemy.Width / 2) < (soldier.X + soldier.Width / 2) ? Direction.Left : Direction.Right;
+                        soldier.PrepareToShoot((enemy.X + enemy.Width / 2) < (soldier.X + soldier.Width / 2) ? Direction.Left : Direction.Right);
                         break;
                     }
                 }
@@ -210,7 +208,10 @@ namespace Nazdar.Screens
                 for (int i = 0; i < farmers.Count; i++, f++)
                 {
                     f = f % farms.Count;
-                    this.farmers.ElementAt(i).DeploymentX = this.farms[f].X + this.farms[f].Width / 2;
+                    if (this.farms[f].Status != Building.Status.InProcess)
+                    {
+                        this.farmers.ElementAt(i).DeploymentX = this.farms[f].X + this.farms[f].Width / 2;
+                    }
                 }
             }
 
@@ -268,7 +269,7 @@ namespace Nazdar.Screens
                 peasant.Update(this.Game.DeltaTime);
             }
         }
-        
+
         private void Build(BaseBuilding building)
         {
             // is someone building it?
@@ -373,7 +374,6 @@ namespace Nazdar.Screens
                 }
 
                 // can shoot at closest enemy?
-                tower.CanShoot = false;
                 if (tower.Status == Building.Status.Built)
                 {
                     int range = Enums.Screen.Width / 2; // half of the visible screen
@@ -381,7 +381,6 @@ namespace Nazdar.Screens
                     {
                         if (Math.Abs(enemy.X - tower.X) < range)
                         {
-                            tower.CanShoot = true;
                             tower.PrepareToShoot(
                                 (enemy.X + enemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right,
                                 enemy.X,
@@ -587,7 +586,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         armory.DropWeapon();
-                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.center.Level));
+                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.center.Level * 2));
                     }
                 }
             }
@@ -604,7 +603,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         farm.DropTool();
-                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.center.Level));
+                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.center.Level * 2));
                     }
                 }
             }
@@ -866,15 +865,15 @@ namespace Nazdar.Screens
         {
             foreach (Soldier soldier in this.soldiers)
             {
-                soldier.Caliber = Soldier.DefaultCaliber + this.center.Level;
+                soldier.Caliber = Soldier.DefaultCaliber + this.center.Level * 2;
             }
             foreach (Peasant peasant in this.peasants)
             {
-                peasant.Caliber = Peasant.DefaultCaliber + this.center.Level;
+                peasant.Caliber = Peasant.DefaultCaliber + this.center.Level * 2;
             }
             foreach (Farmer farmer in this.farmers)
             {
-                farmer.Caliber = Farmer.DefaultCaliber + this.center.Level;
+                farmer.Caliber = Farmer.DefaultCaliber + this.center.Level * 2;
             }
         }
 

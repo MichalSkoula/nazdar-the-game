@@ -10,7 +10,7 @@ namespace Nazdar.Objects
 {
     public class Farmer : BasePerson
     {
-        private int centerRadius = 24;
+        private int centerRadius = 32;
         private bool isFast = true;
 
         public const int DefaultHealth = 100;
@@ -22,10 +22,10 @@ namespace Nazdar.Objects
 
         private List<Animation> animations = new List<Animation>()
         {
-            new Animation(Assets.Images["SoldierRight"], 4, 10),
-            new Animation(Assets.Images["SoldierRight"], 4, 10),
-            new Animation(Assets.Images["SoldierLeft"], 4, 10),
-            new Animation(Assets.Images["SoldierLeft"], 4, 10),
+            new Animation(Assets.Images["FarmerRight"], 4, 10),
+            new Animation(Assets.Images["FarmerRight"], 4, 10),
+            new Animation(Assets.Images["FarmerLeft"], 4, 10),
+            new Animation(Assets.Images["FarmerLeft"], 4, 10),
         };
 
         public Farmer(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
@@ -144,7 +144,7 @@ namespace Nazdar.Objects
         {
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
-            spriteBatch.DrawString(Assets.Fonts["Small"], this.Caliber.ToString(), new Vector2(this.X, this.Y), this.FinalColor);
+            this.DrawCaliber(spriteBatch);
 
             // particles
             this.particleBlood.Draw(spriteBatch);

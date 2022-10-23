@@ -36,6 +36,8 @@ namespace Nazdar
             Assets.Images["EnemyRight"] = content.Load<Texture2D>("Enemy/enemy_right");
             Assets.Images["HomelessLeft"] = content.Load<Texture2D>("Homeless/homeless_left");
             Assets.Images["HomelessRight"] = content.Load<Texture2D>("Homeless/homeless_right");
+            Assets.Images["FarmerLeft"] = content.Load<Texture2D>("Farmer/farmer_left");
+            Assets.Images["FarmerRight"] = content.Load<Texture2D>("Farmer/farmer_right");
             Assets.Images["BulletLeft"] = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
             Assets.Images["Coin"] = content.Load<Texture2D>("Items/coin");

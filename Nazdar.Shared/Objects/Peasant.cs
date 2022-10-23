@@ -139,7 +139,7 @@ namespace Nazdar.Objects
         {
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
-            spriteBatch.DrawString(Assets.Fonts["Small"], this.Caliber.ToString(), new Vector2(this.X, this.Y), this.FinalColor);
+            this.DrawCaliber(spriteBatch);
 
             // particles
             this.particleBlood.Draw(spriteBatch);

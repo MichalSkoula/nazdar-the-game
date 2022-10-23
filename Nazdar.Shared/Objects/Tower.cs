@@ -10,18 +10,16 @@ namespace Nazdar.Objects
     {
         public const int Cost = 5;
         public const string Name = "Tower";
-        public bool CanShoot { get; set; } = false;
         private int shootPower = 1;
         private int shootRate = 95; // 0 fastest, 100 slowest
 
-        public List<Bullet> Bullets { get; private set; }
+        public List<Bullet> Bullets { get; private set; } = new List<Bullet>();
 
         public Tower(int x, int y, Building.Status status)
         {
             this.Sprite = Assets.Images["Tower"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.Bullets = new List<Bullet>();
             this.TimeToBuilt = 5;
             this.Caliber = 20;
             this.Type = Building.Type.Tower;
@@ -48,13 +46,8 @@ namespace Nazdar.Objects
             {
                 this.shootPower = 1;
             }
-        }
 
-        public new void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-
-            if (this.CanShoot && Game1.GlobalTimer % this.shootRate == 0)
+            if (Game1.GlobalTimer % this.shootRate == 1)
             {
                 this.Bullets.Add(new Bullet(
                     this.X + this.Width / 2,
@@ -65,6 +58,11 @@ namespace Nazdar.Objects
                     this.shootPower
                 ));
             }
+        }
+
+        public new void Update(float deltaTime)
+        {
+            base.Update(deltaTime);
 
             foreach (var bullet in this.Bullets)
             {

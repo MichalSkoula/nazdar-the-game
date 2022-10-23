@@ -15,9 +15,8 @@ namespace Nazdar.Objects
         private int shootRate = 70; // 0 fastest, 100 slowest
 
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 5;
+        public const int DefaultCaliber = 10;
 
-        public bool CanShoot { get; set; } = false;
         public int? DeploymentX { get; set; } = null;
 
         public List<Bullet> Bullets { get; private set; }
@@ -93,23 +92,7 @@ namespace Nazdar.Objects
 
             this.isFast = true;
 
-            // maybe can shoot - slow down and shoot towards enemy
-            if (this.CanShoot)
-            {
-                this.isFast = false;
-
-                if (Game1.GlobalTimer % this.shootRate == 0)
-                {
-                    Audio.PlaySound("GunFire");
-                    this.Bullets.Add(new Bullet(
-                        this.X + this.Width / 2,
-                        this.Y + this.Height / 4,
-                        this.Direction,
-                        this.Caliber
-                    ));
-                }
-            }
-            else if (this.DeploymentX == null)
+            if (this.DeploymentX == null)
             {
                 // run towards town center
                 if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
@@ -161,11 +144,28 @@ namespace Nazdar.Objects
             this.Bullets.RemoveAll(p => p.ToDelete);
         }
 
+        public void PrepareToShoot(Direction direction)
+        {
+            this.isFast = false;
+            this.Direction = direction;
+
+            if (Game1.GlobalTimer % this.shootRate == 0)
+            {
+                Audio.PlaySound("GunFire");
+                this.Bullets.Add(new Bullet(
+                    this.X + this.Width / 2,
+                    this.Y + this.Height / 4,
+                    this.Direction,
+                    this.Caliber
+                ));
+            }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
-            spriteBatch.DrawString(Assets.Fonts["Small"], this.Caliber.ToString(), new Vector2(this.X, this.Y), this.FinalColor);
+            this.DrawCaliber(spriteBatch);
 
             // bullets
             foreach (var bullet in this.Bullets)
