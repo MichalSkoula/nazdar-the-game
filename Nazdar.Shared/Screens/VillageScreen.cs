@@ -62,7 +62,7 @@ namespace Nazdar.Screens
         public override void Initialize()
         {
             // create player in the center of the map
-            this.player = new Player(MapWidth / 2, Offset.Floor, 3);
+            this.player = new Player(MapWidth / 2, Offset.Floor, startingMoney);
 
             // load building spots from tileset
             foreach (var buildingSpot in Assets.TilesetGroups["village1"].GetObjects("objects", "BuildingSpot"))
