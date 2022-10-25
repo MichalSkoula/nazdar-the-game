@@ -55,6 +55,8 @@ namespace Nazdar.Screens
         private int homelessLimit = 16;
         private int farmingMoneyProbability = 1024;
         private int startingMoney = 3;
+        private int farmLimit = 3;
+        private int centerMaxLevel = 10;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
@@ -205,12 +207,14 @@ namespace Nazdar.Screens
             {
                 // distribute farmers to farms
                 int f = 0; // indexer for farm
+                int[] farmLimitArray = new int[this.farms.Count];
                 for (int i = 0; i < farmers.Count; i++, f++)
                 {
                     f = f % farms.Count;
-                    if (this.farms[f].Status != Building.Status.InProcess)
+                    if (this.farms[f].Status != Building.Status.InProcess && farmLimitArray[f] < this.farmLimit)
                     {
                         this.farmers.ElementAt(i).DeploymentX = this.farms[f].X + this.farms[f].Width / 2;
+                        farmLimitArray[f]++;
                     }
                 }
             }
@@ -648,7 +652,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built)
+                    else if (this.center.Status == Building.Status.Built && this.center.Level < this.centerMaxLevel)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
