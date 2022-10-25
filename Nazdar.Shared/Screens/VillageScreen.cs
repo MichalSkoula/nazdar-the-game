@@ -926,6 +926,7 @@ namespace Nazdar.Screens
 
             // stats ------------------------------------------------------------------------------------
             int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
+            int rightOffset = Game1.CurrentPlatform == Enums.Platform.Android ? 380 : 460;
 
             // healthbar
             this.Game.SpriteBatch.DrawRectangle(
@@ -954,35 +955,36 @@ namespace Nazdar.Screens
                 Color.Black);
 
             // right stats
+            
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Peasants: " + (this.peasants.Count).ToString(),
-                new Vector2(leftOffset + 450, Offset.StatusBarY + 0),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 0),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Soldiers: " + (this.soldiers.Count).ToString(),
-                new Vector2(leftOffset + 450, Offset.StatusBarY + 10),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 10),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Kills: " + this.player.Kills.ToString(),
-                new Vector2(leftOffset + 450, Offset.StatusBarY + 20),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Score: " + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0),
-                new Vector2(leftOffset + 450, Offset.StatusBarY + 30),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
-                new Vector2(leftOffset + 450, Offset.StatusBarY + 40),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
                 Color.Black);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                "Day " + this.player.Days.ToString() + ".",
-               new Vector2(leftOffset + 450, Offset.StatusBarY + 50),
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
                Color.Black);
 
             // messages
