@@ -5,13 +5,13 @@ namespace Nazdar.Controls
 {
     public static class TouchControls
     {
-        private static Rectangle left = new Rectangle(30, 110, 44, 48);
-        private static Rectangle right = new Rectangle(100, 110, 44, 48);
-        private static Rectangle select = new Rectangle(Enums.Screen.Width / 2 - 22, 300, 44, 48);
+        private static Rectangle left = new Rectangle(30, 290, 44, 48);
+        private static Rectangle right = new Rectangle(100, 290, 44, 48);
+        private static Rectangle select = new Rectangle(Enums.Screen.Width / 2 - 22, 290, 44, 48);
 
-        private static Rectangle jump = new Rectangle(550, 50, 44, 48);
-        private static Rectangle shoot = new Rectangle(490, 110, 44, 48);
-        private static Rectangle action = new Rectangle(550, 170, 44, 48);
+        private static Rectangle jump = new Rectangle(565, 225, 44, 48);
+        private static Rectangle shoot = new Rectangle(505, 290, 44, 48);
+        private static Rectangle action = new Rectangle(565, 290, 44, 48);
 
         public static bool IsPressedLeft()
         {

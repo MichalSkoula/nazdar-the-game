@@ -104,10 +104,10 @@ namespace Nazdar
 
         public static class Offset
         {
-            public const int StatusBarY = 290;
+            public const int StatusBarY = 215;
             public const int StatusBarX = 15;
-            public const int Floor = 252;
-            public const int Floor2 = 260;
+            public const int Floor = 172;
+            public const int Floor2 = 180;
             public const int MessagesX = Screen.Width - 250;
 
             public static int MenuX = 20;
