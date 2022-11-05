@@ -14,6 +14,7 @@ namespace Nazdar.Objects
     public class Player : BasePerson
     {
         private static readonly int moneyLimit = 60;
+        private static readonly int cartridgeLimit = 30;
 
         public List<Bullet> Bullets
         {
@@ -49,10 +50,34 @@ namespace Nazdar.Objects
                 }
             }
         }
-
         public bool CanAddMoney()
         {
             return this.Money < moneyLimit;
+        }
+
+        private int cartridges;
+        public int Cartridges
+        {
+            get
+            {
+                return this.cartridges;
+            }
+            set
+            {
+                if (value > cartridgeLimit)
+                {
+                    Game1.MessageBuffer.AddMessage("Cant hold all this cartridges", MessageType.Danger);
+                    this.cartridges = cartridgeLimit;
+                }
+                else
+                {
+                    this.cartridges = value;
+                }
+            }
+        }
+        public bool CanAddCartridge()
+        {
+            return this.Cartridges < cartridgeLimit;
         }
 
         public int Days { get; set; }
@@ -104,6 +129,7 @@ namespace Nazdar.Objects
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
             this.Money = (int)saveData.Money;
+            this.Cartridges = (int)saveData.Cartridges;
             this.Kills = (int)saveData.Kills;
 
             // load bullets

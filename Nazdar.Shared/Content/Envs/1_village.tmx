@@ -31,7 +31,7 @@
  <objectgroup id="2" name="objects">
   <object id="3" name="BuildingSpot" class="Center" x="1248" y="144" width="64" height="48"/>
   <object id="6" name="BuildingSpot" class="Armory" x="1520" y="160" width="32" height="32"/>
-  <object id="9" name="BuildingSpot" class="Armory" x="1056" y="160" width="32" height="32"/>
+  <object id="9" name="BuildingSpot" class="Arsenal" x="1056" y="160" width="32" height="32"/>
   <object id="11" name="BuildingSpot" class="Tower" x="928" y="144" width="16" height="48"/>
   <object id="12" name="BuildingSpot" class="Tower" x="1696" y="144" width="16" height="48"/>
   <object id="13" name="BuildingSpot" class="Farm" x="752" y="168" width="64" height="24"/>

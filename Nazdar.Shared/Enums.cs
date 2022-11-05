@@ -43,7 +43,8 @@ namespace Nazdar
             Hire,
             Build,
             Create,
-            Upgrade
+            Upgrade,
+            Buy
         }
 
         public enum BulletType
@@ -85,7 +86,8 @@ namespace Nazdar
                 Center,
                 Armory,
                 Tower,
-                Farm
+                Farm,
+                Arsenal
             }
 
             public enum Status

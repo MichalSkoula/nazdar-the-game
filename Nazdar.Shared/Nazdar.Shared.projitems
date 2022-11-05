@@ -46,6 +46,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ParticleSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Arsenal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreenDeleteSave.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreenNewGame.cs" />

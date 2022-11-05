@@ -44,6 +44,7 @@ namespace Nazdar
             Assets.Images["Crate"] = content.Load<Texture2D>("Items/crate");
             Assets.Images["Center"] = content.Load<Texture2D>("Buildings/Center");
             Assets.Images["Armory"] = content.Load<Texture2D>("Buildings/Armory");
+            Assets.Images["Arsenal"] = content.Load<Texture2D>("Buildings/Arsenal");
             Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
             Assets.Images["Farm"] = content.Load<Texture2D>("Buildings/Farm");
 

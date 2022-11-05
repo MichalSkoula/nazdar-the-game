@@ -19,6 +19,9 @@ namespace Nazdar.Objects
                 case "Armory":
                     this.Type = Building.Type.Armory;
                     break;
+                case "Arsenal":
+                    this.Type = Building.Type.Arsenal;
+                    break;
                 case "Tower":
                     this.Type = Building.Type.Tower;
                     break;
