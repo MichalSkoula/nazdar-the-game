@@ -33,14 +33,13 @@ namespace Nazdar.Objects
             for (int i = 0; i < cost; i++)
             {
                 spriteBatch.Draw(
-                    Assets.Images["Coin"],
+                    Assets.Images["CoinStatic"],
                     new Rectangle(
-                        x + (Assets.Images["Coin"].Height + 1) * (i - (i >= moneyRowLimit ? moneyRowLimit : 0)),
-                        y - Assets.Images["Coin"].Height * 2 + (i >= moneyRowLimit ? Assets.Images["Coin"].Height : 0),
-                        Assets.Images["Coin"].Height,
-                        Assets.Images["Coin"].Height
+                        x + (Assets.Images["CoinStatic"].Width + 1) * (i - (i >= moneyRowLimit ? moneyRowLimit : 0)),
+                        y - Assets.Images["CoinStatic"].Height * 2 + (i >= moneyRowLimit ? Assets.Images["CoinStatic"].Height : 0),
+                        Assets.Images["CoinStatic"].Width,
+                        Assets.Images["CoinStatic"].Height
                     ),
-                    new Rectangle(0, 0, Assets.Images["Coin"].Height, Assets.Images["Coin"].Height),
                     Color.White * alpha
                 );
             }

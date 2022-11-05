@@ -184,9 +184,17 @@ namespace Nazdar.Objects
             // bullets
             if (Keyboard.HasBeenPressed(ControlKeys.Shoot) || Gamepad.HasBeenPressed(ControlButtons.Shoot) || TouchControls.HasBeenPressedShoot())
             {
-                Audio.PlaySound("GunFire");
-                this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
-                this.particleSmoke.Run(50);
+                if (this.Cartridges > 0)
+                {
+                    Audio.PlaySound("GunFire");
+                    this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
+                    this.particleSmoke.Run(50);
+                    this.Cartridges--;
+                }
+                else
+                {
+                    Game1.MessageBuffer.AddMessage("No cartridges", MessageType.Danger);
+                }
             }
             foreach (var bullet in this.Bullets)
             {

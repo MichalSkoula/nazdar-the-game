@@ -1014,11 +1014,14 @@ namespace Nazdar.Screens
             // money
             Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
 
+            // cartridges
+            Arsenal.DrawCartridgesStatic(this.Game.SpriteBatch, this.player.Cartridges, leftOffset, Offset.StatusBarY + 45, 1);
+
             // day or night
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-                new Vector2(leftOffset, Offset.StatusBarY + 45),
+                new Vector2(leftOffset, Offset.StatusBarY + 60),
                 Color.Black);
 
             // right stats
