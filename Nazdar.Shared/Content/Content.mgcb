@@ -26,6 +26,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Armory.png
 
+#begin Buildings/Arsenal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Arsenal.png
+
 #begin Buildings/Center.png
 /importer:TextureImporter
 /processor:TextureProcessor

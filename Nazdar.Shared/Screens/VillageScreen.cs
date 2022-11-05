@@ -39,6 +39,7 @@ namespace Nazdar.Screens
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private Center center;
         private List<Armory> armories = new List<Armory>();
+        private List<Arsenal> arsenals = new List<Arsenal>();
         private List<Tower> towers = new List<Tower>();
         private List<Farm> farms = new List<Farm>();
 
@@ -120,6 +121,7 @@ namespace Nazdar.Screens
                 this.center.Update(this.Game.DeltaTime);
             }
             this.UpdateArmories();
+            this.UpdateArsenals();
             this.UpdateTowers();
             this.UpdateFarms();
 
@@ -245,6 +247,10 @@ namespace Nazdar.Screens
             {
                 this.Build(armory);
             }
+            foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(arsenal);
+            }
             foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(tower);
@@ -347,6 +353,14 @@ namespace Nazdar.Screens
             foreach (Armory armory in this.armories)
             {
                 armory.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateArsenals()
+        {
+            foreach (Arsenal arsenal in this.arsenals)
+            {
+                arsenal.Update(this.Game.DeltaTime);
             }
         }
 
@@ -726,7 +740,7 @@ namespace Nazdar.Screens
                                 {
                                     if (armory.AddWeapon())
                                     {
-                                        Game1.MessageBuffer.AddMessage("Item purchased", MessageType.Info);
+                                        Game1.MessageBuffer.AddMessage("Weapon kit purchased", MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
                                         this.player.Money -= Armory.WeaponCost;
                                     }
@@ -734,6 +748,59 @@ namespace Nazdar.Screens
                                     {
                                         Game1.MessageBuffer.AddMessage("Armory is full", MessageType.Fail);
                                     }
+                                }
+                                else
+                                {
+                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                }
+                            }
+                        }
+                    }
+                }
+                // Arsenal?
+                if (buildingSpot.Type == Building.Type.Arsenal)
+                {
+                    var arsenals = this.arsenals.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (arsenals.Count() == 0)
+                    {
+                        // no arsenal here - we can build something
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Arsenal.Cost;
+                        this.player.ActionName = Arsenal.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                        {
+                            if (this.player.Money < Arsenal.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= Arsenal.Cost;
+                                this.arsenals.Add(new Arsenal(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // arsenal exists - buy bullets?
+                        var arsenal = arsenals.First();
+                        if (arsenal.Status == Building.Status.Built && this.player.CanAddCartridge())
+                        {
+                            this.player.Action = Enums.PlayerAction.Buy;
+                            this.player.ActionCost = Arsenal.CartridgesCost;
+                            this.player.ActionName = Arsenal.CartridgeName;
+
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                            {
+                                if (this.player.Money >= Arsenal.CartridgesCost)
+                                {
+                                    this.player.Cartridges += Arsenal.CartridgesCount;
+                                    Game1.MessageBuffer.AddMessage("Cartridge purchased", MessageType.Info);
+                                    Audio.PlaySound("SoldierSpawn");
+                                    this.player.Money -= Arsenal.CartridgesCost;
                                 }
                                 else
                                 {
@@ -955,7 +1022,6 @@ namespace Nazdar.Screens
                 Color.Black);
 
             // right stats
-            
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Peasants: " + (this.peasants.Count).ToString(),
@@ -1007,6 +1073,11 @@ namespace Nazdar.Screens
             foreach (Armory armory in this.armories)
             {
                 armory.Draw(this.Game.SpriteBatch);
+            }
+
+            foreach (Arsenal arsenal in this.arsenals)
+            {
+                arsenal.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Farm farm in this.farms)
@@ -1153,6 +1224,14 @@ namespace Nazdar.Screens
                 }
             }
 
+            if (saveData.ContainsKey("arsenals"))
+            {
+                foreach (var arsenal in saveData.GetValue("arsenals"))
+                {
+                    this.arsenals.Add(new Arsenal((int)arsenal.Hitbox.X, (int)arsenal.Hitbox.Y, (Building.Status)arsenal.Status));
+                }
+            }
+
             if (saveData.ContainsKey("farms"))
             {
                 foreach (var farm in saveData.GetValue("farms"))
@@ -1192,6 +1271,7 @@ namespace Nazdar.Screens
                 peasants = this.peasants,
                 center = this.center,
                 armories = this.armories,
+                arsenals = this.arsenals,
                 towers = this.towers,
                 farms = this.farms,
                 coins = this.coins,
