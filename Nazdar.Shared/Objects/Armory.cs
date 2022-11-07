@@ -7,7 +7,7 @@ namespace Nazdar.Objects
 {
     public class Armory : BaseBuilding
     {
-        public const int Cost = 3;
+        public const int Cost = 4;
         public const string Name = "Armory";
 
         public const int WeaponCost = 1;

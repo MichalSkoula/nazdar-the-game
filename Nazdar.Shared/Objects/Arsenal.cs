@@ -6,11 +6,11 @@ namespace Nazdar.Objects
 {
     public class Arsenal : BaseBuilding
     {
-        public const int Cost = 3;
+        public const int Cost = 4;
         public const string Name = "Arsenal";
         public const string CartridgeName = "Cartridge";
 
-        public const int CartridgesCost = 1;
+        public const int CartridgesCost = 3;
         public const int CartridgesCount = 5;
 
         public Arsenal(int x, int y, Building.Status status)
@@ -32,15 +32,15 @@ namespace Nazdar.Objects
             base.Update(deltaTime);
         }
 
-        public static void DrawCartridgesStatic(SpriteBatch spriteBatch, int amount, int x, int y, float alpha = 1)
+        public static void DrawCartridgesStatic(SpriteBatch spriteBatch, int howMany, int x, int y, float alpha = 1)
         {
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < howMany; i++)
             {
                 spriteBatch.Draw(
                     Assets.Images["BulletStatic"],
                     new Rectangle(
-                        x + (Assets.Images["BulletStatic"].Width + 1) * i,
-                        y,
+                        x + (Assets.Images["BulletStatic"].Width + 1) * (i % Enums.Offset.RowLimit),
+                        y - Assets.Images["BulletStatic"].Height * 2 + (i / Enums.Offset.RowLimit * Assets.Images["BulletStatic"].Height),
                         Assets.Images["BulletStatic"].Width,
                         Assets.Images["BulletStatic"].Height
                     ),

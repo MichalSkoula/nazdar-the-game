@@ -8,7 +8,7 @@ namespace Nazdar.Objects
 {
     public class Tower : BaseBuilding
     {
-        public const int Cost = 5;
+        public const int Cost = 8;
         public const string Name = "Tower";
         private int shootPower = 1;
         private int shootRate = 95; // 0 fastest, 100 slowest

@@ -5,7 +5,6 @@ namespace Nazdar.Objects
 {
     public class Coin : BaseObject
     {
-        private static int moneyRowLimit = 30;
         private Animation anim;
 
         public Coin(int x, int y)
@@ -19,7 +18,6 @@ namespace Nazdar.Objects
             base.Update(deltaTime);
 
             this.anim.Loop = true;
-            //this.Anim.ResetLoop();
             this.anim.Update(deltaTime);
         }
 
@@ -28,15 +26,15 @@ namespace Nazdar.Objects
             this.anim.Draw(spriteBatch, this.Hitbox, Color.White);
         }
 
-        public static void DrawStatic(SpriteBatch spriteBatch, int cost, int x, int y, float alpha = 1)
+        public static void DrawStatic(SpriteBatch spriteBatch, int howMany, int x, int y, float alpha = 1)
         {
-            for (int i = 0; i < cost; i++)
+            for (int i = 0; i < howMany; i++)
             {
                 spriteBatch.Draw(
                     Assets.Images["CoinStatic"],
                     new Rectangle(
-                        x + (Assets.Images["CoinStatic"].Width + 1) * (i - (i >= moneyRowLimit ? moneyRowLimit : 0)),
-                        y - Assets.Images["CoinStatic"].Height * 2 + (i >= moneyRowLimit ? Assets.Images["CoinStatic"].Height : 0),
+                        x + (Assets.Images["CoinStatic"].Width + 1) * (i % Enums.Offset.RowLimit),
+                        y - Assets.Images["CoinStatic"].Height * 2 + (i / Enums.Offset.RowLimit * Assets.Images["CoinStatic"].Height),
                         Assets.Images["CoinStatic"].Width,
                         Assets.Images["CoinStatic"].Height
                     ),

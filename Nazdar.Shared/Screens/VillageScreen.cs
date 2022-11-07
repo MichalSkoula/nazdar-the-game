@@ -49,15 +49,15 @@ namespace Nazdar.Screens
 
         // some settings - random 0-X == 1
         private int newEnemyProbability = 128; // every day, it gets -2
-        private int newEnemyProbabilityLowLimit = 32;
+        private int newEnemyProbabilityLowLimit = 16;
+        private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newHomelessProbability = 512 * 3;
         private int newCoinProbability = 768;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
         private int farmingMoneyProbability = 1024;
-        private int startingMoney = 3;
-        private int farmLimit = 3;
-        private int centerMaxLevel = 10;
+        private int farmLimit = 4;
+        private int centerMaxLevel = 5;
 
         private int? leftmostTowerX = null;
         private int? rightmostTowerX = null;
@@ -65,7 +65,7 @@ namespace Nazdar.Screens
         public override void Initialize()
         {
             // create player in the center of the map
-            this.player = new Player(MapWidth / 2, Offset.Floor, startingMoney);
+            this.player = new Player(MapWidth / 2, Offset.Floor);
 
             // load building spots from tileset
             foreach (var buildingSpot in Assets.TilesetGroups["village1"].GetObjects("objects", "BuildingSpot"))
@@ -151,14 +151,21 @@ namespace Nazdar.Screens
                 Audio.PlayRandomSound("EnemySpawns");
                 Game1.MessageBuffer.AddMessage("New enemy!", MessageType.Danger);
 
+                // every day it gets more difficult
+                int newEnemyCaliber = Enemy.DefaultCaliber + this.player.Days;
+                if (newEnemyCaliber > this.newEnemyMaxCaliber)
+                {
+                    newEnemyCaliber = this.newEnemyMaxCaliber;
+                }
+
                 // choose direction
                 if (Tools.GetRandom(2) == 0)
                 {
-                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right));
+                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber));
                 }
                 else
                 {
-                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left));
+                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber));
                 }
             }
 
@@ -670,7 +677,7 @@ namespace Nazdar.Screens
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
-                        this.player.ActionCost = Center.Cost * (this.center.Level + 1) * 2;
+                        this.player.ActionCost = Center.Cost * (this.center.Level + 1) * 3;
                         this.player.ActionName = Center.Name;
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
@@ -936,15 +943,15 @@ namespace Nazdar.Screens
         {
             foreach (Soldier soldier in this.soldiers)
             {
-                soldier.Caliber = Soldier.DefaultCaliber + this.center.Level * 2;
+                soldier.Caliber = Soldier.DefaultCaliber * this.center.Level;
             }
             foreach (Peasant peasant in this.peasants)
             {
-                peasant.Caliber = Peasant.DefaultCaliber + this.center.Level * 2;
+                peasant.Caliber = Peasant.DefaultCaliber * this.center.Level;
             }
             foreach (Farmer farmer in this.farmers)
             {
-                farmer.Caliber = Farmer.DefaultCaliber + this.center.Level * 2;
+                farmer.Caliber = Farmer.DefaultCaliber * this.center.Level;
             }
         }
 
@@ -1011,50 +1018,51 @@ namespace Nazdar.Screens
                 8
             );
 
-            // money
-            Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
-
-            // cartridges
-            Arsenal.DrawCartridgesStatic(this.Game.SpriteBatch, this.player.Cartridges, leftOffset, Offset.StatusBarY + 45, 1);
-
             // day or night
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-                new Vector2(leftOffset, Offset.StatusBarY + 60),
-                Color.Black);
+                new Vector2(leftOffset + 160, Offset.StatusBarY + 1),
+                Color.White);
+
+            // money
+            Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
+
+            // cartridges
+            Arsenal.DrawCartridgesStatic(this.Game.SpriteBatch, this.player.Cartridges, leftOffset, Offset.StatusBarY + 75, 1);
+
 
             // right stats
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Peasants: " + (this.peasants.Count).ToString(),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 0),
-                Color.Black);
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Soldiers: " + (this.soldiers.Count).ToString(),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 10),
-                Color.Black);
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Kills: " + this.player.Kills.ToString(),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
-                Color.Black);
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Score: " + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
-                Color.Black);
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
-                Color.Black);
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                "Day " + this.player.Days.ToString() + ".",
                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
-               Color.Black);
+               Color.White);
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
