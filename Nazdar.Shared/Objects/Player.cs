@@ -102,7 +102,7 @@ namespace Nazdar.Objects
             this.Caliber = 30;
             this.Days = 0;
             this.Speed = 121;
-            this.Money = 3;
+            this.Money = 4;
             this.Cartridges = 15;
 
             this.particleBlood = new ParticleSource(

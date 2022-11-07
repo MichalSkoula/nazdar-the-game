@@ -4,6 +4,7 @@ using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using Nazdar.Messages;
 using Nazdar.Shared;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace Nazdar
@@ -29,6 +30,8 @@ namespace Nazdar
         public static int BarWidth { get; private set; }
 
         public string SaveSlot { get; set; }
+
+        public static JObject SaveTempData { get; set; }
 
         // world variables
         public int Village { get; set; }
@@ -113,12 +116,12 @@ namespace Nazdar
             base.Update(gameTime);
         }
 
-        public void LoadScreen(Type type, bool transition = false)
+        public void LoadScreen(Type type, bool transition = true)
         {
             var screen = Activator.CreateInstance(type, this);
             if (transition)
             {
-                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, Color.Black));
+                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, Color.Black, 0.5f));
             }
             else
             {

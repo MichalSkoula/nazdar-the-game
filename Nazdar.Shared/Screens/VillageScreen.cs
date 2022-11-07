@@ -5,6 +5,8 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +54,7 @@ namespace Nazdar.Screens
         private int newEnemyProbabilityLowLimit = 16;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newHomelessProbability = 512 * 3;
-        private int newCoinProbability = 768;
+        private int newCoinProbability = 512 * 6;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
         private int farmingMoneyProbability = 1024;
@@ -83,7 +85,18 @@ namespace Nazdar.Screens
 
             // set save slot and maybe load?
             this.saveFile.File = Game.SaveSlot;
-            this.Load();
+            if (! this.Load())
+            {
+                // nothing to load - spark some coins and homelesses
+                for (int i = 0; i < 8 + Tools.GetRandom(4); i++)
+                {
+                    this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
+                }
+                for (int i = 0; i < 2 + Tools.GetRandom(2); i++)
+                {
+                    this.CreateHomeless();
+                }
+            }
 
             // play songs
             Audio.StopSong();
@@ -97,7 +110,7 @@ namespace Nazdar.Screens
             if (Keyboard.HasBeenPressed(Keys.Escape) || Gamepad.HasBeenPressed(Buttons.Start) || Gamepad.HasBeenPressed(Buttons.B) || TouchControls.HasBeenPressedSelect())
             {
                 // save
-                this.Save();
+                this.saveFile.Save(this.GetSaveData());
 
                 // back to menu
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
@@ -321,21 +334,26 @@ namespace Nazdar.Screens
             if (Tools.GetRandom(this.newHomelessProbability) == 1 && this.homelesses.Count < this.homelessLimit)
             {
                 Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
-                // choose side 
-                if (Tools.GetRandom(2) == 0)
-                {
-                    this.homelesses.Add(new Homeless(0, Offset.Floor, Direction.Right));
-                }
-                else
-                {
-                    this.homelesses.Add(new Homeless(MapWidth, Offset.Floor, Direction.Left));
-                }
+                this.CreateHomeless();
             }
 
             // update 
             foreach (Homeless homeless in this.homelesses)
             {
                 homeless.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void CreateHomeless()
+        {
+            // choose side 
+            if (Tools.GetRandom(2) == 0)
+            {
+                this.homelesses.Add(new Homeless(0, Offset.Floor, Direction.Right));
+            }
+            else
+            {
+                this.homelesses.Add(new Homeless(MapWidth, Offset.Floor, Direction.Left));
             }
         }
 
@@ -492,6 +510,12 @@ namespace Nazdar.Screens
 
                     if (!this.player.TakeHit(enemy.Caliber))
                     {
+                        // save current state to global static variable as json
+                        // to be able to show it on game over screen
+                        // the same way as if it was from a file
+                        Game1.SaveTempData = JObject.FromObject(this.GetSaveData());
+
+                        // load screen
                         this.Game.LoadScreen(typeof(Screens.GameOverScreen));
                     }
                 }
@@ -1137,12 +1161,12 @@ namespace Nazdar.Screens
             this.Game.DrawEnd();
         }
 
-        private void Load()
+        private bool Load()
         {
             dynamic saveData = this.saveFile.Load();
             if (saveData == null)
             {
-                return;
+                return false;
             }
 
             if (saveData.ContainsKey("player"))
@@ -1268,11 +1292,13 @@ namespace Nazdar.Screens
             }
 
             Game1.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
+
+            return true;
         }
 
-        private void Save()
+        private dynamic GetSaveData()
         {
-            this.saveFile.Save(new
+            return new
             {
                 player = this.player,
                 enemies = this.enemies,
@@ -1289,7 +1315,7 @@ namespace Nazdar.Screens
                 dayPhase = this.dayPhase,
                 dayPhaseTimer = this.dayPhaseTimer,
                 village = this.Game.Village,
-            });
+            };
         }
     }
 }

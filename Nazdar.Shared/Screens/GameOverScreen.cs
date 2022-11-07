@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -31,10 +32,8 @@ namespace Nazdar.Screens
 
         private void Load()
         {
-            FileIO saveFile = new FileIO(Game.SaveSlot);
-
-            dynamic saveData = saveFile.Load();
-            this.saveDataLines = Tools.ParseSaveData(saveData);
+            // try to get current score etc to show
+            this.saveDataLines = Tools.ParseSaveData(Game1.SaveTempData);
         }
 
         public override void Update(GameTime gameTime)
