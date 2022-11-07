@@ -115,6 +115,8 @@ namespace Nazdar
             public static int MenuX = 20;
             public static int MenuY = 20;
             public static int MenuFooter = 340;
+
+            public static int RowLimit = 16;
         }
 
         public static class Screen

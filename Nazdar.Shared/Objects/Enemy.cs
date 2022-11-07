@@ -10,6 +10,9 @@ namespace Nazdar.Objects
 {
     public class Enemy : BasePerson
     {
+        public const int DefaultHealth = 100;
+        public const int DefaultCaliber = 10;
+
         private List<Bullet> bullets = new List<Bullet>();
 
         private List<Animation> animations = new List<Animation>()
@@ -20,7 +23,7 @@ namespace Nazdar.Objects
             new Animation(Assets.Images["EnemyLeft"], 4, 10),
         };
 
-        public Enemy(int x, int y, Direction direction, int health = 100, int caliber = 10)
+        public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
@@ -90,6 +93,7 @@ namespace Nazdar.Objects
         {
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
+            this.DrawCaliber(spriteBatch);
 
             // bullets
             foreach (var bullet in this.bullets)

@@ -16,13 +16,25 @@ namespace Nazdar.Screens
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
+        private string[] saveDataLines;
+
         public override void Initialize()
         {
             buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Load last save", true));
             buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "New game"));
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Main Menu"));
 
+            this.Load();
+
             base.Initialize();
+        }
+
+        private void Load()
+        {
+            FileIO saveFile = new FileIO(Game.SaveSlot);
+
+            dynamic saveData = saveFile.Load();
+            this.saveDataLines = Tools.ParseSaveData(saveData);
         }
 
         public override void Update(GameTime gameTime)
@@ -91,6 +103,15 @@ namespace Nazdar.Screens
 
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);
+
+            // save data
+            int i = 0;
+            foreach (string line in this.saveDataLines)
+            {
+                i++;
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), Color.White);
+
+            }
 
             this.Game.DrawEnd();
         }

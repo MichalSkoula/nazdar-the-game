@@ -6,7 +6,7 @@ namespace Nazdar.Objects
 {
     public class Center : BaseBuilding
     {
-        public const int Cost = 1;
+        public const int Cost = 2;
         public const string Name = "Center";
 
         public Center(int x, int y, Building.Status status, int level = 1)

@@ -118,12 +118,10 @@ namespace Nazdar.Screens
 
             // save data
             int i = 0;
-
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 90 + 28 * i), Color.White);
-
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), Color.White);
             }
 
             this.Game.DrawEnd();

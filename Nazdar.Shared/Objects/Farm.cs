@@ -7,7 +7,7 @@ namespace Nazdar.Objects
 {
     public class Farm : BaseBuilding
     {
-        public const int Cost = 3;
+        public const int Cost = 4;
         public const string Name = "Farm";
 
         private List<Tool> tools = new List<Tool>();
