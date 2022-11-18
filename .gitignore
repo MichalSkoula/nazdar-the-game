@@ -365,3 +365,6 @@ FodyWeavers.xsd
 # Tiled files
 *.tiled-session
 Rocky Roads
+
+# website
+Nazdar.Website/public
