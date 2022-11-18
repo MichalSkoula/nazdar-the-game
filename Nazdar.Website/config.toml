@@ -1,4 +1,4 @@
-baseurl = "/"
+baseURL = "https://nazdarthegame.com/"
 languageCode = "en-us"
 theme = "terminal"
 paginate = 5
