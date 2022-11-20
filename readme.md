@@ -4,6 +4,13 @@ Monogame platform/strategic game (awesome).
 
 ![obrazek](https://user-images.githubusercontent.com/5922575/192386184-0100011a-ec67-43a7-82ea-13b430e28f80.png)
 
+## TODO
+
+* farmáři na noc schovat
+* sekání při přechodu denní fáze
+* přechody mezi songama vyřešit
+* nazdar.com převést 4.12. až to půjde
+
 ## PACKAGING
 
 https://docs.monogame.net/articles/packaging_games.html
