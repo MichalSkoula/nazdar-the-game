@@ -87,7 +87,8 @@ namespace Nazdar
                 Armory,
                 Tower,
                 Farm,
-                Arsenal
+                Arsenal,
+                Slum // cant be build
             }
 
             public enum Status

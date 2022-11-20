@@ -55,6 +55,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileIO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenActions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenDraw.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
   </ItemGroup>
