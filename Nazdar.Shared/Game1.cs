@@ -133,7 +133,7 @@ namespace Nazdar
         public void DrawStart()
         {
             this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
-            this.GraphicsDevice.Clear(Color.DarkGray);
+            this.GraphicsDevice.Clear(Color.Black);
 
             this.SpriteBatchStart();
         }

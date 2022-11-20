@@ -10,6 +10,8 @@ namespace Nazdar.Objects
         protected Animation Anim { get; set; }
         protected int Speed { get; set; }
 
+        public int? DeploymentX { get; set; } = null;
+
         public void DrawHealth(SpriteBatch spriteBatch)
         {
             if (this.Dead)

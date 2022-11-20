@@ -17,8 +17,6 @@ namespace Nazdar.Objects
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 10;
 
-        public int? DeploymentX { get; set; } = null;
-
         public List<Bullet> Bullets { get; private set; }
 
         private List<Animation> animations = new List<Animation>()
