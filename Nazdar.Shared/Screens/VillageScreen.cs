@@ -48,7 +48,7 @@ namespace Nazdar.Screens
         private int newCoinProbability = 512 * 6;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
-        private int farmingMoneyProbability = 1024;
+        private int farmingMoneyProbability = 512 * 3;
         private int farmLimit = 4;
         private int centerMaxLevel = 5;
 
@@ -71,13 +71,17 @@ namespace Nazdar.Screens
                         (int)buildingSpot.y,
                         (int)buildingSpot.width,
                         (int)buildingSpot.height,
-                        buildingSpot.@class
+                        buildingSpot.name
                     )
                 );
+            }
 
-                if (buildingSpot.@class == "Slum")
+            // load other object from tileset
+            foreach (var other in Assets.TilesetGroups["village1"].GetObjects("objects", "Other"))
+            {
+                if (other.name == "Slum")
                 {
-                    slumXs.Add((int)buildingSpot.x);
+                    slumXs.Add((int)other.x);
                 }
             }
 
@@ -86,7 +90,7 @@ namespace Nazdar.Screens
             if (!this.Load())
             {
                 // nothing to load - spark some coins and homelesses
-                for (int i = 0; i < 8 + Tools.GetRandom(4); i++)
+                for (int i = 0; i < 12 + Tools.GetRandom(4); i++)
                 {
                     this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
                 }

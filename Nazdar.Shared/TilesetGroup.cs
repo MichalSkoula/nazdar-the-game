@@ -28,16 +28,10 @@ namespace Nazdar.Shared
             this.TilesetTexture = texture;
         }
 
-        public IEnumerable<TiledObject> GetObjects(string layerName, string objectName)
+        public IEnumerable<TiledObject> GetObjects(string layerName, string className)
         {
             var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
-            return layer.objects.Where(o => o.name == objectName);
-        }
-
-        public TiledObject GetObject(string layerName, string objectName)
-        {
-            var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
-            return layer.objects.First(o => o.name == objectName);
+            return layer.objects.Where(o => o.@class == className);
         }
 
         public void Draw(string layerName, SpriteBatch spriteBatch)
