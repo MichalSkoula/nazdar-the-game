@@ -18,8 +18,6 @@ namespace Nazdar.Objects
 
         public bool IsFarming { get; set; } = false;
 
-        public int? DeploymentX { get; set; } = null;
-
         private List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["FarmerRight"], 4, 10),

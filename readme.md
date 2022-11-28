@@ -6,7 +6,6 @@ Monogame platform/strategic game (awesome).
 
 ## TODO
 
-* farmáři na noc schovat
 * sekání při přechodu denní fáze
 * přechody mezi songama vyřešit
 * nazdar.com převést 4.12. až to půjde
@@ -24,7 +23,7 @@ https://docs.monogame.net/articles/packaging_games.html
 
 * MonoGame 3.8
 * MonoGame.Extended 3.7 (3.8 is bugged)
-* C# 10 (well, 8, because of UWP), .NET 6
+* C# 8 (because of UWP), .NET 6
 
 ### images
 * https://0x72.itch.io/pixeldudesmaker CC-29 color palette

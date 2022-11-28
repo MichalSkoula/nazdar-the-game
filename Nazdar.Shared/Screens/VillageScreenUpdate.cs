@@ -134,10 +134,23 @@ namespace Nazdar.Screens
 
         private void UpdateFarmers()
         {
-            if (this.farmers.Count > 0 && this.farms.Count > 0)
+            if (this.farmers.Count == 0)
+            {
+                return;
+            }
+
+            if (this.dayPhase == DayPhase.Night || this.enemies.Where(enemy => enemy.Dead == false).Count() > 0)
+            {
+                // at night, go to the base
+                foreach (Farmer farmer in this.farmers)
+                {
+                    farmer.DeploymentX = this.center.X + this.center.Width / 2;
+                }
+            }
+            else if (this.farms.Count > 0)
             {
                 // distribute farmers to farms
-                int f = 0; // indexer for farm
+                int f = 0; // farm index
                 int[] farmLimitArray = new int[this.farms.Count];
                 for (int i = 0; i < farmers.Count; i++, f++)
                 {
