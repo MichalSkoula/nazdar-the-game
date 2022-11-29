@@ -6,9 +6,10 @@ Monogame platform/strategic game (awesome).
 
 ## TODO
 
+* Nepřátele by neměly levelovat, měli by jich být více nebo jini
+* levely = villages, systém více vesnic
 * sekání při přechodu denní fáze
 * přechody mezi songama vyřešit
-* nazdar.com převést 4.12. až to půjde
 
 ## PACKAGING
 
