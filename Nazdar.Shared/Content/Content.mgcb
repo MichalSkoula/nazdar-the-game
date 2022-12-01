@@ -392,26 +392,26 @@
 /processorParam:TextureFormat=Color
 /build:Farmer/farmer_right.png
 
-#begin Fonts/fontPublicPixelLarge.spritefont
+#begin Fonts/fontLarge.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/fontPublicPixelLarge.spritefont
+/build:Fonts/fontLarge.spritefont
 
-#begin Fonts/fontPublicPixelMedium.spritefont
+#begin Fonts/fontMedium.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/fontPublicPixelMedium.spritefont
+/build:Fonts/fontMedium.spritefont
 
-#begin Fonts/fontPublicPixelSmall.spritefont
+#begin Fonts/fontSmall.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/fontPublicPixelSmall.spritefont
+/build:Fonts/fontSmall.spritefont
 
 #begin Homeless/homeless_left.png
 /importer:TextureImporter

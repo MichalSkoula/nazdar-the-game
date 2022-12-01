@@ -66,9 +66,9 @@ namespace Nazdar
             Assets.Images["GamepadY"] = content.Load<Texture2D>("Controls/gamepad/y");
 
             // load fonts
-            Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontPublicPixelSmall");
-            Assets.Fonts["Medium"] = content.Load<SpriteFont>("Fonts/fontPublicPixelMedium");
-            Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontPublicPixelLarge");
+            Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontSmall");
+            Assets.Fonts["Medium"] = content.Load<SpriteFont>("Fonts/fontMedium");
+            Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontLarge");
 
             // load sounds
             Assets.Sounds["Blip"] = content.Load<SoundEffect>("Sounds/blip");

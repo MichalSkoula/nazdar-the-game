@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         public Rectangle? IsBuildingHere = null;
         public Rectangle? IsRunningForItem = null;
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 1;
+        public const int DefaultCaliber = 2;
 
         private List<Animation> animations = new List<Animation>()
         {

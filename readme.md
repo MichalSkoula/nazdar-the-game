@@ -6,7 +6,6 @@ Monogame platform/strategic game (awesome).
 
 ## TODO
 
-* Nepřátele by neměly levelovat, měli by jich být více nebo jini
 * levely = villages, systém více vesnic
 * sekání při přechodu denní fáze
 * přechody mezi songama vyřešit
@@ -50,3 +49,6 @@ https://docs.monogame.net/articles/packaging_games.html
 * https://opengameart.org/content/rizys-sleep-music menu song
 * https://opengameart.org/content/coin-splash coin
 * https://opengameart.org/content/mining-pick rock
+
+### fonts
+* https://www.dafont.com/profile.php?user=1243624 dogika

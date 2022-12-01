@@ -2,8 +2,6 @@
 using Nazdar.Objects;
 using Nazdar.Shared;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using static Nazdar.Enums;
 
@@ -66,16 +64,18 @@ namespace Nazdar.Screens
         {
             foreach (Soldier soldier in this.soldiers)
             {
-                soldier.Caliber = Soldier.DefaultCaliber * this.center.Level;
+                soldier.Caliber = Soldier.DefaultCaliber + this.center.Level * 2;
             }
             foreach (Peasant peasant in this.peasants)
             {
-                peasant.Caliber = Peasant.DefaultCaliber * this.center.Level;
+                peasant.Caliber = Peasant.DefaultCaliber + this.center.Level * 2;
             }
             foreach (Farmer farmer in this.farmers)
             {
-                farmer.Caliber = Farmer.DefaultCaliber * this.center.Level;
+                farmer.Caliber = Farmer.DefaultCaliber + this.center.Level * 2;
             }
+
+            this.player.Caliber = Player.DefaultCaliber + this.center.Level * 2;
         }
     }
 }

@@ -141,10 +141,11 @@ namespace Nazdar.Screens
 
             if (this.dayPhase == DayPhase.Night || this.enemies.Where(enemy => enemy.Dead == false).Count() > 0)
             {
-                // at night, go to the base
+                // at night, go to the base and do not harvest
                 foreach (Farmer farmer in this.farmers)
                 {
                     farmer.DeploymentX = this.center.X + this.center.Width / 2;
+                    farmer.CanBeFarming = false;
                 }
             }
             else if (this.farms.Count > 0)
@@ -158,6 +159,7 @@ namespace Nazdar.Screens
                     if (this.farms[f].Status != Building.Status.InProcess && farmLimitArray[f] < this.farmLimit)
                     {
                         this.farmers.ElementAt(i).DeploymentX = this.farms[f].X + this.farms[f].Width / 2;
+                        this.farmers.ElementAt(i).CanBeFarming = true;
                         farmLimitArray[f]++;
                     }
                 }
@@ -503,7 +505,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         farm.DropTool();
-                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.center.Level * 2));
+                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.center.Level));
                     }
                 }
             }
@@ -552,7 +554,7 @@ namespace Nazdar.Screens
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
-                        this.player.ActionCost = Center.Cost * (this.center.Level + 1) * 3;
+                        this.player.ActionCost = Center.Cost * (this.center.Level + 1) * 2;
                         this.player.ActionName = Center.Name;
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())

@@ -90,6 +90,7 @@ namespace Nazdar.Objects
 
         private bool canJump = true;
 
+        public const int DefaultCaliber = 32;
         public int Kills { get; set; } = 0;
 
         public Player(int x, int y)
@@ -99,7 +100,7 @@ namespace Nazdar.Objects
             this.Bullets = new List<Bullet>();
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Health = 100;
-            this.Caliber = 30;
+            this.Caliber = DefaultCaliber;
             this.Days = 0;
             this.Speed = 121;
             this.Money = 4;
@@ -132,6 +133,7 @@ namespace Nazdar.Objects
             this.Money = (int)saveData.Money;
             this.Cartridges = (int)saveData.Cartridges;
             this.Kills = (int)saveData.Kills;
+            this.Caliber = (int)saveData.Caliber;
 
             // load bullets
             if (saveData.ContainsKey("Bullets"))

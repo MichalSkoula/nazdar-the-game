@@ -41,7 +41,7 @@ namespace Nazdar.Screens
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
         // some settings - random 0-X == 1
-        private int newEnemyProbability = 128; // every day, it gets -2
+        private int newEnemyProbability = 192; // every day, it gets -2
         private int newEnemyProbabilityLowLimit = 16;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newHomelessProbability = 512 * 3;
@@ -90,7 +90,7 @@ namespace Nazdar.Screens
             if (!this.Load())
             {
                 // nothing to load - spark some coins and homelesses
-                for (int i = 0; i < 12 + Tools.GetRandom(4); i++)
+                for (int i = 0; i < 16 + Tools.GetRandom(4); i++)
                 {
                     this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
                 }

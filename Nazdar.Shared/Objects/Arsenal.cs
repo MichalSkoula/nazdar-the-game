@@ -11,7 +11,7 @@ namespace Nazdar.Objects
         public const string CartridgeName = "Cartridge";
 
         public const int CartridgesCost = 3;
-        public const int CartridgesCount = 5;
+        public const int CartridgesCount = 6;
 
         public Arsenal(int x, int y, Building.Status status)
         {
