@@ -11,7 +11,7 @@ namespace Nazdar.Objects
     public class Enemy : BasePerson
     {
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 10;
+        public const int DefaultCaliber = 16;
 
         private List<Bullet> bullets = new List<Bullet>();
 

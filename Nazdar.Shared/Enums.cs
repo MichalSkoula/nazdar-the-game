@@ -21,8 +21,8 @@ namespace Nazdar
 
         public enum DayNightLength
         {
-            Night = 16,
-            Day = 32
+            Night = 32,
+            Day = 64
         }
 
         public enum ButtonSize

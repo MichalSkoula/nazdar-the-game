@@ -14,9 +14,10 @@ namespace Nazdar.Objects
         private bool isFast = true;
 
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 2;
+        public const int DefaultCaliber = 4;
 
         public bool IsFarming { get; set; } = false;
+        public bool CanBeFarming { get; set; } = false;
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -129,7 +130,11 @@ namespace Nazdar.Objects
                 if (this.X < this.DeploymentX + this.centerRadius / 2 && this.X > this.DeploymentX - this.centerRadius / 2)
                 {
                     this.isFast = false;
-                    this.IsFarming = true;
+                    if (this.CanBeFarming)
+                    {
+                        this.IsFarming = true;
+                    }
+
                     if (Tools.GetRandom(128) == 1)
                     {
                         this.ChangeDirection();

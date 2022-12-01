@@ -52,7 +52,7 @@ namespace Nazdar.Screens
             // day or night
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
+                "Power " + this.player.Caliber.ToString(),
                 new Vector2(leftOffset + 160, Offset.StatusBarY + 1),
                 Color.White);
 
@@ -61,7 +61,6 @@ namespace Nazdar.Screens
 
             // cartridges
             Arsenal.DrawCartridgesStatic(this.Game.SpriteBatch, this.player.Cartridges, leftOffset, Offset.StatusBarY + 75, 1);
-
 
             // right stats
             this.Game.SpriteBatch.DrawString(
@@ -93,6 +92,11 @@ namespace Nazdar.Screens
                Assets.Fonts["Small"],
                "Day " + this.player.Days.ToString() + ".",
                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
+               Color.White);
+            this.Game.SpriteBatch.DrawString(
+               Assets.Fonts["Small"],
+               this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 60),
                Color.White);
 
             // messages
