@@ -34,7 +34,7 @@ namespace Nazdar
         public static JObject SaveTempData { get; set; }
 
         // world variables
-        public int Village { get; set; }
+        public int Village { get; set; } = 1;
         public static MessageBuffer MessageBuffer = new MessageBuffer();
         public static int GlobalTimer { get; private set; }
 
