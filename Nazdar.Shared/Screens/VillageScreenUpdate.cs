@@ -16,6 +16,7 @@ namespace Nazdar.Screens
     {
         public override void Update(GameTime gameTime)
         {
+            // save & back to menu
             if (Keyboard.HasBeenPressed(Keys.Escape) || Gamepad.HasBeenPressed(Buttons.Start) || Gamepad.HasBeenPressed(Buttons.B) || TouchControls.HasBeenPressedSelect())
             {
                 // save
@@ -550,7 +551,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built && this.center.Level < this.centerMaxLevel)
+                    else if (this.center.Status == Building.Status.Built && this.center.Level < MaxCenterLevel)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
@@ -567,6 +568,34 @@ namespace Nazdar.Screens
                                 this.center.Level++;
 
                                 this.Upgrade();
+
+                                // next village?
+                                if (this.center.Level == MaxCenterLevel)
+                                {
+                                    // finish the game? or another village?
+                                    if (this.Game.Village == MaxVillage)
+                                    {
+                                        Game1.MessageBuffer.AddMessage("YOU DIT IT!!!!", MessageType.Success);
+
+                                        // save
+                                        this.saveFile.Save(this.GetSaveData());
+
+                                        // back to main menu
+                                        this.Game.LoadScreen(typeof(Screens.MenuScreen));
+                                    } 
+                                    else
+                                    {
+                                        Game1.MessageBuffer.AddMessage("MAX UPGRADE!", MessageType.Success);
+                                        Game1.MessageBuffer.AddMessage("Lets go to another village!", MessageType.Success);
+                                        this.Game.Village++;
+
+                                        // save
+                                        this.saveFile.Save(this.GetSaveData());
+
+                                        // back to map menu
+                                        this.Game.LoadScreen(typeof(Screens.MapScreen));
+                                    } 
+                                }
                             }
                             else
                             {

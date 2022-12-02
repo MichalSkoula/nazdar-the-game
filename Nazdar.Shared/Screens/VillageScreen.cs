@@ -40,6 +40,10 @@ namespace Nazdar.Screens
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
+        // consts
+        public const int MaxCenterLevel = 5;
+        public readonly int MaxVillage = Assets.TilesetGroups.Count;
+
         // some settings - random 0-X == 1
         private int newEnemyProbability = 192; // every day, it gets -2
         private int newEnemyProbabilityLowLimit = 16;
@@ -50,7 +54,6 @@ namespace Nazdar.Screens
         private int homelessLimit = 16;
         private int farmingMoneyProbability = 512 * 2;
         private int farmLimit = 4;
-        private int centerMaxLevel = 5;
 
         // X positions for deployments
         private int? leftmostTowerX = null;
@@ -63,7 +66,7 @@ namespace Nazdar.Screens
             this.player = new Player(MapWidth / 2, Offset.Floor);
 
             // load building spots from tileset
-            foreach (var buildingSpot in Assets.TilesetGroups["village1"].GetObjects("objects", "BuildingSpot"))
+            foreach (var buildingSpot in Assets.TilesetGroups["village" + this.Game.Village].GetObjects("objects", "BuildingSpot"))
             {
                 this.buildingSpots.Add(
                     new BuildingSpot(

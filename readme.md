@@ -6,9 +6,9 @@ Monogame platform/strategic game (awesome).
 
 ## TODO
 
-* levely = villages, systém více vesnic
-* sekání při přechodu denní fáze
-* přechody mezi songama vyřešit
+* Při přechodu do nové vesnice resetovat nepřátele atd...ale nechat skóre, jinak vše pryč - možná s sebou vzít vojáky, nebo část lidí? Třeba půlku.
+* Sekání při přechodu denní fáze
+* Přechody mezi songama vyřešit
 
 ## PACKAGING
 
