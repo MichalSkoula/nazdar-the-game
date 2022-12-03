@@ -4,10 +4,16 @@ Monogame platform/strategic game (awesome).
 
 ![obrazek](https://user-images.githubusercontent.com/5922575/192386184-0100011a-ec67-43a7-82ea-13b430e28f80.png)
 
+## LINKS
+
+Homepage: https://skoula.cz/nazdar
+
+Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
+
 ## TODO
 
-* Další levely
-* Přechody mezi songama vyřešit
+* More levels
+* Music transitions
 
 ## PACKAGING
 
