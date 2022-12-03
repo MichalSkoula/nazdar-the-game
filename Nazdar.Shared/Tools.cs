@@ -83,7 +83,9 @@ namespace Nazdar.Shared
                 // try to get score and other data from save slots
                 try
                 {
-                    score = GetScore(
+                    score = saveData.ContainsKey("player") ? (int)saveData.GetValue("player").BaseScore : -1;
+
+                    score += GetScore(
                         saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Days : 0,
                         saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Money : 0,
                         saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
