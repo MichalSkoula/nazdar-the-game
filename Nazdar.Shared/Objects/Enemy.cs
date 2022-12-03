@@ -31,7 +31,7 @@ namespace Nazdar.Objects
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
-            this.Color = UniversalColors[Tools.GetRandom(UniversalColors.Length)];
+            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),

@@ -17,17 +17,11 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // day or night sky - color transition
-            float dayPhaseLength = this.dayPhase == DayPhase.Day ? (float)DayNightLength.Day : (float)DayNightLength.Night;
-            float dayProgress = (float)((dayPhaseLength - this.dayPhaseTimer) / dayPhaseLength);
-            Color currentColor = Color.Lerp(
-                this.dayPhase == DayPhase.Day ? Color.CornflowerBlue : Color.DarkBlue,
-                this.dayPhase == DayPhase.Day ? Color.DarkBlue : Color.CornflowerBlue,
-                dayProgress
-            );
+            Color currentColor = this.GetSkyColor();
             this.GraphicsDevice.Clear(currentColor);
 
             // background - tileset
-            Assets.TilesetGroups["village1"].Draw("ground", this.Game.SpriteBatch);
+            Assets.TilesetGroups["village" + this.Game.Village].Draw("ground", this.Game.SpriteBatch);
 
             // stats ------------------------------------------------------------------------------------
             int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
@@ -36,16 +30,16 @@ namespace Nazdar.Screens
             // healthbar
             this.Game.SpriteBatch.DrawRectangle(
                 new Rectangle(leftOffset, Offset.StatusBarY, 100, 10),
-                Color.Black
+                MyColor.Black
             );
             this.Game.SpriteBatch.DrawRectangle(
                 new Rectangle(leftOffset + 1, Offset.StatusBarY + 1, 98, 8),
-                Color.LightGreen,
+                MyColor.White,
                 8
             );
             this.Game.SpriteBatch.DrawRectangle(
                 new Rectangle(leftOffset + 1, Offset.StatusBarY + 1, (int)((this.player.Health / 100f) * 98), 8),
-                Color.Green,
+                MyColor.Green,
                 8
             );
 
@@ -54,7 +48,7 @@ namespace Nazdar.Screens
                 Assets.Fonts["Small"],
                 "Attack " + this.player.Caliber.ToString(),
                 new Vector2(leftOffset + 160, Offset.StatusBarY + 1),
-                Color.White);
+                MyColor.White);
 
             // money
             Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
@@ -67,39 +61,44 @@ namespace Nazdar.Screens
                 Assets.Fonts["Small"],
                 "Peasants: " + (this.peasants.Count).ToString(),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 0),
-                Color.White);
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Farmers: " + (this.farmers.Count).ToString(),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 10),
+                MyColor.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Soldiers: " + (this.soldiers.Count).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 10),
-                Color.White);
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
+                MyColor.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Kills: " + this.player.Kills.ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
-                Color.White);
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
+                MyColor.White);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
-               Color.White);
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
+               MyColor.White);
 
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Score: " + (this.player.BaseScore + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0)).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
-                Color.White);
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 60),
+                MyColor.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 60),
-                Color.White);
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
+                MyColor.White);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                "Day " + this.player.Days.ToString() + ".",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
-               Color.White);
-            
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 80),
+               MyColor.White);
+
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
@@ -172,6 +171,36 @@ namespace Nazdar.Screens
             this.player.Draw(this.Game.SpriteBatch);
 
             this.Game.DrawEnd();
+        }
+
+        private Color GetSkyColor()
+        {
+            float currentPhaseLength = this.dayPhase == DayPhase.Day ? (float)DayNightLength.Day : (float)DayNightLength.Night;
+            float progress = (float)((currentPhaseLength - this.dayPhaseTimer) / currentPhaseLength);
+
+            if (this.dayPhase == DayPhase.Day)
+            {
+                if (progress < 0.2f)
+                {
+                    // dawn
+                    return MyColor.Violet;
+                }
+                else if (progress > 0.8f)
+                {
+                    // dusk
+                    return MyColor.DarkViolet;
+                }
+                else
+                {
+                    // day
+                    return MyColor.Blue;
+                }
+            }
+            else
+            {
+                // night
+                return MyColor.Black;
+            }
         }
     }
 }

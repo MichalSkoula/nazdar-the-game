@@ -170,7 +170,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             int i = 0;
@@ -186,24 +186,24 @@ namespace Nazdar.Screens
                         Assets.Fonts["Small"],
                         button.Value.Data[0],
                         new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y),
-                        Color.White);
+                        MyColor.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[1],
                         new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 10),
-                        Color.White);
+                        MyColor.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[2],
                         new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 20),
-                        Color.White);
+                        MyColor.White);
                 }
                 i++;
             }
 
 #if DEBUG
             // save path
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 50, Offset.MenuFooter), Color.Gray);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 50, Offset.MenuFooter), MyColor.Gray1);
 #endif
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);

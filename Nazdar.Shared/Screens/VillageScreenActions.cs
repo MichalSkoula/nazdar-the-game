@@ -4,7 +4,6 @@ using Nazdar.Shared;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using static Nazdar.Enums;
 
 namespace Nazdar.Screens
@@ -64,7 +63,7 @@ namespace Nazdar.Screens
 
         private int GetUpgradeAttackAddition()
         {
-            return this.center == null? 0 : this.center.Level * 2;
+            return this.center == null ? 0 : this.center.Level * 2;
         }
 
         private void Upgrade()
@@ -98,7 +97,7 @@ namespace Nazdar.Screens
                 else
                 {
                     this.ToAnotherVillage();
-                    
+
                 }
             }
         }
@@ -130,7 +129,7 @@ namespace Nazdar.Screens
             this.peasants = this.peasants.Where((x, i) => i % 2 == 0).ToList();
             foreach (var p in this.peasants)
             {
-                p.Caliber= Peasant.DefaultCaliber;
+                p.Caliber = Peasant.DefaultCaliber;
             }
 
             this.soldiers = this.soldiers.Where((x, i) => i % 2 == 0).ToList();

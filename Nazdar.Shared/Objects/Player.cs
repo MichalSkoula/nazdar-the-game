@@ -234,14 +234,14 @@ namespace Nazdar.Objects
                 float alpha = (this.ActionCost <= this.Money ? 1f : 0.6f);
 
                 // static image from spritesheet
-                Coin.DrawStatic(spriteBatch, this.ActionCost, this.X, this.Y, alpha);
+                Coin.DrawStatic(spriteBatch, this.ActionCost, this.X, this.Y, alpha, true);
 
                 // text
                 spriteBatch.DrawString(
                     Assets.Fonts["Small"],
                     this.Action.ToString() + " " + this.ActionName,
                     new Vector2(this.X, this.Y - 10),
-                    Color.White * alpha
+                    MyColor.White * alpha
                 );
             }
         }
