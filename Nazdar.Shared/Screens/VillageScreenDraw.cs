@@ -52,7 +52,7 @@ namespace Nazdar.Screens
             // day or night
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Power " + this.player.Caliber.ToString(),
+                "Attack " + this.player.Caliber.ToString(),
                 new Vector2(leftOffset + 160, Offset.StatusBarY + 1),
                 Color.White);
 
@@ -79,25 +79,27 @@ namespace Nazdar.Screens
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
                 Color.White);
             this.Game.SpriteBatch.DrawString(
+               Assets.Fonts["Small"],
+               this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
+               Color.White);
+
+            this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Score: " + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
+                "Score: " + (this.player.BaseScore + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0)).ToString(),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 60),
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                "Day " + this.player.Days.ToString() + ".",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
                Color.White);
-            this.Game.SpriteBatch.DrawString(
-               Assets.Fonts["Small"],
-               this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 60),
-               Color.White);
+            
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);

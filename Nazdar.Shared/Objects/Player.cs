@@ -93,6 +93,8 @@ namespace Nazdar.Objects
         public const int DefaultCaliber = 32;
         public int Kills { get; set; } = 0;
 
+        public int BaseScore { get; set; } = 0;
+
         public Player(int x, int y)
         {
             this.Anim = this.animations[(int)Direction.Right];
@@ -134,6 +136,7 @@ namespace Nazdar.Objects
             this.Cartridges = (int)saveData.Cartridges;
             this.Kills = (int)saveData.Kills;
             this.Caliber = (int)saveData.Caliber;
+            this.BaseScore = (int)saveData.BaseScore;
 
             // load bullets
             if (saveData.ContainsKey("Bullets"))

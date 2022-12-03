@@ -378,13 +378,7 @@ namespace Nazdar.Screens
 
                     if (!this.player.TakeHit(enemy.Caliber))
                     {
-                        // save current state to global static variable as json
-                        // to be able to show it on game over screen
-                        // the same way as if it was from a file
-                        Game1.SaveTempData = JObject.FromObject(this.GetSaveData());
-
-                        // load screen
-                        this.Game.LoadScreen(typeof(Screens.GameOverScreen));
+                        this.GameOver();
                     }
                 }
             }
@@ -489,7 +483,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         armory.DropWeapon();
-                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.center.Level * 2));
+                        this.soldiers.Add(new Soldier(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.GetUpgradeAttackAddition()));
                     }
                 }
             }
@@ -501,12 +495,12 @@ namespace Nazdar.Screens
                 {
                     if (peasant.Hitbox.Intersects(farm.Hitbox) && farm.ToolsCount > 0)
                     {
-                        // ok, peasant get tool and turns into soldier
+                        // ok, peasant get tool and turns into farmer
                         Game1.MessageBuffer.AddMessage("Peasant => farmer", MessageType.Success);
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         farm.DropTool();
-                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.center.Level));
+                        this.farmers.Add(new Farmer(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Farmer.DefaultCaliber + this.GetUpgradeAttackAddition()));
                     }
                 }
             }
@@ -567,35 +561,8 @@ namespace Nazdar.Screens
                                 this.player.Money -= this.player.ActionCost;
                                 this.center.Level++;
 
+                                // upgrade, to another village, etc
                                 this.Upgrade();
-
-                                // next village?
-                                if (this.center.Level == MaxCenterLevel)
-                                {
-                                    // finish the game? or another village?
-                                    if (this.Game.Village == MaxVillage)
-                                    {
-                                        Game1.MessageBuffer.AddMessage("YOU DIT IT!!!!", MessageType.Success);
-
-                                        // save
-                                        this.saveFile.Save(this.GetSaveData());
-
-                                        // back to main menu
-                                        this.Game.LoadScreen(typeof(Screens.MenuScreen));
-                                    } 
-                                    else
-                                    {
-                                        Game1.MessageBuffer.AddMessage("MAX UPGRADE!", MessageType.Success);
-                                        Game1.MessageBuffer.AddMessage("Lets go to another village!", MessageType.Success);
-                                        this.Game.Village++;
-
-                                        // save
-                                        this.saveFile.Save(this.GetSaveData());
-
-                                        // back to map menu
-                                        this.Game.LoadScreen(typeof(Screens.MapScreen));
-                                    } 
-                                }
                             }
                             else
                             {
@@ -831,7 +798,7 @@ namespace Nazdar.Screens
                                 Audio.PlaySound("SoldierSpawn");
                                 homeless.ToDelete = true;
                                 this.player.Money -= Homeless.Cost;
-                                this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction));
+                                this.peasants.Add(new Peasant(homeless.Hitbox.X, Offset.Floor, homeless.Direction, caliber: Peasant.DefaultCaliber + this.GetUpgradeAttackAddition()));
                             }
                             else
                             {
