@@ -121,7 +121,7 @@ namespace Nazdar
             var screen = Activator.CreateInstance(type, this);
             if (transition)
             {
-                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, Color.Black, 0.5f));
+                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, MyColor.Black, 0.5f));
             }
             else
             {
@@ -133,7 +133,7 @@ namespace Nazdar
         public void DrawStart()
         {
             this.GraphicsDevice.SetRenderTarget(this.RenderTarget);
-            this.GraphicsDevice.Clear(Color.Black);
+            this.GraphicsDevice.Clear(MyColor.Black);
 
             this.SpriteBatchStart();
         }
@@ -183,7 +183,7 @@ namespace Nazdar
             }
 
             this.GraphicsDevice.SetRenderTarget(null);
-            this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
+            this.Graphics.GraphicsDevice.Clear(ClearOptions.Target, MyColor.Black, 1.0f, 0);
 
             this.SpriteBatch.Begin(
                 SpriteSortMode.Deferred,

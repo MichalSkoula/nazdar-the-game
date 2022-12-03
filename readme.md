@@ -6,8 +6,7 @@ Monogame platform/strategic game (awesome).
 
 ## TODO
 
-* Při přechodu do nové vesnice resetovat nepřátele atd...ale nechat skóre, jinak vše pryč - možná s sebou vzít vojáky, nebo část lidí? Třeba půlku.
-* Sekání při přechodu denní fáze
+* Další levely
 * Přechody mezi songama vyřešit
 
 ## PACKAGING
@@ -26,7 +25,7 @@ https://docs.monogame.net/articles/packaging_games.html
 * C# 8 (because of UWP), .NET 6
 
 ### images
-* https://0x72.itch.io/pixeldudesmaker CC-29 color palette
+* https://0x72.itch.io/pixeldudesmaker CC-29 color palette - https://lospec.com/palette-list/cc-29
 * https://essssam.itch.io/rocky-roads
 * https://mariaparragames.itch.io/free-retro-city-assetpack
 * https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat

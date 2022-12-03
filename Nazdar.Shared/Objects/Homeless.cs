@@ -28,7 +28,7 @@ namespace Nazdar.Objects
             this.Health = 100;
             this.Alpha = 0.5f;
             this.Speed = 61;
-            this.Color = UniversalColors[Tools.GetRandom(UniversalColors.Length)];
+            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
         }
 
         public new void Update(float deltaTime)

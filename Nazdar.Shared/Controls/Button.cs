@@ -92,19 +92,19 @@ namespace Nazdar.Controls
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var bgColor = Color.Green;
+            var bgColor = MyColor.Purple;
 
             if (this.Active == false)
             {
-                bgColor = Color.Gray;
+                bgColor = MyColor.Gray3;
             }
             else if (this.state == ButtonState.HoverState)
             {
-                bgColor = Color.LightGreen;
+                bgColor = MyColor.White;
             }
 
             spriteBatch.DrawRectangle(this.Hitbox, bgColor, (this.Hitbox.Height / 2) + 5);
-            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), Color.Black);
+            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), MyColor.Black);
         }
 
         private int CalculateButtonSize()

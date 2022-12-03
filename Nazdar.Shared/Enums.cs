@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 
 namespace Nazdar
 {
@@ -21,8 +20,8 @@ namespace Nazdar
 
         public enum DayNightLength
         {
-            Night = 32,
-            Day = 64
+            Night = 8,
+            Day = 16
         }
 
         public enum ButtonSize
@@ -137,16 +136,5 @@ namespace Nazdar
             UWP,
             Android
         }
-
-        // http://www.foszor.com/blog/xna-color-chart/
-        public static Color[] UniversalColors = {
-            Color.White,
-            Color.Lavender,
-            Color.LightGray,
-            Color.Honeydew,
-            Color.Ivory,
-            Color.SeaShell,
-            Color.WhiteSmoke
-        };
     }
 }

@@ -4,7 +4,6 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using static Nazdar.Enums;
@@ -84,11 +83,11 @@ namespace Nazdar.Screens
                 // choose direction
                 if (Tools.GetRandom(2) == 0)
                 {
-                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber));
+                    // this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber));
                 }
                 else
                 {
-                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber));
+                    //this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber));
                 }
             }
 
