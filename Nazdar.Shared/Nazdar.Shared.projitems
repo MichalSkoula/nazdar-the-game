@@ -62,6 +62,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenUpdate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Version.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
