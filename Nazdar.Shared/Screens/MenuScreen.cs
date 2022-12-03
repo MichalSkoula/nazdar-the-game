@@ -33,7 +33,7 @@ namespace Nazdar.Screens
             buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Exit"));
 
 #if DEBUG
-            buttons.Add("openFolderButton", new Button(Offset.MenuX, Offset.MenuFooter, null, ButtonSize.Small, "open"));
+            buttons.Add("openFolderButton", new Button(Offset.MenuX + 560, Offset.MenuFooter - 20, null, ButtonSize.Small, "open"));
 #endif
 
             // load settings
@@ -201,9 +201,11 @@ namespace Nazdar.Screens
                 i++;
             }
 
+            // version
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "v" + Version.Number, new Vector2(Offset.MenuX, Offset.MenuFooter), MyColor.Gray1);
 #if DEBUG
             // save path
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 50, Offset.MenuFooter), MyColor.Gray1);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 40, Offset.MenuFooter), MyColor.Gray1);
 #endif
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);
