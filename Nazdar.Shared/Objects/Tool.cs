@@ -9,7 +9,7 @@ namespace Nazdar.Objects
 
         public Tool()
         {
-            this.Sprite = Assets.Images["Crate2"];
+            this.Sprite = Assets.Images["Crate"];
             this.Hitbox = new Rectangle(0, 0, this.Sprite.Width, this.Sprite.Height);
         }
 
