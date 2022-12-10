@@ -74,29 +74,34 @@ namespace Nazdar.Screens
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Kills: " + this.player.Kills.ToString(),
+                "Medics: " + (this.medics.Count).ToString(),
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                "Kills: " + this.player.Kills.ToString(),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
                MyColor.White);
 
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Score: " + (this.player.BaseScore + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0)).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 60),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 "Village " + this.Game.Village.ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 80),
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(
                Assets.Fonts["Small"],
                "Day " + this.player.Days.ToString() + ".",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 80),
+               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 90),
                MyColor.White);
 
 
@@ -120,6 +125,11 @@ namespace Nazdar.Screens
             foreach (Armory armory in this.armories)
             {
                 armory.Draw(this.Game.SpriteBatch);
+            }
+
+            foreach (Hospital hospital in this.hospitals)
+            {
+                hospital.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Arsenal arsenal in this.arsenals)
@@ -150,6 +160,11 @@ namespace Nazdar.Screens
             foreach (Farmer farmer in this.farmers)
             {
                 farmer.Draw(this.Game.SpriteBatch);
+            }
+
+            foreach (Medic medic in this.medics)
+            {
+                medic.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Homeless homeless in this.homelesses)

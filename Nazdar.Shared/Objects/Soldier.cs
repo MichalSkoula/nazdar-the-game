@@ -10,7 +10,6 @@ namespace Nazdar.Objects
 {
     public class Soldier : BasePerson
     {
-        private int centerRadius = 96;
         private bool isFast = true;
         private int shootRate = 70; // 0 fastest, 100 slowest
 
@@ -90,23 +89,21 @@ namespace Nazdar.Objects
 
             this.isFast = true;
 
-            if (this.DeploymentX == null)
+            if (this.DeploymentBuilding == null)
             {
                 // run towards town center
-                if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
+                if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + this.centerRadius)
+                else if (this.X > VillageScreen.MapWidth / 2 + Center.CenterRadius)
                 {
                     this.Direction = Direction.Left;
                 }
-
-                // when near the base, can be slow and randomly change direction
-                if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
+                else
                 {
                     this.isFast = false;
-                    if (Tools.GetRandom(128) < 2)
+                    if (Tools.GetRandom(128) == 1)
                     {
                         this.ChangeDirection();
                     }
@@ -115,17 +112,15 @@ namespace Nazdar.Objects
             else
             {
                 // soldier is deployed somewhere
-                if (this.X < this.DeploymentX - this.centerRadius / 2)
+                if (this.X < this.DeploymentBuilding.X - this.DeploymentBuilding.Width / 2)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > this.DeploymentX + this.centerRadius / 2)
+                else if (this.X > this.DeploymentBuilding.X + this.DeploymentBuilding.Width + this.DeploymentBuilding.Width / 2)
                 {
                     this.Direction = Direction.Left;
                 }
-
-                // when near the base, can be slow and randomly change direction
-                if (this.X < this.DeploymentX + this.centerRadius / 2 && this.X > this.DeploymentX - this.centerRadius / 2)
+                else
                 {
                     this.isFast = false;
                     if (Tools.GetRandom(128) == 1)

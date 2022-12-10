@@ -66,7 +66,7 @@ namespace Nazdar.Objects
             int i = 0;
             foreach (var weapon in this.weapons)
             {
-                weapon.SetPosition(this.X + -5 + i * 5, this.Y + this.Height - weapon.Height);
+                weapon.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - weapon.Height);
                 i++;
             }
             base.Update(deltaTime);

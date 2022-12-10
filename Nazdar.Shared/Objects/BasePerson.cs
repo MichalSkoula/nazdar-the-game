@@ -7,10 +7,30 @@ namespace Nazdar.Objects
 {
     public abstract class BasePerson : BaseObject
     {
+        private int health;
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+
+            set
+            {
+                this.health = value;
+                if (this.health > 100)
+                {
+                    this.health = 100;
+                }
+            }
+        }
+
         protected Animation Anim { get; set; }
         protected int Speed { get; set; }
 
-        public int? DeploymentX { get; set; } = null;
+        public BasePerson DeploymentPerson = null;
+        public BaseBuilding DeploymentBuilding = null;
+        public int? DeploymentX = null;
 
         public void DrawHealth(SpriteBatch spriteBatch)
         {

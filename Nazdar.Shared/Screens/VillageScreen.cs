@@ -24,6 +24,7 @@ namespace Nazdar.Screens
         private List<Enemy> enemies = new List<Enemy>();
         private List<Soldier> soldiers = new List<Soldier>();
         private List<Farmer> farmers = new List<Farmer>();
+        private List<Medic> medics = new List<Medic>();
         private List<Homeless> homelesses = new List<Homeless>();
         private List<Peasant> peasants = new List<Peasant>();
 
@@ -35,13 +36,13 @@ namespace Nazdar.Screens
         private List<Arsenal> arsenals = new List<Arsenal>();
         private List<Tower> towers = new List<Tower>();
         private List<Farm> farms = new List<Farm>();
+        private List<Hospital> hospitals = new List<Hospital>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
 
         // consts
-        public const int MaxCenterLevel = 5;
         public readonly int MaxVillage = Assets.TilesetGroups.Count;
 
         // some settings - random 0-X == 1
@@ -52,12 +53,12 @@ namespace Nazdar.Screens
         private int newCoinProbability = 512 * 4;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
-        private int farmingMoneyProbability = 512 * 2;
+        public static int farmingMoneyProbability = 512 * 2;
         private int farmLimit = 4;
 
         // X positions for deployments
-        private int? leftmostTowerX = null;
-        private int? rightmostTowerX = null;
+        private Tower? leftmostTower = null;
+        private Tower? rightmostTower = null;
         private List<int> slumXs = new List<int>();
 
         public override void Initialize()
@@ -180,6 +181,14 @@ namespace Nazdar.Screens
                 }
             }
 
+            if (saveData.ContainsKey("medics"))
+            {
+                foreach (var medic in saveData.GetValue("medics"))
+                {
+                    this.medics.Add(new Medic((int)medic.Hitbox.X, (int)medic.Hitbox.Y, (Direction)medic.Direction, (int)medic.Health, (int)medic.Caliber));
+                }
+            }
+
             if (saveData.ContainsKey("coins"))
             {
                 foreach (var coin in saveData.GetValue("coins"))
@@ -224,6 +233,14 @@ namespace Nazdar.Screens
                 }
             }
 
+            if (saveData.ContainsKey("hospitals"))
+            {
+                foreach (var hospital in saveData.GetValue("hospitals"))
+                {
+                    this.hospitals.Add(new Hospital((int)hospital.Hitbox.X, (int)hospital.Hitbox.Y, (Building.Status)hospital.Status, (int)hospital.MedicalKitsCount));
+                }
+            }
+
             if (saveData.ContainsKey("towers"))
             {
                 foreach (var tower in saveData.GetValue("towers"))
@@ -255,9 +272,11 @@ namespace Nazdar.Screens
                 farmers = this.farmers,
                 homelesses = this.homelesses,
                 peasants = this.peasants,
+                medics = this.medics,
                 center = this.center,
                 armories = this.armories,
                 arsenals = this.arsenals,
+                hospitals = this.hospitals,
                 towers = this.towers,
                 farms = this.farms,
                 coins = this.coins,

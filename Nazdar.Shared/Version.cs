@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Nazdar.Shared
+﻿namespace Nazdar.Shared
 {
     public class Version
     {
-        public const string Number = "0.8";
+        public const string Number = "0.9";
     }
 }

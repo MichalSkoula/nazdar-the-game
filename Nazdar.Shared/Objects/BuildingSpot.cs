@@ -31,6 +31,9 @@ namespace Nazdar.Objects
                 case "Slum":
                     this.Type = Building.Type.Slum;
                     break;
+                case "Hospital":
+                    this.Type = Building.Type.Hospital;
+                    break;
                 default:
                     throw new ArgumentException();
             }
