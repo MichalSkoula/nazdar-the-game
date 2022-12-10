@@ -66,7 +66,7 @@ namespace Nazdar.Objects
             int i = 0;
             foreach (var tool in this.tools)
             {
-                tool.SetPosition(this.X + -5 + i * 5, this.Y + this.Height - tool.Height);
+                tool.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - tool.Height);
                 i++;
             }
             base.Update(deltaTime);

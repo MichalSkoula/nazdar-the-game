@@ -14,6 +14,7 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 
 * More levels
 * Music transitions
+* every level, something new
 
 ## PACKAGING
 
@@ -21,6 +22,10 @@ https://docs.monogame.net/articles/packaging_games.html
 
 * dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
 * dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
+
+### run mgcb: ###
+
+dotnet mgcb-editor
 
 ## CREDITS 
 

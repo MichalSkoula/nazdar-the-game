@@ -16,7 +16,6 @@ namespace Nazdar.Objects
             new Animation(Assets.Images["HomelessLeft"], 4, 10),
         };
 
-        private int centerRadius = 64;
         public const int Cost = 1;
         public const string Name = "Homeless";
 
@@ -65,17 +64,17 @@ namespace Nazdar.Objects
             this.Anim.Update(deltaTime);
 
             // go around slum
-            if (this.X < this.DeploymentX - this.centerRadius / 2)
+            if (this.X < this.DeploymentX - Center.CenterRadius / 2)
             {
                 this.Direction = Direction.Right;
             }
-            else if (this.X > this.DeploymentX + this.centerRadius / 2)
+            else if (this.X > this.DeploymentX + Center.CenterRadius / 2)
             {
                 this.Direction = Direction.Left;
             }
 
             // when near the slum, can be slow and randomly change direction
-            if (this.X < this.DeploymentX + this.centerRadius / 2 && this.X > this.DeploymentX - this.centerRadius / 2)
+            if (this.X < this.DeploymentX + Center.CenterRadius / 2 && this.X > this.DeploymentX - Center.CenterRadius / 2)
             {
                 if (Tools.GetRandom(128) == 1)
                 {

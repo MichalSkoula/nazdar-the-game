@@ -20,8 +20,8 @@ namespace Nazdar
 
         public enum DayNightLength
         {
-            Night = 8,
-            Day = 16
+            Night = 32,
+            Day = 64
         }
 
         public enum ButtonSize
@@ -87,7 +87,8 @@ namespace Nazdar
                 Tower,
                 Farm,
                 Arsenal,
-                Slum // cant be build
+                Slum, // cant be build
+                Hospital
             }
 
             public enum Status

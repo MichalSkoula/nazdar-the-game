@@ -5,6 +5,7 @@ using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using static Nazdar.Enums;
 using Keyboard = Nazdar.Controls.Keyboard;
@@ -35,6 +36,7 @@ namespace Nazdar.Screens
             this.UpdatePeasants();
             this.UpdateFarmers();
             this.UpdateHomelesses();
+            this.UpdateMedics();
             this.UpdateCoins();
 
             // buildings
@@ -46,6 +48,7 @@ namespace Nazdar.Screens
             this.UpdateArsenals();
             this.UpdateTowers();
             this.UpdateFarms();
+            this.UpdateHospitals();
 
             // collisions
             this.UpdatePeoplesCollisions();
@@ -83,11 +86,11 @@ namespace Nazdar.Screens
                 // choose direction
                 if (Tools.GetRandom(2) == 0)
                 {
-                    // this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber));
+                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber));
                 }
                 else
                 {
-                    //this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber));
+                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber));
                 }
             }
 
@@ -105,16 +108,16 @@ namespace Nazdar.Screens
             {
                 left = !left;
 
-                soldier.DeploymentX = null;
-                if (left && this.leftmostTowerX != null)
+                soldier.DeploymentBuilding = null;
+                if (left && this.leftmostTower != null)
                 {
                     // leftmost tower exists?
-                    soldier.DeploymentX = this.leftmostTowerX;
+                    soldier.DeploymentBuilding = this.leftmostTower;
                 }
-                else if (!left && this.rightmostTowerX != null)
+                else if (!left && this.rightmostTower != null)
                 {
                     // rightmost tower exists?
-                    soldier.DeploymentX = this.rightmostTowerX;
+                    soldier.DeploymentBuilding = this.rightmostTower;
                 }
 
                 // can shoot at closest enemy?
@@ -139,27 +142,22 @@ namespace Nazdar.Screens
                 return;
             }
 
-            if (this.dayPhase == DayPhase.Night || this.enemies.Where(enemy => enemy.Dead == false).Count() > 0)
+            foreach (Farmer farmer in this.farmers)
             {
-                // at night, go to the base and do not harvest
-                foreach (Farmer farmer in this.farmers)
-                {
-                    farmer.DeploymentX = this.center.X + this.center.Width / 2;
-                    farmer.CanBeFarming = false;
-                }
+                farmer.DeploymentBuilding = null;
             }
-            else if (this.farms.Count > 0)
+
+            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0 && this.farms.Count > 0)
             {
                 // distribute farmers to farms
                 int f = 0; // farm index
                 int[] farmLimitArray = new int[this.farms.Count];
                 for (int i = 0; i < farmers.Count; i++, f++)
                 {
-                    f = f % farms.Count;
+                    f %= farms.Count;
                     if (this.farms[f].Status != Building.Status.InProcess && farmLimitArray[f] < this.farmLimit)
                     {
-                        this.farmers.ElementAt(i).DeploymentX = this.farms[f].X + this.farms[f].Width / 2;
-                        this.farmers.ElementAt(i).CanBeFarming = true;
+                        this.farmers.ElementAt(i).DeploymentBuilding = this.farms[f];
                         farmLimitArray[f]++;
                     }
                 }
@@ -168,12 +166,53 @@ namespace Nazdar.Screens
             // update them
             foreach (Farmer farmer in this.farmers)
             {
-                if (farmer.IsFarming && Tools.GetRandom(farmingMoneyProbability) == 1)
+                farmer.Update(this.Game.DeltaTime, this.coins);
+            }
+        }
+
+        private void UpdateMedics()
+        {
+            if (this.medics.Count == 0)
+            {
+                return;
+            }
+
+            // remove deployment
+            foreach (Medic medic in this.medics)
+            {
+                medic.DeploymentPerson = null;
+            }
+
+            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            {
+                // make list of all wounded
+                List<BasePerson> wounded = new List<BasePerson>();
+                wounded.AddRange(this.soldiers.Where(i => i.Health < 100));
+                wounded.AddRange(this.farmers.Where(i => i.Health < 100));
+                wounded.AddRange(this.peasants.Where(i => i.Health < 100));
+                wounded = wounded.OrderBy(w => w.Health).ToList();
+
+                if (wounded.Count > 0)
                 {
-                    Game1.MessageBuffer.AddMessage("New coin from farming!", MessageType.Opportunity);
-                    this.coins.Add(new Coin(farmer.X + farmer.Width / 2, Offset.Floor2));
+                    // distribute medics to wounded
+                    int w = 0; // wounded index
+                    int[] woundedLimitArray = new int[wounded.Count];
+                    for (int i = 0; i < medics.Count; i++, w++)
+                    {
+                        w %= wounded.Count;
+                        if (woundedLimitArray[w] == 0)
+                        {
+                            this.medics.ElementAt(i).DeploymentPerson = wounded[w];
+                            woundedLimitArray[w]++;
+                        }
+                    }
                 }
-                farmer.Update(this.Game.DeltaTime);
+            }
+
+            // update them
+            foreach (Medic medic in this.medics)
+            {
+                medic.Update(this.Game.DeltaTime);
             }
         }
 
@@ -190,6 +229,10 @@ namespace Nazdar.Screens
             foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(armory);
+            }
+            foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(hospital);
             }
             foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
             {
@@ -216,6 +259,10 @@ namespace Nazdar.Screens
             foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
             {
                 this.Pick(armory);
+            }
+            foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
+            {
+                this.Pick(hospital);
             }
 
             foreach (Peasant peasant in this.peasants)
@@ -248,6 +295,14 @@ namespace Nazdar.Screens
             }
         }
 
+        private void UpdateHospitals()
+        {
+            foreach (Hospital hospital in this.hospitals)
+            {
+                hospital.Update(this.Game.DeltaTime);
+            }
+        }
+
         private void UpdateArsenals()
         {
             foreach (Arsenal arsenal in this.arsenals)
@@ -266,20 +321,20 @@ namespace Nazdar.Screens
 
         private void UpdateTowers()
         {
-            this.leftmostTowerX = this.rightmostTowerX = null;
+            this.leftmostTower = this.rightmostTower = null;
 
             foreach (Tower tower in this.towers)
             {
                 // is it left or rightmost tower (to send soldiers to this tower)
                 if (this.center != null)
                 {
-                    if (tower.X < this.center.X && (this.leftmostTowerX == null || tower.X < this.leftmostTowerX))
+                    if (tower.X < this.center.X && (this.leftmostTower == null || tower.X < this.leftmostTower.X))
                     {
-                        this.leftmostTowerX = tower.X;
+                        this.leftmostTower = tower;
                     }
-                    else if (tower.X > (this.center.X + this.center.Width) && (this.rightmostTowerX == null || tower.X > this.rightmostTowerX))
+                    else if (tower.X > (this.center.X + this.center.Width) && (this.rightmostTower == null || tower.X > this.rightmostTower.X))
                     {
-                        this.rightmostTowerX = tower.X + tower.Width;
+                        this.rightmostTower = tower;
                     }
                 }
 
@@ -504,6 +559,23 @@ namespace Nazdar.Screens
                 }
             }
 
+            // medical kits
+            foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
+            {
+                foreach (var peasant in this.peasants)
+                {
+                    if (peasant.Hitbox.Intersects(hospital.Hitbox) && hospital.MedicalKitsCount > 0)
+                    {
+                        // ok, peasant get medical kit and turns into medic
+                        Game1.MessageBuffer.AddMessage("Peasant => medic", MessageType.Success);
+                        Audio.PlaySound("SoldierSpawn");
+                        peasant.ToDelete = true;
+                        hospital.DropMedicalKit();
+                        this.medics.Add(new Medic(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.GetUpgradeAttackAddition()));
+                    }
+                }
+            }
+
             this.peasants.RemoveAll(p => p.ToDelete);
         }
 
@@ -544,7 +616,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built && this.center.Level < MaxCenterLevel)
+                    else if (this.center.Status == Building.Status.Built && this.center.Level < Center.MaxCenterLevel)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
@@ -636,8 +708,67 @@ namespace Nazdar.Screens
                         }
                     }
                 }
+                // Hospital?
+                else if (buildingSpot.Type == Building.Type.Hospital)
+                {
+                    var hospitals = this.hospitals.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (hospitals.Count() == 0)
+                    {
+                        // no hospital here - we can build something
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Hospital.Cost;
+                        this.player.ActionName = Hospital.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                        {
+                            if (this.player.Money < Hospital.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= Hospital.Cost;
+                                this.hospitals.Add(new Hospital(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        // hospital exists - create medical kits?
+                        var hospital = hospitals.First();
+                        if (hospital.Status == Building.Status.Built)
+                        {
+                            this.player.Action = Enums.PlayerAction.Create;
+                            this.player.ActionCost = Hospital.MedicalKitCost;
+                            this.player.ActionName = MedicalKit.Name;
+
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                            {
+                                if (this.player.Money >= Hospital.MedicalKitCost)
+                                {
+                                    if (hospital.AddMedicalKit())
+                                    {
+                                        Game1.MessageBuffer.AddMessage("Medical kit purchased", MessageType.Info);
+                                        Audio.PlaySound("SoldierSpawn");
+                                        this.player.Money -= Hospital.MedicalKitCost;
+                                    }
+                                    else
+                                    {
+                                        Game1.MessageBuffer.AddMessage("Hospital is full", MessageType.Fail);
+                                    }
+                                }
+                                else
+                                {
+                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                }
+                            }
+                        }
+                    }
+                }
                 // Arsenal?
-                if (buildingSpot.Type == Building.Type.Arsenal)
+                else if (buildingSpot.Type == Building.Type.Arsenal)
                 {
                     var arsenals = this.arsenals.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
                     if (arsenals.Count() == 0)

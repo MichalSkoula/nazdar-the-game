@@ -5,8 +5,6 @@ namespace Nazdar.Objects
 {
     public abstract class BaseObject
     {
-        public int Health { get; set; }
-
         public int Caliber { get; set; }
 
         public int Level { get; set; } = 1;

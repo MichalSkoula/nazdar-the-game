@@ -10,14 +10,10 @@ namespace Nazdar.Objects
 {
     public class Farmer : BasePerson
     {
-        private int centerRadius = 32;
         private bool isFast = true;
 
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 4;
-
-        public bool IsFarming { get; set; } = false;
-        public bool CanBeFarming { get; set; } = false;
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -46,7 +42,7 @@ namespace Nazdar.Objects
             );
         }
 
-        public new void Update(float deltaTime)
+        public void Update(float deltaTime, List<Coin> coins)
         {
             base.Update(deltaTime);
 
@@ -88,23 +84,20 @@ namespace Nazdar.Objects
             this.Anim.Update(deltaTime);
 
             this.isFast = true;
-            this.IsFarming = false;
 
             // go somewhere
-            if (this.DeploymentX == null)
+            if (this.DeploymentBuilding == null)
             {
                 // run towards town center
-                if (this.X < VillageScreen.MapWidth / 2 - this.centerRadius)
+                if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + this.centerRadius)
+                else if (this.X > VillageScreen.MapWidth / 2 + Center.CenterRadius)
                 {
                     this.Direction = Direction.Left;
                 }
-
-                // when near the base, can be slow and randomly change direction
-                if (this.X < VillageScreen.MapWidth / 2 + this.centerRadius && this.X > VillageScreen.MapWidth / 2 - this.centerRadius)
+                else
                 {
                     this.isFast = false;
                     if (Tools.GetRandom(128) < 2)
@@ -116,23 +109,22 @@ namespace Nazdar.Objects
             else
             {
                 // is deployed somewhere
-                if (this.X < this.DeploymentX - this.centerRadius / 2)
+                if (this.X < this.DeploymentBuilding.X)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > this.DeploymentX + this.centerRadius / 2)
+                else if (this.X > this.DeploymentBuilding.X + this.DeploymentBuilding.Width)
                 {
                     this.Direction = Direction.Left;
                 }
-
-                // when near the desired spot, can be slow and randomly change direction
-                // and also farming
-                if (this.X < this.DeploymentX + this.centerRadius / 2 && this.X > this.DeploymentX - this.centerRadius / 2)
+                else
                 {
                     this.isFast = false;
-                    if (this.CanBeFarming)
+
+                    if (Tools.GetRandom(VillageScreen.farmingMoneyProbability) == 1)
                     {
-                        this.IsFarming = true;
+                        Game1.MessageBuffer.AddMessage("New coin from farming!", MessageType.Opportunity);
+                        coins.Add(new Coin(this.X + this.Width / 2, Offset.Floor2));
                     }
 
                     if (Tools.GetRandom(128) == 1)

@@ -3,13 +3,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Nazdar.Objects
 {
-    public class Tool : BaseObject
+    public class MedicalKit : BaseObject
     {
-        public const string Name = "Tool";
+        public const string Name = "MedicalKit";
 
-        public Tool()
+        public MedicalKit()
         {
-            this.Sprite = Assets.Images["Crate2"];
+            this.Sprite = Assets.Images["MedicalKit"];
             this.Hitbox = new Rectangle(0, 0, this.Sprite.Width, this.Sprite.Height);
         }
 

@@ -81,13 +81,17 @@ namespace Nazdar.Screens
             {
                 farmer.Caliber = Farmer.DefaultCaliber + this.GetUpgradeAttackAddition();
             }
+            foreach (Medic medic in this.medics)
+            {
+                medic.Caliber = Medic.DefaultCaliber + this.GetUpgradeAttackAddition();
+            }
 
             // upgrade and heal player
             this.player.Caliber = Player.DefaultCaliber + this.GetUpgradeAttackAddition();
             this.player.Health = 100;
 
             // go to the next village?
-            if (this.center.Level == MaxCenterLevel)
+            if (this.center.Level == Center.MaxCenterLevel)
             {
                 // finish the game? or another village?
                 if (this.Game.Village == MaxVillage)
@@ -97,7 +101,6 @@ namespace Nazdar.Screens
                 else
                 {
                     this.ToAnotherVillage();
-
                 }
             }
         }
@@ -118,6 +121,7 @@ namespace Nazdar.Screens
             this.armories.Clear();
             this.arsenals.Clear();
             this.farms.Clear();
+            this.hospitals.Clear();
             this.towers.Clear();
             this.homelesses.Clear();
             this.coins.Clear();
