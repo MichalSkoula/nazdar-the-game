@@ -15,18 +15,10 @@ namespace Nazdar.Objects
 
         private List<Bullet> bullets = new List<Bullet>();
 
-        private List<Animation> animations = new List<Animation>()
-        {
-            new Animation(Assets.Images["EnemyRight"], 4, 10),
-            new Animation(Assets.Images["EnemyRight"], 4, 10),
-            new Animation(Assets.Images["EnemyLeft"], 4, 10),
-            new Animation(Assets.Images["EnemyLeft"], 4, 10),
-        };
+        private List<Animation> animations = new List<Animation>();
 
         public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
         {
-            this.Anim = this.animations[(int)Direction.Left];
-            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = health;
             this.Caliber = caliber;
@@ -40,6 +32,16 @@ namespace Nazdar.Objects
                 2,
                 Assets.ParticleTextureRegions["Blood"]
             );
+
+            // choose random animation and set it for all directions
+            int randomAnimIndex = Tools.GetRandom(5);
+            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Right"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Right"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Left"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Left"], 4, 10));
+
+            this.Anim = this.animations[(int)Direction.Left];
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
         }
 
         public new void Update(float deltaTime)

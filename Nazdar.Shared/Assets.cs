@@ -32,20 +32,32 @@ namespace Nazdar
             Assets.Images["SoldierRight"] = content.Load<Texture2D>("Soldier/soldier_right");
             Assets.Images["PeasantLeft"] = content.Load<Texture2D>("Peasant/peasant_left");
             Assets.Images["PeasantRight"] = content.Load<Texture2D>("Peasant/peasant_right");
-            Assets.Images["EnemyLeft"] = content.Load<Texture2D>("Enemy/enemy_left");
-            Assets.Images["EnemyRight"] = content.Load<Texture2D>("Enemy/enemy_right");
             Assets.Images["HomelessLeft"] = content.Load<Texture2D>("Homeless/homeless_left");
             Assets.Images["HomelessRight"] = content.Load<Texture2D>("Homeless/homeless_right");
             Assets.Images["FarmerLeft"] = content.Load<Texture2D>("Farmer/farmer_left");
             Assets.Images["FarmerRight"] = content.Load<Texture2D>("Farmer/farmer_right");
             Assets.Images["MedicLeft"] = content.Load<Texture2D>("Medic/medic_left");
             Assets.Images["MedicRight"] = content.Load<Texture2D>("Medic/medic_right");
+
+            Assets.Images["Enemy1Left"] = content.Load<Texture2D>("Enemy/enemy1_left");
+            Assets.Images["Enemy1Right"] = content.Load<Texture2D>("Enemy/enemy1_right");
+            Assets.Images["Enemy2Left"] = content.Load<Texture2D>("Enemy/enemy2_left");
+            Assets.Images["Enemy2Right"] = content.Load<Texture2D>("Enemy/enemy2_right");
+            Assets.Images["Enemy3Left"] = content.Load<Texture2D>("Enemy/enemy3_left");
+            Assets.Images["Enemy3Right"] = content.Load<Texture2D>("Enemy/enemy3_right");
+            Assets.Images["Enemy4Left"] = content.Load<Texture2D>("Enemy/enemy4_left");
+            Assets.Images["Enemy4Right"] = content.Load<Texture2D>("Enemy/enemy4_right");
+            Assets.Images["Enemy5Left"] = content.Load<Texture2D>("Enemy/enemy5_left");
+            Assets.Images["Enemy5Right"] = content.Load<Texture2D>("Enemy/enemy5_right");
+
             Assets.Images["BulletLeft"] = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
             Assets.Images["BulletStatic"] = content.Load<Texture2D>("Bullet/bullet");
-
             Assets.Images["Coin"] = content.Load<Texture2D>("Coin/coin");
             Assets.Images["CoinStatic"] = content.Load<Texture2D>("Coin/coin_static");
+            Assets.Images["Crate"] = content.Load<Texture2D>("Tools/crate");
+            Assets.Images["Crate2"] = content.Load<Texture2D>("Tools/crate2");
+            Assets.Images["MedicalKit"] = content.Load<Texture2D>("Tools/medicalkit");
 
             Assets.Images["Center"] = content.Load<Texture2D>("Buildings/Center");
             Assets.Images["Armory"] = content.Load<Texture2D>("Buildings/Armory");
@@ -53,10 +65,6 @@ namespace Nazdar
             Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
             Assets.Images["Farm"] = content.Load<Texture2D>("Buildings/Farm");
             Assets.Images["Hospital"] = content.Load<Texture2D>("Buildings/Hospital");
-
-            Assets.Images["Crate"] = content.Load<Texture2D>("Tools/crate");
-            Assets.Images["Crate2"] = content.Load<Texture2D>("Tools/crate2");
-            Assets.Images["MedicalKit"] = content.Load<Texture2D>("Tools/medicalkit");
 
             Assets.Images["KeyboardUp"] = content.Load<Texture2D>("Controls/keyboard/up");
             Assets.Images["KeyboardRight"] = content.Load<Texture2D>("Controls/keyboard/right");
