@@ -213,7 +213,7 @@ namespace Nazdar.Screens
             else
             {
                 // night
-                return MyColor.Black;
+                return MyColor.DarkerViolet;
             }
         }
     }

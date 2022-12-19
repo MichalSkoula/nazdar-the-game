@@ -34,7 +34,7 @@
   <object id="9" name="Arsenal" class="BuildingSpot" x="1040" y="160" width="128" height="32"/>
   <object id="12" name="Tower" class="BuildingSpot" x="1648" y="144" width="64" height="48"/>
   <object id="13" name="Farm" class="BuildingSpot" x="768" y="168" width="160" height="24"/>
-  <object id="14" name="Hospital" class="BuildingSpot" x="1520.33" y="160" width="112" height="32"/>
+  <object id="14" name="Hospital" class="BuildingSpot" x="1520.33" y="152" width="112" height="40"/>
   <object id="15" name="Tower" class="BuildingSpot" x="960" y="144" width="64" height="48"/>
   <object id="16" name="Slum" class="Other" x="320" y="176" width="32" height="16"/>
   <object id="17" name="Slum" class="Other" x="2128" y="176" width="32" height="16"/>
