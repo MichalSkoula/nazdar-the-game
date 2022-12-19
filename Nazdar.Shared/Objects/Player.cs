@@ -5,6 +5,7 @@ using Nazdar.Screens;
 using Nazdar.Shared;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using static Nazdar.Enums;
 using Keyboard = Nazdar.Controls.Keyboard;
@@ -15,12 +16,6 @@ namespace Nazdar.Objects
     {
         private static readonly int moneyLimit = 48;
         private static readonly int cartridgeLimit = 32;
-
-        public List<Bullet> Bullets
-        {
-            get;
-            private set;
-        }
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -128,7 +123,7 @@ namespace Nazdar.Objects
         public void Load(dynamic saveData)
         {
             // load player
-            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Y, this.Anim.FrameWidth, this.Anim.FrameHeight);
+            this.Hitbox = new Rectangle((int)saveData.Hitbox.X, this.Y, (int)saveData.Hitbox.Width, (int)saveData.Hitbox.Height);
             this.Direction = (Direction)saveData.Direction;
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
@@ -146,6 +141,24 @@ namespace Nazdar.Objects
                     this.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Direction)bullet.Direction, (int)bullet.Caliber));
                 }
             }
+        }
+
+        // hides BasePerson.GetSaveData
+        public new object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Direction,
+                this.Health,
+                this.Days,
+                this.Money,
+                this.Cartridges,
+                this.Kills,
+                this.Caliber,
+                this.BaseScore,
+                Bullets = this.Bullets.Select(b => new { b.Hitbox, b.Direction, b.Caliber }).ToList()
+            };
         }
 
         public new void Update(float deltaTime)

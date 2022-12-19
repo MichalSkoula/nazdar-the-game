@@ -15,12 +15,12 @@ namespace Nazdar.Objects
         public const int ToolCost = 1;
         public int ToolsCount => tools.Count;
 
-        public Farm(int x, int y, Building.Status status, int? toolsCount = 0)
+        public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5)
         {
             this.Sprite = Assets.Images["Farm"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.TimeToBuilt = 5;
+            this.TimeToBuild = ttb;
             this.Type = Building.Type.Farm;
 
             for (int i = 0; i < toolsCount; i++)
@@ -70,6 +70,17 @@ namespace Nazdar.Objects
                 i++;
             }
             base.Update(deltaTime);
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Status,
+                this.ToolsCount,
+                this.TimeToBuild
+            };
         }
     }
 }

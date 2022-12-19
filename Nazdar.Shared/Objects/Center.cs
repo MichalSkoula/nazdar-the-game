@@ -10,12 +10,12 @@ namespace Nazdar.Objects
         public const string Name = "Center";
         public const int MaxCenterLevel = 4;
         public const int CenterRadius = 96;
-        public Center(int x, int y, Building.Status status, int level = 1)
+        public Center(int x, int y, Building.Status status, int level = 1, float ttb = 10)
         {
             this.Sprite = Assets.Images["Center"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.TimeToBuilt = 10;
+            this.TimeToBuild = ttb;
             this.Type = Building.Type.Center;
             this.Level = level;
         }
@@ -25,9 +25,9 @@ namespace Nazdar.Objects
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
 
 
-            if (this.Level + 1 == MaxCenterLevel)
+            if (this.Level == MaxCenterLevel)
             {
-                spriteBatch.DrawString(Assets.Fonts["Small"], "Upgrade to complete level!", new Vector2(this.X + 5, this.Y - 20), this.FinalColor);
+                spriteBatch.DrawString(Assets.Fonts["Small"], "Max level. Repair locomotive now!", new Vector2(this.X + 5, this.Y - 20), this.FinalColor);
             }
             spriteBatch.DrawString(Assets.Fonts["Small"], "Lvl" + this.Level, new Vector2(this.X + 5, this.Y - 10), this.FinalColor);
         }
@@ -35,6 +35,17 @@ namespace Nazdar.Objects
         public new void Update(float deltaTime)
         {
             base.Update(deltaTime);
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Status,
+                this.Level,
+                this.TimeToBuild
+            };
         }
     }
 }

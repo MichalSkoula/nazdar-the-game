@@ -117,10 +117,9 @@ namespace Nazdar.Screens
                 buildingSpot.Draw(this.Game.SpriteBatch);
             }
 
-            if (this.center != null)
-            {
-                this.center.Draw(this.Game.SpriteBatch);
-            }
+            this.center?.Draw(this.Game.SpriteBatch);
+
+            this.locomotive?.Draw(this.Game.SpriteBatch);
 
             foreach (Armory armory in this.armories)
             {

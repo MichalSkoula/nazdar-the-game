@@ -15,12 +15,12 @@ namespace Nazdar.Objects
         private List<MedicalKit> medicalKits = new List<MedicalKit>();
         public int MedicalKitsCount => medicalKits.Count;
 
-        public Hospital(int x, int y, Building.Status status, int? medicalKitsCount = 0)
+        public Hospital(int x, int y, Building.Status status, int? medicalKitsCount = 0, float ttb = 10)
         {
             this.Sprite = Assets.Images["Hospital"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.TimeToBuilt = 5;
+            this.TimeToBuild = ttb;
             this.Type = Building.Type.Hospital;
 
             for (int i = 0; i < medicalKitsCount; i++)
@@ -70,6 +70,17 @@ namespace Nazdar.Objects
                 i++;
             }
             base.Update(deltaTime);
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Status,
+                this.MedicalKitsCount,
+                this.TimeToBuild
+            };
         }
     }
 }

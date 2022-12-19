@@ -15,12 +15,12 @@ namespace Nazdar.Objects
         private List<Weapon> weapons = new List<Weapon>();
         public int WeaponsCount => weapons.Count;
 
-        public Armory(int x, int y, Building.Status status, int? weaponCount = 0)
+        public Armory(int x, int y, Building.Status status, int? weaponCount = 0, float ttb = 5)
         {
             this.Sprite = Assets.Images["Armory"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.TimeToBuilt = 5;
+            this.TimeToBuild = ttb;
             this.Type = Building.Type.Armory;
 
             for (int i = 0; i < weaponCount; i++)
@@ -70,6 +70,17 @@ namespace Nazdar.Objects
                 i++;
             }
             base.Update(deltaTime);
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Status,
+                this.WeaponsCount,
+                this.TimeToBuild
+            };
         }
     }
 }

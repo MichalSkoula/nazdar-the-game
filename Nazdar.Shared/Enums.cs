@@ -88,13 +88,15 @@ namespace Nazdar
                 Farm,
                 Arsenal,
                 Slum, // cant be build
-                Hospital
+                Hospital,
+                Locomotive
             }
 
             public enum Status
             {
                 InProcess,
-                Built
+                Built,
+                Finished // only locomotive...to next level
             }
         }
 

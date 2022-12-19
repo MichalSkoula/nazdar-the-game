@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 using System;
 using static Nazdar.Enums;
 
@@ -11,37 +10,23 @@ namespace Nazdar.Objects
         public BuildingSpot(int x, int y, int width, int height, string type)
         {
             this.Hitbox = new Rectangle(x, y, width, height);
-            switch (type)
+            this.Type = type switch
             {
-                case "Center":
-                    this.Type = Building.Type.Center;
-                    break;
-                case "Armory":
-                    this.Type = Building.Type.Armory;
-                    break;
-                case "Arsenal":
-                    this.Type = Building.Type.Arsenal;
-                    break;
-                case "Tower":
-                    this.Type = Building.Type.Tower;
-                    break;
-                case "Farm":
-                    this.Type = Building.Type.Farm;
-                    break;
-                case "Slum":
-                    this.Type = Building.Type.Slum;
-                    break;
-                case "Hospital":
-                    this.Type = Building.Type.Hospital;
-                    break;
-                default:
-                    throw new ArgumentException();
-            }
+                "Center" => Building.Type.Center,
+                "Armory" => Building.Type.Armory,
+                "Arsenal" => Building.Type.Arsenal,
+                "Tower" => Building.Type.Tower,
+                "Farm" => Building.Type.Farm,
+                "Slum" => Building.Type.Slum,
+                "Hospital" => Building.Type.Hospital,
+                "Locomotive" => Building.Type.Locomotive,
+                _ => throw new ArgumentException(),
+            };
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawRectangle(this.Hitbox, Color.Wheat * 0.05f);
+            spriteBatch.Draw(Assets.Images[this.Type.ToString()], this.Hitbox, this.FinalColor * 0.1f);
         }
 
         public new void Update(float deltaTime)

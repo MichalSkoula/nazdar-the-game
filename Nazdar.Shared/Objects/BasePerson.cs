@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Nazdar.Shared;
+using System.Linq;
 
 namespace Nazdar.Objects
 {
@@ -77,6 +78,18 @@ namespace Nazdar.Objects
             this.Health = 0;
 
             return false;
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Direction,
+                this.Health,
+                this.Caliber,
+                Bullets = this.Bullets.Select(b => new { b.Hitbox, b.Direction, b.Caliber }).ToList()
+            };
         }
     }
 }

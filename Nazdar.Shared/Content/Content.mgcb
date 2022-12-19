@@ -74,6 +74,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Hospital.png
 
+#begin Buildings/Locomotive.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Locomotive.png
+
 #begin Buildings/Tower.png
 /importer:TextureImporter
 /processor:TextureProcessor

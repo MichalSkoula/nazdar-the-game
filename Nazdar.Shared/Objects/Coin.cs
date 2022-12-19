@@ -44,5 +44,13 @@ namespace Nazdar.Objects
                 );
             }
         }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox
+            };
+        }
     }
 }
