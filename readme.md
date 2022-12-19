@@ -12,9 +12,9 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 
 ## TODO
 
-* More levels
+* More levels, every level, something new
 * Music transitions
-* every level, something new
+* New building sprites
 
 ## PACKAGING
 

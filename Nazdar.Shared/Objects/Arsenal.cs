@@ -13,12 +13,12 @@ namespace Nazdar.Objects
         public const int CartridgesCost = 3;
         public const int CartridgesCount = 6;
 
-        public Arsenal(int x, int y, Building.Status status)
+        public Arsenal(int x, int y, Building.Status status, float ttb = 5)
         {
             this.Sprite = Assets.Images["Arsenal"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.TimeToBuilt = 5;
+            this.TimeToBuild = ttb;
             this.Type = Building.Type.Arsenal;
         }
 
@@ -47,6 +47,16 @@ namespace Nazdar.Objects
                     Color.White * alpha
                 );
             }
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Status,
+                this.TimeToBuild
+            };
         }
     }
 }

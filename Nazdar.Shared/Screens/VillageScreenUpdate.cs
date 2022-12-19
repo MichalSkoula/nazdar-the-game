@@ -40,10 +40,8 @@ namespace Nazdar.Screens
             this.UpdateCoins();
 
             // buildings
-            if (this.center != null)
-            {
-                this.center.Update(this.Game.DeltaTime);
-            }
+            this.center?.Update(this.Game.DeltaTime);
+            this.locomotive?.Update(this.Game.DeltaTime);
             this.UpdateArmories();
             this.UpdateArsenals();
             this.UpdateTowers();
@@ -57,6 +55,21 @@ namespace Nazdar.Screens
 
             // other
             this.UpdateDayPhase();
+
+            // go to next village?
+            if (this.locomotive?.Status == Building.Status.Built)
+            {
+                this.locomotive.Status = Building.Status.Finished;
+
+                if (this.Game.Village == MaxVillage)
+                {
+                    this.Won();
+                }
+                else
+                {
+                    this.ToAnotherVillage();
+                }
+            }
         }
 
         private void UpdateEnemies()
@@ -229,40 +242,52 @@ namespace Nazdar.Screens
             foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(armory);
+                break;
             }
             foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(hospital);
+                break;
             }
             foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(arsenal);
+                break;
             }
             foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(tower);
+                break;
             }
             foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
             {
                 this.Build(farm);
+                break;
             }
             if (this.center != null && this.center.Status == Building.Status.InProcess)
             {
                 this.Build(this.center);
+            }
+            if (this.locomotive != null && this.locomotive.Status == Building.Status.InProcess)
+            {
+                this.Build(this.locomotive);
             }
 
             // something to get?
             foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
             {
                 this.Pick(farm);
+                break;
             }
             foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
             {
                 this.Pick(armory);
+                break;
             }
             foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
             {
                 this.Pick(hospital);
+                break;
             }
 
             foreach (Peasant peasant in this.peasants)
@@ -903,6 +928,29 @@ namespace Nazdar.Screens
                                     Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                                 }
                             }
+                        }
+                    }
+                }
+                // Locomotive? Final building? Are we ready?
+                else if (buildingSpot.Type == Building.Type.Locomotive && this.locomotive == null && this.center.Level == Center.MaxCenterLevel)
+                {
+                    // we can build it
+                    this.player.Action = Enums.PlayerAction.Build;
+                    this.player.ActionCost = Locomotive.Cost;
+                    this.player.ActionName = Locomotive.Name + " and continue the journey!";
+
+                    if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                    {
+                        if (this.player.Money < Locomotive.Cost)
+                        {
+                            Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                        }
+                        else
+                        {
+                            Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                            Audio.PlaySound("Rock");
+                            this.player.Money -= Locomotive.Cost;
+                            this.locomotive = new Locomotive(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                         }
                     }
                 }

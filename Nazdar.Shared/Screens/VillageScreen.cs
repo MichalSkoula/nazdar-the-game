@@ -2,6 +2,7 @@
 using Nazdar.Objects;
 using Nazdar.Shared;
 using System.Collections.Generic;
+using System.Linq;
 using static Nazdar.Enums;
 
 namespace Nazdar.Screens
@@ -32,6 +33,7 @@ namespace Nazdar.Screens
 
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private Center center;
+        private Locomotive locomotive;
         private List<Armory> armories = new List<Armory>();
         private List<Arsenal> arsenals = new List<Arsenal>();
         private List<Tower> towers = new List<Tower>();
@@ -57,8 +59,8 @@ namespace Nazdar.Screens
         private int farmLimit = 4;
 
         // X positions for deployments
-        private Tower? leftmostTower = null;
-        private Tower? rightmostTower = null;
+        private Tower? leftmostTower;
+        private Tower? rightmostTower;
         private List<int> slumXs = new List<int>();
 
         public override void Initialize()
@@ -126,32 +128,20 @@ namespace Nazdar.Screens
 
             if (saveData.ContainsKey("enemies"))
             {
-                foreach (var enemy in saveData.GetValue("enemies"))
+                foreach (var data in saveData.GetValue("enemies"))
                 {
-                    if ((bool)enemy.Dead)
-                    {
-                        continue;
-                    }
-                    this.enemies.Add(new Enemy((int)enemy.Hitbox.X, (int)enemy.Hitbox.Y, (Direction)enemy.Direction, (int)enemy.Health, (int)enemy.Caliber));
+                    this.enemies.Add(new Enemy((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
                 }
             }
 
             if (saveData.ContainsKey("soldiers"))
             {
-                foreach (var soldier in saveData.GetValue("soldiers"))
+                foreach (var data in saveData.GetValue("soldiers"))
                 {
-                    if ((bool)soldier.Dead)
+                    var newSoldier = new Soldier((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber);
+                    foreach (var bulletData in data.GetValue("Bullets"))
                     {
-                        continue;
-                    }
-
-                    var newSoldier = new Soldier((int)soldier.Hitbox.X, (int)soldier.Hitbox.Y, (Direction)soldier.Direction, (int)soldier.Health, (int)soldier.Caliber);
-                    if (soldier.ContainsKey("Bullets"))
-                    {
-                        foreach (var bullet in soldier.GetValue("Bullets"))
-                        {
-                            newSoldier.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Direction)bullet.Direction, (int)bullet.Caliber));
-                        }
+                        newSoldier.Bullets.Add(new Bullet((int)bulletData.Hitbox.X, (int)bulletData.Hitbox.Y, (Direction)bulletData.Direction, (int)bulletData.Caliber));
                     }
                     this.soldiers.Add(newSoldier);
                 }
@@ -159,41 +149,41 @@ namespace Nazdar.Screens
 
             if (saveData.ContainsKey("homelesses"))
             {
-                foreach (var homeless in saveData.GetValue("homelesses"))
+                foreach (var data in saveData.GetValue("homelesses"))
                 {
-                    this.homelesses.Add(new Homeless((int)homeless.Hitbox.X, (int)homeless.Hitbox.Y, (Direction)homeless.Direction));
+                    this.homelesses.Add(new Homeless((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction));
                 }
             }
 
             if (saveData.ContainsKey("peasants"))
             {
-                foreach (var peasant in saveData.GetValue("peasants"))
+                foreach (var data in saveData.GetValue("peasants"))
                 {
-                    this.peasants.Add(new Peasant((int)peasant.Hitbox.X, (int)peasant.Hitbox.Y, (Direction)peasant.Direction, (int)peasant.Health, (int)peasant.Caliber));
+                    this.peasants.Add(new Peasant((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
                 }
             }
 
             if (saveData.ContainsKey("farmers"))
             {
-                foreach (var farmer in saveData.GetValue("farmers"))
+                foreach (var data in saveData.GetValue("farmers"))
                 {
-                    this.farmers.Add(new Farmer((int)farmer.Hitbox.X, (int)farmer.Hitbox.Y, (Direction)farmer.Direction, (int)farmer.Health, (int)farmer.Caliber));
+                    this.farmers.Add(new Farmer((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
                 }
             }
 
             if (saveData.ContainsKey("medics"))
             {
-                foreach (var medic in saveData.GetValue("medics"))
+                foreach (var data in saveData.GetValue("medics"))
                 {
-                    this.medics.Add(new Medic((int)medic.Hitbox.X, (int)medic.Hitbox.Y, (Direction)medic.Direction, (int)medic.Health, (int)medic.Caliber));
+                    this.medics.Add(new Medic((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
                 }
             }
 
             if (saveData.ContainsKey("coins"))
             {
-                foreach (var coin in saveData.GetValue("coins"))
+                foreach (var data in saveData.GetValue("coins"))
                 {
-                    this.coins.Add(new Coin((int)coin.Hitbox.X, (int)coin.Hitbox.Y));
+                    this.coins.Add(new Coin((int)data.Hitbox.X, (int)data.Hitbox.Y));
                 }
             }
 
@@ -205,53 +195,56 @@ namespace Nazdar.Screens
 
             if (saveData.ContainsKey("center") && saveData.GetValue("center") != null)
             {
-                var center = saveData.GetValue("center");
-                this.center = new Center((int)center.X, (int)center.Y, (Building.Status)center.Status, (int)center.Level);
+                var data = saveData.GetValue("center");
+                this.center = new Center((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.Level, (float)data.TimeToBuild);
+            }
+
+            if (saveData.ContainsKey("locomotive") && saveData.GetValue("locomotive") != null)
+            {
+                var data = saveData.GetValue("locomotive");
+                this.locomotive = new Locomotive((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild);
             }
 
             if (saveData.ContainsKey("armories"))
             {
-                foreach (var armory in saveData.GetValue("armories"))
+                foreach (var data in saveData.GetValue("armories"))
                 {
-                    this.armories.Add(new Armory((int)armory.Hitbox.X, (int)armory.Hitbox.Y, (Building.Status)armory.Status, (int)armory.WeaponsCount));
+                    this.armories.Add(new Armory((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.WeaponsCount, (float)data.TimeToBuild));
                 }
             }
 
             if (saveData.ContainsKey("arsenals"))
             {
-                foreach (var arsenal in saveData.GetValue("arsenals"))
+                foreach (var data in saveData.GetValue("arsenals"))
                 {
-                    this.arsenals.Add(new Arsenal((int)arsenal.Hitbox.X, (int)arsenal.Hitbox.Y, (Building.Status)arsenal.Status));
+                    this.arsenals.Add(new Arsenal((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild));
                 }
             }
 
             if (saveData.ContainsKey("farms"))
             {
-                foreach (var farm in saveData.GetValue("farms"))
+                foreach (var data in saveData.GetValue("farms"))
                 {
-                    this.farms.Add(new Farm((int)farm.Hitbox.X, (int)farm.Hitbox.Y, (Building.Status)farm.Status, (int)farm.ToolsCount));
+                    this.farms.Add(new Farm((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.ToolsCount, (float)data.TimeToBuild));
                 }
             }
 
             if (saveData.ContainsKey("hospitals"))
             {
-                foreach (var hospital in saveData.GetValue("hospitals"))
+                foreach (var data in saveData.GetValue("hospitals"))
                 {
-                    this.hospitals.Add(new Hospital((int)hospital.Hitbox.X, (int)hospital.Hitbox.Y, (Building.Status)hospital.Status, (int)hospital.MedicalKitsCount));
+                    this.hospitals.Add(new Hospital((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.MedicalKitsCount, (float)data.TimeToBuild));
                 }
             }
 
             if (saveData.ContainsKey("towers"))
             {
-                foreach (var tower in saveData.GetValue("towers"))
+                foreach (var data in saveData.GetValue("towers"))
                 {
-                    var newTower = new Tower((int)tower.Hitbox.X, (int)tower.Hitbox.Y, (Building.Status)tower.Status);
-                    if (tower.ContainsKey("Bullets"))
+                    var newTower = new Tower((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild);
+                    foreach (var bulletData in data.GetValue("Bullets"))
                     {
-                        foreach (var bullet in tower.GetValue("Bullets"))
-                        {
-                            newTower.Bullets.Add(new Bullet((int)bullet.Hitbox.X, (int)bullet.Hitbox.Y, (Direction)bullet.Direction, (int)bullet.Caliber, BulletType.Cannonball));
-                        }
+                        newTower.Bullets.Add(new Bullet((int)bulletData.Hitbox.X, (int)bulletData.Hitbox.Y, (Direction)bulletData.Direction, (int)bulletData.Caliber, BulletType.Cannonball));
                     }
                     this.towers.Add(newTower);
                 }
@@ -266,22 +259,23 @@ namespace Nazdar.Screens
         {
             return new
             {
-                player = this.player,
-                enemies = this.enemies,
-                soldiers = this.soldiers,
-                farmers = this.farmers,
-                homelesses = this.homelesses,
-                peasants = this.peasants,
-                medics = this.medics,
-                center = this.center,
-                armories = this.armories,
-                arsenals = this.arsenals,
-                hospitals = this.hospitals,
-                towers = this.towers,
-                farms = this.farms,
-                coins = this.coins,
-                dayPhase = this.dayPhase,
-                dayPhaseTimer = this.dayPhaseTimer,
+                player = this.player.GetSaveData(),
+                enemies = this.enemies.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                soldiers = this.soldiers.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                farmers = this.farmers.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                homelesses = this.homelesses.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                peasants = this.peasants.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                medics = this.medics.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                center = this.center?.GetSaveData(),
+                locomotive = this.locomotive?.GetSaveData(),
+                armories = this.armories.Select(item => item.GetSaveData()).ToList(),
+                arsenals = this.arsenals.Select(item => item.GetSaveData()).ToList(),
+                hospitals = this.hospitals.Select(item => item.GetSaveData()).ToList(),
+                towers = this.towers.Select(item => item.GetSaveData()).ToList(),
+                farms = this.farms.Select(item => item.GetSaveData()).ToList(),
+                coins = this.coins.Select(item => item.GetSaveData()).ToList(),
+                this.dayPhase,
+                this.dayPhaseTimer,
                 village = this.Game.Village,
             };
         }

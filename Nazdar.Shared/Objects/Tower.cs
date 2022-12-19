@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using static Nazdar.Enums;
 
 namespace Nazdar.Objects
@@ -13,14 +13,12 @@ namespace Nazdar.Objects
         private int shootPower = 1;
         private int shootRate = 95; // 0 fastest, 100 slowest
 
-        public List<Bullet> Bullets { get; private set; } = new List<Bullet>();
-
-        public Tower(int x, int y, Building.Status status)
+        public Tower(int x, int y, Building.Status status, float ttb = 4)
         {
             this.Sprite = Assets.Images["Tower"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
-            this.TimeToBuilt = 5;
+            this.TimeToBuild = ttb;
             this.Caliber = 20;
             this.Type = Building.Type.Tower;
         }
@@ -69,6 +67,17 @@ namespace Nazdar.Objects
                 bullet.Update(deltaTime);
             }
             this.Bullets.RemoveAll(p => p.ToDelete);
+        }
+
+        public object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Status,
+                Bullets = this.Bullets.Select(b => new { b.Hitbox, b.Direction, b.Caliber }).ToList(),
+                this.TimeToBuild
+            };
         }
     }
 }

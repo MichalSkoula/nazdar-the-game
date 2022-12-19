@@ -1,11 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace Nazdar.Objects
 {
     public abstract class BaseObject
     {
         public int Caliber { get; set; }
+
+        public List<Bullet> Bullets { get; protected set; } = new List<Bullet>();
 
         public int Level { get; set; } = 1;
 

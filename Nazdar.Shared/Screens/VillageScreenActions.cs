@@ -89,20 +89,6 @@ namespace Nazdar.Screens
             // upgrade and heal player
             this.player.Caliber = Player.DefaultCaliber + this.GetUpgradeAttackAddition();
             this.player.Health = 100;
-
-            // go to the next village?
-            if (this.center.Level == Center.MaxCenterLevel)
-            {
-                // finish the game? or another village?
-                if (this.Game.Village == MaxVillage)
-                {
-                    this.Won();
-                }
-                else
-                {
-                    this.ToAnotherVillage();
-                }
-            }
         }
 
         private void ToAnotherVillage()
@@ -117,6 +103,7 @@ namespace Nazdar.Screens
 
             // reset some things
             this.center.Level = 1;
+            this.locomotive = null;
             this.enemies.Clear();
             this.armories.Clear();
             this.arsenals.Clear();

@@ -65,6 +65,7 @@ namespace Nazdar
             Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
             Assets.Images["Farm"] = content.Load<Texture2D>("Buildings/Farm");
             Assets.Images["Hospital"] = content.Load<Texture2D>("Buildings/Hospital");
+            Assets.Images["Locomotive"] = content.Load<Texture2D>("Buildings/Locomotive");
 
             Assets.Images["KeyboardUp"] = content.Load<Texture2D>("Controls/keyboard/up");
             Assets.Images["KeyboardRight"] = content.Load<Texture2D>("Controls/keyboard/right");
