@@ -1,12 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Nazdar.Shared;
 using System.Collections.Generic;
 
 namespace Nazdar.Objects
 {
     public abstract class BaseObject
     {
+        protected Animation Anim { get; set; }
+
         public int Caliber { get; set; }
+
+        protected ParticleSource particleSmoke;
 
         public List<Bullet> Bullets { get; protected set; } = new List<Bullet>();
 

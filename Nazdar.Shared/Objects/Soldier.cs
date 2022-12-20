@@ -42,6 +42,14 @@ namespace Nazdar.Objects
                 2,
                 Assets.ParticleTextureRegions["Blood"]
             );
+
+            this.particleSmoke = new ParticleSource(
+               new Vector2(this.X, this.Y),
+               new Tuple<int, int>(0, this.Height / 2),
+               Direction.Up,
+               0.5f,
+               Assets.ParticleTextureRegions["Smoke"]
+            );
         }
 
         public new void Update(float deltaTime)
@@ -133,6 +141,8 @@ namespace Nazdar.Objects
                 bullet.Update(deltaTime);
             }
             this.Bullets.RemoveAll(p => p.ToDelete);
+
+            this.particleSmoke.Update(deltaTime, new Vector2(this.X + (this.Direction == Direction.Left ? 0 : this.Width), this.Y));
         }
 
         public void PrepareToShoot(Direction direction)
@@ -142,13 +152,15 @@ namespace Nazdar.Objects
 
             if (Game1.GlobalTimer % this.shootRate == 0)
             {
-                Audio.PlaySound("GunFire");
                 this.Bullets.Add(new Bullet(
                     this.X + this.Width / 2,
                     this.Y + this.Height / 4,
                     this.Direction,
                     this.Caliber
                 ));
+
+                Audio.PlaySound("GunFire");
+                this.particleSmoke.Run(50);
             }
         }
 
@@ -166,6 +178,7 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Draw(spriteBatch);
+            this.particleSmoke.Draw(spriteBatch);
         }
     }
 }

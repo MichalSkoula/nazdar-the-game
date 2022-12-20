@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Nazdar.Shared;
 using System;
 using System.Linq;
 using static Nazdar.Enums;
@@ -12,20 +13,37 @@ namespace Nazdar.Objects
         public const string Name = "Tower";
         private int shootPower = 1;
         private int shootRate = 95; // 0 fastest, 100 slowest
+        public bool CanFire { get; set; }
 
         public Tower(int x, int y, Building.Status status, float ttb = 4)
         {
             this.Sprite = Assets.Images["Tower"];
+            this.Anim = new Animation(Assets.Images["TowerFiring"], 4, 10);
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
             this.TimeToBuild = ttb;
             this.Caliber = 20;
             this.Type = Building.Type.Tower;
+
+            this.particleSmoke = new ParticleSource(
+               new Vector2(this.X, this.Y),
+               new Tuple<int, int>(0, this.Height / 2),
+               Direction.Up,
+               0.5f,
+               Assets.ParticleTextureRegions["Smoke"]
+            );
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            // draw sprite and on that, draw animation?
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
+            if (this.CanFire)
+            {
+                this.Anim.Draw(spriteBatch, this.Hitbox);
+            }
+
+            this.particleSmoke.Draw(spriteBatch);
 
             // bullets
             foreach (var bullet in this.Bullets)
@@ -48,13 +66,16 @@ namespace Nazdar.Objects
             if (Game1.GlobalTimer % this.shootRate == 1)
             {
                 this.Bullets.Add(new Bullet(
-                    this.X + this.Width / 2,
+                    this.X + (int)(this.Width * (this.Direction == Direction.Left ? 0.25f : 0.75f)),
                     this.Y + this.Height / 4,
                     this.Direction,
                     this.Caliber,
                     BulletType.Cannonball,
                     this.shootPower
                 ));
+
+                Audio.PlaySound("GunFire");
+                this.particleSmoke.Run(75);
             }
         }
 
@@ -67,6 +88,20 @@ namespace Nazdar.Objects
                 bullet.Update(deltaTime);
             }
             this.Bullets.RemoveAll(p => p.ToDelete);
+
+            // anim change frame
+            if (this.CanFire)
+            {
+                this.Anim.Loop = true;
+            }
+            else
+            {
+                this.Anim.Loop = false;
+                this.Anim.ResetLoop();
+            }
+            this.Anim.Update(deltaTime);
+
+            this.particleSmoke.Update(deltaTime, new Vector2(this.X + (this.Direction == Direction.Left ? 0 : this.Width), this.Y));
         }
 
         public object GetSaveData()
