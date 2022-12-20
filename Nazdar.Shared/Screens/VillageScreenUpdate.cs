@@ -366,11 +366,13 @@ namespace Nazdar.Screens
                 // can shoot at closest enemy?
                 if (tower.Status == Building.Status.Built)
                 {
+                    tower.CanFire = false;
                     int range = Enums.Screen.Width / 2; // half of the visible screen
                     foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - tower.X)))
                     {
                         if (Math.Abs(enemy.X - tower.X) < range)
                         {
+                            tower.CanFire = true;
                             tower.PrepareToShoot(
                                 (enemy.X + enemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right,
                                 enemy.X,

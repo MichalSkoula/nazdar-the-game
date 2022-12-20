@@ -81,8 +81,6 @@ namespace Nazdar.Objects
         public int ActionCost { get; set; }
         public string ActionName { get; set; }
 
-        private ParticleSource particleSmoke;
-
         private bool canJump = true;
 
         public const int DefaultCaliber = 32;

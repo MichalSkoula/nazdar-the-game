@@ -26,7 +26,6 @@ namespace Nazdar.Objects
             }
         }
 
-        protected Animation Anim { get; set; }
         protected int Speed { get; set; }
 
         public BasePerson DeploymentPerson = null;

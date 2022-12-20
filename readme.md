@@ -63,3 +63,6 @@ dotnet mgcb-editor
 
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika
+
+### other
+* http://legie100.com/legiovlak/
