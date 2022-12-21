@@ -18,7 +18,8 @@ namespace Nazdar.Objects
         public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5)
         {
             this.Sprite = Assets.Images["Farm"];
-            this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
+            this.Anim = new Animation(Assets.Images["Farm"], 3, 3);
+            this.Hitbox = new Rectangle(x, y, this.Sprite.Width / 3, this.Sprite.Height);
             this.Status = status;
             this.TimeToBuild = ttb;
             this.Type = Building.Type.Farm;
@@ -53,7 +54,8 @@ namespace Nazdar.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
+            //spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
+            this.Anim.Draw(spriteBatch, this.Hitbox);
 
             foreach (var tool in this.tools)
             {
@@ -69,6 +71,11 @@ namespace Nazdar.Objects
                 tool.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - tool.Height);
                 i++;
             }
+
+            // anim change frame
+            this.Anim.Loop = true;
+            this.Anim.Update(deltaTime);
+
             base.Update(deltaTime);
         }
 
