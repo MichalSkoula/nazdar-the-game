@@ -15,6 +15,7 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 * More levels, every level, something new
 * Music transitions
 * New building sprites
+* nárazníkové vozy odminovací na kraje
 
 ## PACKAGING
 
@@ -39,8 +40,7 @@ dotnet mgcb-editor
 * CC-29 color palette - https://lospec.com/palette-list/cc-29
 * characters based on https://0x72.itch.io/pixeldudesmaker 
 * https://essssam.itch.io/rocky-roads
-* https://mariaparragames.itch.io/free-retro-city-assetpack
-* https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat
+* https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat.png
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
 * https://dreammix.itch.io/keyboard-keys-for-ui keyboard
 
