@@ -9,6 +9,11 @@ namespace Nazdar.Objects
         public Building.Type Type;
         public Building.Status Status = Building.Status.InProcess;
 
+        public BaseBuilding() 
+        {
+            this.Alpha = 0.25f;
+        }
+
         public new void Update(float deltaTime)
         {
             base.Update(deltaTime);

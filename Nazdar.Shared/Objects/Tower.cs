@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         private int shootRate = 95; // 0 fastest, 100 slowest
         public bool CanFire { get; set; }
 
-        public Tower(int x, int y, Building.Status status, float ttb = 4)
+        public Tower(int x, int y, Building.Status status, float ttb = 4) : base()
         {
             this.Sprite = Assets.Images["Tower"];
             this.Anim = new Animation(Assets.Images["TowerFiring"], 4, 10);

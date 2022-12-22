@@ -9,7 +9,7 @@ namespace Nazdar.Objects
         public const int Cost = 32;
         public const string Name = "Locomotive";
 
-        public Locomotive(int x, int y, Building.Status status, float ttb = 20)
+        public Locomotive(int x, int y, Building.Status status, float ttb = 20) : base()
         {
             this.Sprite = Assets.Images["Locomotive"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);

@@ -37,6 +37,7 @@ namespace Nazdar
         public int Village { get; set; } = 1;
         public static MessageBuffer MessageBuffer = new MessageBuffer();
         public static int GlobalTimer { get; private set; }
+        public static bool NextLevelAnimation { get; set; } = false;
 
         public Game1()
         {

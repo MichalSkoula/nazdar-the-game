@@ -26,7 +26,7 @@ namespace Nazdar.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.Images[this.Type.ToString()], this.Hitbox, this.FinalColor * 0.1f);
+            spriteBatch.Draw(Assets.Images[this.Type.ToString()], this.Hitbox, this.FinalColor);
         }
 
         public new void Update(float deltaTime)

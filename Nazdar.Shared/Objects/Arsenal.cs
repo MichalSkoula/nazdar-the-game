@@ -13,7 +13,7 @@ namespace Nazdar.Objects
         public const int CartridgesCost = 3;
         public const int CartridgesCount = 6;
 
-        public Arsenal(int x, int y, Building.Status status, float ttb = 5)
+        public Arsenal(int x, int y, Building.Status status, float ttb = 5) : base()
         {
             this.Sprite = Assets.Images["Arsenal"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);

@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         public const int ToolCost = 1;
         public int ToolsCount => tools.Count;
 
-        public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5)
+        public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5) : base()
         {
             this.Sprite = Assets.Images["Farm"];
             this.Anim = new Animation(Assets.Images["Farm"], 3, 3);
