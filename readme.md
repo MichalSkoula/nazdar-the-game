@@ -12,10 +12,11 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 
 ## TODO
 
+* some kind of animation after this.locomotive.Status = Building.Status.Finished; ?
 * More levels, every level, something new
-* Music transitions
-* New building sprites
+* New music engine
 * nárazníkové vozy odminovací na kraje
+* autosave
 
 ## PACKAGING
 

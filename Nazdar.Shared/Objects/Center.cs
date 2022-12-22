@@ -10,7 +10,7 @@ namespace Nazdar.Objects
         public const string Name = "Center";
         public const int MaxCenterLevel = 4;
         public const int CenterRadius = 96;
-        public Center(int x, int y, Building.Status status, int level = 1, float ttb = 10)
+        public Center(int x, int y, Building.Status status, int level = 1, float ttb = 10) : base()
         {
             this.Sprite = Assets.Images["Center"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);

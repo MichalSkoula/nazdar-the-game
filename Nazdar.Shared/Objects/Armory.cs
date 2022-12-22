@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         private List<Weapon> weapons = new List<Weapon>();
         public int WeaponsCount => weapons.Count;
 
-        public Armory(int x, int y, Building.Status status, int? weaponCount = 0, float ttb = 5)
+        public Armory(int x, int y, Building.Status status, int? weaponCount = 0, float ttb = 5) : base()
         {
             this.Sprite = Assets.Images["Armory"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);

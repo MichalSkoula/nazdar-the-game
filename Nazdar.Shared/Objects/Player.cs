@@ -165,19 +165,61 @@ namespace Nazdar.Objects
 
             // moving?
             bool isMoving = false;
-            if ((Keyboard.IsPressed(ControlKeys.Right) || Gamepad.IsPressedThumbstick(Direction.Right) || TouchControls.IsPressedRight()) && this.X < VillageScreen.MapWidth - this.Width)
-            {
-                this.X += (int)(deltaTime * this.Speed);
-                this.Direction = Direction.Right;
-                isMoving = true;
-            }
-            else if ((Keyboard.IsPressed(ControlKeys.Left) || Gamepad.IsPressedThumbstick(Direction.Left) || TouchControls.IsPressedLeft()) && this.X > 0)
-            {
-                this.X -= (int)(deltaTime * this.Speed);
-                this.Direction = Direction.Left;
-                isMoving = true;
-            }
 
+            if (Game1.NextLevelAnimation)
+            {
+                if (this.Direction == Direction.Left)
+                {
+                    this.X -= (int)(deltaTime * this.Speed / 2);
+                    isMoving = true;
+                } 
+                else
+                {
+                    this.X += (int)(deltaTime * this.Speed / 2);
+                    isMoving = true;
+                }
+            }
+            else
+            {
+                // move
+                if ((Keyboard.IsPressed(ControlKeys.Right) || Gamepad.IsPressedThumbstick(Direction.Right) || TouchControls.IsPressedRight()) && this.X < VillageScreen.MapWidth - this.Width)
+                {
+                    this.X += (int)(deltaTime * this.Speed);
+                    this.Direction = Direction.Right;
+                    isMoving = true;
+                }
+                else if ((Keyboard.IsPressed(ControlKeys.Left) || Gamepad.IsPressedThumbstick(Direction.Left) || TouchControls.IsPressedLeft()) && this.X > 0)
+                {
+                    this.X -= (int)(deltaTime * this.Speed);
+                    this.Direction = Direction.Left;
+                    isMoving = true;
+                }
+
+                // jump?
+                if ((Keyboard.IsPressed(ControlKeys.Jump) || Gamepad.HasBeenPressed(ControlButtons.Jump) || TouchControls.HasBeenPressedJump()) && this.Y == Enums.Offset.Floor)
+                {
+                    this.Jump();
+                    isMoving = true;
+                }
+
+                // fire
+                if (Keyboard.HasBeenPressed(ControlKeys.Shoot) || Gamepad.HasBeenPressed(ControlButtons.Shoot) || TouchControls.HasBeenPressedShoot())
+                {
+                    if (this.Cartridges > 0)
+                    {
+                        Audio.PlaySound("GunFire");
+                        this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
+                        this.particleSmoke.Run(50);
+                        this.Cartridges--;
+                    }
+                    else
+                    {
+                        Game1.MessageBuffer.AddMessage("No cartridges", MessageType.Danger);
+                    }
+                }
+            }
+ 
+            // moving animation
             if (isMoving)
             {
                 this.Anim.Loop = true;
@@ -191,28 +233,7 @@ namespace Nazdar.Objects
 
             this.Anim.Update(deltaTime);
 
-            // jump?
-            if ((Keyboard.IsPressed(ControlKeys.Jump) || Gamepad.HasBeenPressed(ControlButtons.Jump) || TouchControls.HasBeenPressedJump()) && this.Y == Enums.Offset.Floor)
-            {
-                this.Jump();
-                isMoving = true;
-            }
-
             // bullets
-            if (Keyboard.HasBeenPressed(ControlKeys.Shoot) || Gamepad.HasBeenPressed(ControlButtons.Shoot) || TouchControls.HasBeenPressedShoot())
-            {
-                if (this.Cartridges > 0)
-                {
-                    Audio.PlaySound("GunFire");
-                    this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
-                    this.particleSmoke.Run(50);
-                    this.Cartridges--;
-                }
-                else
-                {
-                    Game1.MessageBuffer.AddMessage("No cartridges", MessageType.Danger);
-                }
-            }
             foreach (var bullet in this.Bullets)
             {
                 bullet.Update(deltaTime);

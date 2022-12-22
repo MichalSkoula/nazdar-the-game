@@ -55,21 +55,7 @@ namespace Nazdar.Screens
 
             // other
             this.UpdateDayPhase();
-
-            // go to next village?
-            if (this.locomotive?.Status == Building.Status.Built)
-            {
-                this.locomotive.Status = Building.Status.Finished;
-
-                if (this.Game.Village == MaxVillage)
-                {
-                    this.Won();
-                }
-                else
-                {
-                    this.ToAnotherVillage();
-                }
-            }
+            this.CheckIfWeCanGoToAnotherVillage();
         }
 
         private void UpdateEnemies()

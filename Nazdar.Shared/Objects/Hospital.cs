@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         private List<MedicalKit> medicalKits = new List<MedicalKit>();
         public int MedicalKitsCount => medicalKits.Count;
 
-        public Hospital(int x, int y, Building.Status status, int? medicalKitsCount = 0, float ttb = 10)
+        public Hospital(int x, int y, Building.Status status, int? medicalKitsCount = 0, float ttb = 10) : base()
         {
             this.Sprite = Assets.Images["Hospital"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
