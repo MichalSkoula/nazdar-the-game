@@ -6,10 +6,10 @@ namespace Nazdar
     {
         public enum Direction
         {
-            Up, // 0
-            Right, // 1
-            Down, // 2
-            Left, // 3
+            Up,     // 0
+            Right,  // 1
+            Down,   // 2
+            Left,   // 3
         }
 
         public enum DayPhase
@@ -58,7 +58,8 @@ namespace Nazdar
             Success,
             Fail,
             Danger,
-            Opportunity
+            Opportunity,
+            Super
         }
 
         // ControlKeys for touchscreen are defined in TouchControl.cs
@@ -114,6 +115,7 @@ namespace Nazdar
             public const int Floor = 172;
             public const int Floor2 = 180;
             public const int MessagesX = Screen.Width - 250;
+            public const int SuperMessageY = 100;
 
             public static int MenuX = 20;
             public static int MenuY = 20;

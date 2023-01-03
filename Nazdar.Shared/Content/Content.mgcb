@@ -746,12 +746,6 @@
 /processorParam:Quality=Best
 /build:Sounds/coinsplash.ogg
 
-#begin Sounds/explosion.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/explosion.ogg
-
 #begin Sounds/gun_fire.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

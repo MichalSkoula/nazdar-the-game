@@ -91,7 +91,6 @@ namespace Nazdar
 
             // load sounds
             Assets.Sounds["Blip"] = content.Load<SoundEffect>("Sounds/blip");
-            Assets.Sounds["Explosion"] = content.Load<SoundEffect>("Sounds/explosion");
             Assets.Sounds["GunFire"] = content.Load<SoundEffect>("Sounds/gun_fire");
             Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coinsplash");
             Assets.Sounds["Rock"] = content.Load<SoundEffect>("Sounds/rock");
