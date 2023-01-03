@@ -18,7 +18,7 @@ namespace Nazdar.Screens
         private readonly FileIO saveFile = new FileIO();
 
         // will be calculated
-        public static int MapWidth = Enums.Screen.Width * 4; // 640 * 4 = 2560px
+        public static int MapWidth;
 
         // game components
         private Player player;
@@ -48,9 +48,13 @@ namespace Nazdar.Screens
         // consts
         public readonly int MaxVillage = Assets.TilesetGroups.Count;
 
-        // some settings - random 0-X == 1
-        private int newEnemyProbability = 192; // every day, it gets -2
+        // some settings - random 0-X == 1 ----------------------------------------------
+        // new enemy settings
+        // every day, it gets -2
+        // every village, it gets - *32 ... village 1 = 224, village 2 = 192, village 3 = 160, ...
+        private static int newEnemyDefaultProbability = 256;
         private int newEnemyProbabilityLowLimit = 16;
+
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newHomelessProbability = 512 * 3;
         private int newCoinProbability = 512 * 4;
@@ -65,6 +69,8 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
+            MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
+
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, Offset.Floor);
 
@@ -83,7 +89,7 @@ namespace Nazdar.Screens
             }
 
             // load other object from tileset
-            foreach (var other in Assets.TilesetGroups["village1"].GetObjects("objects", "Other"))
+            foreach (var other in Assets.TilesetGroups["village" + this.Game.Village].GetObjects("objects", "Other"))
             {
                 this.slums.Add(
                     new BuildingSpot(
@@ -91,7 +97,7 @@ namespace Nazdar.Screens
                         (int)other.y,
                         (int)other.width,
                         (int)other.height,
-                        (string)other.name
+                        other.name
                     )
                 );
             }

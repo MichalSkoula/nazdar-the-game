@@ -8,20 +8,23 @@ namespace Nazdar.Messages
         public string Text { get; set; }
         public double Ttl;
         public Color Color;
+        public MessageType Type;
 
-        public Message(string text, MessageType? messageType, double ttl)
+        public Message(string text, double ttl, MessageType? messageType = MessageType.Info)
         {
             this.Text = text;
             this.Ttl = ttl;
+            this.Type = (MessageType)messageType;
 
             this.Color = messageType switch
             {
-                MessageType.Info => Color.White,
-                MessageType.Success => Color.LightGreen,
-                MessageType.Fail => Color.IndianRed,
-                MessageType.Danger => Color.Orange,
-                MessageType.Opportunity => Color.LightBlue,
-                _ => Color.White,
+                MessageType.Info => MyColor.White,
+                MessageType.Success => MyColor.Green,
+                MessageType.Fail => MyColor.Red,
+                MessageType.Danger => MyColor.Orange,
+                MessageType.Opportunity => MyColor.Turquoise,
+                MessageType.Super => MyColor.Violet,
+                _ => MyColor.White,
             };
         }
     }

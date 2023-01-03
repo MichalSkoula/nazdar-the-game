@@ -48,18 +48,19 @@ dotnet mgcb-editor
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue
 * https://opengameart.org/content/chill-lofi-inspired chill_lofi
 * https://opengameart.org/content/lofi-again lofiagain
-* https://opengameart.org/content/6-zombie-sounds zombies
-* https://ommaste.itch.io/ommaste-starter-sound-pack explosion
+* https://opengameart.org/content/the-reach-of-hunger all metal songs
+* https://opengameart.org/content/rizys-sleep-music menu song
+
+### sounds
+* https://opengameart.org/content/coin-splash coin
+* https://opengameart.org/content/mining-pick rock
 * https://opengameart.org/content/15-vocal-male-strainhurtpainjump-sounds jump
 * https://opengameart.org/content/collection-gun-sounds gunfire
 * https://opengameart.org/content/monster-sound-pack-volume-1 monster 
 * https://opengameart.org/content/monster-sound-effects-2 monster
 * https://opengameart.org/content/monster-sound-effects-pack monster
 * https://opengameart.org/content/80-cc0-rpg-sfx metal sound
-* https://opengameart.org/content/the-reach-of-hunger all metal songs
-* https://opengameart.org/content/rizys-sleep-music menu song
-* https://opengameart.org/content/coin-splash coin
-* https://opengameart.org/content/mining-pick rock
+* https://opengameart.org/content/6-zombie-sounds zombies
 
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika

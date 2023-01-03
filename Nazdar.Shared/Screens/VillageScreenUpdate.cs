@@ -63,8 +63,9 @@ namespace Nazdar.Screens
             // create enemy?
             // - at night
             // - in first half on night
-            // - random - every day it gets more difficult
-            int randomBase = this.newEnemyProbability - this.player.Days * 2;
+            // - random - every day it gets more difficult, every village also
+            int randomBase = newEnemyDefaultProbability - this.Game.Village * 32 - this.player.Days * 4;
+            Tools.Dump(randomBase);
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;
@@ -77,9 +78,9 @@ namespace Nazdar.Screens
 
                 // every day it gets more difficult
                 int newEnemyCaliber = Enemy.DefaultCaliber + this.player.Days;
-                if (newEnemyCaliber > this.newEnemyMaxCaliber)
+                if (newEnemyCaliber > newEnemyMaxCaliber)
                 {
-                    newEnemyCaliber = this.newEnemyMaxCaliber;
+                    newEnemyCaliber = newEnemyMaxCaliber;
                 }
 
                 // choose direction
@@ -436,16 +437,19 @@ namespace Nazdar.Screens
             }
 
             // enemies and player
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            if (Game1.NextLevelAnimation == false)
             {
-                if (this.player.Hitbox.Intersects(enemy.Hitbox))
+                foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
                 {
-                    this.EnemyDie(enemy);
-                    Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
-
-                    if (!this.player.TakeHit(enemy.Caliber))
+                    if (this.player.Hitbox.Intersects(enemy.Hitbox))
                     {
-                        this.GameOver();
+                        this.EnemyDie(enemy);
+                        Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
+
+                        if (!this.player.TakeHit(enemy.Caliber))
+                        {
+                            this.GameOver();
+                        }
                     }
                 }
             }

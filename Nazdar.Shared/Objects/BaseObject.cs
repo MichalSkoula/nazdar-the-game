@@ -74,7 +74,7 @@ namespace Nazdar.Objects
             {
                 return Hitbox.X;
             }
-            protected set
+            set
             {
                 var temp = this.Hitbox;
                 temp.X = value;

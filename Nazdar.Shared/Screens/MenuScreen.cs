@@ -147,7 +147,7 @@ namespace Nazdar.Screens
             // back to splash screen
             if (this.buttons.GetValueOrDefault("controlsButton").HasBeenClicked())
             {
-                this.Game.LoadScreen(typeof(Screens.SplashScreen));
+                this.Game.LoadScreen(typeof(Screens.ControlsScreen));
             }
 
             // open save folder (only if DEBUG)

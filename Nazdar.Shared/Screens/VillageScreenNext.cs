@@ -13,6 +13,7 @@ namespace Nazdar.Screens
         {
             if (this.locomotive?.Status == Building.Status.Built)
             {
+                Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
                 this.locomotive.Status = Building.Status.Finished;
             }
 
@@ -32,6 +33,8 @@ namespace Nazdar.Screens
                 }
                 else
                 {
+                    Game1.MessageBuffer.DeleteSuperMessage();
+
                     // near locomotive? end this
                     if (this.Game.Village == MaxVillage)
                     {
@@ -40,7 +43,6 @@ namespace Nazdar.Screens
                     else
                     {
                         this.ToAnotherVillage();
-
                     }
                 }
             }
@@ -70,6 +72,11 @@ namespace Nazdar.Screens
             this.player.Kills = 0;
             this.player.Caliber = Player.DefaultCaliber;
             this.player.Bullets.Clear();
+
+            // set new center based on new map size
+            MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
+            this.player.X = MapWidth / 2;
+            this.center.X = MapWidth / 2 - this.center.Width / 2; // center is always in the centre
 
             // take every other with me + reset caliber
             this.peasants = this.peasants.Where((x, i) => i % 2 == 0).ToList();

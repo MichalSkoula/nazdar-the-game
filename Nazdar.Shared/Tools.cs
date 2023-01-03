@@ -119,5 +119,10 @@ namespace Nazdar.Shared
         {
             System.Diagnostics.Debug.WriteLine(str);
         }
+
+        public static void Dump(int number)
+        {
+            System.Diagnostics.Debug.WriteLine(number.ToString());
+        }
     }
 }

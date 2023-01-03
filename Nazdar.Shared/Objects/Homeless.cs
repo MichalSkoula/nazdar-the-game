@@ -25,7 +25,7 @@ namespace Nazdar.Objects
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = 100;
-            this.Alpha = 0.6f;
+            //this.Alpha = 0.6f;
             this.Speed = 61;
             this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
         }
