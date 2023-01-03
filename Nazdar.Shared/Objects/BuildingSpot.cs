@@ -26,7 +26,11 @@ namespace Nazdar.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Assets.Images[this.Type.ToString()], this.Hitbox, this.FinalColor);
+            spriteBatch.Draw(
+                Assets.Images[this.Type.ToString()],
+                this.Hitbox,
+                this.Type == Building.Type.Slum ? Color.White : this.FinalColor
+            );
         }
 
         public new void Update(float deltaTime)

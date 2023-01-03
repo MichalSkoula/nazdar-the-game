@@ -16,7 +16,6 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 * More levels, every level, something new
 * New music engine
 * nárazníkové vozy odminovací na kraje
-* autosave
 
 ## PACKAGING
 

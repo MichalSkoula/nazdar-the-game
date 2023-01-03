@@ -516,10 +516,33 @@ namespace Nazdar.Screens
                 }
             }
 
+            // enemies and medics
+            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            {
+                foreach (Medic medic in this.medics.Where(medic => medic.Dead == false))
+                {
+                    if (!enemy.Dead && !medic.Dead && enemy.Hitbox.Intersects(medic.Hitbox))
+                    {
+                        if (!enemy.TakeHit(medic.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Enemy killed by medic", MessageType.Success);
+                            this.EnemyDie(enemy);
+                        }
+                        if (!medic.TakeHit(enemy.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Innocent medic killed by enemy", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            medic.Dead = true;
+                        }
+                    }
+                }
+            }
+
             this.soldiers.RemoveAll(p => p.ToDelete);
             this.enemies.RemoveAll(p => p.ToDelete);
             this.peasants.RemoveAll(p => p.ToDelete);
             this.farmers.RemoveAll(p => p.ToDelete);
+            this.medics.RemoveAll(p => p.ToDelete);
         }
 
         private void UpdateThingsCollisions()
@@ -584,7 +607,7 @@ namespace Nazdar.Screens
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         hospital.DropMedicalKit();
-                        this.medics.Add(new Medic(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Soldier.DefaultCaliber + this.GetUpgradeAttackAddition()));
+                        this.medics.Add(new Medic(peasant.Hitbox.X, Offset.Floor, peasant.Direction, caliber: Medic.DefaultCaliber + this.GetUpgradeAttackAddition()));
                     }
                 }
             }
@@ -986,12 +1009,15 @@ namespace Nazdar.Screens
 
                 if (this.dayPhase == DayPhase.Day)
                 {
-                    Game1.MessageBuffer.AddMessage("Brace yourself", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage("Brace yourselfs", MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
                 }
                 else
                 {
+                    this.saveFile.Save(this.GetSaveData());
+                    Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
+
                     Game1.MessageBuffer.AddMessage("New dawn", MessageType.Success);
                     this.player.Days++;
                     this.dayPhase = DayPhase.Day;
@@ -1016,7 +1042,7 @@ namespace Nazdar.Screens
             foreach (Homeless homeless in this.homelesses)
             {
                 // get nearest slum and szukaj around it
-                homeless.DeploymentX = this.slumXs.OrderBy(s => Math.Abs(s - homeless.X)).FirstOrDefault();
+                homeless.DeploymentX = this.slums.OrderBy(s => Math.Abs(s.X - homeless.X)).FirstOrDefault().X;
                 homeless.Update(this.Game.DeltaTime);
             }
         }

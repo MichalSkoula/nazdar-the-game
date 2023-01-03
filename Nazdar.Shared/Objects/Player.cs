@@ -172,7 +172,7 @@ namespace Nazdar.Objects
                 {
                     this.X -= (int)(deltaTime * this.Speed / 2);
                     isMoving = true;
-                } 
+                }
                 else
                 {
                     this.X += (int)(deltaTime * this.Speed / 2);
@@ -218,7 +218,7 @@ namespace Nazdar.Objects
                     }
                 }
             }
- 
+
             // moving animation
             if (isMoving)
             {

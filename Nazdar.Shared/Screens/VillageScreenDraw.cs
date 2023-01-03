@@ -116,6 +116,10 @@ namespace Nazdar.Screens
             {
                 buildingSpot.Draw(this.Game.SpriteBatch);
             }
+            foreach (BuildingSpot inactiveBuildingSpot in this.slums)
+            {
+                inactiveBuildingSpot.Draw(this.Game.SpriteBatch);
+            }
 
             this.center?.Draw(this.Game.SpriteBatch);
 

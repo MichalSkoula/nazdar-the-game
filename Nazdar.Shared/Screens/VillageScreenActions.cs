@@ -1,7 +1,6 @@
 ﻿using MonoGame.Extended.Screens;
 using Nazdar.Objects;
 using Nazdar.Shared;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using static Nazdar.Enums;
@@ -40,8 +39,9 @@ namespace Nazdar.Screens
 
         private void CreateHomeless()
         {
+            var randomSlum = this.slums[Tools.GetRandom(this.slums.Count)];
             this.homelesses.Add(new Homeless(
-                this.slumXs[Tools.GetRandom(this.slumXs.Count)],
+                randomSlum.X + randomSlum.Width / 2,
                 Offset.Floor,
                 Direction.Right
             ));

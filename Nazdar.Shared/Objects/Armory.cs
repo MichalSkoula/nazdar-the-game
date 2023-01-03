@@ -10,7 +10,7 @@ namespace Nazdar.Objects
         public const int Cost = 4;
         public const string Name = "Armory";
 
-        public const int WeaponCost = 1;
+        public const int WeaponCost = 2;
         private int weaponLimit = 6;
         private List<Weapon> weapons = new List<Weapon>();
         public int WeaponsCount => weapons.Count;

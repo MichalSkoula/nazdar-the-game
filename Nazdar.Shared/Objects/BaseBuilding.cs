@@ -9,7 +9,7 @@ namespace Nazdar.Objects
         public Building.Type Type;
         public Building.Status Status = Building.Status.InProcess;
 
-        public BaseBuilding() 
+        public BaseBuilding()
         {
             this.Alpha = 0.25f;
         }
