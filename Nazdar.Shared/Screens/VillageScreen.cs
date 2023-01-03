@@ -32,6 +32,7 @@ namespace Nazdar.Screens
         private List<Coin> coins = new List<Coin>();
 
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
+        private List<BuildingSpot> slums = new List<BuildingSpot>();
         private Center center;
         private Locomotive locomotive;
         private List<Armory> armories = new List<Armory>();
@@ -61,7 +62,6 @@ namespace Nazdar.Screens
         // X positions for deployments
         private Tower? leftmostTower;
         private Tower? rightmostTower;
-        private List<int> slumXs = new List<int>();
 
         public override void Initialize()
         {
@@ -85,10 +85,15 @@ namespace Nazdar.Screens
             // load other object from tileset
             foreach (var other in Assets.TilesetGroups["village1"].GetObjects("objects", "Other"))
             {
-                if (other.name == "Slum")
-                {
-                    slumXs.Add((int)other.x);
-                }
+                this.slums.Add(
+                    new BuildingSpot(
+                        (int)other.x,
+                        (int)other.y,
+                        (int)other.width,
+                        (int)other.height,
+                        (string)other.name
+                    )
+                );
             }
 
             // set save slot and maybe load?

@@ -10,7 +10,7 @@ namespace Nazdar.Objects
         public const int Cost = 4;
         public const string Name = "Hospital";
 
-        public const int MedicalKitCost = 1;
+        public const int MedicalKitCost = 4;
         private int medicalKitLimit = 6;
         private List<MedicalKit> medicalKits = new List<MedicalKit>();
         public int MedicalKitsCount => medicalKits.Count;
