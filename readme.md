@@ -12,10 +12,10 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 
 ## TODO
 
-* some kind of animation after this.locomotive.Status = Building.Status.Finished; ?
-* More levels, every level, something new
-* New music engine
+* upgrades and locomotives should be more expensive
+* maybe only one upgrade a day
 * nárazníkové vozy odminovací na kraje
+* map view - view progress and villages
 
 ## PACKAGING
 

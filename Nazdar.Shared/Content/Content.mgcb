@@ -479,6 +479,9 @@
 #begin Envs/2_village.tmx
 /copy:Envs/2_village.tmx
 
+#begin Envs/3_village.tmx
+/copy:Envs/3_village.tmx
+
 #begin Envs/Rocky Roads/tileset forest.png
 /importer:TextureImporter
 /processor:TextureProcessor
