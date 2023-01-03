@@ -78,7 +78,7 @@ namespace Nazdar.Screens
             this.player.X = MapWidth / 2;
             this.center.X = MapWidth / 2 - this.center.Width / 2; // center is always in the centre
 
-            // take every other with me + reset caliber
+            // take every person other with me + reset caliber
             this.peasants = this.peasants.Where((x, i) => i % 2 == 0).ToList();
             foreach (var p in this.peasants)
             {
@@ -97,6 +97,16 @@ namespace Nazdar.Screens
             {
                 f.Caliber = Farmer.DefaultCaliber;
             }
+
+            this.medics = this.medics.Where((x, i) => i % 2 == 0).ToList();
+            foreach (var m in this.medics)
+            {
+                m.Caliber = Medic.DefaultCaliber;
+            }
+
+            // reset dayphase
+            dayPhase = DayPhase.Day;
+            dayPhaseTimer = (int)DayNightLength.Day;
 
             // save
             this.saveFile.Save(this.GetSaveData());
