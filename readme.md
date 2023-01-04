@@ -16,6 +16,8 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 * maybe only one upgrade a day
 * nárazníkové vozy odminovací na kraje
 * map view - view progress and villages
+* screen shake hh
+* mouse is unnecessary.... Keyboard, Touch and Gamepad 
 
 ## PACKAGING
 
