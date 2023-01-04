@@ -18,6 +18,7 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 * map view - view progress and villages
 * screen shake hh
 * mouse is unnecessary.... Keyboard, Touch and Gamepad 
+* boj na blízko menší kalibr
 
 ## PACKAGING
 
