@@ -10,7 +10,9 @@ namespace Nazdar.Objects
         public const string Name = "Center";
         public const int MaxCenterLevel = 4;
         public const int CenterRadius = 96;
-        public Center(int x, int y, Building.Status status, int level = 1, float ttb = 10) : base()
+        public bool HasBeenUpgradedToday = false;
+
+        public Center(int x, int y, Building.Status status, int level = 1, float ttb = 10, bool hasBeenUpgradedToday = false) : base()
         {
             this.Sprite = Assets.Images["Center"];
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
@@ -18,6 +20,7 @@ namespace Nazdar.Objects
             this.TimeToBuild = ttb;
             this.Type = Building.Type.Center;
             this.Level = level;
+            this.HasBeenUpgradedToday = hasBeenUpgradedToday;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -43,7 +46,8 @@ namespace Nazdar.Objects
                 this.Hitbox,
                 this.Status,
                 this.Level,
-                this.TimeToBuild
+                this.TimeToBuild,
+                this.HasBeenUpgradedToday
             };
         }
     }
