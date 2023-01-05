@@ -12,6 +12,11 @@ namespace Nazdar.Controls
 
         public static MouseState GetState(bool isActive)
         {
+            if (Game1.DisableMouse)
+            {
+                return currentMouseState;
+            }
+
             previousMouseState = currentMouseState;
             currentMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
 

@@ -207,7 +207,7 @@ namespace Nazdar.Screens
             if (saveData.ContainsKey("center") && saveData.GetValue("center") != null)
             {
                 var data = saveData.GetValue("center");
-                this.center = new Center((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.Level, (float)data.TimeToBuild);
+                this.center = new Center((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.Level, (float)data.TimeToBuild, (bool)data.HasBeenUpgradedToday);
             }
 
             if (saveData.ContainsKey("locomotive") && saveData.GetValue("locomotive") != null)

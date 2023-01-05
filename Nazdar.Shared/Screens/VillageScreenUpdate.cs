@@ -443,10 +443,13 @@ namespace Nazdar.Screens
                 {
                     if (this.player.Hitbox.Intersects(enemy.Hitbox))
                     {
-                        this.EnemyDie(enemy);
-                        Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
-
-                        if (!this.player.TakeHit(enemy.Caliber))
+                        if (!enemy.TakeHit(this.player.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
+                            this.EnemyDie(enemy);
+                        }
+                        // player is mega strong
+                        if (!this.player.TakeHit(enemy.Caliber / 2))
                         {
                             this.GameOver();
                         }
@@ -656,7 +659,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built && this.center.Level < Center.MaxCenterLevel)
+                    else if (this.center.Status == Building.Status.Built && this.center.Level < Center.MaxCenterLevel && this.center.HasBeenUpgradedToday == false)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
@@ -1021,6 +1024,11 @@ namespace Nazdar.Screens
                 {
                     this.saveFile.Save(this.GetSaveData());
                     Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
+
+                    if (this.center != null)
+                    {
+                        this.center.HasBeenUpgradedToday = false;
+                    }
 
                     Game1.MessageBuffer.AddMessage("New dawn", MessageType.Success);
                     this.player.Days++;

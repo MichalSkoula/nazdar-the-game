@@ -33,6 +33,8 @@ namespace Nazdar
 
         public static JObject SaveTempData { get; set; }
 
+        public static bool DisableMouse = true;
+
         // world variables
         public int Village { get; set; } = 1;
         public static MessageBuffer MessageBuffer = new MessageBuffer();
@@ -53,6 +55,12 @@ namespace Nazdar
         {
             // 60 fps
             this.TargetElapsedTime = TimeSpan.FromSeconds(1.0 / 60.0f);
+
+            // mouse?
+            if (DisableMouse)
+            {
+                IsMouseVisible = false;
+            }
 
             base.Initialize();
 
