@@ -122,6 +122,8 @@ namespace Nazdar
             public static int MenuFooter = 340;
 
             public static int RowLimit = 16;
+
+            public static int MapTilesOffset = 20 * 16;
         }
 
         public static class Screen

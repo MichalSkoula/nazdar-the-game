@@ -65,7 +65,6 @@ namespace Nazdar.Screens
             // - in first half on night
             // - random - every day it gets more difficult, every village also
             int randomBase = newEnemyDefaultProbability - this.Game.Village * 32 - this.player.Days * 4;
-            Tools.Dump(randomBase);
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;

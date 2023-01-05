@@ -187,6 +187,17 @@ namespace Nazdar
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
                 content.Load<Texture2D>("Envs/tileset1")
             );
+
+            Assets.TilesetGroups["left"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
+                content.Load<Texture2D>("Envs/tileset1")
+            );
+            Assets.TilesetGroups["right"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
+                content.Load<Texture2D>("Envs/tileset1")
+            );
         }
     }
 }

@@ -21,7 +21,9 @@ namespace Nazdar.Screens
             this.GraphicsDevice.Clear(currentColor);
 
             // background - tileset
+            Assets.TilesetGroups["left"].Draw("ground", this.Game.SpriteBatch, -Offset.MapTilesOffset);
             Assets.TilesetGroups["village" + this.Game.Village].Draw("ground", this.Game.SpriteBatch);
+            Assets.TilesetGroups["right"].Draw("ground", this.Game.SpriteBatch, MapWidth);
 
             // stats ------------------------------------------------------------------------------------
             int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
