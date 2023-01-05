@@ -39,7 +39,7 @@ namespace Nazdar.Shared
             return this.TilesetMap.Width * this.TilesetMap.TileWidth;
         }
 
-        public void Draw(string layerName, SpriteBatch spriteBatch)
+        public void Draw(string layerName, SpriteBatch spriteBatch, int offset = 0)
         {
             var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
             for (var i = 0; i < layer.data.Length; i++)
@@ -52,7 +52,7 @@ namespace Nazdar.Shared
                     int column = tileFrame % this.Tileset.Columns;
                     int row = (int)Math.Floor(tileFrame / (double)this.Tileset.Columns);
 
-                    float x = (i % this.TilesetMap.Width) * this.TilesetMap.TileWidth;
+                    float x = (i % this.TilesetMap.Width) * this.TilesetMap.TileWidth + offset;
                     float y = (float)Math.Floor(i / (double)this.TilesetMap.Width) * this.TilesetMap.TileHeight;
 
                     Rectangle tilesetRec = new Rectangle(this.Tileset.TileWidth * column, this.Tileset.TileHeight * row, this.Tileset.TileWidth, this.Tileset.TileHeight);
