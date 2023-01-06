@@ -27,7 +27,7 @@ namespace Nazdar.Screens
             }
 
             // player
-            this.player.Update(this.Game.DeltaTime);
+            this.player.Update(this.Game.DeltaTime, this.camera);
             this.camera.Follow(this.player);
 
             // game objects
