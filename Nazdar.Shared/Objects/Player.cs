@@ -159,7 +159,7 @@ namespace Nazdar.Objects
             };
         }
 
-        public new void Update(float deltaTime)
+        public void Update(float deltaTime, Camera camera)
         {
             base.Update(deltaTime);
 
@@ -207,6 +207,7 @@ namespace Nazdar.Objects
                 {
                     if (this.Cartridges > 0)
                     {
+                        camera.Shake();
                         Audio.PlaySound("GunFire");
                         this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
                         this.particleSmoke.Run(50);
