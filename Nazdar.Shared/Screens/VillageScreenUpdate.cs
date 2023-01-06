@@ -21,6 +21,7 @@ namespace Nazdar.Screens
             {
                 // save
                 this.saveFile.Save(this.GetSaveData());
+                Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
 
                 // back to menu
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
@@ -73,7 +74,6 @@ namespace Nazdar.Screens
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
             {
                 Audio.PlayRandomSound("EnemySpawns");
-                Game1.MessageBuffer.AddMessage("New enemy!", MessageType.Danger);
 
                 // every day it gets more difficult
                 int newEnemyCaliber = Enemy.DefaultCaliber + this.player.Days;
@@ -287,7 +287,6 @@ namespace Nazdar.Screens
             // create new?
             if (Tools.GetRandom(this.newCoinProbability) == 1)
             {
-                Game1.MessageBuffer.AddMessage("New coin!", MessageType.Opportunity);
                 this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
             }
 
@@ -387,7 +386,6 @@ namespace Nazdar.Screens
                         if (!enemy.TakeHit(bullet.Caliber))
                         {
                             this.EnemyDie(enemy);
-                            Game1.MessageBuffer.AddMessage("Bullet kill by player", MessageType.Success);
                         }
                     }
                 }
@@ -407,7 +405,6 @@ namespace Nazdar.Screens
                             if (!enemy.TakeHit(bullet.Caliber))
                             {
                                 this.EnemyDie(enemy);
-                                Game1.MessageBuffer.AddMessage("Bullet kill by tower", MessageType.Success);
                             }
                         }
                     }
@@ -428,7 +425,6 @@ namespace Nazdar.Screens
                             if (!enemy.TakeHit(bullet.Caliber))
                             {
                                 this.EnemyDie(enemy);
-                                Game1.MessageBuffer.AddMessage("Bullet kill by soldier", MessageType.Success);
                             }
                         }
                     }
@@ -444,7 +440,6 @@ namespace Nazdar.Screens
                     {
                         if (!enemy.TakeHit(this.player.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Bare hands kill", MessageType.Success);
                             this.EnemyDie(enemy);
                         }
                         // player is mega strong
@@ -465,12 +460,11 @@ namespace Nazdar.Screens
                     {
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Enemy killed by soldier", MessageType.Success);
                             this.EnemyDie(enemy);
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Soldier killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Heroic soldier killed by enemy", MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             soldier.Dead = true;
                         }
@@ -487,7 +481,6 @@ namespace Nazdar.Screens
                     {
                         if (!enemy.TakeHit(peasant.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Enemy killed by peasant", MessageType.Success);
                             this.EnemyDie(enemy);
                         }
                         if (!peasant.TakeHit(enemy.Caliber))
@@ -509,7 +502,6 @@ namespace Nazdar.Screens
                     {
                         if (!enemy.TakeHit(farmer.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Enemy killed by farmer", MessageType.Success);
                             this.EnemyDie(enemy);
                         }
                         if (!farmer.TakeHit(enemy.Caliber))
@@ -531,7 +523,6 @@ namespace Nazdar.Screens
                     {
                         if (!enemy.TakeHit(medic.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Enemy killed by medic", MessageType.Success);
                             this.EnemyDie(enemy);
                         }
                         if (!medic.TakeHit(enemy.Caliber))
@@ -558,7 +549,6 @@ namespace Nazdar.Screens
             {
                 if (this.player.Hitbox.Intersects(coin.Hitbox) && this.player.CanAddMoney())
                 {
-                    Game1.MessageBuffer.AddMessage("Coin acquired", MessageType.Success);
                     Audio.PlaySound("Coin");
                     this.player.Money++;
                     coin.ToDelete = true;
@@ -798,7 +788,7 @@ namespace Nazdar.Screens
                                     }
                                     else
                                     {
-                                        Game1.MessageBuffer.AddMessage("Hospital is full", MessageType.Fail);
+                                        Game1.MessageBuffer.AddMessage("Can't buy any more medical kits", MessageType.Fail);
                                     }
                                 }
                                 else
@@ -1015,7 +1005,7 @@ namespace Nazdar.Screens
 
                 if (this.dayPhase == DayPhase.Day)
                 {
-                    Game1.MessageBuffer.AddMessage("Brace yourselfs", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage("Brace yourselfs, enemies are coming", MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
                 }

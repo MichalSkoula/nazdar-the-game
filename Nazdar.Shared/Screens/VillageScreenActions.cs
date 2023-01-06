@@ -52,7 +52,6 @@ namespace Nazdar.Screens
             // maybe drop something?
             if (Tools.GetRandom(this.enemyDropProbability) == 1)
             {
-                Game1.MessageBuffer.AddMessage("New coin! Enemy drop.", MessageType.Opportunity);
                 this.coins.Add(new Coin(enemy.X, Offset.Floor2));
             }
 
