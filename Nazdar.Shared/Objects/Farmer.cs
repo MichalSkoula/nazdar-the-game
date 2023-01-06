@@ -123,7 +123,6 @@ namespace Nazdar.Objects
 
                     if (Tools.GetRandom(VillageScreen.farmingMoneyProbability) == 1)
                     {
-                        Game1.MessageBuffer.AddMessage("New coin from farming!", MessageType.Opportunity);
                         coins.Add(new Coin(this.X + this.Width / 2, Offset.Floor2));
                     }
 

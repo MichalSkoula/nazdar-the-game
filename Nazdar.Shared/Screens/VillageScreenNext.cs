@@ -110,6 +110,7 @@ namespace Nazdar.Screens
 
             // save
             this.saveFile.Save(this.GetSaveData());
+            Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
 
             // back to map menu
             this.Game.LoadScreen(typeof(Screens.MapScreen));

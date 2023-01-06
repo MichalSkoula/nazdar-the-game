@@ -29,7 +29,7 @@ namespace Nazdar.Objects
             {
                 this.Status = Building.Status.Built;
                 this.TimeToBuild = 0;
-                Game1.MessageBuffer.AddMessage("Building built", MessageType.Success);
+                Game1.MessageBuffer.AddMessage(this.Type.ToString() + " built", MessageType.Success);
             }
         }
     }
