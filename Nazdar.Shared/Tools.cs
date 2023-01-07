@@ -76,7 +76,7 @@ namespace Nazdar.Shared
             if (saveData != null)
             {
                 int score = 0;
-                int village = 0;
+                int village = 1;
                 int days = 0;
                 int money = 0;
 
@@ -105,7 +105,7 @@ namespace Nazdar.Shared
                 }
 
                 return new string[] {
-                    "Village " + village,
+                    "Mission " + village + ". - " + (Villages)village,
                     "Day " + days,
                     "Score: " + score,
                     "Money: " + money,

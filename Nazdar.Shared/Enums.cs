@@ -143,5 +143,20 @@ namespace Nazdar
             UWP,
             Android
         }
+
+        public enum Villages
+        {
+            Chelyabinsk = 1,
+            Maryanovka = 2,
+            Irkutsk = 3,
+            Zlatoust = 4,
+            Penza = 5,
+            Lipjag = 6,
+            Samara = 7,
+            Ufa = 8,
+            Yekaterinburg = 9,
+            Kazan = 10,
+
+        }
     }
 }
