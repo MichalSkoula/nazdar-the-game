@@ -97,7 +97,7 @@ namespace Nazdar.Screens
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Village " + this.Game.Village.ToString(),
+                this.Game.Village + ". " + (Villages)this.Game.Village,
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 80),
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(

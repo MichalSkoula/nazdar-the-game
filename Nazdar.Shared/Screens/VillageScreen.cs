@@ -56,7 +56,7 @@ namespace Nazdar.Screens
         private int newEnemyProbabilityLowLimit = 16;
 
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
-        private int newHomelessProbability = 512 * 3;
+        private int newHomelessProbability = 512 * 4;
         private int newCoinProbability = 512 * 4;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;

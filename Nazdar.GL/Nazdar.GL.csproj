@@ -26,7 +26,7 @@
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="TiledCS" Version="3.3.3" />
   </ItemGroup>
   <Import Project="..\Nazdar.Shared\Nazdar.Shared.projitems" Label="Shared" />
