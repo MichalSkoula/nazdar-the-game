@@ -123,7 +123,7 @@ namespace Nazdar.Screens
             // save
             this.saveFile.Save(this.GetSaveData());
 
-            // back to main menu
+            // Back to Menu
             this.Game.LoadScreen(typeof(Screens.GameFinishedScreen));
         }
 

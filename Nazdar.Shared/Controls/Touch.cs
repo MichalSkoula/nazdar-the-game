@@ -67,6 +67,35 @@ namespace Nazdar.Controls
             return false;
         }
 
+        public static bool HasBeenPressedAnywhere()
+        {
+            if (Game1.CurrentPlatform != Enums.Platform.Android)
+            {
+                return false;
+            }
+
+            // if hitbox was not "released" previous iteration by any finger, go on
+            foreach (var touch in previousTouchLocations)
+            {
+                if (touch.State == TouchLocationState.Released)
+                {
+                    return false;
+                }
+            }
+
+            // and now it is released... by any finger
+            foreach (var touch in currentTouchLocations)
+            {
+                if (touch.State == TouchLocationState.Released)
+                {
+                    // we can say, well, yes, it has been pressed now!!
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool IsPressed(Rectangle hitbox)
         {
             if (Game1.CurrentPlatform != Enums.Platform.Android)

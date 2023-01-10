@@ -15,7 +15,8 @@ Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 * upgrades and locomotives should be more expensive
 * nárazníkové vozy odminovací na kraje
 * map view - view progress and villages
-* screen shake hh
+* screen shake to more occasions
+* different enemies at higher levels
 
 ## PACKAGING
 

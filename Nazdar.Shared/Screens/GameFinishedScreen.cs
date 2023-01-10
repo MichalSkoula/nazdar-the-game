@@ -20,7 +20,7 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Main Menu"));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu"));
 
             this.Load();
 
@@ -80,7 +80,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "YOU WON", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "YOU WON", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
@@ -96,7 +96,7 @@ namespace Nazdar.Screens
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), Color.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), MyColor.White);
 
             }
 
