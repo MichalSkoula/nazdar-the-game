@@ -22,7 +22,7 @@ namespace Nazdar.Screens
         {
             buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Load last save", true));
             buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "New game"));
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Main Menu"));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu"));
 
             this.Load();
 
@@ -91,7 +91,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), Color.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
@@ -107,7 +107,7 @@ namespace Nazdar.Screens
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), Color.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), MyColor.White);
 
             }
 

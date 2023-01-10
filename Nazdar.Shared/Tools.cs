@@ -105,14 +105,14 @@ namespace Nazdar.Shared
                 }
 
                 return new string[] {
-                    "Mission " + village + ". - " + (Villages)village,
+                    village + ". " + (Villages)village,
                     "Day " + days,
                     "Score: " + score,
                     "Money: " + money,
                 };
             }
 
-            return new string[] { " ", " ", " " };
+            return new string[] { " ", " ", " ", " " };
         }
 
         public static void Dump(string str)

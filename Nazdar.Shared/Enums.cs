@@ -147,16 +147,13 @@ namespace Nazdar
         public enum Villages
         {
             Chelyabinsk = 1,
-            Maryanovka = 2,
-            Irkutsk = 3,
-            Zlatoust = 4,
-            Penza = 5,
-            Lipjag = 6,
-            Samara = 7,
-            Ufa = 8,
-            Yekaterinburg = 9,
-            Kazan = 10,
-
+            Omsk = 2,
+            Pemza = 3,
+            Samara = 4,
+            Ufa = 5,
+            Yekaterinburg = 6,
+            Kazan = 7,
+            Vladivostok = 8
         }
     }
 }

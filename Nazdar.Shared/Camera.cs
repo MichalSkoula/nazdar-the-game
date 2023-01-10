@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Nazdar.Shared;
 using System.Threading.Tasks;
-using System;
 
 namespace Nazdar
 {
