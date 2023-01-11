@@ -207,7 +207,8 @@ namespace Nazdar.Objects
                 {
                     if (this.Cartridges > 0)
                     {
-                        camera.Shake();
+                        MyShake.Shake();
+                        MyVibration.Vibrate();
                         Audio.PlaySound("GunFire");
                         this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
                         this.particleSmoke.Run(50);

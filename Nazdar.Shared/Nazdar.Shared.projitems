@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\TouchControls.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\Message.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Messages\MessageBuffer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyShake.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Farm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Farmer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Hospital.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Version.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MyVibration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />

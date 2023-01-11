@@ -28,6 +28,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="TiledCS" Version="3.3.3" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.4" />
   </ItemGroup>
   <Import Project="..\Nazdar.Shared\Nazdar.Shared.projitems" Label="Shared" />
   <ItemGroup>
