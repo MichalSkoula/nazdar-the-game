@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
@@ -18,7 +17,7 @@ namespace Nazdar.Screens
         private readonly string[] intro =
         {
             "The Czechoslovak Legion were volunteer armed forces of Czech and Slovaks, fighting ",
-            "on the side of the Entente powers during World War I, to win the support of the",
+            "on the side of the Allied Powers during World War I, to win the support of the",
             "Allied Powers for the independence of Bohemia, Moravia and Slovak territories",
             "from the Austro-Hungarian Empire.",
             "",

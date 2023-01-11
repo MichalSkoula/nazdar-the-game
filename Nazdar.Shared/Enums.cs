@@ -149,7 +149,7 @@ namespace Nazdar
             Chelyabinsk = 1,
             Omsk = 2,
             Pemza = 3,
-            Samara = 4,
+            Lipjag = 4,
             Ufa = 5,
             Yekaterinburg = 6,
             Kazan = 7,
