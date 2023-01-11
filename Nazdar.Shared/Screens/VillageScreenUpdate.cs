@@ -438,6 +438,9 @@ namespace Nazdar.Screens
                 {
                     if (this.player.Hitbox.Intersects(enemy.Hitbox))
                     {
+                        MyShake.Shake();
+                        MyVibration.Vibrate();
+
                         if (!enemy.TakeHit(this.player.Caliber))
                         {
                             this.EnemyDie(enemy);

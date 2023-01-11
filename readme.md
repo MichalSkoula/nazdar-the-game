@@ -10,13 +10,6 @@ Homepage: https://skoula.cz/nazdar
 
 Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 
-## TODO
-
-* upgrades and locomotives should be more expensive
-* nárazníkové vozy odminovací na kraje
-* screen shake to more occasions
-* different enemies at higher levels
-
 ## PACKAGING
 
 https://docs.monogame.net/articles/packaging_games.html
