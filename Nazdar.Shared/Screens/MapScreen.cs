@@ -28,7 +28,7 @@ namespace Nazdar.Screens
         {
             { 
                 1, new string[] {
-                    "May 14 1918, Chelyabinsk. An eastbound train ",
+                    "May 1918, Chelyabinsk. An eastbound train ",
                     "bearing Legion forces encountered a westbound",
                     "train bearing Hungarians, who were loyal to the",
                     "Central Powers and who regarded Legion troops ",
@@ -44,7 +44,7 @@ namespace Nazdar.Screens
             },
             {
                 2, new string[] {
-                    "May 25 1918, Omsk. The Bolsheviks attacked the ",
+                    "May 1918, Omsk. The Bolsheviks attacked the ",
                     "legion train at the Maryanovka station. At night,",
                     "the legionnaires made a successful counterattack",
                     "and captured the armaments."
@@ -52,32 +52,32 @@ namespace Nazdar.Screens
             },
             {
                 3, new string[] {
-                    "May 30 1918, Penza."
+                    "May 1918, Penza."
                 }
             },
             {
                 4, new string[] {
-                    "June 8 1918, Samara."
+                    "June 1918, Lipjag, velká bitva."
                 }
             },
             {
                 5, new string[] {
-                    "June 23 1918, Ufa."
+                    "June 1918, Ufa."
                 }
             },
             {
                 6, new string[] {
-                    "July 25 1918, Yekaterinburg. (týden předem zabili cara)"
+                    "July 1918, Yekaterinburg. (týden předem zabili cara)"
                 }
             },
             {
                 7, new string[] {
-                    "August 6 1918, Kazan (zlaty poklad)."
+                    "August 6 1918, Kazan (zlaty poklad, za měsíc ho rudi dobyli zpět to mesto) ."
                 }
             },
             {
                 8, new string[] {
-                    "? 1918, Vladivostok."
+                    "? 1918, Vladivostok. A odjezd lodi"
                 }
             },
 
