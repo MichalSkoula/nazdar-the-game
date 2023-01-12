@@ -482,6 +482,9 @@
 #begin Envs/3_village.tmx
 /copy:Envs/3_village.tmx
 
+#begin Envs/4_village.tmx
+/copy:Envs/4_village.tmx
+
 #begin Envs/left.tmx
 /copy:Envs/left.tmx
 

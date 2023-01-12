@@ -120,9 +120,6 @@ namespace Nazdar.Screens
         {
             Game1.MessageBuffer.AddMessage("YOU WON!!!!", MessageType.Success);
 
-            // save
-            this.saveFile.Save(this.GetSaveData());
-
             // Back to Menu
             this.Game.LoadScreen(typeof(Screens.GameFinishedScreen));
         }

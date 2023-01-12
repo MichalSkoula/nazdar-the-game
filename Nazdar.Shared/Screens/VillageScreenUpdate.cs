@@ -85,11 +85,11 @@ namespace Nazdar.Screens
                 // choose direction
                 if (Tools.GetRandom(2) == 0)
                 {
-                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber));
+                    this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber, villageNumber: this.Game.Village));
                 }
                 else
                 {
-                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber));
+                    this.enemies.Add(new Enemy(MapWidth, Offset.Floor, Direction.Left, caliber: newEnemyCaliber, villageNumber: this.Game.Village));
                 }
             }
 
@@ -957,6 +957,11 @@ namespace Nazdar.Screens
                         }
                         else
                         {
+                            // save
+                            this.saveFile.Save(this.GetSaveData());
+                            Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
+
+                            // start building
                             Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                             Audio.PlaySound("Rock");
                             this.player.Money -= Locomotive.Cost;

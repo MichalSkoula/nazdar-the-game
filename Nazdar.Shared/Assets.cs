@@ -15,6 +15,7 @@ namespace Nazdar
         public static Dictionary<string, SpriteFont> Fonts = new Dictionary<string, SpriteFont>();
         public static Dictionary<string, Effect> Effects = new Dictionary<string, Effect>();
         public static Dictionary<string, TilesetGroup> TilesetGroups = new Dictionary<string, TilesetGroup>();
+        public static Dictionary<string, TilesetGroup> TilesetEdges = new Dictionary<string, TilesetGroup>();
         public static Dictionary<string, TextureRegion2D> ParticleTextureRegions = new Dictionary<string, TextureRegion2D>();
         public static Dictionary<string, List<Song>> SongsCollection = new Dictionary<string, List<Song>>();
         public static Dictionary<string, List<SoundEffect>> SoundsCollection = new Dictionary<string, List<SoundEffect>>();
@@ -187,13 +188,18 @@ namespace Nazdar
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
                 content.Load<Texture2D>("Envs/tileset1")
             );
+            Assets.TilesetGroups["village4"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/4_village.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
+                content.Load<Texture2D>("Envs/tileset1")
+            );
 
-            Assets.TilesetGroups["left"] = new TilesetGroup(
+            Assets.TilesetEdges["left"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
                 content.Load<Texture2D>("Envs/tileset1")
             );
-            Assets.TilesetGroups["right"] = new TilesetGroup(
+            Assets.TilesetEdges["right"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
                 content.Load<Texture2D>("Envs/tileset1")
