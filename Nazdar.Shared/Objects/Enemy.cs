@@ -17,7 +17,7 @@ namespace Nazdar.Objects
 
         private List<Animation> animations = new List<Animation>();
 
-        public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
+        public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber, int villageNumber = 1)
         {
             this.Direction = direction;
             this.Health = health;
@@ -33,8 +33,11 @@ namespace Nazdar.Objects
                 Assets.ParticleTextureRegions["Blood"]
             );
 
-            // choose random animation and set it for all directions
-            int randomAnimIndex = Tools.GetRandom(5);
+            // every village adds one potentional enemy type (sprite)
+            int maxAnimIndex = 5; // number of sprites
+            int villages = Assets.TilesetGroups.Count;
+            int randomAnimIndex = Tools.GetRandom(villages > maxAnimIndex ? maxAnimIndex : villageNumber);
+            // choose random enemy animation and set it for all directions
             this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Right"], 4, 10));
             this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Right"], 4, 10));
             this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Left"], 4, 10));

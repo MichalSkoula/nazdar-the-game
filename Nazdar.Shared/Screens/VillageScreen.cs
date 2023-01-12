@@ -132,6 +132,11 @@ namespace Nazdar.Screens
                 return false;
             }
 
+            if (saveData.ContainsKey("village"))
+            {
+                this.Game.Village = (int)saveData.village;
+            }
+
             if (saveData.ContainsKey("player"))
             {
                 this.player.Load(saveData.GetValue("player"));
@@ -141,7 +146,7 @@ namespace Nazdar.Screens
             {
                 foreach (var data in saveData.GetValue("enemies"))
                 {
-                    this.enemies.Add(new Enemy((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
+                    this.enemies.Add(new Enemy((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber, this.Game.Village));
                 }
             }
 

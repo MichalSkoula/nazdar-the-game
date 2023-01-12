@@ -32,13 +32,12 @@
   <object id="21" name="Center" class="BuildingSpot" x="888" y="144" width="144" height="48"/>
   <object id="22" name="Armory" class="BuildingSpot" x="1032" y="152" width="112" height="40"/>
   <object id="23" name="Arsenal" class="BuildingSpot" x="776" y="152" width="112" height="40"/>
-  <object id="24" name="Tower" class="BuildingSpot" x="1144" y="144" width="96" height="48"/>
   <object id="25" name="Farm" class="BuildingSpot" x="448" y="168" width="160" height="24"/>
   <object id="27" name="Tower" class="BuildingSpot" x="680" y="144" width="96" height="48"/>
   <object id="28" name="Slum" class="Other" x="360" y="168" width="48" height="24"/>
   <object id="29" name="Slum" class="Other" x="1688" y="168" width="48" height="24"/>
   <object id="30" name="Farm" class="BuildingSpot" x="1472" y="168" width="160" height="24"/>
   <object id="31" name="Farm" class="BuildingSpot" x="152" y="168" width="160" height="24"/>
-  <object id="33" name="Locomotive" class="BuildingSpot" x="1240" y="144" width="112" height="48"/>
+  <object id="33" name="Locomotive" class="BuildingSpot" x="1144" y="144" width="112" height="48"/>
  </objectgroup>
 </map>
