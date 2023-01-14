@@ -5,6 +5,7 @@ namespace Nazdar.Shared
     public static class Audio
     {
         public static string CurrentSongCollection { get; set; } = null;
+        public static float SongVolume { get; set; } = 0.5f;
 
         public static void PlaySound(string soundName)
         {
@@ -29,16 +30,48 @@ namespace Nazdar.Shared
         // check if there is a song collection to play; if so, play it
         public static void PlaySongCollection()
         {
-            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.Volume = SongVolume;
             if (CurrentSongCollection != null && MediaPlayer.State != MediaState.Playing/* && MediaPlayer.PlayPosition.TotalSeconds == 0.0f && Assets.SongsCollection.ContainsKey(CurrentSongCollection)*/)
             {
                 MediaPlayer.Play(Assets.SongsCollection[CurrentSongCollection][Tools.GetRandom(Assets.SongsCollection[CurrentSongCollection].Count)]);
             }
         }
 
-        public static void StopSong()
+        public static async void SongTransition(float? finalVolume, string songCollection)
         {
+            if (CurrentSongCollection == songCollection)
+            {
+                return;
+            }
+
+            if (finalVolume == null)
+            {
+                finalVolume = SongVolume;
+            }
+
+            float step = 0.01f;
+
+            // change queue
+            CurrentSongCollection = songCollection;
+
+            // down
+            while (SongVolume > step)
+            {
+                SongVolume -= step;
+                Tools.Dump(SongVolume.ToString());
+                await Task.Delay(10);
+            }
+
+            // change = stop old track
             MediaPlayer.Stop();
+
+            // up
+            while (SongVolume < finalVolume)
+            {
+                SongVolume += step;
+                Tools.Dump(SongVolume.ToString());
+                await Task.Delay(10);
+            }
         }
     }
 }

@@ -91,7 +91,6 @@ namespace Nazdar
             Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontLarge");
 
             // load sounds
-            Assets.Sounds["Blip"] = content.Load<SoundEffect>("Sounds/blip");
             Assets.Sounds["GunFire"] = content.Load<SoundEffect>("Sounds/gun_fire");
             Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coinsplash");
             Assets.Sounds["Rock"] = content.Load<SoundEffect>("Sounds/rock");

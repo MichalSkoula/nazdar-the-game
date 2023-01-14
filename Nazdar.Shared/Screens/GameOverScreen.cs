@@ -26,6 +26,8 @@ namespace Nazdar.Screens
 
             this.Load();
 
+            Audio.SongVolume = 0.25f;
+
             base.Initialize();
         }
 

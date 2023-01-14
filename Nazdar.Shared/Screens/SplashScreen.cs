@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
+using Nazdar.Shared;
 using static Nazdar.Enums;
 using Keyboard = Nazdar.Controls.Keyboard;
 using Mouse = Nazdar.Controls.Mouse;
@@ -34,6 +35,8 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
+            Audio.SongTransition(0.25f, "Menu");
+
             base.Initialize();
         }
 
