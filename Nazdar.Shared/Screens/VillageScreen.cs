@@ -117,9 +117,7 @@ namespace Nazdar.Screens
                 }
             }
 
-            // play songs
-            Audio.StopSong();
-            Audio.CurrentSongCollection = this.dayPhase == DayPhase.Day ? "Day" : "Night";
+            Audio.SongTransition(0.5f, this.dayPhase == DayPhase.Day ? "Day" : "Night");
 
             base.Initialize();
         }

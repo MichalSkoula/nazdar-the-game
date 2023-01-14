@@ -48,9 +48,7 @@ namespace Nazdar.Screens
                 this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = Tools.ParseSaveData(saveData);
             }
 
-            // play song(s)
-            Audio.StopSong();
-            Audio.CurrentSongCollection = "Menu";
+            Audio.SongTransition(0.25f, "Menu");
 
             base.Initialize();
         }
@@ -129,7 +127,7 @@ namespace Nazdar.Screens
                 if (SoundEffect.MasterVolume == 0)
                 {
                     SoundEffect.MasterVolume = 1;
-                    Audio.PlaySound("Blip");
+                    Audio.PlayRandomSound("Jumps");
                 }
                 else
                 {

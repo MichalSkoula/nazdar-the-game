@@ -21,6 +21,8 @@ namespace Nazdar.Screens
             buttons.Add("yes", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Yes"));
             buttons.Add("no", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "No", true));
 
+            Audio.SongVolume = 0.25f;
+
             base.Initialize();
         }
 

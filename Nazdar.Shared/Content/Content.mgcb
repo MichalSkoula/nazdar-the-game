@@ -746,12 +746,6 @@
 /processorParam:Quality=Best
 /build:Songs/metal/The_Recon_Mission.mp3
 
-#begin Sounds/blip.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/blip.wav
-
 #begin Sounds/coinsplash.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor

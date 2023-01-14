@@ -1033,8 +1033,7 @@ namespace Nazdar.Screens
                     this.dayPhaseTimer = (int)DayNightLength.Day;
                 }
 
-                Audio.StopSong();
-                Audio.CurrentSongCollection = this.dayPhase == DayPhase.Day ? "Day" : "Night";
+                Audio.SongTransition(null, this.dayPhase == DayPhase.Day ? "Day" : "Night");
             }
         }
 
