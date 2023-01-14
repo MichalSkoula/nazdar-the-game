@@ -2,7 +2,7 @@
 
 Monogame platform/strategic game (awesome).
 
-![obrazek](https://user-images.githubusercontent.com/5922575/192386184-0100011a-ec67-43a7-82ea-13b430e28f80.png)
+![2023-01-12 23_54_36](https://user-images.githubusercontent.com/5922575/212499276-5196677c-db42-419e-b9bc-d9791709fc19.png)
 
 ## LINKS
 
