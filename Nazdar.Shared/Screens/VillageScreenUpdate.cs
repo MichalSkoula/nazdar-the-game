@@ -619,6 +619,8 @@ namespace Nazdar.Screens
             this.player.Action = null;
             this.player.ActionCost = 0;
             this.player.ActionName = null;
+            this.player.ActionEnabled = true;
+
             foreach (var buildingSpot in this.buildingSpots)
             {
                 if (!this.player.Hitbox.Intersects(buildingSpot.Hitbox))
@@ -651,11 +653,15 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built && this.center.Level < Center.MaxCenterLevel && this.center.HasBeenUpgradedToday == false)
+                    else if (this.center.Status == Building.Status.Built && this.center.Level < this.Game.Village && this.center.HasBeenUpgradedToday == false)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
-                        this.player.ActionCost = Center.Cost * (this.center.Level + 1) * 2;
+                        this.player.ActionCost = Center.Cost * (this.center.Level) * 2;
+                        if (this.player.ActionCost > Center.CostMax)
+                        {
+                            this.player.ActionCost = Center.CostMax;
+                        }
                         this.player.ActionName = Center.Name;
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
@@ -942,18 +948,25 @@ namespace Nazdar.Screens
                     }
                 }
                 // Locomotive? Final building? Are we ready?
-                else if (buildingSpot.Type == Building.Type.Locomotive && this.locomotive == null && this.center.Level == Center.MaxCenterLevel)
+                else if (buildingSpot.Type == Building.Type.Locomotive && this.locomotive == null)
                 {
+
                     // we can build it
                     this.player.Action = Enums.PlayerAction.Build;
                     this.player.ActionCost = Locomotive.Cost;
                     this.player.ActionName = Locomotive.Name + " and continue the journey!";
+                    this.player.ActionEnabled = this.center.Level == this.Game.Village ? true : false;
 
+                    // only if center is maxed up
                     if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                     {
                         if (this.player.Money < Locomotive.Cost)
                         {
                             Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                        }
+                        else if (!this.player.ActionEnabled)
+                        {
+                            Game1.MessageBuffer.AddMessage("You must upgrade center base first", MessageType.Fail);
                         }
                         else
                         {
@@ -1040,7 +1053,13 @@ namespace Nazdar.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            if (Tools.GetRandom(this.newHomelessProbability) == 1 && this.homelesses.Count < this.homelessLimit)
+            int randomBase = newHomelessDefaultProbability - this.Game.Village * 128;
+            if (randomBase < this.newHomelessProbabilityLowLimit)
+            {
+                randomBase = this.newHomelessProbabilityLowLimit;
+            }
+
+            if (Tools.GetRandom(randomBase) == 1 && this.homelesses.Count < this.homelessLimit)
             {
                 Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
                 this.CreateHomeless();
