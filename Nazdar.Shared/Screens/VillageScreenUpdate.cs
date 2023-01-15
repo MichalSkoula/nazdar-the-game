@@ -441,6 +441,12 @@ namespace Nazdar.Screens
                         MyShake.Shake();
                         MyVibration.Vibrate();
 
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
                         if (!enemy.TakeHit(this.player.Caliber))
                         {
                             this.EnemyDie(enemy);
@@ -461,6 +467,12 @@ namespace Nazdar.Screens
                 {
                     if (!enemy.Dead && !soldier.Dead && enemy.Hitbox.Intersects(soldier.Hitbox))
                     {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
                         if (!enemy.TakeHit(soldier.Caliber))
                         {
                             this.EnemyDie(enemy);
@@ -482,6 +494,12 @@ namespace Nazdar.Screens
                 {
                     if (!enemy.Dead && !peasant.Dead && enemy.Hitbox.Intersects(peasant.Hitbox))
                     {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
                         if (!enemy.TakeHit(peasant.Caliber))
                         {
                             this.EnemyDie(enemy);
@@ -503,6 +521,12 @@ namespace Nazdar.Screens
                 {
                     if (!enemy.Dead && !farmer.Dead && enemy.Hitbox.Intersects(farmer.Hitbox))
                     {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
                         if (!enemy.TakeHit(farmer.Caliber))
                         {
                             this.EnemyDie(enemy);
@@ -524,6 +548,12 @@ namespace Nazdar.Screens
                 {
                     if (!enemy.Dead && !medic.Dead && enemy.Hitbox.Intersects(medic.Hitbox))
                     {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
                         if (!enemy.TakeHit(medic.Caliber))
                         {
                             this.EnemyDie(enemy);
@@ -1072,6 +1102,11 @@ namespace Nazdar.Screens
                 homeless.DeploymentX = this.slums.OrderBy(s => Math.Abs(s.X - homeless.X)).FirstOrDefault().X;
                 homeless.Update(this.Game.DeltaTime);
             }
+        }
+
+        private bool RandomPeoplesCollision()
+        {
+            return Game1.GlobalTimer % 5 != 0 || Tools.GetRandom(2) != 0;
         }
 
     }
