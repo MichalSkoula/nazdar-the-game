@@ -35,7 +35,10 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            Audio.SongTransition(0.25f, "Menu");
+            // play menu song, but silently
+            Audio.CurrentSongCollection = "Menu";
+            Audio.SongVolume = 0.1f;
+            Audio.PlaySongCollection();
 
             base.Initialize();
         }

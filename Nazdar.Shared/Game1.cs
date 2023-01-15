@@ -38,6 +38,7 @@ namespace Nazdar
         public static MessageBuffer MessageBuffer = new MessageBuffer();
         public static int GlobalTimer { get; private set; }
         public static bool NextLevelAnimation { get; set; } = false;
+        public bool FirstRun { get; set; } = false;
 
         public Game1()
         {

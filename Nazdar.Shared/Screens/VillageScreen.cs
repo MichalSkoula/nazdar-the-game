@@ -55,8 +55,10 @@ namespace Nazdar.Screens
         private static int newEnemyDefaultProbability = 256;
         private int newEnemyProbabilityLowLimit = 16;
 
+        private static int newHomelessDefaultProbability = 2048;
+        private int newHomelessProbabilityLowLimit = 1024;
+
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
-        private int newHomelessProbability = 512 * 4;
         private int newCoinProbability = 512 * 4;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
@@ -104,10 +106,10 @@ namespace Nazdar.Screens
 
             // set save slot and maybe load?
             this.saveFile.File = Game.SaveSlot;
-            if (!this.Load())
+            if (!this.Load() || this.Game.FirstRun)
             {
-                // nothing to load - spark some coins and homelesses
-                for (int i = 0; i < 16 + Tools.GetRandom(4); i++)
+                // spark some coins and homelesses
+                for (int i = 0; i < 12 + Tools.GetRandom(4); i++)
                 {
                     this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
                 }
@@ -115,6 +117,7 @@ namespace Nazdar.Screens
                 {
                     this.CreateHomeless();
                 }
+                this.Game.FirstRun = false;
             }
 
             Audio.SongTransition(0.5f, this.dayPhase == DayPhase.Day ? "Day" : "Night");
@@ -133,6 +136,11 @@ namespace Nazdar.Screens
             if (saveData.ContainsKey("village"))
             {
                 this.Game.Village = (int)saveData.village;
+            }
+
+            if (saveData.ContainsKey("firstRun"))
+            {
+                this.Game.FirstRun = (bool)saveData.firstRun;
             }
 
             if (saveData.ContainsKey("player"))
@@ -291,6 +299,7 @@ namespace Nazdar.Screens
                 this.dayPhase,
                 this.dayPhaseTimer,
                 village = this.Game.Village,
+                firstRun = this.Game.FirstRun,
             };
         }
     }

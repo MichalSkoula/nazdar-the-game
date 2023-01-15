@@ -40,11 +40,18 @@ namespace Nazdar.Shared
 
         public static async void SongTransition(float? finalVolume, string songCollection)
         {
+            // this collection is already playing
             if (CurrentSongCollection == songCollection)
             {
+                // maybe just adjust volume, nothing else
+                if (finalVolume != null) 
+                { 
+                    SongVolume = (float)finalVolume;
+                }
                 return;
             }
 
+            // do not change volume
             if (finalVolume == null)
             {
                 finalVolume = SongVolume;
@@ -59,7 +66,6 @@ namespace Nazdar.Shared
             while (SongVolume > step)
             {
                 SongVolume -= step;
-                Tools.Dump(SongVolume.ToString());
                 await Task.Delay(10);
             }
 
@@ -70,7 +76,6 @@ namespace Nazdar.Shared
             while (SongVolume < finalVolume)
             {
                 SongVolume += step;
-                Tools.Dump(SongVolume.ToString());
                 await Task.Delay(10);
             }
         }

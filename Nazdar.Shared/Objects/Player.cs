@@ -80,6 +80,7 @@ namespace Nazdar.Objects
         public Enums.PlayerAction? Action { get; set; }
         public int ActionCost { get; set; }
         public string ActionName { get; set; }
+        public bool ActionEnabled { get; set; } = true;
 
         private bool canJump = true;
 
@@ -265,7 +266,7 @@ namespace Nazdar.Objects
             if (this.Action != null)
             {
                 // can afford?
-                float alpha = (this.ActionCost <= this.Money ? 1f : 0.6f);
+                float alpha = (this.ActionCost <= this.Money && this.ActionEnabled ? 1f : 0.5f);
 
                 // static image from spritesheet
                 Coin.DrawStatic(spriteBatch, this.ActionCost, this.X, this.Y, alpha, true);

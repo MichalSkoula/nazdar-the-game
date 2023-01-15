@@ -10,7 +10,7 @@ namespace Nazdar.Objects
     public class Tower : BaseBuilding
     {
         public const int Cost = 8;
-        public const string Name = "Tower";
+        public const string Name = "Armored Railcar";
         private int shootPower = 1;
         private int shootRate = 95; // 0 fastest, 100 slowest
         public bool CanFire { get; set; }

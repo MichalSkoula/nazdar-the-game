@@ -7,6 +7,7 @@ namespace Nazdar.Objects
     public class Center : BaseBuilding
     {
         public const int Cost = 2;
+        public const int CostMax = 32;
         public const string Name = "Center";
         public const int MaxCenterLevel = 4;
         public const int CenterRadius = 96;
@@ -26,11 +27,6 @@ namespace Nazdar.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
-
-            if (this.Level == MaxCenterLevel)
-            {
-                spriteBatch.DrawString(Assets.Fonts["Small"], "Max level. Repair locomotive now!", new Vector2(this.X + 5, this.Y - 20), this.FinalColor);
-            }
             spriteBatch.DrawString(Assets.Fonts["Small"], "Lvl" + this.Level, new Vector2(this.X + 5, this.Y - 10), this.FinalColor);
         }
 
