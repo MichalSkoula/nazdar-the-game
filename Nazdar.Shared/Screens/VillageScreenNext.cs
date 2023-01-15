@@ -81,7 +81,7 @@ namespace Nazdar.Screens
             this.player.X = MapWidth / 2;
             this.center.X = MapWidth / 2 - this.center.Width / 2; // center is always in the centre
 
-            // take every person other with me + reset caliber
+            // take every other person with me + reset caliber
             this.peasants = this.peasants.Where((x, i) => i % 2 == 0).ToList();
             foreach (var p in this.peasants)
             {
