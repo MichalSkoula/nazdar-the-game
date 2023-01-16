@@ -171,9 +171,12 @@ namespace Nazdar.Objects
             this.DrawCaliber(spriteBatch);
 
             // bullets
-            foreach (var bullet in this.Bullets)
+            if (!this.Dead)
             {
-                bullet.Draw(spriteBatch);
+                foreach (var bullet in this.Bullets)
+                {
+                    bullet.Draw(spriteBatch);
+                }
             }
 
             // particles

@@ -20,7 +20,7 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu"));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
 
             this.Load();
 
