@@ -151,16 +151,19 @@ namespace Nazdar.Screens
                 // take only built farms
                 List<Farm> builtFarms = this.farms.Where(f => f.Status == Building.Status.Built).ToList();
 
-                // distribute farmers to farms
-                int f = 0; // farm index
-                int[] farmLimitArray = new int[builtFarms.Count];
-                for (int i = 0; i < farmers.Count; i++, f++)
+                if (builtFarms.Count > 0)
                 {
-                    f %= builtFarms.Count;
-                    if (farmLimitArray[f] < this.farmLimit)
+                    // distribute farmers to farms
+                    int f = 0; // farm index
+                    int[] farmLimitArray = new int[builtFarms.Count];
+                    for (int i = 0; i < farmers.Count; i++, f++)
                     {
-                        this.farmers.ElementAt(i).DeploymentBuilding = builtFarms[f];
-                        farmLimitArray[f]++;
+                        f %= builtFarms.Count;
+                        if (farmLimitArray[f] < this.farmLimit)
+                        {
+                            this.farmers.ElementAt(i).DeploymentBuilding = builtFarms[f];
+                            farmLimitArray[f]++;
+                        }
                     }
                 }
             }
@@ -228,8 +231,8 @@ namespace Nazdar.Screens
             }
 
             // if the air is clean, he could do something
-            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0) 
-            { 
+            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            {
                 // something to build?
                 foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
                 {
@@ -271,16 +274,18 @@ namespace Nazdar.Screens
                     this.Pick(farm);
                     break;
                 }
-                foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
-                {
-                    this.Pick(armory);
-                    break;
-                }
-                foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
-                {
-                    this.Pick(hospital);
-                    break;
-                }
+            }
+
+            // there are things he can do always
+            foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
+            {
+                this.Pick(armory);
+                break;
+            }
+            foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
+            {
+                this.Pick(hospital);
+                break;
             }
 
             foreach (Peasant peasant in this.peasants)

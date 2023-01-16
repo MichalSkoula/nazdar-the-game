@@ -44,8 +44,8 @@ namespace Nazdar.Shared
             if (CurrentSongCollection == songCollection)
             {
                 // maybe just adjust volume, nothing else
-                if (finalVolume != null) 
-                { 
+                if (finalVolume != null)
+                {
                     SongVolume = (float)finalVolume;
                 }
                 return;
