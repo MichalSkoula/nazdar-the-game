@@ -10,6 +10,8 @@ Homepage: https://skoula.cz/nazdar
 
 Releases: https://github.com/MichalSkoula/nazdar-the-game/releases
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/mskoula)
+
 ## PACKAGING
 
 https://docs.monogame.net/articles/packaging_games.html
