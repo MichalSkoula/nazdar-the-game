@@ -148,15 +148,18 @@ namespace Nazdar.Screens
 
             if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0 && this.farms.Count > 0)
             {
+                // take only built farms
+                List<Farm> builtFarms = this.farms.Where(f => f.Status == Building.Status.Built).ToList();
+
                 // distribute farmers to farms
                 int f = 0; // farm index
-                int[] farmLimitArray = new int[this.farms.Count];
+                int[] farmLimitArray = new int[builtFarms.Count];
                 for (int i = 0; i < farmers.Count; i++, f++)
                 {
-                    f %= farms.Count;
-                    if (this.farms[f].Status != Building.Status.InProcess && farmLimitArray[f] < this.farmLimit)
+                    f %= builtFarms.Count;
+                    if (farmLimitArray[f] < this.farmLimit)
                     {
-                        this.farmers.ElementAt(i).DeploymentBuilding = this.farms[f];
+                        this.farmers.ElementAt(i).DeploymentBuilding = builtFarms[f];
                         farmLimitArray[f]++;
                     }
                 }
@@ -224,56 +227,60 @@ namespace Nazdar.Screens
                 peasant.IsRunningForItem = null;
             }
 
-            // something to build?
-            foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
-            {
-                this.Build(armory);
-                break;
-            }
-            foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
-            {
-                this.Build(hospital);
-                break;
-            }
-            foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
-            {
-                this.Build(arsenal);
-                break;
-            }
-            foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
-            {
-                this.Build(tower);
-                break;
-            }
-            foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
-            {
-                this.Build(farm);
-                break;
-            }
-            if (this.center != null && this.center.Status == Building.Status.InProcess)
-            {
-                this.Build(this.center);
-            }
-            if (this.locomotive != null && this.locomotive.Status == Building.Status.InProcess)
-            {
-                this.Build(this.locomotive);
-            }
+            // if the air is clean, he could do something
+            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0) 
+            { 
+                // something to build?
+                foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(armory);
+                    break;
+                }
+                foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(hospital);
+                    break;
+                }
+                foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(arsenal);
+                    break;
+                }
+                foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(tower);
+                    break;
+                }
+                foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(farm);
+                    break;
+                }
+                if (this.center != null && this.center.Status == Building.Status.InProcess)
+                {
+                    this.Build(this.center);
+                }
+                if (this.locomotive != null && this.locomotive.Status == Building.Status.InProcess)
+                {
+                    this.Build(this.locomotive);
+                }
 
-            // something to get?
-            foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
-            {
-                this.Pick(farm);
-                break;
-            }
-            foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
-            {
-                this.Pick(armory);
-                break;
-            }
-            foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
-            {
-                this.Pick(hospital);
-                break;
+                // something to get?
+                foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
+                {
+                    this.Pick(farm);
+                    break;
+                }
+                foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
+                {
+                    this.Pick(armory);
+                    break;
+                }
+                foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
+                {
+                    this.Pick(hospital);
+                    break;
+                }
             }
 
             foreach (Peasant peasant in this.peasants)
