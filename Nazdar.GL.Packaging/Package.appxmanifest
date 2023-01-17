@@ -2,25 +2,24 @@
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
   xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  IgnorableNamespaces="uap mp">
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
 
   <Identity
     Name="43177Michalkoula.NazdarTheGame"
     Publisher="CN=0FC37EF8-26B5-492F-87A3-AECF73C84ABB"
-    Version="0.9.2.0" />
-  
-  <mp:PhoneIdentity PhoneProductId="ecbc90a2-b1cd-41d2-9093-0607a0a688e4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    Version="0.9.3.0" />
 
   <Properties>
     <DisplayName>Nazdar! The Game</DisplayName>
     <PublisherDisplayName>Michal Škoula</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
+    <Logo>Images\StoreLogo.png</Logo>
   </Properties>
 
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.14393.0" MaxVersionTested="10.0.14393.0" />
   </Dependencies>
 
   <Resources>
@@ -29,23 +28,22 @@
 
   <Applications>
     <Application Id="App"
-      Executable="Nazdar.UWP.exe"
-      EntryPoint="Nazdar.UWP.App">
+      Executable="$targetnametoken$.exe"
+      EntryPoint="$targetentrypoint$">
       <uap:VisualElements
         DisplayName="Nazdar! The Game"
-        Square150x150Logo="Assets\Logo.png"
-        Square44x44Logo="Assets\SmallLogo.png"
-        Description="Nazdar.UWP"
-        BackgroundColor="#464646">
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
-        <uap:DefaultTile Square71x71Logo="Assets\SmallTile.png" Wide310x150Logo="Assets\WideTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-        <uap:InitialRotationPreference>
-          <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
+        Description="Nazdar.GL.Packaging"
+        BackgroundColor="transparent"
+        Square150x150Logo="Images\Square150x150Logo.png"
+        Square44x44Logo="Images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+        <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
   </Applications>
 
   <Capabilities>
     <Capability Name="internetClient" />
+    <rescap:Capability Name="runFullTrust" />
   </Capabilities>
 </Package>

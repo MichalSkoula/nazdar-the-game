@@ -9,6 +9,7 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <Title>Nazdar! The Game</Title>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
