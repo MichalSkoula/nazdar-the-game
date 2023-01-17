@@ -20,6 +20,10 @@ https://docs.monogame.net/articles/packaging_games.html
 * dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
 * dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
 
+#### note ####
+Nazdar.GL.Packaging - x84 (Desktop)
+Nazdar.UWP - x64, x84, ARM (bundle, Xbox uses x64)
+
 ### run mgcb: ###
 
 dotnet mgcb-editor
