@@ -137,6 +137,11 @@ namespace Nazdar.Screens
                 hospital.Draw(this.Game.SpriteBatch);
             }
 
+            foreach (Market market in this.markets)
+            {
+                market.Draw(this.Game.SpriteBatch);
+            }
+
             foreach (Arsenal arsenal in this.arsenals)
             {
                 arsenal.Draw(this.Game.SpriteBatch);

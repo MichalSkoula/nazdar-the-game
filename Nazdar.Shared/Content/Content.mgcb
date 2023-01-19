@@ -86,6 +86,30 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Locomotive.png
 
+#begin Buildings/Market_active.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Market_active.png
+
+#begin Buildings/Market.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Market.png
+
 #begin Buildings/Slum.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -484,6 +508,9 @@
 
 #begin Envs/4_village.tmx
 /copy:Envs/4_village.tmx
+
+#begin Envs/5_village.tmx
+/copy:Envs/5_village.tmx
 
 #begin Envs/left.tmx
 /copy:Envs/left.tmx

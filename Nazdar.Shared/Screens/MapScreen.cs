@@ -56,7 +56,8 @@ namespace Nazdar.Screens
             {
                 5, new string[] {
                     "June 1918, Ufa. The Legion must capture the city",
-                    "of Ufa and take control over near villages."
+                    "of Ufa and take control over near villages. Maybe do",
+                    "some bizz there too."
                 }
             },
             {

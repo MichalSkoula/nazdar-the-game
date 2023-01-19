@@ -4,7 +4,7 @@ namespace Nazdar.Objects
 {
     public abstract class BaseBuilding : BaseObject
     {
-        public bool IsBeingBuilt { get; set; }
+        public Peasant WorkingPeasant { get; set; } = null;
         public float TimeToBuild;
         public Building.Type Type;
         public Building.Status Status = Building.Status.InProcess;
@@ -20,16 +20,23 @@ namespace Nazdar.Objects
 
             this.Alpha = this.Status == Building.Status.InProcess ? 0.25f : 1;
 
-            if (this.TimeToBuild > 0 && this.IsBeingBuilt)
+            if (this.TimeToBuild > 0 && this.WorkingPeasant != null)
             {
                 this.TimeToBuild -= deltaTime;
             }
 
+            // built?
             if (this.TimeToBuild < 0)
             {
                 this.Status = Building.Status.Built;
                 this.TimeToBuild = 0;
                 Game1.MessageBuffer.AddMessage(this.Type.ToString() + " built", MessageType.Success);
+
+                // if market, peasant becomes merchant => die
+                if (this.Type == Building.Type.Market)
+                {
+                    this.WorkingPeasant.ToDelete = true;
+                }
             }
         }
     }
