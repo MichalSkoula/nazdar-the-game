@@ -40,10 +40,12 @@ namespace Nazdar.Screens
         private List<Tower> towers = new List<Tower>();
         private List<Farm> farms = new List<Farm>();
         private List<Hospital> hospitals = new List<Hospital>();
+        private List<Market> markets = new List<Market>();
 
         // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
+        private bool won = false;
 
         // consts
         public readonly int MaxVillage = Assets.TilesetGroups.Count;
@@ -63,6 +65,7 @@ namespace Nazdar.Screens
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
         public static int farmingMoneyProbability = 512 * 3;
+        public static int marketMoneyProbability = 512 * 3;
         private int farmLimit = 4;
 
         // X positions for deployments
@@ -259,6 +262,14 @@ namespace Nazdar.Screens
                 }
             }
 
+            if (saveData.ContainsKey("markets"))
+            {
+                foreach (var data in saveData.GetValue("markets"))
+                {
+                    this.markets.Add(new Market((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild));
+                }
+            }
+
             if (saveData.ContainsKey("towers"))
             {
                 foreach (var data in saveData.GetValue("towers"))
@@ -293,6 +304,7 @@ namespace Nazdar.Screens
                 armories = this.armories.Select(item => item.GetSaveData()).ToList(),
                 arsenals = this.arsenals.Select(item => item.GetSaveData()).ToList(),
                 hospitals = this.hospitals.Select(item => item.GetSaveData()).ToList(),
+                markets = this.markets.Select(item => item.GetSaveData()).ToList(),
                 towers = this.towers.Select(item => item.GetSaveData()).ToList(),
                 farms = this.farms.Select(item => item.GetSaveData()).ToList(),
                 coins = this.coins.Select(item => item.GetSaveData()).ToList(),

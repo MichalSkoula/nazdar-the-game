@@ -69,6 +69,8 @@ namespace Nazdar
             Assets.Images["Hospital"] = content.Load<Texture2D>("Buildings/Hospital");
             Assets.Images["Locomotive"] = content.Load<Texture2D>("Buildings/Locomotive");
             Assets.Images["Slum"] = content.Load<Texture2D>("Buildings/Slum");
+            Assets.Images["Market"] = content.Load<Texture2D>("Buildings/Market");
+            Assets.Images["MarketActive"] = content.Load<Texture2D>("Buildings/Market_active");
 
             Assets.Images["KeyboardUp"] = content.Load<Texture2D>("Controls/keyboard/up");
             Assets.Images["KeyboardRight"] = content.Load<Texture2D>("Controls/keyboard/right");
@@ -189,6 +191,11 @@ namespace Nazdar
             );
             Assets.TilesetGroups["village4"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/4_village.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
+                content.Load<Texture2D>("Envs/tileset1")
+            );
+            Assets.TilesetGroups["village5"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/5_village.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
                 content.Load<Texture2D>("Envs/tileset1")
             );

@@ -20,6 +20,7 @@ namespace Nazdar.Objects
                 "Slum" => Building.Type.Slum,
                 "Hospital" => Building.Type.Hospital,
                 "Locomotive" => Building.Type.Locomotive,
+                "Market" => Building.Type.Market,
                 _ => throw new ArgumentException(),
             };
         }

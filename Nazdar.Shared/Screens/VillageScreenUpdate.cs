@@ -48,6 +48,7 @@ namespace Nazdar.Screens
             this.UpdateTowers();
             this.UpdateFarms();
             this.UpdateHospitals();
+            this.UpdateMarkets();
 
             // collisions
             this.UpdatePeoplesCollisions();
@@ -267,6 +268,11 @@ namespace Nazdar.Screens
                 {
                     this.Build(this.locomotive);
                 }
+                foreach (var market in this.markets.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(market);
+                    break;
+                }
 
                 // something to get?
                 foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
@@ -322,6 +328,14 @@ namespace Nazdar.Screens
             foreach (Hospital hospital in this.hospitals)
             {
                 hospital.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateMarkets()
+        {
+            foreach (Market market in this.markets)
+            {
+                market.Update(this.Game.DeltaTime, this.coins);
             }
         }
 
@@ -846,6 +860,33 @@ namespace Nazdar.Screens
                                 {
                                     Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                                 }
+                            }
+                        }
+                    }
+                }
+                // Market?
+                else if (buildingSpot.Type == Building.Type.Market)
+                {
+                    var markets = this.markets.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (markets.Count() == 0)
+                    {
+                        // no market here - we can build something
+                        this.player.Action = Enums.PlayerAction.Build;
+                        this.player.ActionCost = Market.Cost;
+                        this.player.ActionName = Market.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                        {
+                            if (this.player.Money < Market.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= Market.Cost;
+                                this.markets.Add(new Market(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
                     }

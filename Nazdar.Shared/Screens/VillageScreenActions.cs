@@ -12,16 +12,16 @@ namespace Nazdar.Screens
         private void Build(BaseBuilding building)
         {
             // is someone building it?
-            building.IsBeingBuilt = false;
+            building.WorkingPeasant = null;
             foreach (var peasant in this.peasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
             {
-                building.IsBeingBuilt = true;
+                building.WorkingPeasant = peasant;
                 peasant.IsBuildingHere = building.Hitbox;
                 break;
             }
 
             // no one is building it
-            if (building.IsBeingBuilt == false && this.peasants.Count > 0)
+            if (building.WorkingPeasant == null && this.peasants.Count > 0)
             {
                 var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
                 nearestPeasant.IsBuildingHere = building.Hitbox;

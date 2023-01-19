@@ -38,7 +38,11 @@ namespace Nazdar.Screens
                     // near locomotive? end this
                     if (this.Game.Village == MaxVillage)
                     {
-                        this.Won();
+                        if (!this.won)
+                        {
+                            this.won = true;
+                            this.Won();
+                        }
                     }
                     else
                     {
@@ -121,7 +125,7 @@ namespace Nazdar.Screens
 
         private void Won()
         {
-            Game1.MessageBuffer.AddMessage("YOU WON!!!!", MessageType.Success);
+            Game1.MessageBuffer.AddMessage("YOU WON. Beginner's luck.", MessageType.Success);
 
             // Back to Menu
             this.Game.LoadScreen(typeof(Screens.GameFinishedScreen));

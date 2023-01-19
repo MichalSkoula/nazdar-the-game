@@ -90,7 +90,8 @@ namespace Nazdar
                 Arsenal,
                 Slum, // cant be build
                 Hospital,
-                Locomotive
+                Locomotive,
+                Market
             }
 
             public enum Status
@@ -114,7 +115,7 @@ namespace Nazdar
             public const int StatusBarX = 15;
             public const int Floor = 172;
             public const int Floor2 = 180;
-            public const int MessagesX = Screen.Width - 250;
+            public const int MessagesX = Screen.Width - 260;
             public const int SuperMessageY = 100;
 
             public static int MenuX = 20;
