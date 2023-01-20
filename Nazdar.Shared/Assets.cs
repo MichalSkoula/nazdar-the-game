@@ -194,9 +194,8 @@ namespace Nazdar
             shit.SetData(new[] { MyColor.LightBrown });
             Assets.ParticleTextureRegions["Shit"] = new TextureRegion2D(shit);
 
-            // load tilesets ---------------------------------------------------------------------------------------
-            // 1/ Set the "Copy to Output Directory" property of these two files to `Copy if newer`
-            // 2/ Set build action to Copy in MGCB (because of Android)
+            // load tilesets ----------------------------------------------------------------
+            // Set build action to Copy in MGCB (because of Android)
             // streams are here because Android, but TitleContainer is cross platform so cool
             Assets.TilesetGroups["village1"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tmx"),
@@ -211,7 +210,7 @@ namespace Nazdar
             Assets.TilesetGroups["village3"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/3_village.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
-                content.Load<Texture2D>("Envs/tileset_grass")
+                content.Load<Texture2D>("Envs/tileset_snow")
             );
             Assets.TilesetGroups["village4"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/4_village.tmx"),
@@ -224,15 +223,39 @@ namespace Nazdar
                 content.Load<Texture2D>("Envs/tileset_grass")
             );
 
-            Assets.TilesetEdges["left"] = new TilesetGroup(
+            // edges --- must correspond to villages ----------------------------------------
+            Assets.TilesetEdges["left1"] =
+            Assets.TilesetEdges["left4"] =
+            Assets.TilesetEdges["left5"] =
+            new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
                 content.Load<Texture2D>("Envs/tileset_grass")
             );
-            Assets.TilesetEdges["right"] = new TilesetGroup(
+
+            Assets.TilesetEdges["right1"] =
+            Assets.TilesetEdges["right4"] =
+            Assets.TilesetEdges["right5"] =
+            new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
                 content.Load<Texture2D>("Envs/tileset_grass")
+            );
+
+            Assets.TilesetEdges["left2"] =
+            Assets.TilesetEdges["left3"] =
+            new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
+                content.Load<Texture2D>("Envs/tileset_snow")
+            );
+
+            Assets.TilesetEdges["right2"] =
+            Assets.TilesetEdges["right3"] =
+            new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
+                content.Load<Texture2D>("Envs/tileset_snow")
             );
         }
     }
