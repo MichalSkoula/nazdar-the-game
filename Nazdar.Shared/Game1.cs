@@ -78,7 +78,7 @@ namespace Nazdar
 
             // start it with this scene
 #if DEBUG
-            this.LoadScreen(typeof(Screens.SplashScreen));
+            this.LoadScreen(typeof(Screens.MenuScreen));
 #else
             IsMouseVisible = false;
             this.LoadScreen(typeof(Screens.SplashScreen));
