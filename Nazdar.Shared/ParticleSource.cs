@@ -19,7 +19,7 @@ namespace Nazdar.Shared
         private Tuple<int, int> offset;
 
         // ttl - time to live of one particle
-        public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, float ttl, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null)
+        public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, float ttl, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null, float gravity = 30)
         {
             this.offset = offset;
             this.particleEffect = new ParticleEffect(autoTrigger: false)
@@ -34,7 +34,7 @@ namespace Nazdar.Shared
                             Speed = new Range<float>(0f, 50f),
                             Quantity = 3,
                             Rotation = new Range<float>(-1f, 1f),
-                            Scale = new Range<float>(3.0f, 4.0f)
+                            Scale = new Range<float>(3.0f, 4.0f) // size of a particle
                         },
                         Modifiers =
                         {
@@ -51,7 +51,7 @@ namespace Nazdar.Shared
                             },
                             new RotationModifier {RotationRate = -2.1f},
                             //new RectangleContainerModifier {Width = 800, Height = 480},
-                            new LinearGravityModifier {Direction = this.convertDirection(direction), Strength = 30f},
+                            new LinearGravityModifier {Direction = this.convertDirection(direction), Strength = gravity},
                         }
                     }
                 }

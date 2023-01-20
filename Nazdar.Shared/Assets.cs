@@ -51,6 +51,9 @@ namespace Nazdar
             Assets.Images["Enemy5Left"] = content.Load<Texture2D>("Enemy/enemy5_left");
             Assets.Images["Enemy5Right"] = content.Load<Texture2D>("Enemy/enemy5_right");
 
+            Assets.Images["PigLeft"] = content.Load<Texture2D>("Pig/pig_left");
+            Assets.Images["PigRight"] = content.Load<Texture2D>("Pig/pig_right");
+
             Assets.Images["BulletLeft"] = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
             Assets.Images["BulletStatic"] = content.Load<Texture2D>("Bullet/bullet");
@@ -163,12 +166,16 @@ namespace Nazdar
 
             // load particle textures
             Texture2D blood = new Texture2D(graphicsDevice, 1, 1);
-            blood.SetData(new[] { Color.Red });
+            blood.SetData(new[] { MyColor.Red });
             Assets.ParticleTextureRegions["Blood"] = new TextureRegion2D(blood);
 
             Texture2D smoke = new Texture2D(graphicsDevice, 1, 1);
-            smoke.SetData(new[] { Color.DarkGray });
+            smoke.SetData(new[] { MyColor.Gray3 });
             Assets.ParticleTextureRegions["Smoke"] = new TextureRegion2D(smoke);
+
+            Texture2D shit = new Texture2D(graphicsDevice, 1, 1);
+            shit.SetData(new[] { MyColor.LightBrown });
+            Assets.ParticleTextureRegions["Shit"] = new TextureRegion2D(shit);
 
             // load tilesets ---------------------------------------------------------------------------------------
             // 1/ Set the "Copy to Output Directory" property of these two files to `Copy if newer`
