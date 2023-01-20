@@ -65,6 +65,7 @@ namespace Nazdar.Screens
         private int newPigMaxCaliber = Pig.DefaultCaliber * 5;
         private int newCoinProbability = 512 * 4;
         private int enemyDropProbability = 8;
+        private int pigDropProbability = 4;
         private int homelessLimit = 16;
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 3;

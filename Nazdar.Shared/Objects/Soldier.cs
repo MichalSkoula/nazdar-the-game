@@ -159,7 +159,7 @@ namespace Nazdar.Objects
                     this.Caliber
                 ));
 
-                Audio.PlaySound("GunFire");
+                Audio.PlayRandomSound("SoldierShoots");
                 this.particleSmoke.Run(50);
             }
         }

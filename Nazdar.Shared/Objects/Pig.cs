@@ -47,7 +47,7 @@ namespace Nazdar.Objects
                 2,
                 Assets.ParticleTextureRegions["Shit"],
                 gravity: 60
-            );   
+            );
         }
 
         public new void Update(float deltaTime)

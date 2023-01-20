@@ -74,7 +74,7 @@ namespace Nazdar.Objects
                     this.shootPower
                 ));
 
-                Audio.PlaySound("GunFire");
+                Audio.PlaySound("CannonShoot");
                 this.particleSmoke.Run(75);
             }
         }

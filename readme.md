@@ -39,7 +39,7 @@ dotnet mgcb-editor
 ### images
 * CC-29 color palette - https://lospec.com/palette-list/cc-29
 * characters based on https://0x72.itch.io/pixeldudesmaker 
-* https://essssam.itch.io/rocky-roads
+* https://essssam.itch.io/rocky-roads env
 * https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat.png
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
 * https://dreammix.itch.io/keyboard-keys-for-ui keyboard
@@ -55,12 +55,14 @@ dotnet mgcb-editor
 * https://opengameart.org/content/coin-splash coin
 * https://opengameart.org/content/mining-pick rock
 * https://opengameart.org/content/15-vocal-male-strainhurtpainjump-sounds jump
-* https://opengameart.org/content/collection-gun-sounds gunfire
 * https://opengameart.org/content/monster-sound-pack-volume-1 monster 
 * https://opengameart.org/content/monster-sound-effects-2 monster
 * https://opengameart.org/content/monster-sound-effects-pack monster
+* https://opengameart.org/content/25-cc0-bang-firework-sfx shooting
+* https://opengameart.org/content/battle-at-sea tower shooting
 * https://opengameart.org/content/80-cc0-rpg-sfx metal sound
 * https://opengameart.org/content/6-zombie-sounds zombies
+* https://opengameart.org/content/pig-sfx-pack pigs
 
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika

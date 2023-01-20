@@ -107,11 +107,11 @@ namespace Nazdar.Screens
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
-            int randomBase = this.GetNewEnemyProbability() * 2; // for pigs
+            int randomBase = this.GetNewEnemyProbability() * 4; // for pigs
 
             if (this.dayPhase == DayPhase.Night && this.Game.Village >= 3 && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
             {
-                Audio.PlayRandomSound("EnemySpawns");
+                Audio.PlayRandomSound("PigSpawns");
 
                 // every day it gets more difficult
                 int newPigCaliber = Pig.DefaultCaliber + this.player.Days;
@@ -661,7 +661,7 @@ namespace Nazdar.Screens
 
                         if (!pig.TakeHit(bullet.Caliber / 2))
                         {
-                            this.EnemyDie(pig);
+                            this.PigDie(pig);
                         }
                     }
                 }
@@ -680,7 +680,7 @@ namespace Nazdar.Screens
 
                             if (!pig.TakeHit(bullet.Caliber / 2))
                             {
-                                this.EnemyDie(pig);
+                                this.PigDie(pig);
                             }
                         }
                     }
@@ -700,7 +700,7 @@ namespace Nazdar.Screens
 
                             if (!pig.TakeHit(bullet.Caliber / 2))
                             {
-                                this.EnemyDie(pig);
+                                this.PigDie(pig);
                             }
                         }
                     }
@@ -725,7 +725,7 @@ namespace Nazdar.Screens
 
                         if (!pig.TakeHit(this.player.Caliber / 2))
                         {
-                            this.EnemyDie(pig);
+                            this.PigDie(pig);
                         }
                         // player is mega strong
                         if (!this.player.TakeHit(pig.Caliber / 2))
@@ -751,7 +751,7 @@ namespace Nazdar.Screens
 
                         if (!pig.TakeHit(soldier.Caliber / 2))
                         {
-                            this.EnemyDie(pig);
+                            this.PigDie(pig);
                         }
                         if (!soldier.TakeHit(pig.Caliber))
                         {
@@ -778,7 +778,7 @@ namespace Nazdar.Screens
 
                         if (!pig.TakeHit(peasant.Caliber / 2))
                         {
-                            this.EnemyDie(pig);
+                            this.PigDie(pig);
                         }
                         if (!peasant.TakeHit(pig.Caliber))
                         {
@@ -805,7 +805,7 @@ namespace Nazdar.Screens
 
                         if (!pig.TakeHit(farmer.Caliber / 2))
                         {
-                            this.EnemyDie(pig);
+                            this.PigDie(pig);
                         }
                         if (!farmer.TakeHit(pig.Caliber))
                         {
@@ -832,7 +832,7 @@ namespace Nazdar.Screens
 
                         if (!pig.TakeHit(medic.Caliber / 2))
                         {
-                            this.EnemyDie(pig);
+                            this.PigDie(pig);
                         }
                         if (!medic.TakeHit(pig.Caliber))
                         {
