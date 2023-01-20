@@ -200,39 +200,39 @@ namespace Nazdar
             // streams are here because Android, but TitleContainer is cross platform so cool
             Assets.TilesetGroups["village1"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/1_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                content.Load<Texture2D>("Envs/tileset_grass")
             );
             Assets.TilesetGroups["village2"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/2_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
+                content.Load<Texture2D>("Envs/tileset_snow")
             );
             Assets.TilesetGroups["village3"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/3_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                content.Load<Texture2D>("Envs/tileset_grass")
             );
             Assets.TilesetGroups["village4"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/4_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                content.Load<Texture2D>("Envs/tileset_grass")
             );
             Assets.TilesetGroups["village5"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/5_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                content.Load<Texture2D>("Envs/tileset_grass")
             );
 
             Assets.TilesetEdges["left"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                content.Load<Texture2D>("Envs/tileset_grass")
             );
             Assets.TilesetEdges["right"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tsx"),
-                content.Load<Texture2D>("Envs/tileset1")
+                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                content.Load<Texture2D>("Envs/tileset_grass")
             );
         }
     }
