@@ -21,11 +21,11 @@ namespace Nazdar.Screens
             this.GraphicsDevice.Clear(currentColor);
 
             // background - tileset
-            Assets.TilesetEdges["left"].Draw("ground", this.Game.SpriteBatch, -Offset.MapTilesOffset);
+            Assets.TilesetEdges["left" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, -Offset.MapTilesOffset);
             Assets.TilesetGroups["village" + this.Game.Village].Draw("ground", this.Game.SpriteBatch);
-            Assets.TilesetEdges["right"].Draw("ground", this.Game.SpriteBatch, MapWidth);
+            Assets.TilesetEdges["right" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, MapWidth);
 
-            // stats ------------------------------------------------------------------------------------
+            // stats --------------------------------------------------------------------------
             int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
             int rightOffset = Game1.CurrentPlatform == Enums.Platform.Android ? 380 : 460;
 
