@@ -47,7 +47,7 @@ namespace Nazdar.Screens
             ));
         }
 
-        private void EnemyDie(BasePerson enemy)
+        private void EnemyDie(Enemy enemy)
         {
             // maybe drop something?
             if (Tools.GetRandom(this.enemyDropProbability) == 1)
@@ -58,6 +58,19 @@ namespace Nazdar.Screens
             Audio.PlayRandomSound("EnemyDeaths");
             this.player.Kills++;
             enemy.Dead = true;
+        }
+
+        private void PigDie(Pig pig)
+        {
+            // maybe drop something?
+            if (Tools.GetRandom(this.pigDropProbability) == 1)
+            {
+                this.coins.Add(new Coin(pig.X, Offset.Floor2));
+            }
+
+            Audio.PlayRandomSound("PigDeaths");
+            this.player.Kills++;
+            pig.Dead = true;
         }
 
         private int GetUpgradeAttackAddition()

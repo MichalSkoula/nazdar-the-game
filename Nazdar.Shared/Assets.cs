@@ -96,9 +96,17 @@ namespace Nazdar
             Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontLarge");
 
             // load sounds
-            Assets.Sounds["GunFire"] = content.Load<SoundEffect>("Sounds/gun_fire");
             Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coinsplash");
             Assets.Sounds["Rock"] = content.Load<SoundEffect>("Sounds/rock");
+            Assets.Sounds["CannonShoot"] = content.Load<SoundEffect>("Sounds/shoot/cannon_fire_double");
+            Assets.SoundsCollection["PlayerShoots"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/shoot/soldier_bang_01"),
+                content.Load<SoundEffect>("Sounds/shoot/soldier_bang_07"),
+            };
+            Assets.SoundsCollection["SoldierShoots"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/shoot/soldier_bang_04"),
+                content.Load<SoundEffect>("Sounds/shoot/soldier_cannon_02"),
+            };
             Assets.SoundsCollection["Jumps"] = new List<SoundEffect> {
                 content.Load<SoundEffect>("Sounds/jumps/slightscream-01"),
                 content.Load<SoundEffect>("Sounds/jumps/slightscream-02"),
@@ -127,6 +135,15 @@ namespace Nazdar
                 content.Load<SoundEffect>("Sounds/zombies/monster-1"),
                 content.Load<SoundEffect>("Sounds/zombies/monster-4"),
                 content.Load<SoundEffect>("Sounds/zombies/monster-9"),
+            };
+            Assets.SoundsCollection["PigDeaths"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/pig/pig_hit1"),
+                content.Load<SoundEffect>("Sounds/pig/pig_hit2"),
+            };
+            Assets.SoundsCollection["PigSpawns"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/pig/pig_idle"),
+                content.Load<SoundEffect>("Sounds/pig/pig_idle2"),
+                content.Load<SoundEffect>("Sounds/pig/pig_idle4"),
             };
             Assets.SoundsCollection["SoldierDeaths"] = new List<SoundEffect> {
                 content.Load<SoundEffect>("Sounds/soldiers/die1"),

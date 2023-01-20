@@ -210,7 +210,7 @@ namespace Nazdar.Objects
                     {
                         MyShake.Shake();
                         MyVibration.Vibrate();
-                        Audio.PlaySound("GunFire");
+                        Audio.PlayRandomSound("PlayerShoots");
                         this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
                         this.particleSmoke.Run(50);
                         this.Cartridges--;

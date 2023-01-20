@@ -803,12 +803,6 @@
 /processorParam:Quality=Best
 /build:Sounds/coinsplash.ogg
 
-#begin Sounds/gun_fire.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/gun_fire.wav
-
 #begin Sounds/jumps/slightscream-01.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -869,11 +863,77 @@
 /processorParam:Quality=Best
 /build:Sounds/jumps/slightscream-10.wav
 
+#begin Sounds/pig/pig_hit1.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pig/pig_hit1.ogg
+
+#begin Sounds/pig/pig_hit2.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pig/pig_hit2.ogg
+
+#begin Sounds/pig/pig_idle.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pig/pig_idle.ogg
+
+#begin Sounds/pig/pig_idle2.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pig/pig_idle2.ogg
+
+#begin Sounds/pig/pig_idle4.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pig/pig_idle4.ogg
+
 #begin Sounds/rock.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/rock.wav
+
+#begin Sounds/shoot/cannon_fire_double.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shoot/cannon_fire_double.ogg
+
+#begin Sounds/shoot/cannon_fire.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shoot/cannon_fire.ogg
+
+#begin Sounds/shoot/soldier_bang_01.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shoot/soldier_bang_01.ogg
+
+#begin Sounds/shoot/soldier_bang_04.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shoot/soldier_bang_04.ogg
+
+#begin Sounds/shoot/soldier_bang_07.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shoot/soldier_bang_07.ogg
+
+#begin Sounds/shoot/soldier_cannon_02.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shoot/soldier_cannon_02.ogg
 
 #begin Sounds/soldiers/die1.ogg
 /importer:OggImporter
