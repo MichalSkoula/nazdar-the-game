@@ -18,7 +18,7 @@ namespace Nazdar.Objects
         public Tower(int x, int y, Building.Status status, float ttb = 4) : base()
         {
             this.Sprite = Assets.Images["Tower"];
-            this.Anim = new Animation(Assets.Images["TowerFiring"], 4, 10);
+            this.Anim = new Animation(Assets.Images["TowerFiring"], 4, 6);
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
             this.TimeToBuild = ttb;

@@ -47,7 +47,7 @@ namespace Nazdar.Screens
             ));
         }
 
-        private void EnemyDie(Enemy enemy)
+        private void EnemyDie(BasePerson enemy)
         {
             // maybe drop something?
             if (Tools.GetRandom(this.enemyDropProbability) == 1)

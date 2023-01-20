@@ -113,8 +113,9 @@ namespace Nazdar
         {
             public const int StatusBarY = 215;
             public const int StatusBarX = 15;
-            public const int Floor = 172;
+            public const int Floor = 172; // normal people
             public const int Floor2 = 180;
+            public const int Floor3 = 160; // pigs
             public const int MessagesX = Screen.Width - 260;
             public const int SuperMessageY = 100;
 

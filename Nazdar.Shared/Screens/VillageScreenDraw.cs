@@ -162,6 +162,11 @@ namespace Nazdar.Screens
                 enemy.Draw(this.Game.SpriteBatch);
             }
 
+            foreach (Pig pig in this.pigs)
+            {
+                pig.Draw(this.Game.SpriteBatch);
+            }
+
             foreach (Soldier soldier in this.soldiers)
             {
                 soldier.Draw(this.Game.SpriteBatch);

@@ -33,6 +33,7 @@ namespace Nazdar.Screens
 
             // game objects
             this.UpdateEnemies();
+            this.UpdatePigs();
             this.UpdateSoldiers();
             this.UpdatePeasants();
             this.UpdateFarmers();
@@ -51,7 +52,8 @@ namespace Nazdar.Screens
             this.UpdateMarkets();
 
             // collisions
-            this.UpdatePeoplesCollisions();
+            this.UpdateEnemiesCollisions();
+            this.UpdatePigsCollisions();
             this.UpdateActionsCollisions();
             this.UpdateThingsCollisions();
 
@@ -66,11 +68,8 @@ namespace Nazdar.Screens
             // - at night
             // - in first half on night
             // - random - every day it gets more difficult, every village also
-            int randomBase = newEnemyDefaultProbability - this.Game.Village * 32 - this.player.Days * 4;
-            if (randomBase < this.newEnemyProbabilityLowLimit)
-            {
-                randomBase = this.newEnemyProbabilityLowLimit;
-            }
+
+            int randomBase = this.GetNewEnemyProbability();
 
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
             {
@@ -99,6 +98,54 @@ namespace Nazdar.Screens
             {
                 enemy.Update(this.Game.DeltaTime);
             }
+        }
+
+        private void UpdatePigs()
+        {
+            // create enemy?
+            // - at night
+            // - in first half on night
+            // - random - every day it gets more difficult, every village also
+
+            int randomBase = this.GetNewEnemyProbability() * 2; // for pigs
+
+            if (this.dayPhase == DayPhase.Night && this.Game.Village >= 3 && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
+            {
+                Audio.PlayRandomSound("EnemySpawns");
+
+                // every day it gets more difficult
+                int newPigCaliber = Pig.DefaultCaliber + this.player.Days;
+                if (newPigCaliber > newPigMaxCaliber)
+                {
+                    newPigCaliber = newPigMaxCaliber;
+                }
+
+                // choose direction
+                if (Tools.GetRandom(2) == 0)
+                {
+                    this.pigs.Add(new Pig(0, Offset.Floor3, Direction.Right, caliber: newPigCaliber));
+                }
+                else
+                {
+                    this.pigs.Add(new Pig(MapWidth, Offset.Floor3, Direction.Left, caliber: newPigCaliber));
+                }
+            }
+
+            // update pigs
+            foreach (Pig pig in this.pigs)
+            {
+                pig.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private int GetNewEnemyProbability()
+        {
+            int randomBase = newEnemyDefaultProbability - this.Game.Village * 32 - this.player.Days * 4;
+            if (randomBase < this.newEnemyProbabilityLowLimit)
+            {
+                randomBase = this.newEnemyProbabilityLowLimit;
+            }
+            return randomBase;
         }
 
         private void UpdateSoldiers()
@@ -398,7 +445,7 @@ namespace Nazdar.Screens
             }
         }
 
-        private void UpdatePeoplesCollisions()
+        private void UpdateEnemiesCollisions()
         {
             // enemies and player bullets
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
@@ -596,6 +643,209 @@ namespace Nazdar.Screens
 
             this.soldiers.RemoveAll(p => p.ToDelete);
             this.enemies.RemoveAll(p => p.ToDelete);
+            this.peasants.RemoveAll(p => p.ToDelete);
+            this.farmers.RemoveAll(p => p.ToDelete);
+            this.medics.RemoveAll(p => p.ToDelete);
+        }
+
+        private void UpdatePigsCollisions()
+        {
+            // pigs and player bullets
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Bullet bullet in this.player.Bullets.Where(bullet => bullet.ToDelete == false))
+                {
+                    if (pig.Hitbox.Intersects(bullet.Hitbox))
+                    {
+                        bullet.ToDelete = true;
+
+                        if (!pig.TakeHit(bullet.Caliber / 2))
+                        {
+                            this.EnemyDie(pig);
+                        }
+                    }
+                }
+            }
+
+            // pigs and tower bullets
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Tower tower in this.towers)
+                {
+                    foreach (Bullet bullet in tower.Bullets.Where(bullet => bullet.ToDelete == false))
+                    {
+                        if (pig.Hitbox.Intersects(bullet.Hitbox))
+                        {
+                            bullet.ToDelete = true;
+
+                            if (!pig.TakeHit(bullet.Caliber / 2))
+                            {
+                                this.EnemyDie(pig);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // pigs and soldiers bullets
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Soldier soldier in this.soldiers)
+                {
+                    foreach (Bullet bullet in soldier.Bullets.Where(bullet => bullet.ToDelete == false))
+                    {
+                        if (pig.Hitbox.Intersects(bullet.Hitbox))
+                        {
+                            bullet.ToDelete = true;
+
+                            if (!pig.TakeHit(bullet.Caliber / 2))
+                            {
+                                this.EnemyDie(pig);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // pigs and player
+            if (Game1.NextLevelAnimation == false)
+            {
+                foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+                {
+                    if (this.player.Hitbox.Intersects(pig.Hitbox))
+                    {
+                        MyShake.Shake();
+                        MyVibration.Vibrate();
+
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!pig.TakeHit(this.player.Caliber / 2))
+                        {
+                            this.EnemyDie(pig);
+                        }
+                        // player is mega strong
+                        if (!this.player.TakeHit(pig.Caliber / 2))
+                        {
+                            this.GameOver();
+                        }
+                    }
+                }
+            }
+
+            // pigs and soldiers
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Soldier soldier in this.soldiers.Where(soldier => soldier.Dead == false))
+                {
+                    if (!pig.Dead && !soldier.Dead && pig.Hitbox.Intersects(soldier.Hitbox))
+                    {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!pig.TakeHit(soldier.Caliber / 2))
+                        {
+                            this.EnemyDie(pig);
+                        }
+                        if (!soldier.TakeHit(pig.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Heroic soldier killed by pig rider", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            soldier.Dead = true;
+                        }
+                    }
+                }
+            }
+
+            // pigs and peasants
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Peasant peasant in this.peasants.Where(peasant => peasant.Dead == false))
+                {
+                    if (!pig.Dead && !peasant.Dead && pig.Hitbox.Intersects(peasant.Hitbox))
+                    {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!pig.TakeHit(peasant.Caliber / 2))
+                        {
+                            this.EnemyDie(pig);
+                        }
+                        if (!peasant.TakeHit(pig.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Innocent peasant killed by pig rider", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            peasant.Dead = true;
+                        }
+                    }
+                }
+            }
+
+            // pigs and farmers
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Farmer farmer in this.farmers.Where(farmer => farmer.Dead == false))
+                {
+                    if (!pig.Dead && !farmer.Dead && pig.Hitbox.Intersects(farmer.Hitbox))
+                    {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!pig.TakeHit(farmer.Caliber / 2))
+                        {
+                            this.EnemyDie(pig);
+                        }
+                        if (!farmer.TakeHit(pig.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Innocent farmer killed by pig rider", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            farmer.Dead = true;
+                        }
+                    }
+                }
+            }
+
+            // pigs and medics
+            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+            {
+                foreach (Medic medic in this.medics.Where(medic => medic.Dead == false))
+                {
+                    if (!pig.Dead && !medic.Dead && pig.Hitbox.Intersects(medic.Hitbox))
+                    {
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!pig.TakeHit(medic.Caliber / 2))
+                        {
+                            this.EnemyDie(pig);
+                        }
+                        if (!medic.TakeHit(pig.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("Innocent medic killed by pig rider", MessageType.Fail);
+                            Audio.PlayRandomSound("SoldierDeaths");
+                            medic.Dead = true;
+                        }
+                    }
+                }
+            }
+
+            this.soldiers.RemoveAll(p => p.ToDelete);
+            this.pigs.RemoveAll(p => p.ToDelete);
             this.peasants.RemoveAll(p => p.ToDelete);
             this.farmers.RemoveAll(p => p.ToDelete);
             this.medics.RemoveAll(p => p.ToDelete);

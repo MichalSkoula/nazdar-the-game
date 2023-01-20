@@ -23,6 +23,7 @@ namespace Nazdar.Screens
         // game components
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
+        private List<Pig> pigs = new List<Pig>();
         private List<Soldier> soldiers = new List<Soldier>();
         private List<Farmer> farmers = new List<Farmer>();
         private List<Medic> medics = new List<Medic>();
@@ -61,6 +62,7 @@ namespace Nazdar.Screens
         private int newHomelessProbabilityLowLimit = 1024;
 
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
+        private int newPigMaxCaliber = Pig.DefaultCaliber * 5;
         private int newCoinProbability = 512 * 4;
         private int enemyDropProbability = 8;
         private int homelessLimit = 16;
@@ -156,6 +158,14 @@ namespace Nazdar.Screens
                 foreach (var data in saveData.GetValue("enemies"))
                 {
                     this.enemies.Add(new Enemy((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber, this.Game.Village));
+                }
+            }
+
+            if (saveData.ContainsKey("pigs"))
+            {
+                foreach (var data in saveData.GetValue("pigs"))
+                {
+                    this.pigs.Add(new Pig((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
                 }
             }
 
@@ -294,6 +304,7 @@ namespace Nazdar.Screens
             {
                 player = this.player.GetSaveData(),
                 enemies = this.enemies.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                pigs = this.pigs.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 soldiers = this.soldiers.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 farmers = this.farmers.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 homelesses = this.homelesses.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
