@@ -1,6 +1,7 @@
 ﻿using MonoGame.Extended.Screens;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Weather;
 using System.Collections.Generic;
 using System.Linq;
 using static Nazdar.Enums;
@@ -47,6 +48,7 @@ namespace Nazdar.Screens
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
         private bool won = false;
+        private Sky sky = new Sky();
 
         // consts
         public readonly int MaxVillage = Assets.TilesetGroups.Count;
@@ -79,6 +81,7 @@ namespace Nazdar.Screens
         {
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
 
+            sky.Rain(30);
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, Offset.Floor);
 

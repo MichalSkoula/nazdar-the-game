@@ -52,6 +52,8 @@ namespace Nazdar.Screens
                 new Vector2(leftOffset + 160, Offset.StatusBarY + 1),
                 MyColor.White);
 
+            this.sky.Draw(Game.SpriteBatch);
+
             // money
             Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
 
