@@ -1381,6 +1381,8 @@ namespace Nazdar.Screens
 
                 Audio.SongTransition(null, this.dayPhase == DayPhase.Day ? "Day" : "Night");
             }
+
+            this.sky.Update(this.Game.DeltaTime);
         }
 
         private void UpdateHomelesses()
