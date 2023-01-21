@@ -102,18 +102,13 @@ namespace Nazdar.Shared
 
         private Vector2 convertDirection(Enums.Direction direction)
         {
-            switch (direction)
+            return direction switch
             {
-                case Enums.Direction.Up:
-                    return -Vector2.UnitY;
-                case Enums.Direction.Down:
-                    return Vector2.UnitY;
-                case Enums.Direction.Left:
-                    return -Vector2.UnitX;
-                default:
-                case Enums.Direction.Right:
-                    return Vector2.UnitX;
-            }
+                Enums.Direction.Up => -Vector2.UnitY,
+                Enums.Direction.Down => Vector2.UnitY,
+                Enums.Direction.Left => -Vector2.UnitX,
+                _ => Vector2.UnitX,
+            };
         }
     }
 }
