@@ -1386,7 +1386,7 @@ namespace Nazdar.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            int randomBase = newHomelessDefaultProbability - this.Game.Village * 128;
+            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - this.Game.Village * 128;
             if (randomBase < this.newHomelessProbabilityLowLimit)
             {
                 randomBase = this.newHomelessProbabilityLowLimit;

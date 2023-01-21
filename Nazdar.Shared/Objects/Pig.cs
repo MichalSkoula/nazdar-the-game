@@ -44,8 +44,10 @@ namespace Nazdar.Objects
                 new Vector2(this.X, this.Y),
                 new Tuple<int, int>(this.Direction == Direction.Right ? 5 : this.Width - 5, this.Height - 5),
                 Direction.Down,
-                2,
+                1,
                 Assets.ParticleTextureRegions["Shit"],
+                MyColor.LighterBrown,
+                MyColor.LightBrown,
                 gravity: 60
             );
         }

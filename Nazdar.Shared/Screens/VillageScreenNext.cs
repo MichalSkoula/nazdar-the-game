@@ -90,6 +90,7 @@ namespace Nazdar.Screens
             foreach (var p in this.peasants)
             {
                 p.Caliber = Peasant.DefaultCaliber;
+                p.Health = 100;
             }
 
             this.soldiers = this.soldiers.Where((x, i) => i % 2 == 0).ToList();
@@ -97,18 +98,21 @@ namespace Nazdar.Screens
             {
                 s.Caliber = Soldier.DefaultCaliber;
                 s.Bullets.Clear();
+                s.Health = 100;
             }
 
             this.farmers = this.farmers.Where((x, i) => i % 2 == 0).ToList();
             foreach (var f in this.farmers)
             {
                 f.Caliber = Farmer.DefaultCaliber;
+                f.Health = 100;
             }
 
             this.medics = this.medics.Where((x, i) => i % 2 == 0).ToList();
             foreach (var m in this.medics)
             {
                 m.Caliber = Medic.DefaultCaliber;
+                m.Health = 100;
             }
 
             // reset dayphase
