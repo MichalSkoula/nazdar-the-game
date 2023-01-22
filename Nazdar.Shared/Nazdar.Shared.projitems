@@ -73,6 +73,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Version.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyVibration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weather\IDrop.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weather\Raindrop.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weather\Sky.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Weather\Snowflake.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />

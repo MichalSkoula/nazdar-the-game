@@ -157,5 +157,11 @@ namespace Nazdar
             Kazan = 7,
             Vladivostok = 8
         }
+
+        public enum DropType
+        {
+            Raining,
+            Snowing
+        }
     }
 }

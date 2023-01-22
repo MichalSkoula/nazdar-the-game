@@ -59,10 +59,8 @@ namespace Nazdar.Screens
         // every village, it gets - *32 ... village 1 = 224, village 2 = 192, village 3 = 160, ...
         private static int newEnemyDefaultProbability = 256;
         private int newEnemyProbabilityLowLimit = 16;
-
-        private static int newHomelessDefaultProbability = 2048;
-        private int newHomelessProbabilityLowLimit = 1024;
-
+        private static int newHomelessDefaultProbability = 512 * 4;
+        private int newHomelessProbabilityLowLimit = 512 * 2;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newPigMaxCaliber = Pig.DefaultCaliber * 5;
         private int newCoinProbability = 512 * 4;
@@ -71,6 +69,7 @@ namespace Nazdar.Screens
         private int homelessLimit = 16;
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 3;
+        private int newSkyApocalypseProbability = 512 * 6;
         private int farmLimit = 4;
 
         // X positions for deployments
@@ -81,7 +80,6 @@ namespace Nazdar.Screens
         {
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
 
-            sky.Rain(30);
             // create player in the center of the map
             this.player = new Player(MapWidth / 2, Offset.Floor);
 
@@ -232,6 +230,15 @@ namespace Nazdar.Screens
                 this.dayPhaseTimer = (double)saveData.GetValue("dayPhaseTimer");
             }
 
+            if (saveData.ContainsKey("skyDropType") && saveData.ContainsKey("skyTtl") && (int)saveData.GetValue("skyTtl") > 0)
+            {
+                sky.Start(
+                    (int)saveData.GetValue("skyTtl"),
+                    (DropType)saveData.GetValue("skyDropType"),
+                    saveData.ContainsKey("skyDropCount") ? (int)saveData.GetValue("skyDropCount") : 0
+                );
+            }
+
             if (saveData.ContainsKey("center") && saveData.GetValue("center") != null)
             {
                 var data = saveData.GetValue("center");
@@ -327,6 +334,9 @@ namespace Nazdar.Screens
                 this.dayPhaseTimer,
                 village = this.Game.Village,
                 firstRun = this.Game.FirstRun,
+                skyTtl = this.sky.Ttl,
+                skyDropType = this.sky.Type,
+                skyDropCount = this.sky.DropCount,
             };
         }
     }
