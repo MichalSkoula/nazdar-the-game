@@ -509,6 +509,9 @@
 #begin Envs/5_village.tmx
 /copy:Envs/5_village.tmx
 
+#begin Envs/6_village.tmx
+/copy:Envs/6_village.tmx
+
 #begin Envs/grass.tsx
 /copy:Envs/grass.tsx
 

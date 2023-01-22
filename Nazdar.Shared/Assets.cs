@@ -209,7 +209,7 @@ namespace Nazdar
             );
             Assets.TilesetGroups["village3"] = new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/3_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
+                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
                 content.Load<Texture2D>("Envs/tileset_snow")
             );
             Assets.TilesetGroups["village4"] = new TilesetGroup(
@@ -221,6 +221,11 @@ namespace Nazdar
                 TitleContainer.OpenStream(@"Content/Envs/5_village.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
                 content.Load<Texture2D>("Envs/tileset_grass")
+            );
+            Assets.TilesetGroups["village6"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/6_village.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
+                content.Load<Texture2D>("Envs/tileset_snow")
             );
 
             // edges --- must correspond to villages ----------------------------------------
@@ -244,6 +249,7 @@ namespace Nazdar
 
             Assets.TilesetEdges["left2"] =
             Assets.TilesetEdges["left3"] =
+            Assets.TilesetEdges["left6"] =
             new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
@@ -252,6 +258,7 @@ namespace Nazdar
 
             Assets.TilesetEdges["right2"] =
             Assets.TilesetEdges["right3"] =
+            Assets.TilesetEdges["right6"] =
             new TilesetGroup(
                 TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
                 TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
