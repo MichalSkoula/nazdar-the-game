@@ -58,7 +58,7 @@ namespace Nazdar.Screens
             this.UpdateThingsCollisions();
 
             // other
-            this.UpdateDayPhase();
+            this.UpdateDayPhaseAndSky();
             this.CheckIfWeCanGoToAnotherVillage();
         }
 
@@ -1351,7 +1351,7 @@ namespace Nazdar.Screens
             }
         }
 
-        private void UpdateDayPhase()
+        private void UpdateDayPhaseAndSky()
         {
             this.dayPhaseTimer -= this.Game.DeltaTime;
             if (this.dayPhaseTimer <= 0)
@@ -1383,6 +1383,11 @@ namespace Nazdar.Screens
             }
 
             this.sky.Update(this.Game.DeltaTime);
+            // maybe start new apocalypse
+            if (!this.sky.Active && Tools.GetRandom(newSkyApocalypseProbability) == 0)
+            {
+                this.sky.Start(Tools.GetRandom(20) + 10);
+            }
         }
 
         private void UpdateHomelesses()

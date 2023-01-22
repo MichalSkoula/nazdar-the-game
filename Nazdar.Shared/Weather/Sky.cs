@@ -6,19 +6,42 @@ using System.Text;
 using MonoGame.Extended;
 using Nazdar.Shared;
 using Nazdar.Screens;
+using static Nazdar.Enums;
 
 namespace Nazdar.Weather
 {
     public class Sky
     {
-        private List<Raindrop> drops = new List<Raindrop>();
-        public double Ttl;
-        public bool Raining { get; set; } = false;
+        private List<IDrop> drops = new List<IDrop>();
+        public double Ttl = 0;
+        public DropType Type = DropType.Raining;
+        public int DropCount
+        {
+            get
+            {
+                return drops.Count;
+            }
+        }
+        public bool Active
+        {
+            get
+            {
+                return Ttl > 0;
+            }
+        }
 
-        public void Rain(int ttl)
+        public void Start(int ttl, DropType? type = null, int startCount = 0)
         {
             this.Ttl = ttl;
-            this.Raining = true;
+            this.Type = (DropType)(type == null ? (DropType)Tools.GetRandom(2) : type);
+
+            if (startCount > 0)
+            {
+                for (int i = 0; i < startCount; i++)
+                {
+                    this.AddDrop(true);
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -31,9 +54,9 @@ namespace Nazdar.Weather
 
         public void Update(float deltaTime)
         {
-            if (this.Raining && Tools.GetRandom(10) == 0)
+            if (this.Active)
             {
-                this.drops.Add(new Raindrop(Tools.GetRandom(VillageScreen.MapWidth), -10));
+                this.AddDrop();
             }
 
             foreach (var drop in this.drops)
@@ -49,9 +72,24 @@ namespace Nazdar.Weather
             this.drops.RemoveAll(d => d.ToDelete);
 
             this.Ttl -= deltaTime;
-            if (this.Ttl < 0)
+        }
+
+        private void AddDrop(bool randomY = false)
+        {
+            int x = Tools.GetRandom(VillageScreen.MapWidth + Enums.Screen.Width) - Enums.Screen.Width / 2;
+            int y = -10;
+            if (randomY)
             {
-                this.Raining = false;
+                y = Tools.GetRandom(Enums.Screen.Height);
+            }
+
+            if (this.Type == DropType.Raining)
+            {
+                this.drops.Add(new Raindrop(x, y));
+            }
+            else
+            {
+                this.drops.Add(new Snowflake(x, y));
             }
         }
     }
