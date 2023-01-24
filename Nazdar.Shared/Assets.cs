@@ -194,6 +194,10 @@ namespace Nazdar
             shit.SetData(new[] { MyColor.LightBrown });
             Assets.ParticleTextureRegions["Shit"] = new TextureRegion2D(shit);
 
+            Texture2D heal = new Texture2D(graphicsDevice, 1, 1);
+            heal.SetData(new[] { MyColor.Turquoise });
+            Assets.ParticleTextureRegions["Heal"] = new TextureRegion2D(heal);
+
             // load tilesets ----------------------------------------------------------------
             // Set build action to Copy in MGCB (because of Android)
             // streams are here because Android, but TitleContainer is cross platform so cool

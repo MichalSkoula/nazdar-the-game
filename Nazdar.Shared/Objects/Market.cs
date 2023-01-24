@@ -9,7 +9,7 @@ namespace Nazdar.Objects
 {
     public class Market : BaseBuilding
     {
-        public const int Cost = 12;
+        public const int Cost = 10;
         public const string Name = "Market";
 
         public Market(int x, int y, Building.Status status, float ttb = 8) : base()

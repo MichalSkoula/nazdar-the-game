@@ -18,6 +18,20 @@ namespace Nazdar.Screens
 
         private string[] saveDataLines;
 
+        private readonly string[] outro =
+        {
+            "You did it. The legionnaires took over the entire",
+            "Trans-Siberian Railway, but they didn't stop those",
+            "rotten Bolsheviks from taking control of all Russia.",
+            "",
+            "However they achieved the goal.",
+            "They convinced the Allied Powers about the project",
+            "of an independent Czechoslovakia."
+        };
+        private float descriptionY = 300;
+        private readonly int descriptionYStop = 110;
+        private readonly int descriptionSpeed = 40;
+
         public override void Initialize()
         {
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
@@ -74,6 +88,17 @@ namespace Nazdar.Screens
             {
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }
+
+            // move description
+            if (this.descriptionY > descriptionYStop)
+            {
+                this.descriptionY -= this.Game.DeltaTime * descriptionSpeed;
+            }
+            else
+            {
+                // to be precise
+                this.descriptionY = descriptionYStop;
+            }
         }
 
         public override void Draw(GameTime gameTime)
@@ -99,7 +124,14 @@ namespace Nazdar.Screens
             {
                 i++;
                 this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), MyColor.White);
+            }
 
+            // outro up
+            i = 0;
+            foreach (string line in this.outro)
+            {
+                i++;
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 250, descriptionY + 18 * i), MyColor.White);
             }
 
             this.Game.DrawEnd();

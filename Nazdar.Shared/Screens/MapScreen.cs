@@ -64,7 +64,9 @@ namespace Nazdar.Screens
                 6, new string[] {
                     "July 1918, Yekaterinburg. The Legion arrived late.",
                     "Only a week earlier, the Bolsheviks had killed",
-                    "the Russian Tsar and his entire family."
+                    "the Russian Tsar and his entire family.",
+                    "",
+                    "A hard winter struck. They have to find other sources."
                 }
             },
             {

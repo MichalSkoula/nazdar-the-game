@@ -1,11 +1,7 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using MonoGame.Extended;
-using Nazdar.Shared;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Screens;
+using Nazdar.Shared;
+using System.Collections.Generic;
 using static Nazdar.Enums;
 
 namespace Nazdar.Weather

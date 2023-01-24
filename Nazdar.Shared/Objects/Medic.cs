@@ -15,6 +15,8 @@ namespace Nazdar.Objects
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 4;
 
+        protected ParticleSource particleHeal;
+
         private List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["MedicRight"], 4, 10),
@@ -40,6 +42,14 @@ namespace Nazdar.Objects
                 2,
                 Assets.ParticleTextureRegions["Blood"]
             );
+
+            this.particleHeal = new ParticleSource(
+                new Vector2(this.X, this.Y),
+                new Tuple<int, int>(this.Width / 2, this.Height / 2),
+                Direction.Up,
+                1,
+                Assets.ParticleTextureRegions["Heal"]
+            );
         }
 
         public new void Update(float deltaTime)
@@ -48,6 +58,7 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
+            this.particleHeal.Update(deltaTime, new Vector2(this.X, this.Y));
 
             if (this.Dead)
             {
@@ -126,9 +137,10 @@ namespace Nazdar.Objects
                     }
 
                     // heal?
-                    if (Game1.GlobalTimer % 50 == 0)
+                    if (Game1.GlobalTimer % 30 == 0)
                     {
                         this.DeploymentPerson.Health++;
+                        this.particleHeal.Run(50);
                     }
                 }
             }
@@ -142,6 +154,7 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Draw(spriteBatch);
+            this.particleHeal.Draw(spriteBatch);
         }
     }
 }

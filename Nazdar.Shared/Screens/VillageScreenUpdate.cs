@@ -70,7 +70,6 @@ namespace Nazdar.Screens
             // - random - every day it gets more difficult, every village also
 
             int randomBase = this.GetNewEnemyProbability();
-
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
             {
                 Audio.PlayRandomSound("EnemySpawns");
@@ -140,7 +139,7 @@ namespace Nazdar.Screens
 
         private int GetNewEnemyProbability()
         {
-            int randomBase = newEnemyDefaultProbability - this.Game.Village * 32 - this.player.Days * 4;
+            int randomBase = newEnemyDefaultProbability - this.Game.Village * 20 - this.player.Days * 2;
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;
@@ -150,6 +149,10 @@ namespace Nazdar.Screens
 
         private void UpdateSoldiers()
         {
+            // create list of all enemies
+            List<BasePerson> uniEnemies = (from x in this.pigs select (BasePerson)x).ToList();
+            uniEnemies.AddRange((from x in this.enemies select (BasePerson)x).ToList());
+
             bool left = true;
             foreach (Soldier soldier in this.soldiers)
             {
@@ -169,11 +172,11 @@ namespace Nazdar.Screens
 
                 // can shoot at closest enemy?
                 int range = Enums.Screen.Width / 3; // third of the visible screen
-                foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - soldier.X)))
+                foreach (BasePerson uniEnemy in uniEnemies.Where(ue => ue.Dead == false).OrderBy(e => Math.Abs(e.X - soldier.X)))
                 {
-                    if (Math.Abs(enemy.X - soldier.X) < range)
+                    if (Math.Abs(uniEnemy.X - soldier.X) < range)
                     {
-                        soldier.PrepareToShoot((enemy.X + enemy.Width / 2) < (soldier.X + soldier.Width / 2) ? Direction.Left : Direction.Right);
+                        soldier.PrepareToShoot((uniEnemy.X + uniEnemy.Width / 2) < (soldier.X + soldier.Width / 2) ? Direction.Left : Direction.Right);
                         break;
                     }
                 }
