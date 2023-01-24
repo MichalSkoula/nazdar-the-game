@@ -74,6 +74,7 @@ namespace Nazdar.Screens
             this.farms.Clear();
             this.hospitals.Clear();
             this.towers.Clear();
+            this.markets.Clear();
             this.homelesses.Clear();
             this.coins.Clear();
             this.player.Kills = 0;

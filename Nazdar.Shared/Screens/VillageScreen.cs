@@ -56,11 +56,11 @@ namespace Nazdar.Screens
         // some settings - random 0-X == 1 ----------------------------------------------
         // new enemy settings
         // every day, it gets -2
-        // every village, it gets - *32 ... village 1 = 224, village 2 = 192, village 3 = 160, ...
-        private static int newEnemyDefaultProbability = 256;
-        private int newEnemyProbabilityLowLimit = 16;
+        // every village, it gets -20
+        private static int newEnemyDefaultProbability = 260;
+        private int newEnemyProbabilityLowLimit = 32;
         private static int newHomelessDefaultProbability = 512 * 4;
-        private int newHomelessProbabilityLowLimit = 512 * 2;
+        private int newHomelessProbabilityLowLimit = 768;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newPigMaxCaliber = Pig.DefaultCaliber * 5;
         private int newCoinProbability = 512 * 4;
@@ -68,7 +68,7 @@ namespace Nazdar.Screens
         private int pigDropProbability = 4;
         private int homelessLimit = 16;
         public static int farmingMoneyProbability = 512 * 3;
-        public static int marketMoneyProbability = 512 * 3;
+        public static int marketMoneyProbability = 512 * 2;
         private int newSkyApocalypseProbability = 512 * 6;
         private int farmLimit = 4;
 

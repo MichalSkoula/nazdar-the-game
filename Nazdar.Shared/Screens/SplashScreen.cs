@@ -89,7 +89,7 @@ namespace Nazdar.Screens
             textWidth = (int)Assets.Fonts["Medium"].MeasureString(action).X;
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], action, new Vector2((Enums.Screen.Width - textWidth) / 2, 120), MyColor.White);
 
-            // descriptions
+            // intro up
             int i = 0;
             foreach (string line in this.intro)
             {
