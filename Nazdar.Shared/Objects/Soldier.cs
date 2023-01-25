@@ -154,7 +154,7 @@ namespace Nazdar.Objects
             {
                 this.Bullets.Add(new Bullet(
                     this.X + this.Width / 2,
-                    this.Y + this.Height / 4,
+                    this.Y + this.Height / 4 + Tools.GetRandom(4) - 2,
                     this.Direction,
                     this.Caliber
                 ));
