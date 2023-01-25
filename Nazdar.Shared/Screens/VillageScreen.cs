@@ -63,7 +63,7 @@ namespace Nazdar.Screens
         private int newHomelessProbabilityLowLimit = 768;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
         private int newPigMaxCaliber = Pig.DefaultCaliber * 5;
-        private int newCoinProbability = 512 * 4;
+        private int newCoinProbability = 512 * 3;
         private int enemyDropProbability = 8;
         private int pigDropProbability = 4;
         private int homelessLimit = 16;

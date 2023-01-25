@@ -211,7 +211,14 @@ namespace Nazdar.Objects
                         MyShake.Shake();
                         MyVibration.Vibrate();
                         Audio.PlayRandomSound("PlayerShoots");
-                        this.Bullets.Add(new Bullet(this.X + (this.Width / 2), this.Y + (this.Height / 2), this.Direction, this.Caliber));
+                        this.Bullets.Add(
+                            new Bullet(
+                                this.X + (this.Width / 2),
+                                this.Y + (this.Height / 2) + Tools.GetRandom(4) - 2,
+                                this.Direction,
+                                this.Caliber
+                            )
+                        );
                         this.particleSmoke.Run(50);
                         this.Cartridges--;
                     }
