@@ -17,13 +17,12 @@ namespace Nazdar.Objects
 
         protected ParticleSource particleShit;
 
-        public Pig(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
+        public Pig(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber) : base()
         {
             this.Direction = direction;
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
-            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
 
             this.animations.Add(new Animation(Assets.Images["PigRight"], 4, 8));
             this.animations.Add(new Animation(Assets.Images["PigRight"], 4, 8));

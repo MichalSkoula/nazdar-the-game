@@ -23,7 +23,7 @@ namespace Nazdar.Objects
             new Animation(Assets.Images["FarmerLeft"], 4, 10),
         };
 
-        public Farmer(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
+        public Farmer(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber) : base()
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
@@ -31,7 +31,6 @@ namespace Nazdar.Objects
             this.Health = health;
             this.Speed = 100;
             this.Caliber = caliber;
-            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),

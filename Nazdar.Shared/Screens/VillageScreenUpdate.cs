@@ -159,12 +159,12 @@ namespace Nazdar.Screens
                 left = !left;
 
                 soldier.DeploymentBuilding = null;
-                if (left && this.leftmostTower != null)
+                if (left && this.leftmostTower != null && this.leftmostTower.Status == Building.Status.Built)
                 {
                     // leftmost tower exists?
                     soldier.DeploymentBuilding = this.leftmostTower;
                 }
-                else if (!left && this.rightmostTower != null)
+                else if (!left && this.rightmostTower != null && this.rightmostTower.Status == Building.Status.Built)
                 {
                     // rightmost tower exists?
                     soldier.DeploymentBuilding = this.rightmostTower;

@@ -24,7 +24,7 @@ namespace Nazdar.Objects
             new Animation(Assets.Images["PeasantLeft"], 4, 10),
         };
 
-        public Peasant(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber)
+        public Peasant(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber) : base()
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);

@@ -19,15 +19,13 @@ namespace Nazdar.Objects
         public const int Cost = 1;
         public const string Name = "Homeless";
 
-        public Homeless(int x, int y, Direction direction)
+        public Homeless(int x, int y, Direction direction) : base()
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
             this.Health = 100;
-            //this.Alpha = 0.6f;
             this.Speed = 61;
-            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
         }
 
         public new void Update(float deltaTime)

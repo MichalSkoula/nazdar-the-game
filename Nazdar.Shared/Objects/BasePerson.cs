@@ -8,6 +8,11 @@ namespace Nazdar.Objects
 {
     public abstract class BasePerson : BaseObject
     {
+        public BasePerson()
+        {
+            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
+        }
+
         private int health;
         public int Health
         {
