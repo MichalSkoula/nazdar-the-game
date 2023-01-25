@@ -69,6 +69,7 @@ namespace Nazdar.Screens
             this.center.Level = 1;
             this.locomotive = null;
             this.enemies.Clear();
+            this.pigs.Clear();
             this.armories.Clear();
             this.arsenals.Clear();
             this.farms.Clear();

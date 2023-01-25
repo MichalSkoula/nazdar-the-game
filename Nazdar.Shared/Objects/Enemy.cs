@@ -15,13 +15,12 @@ namespace Nazdar.Objects
 
         private List<Animation> animations = new List<Animation>();
 
-        public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber, int villageNumber = 1)
+        public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber, int villageNumber = 1) : base()
         {
             this.Direction = direction;
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
-            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),

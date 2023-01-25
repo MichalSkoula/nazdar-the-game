@@ -1,4 +1,5 @@
-﻿using static Nazdar.Enums;
+﻿using Nazdar.Shared;
+using static Nazdar.Enums;
 
 namespace Nazdar.Objects
 {
@@ -12,6 +13,7 @@ namespace Nazdar.Objects
         public BaseBuilding()
         {
             this.Alpha = 0.25f;
+            this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
         }
 
         public new void Update(float deltaTime)
