@@ -84,9 +84,12 @@ namespace Nazdar
                 Salt[i] = Tools.GetRandom(2); // 0,1
             }
 
+            // load settings
+            Settings.LoadSettings(this);
+
             // start it with this scene
 #if DEBUG
-            this.LoadScreen(typeof(Screens.MenuScreen));
+            this.LoadScreen(typeof(Screens.SplashScreen));
 
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);

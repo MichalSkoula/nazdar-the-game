@@ -69,6 +69,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenDraw.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenNext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenUpdate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Version.cs" />
