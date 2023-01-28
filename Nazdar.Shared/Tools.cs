@@ -59,6 +59,14 @@ namespace Nazdar.Shared
             return (Math.PI / 180) * val;
         }
 
+        /// <summary>
+        /// Rounds int to tenths
+        /// </summary>
+        public static int RoundOff(this int i)
+        {
+            return ((int)Math.Round(i / 10.0)) * 10;
+        }
+
         public static int GetScore(int days, int money, int peasants, int soldiers, int kills, int centerLevel)
         {
             return

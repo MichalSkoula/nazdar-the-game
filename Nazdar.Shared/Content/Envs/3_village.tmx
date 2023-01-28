@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="160" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="35">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="160" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="36">
  <tileset firstgid="1" source="snow.tsx"/>
  <layer id="1" name="ground" width="160" height="23">
   <data encoding="csv">
@@ -32,7 +32,6 @@
   <object id="21" name="Center" class="BuildingSpot" x="1208" y="144" width="144" height="48"/>
   <object id="22" name="Armory" class="BuildingSpot" x="1352" y="152" width="112" height="40"/>
   <object id="23" name="Arsenal" class="BuildingSpot" x="1096" y="152" width="112" height="40"/>
-  <object id="24" name="Tower" class="BuildingSpot" x="1464" y="144" width="96" height="48"/>
   <object id="25" name="Farm" class="BuildingSpot" x="720" y="168" width="160" height="24"/>
   <object id="27" name="Tower" class="BuildingSpot" x="1000" y="144" width="96" height="48"/>
   <object id="28" name="Slum" class="Other" x="304" y="168" width="48" height="24"/>
@@ -40,7 +39,8 @@
   <object id="30" name="Farm" class="BuildingSpot" x="1888" y="168" width="160" height="24"/>
   <object id="31" name="Farm" class="BuildingSpot" x="512" y="168" width="160" height="24"/>
   <object id="32" name="Farm" class="BuildingSpot" x="2224.67" y="168" width="160" height="24"/>
-  <object id="33" name="Locomotive" class="BuildingSpot" x="1560" y="144" width="112" height="48"/>
+  <object id="33" name="Locomotive" class="BuildingSpot" x="1576" y="144" width="112" height="48"/>
   <object id="34" name="Slum" class="Other" x="2140" y="168" width="48" height="24"/>
+  <object id="35" name="Hospital" class="BuildingSpot" x="1464" y="152" width="112" height="40"/>
  </objectgroup>
 </map>

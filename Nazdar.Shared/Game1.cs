@@ -79,15 +79,15 @@ namespace Nazdar
             // start it with this scene
 #if DEBUG
             this.LoadScreen(typeof(Screens.MenuScreen));
-#else
-            IsMouseVisible = false;
-            this.LoadScreen(typeof(Screens.SplashScreen));
-#endif
 
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Adapter.CurrentDisplayMode.Width + " " + GraphicsDevice.Adapter.CurrentDisplayMode.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.PresentationParameters.BackBufferWidth + " " + GraphicsDevice.PresentationParameters.BackBufferHeight);
+#else
+            IsMouseVisible = false;
+            this.LoadScreen(typeof(Screens.SplashScreen));
+#endif
         }
 
         protected override void LoadContent()

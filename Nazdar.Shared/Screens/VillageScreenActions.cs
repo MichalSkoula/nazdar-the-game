@@ -100,7 +100,6 @@ namespace Nazdar.Screens
 
             // upgrade and heal player
             this.player.Caliber = Player.DefaultCaliber + this.GetUpgradeAttackAddition();
-            this.player.Health = 100;
 
             // only one upgrade a day
             this.center.HasBeenUpgradedToday = true;

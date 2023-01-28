@@ -27,6 +27,16 @@ namespace Nazdar.Screens
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
 
+#if DEBUG
+            // cheats
+            if (Keyboard.HasBeenPressed(Keys.C) || Gamepad.HasBeenPressed(Buttons.RightTrigger))
+            {
+                this.player.Health = 100;
+                this.player.Cartridges = 100;
+                this.player.Money = 100;
+            }
+#endif
+
             // player
             this.player.Update(this.Game.DeltaTime, this.camera);
             this.camera.Follow(this.player);
@@ -239,14 +249,18 @@ namespace Nazdar.Screens
                 medic.DeploymentPerson = null;
             }
 
-            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            if (this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
             {
                 // make list of all wounded
                 List<BasePerson> wounded = new List<BasePerson>();
-                wounded.AddRange(this.soldiers.Where(i => i.Health < 100));
-                wounded.AddRange(this.farmers.Where(i => i.Health < 100));
-                wounded.AddRange(this.peasants.Where(i => i.Health < 100));
-                wounded = wounded.OrderBy(w => w.Health).ToList();
+                wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && i.Dead == false));
+                wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
+                wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
+                if (this.player.Health < 100)
+                {
+                    wounded.Add(this.player);
+                }
+                wounded = wounded.OrderBy(w => w.Health.RoundOff()).ToList();
 
                 if (wounded.Count > 0)
                 {
