@@ -36,7 +36,7 @@ namespace Nazdar.Objects
                     Assets.Images["CoinStatic"],
                     new Rectangle(
                         x + (Assets.Images["CoinStatic"].Width + 1) * (i % Enums.Offset.RowLimit),
-                        y - Assets.Images["CoinStatic"].Height * 2 + sign * (i / Enums.Offset.RowLimit * Assets.Images["CoinStatic"].Height),
+                        y - Assets.Images["CoinStatic"].Height * 2 + sign * (i / Enums.Offset.RowLimit * Assets.Images["CoinStatic"].Height) + Game1.Salt[i],
                         Assets.Images["CoinStatic"].Width,
                         Assets.Images["CoinStatic"].Height
                     ),

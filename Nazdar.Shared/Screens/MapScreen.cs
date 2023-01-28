@@ -200,12 +200,12 @@ namespace Nazdar.Screens
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);
 
-            // save data - show only village and score
+            // save data - show only some things
             int i = 0;
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                if (i == 1 || i > 3)
+                if (i == 1)
                 {
                     continue;
                 }

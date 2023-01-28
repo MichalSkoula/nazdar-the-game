@@ -87,6 +87,7 @@ namespace Nazdar.Shared
                 int village = 1;
                 int days = 0;
                 int money = 0;
+                int kills = 0;
 
                 // try to get score and other data from save slots
                 try
@@ -105,7 +106,7 @@ namespace Nazdar.Shared
                     days = saveData.GetValue("player").Days;
                     money = saveData.GetValue("player").Money;
                     village = saveData.GetValue("village");
-
+                    kills = saveData.GetValue("player").Kills;
                 }
                 catch (Exception e)
                 {
@@ -117,10 +118,67 @@ namespace Nazdar.Shared
                     "Day " + days,
                     "Score: " + score,
                     "Money: " + money,
+                    "Kills: " + kills
                 };
             }
 
             return new string[] { " ", " ", " ", " " };
+        }
+
+        /// <summary>
+        /// Converts remaining time in day/night phase and returns date and time of day, in XX:XX format
+        /// </summary>
+        public static string DayPhaseTimerToHours(DayPhase dayPhase, double dayPhaseTimer)
+        {
+            int hours;
+            double progressMinutes;
+            if (dayPhase == DayPhase.Day)
+            {
+                double progress = ((double)DayNightLength.Day - dayPhaseTimer) / (double)DayNightLength.Day;
+                hours = 6 + (int)Math.Floor(16 * progress); // starting at 6:00
+
+                progressMinutes = Math.Floor(16 * progress) - 16 * progress;
+            }
+            else
+            {
+                double progress = ((double)DayNightLength.Night - dayPhaseTimer) / (double)DayNightLength.Night;
+                hours = (int)Math.Floor(8 * progress);
+                if (hours == 0)
+                {
+                    hours = 22;
+                }
+                else if (hours == 1)
+                {
+                    hours = 23;
+                }
+                else
+                {
+                    hours -= 2;
+                }
+
+                progressMinutes = Math.Floor(16 * progress) - 16 * progress;
+            }
+
+            // make minutes and convert it into quarters
+            int progressInMinutes = (int)Math.Floor(Math.Abs(progressMinutes) * 60);
+            if (progressInMinutes < 15)
+            {
+                progressInMinutes = 0;
+            }
+            else if (progressInMinutes < 30)
+            {
+                progressInMinutes = 15;
+            }
+            else if (progressInMinutes < 45)
+            {
+                progressInMinutes = 30;
+            }
+            else
+            {
+                progressInMinutes = 45;
+            }
+
+            return hours.ToString("00") + ":" + progressInMinutes.ToString("00");
         }
 
         public static void Dump(string str)
@@ -129,6 +187,11 @@ namespace Nazdar.Shared
         }
 
         public static void Dump(int number)
+        {
+            System.Diagnostics.Debug.WriteLine(number.ToString());
+        }
+
+        public static void Dump(double number)
         {
             System.Diagnostics.Debug.WriteLine(number.ToString());
         }

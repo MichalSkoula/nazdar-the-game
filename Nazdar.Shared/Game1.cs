@@ -40,6 +40,8 @@ namespace Nazdar
         public static bool NextLevelAnimation { get; set; } = false;
         public bool FirstRun { get; set; } = false;
 
+        public static int[] Salt = new int[100];
+
         public Game1()
         {
             this.Graphics = new GraphicsDeviceManager(this);
@@ -75,6 +77,12 @@ namespace Nazdar
 
             // internal resolution
             this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, Enums.Screen.Width, Enums.Screen.Height);
+
+            // fill salt
+            for (int i = 0; i < Salt.Length; i++)
+            {
+                Salt[i] = Tools.GetRandom(2); // 0,1
+            }
 
             // start it with this scene
 #if DEBUG
