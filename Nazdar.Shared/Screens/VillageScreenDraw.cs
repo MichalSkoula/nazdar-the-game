@@ -4,7 +4,6 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
-using System;
 using static Nazdar.Enums;
 
 namespace Nazdar.Screens
@@ -27,7 +26,7 @@ namespace Nazdar.Screens
 
             // stats --------------------------------------------------------------------------
             int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
-            int rightOffset = Game1.CurrentPlatform == Enums.Platform.Android ? 380 : 460;
+            int rightOffset = Game1.CurrentPlatform == Enums.Platform.Android ? 400 : 520;
 
             // healthbar
             this.Game.SpriteBatch.DrawRectangle(
@@ -52,60 +51,84 @@ namespace Nazdar.Screens
                 new Vector2(leftOffset + 160, Offset.StatusBarY + 1),
                 MyColor.White);
 
-            // money
-            Coin.DrawStatic(this.Game.SpriteBatch, this.player.Money, leftOffset, Offset.StatusBarY + 40, 1);
+            // left stats
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["CoinStatic"],
+                new Vector2(leftOffset, Offset.StatusBarY + 20),
+                Color.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                " x " + (this.player.Money).ToString(),
+                new Vector2(leftOffset + 20, Offset.StatusBarY + 22),
+                MyColor.White);
 
-            // cartridges
-            Arsenal.DrawCartridgesStatic(this.Game.SpriteBatch, this.player.Cartridges, leftOffset, Offset.StatusBarY + 75, 1);
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["BulletStatic"],
+                new Vector2(leftOffset, Offset.StatusBarY + 45),
+                Color.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                " x " + (this.player.Cartridges).ToString(),
+                new Vector2(leftOffset + 20, Offset.StatusBarY + 46),
+                MyColor.White);
+
+            // top left stats
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                this.Game.Village + ". " + (Villages)this.Game.Village + ", day " + this.player.Days.ToString() + ".",
+                new Vector2(leftOffset, 10),
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+               Assets.Fonts["Small"],
+               Tools.DayPhaseTimerToHours(this.dayPhase, this.dayPhaseTimer),
+               new Vector2(leftOffset, 25),
+               MyColor.White);
 
             // right stats
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["PeasantRight"],
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY),
+                new Rectangle(0, 0, Assets.Images["PeasantRight"].Width / 4, Assets.Images["PeasantRight"].Height),
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Peasants: " + (this.peasants.Count).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 0),
+                " x " + (this.peasants.Count).ToString(),
+                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + Assets.Images["PeasantRight"].Height / 2),
                 MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Farmers: " + (this.farmers.Count).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 10),
-                MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Soldiers: " + (this.soldiers.Count).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
-                MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Medics: " + (this.medics.Count).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 30),
-                MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                "Kills: " + this.player.Kills.ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 40),
-                MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-               Assets.Fonts["Small"],
-               this.dayPhase.ToString() + " (" + Math.Ceiling(this.dayPhaseTimer).ToString() + ")",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
-               MyColor.White);
 
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["FarmerRight"],
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 25),
+                new Rectangle(0, 0, Assets.Images["FarmerRight"].Width / 4, Assets.Images["FarmerRight"].Height),
+                Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                "Score: " + (this.player.BaseScore + Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0)).ToString(),
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
+                " x " + (this.farmers.Count).ToString(),
+                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 25 + Assets.Images["FarmerRight"].Height / 2),
                 MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                this.Game.Village + ". " + (Villages)this.Game.Village,
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 80),
-                MyColor.White);
-            this.Game.SpriteBatch.DrawString(
-               Assets.Fonts["Small"],
-               "Day " + this.player.Days.ToString() + ".",
-               new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 90),
-               MyColor.White);
 
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["SoldierRight"],
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 50),
+                new Rectangle(0, 0, Assets.Images["SoldierRight"].Width / 4, Assets.Images["SoldierRight"].Height),
+                Color.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                " x " + (this.soldiers.Count).ToString(),
+                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 50 + Assets.Images["SoldierRight"].Height / 2),
+                MyColor.White);
+
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["MedicRight"],
+                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 75),
+                new Rectangle(0, 0, Assets.Images["MedicRight"].Width / 4, Assets.Images["MedicRight"].Height),
+                Color.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                " x " + (this.medics.Count).ToString(),
+                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 75 + Assets.Images["MedicRight"].Height / 2),
+                MyColor.White);
+            
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
@@ -213,12 +236,12 @@ namespace Nazdar.Screens
 
             if (this.dayPhase == DayPhase.Day)
             {
-                if (progress < 0.2f)
+                if (progress < 0.15f)
                 {
                     // dawn
                     return MyColor.Violet;
                 }
-                else if (progress > 0.8f)
+                else if (progress > 0.85f)
                 {
                     // dusk
                     return MyColor.DarkViolet;

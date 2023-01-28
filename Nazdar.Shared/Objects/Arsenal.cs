@@ -32,23 +32,6 @@ namespace Nazdar.Objects
             base.Update(deltaTime);
         }
 
-        public static void DrawCartridgesStatic(SpriteBatch spriteBatch, int howMany, int x, int y, float alpha = 1)
-        {
-            for (int i = 0; i < howMany; i++)
-            {
-                spriteBatch.Draw(
-                    Assets.Images["BulletStatic"],
-                    new Rectangle(
-                        x + (Assets.Images["BulletStatic"].Width + 1) * (i % Enums.Offset.RowLimit),
-                        y - Assets.Images["BulletStatic"].Height * 2 + (i / Enums.Offset.RowLimit * Assets.Images["BulletStatic"].Height),
-                        Assets.Images["BulletStatic"].Width,
-                        Assets.Images["BulletStatic"].Height
-                    ),
-                    Color.White * alpha
-                );
-            }
-        }
-
         public object GetSaveData()
         {
             return new

@@ -234,19 +234,38 @@ namespace Nazdar.Screens
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
             }
+            else
+            {
+                // default values differs on debug mode
+#if DEBUG
+                this.Game.Graphics.IsFullScreen = false;
+#else
+                this.Game.Graphics.IsFullScreen = true;
+#endif
+                this.Game.Graphics.ApplyChanges();
+            }
 
+            // music
             if (settings.ContainsKey("musicMuted"))
             {
                 MediaPlayer.IsMuted = (bool)settings.musicMuted;
             }
+            else
+            {
+                // default on
+                MediaPlayer.IsMuted = false;
+            }
 
+            // sounds
             if (settings.ContainsKey("soundsVolume"))
             {
                 SoundEffect.MasterVolume = (int)settings.soundsVolume;
             }
+            else
+            {
+                // default on
+                SoundEffect.MasterVolume = 1;
+            }
         }
-
-        // take a look at whats inside the save slots to show it in main menu
-
     }
 }

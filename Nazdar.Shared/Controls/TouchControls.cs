@@ -5,13 +5,13 @@ namespace Nazdar.Controls
 {
     public static class TouchControls
     {
-        private static Rectangle left = new Rectangle(30, 290, 44, 48);
-        private static Rectangle right = new Rectangle(100, 290, 44, 48);
+        private static Rectangle left = new Rectangle(20, 290, 44, 48);
+        private static Rectangle right = new Rectangle(90, 290, 44, 48);
         private static Rectangle select = new Rectangle(Enums.Screen.Width / 2 - 22, 290, 44, 48);
 
-        private static Rectangle jump = new Rectangle(565, 225, 44, 48);
-        private static Rectangle shoot = new Rectangle(505, 290, 44, 48);
-        private static Rectangle action = new Rectangle(565, 290, 44, 48);
+        private static Rectangle jump = new Rectangle(575, 225, 44, 48);
+        private static Rectangle shoot = new Rectangle(515, 290, 44, 48);
+        private static Rectangle action = new Rectangle(575, 290, 44, 48);
 
         public static bool IsPressedLeft()
         {
@@ -50,13 +50,13 @@ namespace Nazdar.Controls
                 return;
             }
 
-            spriteBatch.Draw(Assets.Images["GamepadLeft"], new Rectangle(left.X - (int)leftOffset, left.Y, left.Width, left.Height), Color.White * 0.7f);
-            spriteBatch.Draw(Assets.Images["GamepadRight"], new Rectangle(right.X - (int)leftOffset, right.Y, right.Width, right.Height), Color.White * 0.7f);
-            spriteBatch.Draw(Assets.Images["GamepadSelect"], new Rectangle(select.X - (int)leftOffset, select.Y, select.Width, select.Height), Color.White * 0.7f);
+            spriteBatch.Draw(Assets.Images["GamepadLeft"], new Rectangle(left.X - (int)leftOffset, left.Y, left.Width, left.Height), Color.White * 0.75f);
+            spriteBatch.Draw(Assets.Images["GamepadRight"], new Rectangle(right.X - (int)leftOffset, right.Y, right.Width, right.Height), Color.White * 0.75f);
+            spriteBatch.Draw(Assets.Images["GamepadSelect"], new Rectangle(select.X - (int)leftOffset, select.Y, select.Width, select.Height), Color.White * 0.75f);
 
-            spriteBatch.Draw(Assets.Images["GamepadY"], new Rectangle(jump.X - (int)leftOffset, jump.Y, jump.Width, jump.Height), Color.White * 0.7f);
-            spriteBatch.Draw(Assets.Images["GamepadX"], new Rectangle(shoot.X - (int)leftOffset, shoot.Y, shoot.Width, shoot.Height), Color.White * 0.7f);
-            spriteBatch.Draw(Assets.Images["GamepadA"], new Rectangle(action.X - (int)leftOffset, action.Y, action.Width, action.Height), Color.White * 0.7f);
+            spriteBatch.Draw(Assets.Images["GamepadY"], new Rectangle(jump.X - (int)leftOffset, jump.Y, jump.Width, jump.Height), Color.White * 0.75f);
+            spriteBatch.Draw(Assets.Images["GamepadX"], new Rectangle(shoot.X - (int)leftOffset, shoot.Y, shoot.Width, shoot.Height), Color.White * 0.75f);
+            spriteBatch.Draw(Assets.Images["GamepadA"], new Rectangle(action.X - (int)leftOffset, action.Y, action.Width, action.Height), Color.White * 0.75f);
         }
     }
 }
