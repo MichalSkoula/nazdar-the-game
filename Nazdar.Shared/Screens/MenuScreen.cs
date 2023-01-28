@@ -18,8 +18,6 @@ namespace Nazdar.Screens
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
-        private FileIO settingsFile = new FileIO("settings.json");
-
         public override void Initialize()
         {
             // add buttons
@@ -35,9 +33,6 @@ namespace Nazdar.Screens
 #if DEBUG
             buttons.Add("openFolderButton", new Button(Offset.MenuX + 560, Offset.MenuFooter - 20, null, ButtonSize.Small, "open"));
 #endif
-
-            // load settings
-            this.LoadSettings();
 
             // load saves to show info next to slot button
             string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3 };
@@ -111,14 +106,14 @@ namespace Nazdar.Screens
             {
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
-                this.SaveSettings();
+                Settings.SaveSettings(Game);
             }
 
             // settings - music
             if (Controls.Keyboard.HasBeenPressed(Keys.M) || this.buttons.GetValueOrDefault("musicButton").HasBeenClicked())
             {
                 MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
-                this.SaveSettings();
+                Settings.SaveSettings(Game);
             }
 
             // settings - sounds
@@ -133,7 +128,7 @@ namespace Nazdar.Screens
                 {
                     SoundEffect.MasterVolume = 0;
                 }
-                this.SaveSettings();
+                Settings.SaveSettings(Game);
             }
 
             // exit game from menu
@@ -154,7 +149,7 @@ namespace Nazdar.Screens
             {
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
                 {
-                    FileName = this.settingsFile.GetFolder(),
+                    FileName = Settings.GetPath(),
                     UseShellExecute = true,
                     Verb = "open"
                 });
@@ -203,69 +198,12 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "v" + Version.Number, new Vector2(Offset.MenuX, Offset.MenuFooter), MyColor.Gray1);
 #if DEBUG
             // save path
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], this.settingsFile.GetPath(), new Vector2(Offset.MenuX + 40, Offset.MenuFooter), MyColor.Gray1);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], Settings.GetPath(), new Vector2(Offset.MenuX + 40, Offset.MenuFooter), MyColor.Gray1);
 #endif
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);
 
             this.Game.DrawEnd();
-        }
-
-        private void SaveSettings()
-        {
-            this.settingsFile.Save(new
-            {
-                fullscreen = this.Game.Graphics.IsFullScreen,
-                musicMuted = MediaPlayer.IsMuted,
-                soundsVolume = SoundEffect.MasterVolume,
-            });
-        }
-
-        private void LoadSettings()
-        {
-            dynamic settings = this.settingsFile.Load();
-            if (settings == null)
-            {
-                return;
-            }
-
-            if (settings.ContainsKey("fullscreen") && this.Game.Graphics.IsFullScreen != (bool)settings.fullscreen)
-            {
-                this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
-                this.Game.Graphics.ApplyChanges();
-            }
-            else
-            {
-                // default values differs on debug mode
-#if DEBUG
-                this.Game.Graphics.IsFullScreen = false;
-#else
-                this.Game.Graphics.IsFullScreen = true;
-#endif
-                this.Game.Graphics.ApplyChanges();
-            }
-
-            // music
-            if (settings.ContainsKey("musicMuted"))
-            {
-                MediaPlayer.IsMuted = (bool)settings.musicMuted;
-            }
-            else
-            {
-                // default on
-                MediaPlayer.IsMuted = false;
-            }
-
-            // sounds
-            if (settings.ContainsKey("soundsVolume"))
-            {
-                SoundEffect.MasterVolume = (int)settings.soundsVolume;
-            }
-            else
-            {
-                // default on
-                SoundEffect.MasterVolume = 1;
-            }
         }
     }
 }
