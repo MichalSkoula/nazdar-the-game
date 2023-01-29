@@ -19,9 +19,12 @@ namespace Nazdar.Screens
             Color currentColor = this.GetSkyColor();
             this.GraphicsDevice.Clear(currentColor);
 
-            // background - tileset
-            Assets.TilesetEdges["left" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, -Offset.MapTilesOffset);
+            // background - railways
+            Assets.TilesetGroups["village" + this.Game.Village].Draw("background", this.Game.SpriteBatch);
+            // background - ground
             Assets.TilesetGroups["village" + this.Game.Village].Draw("ground", this.Game.SpriteBatch);
+            // background - edges
+            Assets.TilesetEdges["left" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, -Offset.MapTilesOffset);
             Assets.TilesetEdges["right" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, MapWidth);
 
             // stats --------------------------------------------------------------------------
