@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
-using static Nazdar.Enums;
+using Nazdar.Shared;
+using System.Collections.Generic;
 
 namespace Nazdar.Controls
 {
@@ -9,7 +11,7 @@ namespace Nazdar.Controls
     {
         private readonly int padding;
         private readonly SpriteFont font;
-        private ButtonState state;
+        private Enums.ButtonState state;
 
         public string Text { get; set; }
 
@@ -23,9 +25,9 @@ namespace Nazdar.Controls
 
         public string[] Data { get; set; }
 
-        public Button(int x, int y, int? width, ButtonSize size, string text, bool focus = false, string[] data = null, bool active = true)
+        public Button(int x, int y, int? width, Enums.ButtonSize size, string text, bool focus = false, string[] data = null, bool active = true)
         {
-            this.state = ButtonState.StaticState;
+            this.state = Enums.ButtonState.StaticState;
             this.padding = 5;
             this.Text = text;
             this.Focus = focus;
@@ -35,13 +37,13 @@ namespace Nazdar.Controls
             // add font
             switch (size)
             {
-                case ButtonSize.Small:
+                case Enums.ButtonSize.Small:
                     this.font = Assets.Fonts["Small"];
                     break;
-                case ButtonSize.Medium:
+                case Enums.ButtonSize.Medium:
                     this.font = Assets.Fonts["Medium"];
                     break;
-                case ButtonSize.Large:
+                case Enums.ButtonSize.Large:
                     this.font = Assets.Fonts["Large"];
                     break;
             }
@@ -78,15 +80,15 @@ namespace Nazdar.Controls
         {
             if (this.Hitbox.Contains(Mouse.Position))
             {
-                this.state = ButtonState.HoverState;
+                this.state = Enums.ButtonState.HoverState;
             }
             else if (this.Focus)
             {
-                this.state = ButtonState.HoverState;
+                this.state = Enums.ButtonState.HoverState;
             }
             else
             {
-                this.state = ButtonState.StaticState;
+                this.state = Enums.ButtonState.StaticState;
             }
         }
 
@@ -98,7 +100,7 @@ namespace Nazdar.Controls
             {
                 bgColor = MyColor.Gray3;
             }
-            else if (this.state == ButtonState.HoverState)
+            else if (this.state == Enums.ButtonState.HoverState)
             {
                 bgColor = MyColor.White;
             }
@@ -111,6 +113,41 @@ namespace Nazdar.Controls
         {
             Vector2 textSize = this.font.MeasureString(this.Text);
             return (int)textSize.X;
+        }
+
+        /// <summary>
+        /// Updates, iterates and "click" buttons
+        /// </summary>
+        public static void UpdateButtons(Dictionary<string, Button> buttons)
+        {
+            // update buttons
+            foreach (KeyValuePair<string, Button> button in buttons)
+            {
+                button.Value.Update();
+            }
+
+            // iterate through buttons up/down
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Down))
+            {
+                Tools.ButtonsIterateWithKeys(Enums.Direction.Down, buttons);
+            }
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Up))
+            {
+                Tools.ButtonsIterateWithKeys(Enums.Direction.Up, buttons);
+            }
+
+            // enter? some button has focus? click!
+            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Gamepad.HasBeenPressed(Buttons.A))
+            {
+                foreach (KeyValuePair<string, Button> button in buttons)
+                {
+                    if (button.Value.Focus)
+                    {
+                        button.Value.Clicked = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
