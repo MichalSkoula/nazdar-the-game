@@ -125,34 +125,7 @@ namespace Nazdar.Screens
 
         public override void Update(GameTime gameTime)
         {
-            // update buttons
-            foreach (KeyValuePair<string, Button> button in this.buttons)
-            {
-                button.Value.Update();
-            }
-
-            // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Gamepad.HasBeenPressed(Buttons.DPadDown) || Gamepad.HasBeenPressedThumbstick(Direction.Down))
-            {
-                Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
-            }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Gamepad.HasBeenPressed(Buttons.DPadUp) || Gamepad.HasBeenPressedThumbstick(Direction.Up))
-            {
-                Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
-            }
-
-            // enter? some button has focus? click!
-            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || Gamepad.HasBeenPressed(Buttons.A))
-            {
-                foreach (KeyValuePair<string, Button> button in this.buttons)
-                {
-                    if (button.Value.Focus)
-                    {
-                        button.Value.Clicked = true;
-                        break;
-                    }
-                }
-            }
+            Button.UpdateButtons(this.buttons);
 
             // start game - villages
             if (this.buttons.GetValueOrDefault("startButton").HasBeenClicked() || Controls.Gamepad.HasBeenPressed(Buttons.Start))

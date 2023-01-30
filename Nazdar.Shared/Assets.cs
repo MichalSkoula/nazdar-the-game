@@ -224,20 +224,20 @@ namespace Nazdar
             {
                 Assets.TilesetGroups["village" + tilesetType.Key] = new TilesetGroup(
                     TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Key + "_village.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString() + ".tsx"),
-                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString())
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString().ToLower() + ".tsx"),
+                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString().ToLower())
                 );
 
                 // load corresponding edges
                 Assets.TilesetEdges["left" + tilesetType.Key] = new TilesetGroup(
                     TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString() + ".tsx"),
-                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString() + "")
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString().ToLower() + ".tsx"),
+                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString().ToLower() + "")
                 );
                 Assets.TilesetEdges["right" + tilesetType.Key] = new TilesetGroup(
                     TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString() + ".tsx"),
-                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString() + "")
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString().ToLower() + ".tsx"),
+                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString().ToLower() + "")
                 );
             }
         }

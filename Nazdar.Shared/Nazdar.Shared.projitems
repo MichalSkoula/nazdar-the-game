@@ -58,6 +58,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ParticleSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Arsenal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\ControlsScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\CreditsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameFinishedScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreenDeleteSave.cs" />

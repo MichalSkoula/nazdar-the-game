@@ -20,18 +20,28 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            // add buttons
+            // add big start buttons
             buttons.Add("startButton1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Slot #1", true));
-            buttons.Add("startButton2", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "Slot #2"));
-            buttons.Add("startButton3", new Button(Offset.MenuX, 140, null, ButtonSize.Large, "Slot #3"));
-            buttons.Add("controlsButton", new Button(Offset.MenuX, 190, null, ButtonSize.Medium, "Controls"));
-            buttons.Add("fullscreenButton", new Button(Offset.MenuX, 220, null, ButtonSize.Medium, "Toggle Fullscreen"));
-            buttons.Add("musicButton", new Button(Offset.MenuX, 250, null, ButtonSize.Medium, "Toggle Music"));
-            buttons.Add("soundsButton", new Button(Offset.MenuX, 280, null, ButtonSize.Medium, "Toggle Sounds"));
-            buttons.Add("exitButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Exit"));
+            buttons.Add("startButton2", new Button(Offset.MenuX, 96, null, ButtonSize.Large, "Slot #2"));
+            buttons.Add("startButton3", new Button(Offset.MenuX, 132, null, ButtonSize.Large, "Slot #3"));
 
+            // add other buttons
+            int buttonMargin = 28;
+            buttons.Add("controlsButton", new Button(Offset.MenuX, 182 + 0 * buttonMargin, null, ButtonSize.Medium, "Controls"));
+            buttons.Add("creditsButton", new Button(Offset.MenuX, 182 + 1 * buttonMargin, null, ButtonSize.Medium, "Credits"));
+            buttons.Add("musicButton", new Button(Offset.MenuX, 182 + 2 * buttonMargin, null, ButtonSize.Medium, "Toggle Music"));
+            buttons.Add("soundsButton", new Button(Offset.MenuX, 182 + 3 * buttonMargin, null, ButtonSize.Medium, "Toggle Sounds"));
+            if (Game1.CurrentPlatform != Platform.Android)
+            {
+                buttons.Add("fullscreenButton", new Button(Offset.MenuX, 182 + 4 * buttonMargin, null, ButtonSize.Medium, "Toggle Fullscreen"));
+            }
+
+            buttons.Add("exitButton", new Button(Offset.MenuX, 182 + 5 * buttonMargin, null, ButtonSize.Medium, "Exit"));
 #if DEBUG
-            buttons.Add("openFolderButton", new Button(Offset.MenuX + 560, Offset.MenuFooter - 20, null, ButtonSize.Small, "open"));
+            if (Game1.CurrentPlatform != Platform.Android)
+            {
+                buttons.Add("openFolderButton", new Button(Offset.MenuX + 500, Offset.MenuFooter - 10, null, ButtonSize.Small, "saves"));
+            }
 #endif
 
             // load saves to show info next to slot button
@@ -55,34 +65,7 @@ namespace Nazdar.Screens
 
         public override void Update(GameTime gameTime)
         {
-            // update buttons
-            foreach (KeyValuePair<string, Button> button in this.buttons)
-            {
-                button.Value.Update();
-            }
-
-            // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown) || Controls.Gamepad.HasBeenPressedThumbstick(Direction.Down))
-            {
-                Tools.ButtonsIterateWithKeys(Direction.Down, this.buttons);
-            }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp) || Controls.Gamepad.HasBeenPressedThumbstick(Direction.Up))
-            {
-                Tools.ButtonsIterateWithKeys(Direction.Up, this.buttons);
-            }
-
-            // enter? some button has focus? click!
-            if (Controls.Keyboard.HasBeenPressed(Keys.Enter) || Controls.Gamepad.HasBeenPressed(Buttons.A))
-            {
-                foreach (KeyValuePair<string, Button> button in this.buttons)
-                {
-                    if (button.Value.Focus)
-                    {
-                        button.Value.Clicked = true;
-                        break;
-                    }
-                }
-            }
+            Button.UpdateButtons(this.buttons);
 
             // start game
             if (this.buttons.GetValueOrDefault("startButton1").HasBeenClicked())
@@ -102,7 +85,7 @@ namespace Nazdar.Screens
             }
 
             // settings - fullscreen
-            if (Controls.Keyboard.HasBeenPressed(Keys.F) || Controls.Keyboard.HasBeenPressed(Keys.F11) || this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked())
+            if (Controls.Keyboard.HasBeenPressed(Keys.F) || Controls.Keyboard.HasBeenPressed(Keys.F11) || (this.buttons.ContainsKey("fullscreenButton") && this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked()))
             {
                 this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
                 this.Game.Graphics.ApplyChanges();
@@ -143,9 +126,14 @@ namespace Nazdar.Screens
                 this.Game.LoadScreen(typeof(Screens.ControlsScreen));
             }
 
+            // credits
+            if (this.buttons.GetValueOrDefault("creditsButton").HasBeenClicked())
+            {
+                this.Game.LoadScreen(typeof(Screens.CreditsScreen));
+            }
+
             // open save folder (only if DEBUG)
-#if DEBUG
-            if (this.buttons.GetValueOrDefault("openFolderButton").HasBeenClicked())
+            if (this.buttons.ContainsKey("openFolderButton") && this.buttons.GetValueOrDefault("openFolderButton").HasBeenClicked())
             {
                 System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo()
                 {
@@ -154,7 +142,6 @@ namespace Nazdar.Screens
                     Verb = "open"
                 });
             }
-#endif
         }
 
         public override void Draw(GameTime gameTime)
@@ -195,10 +182,13 @@ namespace Nazdar.Screens
             }
 
             // version
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "v" + Version.Number, new Vector2(Offset.MenuX, Offset.MenuFooter), MyColor.Gray1);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "v" + Version.Number, new Vector2(Offset.MenuX + 565, Offset.MenuFooter), MyColor.Gray1);
 #if DEBUG
             // save path
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], Settings.GetPath(), new Vector2(Offset.MenuX + 40, Offset.MenuFooter), MyColor.Gray1);
+            if (Game1.CurrentPlatform != Platform.Android)
+            {
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], Settings.GetPath(), new Vector2(Offset.MenuX, Offset.MenuFooter + 10), MyColor.Gray2);
+            }
 #endif
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);

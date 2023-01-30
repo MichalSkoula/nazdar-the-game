@@ -1,7 +1,10 @@
 ﻿using Nazdar.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using static Nazdar.Enums;
 
 namespace Nazdar.Shared
@@ -194,6 +197,31 @@ namespace Nazdar.Shared
         public static void Dump(double number)
         {
             System.Diagnostics.Debug.WriteLine(number.ToString());
+        }
+
+        public static async Task OpenLinkAsync(string link)
+        {
+            if (Game1.CurrentPlatform == Enums.Platform.GL)
+            {
+                Process.Start(new ProcessStartInfo(link) { UseShellExecute = true });
+            }
+            else if (Game1.CurrentPlatform == Enums.Platform.Android)
+            {
+                await AndroidOpenBrowser(new Uri(link));
+            }
+        }
+
+        private static async Task AndroidOpenBrowser(Uri uri)
+        {
+            try
+            {
+                await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occured. No browser may be installed on the device.
+                Tools.Dump(ex.Message);
+            }
         }
     }
 }

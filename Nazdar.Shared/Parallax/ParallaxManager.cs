@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System.Linq;
-using static Nazdar.Enums;
 
 namespace Nazdar.Shared.Parallax
 {
@@ -59,7 +58,7 @@ namespace Nazdar.Shared.Parallax
             }
         }
 
-        public void AddLayer(Layer layer)
+        private void AddLayer(Layer layer)
         {
             layers.Add(layer);
         }

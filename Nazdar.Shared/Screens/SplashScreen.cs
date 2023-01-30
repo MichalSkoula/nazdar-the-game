@@ -13,7 +13,7 @@ namespace Nazdar.Screens
     {
         private new Game1 Game => (Game1)base.Game;
 
-        private double timer = 20;
+        private double timer = 30;
 
         private readonly string[] intro =
         {
