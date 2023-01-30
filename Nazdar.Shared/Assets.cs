@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.TextureAtlases;
 using Nazdar.Shared;
 using System.Collections.Generic;
+using static Nazdar.Enums;
 
 namespace Nazdar
 {
@@ -15,6 +16,7 @@ namespace Nazdar
         public static Dictionary<string, SpriteFont> Fonts = new Dictionary<string, SpriteFont>();
         public static Dictionary<string, Effect> Effects = new Dictionary<string, Effect>();
         public static Dictionary<string, TilesetGroup> TilesetGroups = new Dictionary<string, TilesetGroup>();
+        public static Dictionary<int, WeatherType> TilesetType;
         public static Dictionary<string, TilesetGroup> TilesetEdges = new Dictionary<string, TilesetGroup>();
         public static Dictionary<string, TextureRegion2D> ParticleTextureRegions = new Dictionary<string, TextureRegion2D>();
         public static Dictionary<string, List<Song>> SongsCollection = new Dictionary<string, List<Song>>();
@@ -89,6 +91,13 @@ namespace Nazdar
             Assets.Images["GamepadB"] = content.Load<Texture2D>("Controls/gamepad/b");
             Assets.Images["GamepadX"] = content.Load<Texture2D>("Controls/gamepad/x");
             Assets.Images["GamepadY"] = content.Load<Texture2D>("Controls/gamepad/y");
+
+            Assets.Images["Mountain"] = content.Load<Texture2D>("Parallax/mountain");
+            Assets.Images["Trees"] = content.Load<Texture2D>("Parallax/trees");
+            Assets.Images["Clouds_bg"] = content.Load<Texture2D>("Parallax/clouds_bg");
+            Assets.Images["Clouds_mg_1"] = content.Load<Texture2D>("Parallax/clouds_mg_1");
+            Assets.Images["Clouds_mg_2"] = content.Load<Texture2D>("Parallax/clouds_mg_2");
+            Assets.Images["Clouds_mg_3"] = content.Load<Texture2D>("Parallax/clouds_mg_3");
 
             // load fonts
             Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontSmall");
@@ -198,76 +207,38 @@ namespace Nazdar
             heal.SetData(new[] { MyColor.Turquoise });
             Assets.ParticleTextureRegions["Heal"] = new TextureRegion2D(heal);
 
-            // load tilesets ----------------------------------------------------------------
-            // Set build action to Copy in MGCB (because of Android)
+            // load tilesets -----------------------------------------------------------------------------------
+            Assets.TilesetType = new Dictionary<int, WeatherType>()
+            {
+                { 1, WeatherType.Grass },
+                { 2, WeatherType.Snow },
+                { 3, WeatherType.Snow },
+                { 4, WeatherType.Grass },
+                { 5, WeatherType.Grass },
+                { 6, WeatherType.Snow },
+            };
+            // Set build action to Copy in MGCB
             // streams are here because Android, but TitleContainer is cross platform so cool
-            Assets.TilesetGroups["village1"] = new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/1_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
-                content.Load<Texture2D>("Envs/tileset_grass")
-            );
-            Assets.TilesetGroups["village2"] = new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/2_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
-                content.Load<Texture2D>("Envs/tileset_snow")
-            );
-            Assets.TilesetGroups["village3"] = new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/3_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
-                content.Load<Texture2D>("Envs/tileset_snow")
-            );
-            Assets.TilesetGroups["village4"] = new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/4_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
-                content.Load<Texture2D>("Envs/tileset_grass")
-            );
-            Assets.TilesetGroups["village5"] = new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/5_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
-                content.Load<Texture2D>("Envs/tileset_grass")
-            );
-            Assets.TilesetGroups["village6"] = new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/6_village.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
-                content.Load<Texture2D>("Envs/tileset_snow")
-            );
+            foreach (var tilesetType in Assets.TilesetType)
+            {
+                Assets.TilesetGroups["village" + tilesetType.Key] = new TilesetGroup(
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Key + "_village.tmx"),
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString() + ".tsx"),
+                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString())
+                );
 
-            // edges --- must correspond to villages ----------------------------------------
-            Assets.TilesetEdges["left1"] =
-            Assets.TilesetEdges["left4"] =
-            Assets.TilesetEdges["left5"] =
-            new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
-                content.Load<Texture2D>("Envs/tileset_grass")
-            );
-
-            Assets.TilesetEdges["right1"] =
-            Assets.TilesetEdges["right4"] =
-            Assets.TilesetEdges["right5"] =
-            new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/grass.tsx"),
-                content.Load<Texture2D>("Envs/tileset_grass")
-            );
-
-            Assets.TilesetEdges["left2"] =
-            Assets.TilesetEdges["left3"] =
-            Assets.TilesetEdges["left6"] =
-            new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
-                content.Load<Texture2D>("Envs/tileset_snow")
-            );
-
-            Assets.TilesetEdges["right2"] =
-            Assets.TilesetEdges["right3"] =
-            Assets.TilesetEdges["right6"] =
-            new TilesetGroup(
-                TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
-                TitleContainer.OpenStream(@"Content/Envs/snow.tsx"),
-                content.Load<Texture2D>("Envs/tileset_snow")
-            );
+                // load corresponding edges
+                Assets.TilesetEdges["left" + tilesetType.Key] = new TilesetGroup(
+                    TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString() + ".tsx"),
+                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString() + "")
+                );
+                Assets.TilesetEdges["right" + tilesetType.Key] = new TilesetGroup(
+                    TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
+                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString() + ".tsx"),
+                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString() + "")
+                );
+            }
         }
     }
 }

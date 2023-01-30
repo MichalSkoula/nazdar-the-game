@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Screens;
 using Nazdar.Shared;
 using System.Collections.Generic;
@@ -52,7 +53,11 @@ namespace Nazdar.Weather
         {
             if (this.Active)
             {
-                this.AddDrop();
+                // add random number of drops
+                for (int i = 0; i < Tools.GetRandom(3) + 2; i++)
+                {
+                    this.AddDrop();
+                }
             }
 
             foreach (var drop in this.drops)
@@ -87,6 +92,63 @@ namespace Nazdar.Weather
             {
                 this.drops.Add(new Snowflake(x, y));
             }
+        }
+
+        public static Color GetSkyColor(DayPhase dayPhase, double dayPhaseTimer)
+        {
+            float progress = Sky.GetDayProgress(dayPhase, dayPhaseTimer);
+            if (dayPhase == DayPhase.Day)
+            {
+                if (progress < 0.15f)
+                {
+                    // dawn
+                    return MyColor.Violet;
+                }
+                else if (progress > 0.85f)
+                {
+                    // dusk
+                    return MyColor.DarkViolet;
+                }
+                else
+                {
+                    // day
+                    return MyColor.Blue;
+                }
+            }
+            else
+            {
+                // night
+                return MyColor.DarkerViolet;
+            }
+        }
+
+        public static Color GetParallaxColor(DayPhase dayPhase, double dayPhaseTimer)
+        {
+            float progress = Sky.GetDayProgress(dayPhase, dayPhaseTimer);
+            if (dayPhase == DayPhase.Day)
+            {
+                if (progress < 0.15f || progress > 0.85f)
+                {
+                    // dawn, dusk
+                    return MyColor.Gray1;
+                }
+                else
+                {
+                    // day
+                    return MyColor.White;
+                }
+            }
+            else
+            {
+                // night
+                return MyColor.Gray3;
+            }
+        }
+
+        private static float GetDayProgress(DayPhase dayPhase, double dayPhaseTimer)
+        {
+            float currentPhaseLength = dayPhase == DayPhase.Day ? (float)DayNightLength.Day : (float)DayNightLength.Night;
+            return (float)((currentPhaseLength - dayPhaseTimer) / currentPhaseLength);
         }
     }
 }

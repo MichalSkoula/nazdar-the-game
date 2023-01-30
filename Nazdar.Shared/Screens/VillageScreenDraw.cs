@@ -4,6 +4,7 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Weather;
 using static Nazdar.Enums;
 
 namespace Nazdar.Screens
@@ -16,8 +17,11 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // day or night sky - color transition
-            Color currentColor = this.GetSkyColor();
+            Color currentColor = Sky.GetSkyColor(this.dayPhase, this.dayPhaseTimer);
             this.GraphicsDevice.Clear(currentColor);
+
+            // parallax
+            this.parallaxManager.Draw(this.Game.SpriteBatch);
 
             // background - railways
             Assets.TilesetGroups["village" + this.Game.Village].Draw("background", this.Game.SpriteBatch);
@@ -131,7 +135,7 @@ namespace Nazdar.Screens
                 " x " + (this.medics.Count).ToString(),
                 new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 75 + Assets.Images["MedicRight"].Height / 2),
                 MyColor.White);
-            
+
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
@@ -230,36 +234,6 @@ namespace Nazdar.Screens
             this.sky.Draw(Game.SpriteBatch);
 
             this.Game.DrawEnd();
-        }
-
-        private Color GetSkyColor()
-        {
-            float currentPhaseLength = this.dayPhase == DayPhase.Day ? (float)DayNightLength.Day : (float)DayNightLength.Night;
-            float progress = (float)((currentPhaseLength - this.dayPhaseTimer) / currentPhaseLength);
-
-            if (this.dayPhase == DayPhase.Day)
-            {
-                if (progress < 0.15f)
-                {
-                    // dawn
-                    return MyColor.Violet;
-                }
-                else if (progress > 0.85f)
-                {
-                    // dusk
-                    return MyColor.DarkViolet;
-                }
-                else
-                {
-                    // day
-                    return MyColor.Blue;
-                }
-            }
-            else
-            {
-                // night
-                return MyColor.DarkerViolet;
-            }
         }
     }
 }

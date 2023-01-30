@@ -163,5 +163,11 @@ namespace Nazdar
             Raining,
             Snowing
         }
+
+        public enum WeatherType
+        {
+            Grass,
+            Snow
+        }
     }
 }
