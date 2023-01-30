@@ -53,6 +53,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Mouse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parallax\Layer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Parallax\ParallaxManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ParticleSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Arsenal.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\ControlsScreen.cs" />

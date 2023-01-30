@@ -1,6 +1,7 @@
 ﻿using MonoGame.Extended.Screens;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Shared.Parallax;
 using Nazdar.Weather;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,13 +45,13 @@ namespace Nazdar.Screens
         private List<Hospital> hospitals = new List<Hospital>();
         private List<Market> markets = new List<Market>();
 
-        // day and night, timer
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
         private bool won = false;
         private Sky sky = new Sky();
 
-        // consts
+        private ParallaxManager parallaxManager = new ParallaxManager();
+
         public readonly int MaxVillage = Assets.TilesetGroups.Count;
 
         // some settings - random 0-X == 1 ----------------------------------------------
@@ -70,7 +71,7 @@ namespace Nazdar.Screens
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 2;
         private int newSkyApocalypseProbability = 512 * 6;
-        private int farmLimit = 4;
+        private readonly int farmLimit = 4;
 
         // X positions for deployments
         private Tower? leftmostTower;
@@ -128,6 +129,9 @@ namespace Nazdar.Screens
             }
 
             Audio.SongTransition(0.5f, this.dayPhase == DayPhase.Day ? "Day" : "Night");
+
+            // add parallax layers
+            parallaxManager.Init(MapWidth, Assets.TilesetType[Game.Village]);
 
             base.Initialize();
         }

@@ -43,6 +43,8 @@ dotnet mgcb-editor
 * https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat.png
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
 * https://dreammix.itch.io/keyboard-keys-for-ui keyboard
+* https://vnitti.itch.io/glacial-mountains-parallax-background parallax mountains, clouds
+* https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue

@@ -4,6 +4,7 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Weather;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,9 +38,10 @@ namespace Nazdar.Screens
             }
 #endif
 
-            // player
+            // player, camera, parallax stuff
             this.player.Update(this.Game.DeltaTime, this.camera);
             this.camera.Follow(this.player);
+            this.parallaxManager.Update(this.player.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));
 
             // game objects
             this.UpdateEnemies();
@@ -1403,7 +1405,7 @@ namespace Nazdar.Screens
             // maybe start new apocalypse
             if (!this.sky.Active && Tools.GetRandom(newSkyApocalypseProbability) == 0)
             {
-                this.sky.Start(Tools.GetRandom(20) + 10);
+                this.sky.Start(Tools.GetRandom(20) + 10, (DropType)Assets.TilesetType[Game.Village]);
             }
         }
 
