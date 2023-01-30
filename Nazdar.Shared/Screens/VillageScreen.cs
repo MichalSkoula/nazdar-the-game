@@ -131,7 +131,7 @@ namespace Nazdar.Screens
             Audio.SongTransition(0.5f, this.dayPhase == DayPhase.Day ? "Day" : "Night");
 
             // add parallax layers
-            parallaxManager.Init(MapWidth, Assets.TilesetType[Game.Village]);
+            parallaxManager.Init(MapWidth, Game.Village);
 
             base.Initialize();
         }

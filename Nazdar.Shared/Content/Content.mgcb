@@ -701,7 +701,7 @@
 /processorParam:TextureFormat=Color
 /build:Parallax/clouds_mg_3.png
 
-#begin Parallax/mountain.png
+#begin Parallax/mountain_grass.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -711,9 +711,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Parallax/mountain.png
+/build:Parallax/mountain_grass.png
 
-#begin Parallax/mountain.png
+#begin Parallax/mountain_snow.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -723,7 +723,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Parallax/mountain.png
+/build:Parallax/mountain_snow.png
 
 #begin Parallax/trees.png
 /importer:TextureImporter

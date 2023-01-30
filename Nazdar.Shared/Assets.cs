@@ -92,7 +92,8 @@ namespace Nazdar
             Assets.Images["GamepadX"] = content.Load<Texture2D>("Controls/gamepad/x");
             Assets.Images["GamepadY"] = content.Load<Texture2D>("Controls/gamepad/y");
 
-            Assets.Images["Mountain"] = content.Load<Texture2D>("Parallax/mountain");
+            Assets.Images["MountainGrass"] = content.Load<Texture2D>("Parallax/mountain_grass");
+            Assets.Images["MountainSnow"] = content.Load<Texture2D>("Parallax/mountain_snow");
             Assets.Images["Trees"] = content.Load<Texture2D>("Parallax/trees");
             Assets.Images["Clouds_bg"] = content.Load<Texture2D>("Parallax/clouds_bg");
             Assets.Images["Clouds_mg_1"] = content.Load<Texture2D>("Parallax/clouds_mg_1");

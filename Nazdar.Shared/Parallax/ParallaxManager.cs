@@ -10,36 +10,52 @@ namespace Nazdar.Shared.Parallax
     {
         private List<Layer> layers = new List<Layer>();
 
-        public void Init(int mapWidth, WeatherType type)
+        public void Init(int mapWidth, int village)
         {
             this.layers.Clear();
 
-            // static -------------------------------------------------------------------------------
-            this.AddLayer(new Layer(Assets.Images["Mountain"], 1, 0.1f, 0, mapWidth, 1));
-            if (type == WeatherType.Grass)
+            switch (village)
             {
-                this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.15f, 0, mapWidth, 1));
-            }
-
-            // moving -------------------------------------------------------------------------------
-            // back clouds
-            if (Tools.GetRandom(2) == 0) 
-            { 
-                this.AddLayer(new Layer(Assets.Images["Clouds_bg"], 0, 0.05f, 1, mapWidth, 0.7f));
-            }
-            // fog
-            if (Tools.GetRandom(2) == 0)
-            {
-                this.AddLayer(new Layer(Assets.Images["Clouds_mg_1"], 5, 0.2f, 1.6f, mapWidth, 0.3f));
-            }
-            // another fog? - only in winter
-            if (type == WeatherType.Snow && Tools.GetRandom(2) == 0)
-            {
-                this.AddLayer(new Layer(Assets.Images["Clouds_mg_3"], 3, 0.2f, 1.2f, mapWidth, 0.5f));
-            }
-            if (type == WeatherType.Snow && Tools.GetRandom(2) == 0)
-            {
-                this.AddLayer(new Layer(Assets.Images["Clouds_mg_2"], 4, 0.2f, 1.4f, mapWidth, 0.4f));
+                case 1:
+                    this.AddLayer(new Layer(Assets.Images["MountainGrass"], 1, 0.1f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    break;
+                case 2:
+                    this.AddLayer(new Layer(Assets.Images["MountainSnow"], 2, 0.1f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_2"], 5, 0.2f, 1f, mapWidth, 0.3f));
+                    break;
+                case 3:
+                    this.AddLayer(new Layer(Assets.Images["MountainSnow"], 2, 0.1f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_1"], 5, 0.2f, 1f, mapWidth, 0.3f));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_3"], 5, 0.25f, 1f, mapWidth, 0.3f));
+                    break;
+                case 4:
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_2"], 5, 0.2f, 1f, mapWidth, 0.3f));
+                    break;
+                case 5:
+                    this.AddLayer(new Layer(Assets.Images["MountainGrass"], 1, 0.1f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_3"], 5, 0.2f, 1f, mapWidth, 0.3f));
+                    break;
+                case 6:
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_1"], 5, 0.2f, 1f, mapWidth, 0.3f));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_2"], 5, 0.25f, 1f, mapWidth, 0.3f));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_3"], 5, 0.3f, 1f, mapWidth, 0.3f));
+                    break;
+                case 7:
+                    this.AddLayer(new Layer(Assets.Images["MountainSnow"], 2, 0.1f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_1"], 5, 0.2f, 1f, mapWidth, 0.3f));
+                    this.AddLayer(new Layer(Assets.Images["Clouds_mg_2"], 5, 0.25f, 1f, mapWidth, 0.3f));
+                    break;
+                case 8:
+                    this.AddLayer(new Layer(Assets.Images["MountainGreen"], 2, 0.1f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.2f, 0, mapWidth, 1));
+                    break;
             }
         }
 

@@ -44,6 +44,7 @@ dotnet mgcb-editor
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
 * https://dreammix.itch.io/keyboard-keys-for-ui keyboard
 * https://vnitti.itch.io/glacial-mountains-parallax-background parallax mountains, clouds
+* https://vnitti.itch.io/grassy-mountains-parallax-background parallax mountains
 * https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees
 
 ### music
