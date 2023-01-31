@@ -19,24 +19,40 @@ namespace Nazdar.Screens
 
         private readonly string[] intro =
         {
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
-            "The Czechoslovak Legion were volunteer armed forces",
+            "A GAME BY",
+            "Michal Skoula",
+            "",
+            "ART",
+            "Michal Skoula",
+            "0x72 (Robert Norenberg)",
+            "Essssam",
+            "Sirnosir",
+            "eggboycolor (Andrew G. Crowell)",
+            "Dream Mix (Justin Sink)",
+            "Vnitti (Vicente Nitti)",
+            "Ansimuz",
+            "",
+            "MUSIC",
+            "Tad Miller",
+            "Omfgdude",
+            "Zander Noriega",
+            "Rizy",
+            "",
+            "SOUNDS",
+            "LordTomorrow",
+            "Spookymodem",
+            "Iwan Gabovitch",
+            "Ogrebane",
+            "rubberduck",
+            "Thimras (Eike Germann)",
+            "ChibiBagu",
+            "Vinrax (Vladislav Krotov)",
+            "",
+            "FONT",
+            "Roberto Mocci",
         };
         private float descriptionY = 350;
-        private readonly int descriptionSpeed = 20;
+        private readonly int descriptionSpeed = 25;
 
         public CreditsScreen(Game1 game) : base(game) { }
 
@@ -46,7 +62,9 @@ namespace Nazdar.Screens
 
             if (Game1.CurrentPlatform != Platform.UWP)
             {
-                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 92, null, ButtonSize.Small, "skoula.cz/nazdar"));
+                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 110, null, ButtonSize.Medium, "Official page"));
+                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 110 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
+                buttons.Add("monogame", new Button(Offset.MenuX, Offset.MenuY + 110 + 27 * 2, null, ButtonSize.Medium, "Monogame"));
             }
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
 
@@ -69,10 +87,18 @@ namespace Nazdar.Screens
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }
 
-            // www skoula
+            // www 
             if (this.buttons.ContainsKey("skoula") && this.buttons.GetValueOrDefault("skoula").HasBeenClicked())
             {
                 Tools.OpenLinkAsync("https://skoula.cz/nazdar");
+            }
+            if (this.buttons.ContainsKey("coffee") && this.buttons.GetValueOrDefault("coffee").HasBeenClicked())
+            {
+                Tools.OpenLinkAsync("https://www.buymeacoffee.com/mskoula");
+            }
+            if (this.buttons.ContainsKey("monogame") && this.buttons.GetValueOrDefault("monogame").HasBeenClicked())
+            {
+                Tools.OpenLinkAsync("https://www.monogame.net");
             }
 
             timer -= Game.DeltaTime;
@@ -93,14 +119,14 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Nazdar!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Credits", new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 80), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 95), MyColor.White);
 
             // intro up
             int i = 0;
             foreach (string line in this.intro)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 210, descriptionY + 18 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 300, descriptionY + 18 * i), MyColor.White);
             }
 
             // buttons

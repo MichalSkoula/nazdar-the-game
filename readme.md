@@ -38,34 +38,34 @@ dotnet mgcb-editor
 
 ### images
 * CC-29 color palette - https://lospec.com/palette-list/cc-29
-* characters based on https://0x72.itch.io/pixeldudesmaker 
-* https://essssam.itch.io/rocky-roads env
-* https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat.png
-* https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad
-* https://dreammix.itch.io/keyboard-keys-for-ui keyboard
-* https://vnitti.itch.io/glacial-mountains-parallax-background parallax mountains, clouds
-* https://vnitti.itch.io/grassy-mountains-parallax-background parallax mountains
-* https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees
+* characters based on https://0x72.itch.io/pixeldudesmaker  Robert Norenberg
+* https://essssam.itch.io/rocky-roads env Essssam
+* https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat.png sirnosir
+* https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad eggboycolor Andrew G. Crowell
+* https://dreammix.itch.io/keyboard-keys-for-ui keyboard Justin Sink
+* https://vnitti.itch.io/glacial-mountains-parallax-background parallax mountains, clouds Vicente Nitti
+* https://vnitti.itch.io/grassy-mountains-parallax-background parallax mountains Vicente Nitti
+* https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees Ansimuz
 
 ### music
-* https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue
-* https://opengameart.org/content/chill-lofi-inspired chill_lofi
-* https://opengameart.org/content/lofi-again lofiagain
-* https://opengameart.org/content/the-reach-of-hunger all metal songs
-* https://opengameart.org/content/rizys-sleep-music menu song
+* https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
+* https://opengameart.org/content/chill-lofi-inspired chill_lofi omfgdude
+* https://opengameart.org/content/lofi-again lofiagain omfgdude
+* https://opengameart.org/content/the-reach-of-hunger all metal songs Zander Noriega
+* https://opengameart.org/content/rizys-sleep-music menu song Rizy
 
 ### sounds
-* https://opengameart.org/content/coin-splash coin
-* https://opengameart.org/content/mining-pick rock
-* https://opengameart.org/content/15-vocal-male-strainhurtpainjump-sounds jump
-* https://opengameart.org/content/monster-sound-pack-volume-1 monster 
-* https://opengameart.org/content/monster-sound-effects-2 monster
-* https://opengameart.org/content/monster-sound-effects-pack monster
-* https://opengameart.org/content/25-cc0-bang-firework-sfx shooting
-* https://opengameart.org/content/battle-at-sea tower shooting
-* https://opengameart.org/content/80-cc0-rpg-sfx metal sound
-* https://opengameart.org/content/6-zombie-sounds zombies
-* https://opengameart.org/content/pig-sfx-pack pigs
+* https://opengameart.org/content/coin-splash coin LordTomorrow
+* https://opengameart.org/content/mining-pick rock spookymodem
+* https://opengameart.org/content/15-vocal-male-strainhurtpainjump-sounds jump Iwan Gabovitch
+* https://opengameart.org/content/monster-sound-pack-volume-1 monster Ogrebane
+* https://opengameart.org/content/monster-sound-effects-2 monster Ogrebane
+* https://opengameart.org/content/monster-sound-effects-pack monster Ogrebane
+* https://opengameart.org/content/25-cc0-bang-firework-sfx shooting rubberduck
+* https://opengameart.org/content/battle-at-sea tower shooting Eike Germann
+* https://opengameart.org/content/80-cc0-rpg-sfx metal sound rubberduck
+* https://opengameart.org/content/6-zombie-sounds zombies ChibiBagu
+* https://opengameart.org/content/pig-sfx-pack pigs Vladislav Krotov Vinrax
 
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika
