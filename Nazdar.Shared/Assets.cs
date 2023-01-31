@@ -65,16 +65,25 @@ namespace Nazdar
             Assets.Images["Crate2"] = content.Load<Texture2D>("Tools/crate2");
             Assets.Images["MedicalKit"] = content.Load<Texture2D>("Tools/medicalkit");
 
+            Assets.Images["Construction"] = content.Load<Texture2D>("Buildings/Construction");
             Assets.Images["Center"] = content.Load<Texture2D>("Buildings/Center");
+            Assets.Images["CenterRuins"] = content.Load<Texture2D>("Buildings/CenterRuins");
             Assets.Images["Armory"] = content.Load<Texture2D>("Buildings/Armory");
+            Assets.Images["ArmoryRuins"] = content.Load<Texture2D>("Buildings/ArmoryRuins");
             Assets.Images["Arsenal"] = content.Load<Texture2D>("Buildings/Arsenal");
+            Assets.Images["ArsenalRuins"] = content.Load<Texture2D>("Buildings/ArsenalRuins");
             Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
+            Assets.Images["TowerRuins"] = content.Load<Texture2D>("Buildings/TowerRuins");
             Assets.Images["TowerFiring"] = content.Load<Texture2D>("Buildings/Tower_firing");
             Assets.Images["Farm"] = content.Load<Texture2D>("Buildings/Farm");
+            Assets.Images["FarmRuins"] = content.Load<Texture2D>("Buildings/FarmRuins");
             Assets.Images["Hospital"] = content.Load<Texture2D>("Buildings/Hospital");
+            Assets.Images["HospitalRuins"] = content.Load<Texture2D>("Buildings/HospitalRuins");
             Assets.Images["Locomotive"] = content.Load<Texture2D>("Buildings/Locomotive");
+            Assets.Images["LocomotiveRuins"] = content.Load<Texture2D>("Buildings/LocomotiveRuins");
             Assets.Images["Slum"] = content.Load<Texture2D>("Buildings/Slum");
             Assets.Images["Market"] = content.Load<Texture2D>("Buildings/Market");
+            Assets.Images["MarketRuins"] = content.Load<Texture2D>("Buildings/MarketRuins");
             Assets.Images["MarketActive"] = content.Load<Texture2D>("Buildings/Market_active");
 
             Assets.Images["KeyboardUp"] = content.Load<Texture2D>("Controls/keyboard/up");
@@ -205,8 +214,12 @@ namespace Nazdar
             Assets.ParticleTextureRegions["Shit"] = new TextureRegion2D(shit);
 
             Texture2D heal = new Texture2D(graphicsDevice, 1, 1);
-            heal.SetData(new[] { MyColor.Turquoise });
+            heal.SetData(new[] { MyColor.Aqua });
             Assets.ParticleTextureRegions["Heal"] = new TextureRegion2D(heal);
+
+            Texture2D construction = new Texture2D(graphicsDevice, 1, 1);
+            construction.SetData(new[] { MyColor.Gray2 });
+            Assets.ParticleTextureRegions["Construction"] = new TextureRegion2D(construction);
 
             // load tilesets -----------------------------------------------------------------------------------
             Assets.TilesetType = new Dictionary<int, WeatherType>()

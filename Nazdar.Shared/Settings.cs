@@ -14,6 +14,7 @@ namespace Nazdar.Shared
                 fullscreen = Game.Graphics.IsFullScreen,
                 musicMuted = MediaPlayer.IsMuted,
                 soundsVolume = SoundEffect.MasterVolume,
+                vibrations = Game1.Vibrations
             });
         }
 
@@ -25,6 +26,7 @@ namespace Nazdar.Shared
                 // EITHER set default values
                 MediaPlayer.IsMuted = false;
                 SoundEffect.MasterVolume = 1;
+                Game1.Vibrations = true;
 #if DEBUG
                 Game.Graphics.IsFullScreen = false;
 #else
@@ -50,6 +52,11 @@ namespace Nazdar.Shared
             if (settings.ContainsKey("soundsVolume"))
             {
                 SoundEffect.MasterVolume = (int)settings.soundsVolume;
+            }
+
+            if (settings.ContainsKey("vibrations"))
+            {
+                Game1.Vibrations = (bool)settings.vibrations;
             }
         }
 

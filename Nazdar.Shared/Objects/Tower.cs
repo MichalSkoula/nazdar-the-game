@@ -38,6 +38,7 @@ namespace Nazdar.Objects
         {
             // draw sprite and on that, draw animation?
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
+            base.Draw(spriteBatch);
             if (this.CanFire)
             {
                 this.Anim.Draw(spriteBatch, this.Hitbox);

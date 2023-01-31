@@ -26,7 +26,9 @@ namespace Nazdar.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
+            base.Draw(spriteBatch);
             spriteBatch.DrawString(Assets.Fonts["Small"], "Lvl" + this.Level, new Vector2(this.X + 5, this.Y - 10), this.FinalColor);
         }
 

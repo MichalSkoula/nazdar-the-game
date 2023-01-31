@@ -21,22 +21,23 @@ namespace Nazdar.Screens
         public override void Initialize()
         {
             // add big start buttons
-            buttons.Add("startButton1", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Slot #1", true));
-            buttons.Add("startButton2", new Button(Offset.MenuX, 96, null, ButtonSize.Large, "Slot #2"));
-            buttons.Add("startButton3", new Button(Offset.MenuX, 132, null, ButtonSize.Large, "Slot #3"));
+            buttons.Add("startButton1", new Button(Offset.MenuX, 55, null, ButtonSize.Large, "Slot #1", true));
+            buttons.Add("startButton2", new Button(Offset.MenuX, 90, null, ButtonSize.Large, "Slot #2"));
+            buttons.Add("startButton3", new Button(Offset.MenuX, 125, null, ButtonSize.Large, "Slot #3"));
 
             // add other buttons
-            int buttonMargin = 28;
-            buttons.Add("controlsButton", new Button(Offset.MenuX, 182 + 0 * buttonMargin, null, ButtonSize.Medium, "Controls"));
-            buttons.Add("creditsButton", new Button(Offset.MenuX, 182 + 1 * buttonMargin, null, ButtonSize.Medium, "Credits"));
-            buttons.Add("musicButton", new Button(Offset.MenuX, 182 + 2 * buttonMargin, null, ButtonSize.Medium, "Toggle Music"));
-            buttons.Add("soundsButton", new Button(Offset.MenuX, 182 + 3 * buttonMargin, null, ButtonSize.Medium, "Toggle Sounds"));
-            if (Game1.CurrentPlatform != Platform.Android)
-            {
-                buttons.Add("fullscreenButton", new Button(Offset.MenuX, 182 + 4 * buttonMargin, null, ButtonSize.Medium, "Toggle Fullscreen"));
-            }
+            buttons.Add("controlsButton", new Button(Offset.MenuX, 160 + 0 * 27, null, ButtonSize.Medium, "Controls"));
+            buttons.Add("creditsButton", new Button(Offset.MenuX, 160 + 1 * 27, null, ButtonSize.Medium, "Credits"));
+            buttons.Add("musicButton", new Button(Offset.MenuX, 160 + 2 * 27, null, ButtonSize.Medium, "Music:", text: "Off"));
+            buttons.Add("soundsButton", new Button(Offset.MenuX, 160 + 3 * 27, null, ButtonSize.Medium, "Sounds:", text: "Off"));
+            buttons.Add("vibrationsButton", new Button(Offset.MenuX, 160 + 4 * 27, null, ButtonSize.Medium, "Vibrations:", text: "Off"));
 
-            buttons.Add("exitButton", new Button(Offset.MenuX, 182 + 5 * buttonMargin, null, ButtonSize.Medium, "Exit"));
+            // fullscreen - only on desktop = GL
+            if (Game1.CurrentPlatform == Platform.GL)
+            {
+                buttons.Add("fullscreenButton", new Button(Offset.MenuX, 160 + 5 * 27, null, ButtonSize.Medium, "Fullscreen:", text: "Off"));
+            }
+            buttons.Add("exitButton", new Button(Offset.MenuX, 160 + 6 * 27, null, ButtonSize.Medium, "Exit"));
 #if DEBUG
             if (Game1.CurrentPlatform != Platform.Android)
             {
@@ -85,11 +86,28 @@ namespace Nazdar.Screens
             }
 
             // settings - fullscreen
-            if (Controls.Keyboard.HasBeenPressed(Keys.F) || Controls.Keyboard.HasBeenPressed(Keys.F11) || (this.buttons.ContainsKey("fullscreenButton") && this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked()))
+            if (this.buttons.ContainsKey("fullscreenButton"))
             {
-                this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
-                this.Game.Graphics.ApplyChanges();
-                Settings.SaveSettings(Game);
+                if (Controls.Keyboard.HasBeenPressed(Keys.F) || Controls.Keyboard.HasBeenPressed(Keys.F11) || this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked())
+                {
+                    this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
+                    this.Game.Graphics.ApplyChanges();
+                    Settings.SaveSettings(Game);
+                }
+
+                this.buttons.GetValueOrDefault("fullscreenButton").Text = this.Game.Graphics.IsFullScreen ? "On" : "Off";
+            }
+
+            // settings - vibrations
+            if (this.buttons.ContainsKey("vibrationsButton"))
+            {
+                if (this.buttons.GetValueOrDefault("vibrationsButton").HasBeenClicked())
+                {
+                    Game1.Vibrations = !Game1.Vibrations;
+                    Settings.SaveSettings(Game);
+                }
+
+                this.buttons.GetValueOrDefault("vibrationsButton").Text = Game1.Vibrations ? "On" : "Off";
             }
 
             // settings - music
@@ -98,6 +116,7 @@ namespace Nazdar.Screens
                 MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
                 Settings.SaveSettings(Game);
             }
+            this.buttons.GetValueOrDefault("musicButton").Text = MediaPlayer.IsMuted ? "Off" : "On";
 
             // settings - sounds
             if (Controls.Keyboard.HasBeenPressed(Keys.S) || this.buttons.GetValueOrDefault("soundsButton").HasBeenClicked())
@@ -113,6 +132,7 @@ namespace Nazdar.Screens
                 }
                 Settings.SaveSettings(Game);
             }
+            this.buttons.GetValueOrDefault("soundsButton").Text = SoundEffect.MasterVolume == 1 ? "On" : "Off";
 
             // exit game from menu
             if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || this.buttons.GetValueOrDefault("exitButton").HasBeenClicked())
@@ -185,10 +205,7 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "v" + Version.Number, new Vector2(Offset.MenuX + 565, Offset.MenuFooter), MyColor.Gray1);
 #if DEBUG
             // save path
-            if (Game1.CurrentPlatform != Platform.Android)
-            {
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], Settings.GetPath(), new Vector2(Offset.MenuX, Offset.MenuFooter + 10), MyColor.Gray2);
-            }
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], Settings.GetPath(), new Vector2(Offset.MenuX, Offset.MenuFooter + 10), MyColor.Gray2);
 #endif
             // messages
             Game1.MessageBuffer.Draw(Game.SpriteBatch);

@@ -66,7 +66,7 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 " x " + (this.player.Money).ToString(),
-                new Vector2(leftOffset + 20, Offset.StatusBarY + 22),
+                new Vector2(leftOffset + 15, Offset.StatusBarY + 22),
                 MyColor.White);
 
             this.Game.SpriteBatch.Draw(
@@ -76,7 +76,7 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 " x " + (this.player.Cartridges).ToString(),
-                new Vector2(leftOffset + 20, Offset.StatusBarY + 46),
+                new Vector2(leftOffset + 15, Offset.StatusBarY + 46),
                 MyColor.White);
 
             // top left stats
