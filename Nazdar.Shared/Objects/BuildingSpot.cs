@@ -27,8 +27,10 @@ namespace Nazdar.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            string image = this.Type.ToString();
+
             spriteBatch.Draw(
-                Assets.Images[this.Type.ToString()],
+                Assets.Images.ContainsKey(image + "Ruins") ? Assets.Images[image + "Ruins"] : Assets.Images[image],
                 this.Hitbox,
                 this.Type == Building.Type.Slum ? Color.White : this.FinalColor
             );

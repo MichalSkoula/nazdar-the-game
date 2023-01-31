@@ -6,7 +6,6 @@ using Nazdar.Shared;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 using Keyboard = Nazdar.Controls.Keyboard;
-using Mouse = Nazdar.Controls.Mouse;
 
 namespace Nazdar.Screens
 {

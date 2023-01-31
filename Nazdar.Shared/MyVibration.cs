@@ -10,6 +10,11 @@ namespace Nazdar.Shared
     {
         public static void Vibrate(int ms = 250)
         {
+            if (Game1.Vibrations == false)
+            {
+                return;
+            }
+
             if (Game1.CurrentPlatform == Enums.Platform.Android)
             {
                 // mobile, easy

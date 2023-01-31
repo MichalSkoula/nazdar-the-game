@@ -275,8 +275,17 @@ namespace Nazdar.Objects
                 // can afford?
                 float alpha = (this.ActionCost <= this.Money && this.ActionEnabled ? 1f : 0.5f);
 
-                // static image from spritesheet
-                Coin.DrawStatic(spriteBatch, this.ActionCost, this.X, this.Y, alpha, true);
+                // coins
+                spriteBatch.Draw(
+                    Assets.Images["CoinStatic"],
+                    new Vector2(this.X - 2, this.Y - 26),
+                    Color.White * alpha);
+                spriteBatch.DrawString(
+                     Assets.Fonts["Small"],
+                     " x " + this.ActionCost.ToString(),
+                     new Vector2(this.X + 13, this.Y - 24),
+                     MyColor.White * alpha
+                 );
 
                 // text
                 spriteBatch.DrawString(

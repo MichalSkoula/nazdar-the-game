@@ -1,4 +1,6 @@
-﻿using Nazdar.Shared;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Nazdar.Shared;
 using static Nazdar.Enums;
 
 namespace Nazdar.Objects
@@ -12,7 +14,6 @@ namespace Nazdar.Objects
 
         public BaseBuilding()
         {
-            this.Alpha = 0.25f;
             this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
         }
 
@@ -20,11 +21,15 @@ namespace Nazdar.Objects
         {
             base.Update(deltaTime);
 
-            this.Alpha = this.Status == Building.Status.InProcess ? 0.25f : 1;
-
             if (this.TimeToBuild > 0 && this.WorkingPeasant != null)
             {
                 this.TimeToBuild -= deltaTime;
+
+                // particles
+                if (Game1.GlobalTimer % 50 == 0)
+                {
+                    this.WorkingPeasant.particleConstruction.Run(50);
+                }
             }
 
             // built?
@@ -39,6 +44,32 @@ namespace Nazdar.Objects
                 {
                     this.WorkingPeasant.ToDelete = true;
                 }
+            }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (this.Status != Building.Status.InProcess)
+            {
+                return;
+            }
+
+            // cover it with construction tape
+            int textureWidth = Assets.Images["Construction"].Width;
+            int textureHeight = Assets.Images["Construction"].Height;
+            int howManyDraws = this.Hitbox.Width / textureWidth;
+            int howManyDrawsOffset = (this.Hitbox.Width % textureWidth) / 2;
+
+            for (int i = 0; i < howManyDraws; i++)
+            {
+                spriteBatch.Draw(
+                    Assets.Images["Construction"],
+                    new Rectangle(
+                        this.Hitbox.X + howManyDrawsOffset + i * textureWidth,
+                        this.Hitbox.Y + this.Hitbox.Height / 2 - textureHeight / 2,
+                        textureWidth,
+                        textureHeight),
+                    Color.White);
             }
         }
     }

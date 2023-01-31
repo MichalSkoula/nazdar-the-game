@@ -15,6 +15,7 @@ namespace Nazdar.Objects
         public Rectangle? IsRunningForItem = null;
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 2;
+        public ParticleSource particleConstruction;
 
         private List<Animation> animations = new List<Animation>()
         {
@@ -41,6 +42,14 @@ namespace Nazdar.Objects
                 2,
                 Assets.ParticleTextureRegions["Blood"]
             );
+
+            this.particleConstruction = new ParticleSource(
+                new Vector2(this.X, this.Y),
+                new Tuple<int, int>(this.Width / 2, this.Height / 2),
+                Direction.Up,
+                1,
+                Assets.ParticleTextureRegions["Construction"]
+            );
         }
 
         public new void Update(float deltaTime)
@@ -49,6 +58,7 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
+            this.particleConstruction.Update(deltaTime, new Vector2(this.X, this.Y));
 
             if (this.Dead)
             {
@@ -140,6 +150,7 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Draw(spriteBatch);
+            this.particleConstruction.Draw(spriteBatch);
         }
     }
 }

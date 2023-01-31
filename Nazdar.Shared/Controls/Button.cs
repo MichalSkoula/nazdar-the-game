@@ -14,6 +14,7 @@ namespace Nazdar.Controls
         private Enums.ButtonState state;
 
         public string Text { get; set; }
+        private string DefaultText { get; set; }
 
         public Rectangle Hitbox { get; private set; }
 
@@ -25,11 +26,12 @@ namespace Nazdar.Controls
 
         public string[] Data { get; set; }
 
-        public Button(int x, int y, int? width, Enums.ButtonSize size, string text, bool focus = false, string[] data = null, bool active = true)
+        public Button(int x, int y, int? width, Enums.ButtonSize size, string defaultText, bool focus = false, string[] data = null, bool active = true, string text = "")
         {
             this.state = Enums.ButtonState.StaticState;
             this.padding = 5;
             this.Text = text;
+            this.DefaultText = defaultText;
             this.Focus = focus;
             this.Data = data;
             this.Active = active;
@@ -106,12 +108,12 @@ namespace Nazdar.Controls
             }
 
             spriteBatch.DrawRectangle(this.Hitbox, bgColor, (this.Hitbox.Height / 2) + 5);
-            spriteBatch.DrawString(this.font, this.Text, new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), MyColor.Black);
+            spriteBatch.DrawString(this.font, this.DefaultText + (this.Text.Length > 0 ? " " + this.Text : ""), new Vector2(this.Hitbox.X + this.padding, this.Hitbox.Y + this.padding), MyColor.Black);
         }
 
         private int CalculateButtonSize()
         {
-            Vector2 textSize = this.font.MeasureString(this.Text);
+            Vector2 textSize = this.font.MeasureString(this.DefaultText + (this.Text.Length > 0 ? this.Text + " " : ""));
             return (int)textSize.X;
         }
 

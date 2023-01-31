@@ -54,6 +54,7 @@ namespace Nazdar.Objects
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
+            base.Draw(spriteBatch);
 
             foreach (var weapon in this.medicalKits)
             {

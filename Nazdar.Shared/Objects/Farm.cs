@@ -54,8 +54,8 @@ namespace Nazdar.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
+            base.Draw(spriteBatch);
 
             foreach (var tool in this.tools)
             {
