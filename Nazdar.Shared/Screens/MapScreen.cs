@@ -26,6 +26,9 @@ namespace Nazdar.Screens
         {
             {
                 1, new string[] {
+                    "MISSION GOALS",
+                    "Repair the locomotive and head east",
+                    "",
                     "May 1918, Chelyabinsk. An eastbound train bearing",
                     "Legion forces encountered a westbound train",
                     "bearing Hungarians, who were loyal to the Central",
@@ -35,58 +38,80 @@ namespace Nazdar.Screens
             },
             {
                 2, new string[] {
+                    "MISSION GOALS",
+                    "Repair the locomotive and head east",
+                    "",
                     "May 1918, Omsk. The damned Bolsheviks attacked",
                     "the Legion train at the Maryanovka station.",
                 }
             },
             {
                 3, new string[] {
+                    "MISSION GOALS",
+                    "Repair the locomotive and head east",
+                    "",
                     "May 1918, Penza. The Legion must gain control over",
-                    "the Penze train station, to be able to continue."
+                    "the Penze train station, to be able to continue.",
                 }
             },
             {
                 4, new string[] {
+                    "MISSION GOALS",
+                    "Repair damaged rails",
+                    "Repair the locomotive and head east",
+                    "",
                     "June 1918, Lipjag. A great battle is coming.",
                     "The Legion must capture the city of Lipjag,",
                     "where a large number of those damned Bolsheviks",
-                    "are gathered..."
+                    "are gathered...",
                 }
             },
             {
                 5, new string[] {
+                    "MISSION GOALS",
+                    "Repair the locomotive and head east",
+                    "",
                     "June 1918, Ufa. The Legion must capture the city",
                     "of Ufa and take control over near villages. Maybe do",
-                    "some bizz there too."
+                    "some bizz there too.",
                 }
             },
             {
                 6, new string[] {
+                    "MISSION GOALS",
+                    "Repair rails",
+                    "Repair the locomotive and head east",
+                    "",
                     "July 1918, Yekaterinburg. The Legion arrived late.",
                     "Only a week earlier, the Bolsheviks had killed",
                     "the Russian Tsar and his entire family.",
                     "",
-                    "A hard winter struck. They have to find other sources."
+                    "A hard winter struck. They have to find other sources.",
                 }
             },
             {
                 7, new string[] {
+                    "MISSION GOALS",
+                    "Repair the locomotive and head east",
+                    "",
                     "August 6 1918, Kazan. The Legion must conquer the city",
                     "of Kazan and seize the Russian gold treasure. This will",
                     "then serve the White Guards to finance the fight against",
-                    "the Bolsheviks."
+                    "the Bolsheviks.",
                 }
             },
             {
                 8, new string[] {
+                    "MISSION GOALS",
+                    "Repair the locomotive and head east",
+                    "",
                     "January 1919, Vladivostok. The Legionnaires want to go",
                     "home. They control the entire Trans-Siberian Railway, ",
                     "but the promised help from the Allied Powers does not ",
                     "come. They must seize Vladivostok and make their way",
-                    "home by ships."
+                    "home by ships.",
                 }
             },
-
         };
 
         public override void Initialize()

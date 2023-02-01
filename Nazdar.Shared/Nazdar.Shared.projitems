@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Medic.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\MedicalKit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Pig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Rails.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Tower.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Armory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\BaseBuilding.cs" />

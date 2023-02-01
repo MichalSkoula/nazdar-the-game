@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Nazdar.Shared;
-using System;
 using System.Linq;
 
 namespace Nazdar.Objects
