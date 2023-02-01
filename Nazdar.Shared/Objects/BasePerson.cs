@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using Nazdar.Shared;
+using System;
 using System.Linq;
 
 namespace Nazdar.Objects
@@ -71,6 +72,9 @@ namespace Nazdar.Objects
         // returns false if it should die
         public bool TakeHit(int caliber)
         {
+            // 20% random +/-
+            caliber += Tools.GetRandom((int)(caliber * 0.2f)) * (Tools.GetRandom(2) * 2 - 1);
+
             this.particleBlood.Run(100);
 
             if (this.Health - caliber > 0)
