@@ -44,6 +44,7 @@ namespace Nazdar.Screens
         private List<Farm> farms = new List<Farm>();
         private List<Hospital> hospitals = new List<Hospital>();
         private List<Market> markets = new List<Market>();
+        private List<Rails> rails = new List<Rails>();
 
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
@@ -263,6 +264,14 @@ namespace Nazdar.Screens
                 }
             }
 
+            if (saveData.ContainsKey("rails"))
+            {
+                foreach (var data in saveData.GetValue("rails"))
+                {
+                    this.rails.Add(new Rails((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild));
+                }
+            }
+
             if (saveData.ContainsKey("arsenals"))
             {
                 foreach (var data in saveData.GetValue("arsenals"))
@@ -333,6 +342,7 @@ namespace Nazdar.Screens
                 markets = this.markets.Select(item => item.GetSaveData()).ToList(),
                 towers = this.towers.Select(item => item.GetSaveData()).ToList(),
                 farms = this.farms.Select(item => item.GetSaveData()).ToList(),
+                rails = this.rails.Select(item => item.GetSaveData()).ToList(),
                 coins = this.coins.Select(item => item.GetSaveData()).ToList(),
                 this.dayPhase,
                 this.dayPhaseTimer,

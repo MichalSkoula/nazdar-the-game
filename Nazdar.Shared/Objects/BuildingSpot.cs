@@ -7,7 +7,9 @@ namespace Nazdar.Objects
 {
     public class BuildingSpot : BaseBuilding
     {
-        public BuildingSpot(int x, int y, int width, int height, string type)
+        public bool Hide { get; set; }
+
+        public BuildingSpot(int x, int y, int width, int height, string type, bool hide = false)
         {
             this.Hitbox = new Rectangle(x, y, width, height);
             this.Type = type switch
@@ -21,12 +23,19 @@ namespace Nazdar.Objects
                 "Hospital" => Building.Type.Hospital,
                 "Locomotive" => Building.Type.Locomotive,
                 "Market" => Building.Type.Market,
+                "Rails" => Building.Type.Rails,
                 _ => throw new ArgumentException(),
             };
+            this.Hide = hide;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (this.Hide)
+            {
+                return;
+            }
+
             string image = this.Type.ToString();
 
             spriteBatch.Draw(

@@ -62,6 +62,7 @@ namespace Nazdar.Screens
             this.UpdateFarms();
             this.UpdateHospitals();
             this.UpdateMarkets();
+            this.UpdateRails();
 
             // collisions
             this.UpdateEnemiesCollisions();
@@ -339,6 +340,11 @@ namespace Nazdar.Screens
                     this.Build(market);
                     break;
                 }
+                foreach (var rails in this.rails.Where(a => a.Status == Building.Status.InProcess))
+                {
+                    this.Build(rails);
+                    break;
+                }
 
                 // something to get?
                 foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
@@ -402,6 +408,23 @@ namespace Nazdar.Screens
             foreach (Market market in this.markets)
             {
                 market.Update(this.Game.DeltaTime, this.coins);
+            }
+        }
+
+        private void UpdateRails()
+        {
+            foreach (Rails rails in this.rails)
+            {
+                rails.Update(this.Game.DeltaTime);
+
+                // Hides buildingsSpots under built rails
+                if (rails.Status == Building.Status.Built)
+                {
+                    foreach (BuildingSpot bs in this.buildingSpots.Where(bs => bs.Type == Building.Type.Rails && bs.Hitbox.Intersects(rails.Hitbox)))
+                    {
+                        bs.Hide = true;
+                    }
+                }
             }
         }
 
@@ -1160,6 +1183,33 @@ namespace Nazdar.Screens
                         }
                     }
                 }
+                // Rails?
+                else if (buildingSpot.Type == Building.Type.Rails)
+                {
+                    var rails = this.rails.Where(a => a.Hitbox.Intersects(buildingSpot.Hitbox));
+                    if (!rails.Any())
+                    {
+                        // no rails here - we can build them
+                        this.player.Action = Enums.PlayerAction.Repair;
+                        this.player.ActionCost = Rails.Cost;
+                        this.player.ActionName = Rails.Name;
+
+                        if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                        {
+                            if (this.player.Money < Rails.Cost)
+                            {
+                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            }
+                            else
+                            {
+                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Audio.PlaySound("Rock");
+                                this.player.Money -= Rails.Cost;
+                                this.rails.Add(new Rails(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                            }
+                        }
+                    }
+                }
                 // Arsenal?
                 else if (buildingSpot.Type == Building.Type.Arsenal)
                 {
@@ -1304,21 +1354,31 @@ namespace Nazdar.Screens
                 {
 
                     // we can build it
-                    this.player.Action = Enums.PlayerAction.Build;
+                    this.player.Action = Enums.PlayerAction.Repair;
                     this.player.ActionCost = Locomotive.Cost;
-                    this.player.ActionName = Locomotive.Name + " and continue the journey!";
-                    this.player.ActionEnabled = this.center.Level == this.Game.Village ? true : false;
+                    this.player.ActionName = Locomotive.Name;
+                    string actionEnabledText = "";
+                    if (this.center.Level < this.Game.Village)
+                    {
+                        this.player.ActionEnabled = false;
+                        actionEnabledText = "First you need to upgrade the base";
+                    } 
+                    else if (this.buildingSpots.Where(bs => bs.Hide == false && bs.Type == Building.Type.Rails).Any())
+                    {
+                        this.player.ActionEnabled = false;
+                        actionEnabledText = "First you need to repair all rails";
+                    }
 
                     // only if center is maxed up
                     if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                     {
-                        if (this.player.Money < Locomotive.Cost)
+                        if (!this.player.ActionEnabled)
+                        {
+                            Game1.MessageBuffer.AddMessage(actionEnabledText, MessageType.Fail);
+                        }
+                        else if (this.player.Money < Locomotive.Cost)
                         {
                             Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
-                        }
-                        else if (!this.player.ActionEnabled)
-                        {
-                            Game1.MessageBuffer.AddMessage("You must upgrade center base first", MessageType.Fail);
                         }
                         else
                         {

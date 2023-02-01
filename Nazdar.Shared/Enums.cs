@@ -43,7 +43,8 @@ namespace Nazdar
             Build,
             Create,
             Upgrade,
-            Buy
+            Buy,
+            Repair
         }
 
         public enum BulletType
@@ -91,7 +92,8 @@ namespace Nazdar
                 Slum, // cant be build
                 Hospital,
                 Locomotive,
-                Market
+                Market,
+                Rails
             }
 
             public enum Status

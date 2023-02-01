@@ -182,6 +182,11 @@ namespace Nazdar.Screens
                 farm.Draw(this.Game.SpriteBatch);
             }
 
+            foreach (Rails rails in this.rails)
+            {
+                rails.Draw(this.Game.SpriteBatch);
+            }
+
             foreach (Tower tower in this.towers)
             {
                 tower.Draw(this.Game.SpriteBatch);
