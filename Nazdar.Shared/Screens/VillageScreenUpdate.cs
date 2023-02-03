@@ -1362,7 +1362,7 @@ namespace Nazdar.Screens
                     {
                         this.player.ActionEnabled = false;
                         actionEnabledText = "First you need to upgrade the base";
-                    } 
+                    }
                     else if (this.buildingSpots.Where(bs => bs.Hide == false && bs.Type == Building.Type.Rails).Any())
                     {
                         this.player.ActionEnabled = false;

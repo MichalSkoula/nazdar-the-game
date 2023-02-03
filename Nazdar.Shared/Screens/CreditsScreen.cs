@@ -31,6 +31,7 @@ namespace Nazdar.Screens
             "Dream Mix (Justin Sink)",
             "Vnitti (Vicente Nitti)",
             "Ansimuz",
+            "Abetusk",
             "",
             "MUSIC",
             "Tad Miller",
