@@ -632,14 +632,26 @@
 #begin Envs/6_village.tmx
 /copy:Envs/6_village.tmx
 
-#begin Envs/grass.tsx
-/copy:Envs/grass.tsx
+#begin Envs/7_village.tmx
+/copy:Envs/7_village.tmx
 
-#begin Envs/left.tmx
-/copy:Envs/left.tmx
+#begin Envs/8_village.tmx
+/copy:Envs/8_village.tmx
 
-#begin Envs/right.tmx
-/copy:Envs/right.tmx
+#begin Envs/left_grass.tmx
+/copy:Envs/left_grass.tmx
+
+#begin Envs/left_snow.tmx
+/copy:Envs/left_snow.tmx
+
+#begin Envs/right_sea.tmx
+/copy:Envs/right_sea.tmx
+
+#begin Envs/right_grass.tmx
+/copy:Envs/right_grass.tmx
+
+#begin Envs/right_snow.tmx
+/copy:Envs/right_snow.tmx
 
 #begin Envs/Rocky Roads/tileset forest.png
 /importer:TextureImporter
@@ -653,10 +665,7 @@
 /processorParam:TextureFormat=Color
 /build:Envs/Rocky Roads/tileset forest.png
 
-#begin Envs/snow.tsx
-/copy:Envs/snow.tsx
-
-#begin Envs/tileset_grass.png
+#begin Envs/tileset.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -666,19 +675,10 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Envs/tileset_grass.png
+/build:Envs/tileset.png
 
-#begin Envs/tileset_snow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Envs/tileset_snow.png
+#begin Envs/tileset.tsx
+/copy:Envs/tileset.tsx
 
 #begin Farmer/farmer_left.png
 /importer:TextureImporter

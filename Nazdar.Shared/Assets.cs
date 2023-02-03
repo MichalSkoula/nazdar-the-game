@@ -226,10 +226,12 @@ namespace Nazdar
             {
                 { 1, WeatherType.Grass },
                 { 2, WeatherType.Snow },
-                { 3, WeatherType.Snow },
+                { 3, WeatherType.Grass },
                 { 4, WeatherType.Grass },
-                { 5, WeatherType.Grass },
-                { 6, WeatherType.Snow },
+                { 5, WeatherType.Snow },
+                { 6, WeatherType.Grass },
+                { 7, WeatherType.Snow },
+                { 8, WeatherType.Grass },
             };
             // Set build action to Copy in MGCB
             // streams are here because Android, but TitleContainer is cross platform so cool
@@ -237,22 +239,29 @@ namespace Nazdar
             {
                 Assets.TilesetGroups["village" + tilesetType.Key] = new TilesetGroup(
                     TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Key + "_village.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString().ToLower() + ".tsx"),
-                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString().ToLower())
+                    TitleContainer.OpenStream(@"Content/Envs/tileset.tsx"),
+                    content.Load<Texture2D>("Envs/tileset")
                 );
 
                 // load corresponding edges
                 Assets.TilesetEdges["left" + tilesetType.Key] = new TilesetGroup(
-                    TitleContainer.OpenStream(@"Content/Envs/left.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString().ToLower() + ".tsx"),
-                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString().ToLower() + "")
+                    TitleContainer.OpenStream(@"Content/Envs/left_" + tilesetType.Value.ToString().ToLower() + ".tmx"),
+                    TitleContainer.OpenStream(@"Content/Envs/tileset.tsx"),
+                    content.Load<Texture2D>("Envs/tileset")
                 );
                 Assets.TilesetEdges["right" + tilesetType.Key] = new TilesetGroup(
-                    TitleContainer.OpenStream(@"Content/Envs/right.tmx"),
-                    TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Value.ToString().ToLower() + ".tsx"),
-                    content.Load<Texture2D>("Envs/tileset_" + tilesetType.Value.ToString().ToLower() + "")
+                    TitleContainer.OpenStream(@"Content/Envs/right_" + tilesetType.Value.ToString().ToLower() + ".tmx"),
+                    TitleContainer.OpenStream(@"Content/Envs/tileset.tsx"),
+                    content.Load<Texture2D>("Envs/tileset")
                 );
             }
+
+            // load sea edge at village 8
+            Assets.TilesetEdges["right8"] = new TilesetGroup(
+                TitleContainer.OpenStream(@"Content/Envs/right_sea.tmx"),
+                TitleContainer.OpenStream(@"Content/Envs/tileset.tsx"),
+                content.Load<Texture2D>("Envs/tileset")
+            );
         }
     }
 }

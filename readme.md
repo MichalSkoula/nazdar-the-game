@@ -46,6 +46,7 @@ dotnet mgcb-editor
 * https://vnitti.itch.io/glacial-mountains-parallax-background parallax mountains, clouds Vicente Nitti
 * https://vnitti.itch.io/grassy-mountains-parallax-background parallax mountains Vicente Nitti
 * https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees Ansimuz
+* https://opengameart.org/content/animated-tree-and-water water
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
