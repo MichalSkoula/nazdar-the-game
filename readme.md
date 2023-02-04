@@ -48,6 +48,10 @@ dotnet mgcb-editor
 * https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees Ansimuz
 * https://opengameart.org/content/animated-tree-and-water water
 
+* https://trixelized.itch.io/starstring-fields flowers, rocks
+* https://johnmartpixel25.itch.io/free-16x16-grassdirt-tileset another grass
+* https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16 pig
+
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
 * https://opengameart.org/content/chill-lofi-inspired chill_lofi omfgdude

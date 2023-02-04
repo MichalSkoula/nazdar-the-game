@@ -24,10 +24,10 @@ namespace Nazdar.Objects
             this.Caliber = caliber;
             this.Speed = 110;
 
-            this.animations.Add(new Animation(Assets.Images["PigRight"], 4, 8));
-            this.animations.Add(new Animation(Assets.Images["PigRight"], 4, 8));
-            this.animations.Add(new Animation(Assets.Images["PigLeft"], 4, 8));
-            this.animations.Add(new Animation(Assets.Images["PigLeft"], 4, 8));
+            this.animations.Add(new Animation(Assets.Images["PigRight"], 6, 8));
+            this.animations.Add(new Animation(Assets.Images["PigRight"], 6, 8));
+            this.animations.Add(new Animation(Assets.Images["PigLeft"], 6, 8));
+            this.animations.Add(new Animation(Assets.Images["PigLeft"], 6, 8));
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
 
