@@ -95,7 +95,8 @@ namespace Nazdar.Screens
                 }
 
                 // choose direction
-                if (Tools.GetRandom(2) == 0)
+                // at last level, create enemies only on the left
+                if (this.Game.Village == MaxVillage || Tools.GetRandom(2) == 0)
                 {
                     this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber, villageNumber: this.Game.Village));
                 }

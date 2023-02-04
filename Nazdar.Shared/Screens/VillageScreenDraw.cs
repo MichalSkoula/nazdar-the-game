@@ -27,7 +27,7 @@ namespace Nazdar.Screens
             Assets.TilesetGroups["village" + this.Game.Village].Draw("background", this.Game.SpriteBatch);
             Assets.TilesetGroups["village" + this.Game.Village].Draw("ground", this.Game.SpriteBatch);
             // background - edges
-            Assets.TilesetEdges["left" + this.Game.Village].Draw("background", this.Game.SpriteBatch, MapWidth);
+            Assets.TilesetEdges["left" + this.Game.Village].Draw("background", this.Game.SpriteBatch, -Offset.MapTilesOffset);
             Assets.TilesetEdges["left" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, -Offset.MapTilesOffset);
             Assets.TilesetEdges["right" + this.Game.Village].Draw("background", this.Game.SpriteBatch, MapWidth);
             Assets.TilesetEdges["right" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, MapWidth);
