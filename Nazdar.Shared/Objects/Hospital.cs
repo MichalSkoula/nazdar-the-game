@@ -12,8 +12,8 @@ namespace Nazdar.Objects
 
         public const int MedicalKitCost = 4;
         private int medicalKitLimit = 6;
-        private List<MedicalKit> medicalKits = new List<MedicalKit>();
-        public int MedicalKitsCount => medicalKits.Count;
+        public List<MedicalKit> MedicalKits { get; private set; } = new List<MedicalKit>();
+        public int MedicalKitsCount => MedicalKits.Count;
 
         public Hospital(int x, int y, Building.Status status, int? medicalKitsCount = 0, float ttb = 10) : base()
         {
@@ -25,15 +25,15 @@ namespace Nazdar.Objects
 
             for (int i = 0; i < medicalKitsCount; i++)
             {
-                medicalKits.Add(new MedicalKit());
+                MedicalKits.Add(new MedicalKit());
             }
         }
 
         public bool AddMedicalKit()
         {
-            if (medicalKits.Count < this.medicalKitLimit)
+            if (MedicalKits.Count < this.medicalKitLimit)
             {
-                medicalKits.Add(new MedicalKit());
+                MedicalKits.Add(new MedicalKit());
                 return true;
             }
 
@@ -42,9 +42,9 @@ namespace Nazdar.Objects
 
         public bool DropMedicalKit()
         {
-            if (medicalKits.Count > 0)
+            if (MedicalKits.Count > 0)
             {
-                medicalKits.RemoveAt(0);
+                MedicalKits.RemoveAt(0);
                 return true;
             }
 
@@ -56,7 +56,7 @@ namespace Nazdar.Objects
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
             base.Draw(spriteBatch);
 
-            foreach (var weapon in this.medicalKits)
+            foreach (var weapon in this.MedicalKits)
             {
                 weapon.Draw(spriteBatch);
             }
@@ -65,7 +65,7 @@ namespace Nazdar.Objects
         public new void Update(float deltaTime)
         {
             int i = 0;
-            foreach (var medicalKit in this.medicalKits)
+            foreach (var medicalKit in this.MedicalKits)
             {
                 medicalKit.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - medicalKit.Height);
                 i++;

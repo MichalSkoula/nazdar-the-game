@@ -63,7 +63,7 @@
   <object id="28" name="Slum" class="Other" x="360" y="168" width="48" height="24"/>
   <object id="29" name="Slum" class="Other" x="1688" y="168" width="48" height="24"/>
   <object id="30" name="Farm" class="BuildingSpot" x="1472" y="168" width="160" height="24"/>
-  <object id="33" name="Locomotive" class="BuildingSpot" x="1144" y="142" width="112" height="48"/>
+  <object id="33" name="Locomotive" class="BuildingSpot" x="1144" y="145" width="112" height="45"/>
   <object id="34" name="Hospital" class="BuildingSpot" x="664" y="150" width="112" height="40"/>
  </objectgroup>
 </map>

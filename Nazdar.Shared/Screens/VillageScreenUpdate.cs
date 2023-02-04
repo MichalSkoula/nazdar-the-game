@@ -346,19 +346,17 @@ namespace Nazdar.Screens
             // something to get?
             foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
             {
-                this.Pick(farm);
+                this.Pick(farm, false, farm.Tools.Count);
                 break;
             }
-
-            // there are things he can do always
             foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
             {
-                this.Pick(armory);
+                this.Pick(armory, true, armory.Weapons.Count);
                 break;
             }
             foreach (var hospital in this.hospitals.Where(a => a.MedicalKitsCount > 0))
             {
-                this.Pick(hospital);
+                this.Pick(hospital, true, hospital.MedicalKits.Count);
                 break;
             }
 
@@ -904,7 +902,7 @@ namespace Nazdar.Screens
             }
             this.coins.RemoveAll(p => p.ToDelete);
 
-            // weapons
+            // Weapons
             foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
             {
                 foreach (var peasant in this.peasants)
@@ -921,7 +919,7 @@ namespace Nazdar.Screens
                 }
             }
 
-            // tools
+            // Tools
             foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
             {
                 foreach (var peasant in this.peasants)
@@ -1062,7 +1060,7 @@ namespace Nazdar.Screens
                     }
                     else
                     {
-                        // armory exists - create weapons?
+                        // armory exists - create Weapons?
                         var armory = armories.First();
                         if (armory.Status == Building.Status.Built)
                         {
@@ -1314,7 +1312,7 @@ namespace Nazdar.Screens
                     }
                     else
                     {
-                        // farm exists - create tools?
+                        // farm exists - create Tools?
                         var farm = farms.First();
                         if (farm.Status == Building.Status.Built)
                         {

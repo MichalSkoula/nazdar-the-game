@@ -33,12 +33,21 @@ namespace Nazdar.Screens
             }
         }
 
-        private void Pick(BaseBuilding building)
+        private void Pick(BaseBuilding building, bool always, int things)
         {
-            if (this.peasants.Count > 0)
+            if (this.peasants.Count > 0 && (always || (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)))
             {
-                var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
-                nearestPeasant.IsRunningForItem = building.Hitbox;
+                var nearestPeasants = this.peasants.OrderBy(p => Math.Abs(p.X - building.X));
+                int i = 0;
+                foreach (var peasant in nearestPeasants)
+                {
+                    if (i > things)
+                    {
+                        break;
+                    }
+                    i++;
+                    peasant.IsRunningForItem = building.Hitbox;
+                }
             }
         }
 

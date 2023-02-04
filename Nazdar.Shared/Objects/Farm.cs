@@ -10,10 +10,10 @@ namespace Nazdar.Objects
         public const int Cost = 4;
         public const string Name = "Farm";
 
-        private List<Tool> tools = new List<Tool>();
+        public List<Tool> Tools { get; private set; } = new List<Tool>();
         private int toolLimit = 6;
         public const int ToolCost = 1;
-        public int ToolsCount => tools.Count;
+        public int ToolsCount => Tools.Count;
 
         public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5) : base()
         {
@@ -26,15 +26,15 @@ namespace Nazdar.Objects
 
             for (int i = 0; i < toolsCount; i++)
             {
-                this.tools.Add(new Tool());
+                this.Tools.Add(new Tool());
             }
         }
 
         public bool AddTool()
         {
-            if (this.tools.Count < this.toolLimit)
+            if (this.Tools.Count < this.toolLimit)
             {
-                this.tools.Add(new Tool());
+                this.Tools.Add(new Tool());
                 return true;
             }
 
@@ -43,9 +43,9 @@ namespace Nazdar.Objects
 
         public bool DropTool()
         {
-            if (this.tools.Count > 0)
+            if (this.Tools.Count > 0)
             {
-                this.tools.RemoveAt(0);
+                this.Tools.RemoveAt(0);
                 return true;
             }
 
@@ -57,7 +57,7 @@ namespace Nazdar.Objects
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             base.Draw(spriteBatch);
 
-            foreach (var tool in this.tools)
+            foreach (var tool in this.Tools)
             {
                 tool.Draw(spriteBatch);
             }
@@ -66,7 +66,7 @@ namespace Nazdar.Objects
         public new void Update(float deltaTime)
         {
             int i = 0;
-            foreach (var tool in this.tools)
+            foreach (var tool in this.Tools)
             {
                 tool.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - tool.Height);
                 i++;
