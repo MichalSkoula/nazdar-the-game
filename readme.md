@@ -47,10 +47,9 @@ dotnet mgcb-editor
 * https://vnitti.itch.io/grassy-mountains-parallax-background parallax mountains Vicente Nitti
 * https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees Ansimuz
 * https://opengameart.org/content/animated-tree-and-water water
-
-* https://trixelized.itch.io/starstring-fields flowers, rocks
-* https://johnmartpixel25.itch.io/free-16x16-grassdirt-tileset another grass
-* https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16 pig
+* https://trixelized.itch.io/starstring-fields flowers, rocks Trix
+* https://johnmartpixel25.itch.io/free-16x16-grassdirt-tileset another grass JohnMartPixel25
+* https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16 pig Anokolisa
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
