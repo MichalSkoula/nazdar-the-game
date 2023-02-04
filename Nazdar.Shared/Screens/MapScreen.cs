@@ -20,7 +20,7 @@ namespace Nazdar.Screens
 
         // every mission (village) should have a description
         private float descriptionY = 300;
-        private readonly int descriptionYStop = 110;
+        private readonly int descriptionYStop = 62;
         private readonly int descriptionSpeed = 40;
         private readonly Dictionary<int, string[]> villageDescriptions = new Dictionary<int, string[]>()
         {
@@ -110,9 +110,9 @@ namespace Nazdar.Screens
             {
                 7, new string[] {
                     "August 6 1918, Kazan. The Legion must conquer the city",
-                    "of Kazan and defend the Russian Gold Treasure. This will",
-                    "then serve the White Guards to finance the fight against",
-                    "the Bolsheviks.",
+                    "of Kazan and defend the Russian Gold Treasure. This ",
+                    "will then serve the White Guards to finance the fight",
+                    "against the Bolsheviks.",
                     "",
                     "MISSION GOALS",
                     "Repair rails",
@@ -238,7 +238,7 @@ namespace Nazdar.Screens
             foreach (string line in this.villageDescriptions[this.Game.Village])
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 250, Offset.MenuY + descriptionY + 18 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + 18 * i), MyColor.White);
             }
 
             this.Game.DrawEnd();

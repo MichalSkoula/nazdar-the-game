@@ -12,8 +12,8 @@ namespace Nazdar.Objects
 
         public const int WeaponCost = 2;
         private int weaponLimit = 6;
-        private List<Weapon> weapons = new List<Weapon>();
-        public int WeaponsCount => weapons.Count;
+        public List<Weapon> Weapons { get; private set; } = new List<Weapon>();
+        public int WeaponsCount => Weapons.Count;
 
         public Armory(int x, int y, Building.Status status, int? weaponCount = 0, float ttb = 5) : base()
         {
@@ -25,15 +25,15 @@ namespace Nazdar.Objects
 
             for (int i = 0; i < weaponCount; i++)
             {
-                this.weapons.Add(new Weapon());
+                this.Weapons.Add(new Weapon());
             }
         }
 
         public bool AddWeapon()
         {
-            if (this.weapons.Count < this.weaponLimit)
+            if (this.Weapons.Count < this.weaponLimit)
             {
-                this.weapons.Add(new Weapon());
+                this.Weapons.Add(new Weapon());
                 return true;
             }
 
@@ -42,9 +42,9 @@ namespace Nazdar.Objects
 
         public bool DropWeapon()
         {
-            if (this.weapons.Count > 0)
+            if (this.Weapons.Count > 0)
             {
-                this.weapons.RemoveAt(0);
+                this.Weapons.RemoveAt(0);
                 return true;
             }
 
@@ -56,7 +56,7 @@ namespace Nazdar.Objects
             spriteBatch.Draw(this.Sprite, this.Hitbox, this.FinalColor);
             base.Draw(spriteBatch);
 
-            foreach (var weapon in this.weapons)
+            foreach (var weapon in this.Weapons)
             {
                 weapon.Draw(spriteBatch);
             }
@@ -65,7 +65,7 @@ namespace Nazdar.Objects
         public new void Update(float deltaTime)
         {
             int i = 0;
-            foreach (var weapon in this.weapons)
+            foreach (var weapon in this.Weapons)
             {
                 weapon.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - weapon.Height);
                 i++;
