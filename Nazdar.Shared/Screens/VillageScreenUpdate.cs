@@ -298,60 +298,56 @@ namespace Nazdar.Screens
                 peasant.IsRunningForItem = null;
             }
 
-            // if the air is clean, he could do something
-            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            // something to build?
+            foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
             {
-                // something to build?
-                foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(armory);
-                    break;
-                }
-                foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(hospital);
-                    break;
-                }
-                foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(arsenal);
-                    break;
-                }
-                foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(tower);
-                    break;
-                }
-                foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(farm);
-                    break;
-                }
-                if (this.center != null && this.center.Status == Building.Status.InProcess)
-                {
-                    this.Build(this.center);
-                }
-                if (this.locomotive != null && this.locomotive.Status == Building.Status.InProcess)
-                {
-                    this.Build(this.locomotive);
-                }
-                foreach (var market in this.markets.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(market);
-                    break;
-                }
-                foreach (var rails in this.rails.Where(a => a.Status == Building.Status.InProcess))
-                {
-                    this.Build(rails);
-                    break;
-                }
+                this.Build(armory);
+                break;
+            }
+            foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(hospital);
+                break;
+            }
+            foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(arsenal);
+                break;
+            }
+            foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(tower);
+                break;
+            }
+            foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(farm);
+                break;
+            }
+            if (this.center != null && this.center.Status == Building.Status.InProcess)
+            {
+                this.Build(this.center);
+            }
+            if (this.locomotive != null && this.locomotive.Status == Building.Status.InProcess)
+            {
+                this.Build(this.locomotive);
+            }
+            foreach (var market in this.markets.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(market);
+                break;
+            }
+            foreach (var rails in this.rails.Where(a => a.Status == Building.Status.InProcess))
+            {
+                this.Build(rails);
+                break;
+            }
 
-                // something to get?
-                foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
-                {
-                    this.Pick(farm);
-                    break;
-                }
+            // something to get?
+            foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
+            {
+                this.Pick(farm);
+                break;
             }
 
             // there are things he can do always

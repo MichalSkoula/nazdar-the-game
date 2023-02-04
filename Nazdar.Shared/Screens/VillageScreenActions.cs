@@ -13,18 +13,23 @@ namespace Nazdar.Screens
         {
             // is someone building it?
             building.WorkingPeasant = null;
-            foreach (var peasant in this.peasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
-            {
-                building.WorkingPeasant = peasant;
-                peasant.IsBuildingHere = building.Hitbox;
-                break;
-            }
 
-            // no one is building it
-            if (building.WorkingPeasant == null && this.peasants.Count > 0)
+            // if the air is clean, he could do something
+            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
             {
-                var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
-                nearestPeasant.IsBuildingHere = building.Hitbox;
+                foreach (var peasant in this.peasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
+                {
+                    building.WorkingPeasant = peasant;
+                    peasant.IsBuildingHere = building.Hitbox;
+                    break;
+                }
+
+                // no one is building it
+                if (building.WorkingPeasant == null && this.peasants.Count > 0)
+                {
+                    var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
+                    nearestPeasant.IsBuildingHere = building.Hitbox;
+                }
             }
         }
 
