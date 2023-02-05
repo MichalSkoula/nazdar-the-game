@@ -644,11 +644,11 @@
 #begin Envs/left_snow.tmx
 /copy:Envs/left_snow.tmx
 
-#begin Envs/right_sea.tmx
-/copy:Envs/right_sea.tmx
-
 #begin Envs/right_grass.tmx
 /copy:Envs/right_grass.tmx
+
+#begin Envs/right_sea.tmx
+/copy:Envs/right_sea.tmx
 
 #begin Envs/right_snow.tmx
 /copy:Envs/right_snow.tmx
@@ -977,11 +977,29 @@
 /processorParam:Quality=Best
 /build:Songs/chill/cue.mp3
 
+#begin Songs/chill/IcedVillage.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/chill/IcedVillage.mp3
+
 #begin Songs/chill/lofiagain.ogg
 /importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Songs/chill/lofiagain.ogg
+
+#begin Songs/chill/thawing_village_8_bit_lofi.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/chill/thawing_village_8_bit_lofi.mp3
+
+#begin Songs/chill/TheSettlementoftheFrontier.loop.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/chill/TheSettlementoftheFrontier.loop.mp3
 
 #begin Songs/menu/sleep_musicv3.ogg
 /importer:OggImporter
@@ -995,11 +1013,23 @@
 /processorParam:Quality=Best
 /build:Songs/metal/Dragged_Through_Hellfire.mp3
 
+#begin Songs/metal/ente_evil.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/ente_evil.ogg
+
 #begin Songs/metal/Fight_Them_Until_We_Cant.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Songs/metal/Fight_Them_Until_We_Cant.mp3
+
+#begin Songs/metal/good_as_nu_heavy_loop.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/good_as_nu_heavy_loop.ogg
 
 #begin Songs/metal/Oklahoma_Motel_Larvae.mp3
 /importer:Mp3Importer
@@ -1018,6 +1048,12 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Songs/metal/The_Recon_Mission.mp3
+
+#begin Songs/metal/Tri-Tachyon-4HR.DM8_.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/Tri-Tachyon-4HR.DM8_.mp3
 
 #begin Sounds/coinsplash.ogg
 /importer:OggImporter

@@ -184,7 +184,10 @@ namespace Nazdar
                 content.Load<Song>("Songs/chill/bartender"),
                 content.Load<Song>("Songs/chill/cue"),
                 content.Load<Song>("Songs/chill/chill_lofi"),
-                content.Load<Song>("Songs/chill/lofiagain")
+                content.Load<Song>("Songs/chill/lofiagain"),
+                content.Load<Song>("Songs/chill/IcedVillage"),
+                content.Load<Song>("Songs/chill/thawing_village_8_bit_lofi"),
+                content.Load<Song>("Songs/chill/TheSettlementoftheFrontier.loop"),
             };
             Assets.SongsCollection["Night"] = new List<Song>
             {
@@ -193,6 +196,9 @@ namespace Nazdar
                 content.Load<Song>("Songs/metal/Oklahoma_Motel_Larvae"),
                 content.Load<Song>("Songs/metal/The_Reach_Of_Hunger"),
                 content.Load<Song>("Songs/metal/The_Recon_Mission"),
+                content.Load<Song>("Songs/metal/ente_evil"),
+                content.Load<Song>("Songs/metal/Tri-Tachyon-4HR.DM8_"),
+                content.Load<Song>("Songs/metal/good_as_nu_heavy_loop"),
             };
 
             // load effects

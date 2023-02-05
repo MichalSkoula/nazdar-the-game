@@ -53,9 +53,15 @@ dotnet mgcb-editor
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
+* https://opengameart.org/content/iced-village Tad Miller
+* https://opengameart.org/content/thawing-village Tad Miller
+https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Miller
 * https://opengameart.org/content/chill-lofi-inspired chill_lofi omfgdude
 * https://opengameart.org/content/lofi-again lofiagain omfgdude
 * https://opengameart.org/content/the-reach-of-hunger all metal songs Zander Noriega
+* https://opengameart.org/content/metal-song-energetic metal The Real Monoton Artist
+* https://opengameart.org/content/heavy-metal-riffs-4hrdm8 metal
+* https://opengameart.org/content/good-as-nu metal
 * https://opengameart.org/content/rizys-sleep-music menu song Rizy
 
 ### sounds
