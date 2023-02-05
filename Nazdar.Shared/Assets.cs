@@ -173,6 +173,14 @@ namespace Nazdar
                 content.Load<SoundEffect>("Sounds/soldiers/hit5"),
             };
             Assets.Sounds["SoldierSpawn"] = content.Load<SoundEffect>("Sounds/soldiers/metal_03");
+            Assets.SoundsCollection["Clicks"] = new List<SoundEffect> {
+                content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click1"),
+                content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click2"),
+                content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click3"),
+                content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click4"),
+                content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click5"),
+                content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click6"),
+            };
 
             // load songs
             Assets.SongsCollection["Menu"] = new List<Song> {

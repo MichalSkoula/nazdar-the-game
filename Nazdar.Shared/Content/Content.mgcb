@@ -1055,6 +1055,42 @@
 /processorParam:Quality=Best
 /build:Songs/metal/Tri-Tachyon-4HR.DM8_.mp3
 
+#begin Sounds/clicks/j1987 blinkers click1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clicks/j1987 blinkers click1.wav
+
+#begin Sounds/clicks/j1987 blinkers click2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clicks/j1987 blinkers click2.wav
+
+#begin Sounds/clicks/j1987 blinkers click3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clicks/j1987 blinkers click3.wav
+
+#begin Sounds/clicks/j1987 blinkers click4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clicks/j1987 blinkers click4.wav
+
+#begin Sounds/clicks/j1987 blinkers click5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clicks/j1987 blinkers click5.wav
+
+#begin Sounds/clicks/j1987 blinkers click6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/clicks/j1987 blinkers click6.wav
+
 #begin Sounds/coinsplash.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
