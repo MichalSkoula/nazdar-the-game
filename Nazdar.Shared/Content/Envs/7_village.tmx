@@ -63,17 +63,17 @@
   <object id="27" name="Tower" class="BuildingSpot" x="1416" y="142" width="96" height="48"/>
   <object id="28" name="Slum" class="Other" x="792" y="168" width="48" height="24"/>
   <object id="29" name="Slum" class="Other" x="3296" y="168" width="48" height="24"/>
-  <object id="32" name="Farm" class="BuildingSpot" x="3120" y="168" width="160" height="24"/>
+  <object id="32" name="Farm" class="BuildingSpot" x="3104" y="168" width="160" height="24"/>
   <object id="33" name="Locomotive" class="BuildingSpot" x="2312" y="145" width="112" height="45"/>
   <object id="34" name="Hospital" class="BuildingSpot" x="1512" y="150" width="112" height="40"/>
   <object id="35" name="Market" class="BuildingSpot" x="2104" y="150" width="112" height="40"/>
   <object id="38" name="Market" class="BuildingSpot" x="2424" y="150" width="112" height="40"/>
   <object id="39" name="Market" class="BuildingSpot" x="1624" y="150" width="112" height="40"/>
   <object id="40" name="Slum" class="Other" x="872" y="169" width="48" height="24"/>
-  <object id="42" name="Farm" class="BuildingSpot" x="3352" y="168" width="160" height="24"/>
+  <object id="42" name="Farm" class="BuildingSpot" x="3384" y="168" width="160" height="24"/>
   <object id="43" name="Farm" class="BuildingSpot" x="240" y="168" width="160" height="24"/>
   <object id="44" name="Farm" class="BuildingSpot" x="408" y="168" width="160" height="24"/>
-  <object id="45" name="Farm" class="BuildingSpot" x="944" y="168" width="160" height="24"/>
+  <object id="45" name="Farm" class="BuildingSpot" x="992" y="168" width="160" height="24"/>
   <object id="47" name="Rails" class="BuildingSpot" x="2688" y="176" width="96" height="16"/>
   <object id="48" name="Rails" class="BuildingSpot" x="2784" y="176" width="96" height="16"/>
   <object id="49" name="Rails" class="BuildingSpot" x="2944" y="176" width="96" height="16"/>

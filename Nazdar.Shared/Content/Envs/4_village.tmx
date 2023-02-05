@@ -64,12 +64,12 @@
   <object id="28" name="Slum" class="Other" x="304" y="168" width="48" height="24"/>
   <object id="29" name="Slum" class="Other" x="2392" y="168" width="48" height="24"/>
   <object id="30" name="Farm" class="BuildingSpot" x="1840" y="168" width="160" height="24"/>
-  <object id="31" name="Farm" class="BuildingSpot" x="416" y="168" width="160" height="24"/>
+  <object id="31" name="Farm" class="BuildingSpot" x="464" y="168" width="160" height="24"/>
   <object id="32" name="Farm" class="BuildingSpot" x="2016" y="168" width="160" height="24"/>
   <object id="33" name="Locomotive" class="BuildingSpot" x="1560" y="145" width="112" height="45"/>
   <object id="34" name="Hospital" class="BuildingSpot" x="984" y="150" width="112" height="40"/>
   <object id="35" name="Rails" class="BuildingSpot" x="2240" y="176" width="96" height="16"/>
-  <object id="36" name="Farm" class="BuildingSpot" x="112" y="168" width="160" height="24"/>
-  <object id="37" name="Slum" class="Other" x="608" y="168" width="48" height="24"/>
+  <object id="36" name="Farm" class="BuildingSpot" x="56" y="168" width="160" height="24"/>
+  <object id="37" name="Slum" class="Other" x="680" y="168" width="48" height="24"/>
  </objectgroup>
 </map>
