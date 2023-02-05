@@ -124,7 +124,6 @@ namespace Nazdar.Screens
                 if (SoundEffect.MasterVolume == 0)
                 {
                     SoundEffect.MasterVolume = 1;
-                    Audio.PlayRandomSound("Jumps");
                 }
                 else
                 {

@@ -20,7 +20,19 @@ namespace Nazdar.Controls
 
         public bool Focus = false;
 
-        public bool Clicked = false;
+        private bool clicked = false;
+        public bool Clicked 
+        { 
+            get
+            {
+                return clicked;
+            }
+            set
+            {
+                Audio.PlayRandomSound("Clicks", 0.25f);
+                clicked = value;
+            } 
+        }
 
         public bool Active { get; set; }
 

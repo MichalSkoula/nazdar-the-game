@@ -54,6 +54,7 @@ namespace Nazdar.Screens
             "Thimras (Eike Germann)",
             "ChibiBagu",
             "Vinrax (Vladislav Krotov)",
+            "j1987",
             "",
             "FONT",
             "Roberto Mocci",

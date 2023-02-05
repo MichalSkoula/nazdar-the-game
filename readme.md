@@ -76,6 +76,7 @@ https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Mill
 * https://opengameart.org/content/80-cc0-rpg-sfx metal sound rubberduck
 * https://opengameart.org/content/6-zombie-sounds zombies ChibiBagu
 * https://opengameart.org/content/pig-sfx-pack pigs Vladislav Krotov Vinrax
+* https://opengameart.org/content/click-car-blinker clicks j1987
 
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika
