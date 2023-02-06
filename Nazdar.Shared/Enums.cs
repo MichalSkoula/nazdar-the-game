@@ -93,7 +93,8 @@ namespace Nazdar
                 Hospital,
                 Locomotive,
                 Market,
-                Rails
+                Rails,
+                Ship,
             }
 
             public enum Status

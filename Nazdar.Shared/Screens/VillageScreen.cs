@@ -36,6 +36,7 @@ namespace Nazdar.Screens
 
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private List<BuildingSpot> slums = new List<BuildingSpot>();
+        private Ship ship;
         private Center center;
         private Locomotive locomotive;
         private List<Armory> armories = new List<Armory>();
@@ -110,6 +111,16 @@ namespace Nazdar.Screens
                         (int)other.height,
                         other.name
                     )
+                );
+            }
+
+            // maybe load ship
+            var otherShip = Assets.TilesetEdges["right" + this.Game.Village].GetObject("objects", "Other", "Ship");
+            if (otherShip != null)
+            {
+                this.ship = new Ship(
+                    (int)otherShip.x + MapWidth,
+                    (int)otherShip.y
                 );
             }
 
