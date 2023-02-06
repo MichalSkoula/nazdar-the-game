@@ -21,8 +21,8 @@ namespace Nazdar.Controls
         public bool Focus = false;
 
         private bool clicked = false;
-        public bool Clicked 
-        { 
+        public bool Clicked
+        {
             get
             {
                 return clicked;
@@ -31,7 +31,7 @@ namespace Nazdar.Controls
             {
                 Audio.PlayRandomSound("Clicks", 0.25f);
                 clicked = value;
-            } 
+            }
         }
 
         public bool Active { get; set; }

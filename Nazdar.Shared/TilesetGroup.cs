@@ -34,6 +34,13 @@ namespace Nazdar.Shared
             return layer.objects.Where(o => o.@class == className);
         }
 
+        public TiledObject? GetObject(string layerName, string className, string name)
+        {
+            var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
+            var objects = layer.objects.Where(o => o.@class == className && o.name == name);
+            return objects.Any() ? objects.First() : null;
+        }
+
         public int GetTilesetMapWidth()
         {
             return this.TilesetMap.Width * this.TilesetMap.TileWidth;

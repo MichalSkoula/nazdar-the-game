@@ -56,6 +56,7 @@ namespace Nazdar.Screens
             // buildings
             this.center?.Update(this.Game.DeltaTime);
             this.locomotive?.Update(this.Game.DeltaTime);
+            this.ship?.Update(this.Game.DeltaTime);
             this.UpdateArmories();
             this.UpdateArsenals();
             this.UpdateTowers();
