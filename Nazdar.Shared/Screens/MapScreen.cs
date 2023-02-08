@@ -131,8 +131,11 @@ namespace Nazdar.Screens
                     "home by ships.",
                     "",
                     "MISSION GOALS",
-                    "Repair the locomotive and head east",
+                    "Buy the ship and go home",
                     "",
+                    "TIPS",
+                    "Damned Bolsheviks will attact only from the left side.",
+                    "With all they got.",
                 }
             },
         };

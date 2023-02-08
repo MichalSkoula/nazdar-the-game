@@ -8,6 +8,7 @@ namespace Nazdar.Objects
     {
         public const int Cost = 48;
         public const string Name = "Roma Ship";
+        public bool Bought = false;
 
         public Ship(int x, int y) : base()
         {

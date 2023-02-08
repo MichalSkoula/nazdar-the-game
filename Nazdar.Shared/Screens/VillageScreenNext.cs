@@ -9,12 +9,22 @@ namespace Nazdar.Screens
 {
     public partial class VillageScreen : GameScreen
     {
-        public void CheckIfWeCanGoToAnotherVillage()
+        public void CheckIfWeCanGoToAnotherVillageOrWeWon()
         {
+            // locomotive built - start animation
             if (this.locomotive?.Status == Building.Status.Built)
             {
                 Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
                 this.locomotive.Status = Building.Status.Finished;
+            }
+            // ship bought - won the game
+            else if (this.ship != null && this.ship.Bought && this.Game.Village == MaxVillage)
+            {
+                if (!this.won)
+                {
+                    this.won = true;
+                    this.Won();
+                }
             }
 
             Game1.NextLevelAnimation = false;
@@ -33,28 +43,15 @@ namespace Nazdar.Screens
                 }
                 else
                 {
+                    // to another village
                     Game1.MessageBuffer.DeleteSuperMessage();
-
-                    // near locomotive? end this
-                    if (this.Game.Village == MaxVillage)
-                    {
-                        if (!this.won)
-                        {
-                            this.won = true;
-                            this.Won();
-                        }
-                    }
-                    else
-                    {
-                        this.ToAnotherVillage();
-                    }
+                    this.ToAnotherVillage();
                 }
             }
         }
 
         private void ToAnotherVillage()
         {
-            Game1.MessageBuffer.AddMessage("Locomotive repaired!", MessageType.Success);
             Game1.MessageBuffer.AddMessage("Lets go to another village!", MessageType.Success);
 
             this.Game.Village++;
@@ -129,7 +126,7 @@ namespace Nazdar.Screens
         {
             Game1.MessageBuffer.AddMessage("YOU WON. Beginner's luck.", MessageType.Success);
 
-            // Back to Menu
+            // Outro
             this.Game.LoadScreen(typeof(Screens.GameFinishedScreen));
         }
 
