@@ -73,7 +73,7 @@ namespace Nazdar.Screens
 
             // other
             this.UpdateDayPhaseAndSky();
-            this.CheckIfWeCanGoToAnotherVillage();
+            this.CheckIfWeCanGoToAnotherVillageOrWeWon();
         }
 
         private void UpdateEnemies()
@@ -135,7 +135,8 @@ namespace Nazdar.Screens
                 }
 
                 // choose direction
-                if (Tools.GetRandom(2) == 0)
+                // at last level, create enemies only on the left
+                if (this.Game.Village == MaxVillage || Tools.GetRandom(2) == 0)
                 {
                     this.pigs.Add(new Pig(0, Offset.Floor3, Direction.Right, caliber: newPigCaliber));
                 }
@@ -1047,7 +1048,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Armory.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1055,7 +1056,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Armory.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1072,13 +1073,13 @@ namespace Nazdar.Screens
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
-                                if (this.player.Money >= Armory.WeaponCost)
+                                if (this.player.Money >= this.player.ActionCost)
                                 {
                                     if (armory.AddWeapon())
                                     {
                                         Game1.MessageBuffer.AddMessage("Weapon kit purchased", MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
-                                        this.player.Money -= Armory.WeaponCost;
+                                        this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
@@ -1106,7 +1107,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Hospital.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1114,7 +1115,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Hospital.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.hospitals.Add(new Hospital(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1131,13 +1132,13 @@ namespace Nazdar.Screens
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
-                                if (this.player.Money >= Hospital.MedicalKitCost)
+                                if (this.player.Money >= this.player.ActionCost)
                                 {
                                     if (hospital.AddMedicalKit())
                                     {
                                         Game1.MessageBuffer.AddMessage("Medical kit purchased", MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
-                                        this.player.Money -= Hospital.MedicalKitCost;
+                                        this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
@@ -1165,7 +1166,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Market.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1173,7 +1174,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Market.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.markets.Add(new Market(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1192,7 +1193,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Rails.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1200,7 +1201,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Rails.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.rails.Add(new Rails(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1219,7 +1220,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Arsenal.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1227,7 +1228,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Arsenal.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.arsenals.Add(new Arsenal(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1244,12 +1245,12 @@ namespace Nazdar.Screens
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
-                                if (this.player.Money >= Arsenal.CartridgesCost)
+                                if (this.player.Money >= this.player.ActionCost)
                                 {
                                     this.player.Cartridges += Arsenal.CartridgesCount;
                                     Game1.MessageBuffer.AddMessage("Cartridge purchased", MessageType.Info);
                                     Audio.PlaySound("SoldierSpawn");
-                                    this.player.Money -= Arsenal.CartridgesCost;
+                                    this.player.Money -= this.player.ActionCost;
                                 }
                                 else
                                 {
@@ -1272,7 +1273,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Tower.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1280,7 +1281,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Tower.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1299,7 +1300,7 @@ namespace Nazdar.Screens
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
-                            if (this.player.Money < Farm.Cost)
+                            if (this.player.Money < this.player.ActionCost)
                             {
                                 Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                             }
@@ -1307,7 +1308,7 @@ namespace Nazdar.Screens
                             {
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
-                                this.player.Money -= Farm.Cost;
+                                this.player.Money -= this.player.ActionCost;
                                 this.farms.Add(new Farm(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
@@ -1324,13 +1325,13 @@ namespace Nazdar.Screens
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
-                                if (this.player.Money >= Farm.ToolCost)
+                                if (this.player.Money >= this.player.ActionCost)
                                 {
                                     if (farm.AddTool())
                                     {
                                         Game1.MessageBuffer.AddMessage("Tool purchased", MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
-                                        this.player.Money -= Farm.ToolCost;
+                                        this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
@@ -1348,31 +1349,32 @@ namespace Nazdar.Screens
                 // Locomotive? Final building? Are we ready?
                 else if (buildingSpot.Type == Building.Type.Locomotive && this.locomotive == null)
                 {
-
                     // we can build it
                     this.player.Action = Enums.PlayerAction.Repair;
                     this.player.ActionCost = Locomotive.Cost;
                     this.player.ActionName = Locomotive.Name;
                     string actionEnabledText = "";
+
+                    // only if center is maxed up
                     if (this.center.Level < this.Game.Village)
                     {
                         this.player.ActionEnabled = false;
                         actionEnabledText = "First you need to upgrade the base";
                     }
+                    // and rails are repaired
                     else if (this.buildingSpots.Where(bs => bs.Hide == false && bs.Type == Building.Type.Rails).Any())
                     {
                         this.player.ActionEnabled = false;
                         actionEnabledText = "First you need to repair all rails";
                     }
-
-                    // only if center is maxed up
+                    
                     if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                     {
                         if (!this.player.ActionEnabled)
                         {
                             Game1.MessageBuffer.AddMessage(actionEnabledText, MessageType.Fail);
                         }
-                        else if (this.player.Money < Locomotive.Cost)
+                        else if (this.player.Money < this.player.ActionCost)
                         {
                             Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
                         }
@@ -1385,9 +1387,45 @@ namespace Nazdar.Screens
                             // start building
                             Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                             Audio.PlaySound("Rock");
-                            this.player.Money -= Locomotive.Cost;
+                            this.player.Money -= this.player.ActionCost;
                             this.locomotive = new Locomotive(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                         }
+                    }
+                }
+            }
+
+            // Ship? Is it really happening?
+            if (this.ship != null && this.ship.X - this.player.X < 50)
+            {
+                // we can buy it
+                this.player.Action = Enums.PlayerAction.Buy;
+                this.player.ActionCost = Ship.Cost;
+                this.player.ActionName = Ship.Name;
+                string actionEnabledText = "";
+                if (this.center.Level < this.Game.Village)
+                {
+                    this.player.ActionEnabled = false;
+                    actionEnabledText = "First you need to upgrade the base";
+                }
+
+                // only if center is maxed up
+                if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                {
+                    if (!this.player.ActionEnabled)
+                    {
+                        Game1.MessageBuffer.AddMessage(actionEnabledText, MessageType.Fail);
+                    }
+                    else if (this.player.Money < this.player.ActionCost)
+                    {
+                        Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                    }
+                    else
+                    {
+                        // ok
+                        this.ship.Bought = true;
+                        Game1.MessageBuffer.AddMessage("Ship bought", MessageType.Info);
+                        Audio.PlaySound("Rock");
+                        this.player.Money -= Locomotive.Cost;
                     }
                 }
             }

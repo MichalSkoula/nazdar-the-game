@@ -24,7 +24,7 @@ namespace Nazdar.Screens
             "Trans-Siberian Railway, but they didn't stop those",
             "rotten Bolsheviks from taking control of all Russia.",
             "",
-            "However they achieved the goal.",
+            "However they achieved their main goal.",
             "They convinced the Allied Powers about the project",
             "of an independent Czechoslovakia."
         };
