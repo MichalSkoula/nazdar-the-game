@@ -165,10 +165,6 @@ namespace Nazdar.Screens
 
         private void UpdateSoldiers()
         {
-            // create list of all enemies
-            List<BasePerson> uniEnemies = (from x in this.pigs select (BasePerson)x).ToList();
-            uniEnemies.AddRange((from x in this.enemies select (BasePerson)x).ToList());
-
             bool left = true;
             foreach (Soldier soldier in this.soldiers)
             {
@@ -188,7 +184,7 @@ namespace Nazdar.Screens
 
                 // can shoot at closest enemy?
                 int range = Enums.Screen.Width / 3; // third of the visible screen
-                foreach (BasePerson uniEnemy in uniEnemies.Where(ue => ue.Dead == false).OrderBy(e => Math.Abs(e.X - soldier.X)))
+                foreach (BasePerson uniEnemy in this.allEnemies.Where(ue => ue.Dead == false).OrderBy(e => Math.Abs(e.X - soldier.X)))
                 {
                     if (Math.Abs(uniEnemy.X - soldier.X) < range)
                     {
@@ -213,7 +209,7 @@ namespace Nazdar.Screens
                 farmer.DeploymentBuilding = null;
             }
 
-            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0 && this.farms.Count > 0)
+            if (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0 && this.farms.Count > 0)
             {
                 // take only built farms
                 List<Farm> builtFarms = this.farms.Where(f => f.Status == Building.Status.Built).ToList();
@@ -255,7 +251,7 @@ namespace Nazdar.Screens
                 medic.DeploymentPerson = null;
             }
 
-            if (this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            if (this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)
             {
                 // make list of all wounded
                 List<BasePerson> wounded = new List<BasePerson>();
@@ -465,14 +461,14 @@ namespace Nazdar.Screens
                 {
                     tower.CanFire = false;
                     int range = Enums.Screen.Width / 2; // half of the visible screen
-                    foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - tower.X)))
+                    foreach (var uniEnemy in this.allEnemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - tower.X)))
                     {
-                        if (Math.Abs(enemy.X - tower.X) < range)
+                        if (Math.Abs(uniEnemy.X - tower.X) < range)
                         {
                             tower.CanFire = true;
                             tower.PrepareToShoot(
-                                (enemy.X + enemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right,
-                                enemy.X,
+                                (uniEnemy.X + uniEnemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right,
+                                uniEnemy.X,
                                 range
                             );
                             break;
@@ -1514,7 +1510,7 @@ namespace Nazdar.Screens
 
             if (Tools.GetRandom(randomBase) == 1 && this.homelesses.Count < this.homelessLimit)
             {
-                Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
+                //Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
                 this.CreateHomeless();
             }
 
@@ -1531,6 +1527,5 @@ namespace Nazdar.Screens
         {
             return Game1.GlobalTimer % 5 != 0 || Tools.GetRandom(2) != 0;
         }
-
     }
 }

@@ -79,6 +79,17 @@ namespace Nazdar.Screens
         private Tower? leftmostTower;
         private Tower? rightmostTower;
 
+        // list of all enemies
+        private List<BasePerson> allEnemies
+        {
+            get
+            {
+                var list = (from x in this.pigs select (BasePerson)x).ToList();
+                list.AddRange((from x in this.enemies select (BasePerson)x).ToList());
+                return list;
+            }
+        }
+
         public override void Initialize()
         {
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();

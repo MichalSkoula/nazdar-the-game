@@ -59,14 +59,15 @@ namespace Nazdar.Objects
             this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
             this.particleShit.Update(deltaTime, new Vector2(this.X, this.Y));
 
-            if (Tools.GetRandom(60) == 0)
-            {
-                this.particleShit.Run(50);
-            }
-
             if (this.Dead)
             {
                 return;
+            }
+
+            // poo
+            if (Tools.GetRandom(60) == 0)
+            {
+                this.particleShit.Run(50);
             }
 
             // is enemy moving?

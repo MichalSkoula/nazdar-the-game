@@ -1,10 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
 using Nazdar.Weather;
+using System.Linq;
 using static Nazdar.Enums;
 
 namespace Nazdar.Screens
@@ -92,7 +95,7 @@ namespace Nazdar.Screens
                new Vector2(leftOffset, 25),
                MyColor.White);
 
-            // right stats
+            // right stats - players 
             this.Game.SpriteBatch.Draw(
                 Assets.Images["PeasantRight"],
                 new Vector2(leftOffset + rightOffset, Offset.StatusBarY),
@@ -100,8 +103,13 @@ namespace Nazdar.Screens
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                " x " + (this.peasants.Count).ToString(),
+                " x " + (this.peasants.Where(p => p.Dead == false).Count()).ToString(),
                 new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + Assets.Images["PeasantRight"].Height / 2),
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                this.peasants.FirstOrDefault() != null ? this.peasants.First().Caliber.ToString() : "",
+                new Vector2(leftOffset + rightOffset + 60, Offset.StatusBarY + Assets.Images["PeasantRight"].Height / 2),
                 MyColor.White);
 
             this.Game.SpriteBatch.Draw(
@@ -111,8 +119,13 @@ namespace Nazdar.Screens
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                " x " + (this.farmers.Count).ToString(),
+                " x " + (this.farmers.Where(p => p.Dead == false).Count()).ToString(),
                 new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 25 + Assets.Images["FarmerRight"].Height / 2),
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                this.farmers.FirstOrDefault() != null ? this.farmers.First().Caliber.ToString() : "",
+                new Vector2(leftOffset + rightOffset + 60, Offset.StatusBarY + 25 + Assets.Images["FarmerRight"].Height / 2),
                 MyColor.White);
 
             this.Game.SpriteBatch.Draw(
@@ -122,8 +135,13 @@ namespace Nazdar.Screens
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                " x " + (this.soldiers.Count).ToString(),
+                " x " + (this.soldiers.Where(p => p.Dead == false).Count()).ToString(),
                 new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 50 + Assets.Images["SoldierRight"].Height / 2),
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                this.soldiers.FirstOrDefault() != null ? this.soldiers.First().Caliber.ToString() : "",
+                new Vector2(leftOffset + rightOffset + 60, Offset.StatusBarY + 50 + Assets.Images["SoldierRight"].Height / 2),
                 MyColor.White);
 
             this.Game.SpriteBatch.Draw(
@@ -133,8 +151,13 @@ namespace Nazdar.Screens
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                " x " + (this.medics.Count).ToString(),
+                " x " + (this.medics.Where(p => p.Dead == false).Count()).ToString(),
                 new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 75 + Assets.Images["MedicRight"].Height / 2),
+                MyColor.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                this.medics.FirstOrDefault() != null ? this.medics.First().Caliber.ToString() : "",
+                new Vector2(leftOffset + rightOffset + 60, Offset.StatusBarY + 75 + Assets.Images["MedicRight"].Height / 2),
                 MyColor.White);
 
 
