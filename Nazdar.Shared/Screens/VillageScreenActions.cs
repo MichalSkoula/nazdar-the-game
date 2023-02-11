@@ -15,7 +15,7 @@ namespace Nazdar.Screens
             building.WorkingPeasant = null;
 
             // if the air is clean, he could do something
-            if (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            if (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)
             {
                 foreach (var peasant in this.peasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
                 {
@@ -35,7 +35,7 @@ namespace Nazdar.Screens
 
         private void Pick(BaseBuilding building, bool always, int things)
         {
-            if (this.peasants.Count > 0 && (always || (this.dayPhase == DayPhase.Day && this.enemies.Where(enemy => enemy.Dead == false).Count() == 0)))
+            if (this.peasants.Count > 0 && (always || (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)))
             {
                 var nearestPeasants = this.peasants.OrderBy(p => Math.Abs(p.X - building.X));
                 int i = 0;
