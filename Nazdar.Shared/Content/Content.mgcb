@@ -965,17 +965,17 @@
 /processorParam:TextureFormat=Color
 /build:Soldier/soldier_right.png
 
-#begin Songs/chill/a_cup_of_tea.mp3
-/importer:Mp3Importer
+#begin Songs/chill/a_cup_of_tea.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill/a_cup_of_tea.mp3
+/build:Songs/chill/a_cup_of_tea.ogg
 
-#begin Songs/chill/bartender.mp3
-/importer:Mp3Importer
+#begin Songs/chill/bartender.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill/bartender.mp3
+/build:Songs/chill/bartender.ogg
 
 #begin Songs/chill/chill_lofi.ogg
 /importer:OggImporter
@@ -983,17 +983,17 @@
 /processorParam:Quality=Best
 /build:Songs/chill/chill_lofi.ogg
 
-#begin Songs/chill/cue.mp3
-/importer:Mp3Importer
+#begin Songs/chill/cue.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill/cue.mp3
+/build:Songs/chill/cue.ogg
 
-#begin Songs/chill/IcedVillage.mp3
-/importer:Mp3Importer
+#begin Songs/chill/IcedVillage.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill/IcedVillage.mp3
+/build:Songs/chill/IcedVillage.ogg
 
 #begin Songs/chill/lofiagain.ogg
 /importer:OggImporter
@@ -1001,17 +1001,17 @@
 /processorParam:Quality=Best
 /build:Songs/chill/lofiagain.ogg
 
-#begin Songs/chill/thawing_village_8_bit_lofi.mp3
-/importer:Mp3Importer
+#begin Songs/chill/thawing_village_8_bit_lofi.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill/thawing_village_8_bit_lofi.mp3
+/build:Songs/chill/thawing_village_8_bit_lofi.ogg
 
-#begin Songs/chill/TheSettlementoftheFrontier.loop.mp3
-/importer:Mp3Importer
+#begin Songs/chill/TheSettlementoftheFrontier.loop.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/chill/TheSettlementoftheFrontier.loop.mp3
+/build:Songs/chill/TheSettlementoftheFrontier.loop.ogg
 
 #begin Songs/menu/sleep_musicv3.ogg
 /importer:OggImporter
@@ -1019,11 +1019,11 @@
 /processorParam:Quality=Best
 /build:Songs/menu/sleep_musicv3.ogg
 
-#begin Songs/metal/Dragged_Through_Hellfire.mp3
-/importer:Mp3Importer
+#begin Songs/metal/Dragged_Through_Hellfire.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/metal/Dragged_Through_Hellfire.mp3
+/build:Songs/metal/Dragged_Through_Hellfire.ogg
 
 #begin Songs/metal/ente_evil.ogg
 /importer:OggImporter
@@ -1031,11 +1031,11 @@
 /processorParam:Quality=Best
 /build:Songs/metal/ente_evil.ogg
 
-#begin Songs/metal/Fight_Them_Until_We_Cant.mp3
-/importer:Mp3Importer
+#begin Songs/metal/Fight_Them_Until_We_Cant.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/metal/Fight_Them_Until_We_Cant.mp3
+/build:Songs/metal/Fight_Them_Until_We_Cant.ogg
 
 #begin Songs/metal/good_as_nu_heavy_loop.ogg
 /importer:OggImporter
@@ -1043,29 +1043,41 @@
 /processorParam:Quality=Best
 /build:Songs/metal/good_as_nu_heavy_loop.ogg
 
-#begin Songs/metal/Oklahoma_Motel_Larvae.mp3
-/importer:Mp3Importer
+#begin Songs/metal/Oklahoma_Motel_Larvae.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/metal/Oklahoma_Motel_Larvae.mp3
+/build:Songs/metal/Oklahoma_Motel_Larvae.ogg
 
-#begin Songs/metal/The_Reach_Of_Hunger.mp3
-/importer:Mp3Importer
+#begin Songs/metal/The_Reach_Of_Hunger1.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/metal/The_Reach_Of_Hunger.mp3
+/build:Songs/metal/The_Reach_Of_Hunger1.ogg
 
-#begin Songs/metal/The_Recon_Mission.mp3
-/importer:Mp3Importer
+#begin Songs/metal/The_Reach_Of_Hunger2.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/metal/The_Recon_Mission.mp3
+/build:Songs/metal/The_Reach_Of_Hunger2.ogg
 
-#begin Songs/metal/Tri-Tachyon-4HR.DM8_.mp3
-/importer:Mp3Importer
+#begin Songs/metal/The_Reach_Of_Hunger3.ogg
+/importer:OggImporter
 /processor:SongProcessor
 /processorParam:Quality=Best
-/build:Songs/metal/Tri-Tachyon-4HR.DM8_.mp3
+/build:Songs/metal/The_Reach_Of_Hunger3.ogg
+
+#begin Songs/metal/The_Recon_Mission.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/The_Recon_Mission.ogg
+
+#begin Songs/metal/Tri-Tachyon-4HR.DM8_.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Songs/metal/Tri-Tachyon-4HR.DM8_.ogg
 
 #begin Sounds/clicks/j1987 blinkers click1.wav
 /importer:WavImporter
