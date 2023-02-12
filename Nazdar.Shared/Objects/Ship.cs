@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using static Nazdar.Enums;
 
 namespace Nazdar.Objects
 {
