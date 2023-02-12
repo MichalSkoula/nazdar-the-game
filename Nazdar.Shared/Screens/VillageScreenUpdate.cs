@@ -1363,7 +1363,7 @@ namespace Nazdar.Screens
                         this.player.ActionEnabled = false;
                         actionEnabledText = "First you need to repair all rails";
                     }
-                    
+
                     if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                     {
                         if (!this.player.ActionEnabled)

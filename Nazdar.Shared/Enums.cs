@@ -114,7 +114,7 @@ namespace Nazdar
 
         public static class Offset
         {
-            public const int StatusBarY = 215;
+            public const int StatusBarY = 225;
             public const int StatusBarX = 15;
             public const int Floor = 172; // normal people
             public const int Floor2 = 180;
