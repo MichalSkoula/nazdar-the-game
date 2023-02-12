@@ -50,6 +50,7 @@ dotnet mgcb-editor
 * https://trixelized.itch.io/starstring-fields flowers, rocks Trix
 * https://johnmartpixel25.itch.io/free-16x16-grassdirt-tileset another grass JohnMartPixel25
 * https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16 pig Anokolisa
+* https://disven.itch.io/pixel-swords-assets-16x16 sword Disven
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
