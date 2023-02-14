@@ -1347,7 +1347,7 @@ namespace Nazdar.Screens
                 {
                     // we can build it
                     this.player.Action = Enums.PlayerAction.Repair;
-                    this.player.ActionCost = Locomotive.Cost;
+                    this.player.ActionCost = Locomotive.Cost + this.Game.Village * 4;
                     this.player.ActionName = Locomotive.Name;
                     string actionEnabledText = "";
 
@@ -1421,7 +1421,7 @@ namespace Nazdar.Screens
                         this.ship.Bought = true;
                         Game1.MessageBuffer.AddMessage("Ship bought", MessageType.Info);
                         Audio.PlaySound("Rock");
-                        this.player.Money -= Locomotive.Cost;
+                        this.player.Money -= this.player.ActionCost;
                     }
                 }
             }

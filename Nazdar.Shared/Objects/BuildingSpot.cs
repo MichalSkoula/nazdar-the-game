@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Nazdar.Shared;
 using System;
 using static Nazdar.Enums;
 
@@ -28,6 +29,15 @@ namespace Nazdar.Objects
                 _ => throw new ArgumentException(),
             };
             this.Hide = hide;
+
+            if (this.Type == Building.Type.Slum)
+            {
+                this.Sprite = Assets.Images["Slum" + (Tools.GetRandom(2) + 1)];
+            }
+            else
+            {
+                this.Sprite = Assets.Images.ContainsKey(type + "Ruins") ? Assets.Images[type + "Ruins"] : Assets.Images[type];
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -37,10 +47,8 @@ namespace Nazdar.Objects
                 return;
             }
 
-            string image = this.Type.ToString();
-
             spriteBatch.Draw(
-                Assets.Images.ContainsKey(image + "Ruins") ? Assets.Images[image + "Ruins"] : Assets.Images[image],
+                this.Sprite,
                 this.Hitbox,
                 this.Type == Building.Type.Slum ? Color.White : this.FinalColor
             );

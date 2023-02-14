@@ -83,7 +83,8 @@ namespace Nazdar
             Assets.Images["Locomotive"] = content.Load<Texture2D>("Buildings/Locomotive");
             Assets.Images["LocomotiveRuins"] = content.Load<Texture2D>("Buildings/LocomotiveRuins");
             Assets.Images["Ship"] = content.Load<Texture2D>("Ship/Ship");
-            Assets.Images["Slum"] = content.Load<Texture2D>("Buildings/Slum");
+            Assets.Images["Slum1"] = content.Load<Texture2D>("Buildings/Slum");
+            Assets.Images["Slum2"] = content.Load<Texture2D>("Buildings/Slum2");
             Assets.Images["Market"] = content.Load<Texture2D>("Buildings/Market");
             Assets.Images["MarketRuins"] = content.Load<Texture2D>("Buildings/MarketRuins");
             Assets.Images["MarketActive"] = content.Load<Texture2D>("Buildings/Market_active");

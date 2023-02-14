@@ -140,11 +140,11 @@ namespace Nazdar.Screens
             if (!this.Load() || this.Game.FirstRun)
             {
                 // spark some coins and homelesses
-                for (int i = 0; i < 12 + Tools.GetRandom(4); i++)
+                for (int i = 0; i < 12 + this.Game.Village + Tools.GetRandom(6); i++)
                 {
                     this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
                 }
-                for (int i = 0; i < 2 + Tools.GetRandom(2); i++)
+                for (int i = 0; i < 2 + this.Game.Village + Tools.GetRandom(3); i++)
                 {
                     this.CreateHomeless();
                 }
@@ -154,7 +154,7 @@ namespace Nazdar.Screens
             Audio.SongTransition(0.5f, this.dayPhase == DayPhase.Day ? "Day" : "Night");
 
             // add parallax layers
-            parallaxManager.Init(MapWidth, Game.Village);
+            parallaxManager.Init(MapWidth, this.Game.Village);
 
             base.Initialize();
         }
