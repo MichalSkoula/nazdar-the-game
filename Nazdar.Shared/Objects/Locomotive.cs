@@ -6,7 +6,7 @@ namespace Nazdar.Objects
 {
     public class Locomotive : BaseBuilding
     {
-        public const int Cost = 32;
+        public const int Cost = 16;
         public const string Name = "Locomotive";
 
         public Locomotive(int x, int y, Building.Status status, float ttb = 20) : base()

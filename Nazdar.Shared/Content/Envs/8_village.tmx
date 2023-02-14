@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="68">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="70">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="3" name="background" width="240" height="23">
   <data encoding="csv">
@@ -74,5 +74,7 @@
   <object id="65" name="Tower" class="BuildingSpot" x="1432" y="142" width="96" height="48"/>
   <object id="66" name="Slum" class="Other" x="400" y="168" width="48" height="24"/>
   <object id="67" name="Slum" class="Other" x="1064" y="168" width="48" height="24"/>
+  <object id="68" name="Slum" class="Other" x="144" y="168" width="48" height="24"/>
+  <object id="69" name="Slum" class="Other" x="3296" y="168" width="48" height="24"/>
  </objectgroup>
 </map>
