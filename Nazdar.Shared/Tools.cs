@@ -159,7 +159,7 @@ namespace Nazdar.Shared
                     hours -= 2;
                 }
 
-                progressMinutes = Math.Floor(16 * progress) - 16 * progress;
+                progressMinutes = Math.Floor(8 * progress) - 8 * progress;
             }
 
             // make minutes and convert it into quarters
