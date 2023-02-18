@@ -1023,6 +1023,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
 
                 // center must be built first
@@ -1089,6 +1090,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Hospital?
                 else if (buildingSpot.Type == Building.Type.Hospital)
@@ -1148,6 +1150,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Market?
                 else if (buildingSpot.Type == Building.Type.Market)
@@ -1175,6 +1178,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Rails?
                 else if (buildingSpot.Type == Building.Type.Rails)
@@ -1202,6 +1206,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Arsenal?
                 else if (buildingSpot.Type == Building.Type.Arsenal)
@@ -1255,6 +1260,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Tower?
                 else if (buildingSpot.Type == Building.Type.Tower)
@@ -1282,6 +1288,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Farm?
                 else if (buildingSpot.Type == Building.Type.Farm)
@@ -1341,6 +1348,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    break;
                 }
                 // Locomotive? Final building? Are we ready?
                 else if (buildingSpot.Type == Building.Type.Locomotive && this.locomotive == null)
@@ -1387,6 +1395,7 @@ namespace Nazdar.Screens
                             this.locomotive = new Locomotive(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                         }
                     }
+                    break;
                 }
             }
 
