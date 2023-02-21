@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D3933DE-71EE-4146-84D7-47850FA48A30}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.UWP", "Nazdar.UWP\Nazdar.UWP.csproj", "{269B6713-E3E3-44FF-8CCE-2156F9065089}"
@@ -199,7 +198,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Nazdar.Shared\Nazdar.Shared.projitems*{20ca00e9-b8a1-4832-a84f-7e50eb85100d}*SharedItemsImports = 5
-		Nazdar.Shared\Nazdar.Shared.projitems*{269b6713-e3e3-44ff-8cce-2156f9065089}*SharedItemsImports = 4
 		Nazdar.Shared\Nazdar.Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 		Nazdar.Shared\Nazdar.Shared.projitems*{c6ffe90c-f9a2-4fae-8bb0-9d0d34b7182f}*SharedItemsImports = 5
 	EndGlobalSection
