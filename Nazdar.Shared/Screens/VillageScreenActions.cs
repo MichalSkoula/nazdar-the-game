@@ -89,7 +89,12 @@ namespace Nazdar.Screens
 
         private int GetUpgradeAttackAddition()
         {
-            return this.center == null ? 0 : this.center.Level * 2;
+            return Game1.CenterLevel * 2;
+        }
+
+        private int GetUpgradeAttackAdditionTowers()
+        {
+            return Game1.TowersLevel * 2;
         }
 
         private void Upgrade()
@@ -112,11 +117,17 @@ namespace Nazdar.Screens
                 medic.Caliber = Medic.DefaultCaliber + this.GetUpgradeAttackAddition();
             }
 
-            // upgrade and heal player
+            // upgrade player
             this.player.Caliber = Player.DefaultCaliber + this.GetUpgradeAttackAddition();
 
             // only one upgrade a day
             this.center.HasBeenUpgradedToday = true;
+
+            // also towers
+            foreach (Tower tower in this.towers)
+            {
+                tower.Caliber = Tower.DefaultCaliber + this.GetUpgradeAttackAdditionTowers();
+            }
         }
     }
 }

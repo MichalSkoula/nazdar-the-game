@@ -10,7 +10,7 @@ namespace Nazdar.Weather
     {
         public Raindrop(int x, int y)
         {
-            this.Hitbox = new Rectangle(x, y, Tools.GetRandom(2) == 0 ? 1 : 2, 5);
+            this.Hitbox = new Rectangle(x, y, Tools.GetRandom(2) == 0 ? 1 : 2, 6);
             this.Alpha = 0.5f;
             this.Color = MyColor.White;
         }
@@ -22,7 +22,7 @@ namespace Nazdar.Weather
 
         public void Fall()
         {
-            this.Y += 5;
+            this.Y += 6;
         }
     }
 }

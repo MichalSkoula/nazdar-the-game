@@ -994,11 +994,11 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built && this.center.Level < this.Game.Village && this.center.HasBeenUpgradedToday == false)
+                    else if (this.center.Status == Building.Status.Built && Game1.CenterLevel < this.Game.Village && this.center.HasBeenUpgradedToday == false)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
-                        this.player.ActionCost = Center.Cost * (this.center.Level) * 2;
+                        this.player.ActionCost = Center.Cost * Game1.CenterLevel * 2;
                         if (this.player.ActionCost > Center.CostMax)
                         {
                             this.player.ActionCost = Center.CostMax;
@@ -1012,7 +1012,7 @@ namespace Nazdar.Screens
                                 Game1.MessageBuffer.AddMessage("Building upgraded", MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
-                                this.center.Level++;
+                                Game1.CenterLevel++;
 
                                 // upgrade, to another village, etc
                                 this.Upgrade();
@@ -1284,7 +1284,35 @@ namespace Nazdar.Screens
                                 Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
-                                this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
+                                this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess, caliber: Tower.DefaultCaliber + this.GetUpgradeAttackAdditionTowers()));
+                            }
+                        }
+                    }
+                    else
+                    {
+                        var tower = towers.First();
+                        if (tower.Status == Building.Status.Built && Game1.TowersLevel < this.Game.Village)
+                        {
+                            this.player.Action = Enums.PlayerAction.Upgrade;
+                            this.player.ActionCost = (Tower.Cost / 2) + Game1.TowersLevel;
+                            this.player.ActionName = Tower.Name;
+
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                            {
+                                if (this.player.Money >= this.player.ActionCost)
+                                {
+                                    Game1.MessageBuffer.AddMessage("Tower upgraded", MessageType.Info);
+                                    Audio.PlaySound("Rock");
+                                    this.player.Money -= this.player.ActionCost;
+                                    Game1.TowersLevel++;
+
+                                    // upgrade caliber
+                                    this.Upgrade();
+                                }
+                                else
+                                {
+                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                }
                             }
                         }
                     }
@@ -1360,7 +1388,7 @@ namespace Nazdar.Screens
                     string actionEnabledText = "";
 
                     // only if center is maxed up
-                    if (this.center.Level < this.Game.Village)
+                    if (Game1.CenterLevel < this.Game.Village)
                     {
                         this.player.ActionEnabled = false;
                         actionEnabledText = "First you need to upgrade the base";
@@ -1407,7 +1435,7 @@ namespace Nazdar.Screens
                 this.player.ActionCost = Ship.Cost;
                 this.player.ActionName = Ship.Name;
                 string actionEnabledText = "";
-                if (this.center.Level < this.Game.Village)
+                if (Game1.CenterLevel < this.Game.Village)
                 {
                     this.player.ActionEnabled = false;
                     actionEnabledText = "First you need to upgrade the base";

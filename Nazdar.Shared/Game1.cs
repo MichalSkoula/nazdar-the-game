@@ -41,6 +41,8 @@ namespace Nazdar
         public static int GlobalTimer { get; private set; }
         public static bool NextLevelAnimation { get; set; } = false;
         public bool FirstRun { get; set; } = false;
+        public static int CenterLevel { get; set; } = 1;
+        public static int TowersLevel { get; set; } = 1;
 
         public Game1()
         {

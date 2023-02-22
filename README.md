@@ -48,7 +48,6 @@ GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad eggboycolor Andrew G. Crowell
 * https://dreammix.itch.io/keyboard-keys-for-ui keyboard Justin Sink
 * https://vnitti.itch.io/glacial-mountains-parallax-background parallax mountains, clouds Vicente Nitti
-* https://vnitti.itch.io/grassy-mountains-parallax-background parallax mountains Vicente Nitti
 * https://ansimuz.itch.io/mountain-dusk-parallax-background parallax trees Ansimuz
 * https://opengameart.org/content/animated-tree-and-water water
 * https://trixelized.itch.io/starstring-fields flowers, rocks Trix

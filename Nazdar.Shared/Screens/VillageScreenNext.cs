@@ -57,13 +57,14 @@ namespace Nazdar.Screens
             this.Game.Village++;
 
             // save score from previous levels
-            this.player.BaseScore += Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, this.center != null ? this.center.Level : 0);
+            this.player.BaseScore += Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, Game1.CenterLevel);
 
             // enable sparking homelesses and coins at the start of next village
             this.Game.FirstRun = true;
 
             // reset some things
-            this.center.Level = 1;
+            Game1.CenterLevel = 1;
+            Game1.TowersLevel = 1;
             this.locomotive = null;
             this.enemies.Clear();
             this.pigs.Clear();
@@ -113,6 +114,7 @@ namespace Nazdar.Screens
             // reset dayphase
             dayPhase = DayPhase.Day;
             dayPhaseTimer = (int)DayNightLength.Day;
+            this.center.HasBeenUpgradedToday = false;
 
             // save
             this.saveFile.Save(this.GetSaveData());
