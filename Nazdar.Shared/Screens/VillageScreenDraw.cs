@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
@@ -99,103 +100,56 @@ namespace Nazdar.Screens
                MyColor.White);
 
             // right stats - players 
-            this.Game.SpriteBatch.Draw(
+            int count = this.peasants.Where(p => p.Dead == false).Count();
+            this.DrawLeftStats(
                 Assets.Images["PeasantRight"],
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY - 5),
-                new Rectangle(0, 0, Assets.Images["PeasantRight"].Width / 4, Assets.Images["PeasantRight"].Height),
-                Color.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                " x " + (this.peasants.Where(p => p.Dead == false).Count()).ToString(),
-                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY - 5 + Assets.Images["PeasantRight"].Height / 2),
-                MyColor.White);
-            if (this.peasants.Where(p => p.Dead == false).Any())
-            {
-                this.Game.SpriteBatch.Draw(
-                    Assets.Images["Sword"],
-                    new Vector2(leftOffset + rightOffset + 70, Offset.StatusBarY),
-                    new Rectangle(0, 0, Assets.Images["Sword"].Width, Assets.Images["Sword"].Height),
-                    Color.White);
-                this.Game.SpriteBatch.DrawString(
-                    Assets.Fonts["Small"],
-                    this.peasants.First().Caliber.ToString(),
-                    new Vector2(leftOffset + rightOffset + 90, Offset.StatusBarY - 5 + Assets.Images["PeasantRight"].Height / 2),
-                    MyColor.White);
-            }
+                Assets.Images["PeasantRight"],
+                count,
+                count > 0 ? this.peasants.First().Caliber : 0,
+                leftOffset + rightOffset,
+                -5,
+                0);
 
-            this.Game.SpriteBatch.Draw(
-                Assets.Images["FarmerRight"],
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 20),
-                new Rectangle(0, 0, Assets.Images["FarmerRight"].Width / 4, Assets.Images["FarmerRight"].Height),
-                Color.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                " x " + (this.farmers.Where(p => p.Dead == false).Count()).ToString(),
-                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 20 + Assets.Images["FarmerRight"].Height / 2),
-                MyColor.White);
-            if (this.farmers.Where(p => p.Dead == false).Any())
-            {
-                this.Game.SpriteBatch.Draw(
-                    Assets.Images["Sword"],
-                    new Vector2(leftOffset + rightOffset + 70, Offset.StatusBarY + 25),
-                    new Rectangle(0, 0, Assets.Images["Sword"].Width, Assets.Images["Sword"].Height),
-                    Color.White);
-                this.Game.SpriteBatch.DrawString(
-                    Assets.Fonts["Small"],
-                    this.farmers.First().Caliber.ToString(),
-                    new Vector2(leftOffset + rightOffset + 90, Offset.StatusBarY + 20 + Assets.Images["FarmerRight"].Height / 2),
-                    MyColor.White);
-            }
-
-            this.Game.SpriteBatch.Draw(
+            count = this.soldiers.Where(p => p.Dead == false).Count();
+            this.DrawLeftStats(
                 Assets.Images["SoldierRight"],
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 45),
-                new Rectangle(0, 0, Assets.Images["SoldierRight"].Width / 4, Assets.Images["SoldierRight"].Height),
-                Color.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                " x " + (this.soldiers.Where(p => p.Dead == false).Count()).ToString(),
-                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 45 + Assets.Images["SoldierRight"].Height / 2),
-                MyColor.White);
-            if (this.soldiers.Where(p => p.Dead == false).Any())
-            {
-                this.Game.SpriteBatch.Draw(
-                    Assets.Images["Sword"],
-                    new Vector2(leftOffset + rightOffset + 70, Offset.StatusBarY + 50),
-                    new Rectangle(0, 0, Assets.Images["Sword"].Width, Assets.Images["Sword"].Height),
-                    Color.White);
-                this.Game.SpriteBatch.DrawString(
-                    Assets.Fonts["Small"],
-                    this.soldiers.First().Caliber.ToString(),
-                    new Vector2(leftOffset + rightOffset + 90, Offset.StatusBarY + 45 + Assets.Images["SoldierRight"].Height / 2),
-                    MyColor.White);
-            }
+                Assets.Images["PeasantRight"],
+                count,
+                count > 0 ? this.soldiers.First().Caliber : 0,
+                leftOffset + rightOffset,
+                20,
+                25);
 
-            this.Game.SpriteBatch.Draw(
+            count = this.farmers.Where(p => p.Dead == false).Count();
+            this.DrawLeftStats(
+                Assets.Images["FarmerRight"],
+                Assets.Images["PeasantRight"],
+                count,
+                count > 0 ? this.farmers.First().Caliber : 0,
+                leftOffset + rightOffset,
+                45,
+                50);
+
+            count = this.medics.Where(p => p.Dead == false).Count();
+            this.DrawLeftStats(
                 Assets.Images["MedicRight"],
-                new Vector2(leftOffset + rightOffset, Offset.StatusBarY + 70),
-                new Rectangle(0, 0, Assets.Images["MedicRight"].Width / 4, Assets.Images["MedicRight"].Height),
-                Color.White);
-            this.Game.SpriteBatch.DrawString(
-                Assets.Fonts["Small"],
-                " x " + (this.medics.Where(p => p.Dead == false).Count()).ToString(),
-                new Vector2(leftOffset + rightOffset + 20, Offset.StatusBarY + 70 + Assets.Images["MedicRight"].Height / 2),
-                MyColor.White);
-            if (this.medics.Where(p => p.Dead == false).Any())
-            {
-                this.Game.SpriteBatch.Draw(
-                    Assets.Images["Sword"],
-                    new Vector2(leftOffset + rightOffset + 70, Offset.StatusBarY + 75),
-                    new Rectangle(0, 0, Assets.Images["Sword"].Width, Assets.Images["Sword"].Height),
-                    Color.White);
-                this.Game.SpriteBatch.DrawString(
-                    Assets.Fonts["Small"],
-                    this.medics.First().Caliber.ToString(),
-                    new Vector2(leftOffset + rightOffset + 90, Offset.StatusBarY + 70 + Assets.Images["MedicRight"].Height / 2),
-                    MyColor.White);
-            }
+                Assets.Images["PeasantRight"],
+                count,
+                count > 0 ? this.medics.First().Caliber : 0,
+                leftOffset + rightOffset,
+                70,
+                75);
 
-
+            count = this.towers.Where(p => p.Status == Building.Status.Built).Count();
+            this.DrawLeftStats(
+                Assets.Images["Tower"],
+                Assets.Images["PeasantRight"],
+                count,
+                count > 0 ? this.towers.First().Caliber : 0,
+                leftOffset + rightOffset,
+                95,
+                100,
+                true);
 
             // messages
             Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
@@ -301,6 +255,58 @@ namespace Nazdar.Screens
             this.sky.Draw(Game.SpriteBatch);
 
             this.Game.DrawEnd();
+        }
+
+        private void DrawLeftStats(Texture2D sprite, Texture2D frame, int count, int caliber, int offset, int offset1, int offset2, bool building = false)
+        {
+            if (count == 0)
+            {
+                return;
+            }
+
+            // frame - always the same
+            this.Game.SpriteBatch.DrawRectangle(
+                new Rectangle(offset - 2, Offset.StatusBarY + offset1 - 2, frame.Width / 4 + 4, frame.Height + 4),
+                MyColor.Gray3,
+                10);
+            this.Game.SpriteBatch.DrawRectangle(
+                new Rectangle(offset - 2, Offset.StatusBarY + offset1 - 2, frame.Width / 4 + 4, frame.Height + 4),
+                MyColor.DarkerViolet);
+
+            // sprite and count
+            if (building)
+            {
+                this.Game.SpriteBatch.Draw(
+                    sprite,
+                    new Rectangle(offset, Offset.StatusBarY + offset1, (int)(frame.Width / 3.6f), frame.Height),
+                    new Rectangle(0, 0, (int)(sprite.Width / 3.6f), sprite.Height),
+                    Color.White);
+            }
+            else
+            {
+                this.Game.SpriteBatch.Draw(
+                    sprite,
+                    new Vector2(offset, Offset.StatusBarY + offset1),
+                    new Rectangle(0, 0, sprite.Width / 4, sprite.Height),
+                    Color.White);
+            }
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                " x " + count.ToString(),
+                new Vector2(offset + 20, Offset.StatusBarY + offset1 + frame.Height / 2),
+                MyColor.White);
+
+            // sword and attack power
+            this.Game.SpriteBatch.Draw(
+                Assets.Images["Sword"],
+                new Vector2(offset + 70, Offset.StatusBarY + offset2),
+                new Rectangle(0, 0, Assets.Images["Sword"].Width, Assets.Images["Sword"].Height),
+                Color.White);
+            this.Game.SpriteBatch.DrawString(
+                Assets.Fonts["Small"],
+                caliber.ToString(),
+                new Vector2(offset + 90, Offset.StatusBarY + offset1 + frame.Height / 2),
+                MyColor.White);
         }
     }
 }

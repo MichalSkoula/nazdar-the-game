@@ -15,8 +15,6 @@ namespace Nazdar.Objects
 
         public List<Bullet> Bullets { get; protected set; } = new List<Bullet>();
 
-        public int Level { get; set; } = 1;
-
         public bool ToDelete { get; set; }
 
         // dying ... ttd - time to die

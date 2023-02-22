@@ -57,11 +57,6 @@ namespace Nazdar.Shared
             return Rand.Next(limit);
         }
 
-        public static double ToRadians(double val)
-        {
-            return (Math.PI / 180) * val;
-        }
-
         /// <summary>
         /// Rounds int to tenths
         /// </summary>
@@ -103,7 +98,7 @@ namespace Nazdar.Shared
                         saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
                         saveData.ContainsKey("peasants") ? (int)saveData.GetValue("peasants").Count : 0,
                         saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0,
-                        (saveData.ContainsKey("center") && saveData.GetValue("center") != null) ? (int)saveData.GetValue("center").Level : 0
+                        saveData.ContainsKey("centerLevel") ? (int)saveData.GetValue("centerLevel") : 0
                     );
 
                     days = saveData.GetValue("player").Days;
@@ -125,7 +120,7 @@ namespace Nazdar.Shared
                 };
             }
 
-            return new string[] { " ", " ", " ", " " };
+            return new string[] { " ", " ", " ", " ", " " };
         }
 
         /// <summary>

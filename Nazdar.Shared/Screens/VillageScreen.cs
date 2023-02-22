@@ -172,6 +172,18 @@ namespace Nazdar.Screens
                 this.Game.Village = (int)saveData.village;
             }
 
+            Game1.CenterLevel = 1;
+            if (saveData.ContainsKey("centerLevel"))
+            {
+                Game1.CenterLevel = (int)saveData.centerLevel;
+            }
+
+            Game1.TowersLevel = 1;
+            if (saveData.ContainsKey("towersLevel"))
+            {
+                Game1.TowersLevel = (int)saveData.towersLevel;
+            }
+
             if (saveData.ContainsKey("firstRun"))
             {
                 this.Game.FirstRun = (bool)saveData.firstRun;
@@ -269,7 +281,7 @@ namespace Nazdar.Screens
             if (saveData.ContainsKey("center") && saveData.GetValue("center") != null)
             {
                 var data = saveData.GetValue("center");
-                this.center = new Center((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.Level, (float)data.TimeToBuild, (bool)data.HasBeenUpgradedToday);
+                this.center = new Center((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild, (bool)data.HasBeenUpgradedToday);
             }
 
             if (saveData.ContainsKey("locomotive") && saveData.GetValue("locomotive") != null)
@@ -330,7 +342,7 @@ namespace Nazdar.Screens
             {
                 foreach (var data in saveData.GetValue("towers"))
                 {
-                    var newTower = new Tower((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild);
+                    var newTower = new Tower((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild, (int)data.Caliber);
                     foreach (var bulletData in data.GetValue("Bullets"))
                     {
                         newTower.Bullets.Add(new Bullet((int)bulletData.Hitbox.X, (int)bulletData.Hitbox.Y, (Direction)bulletData.Direction, (int)bulletData.Caliber, BulletType.Cannonball));
@@ -369,6 +381,8 @@ namespace Nazdar.Screens
                 this.dayPhase,
                 this.dayPhaseTimer,
                 village = this.Game.Village,
+                centerLevel = Game1.CenterLevel,
+                towersLevel = Game1.TowersLevel,
                 firstRun = this.Game.FirstRun,
                 skyTtl = this.sky.Ttl,
                 skyDropType = this.sky.Type,

@@ -95,7 +95,7 @@ namespace Nazdar.Objects
         {
             this.Anim.Draw(spriteBatch, this.Hitbox, this.FinalColor);
             this.DrawHealth(spriteBatch);
-            this.DrawCaliber(spriteBatch);
+            // this.DrawCaliber(spriteBatch);
 
             // particles
             this.particleBlood.Draw(spriteBatch);

@@ -14,15 +14,16 @@ namespace Nazdar.Objects
         private int shootPower = 1;
         private int shootRate = 95; // 0 fastest, 100 slowest
         public bool CanFire { get; set; }
+        public const int DefaultCaliber = 20;
 
-        public Tower(int x, int y, Building.Status status, float ttb = 4) : base()
+        public Tower(int x, int y, Building.Status status, float ttb = 4, int caliber = DefaultCaliber) : base()
         {
             this.Sprite = Assets.Images["Tower"];
             this.Anim = new Animation(Assets.Images["TowerFiring"], 4, 6);
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
             this.TimeToBuild = ttb;
-            this.Caliber = 20;
+            this.Caliber = caliber;
             this.Type = Building.Type.Tower;
 
             this.particleSmoke = new ParticleSource(
@@ -43,6 +44,8 @@ namespace Nazdar.Objects
             {
                 this.Anim.Draw(spriteBatch, this.Hitbox);
             }
+
+            //spriteBatch.DrawString(Assets.Fonts["Small"], "Lvl" + this.Level, new Vector2(this.X + 5, this.Y - 10), this.FinalColor);
 
             this.particleSmoke.Draw(spriteBatch);
 
@@ -112,7 +115,8 @@ namespace Nazdar.Objects
                 this.Hitbox,
                 this.Status,
                 Bullets = this.Bullets.Select(b => new { b.Hitbox, b.Direction, b.Caliber }).ToList(),
-                this.TimeToBuild
+                this.TimeToBuild,
+                this.Caliber,
             };
         }
     }
