@@ -15,8 +15,15 @@ Homepage + Download: https://skoula.cz/nazdar
 
 https://docs.monogame.net/articles/packaging_games.html
 
-* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
-* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false --self-contained
+Short (depends on project settings):
+
+* dotnet publish -c Release -r win-x64
+* dotnet publish -c Release -r linux-x64
+
+Full:
+
+* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
 
 #### note ####
 Nazdar.GL.Packaging - x84 (Desktop)
