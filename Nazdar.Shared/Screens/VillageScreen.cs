@@ -54,6 +54,8 @@ namespace Nazdar.Screens
 
         private ParallaxManager parallaxManager = new ParallaxManager();
 
+        private Disease disease;
+
         public readonly int MaxVillage = Assets.TilesetGroups.Count;
 
         // some settings - random 0-X == 1 ----------------------------------------------
@@ -73,13 +75,14 @@ namespace Nazdar.Screens
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 2;
         private int newSkyApocalypseProbability = 512 * 6;
+        private int diseaseProbability = 512;
         private readonly int farmLimit = 4;
 
         // X positions for deployments
         private Tower? leftmostTower;
         private Tower? rightmostTower;
 
-        // list of all enemies
+        // lists for easy access
         private List<BasePerson> allEnemies
         {
             get
@@ -155,6 +158,9 @@ namespace Nazdar.Screens
 
             // add parallax layers
             parallaxManager.Init(MapWidth, this.Game.Village);
+
+            // maybe add some disease hahaha
+            this.disease = new Disease(this.Game.Village);
 
             base.Initialize();
         }

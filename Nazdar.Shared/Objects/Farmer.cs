@@ -55,7 +55,7 @@ namespace Nazdar.Objects
 
             // is he moving?
             bool isMoving = false;
-            if (Tools.GetRandom(4) == 1 || this.isFast)
+            if (Tools.RandomChance(4) || this.isFast)
             {
                 if (this.Direction == Direction.Right)
                 {
@@ -99,7 +99,7 @@ namespace Nazdar.Objects
                 else
                 {
                     this.isFast = false;
-                    if (Tools.GetRandom(128) < 2)
+                    if (Tools.RandomChance(128))
                     {
                         this.ChangeDirection();
                     }
@@ -120,12 +120,12 @@ namespace Nazdar.Objects
                 {
                     this.isFast = false;
 
-                    if (Tools.GetRandom(VillageScreen.farmingMoneyProbability) == 1)
+                    if (Tools.RandomChance(VillageScreen.farmingMoneyProbability))
                     {
                         coins.Add(new Coin(this.X + this.Width / 2, Offset.Floor2));
                     }
 
-                    if (Tools.GetRandom(128) == 1)
+                    if (Tools.RandomChance(128))
                     {
                         this.ChangeDirection();
                     }

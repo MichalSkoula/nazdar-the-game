@@ -73,6 +73,7 @@ namespace Nazdar.Screens
 
             // other
             this.UpdateDayPhaseAndSky();
+            this.UpdateDisease();
             this.CheckIfWeCanGoToAnotherVillageOrWeWon();
         }
 
@@ -84,7 +85,7 @@ namespace Nazdar.Screens
             // - random - every day it gets more difficult, every village also
 
             int randomBase = this.GetNewEnemyProbability();
-            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
+            if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
                 Audio.PlayRandomSound("EnemySpawns");
 
@@ -97,7 +98,7 @@ namespace Nazdar.Screens
 
                 // choose direction
                 // at last level, create enemies only on the left
-                if (this.Game.Village == MaxVillage || Tools.GetRandom(2) == 0)
+                if (this.Game.Village == MaxVillage || Tools.RandomChance(2))
                 {
                     this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber, villageNumber: this.Game.Village));
                 }
@@ -123,7 +124,7 @@ namespace Nazdar.Screens
 
             int randomBase = this.GetNewEnemyProbability() * 4; // for pigs
 
-            if (this.dayPhase == DayPhase.Night && this.Game.Village >= 3 && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.GetRandom(randomBase) == 0)
+            if (this.dayPhase == DayPhase.Night && this.Game.Village >= 3 && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
                 Audio.PlayRandomSound("PigSpawns");
 
@@ -136,7 +137,7 @@ namespace Nazdar.Screens
 
                 // choose direction
                 // at last level, create enemies only on the left
-                if (this.Game.Village == MaxVillage || Tools.GetRandom(2) == 0)
+                if (this.Game.Village == MaxVillage || Tools.RandomChance(2))
                 {
                     this.pigs.Add(new Pig(0, Offset.Floor3, Direction.Right, caliber: newPigCaliber));
                 }
@@ -368,7 +369,7 @@ namespace Nazdar.Screens
         private void UpdateCoins()
         {
             // create new?
-            if (Tools.GetRandom(this.newCoinProbability) == 1)
+            if (Tools.RandomChance(this.newCoinProbability))
             {
                 this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
             }
@@ -1530,9 +1531,44 @@ namespace Nazdar.Screens
 
             this.sky.Update(this.Game.DeltaTime);
             // maybe start new apocalypse
-            if (!this.sky.Active && Tools.GetRandom(newSkyApocalypseProbability) == 0)
+            if (!this.sky.Active && Tools.RandomChance(newSkyApocalypseProbability))
             {
                 this.sky.Start(Tools.GetRandom(20) + 10, (DropType)Assets.TilesetType[Game.Village]);
+            }
+        }
+
+        private void UpdateDisease()
+        {
+            if (!this.disease.Status)
+            {
+                return;
+            }
+
+            // everyone except medics
+            var list = (from x in this.peasants select (BasePerson)x).ToList();
+            list.AddRange((from x in this.soldiers select (BasePerson)x).ToList());
+            list.AddRange((from x in this.farmers select (BasePerson)x).ToList());
+            list.Add(this.player);
+
+            foreach (var person in list)
+            {
+                if (person.Dead || !Tools.RandomChance(this.diseaseProbability))
+                {
+                    continue;
+                }
+
+                // die?
+                if (!person.TakeHit(this.disease.Power))
+                {
+                    if (person is Player)
+                    {
+                        this.GameOver();
+                    } 
+                    else
+                    {
+                        person.Dead = true;
+                    }
+                }
             }
         }
 
@@ -1545,9 +1581,9 @@ namespace Nazdar.Screens
                 randomBase = this.newHomelessProbabilityLowLimit;
             }
 
-            if (Tools.GetRandom(randomBase) == 1 && this.homelesses.Count < this.homelessLimit)
+            if (Tools.RandomChance(randomBase) && this.homelesses.Count < this.homelessLimit)
             {
-                //Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
+                Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
                 this.CreateHomeless();
             }
 
@@ -1562,7 +1598,7 @@ namespace Nazdar.Screens
 
         private bool RandomPeoplesCollision()
         {
-            return Game1.GlobalTimer % 5 != 0 || Tools.GetRandom(2) != 0;
+            return Game1.GlobalTimer % 5 != 0 || Tools.RandomChance(2);
         }
     }
 }

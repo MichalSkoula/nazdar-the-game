@@ -10,7 +10,7 @@ namespace Nazdar.Weather
     {
         public Snowflake(int x, int y)
         {
-            bool small = Tools.GetRandom(2) == 0;
+            bool small = Tools.RandomChance(2);
 
             this.Hitbox = new Rectangle(x, y, small ? 2 : 3, small ? 2 : 3);
             this.Alpha = 0.75f;

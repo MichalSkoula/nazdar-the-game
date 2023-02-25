@@ -64,7 +64,7 @@ namespace Nazdar.Screens
         private void EnemyDie(Enemy enemy)
         {
             // maybe drop something?
-            if (Tools.GetRandom(this.enemyDropProbability) == 1)
+            if (Tools.RandomChance(this.enemyDropProbability))
             {
                 this.coins.Add(new Coin(enemy.X, Offset.Floor2));
             }
@@ -77,7 +77,7 @@ namespace Nazdar.Screens
         private void PigDie(Pig pig)
         {
             // maybe drop something?
-            if (Tools.GetRandom(this.pigDropProbability) == 1)
+            if (Tools.RandomChance(this.pigDropProbability))
             {
                 this.coins.Add(new Coin(pig.X, Offset.Floor2));
             }
