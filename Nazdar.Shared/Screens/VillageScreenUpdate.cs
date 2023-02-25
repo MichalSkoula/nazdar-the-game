@@ -1512,9 +1512,6 @@ namespace Nazdar.Screens
                 }
                 else
                 {
-                    this.saveFile.Save(this.GetSaveData());
-                    Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
-
                     if (this.center != null)
                     {
                         this.center.HasBeenUpgradedToday = false;
