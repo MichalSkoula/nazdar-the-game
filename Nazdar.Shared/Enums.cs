@@ -89,12 +89,13 @@ namespace Nazdar
                 Tower,
                 Farm,
                 Arsenal,
-                Slum, // cant be build
+                Slum,       // cant be build
                 Hospital,
                 Locomotive,
                 Market,
-                Rails,
+                Rails,      // when "built", it "disappears"
                 Ship,
+                Treasure    // is always built
             }
 
             public enum Status

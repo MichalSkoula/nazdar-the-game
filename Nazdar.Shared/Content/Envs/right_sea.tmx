@@ -56,6 +56,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="objects">
-  <object id="23" name="Ship" class="Other" x="16" y="112" width="300" height="96"/>
+  <object id="23" name="Ship" class="Special" x="16" y="112" width="300" height="96"/>
  </objectgroup>
 </map>

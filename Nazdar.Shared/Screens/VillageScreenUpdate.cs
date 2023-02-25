@@ -57,6 +57,7 @@ namespace Nazdar.Screens
             this.center?.Update(this.Game.DeltaTime);
             this.locomotive?.Update(this.Game.DeltaTime);
             this.ship?.Update(this.Game.DeltaTime);
+            this.treasure?.Update(this.Game.DeltaTime);
             this.UpdateArmories();
             this.UpdateArsenals();
             this.UpdateTowers();
@@ -569,6 +570,31 @@ namespace Nazdar.Screens
                 }
             }
 
+            // enemies and golden treasure
+            if (Game1.NextLevelAnimation == false && this.treasure != null)
+            {
+                foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+                {
+                    if (this.treasure.Hitbox.Intersects(enemy.Hitbox) && this.treasure.Health > 0)
+                    {
+                        MyShake.Shake();
+                        MyVibration.Vibrate();
+
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!this.treasure.CoinTheft(enemy.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("The Golden Treasure was stolen", MessageType.Fail);
+                            this.GameOver();
+                        }
+                    }
+                }
+            }
+
             // enemies and soldiers
             foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
             {
@@ -766,6 +792,31 @@ namespace Nazdar.Screens
                         // player is mega strong
                         if (!this.player.TakeHit(pig.Caliber / 2))
                         {
+                            this.GameOver();
+                        }
+                    }
+                }
+            }
+
+            // pigs and golden treasure
+            if (Game1.NextLevelAnimation == false && this.treasure != null)
+            {
+                foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
+                {
+                    if (this.treasure.Hitbox.Intersects(pig.Hitbox) && this.treasure.Health > 0)
+                    {
+                        MyShake.Shake();
+                        MyVibration.Vibrate();
+
+                        // random collision?
+                        if (this.RandomPeoplesCollision())
+                        {
+                            continue;
+                        }
+
+                        if (!this.treasure.CoinTheft(pig.Caliber))
+                        {
+                            Game1.MessageBuffer.AddMessage("The Golden Treasure was stolen", MessageType.Fail);
                             this.GameOver();
                         }
                     }
@@ -1560,7 +1611,7 @@ namespace Nazdar.Screens
                     if (person is Player)
                     {
                         this.GameOver();
-                    } 
+                    }
                     else
                     {
                         person.Dead = true;

@@ -22,7 +22,6 @@ namespace Nazdar.Objects
 
         public new void Update(float deltaTime)
         {
-
             base.Update(deltaTime);
         }
 

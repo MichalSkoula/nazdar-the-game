@@ -113,11 +113,12 @@ namespace Nazdar.Screens
             {
                 7, new string[] {
                     "August 6 1918, Kazan. The Legion must conquer the city",
-                    "of Kazan and defend the Russian Gold Treasure. This ",
+                    "of Kazan and defend the Russian Golden Treasure. This ",
                     "will then serve the White Guards to finance the fight",
                     "against the Bolsheviks.",
                     "",
                     "MISSION GOALS",
+                    "Defend the Golden Treasure",
                     "Repair damaged rails",
                     "Repair the locomotive and head east",
                     "",
