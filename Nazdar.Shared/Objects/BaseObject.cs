@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using Nazdar.Shared;
 using System.Collections.Generic;
 
@@ -121,7 +122,6 @@ namespace Nazdar.Objects
             }
         }
 
-        // assets
         protected Texture2D Sprite { get; set; }
 
         public abstract void Draw(SpriteBatch spriteBatch);
@@ -136,6 +136,45 @@ namespace Nazdar.Objects
             {
                 this.Direction = Enums.Direction.Left;
             }
+        }
+
+        private int health;
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+
+            set
+            {
+                this.health = value;
+                if (this.health > 100)
+                {
+                    this.health = 100;
+                }
+            }
+        }
+
+        public void DrawHealth(SpriteBatch spriteBatch, bool gold = false)
+        {
+            if (this.Dead)
+            {
+                return;
+            }
+
+            // border
+            spriteBatch.DrawRectangle(new Rectangle(this.X, this.Y - 6, this.Width, 4), MyColor.Black * this.Alpha);
+
+            // background 
+            spriteBatch.DrawRectangle(new Rectangle(this.X + 1, this.Y - 5, this.Width - 2, 2), MyColor.White * this.Alpha);
+
+            // inside
+            int inside = (int)((this.Health / 100f) * (this.Width - 2));
+            spriteBatch.DrawRectangle(
+                new Rectangle(this.X + 1, this.Y - 5, inside, 2),
+                (gold ? MyColor.Yellow : MyColor.Green) * this.Alpha
+            );
         }
     }
 }

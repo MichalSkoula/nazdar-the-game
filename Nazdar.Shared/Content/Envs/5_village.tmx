@@ -70,7 +70,7 @@
   <object id="37" name="Market" class="BuildingSpot" x="984" y="150" width="112" height="40"/>
   <object id="38" name="Market" class="BuildingSpot" x="2104" y="150" width="112" height="40"/>
   <object id="39" name="Market" class="BuildingSpot" x="1304" y="150" width="112" height="40"/>
-  <object id="40" name="Slum" class="Other" x="552" y="169" width="48" height="24"/>
+  <object id="40" name="Slum" class="Other" x="552" y="168" width="48" height="24"/>
   <object id="41" name="Market" class="BuildingSpot" x="872" y="150" width="112" height="40"/>
   <object id="42" name="Rails" class="BuildingSpot" x="3080" y="176" width="96" height="16"/>
   <object id="43" name="Rails" class="BuildingSpot" x="2400" y="176" width="96" height="16"/>

@@ -37,6 +37,7 @@ namespace Nazdar.Screens
         private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
         private List<BuildingSpot> slums = new List<BuildingSpot>();
         private Ship ship;
+        private Treasure treasure;
         private Center center;
         private Locomotive locomotive;
         private List<Armory> armories = new List<Armory>();
@@ -75,7 +76,7 @@ namespace Nazdar.Screens
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 2;
         private int newSkyApocalypseProbability = 512 * 6;
-        private int diseaseProbability = 512;
+        private int diseaseProbability = 512 * 2;
         private readonly int farmLimit = 4;
 
         // X positions for deployments
@@ -128,13 +129,21 @@ namespace Nazdar.Screens
                 );
             }
 
-            // maybe load ship
-            var otherShip = Assets.TilesetEdges["right" + this.Game.Village].GetObject("objects", "Other", "Ship");
+            // load special buildings
+            var otherShip = Assets.TilesetEdges["right" + this.Game.Village].GetObject("objects", "Special", "Ship");
             if (otherShip != null)
             {
                 this.ship = new Ship(
                     (int)otherShip.x + MapWidth,
                     (int)otherShip.y
+                );
+            }
+            var otherTreasure = Assets.TilesetGroups["village" + this.Game.Village].GetObject("objects", "Special", "Treasure");
+            if (otherTreasure != null)
+            {
+                this.treasure = new Treasure(
+                    (int)otherTreasure.x,
+                    (int)otherTreasure.y
                 );
             }
 
@@ -296,6 +305,12 @@ namespace Nazdar.Screens
                 this.locomotive = new Locomotive((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild);
             }
 
+            if (saveData.ContainsKey("treasure") && saveData.GetValue("treasure") != null)
+            {
+                var data = saveData.GetValue("treasure");
+                this.treasure = new Treasure((int)data.Hitbox.X, (int)data.Hitbox.Y, (int)data.Health);
+            }
+
             if (saveData.ContainsKey("armories"))
             {
                 foreach (var data in saveData.GetValue("armories"))
@@ -366,6 +381,15 @@ namespace Nazdar.Screens
         {
             return new
             {
+                this.dayPhase,
+                this.dayPhaseTimer,
+                village = this.Game.Village,
+                centerLevel = Game1.CenterLevel,
+                towersLevel = Game1.TowersLevel,
+                firstRun = this.Game.FirstRun,
+                skyTtl = this.sky.Ttl,
+                skyDropType = this.sky.Type,
+                skyDropCount = this.sky.DropCount,
                 player = this.player.GetSaveData(),
                 enemies = this.enemies.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 pigs = this.pigs.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
@@ -376,6 +400,7 @@ namespace Nazdar.Screens
                 medics = this.medics.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 center = this.center?.GetSaveData(),
                 locomotive = this.locomotive?.GetSaveData(),
+                treasure = this.treasure?.GetSaveData(),
                 armories = this.armories.Select(item => item.GetSaveData()).ToList(),
                 arsenals = this.arsenals.Select(item => item.GetSaveData()).ToList(),
                 hospitals = this.hospitals.Select(item => item.GetSaveData()).ToList(),
@@ -384,15 +409,6 @@ namespace Nazdar.Screens
                 farms = this.farms.Select(item => item.GetSaveData()).ToList(),
                 rails = this.rails.Select(item => item.GetSaveData()).ToList(),
                 coins = this.coins.Select(item => item.GetSaveData()).ToList(),
-                this.dayPhase,
-                this.dayPhaseTimer,
-                village = this.Game.Village,
-                centerLevel = Game1.CenterLevel,
-                towersLevel = Game1.TowersLevel,
-                firstRun = this.Game.FirstRun,
-                skyTtl = this.sky.Ttl,
-                skyDropType = this.sky.Type,
-                skyDropCount = this.sky.DropCount,
             };
         }
     }

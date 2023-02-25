@@ -173,6 +173,8 @@ namespace Nazdar.Screens
 
             this.ship?.Draw(this.Game.SpriteBatch);
 
+            this.treasure?.Draw(this.Game.SpriteBatch);
+
             foreach (Armory armory in this.armories)
             {
                 armory.Draw(this.Game.SpriteBatch);

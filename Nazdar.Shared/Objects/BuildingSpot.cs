@@ -25,7 +25,6 @@ namespace Nazdar.Objects
                 "Locomotive" => Building.Type.Locomotive,
                 "Market" => Building.Type.Market,
                 "Rails" => Building.Type.Rails,
-                "Ship" => Building.Type.Ship,
                 _ => throw new ArgumentException(),
             };
             this.Hide = hide;
