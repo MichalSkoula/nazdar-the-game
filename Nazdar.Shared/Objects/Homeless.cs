@@ -34,7 +34,7 @@ namespace Nazdar.Objects
 
             // is he moving?
             bool isMoving = false;
-            if (Tools.GetRandom(16) < 2)
+            if (Tools.RandomChance(8))
             {
                 if (this.Direction == Direction.Right)
                 {
@@ -74,7 +74,7 @@ namespace Nazdar.Objects
             // when near the slum, can be slow and randomly change direction
             if (this.X < this.DeploymentX + Center.CenterRadius / 2 && this.X > this.DeploymentX - Center.CenterRadius / 2)
             {
-                if (Tools.GetRandom(128) == 1)
+                if (Tools.RandomChance(128))
                 {
                     this.ChangeDirection();
                 }

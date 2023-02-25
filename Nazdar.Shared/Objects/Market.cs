@@ -51,7 +51,7 @@ namespace Nazdar.Objects
             this.Anim.Update(deltaTime);
 
             // generate money
-            if (this.Status == Building.Status.Built && Tools.GetRandom(VillageScreen.marketMoneyProbability) == 1)
+            if (this.Status == Building.Status.Built && Tools.RandomChance(VillageScreen.marketMoneyProbability))
             {
                 coins.Add(new Coin(this.X + Tools.GetRandom(this.Width), Offset.Floor2));
             }

@@ -65,7 +65,7 @@ namespace Nazdar.Objects
             }
 
             // poo
-            if (Tools.GetRandom(60) == 0)
+            if (Tools.RandomChance(60))
             {
                 this.particleShit.Run(50);
             }

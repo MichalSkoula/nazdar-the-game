@@ -55,12 +55,14 @@ namespace Nazdar.Screens
                     "the Penze train station, to be able to continue.",
                     "",
                     "MISSION GOALS",
+                    "Repair damaged rails",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
                     "New wagon - Defense Tower",
                     "Absence of an Armory will make this mission very",
-                    "difficult - you must defend the people on your own"
+                    "difficult - you must defend the people only with",
+                    "your gun."
                 }
             },
             {
@@ -71,10 +73,10 @@ namespace Nazdar.Screens
                     "are gathered...",
                     "",
                     "MISSION GOALS",
-                    "Repair damaged rails",
                     "Repair the locomotive and head east",
                     "TIPS",
-                    "Damned Bolsheviks destroyed the rails!",
+                    "Cholera epidemic struck! Make sure to have",
+                    "lot of medics."
                 }
             },
             {
@@ -83,12 +85,13 @@ namespace Nazdar.Screens
                     "of Ufa and take control over near villages.",
                     "",
                     "MISSION GOALS",
+                    "Repair damaged rails",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
-                    "A hard winter struck, you will have to find other",
-                    "sources of money than farming",
                     "New wagon - Market",
+                    "A hard winter struck, you will have to find other",
+                    "sources of money than farming.",
                 }
             },
             {
@@ -98,13 +101,13 @@ namespace Nazdar.Screens
                     "the Russian Tsar and his entire family.",
                     "",
                     "MISSION GOALS",
-                    "Repair rails",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
                     "Cannot build Arsenal - your future depends on your",
                     "heroic soldiers.",
-                    "Damned Bolsheviks destroyed the rails!",
+                    "Cholera epidemic struck! Make sure to have",
+                    "lot of medics."
                 }
             },
             {
@@ -115,11 +118,12 @@ namespace Nazdar.Screens
                     "against the Bolsheviks.",
                     "",
                     "MISSION GOALS",
-                    "Repair rails",
+                    "Repair damaged rails",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
-                    "Damned Bolsheviks destroyed the rails!",
+                    "Cholera epidemic struck! Make sure to have",
+                    "lot of medics."
                 }
             },
             {

@@ -57,6 +57,11 @@ namespace Nazdar.Shared
             return Rand.Next(limit);
         }
 
+        public static bool RandomChance(int limit)
+        {
+            return Rand.Next(limit) == 0;
+        }
+
         /// <summary>
         /// Rounds int to tenths
         /// </summary>

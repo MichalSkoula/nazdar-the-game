@@ -67,7 +67,7 @@ namespace Nazdar.Objects
 
             // is he moving?
             bool isMoving = false;
-            if (Tools.GetRandom(8) == 1 || this.isFast)
+            if (Tools.RandomChance(8) || this.isFast)
             {
                 if (this.Direction == Direction.Right)
                 {
@@ -134,7 +134,7 @@ namespace Nazdar.Objects
                 else
                 {
                     this.isFast = false;
-                    if (Tools.GetRandom(128) < 2)
+                    if (Tools.RandomChance(64))
                     {
                         this.ChangeDirection();
                     }
