@@ -184,6 +184,16 @@ namespace Nazdar.Screens
                     soldier.DeploymentBuilding = this.rightmostTower;
                 }
 
+                // last level? everyone on the left
+                if (this.MaxVillage == this.Game.Village)
+                {
+                    soldier.DeploymentBuilding = null;
+                    if (this.leftmostTower != null && this.leftmostTower.Status == Building.Status.Built)
+                    {
+                        soldier.DeploymentBuilding = this.leftmostTower;
+                    }
+                }
+
                 // can shoot at closest enemy?
                 int range = Enums.Screen.Width / 3; // third of the visible screen
                 foreach (BasePerson uniEnemy in this.allEnemies.Where(ue => ue.Dead == false).OrderBy(e => Math.Abs(e.X - soldier.X)))

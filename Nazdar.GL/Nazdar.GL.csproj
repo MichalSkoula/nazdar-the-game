@@ -4,7 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>    
     <Configurations>Debug;Release;Debug Xbox</Configurations>
 	<SelfContained>true</SelfContained>
-	<PublishSingleFile>true</PublishSingleFile>
+	<!--<PublishSingleFile>true</PublishSingleFile>-->
 	<TieredCompilation>false</TieredCompilation>
 	<PublishReadyToRun>false</PublishReadyToRun>
 	  <DebugType>embedded</DebugType>
@@ -14,6 +14,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <Title>Nazdar! The Game</Title>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
