@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Farm.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Farmer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Hospital.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Objects\Lenin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Locomotive.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Market.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Objects\Medic.cs" />

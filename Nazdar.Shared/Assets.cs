@@ -56,6 +56,8 @@ namespace Nazdar
             Assets.Images["PigLeft"] = content.Load<Texture2D>("Pig/pig_left");
             Assets.Images["PigRight"] = content.Load<Texture2D>("Pig/pig_right");
 
+            Assets.Images["Lenin"] = content.Load<Texture2D>("Lenin/lenin");
+
             Assets.Images["BulletLeft"] = content.Load<Texture2D>("Bullet/bullet_left");
             Assets.Images["BulletRight"] = content.Load<Texture2D>("Bullet/bullet_right");
             Assets.Images["BulletStatic"] = content.Load<Texture2D>("Bullet/bullet");
@@ -172,6 +174,8 @@ namespace Nazdar
                 content.Load<SoundEffect>("Sounds/pig/pig_idle2"),
                 content.Load<SoundEffect>("Sounds/pig/pig_idle4"),
             };
+            Assets.Sounds["LeninDeath"] = content.Load<SoundEffect>("Sounds/lenin/cykablyat");
+            Assets.Sounds["LeninSpawn"] = content.Load<SoundEffect>("Sounds/lenin/tractor");
             Assets.SoundsCollection["SoldierDeaths"] = new List<SoundEffect> {
                 content.Load<SoundEffect>("Sounds/soldiers/die1"),
                 content.Load<SoundEffect>("Sounds/soldiers/hit1"),
@@ -232,6 +236,10 @@ namespace Nazdar
             Texture2D smoke = new Texture2D(graphicsDevice, 1, 1);
             smoke.SetData(new[] { MyColor.Gray3 });
             Assets.ParticleTextureRegions["Smoke"] = new TextureRegion2D(smoke);
+
+            Texture2D smokeDark = new Texture2D(graphicsDevice, 1, 1);
+            smokeDark.SetData(new[] { MyColor.Gray4 });
+            Assets.ParticleTextureRegions["SmokeDark"] = new TextureRegion2D(smokeDark);
 
             Texture2D shit = new Texture2D(graphicsDevice, 1, 1);
             shit.SetData(new[] { MyColor.LightBrown });

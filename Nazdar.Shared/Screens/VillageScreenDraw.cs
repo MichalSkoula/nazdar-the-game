@@ -220,6 +220,11 @@ namespace Nazdar.Screens
                 pig.Draw(this.Game.SpriteBatch);
             }
 
+            foreach (Lenin lenin in this.lenins)
+            {
+                lenin.Draw(this.Game.SpriteBatch);
+            }
+
             foreach (Soldier soldier in this.soldiers)
             {
                 soldier.Draw(this.Game.SpriteBatch);

@@ -761,6 +761,18 @@
 /processorParam:TextureFormat=Color
 /build:Homeless/homeless_right.png
 
+#begin Lenin/lenin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Lenin/lenin.png
+
 #begin Medic/medic_left.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1192,6 +1204,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/jumps/slightscream-10.wav
+
+#begin Sounds/lenin/cykablyat.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lenin/cykablyat.ogg
+
+#begin Sounds/lenin/tractor.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lenin/tractor.ogg
 
 #begin Sounds/pig/pig_hit1.ogg
 /importer:OggImporter

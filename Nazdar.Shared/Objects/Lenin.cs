@@ -8,20 +8,29 @@ using static Nazdar.Enums;
 
 namespace Nazdar.Objects
 {
-    public class Enemy : BasePerson
+    public class Lenin : BasePerson
     {
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 16;
+        public const int DefaultCaliber = 64;
 
         private List<Animation> animations = new List<Animation>();
 
-        public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber, int villageNumber = 1) : base()
+        protected ParticleSource particleShit;
+
+        public Lenin(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber) : base()
         {
             this.Direction = direction;
             this.Health = health;
             this.Caliber = caliber;
-            this.Speed = 110;
-            this.Name = "Average Bolshevik";
+            this.Speed = 61;
+            this.Name = "Lenin Tractor";
+
+            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
+            this.Anim = this.animations[(int)Direction.Left];
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
@@ -31,24 +40,14 @@ namespace Nazdar.Objects
                 Assets.ParticleTextureRegions["Blood"]
             );
 
-            // every village adds one potentional enemy type (sprite)
-            int maxAnimIndex = 4; // number of sprites
-            int villages = Assets.TilesetGroups.Count;
-            int randomAnimIndex = Tools.GetRandom(villages > maxAnimIndex ? maxAnimIndex : villageNumber) + 2;
-            // first village? only hungarians
-            if (villageNumber == 1)
-            {
-                randomAnimIndex = 1;
-            }
+            this.particleShit = new ParticleSource(
+                new Vector2(this.X, this.Y),
+                new Tuple<int, int>((int)(this.Width * 0.8f), (int)(this.Height * 0.25f)),
+                Direction.Up,
+                2,
+                Assets.ParticleTextureRegions["SmokeDark"]
 
-            // choose random enemy animation and set it for all directions
-            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Right"], 4, 10));
-            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Right"], 4, 10));
-            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Left"], 4, 10));
-            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Left"], 4, 10));
-
-            this.Anim = this.animations[(int)Direction.Left];
-            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
+            );
         }
 
         public new void Update(float deltaTime)
@@ -57,10 +56,17 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Update(deltaTime, new Vector2(this.X, this.Y));
+            this.particleShit.Update(deltaTime, new Vector2(this.X, this.Y));
 
             if (this.Dead)
             {
                 return;
+            }
+
+            // poo
+            if (Tools.RandomChance(40))
+            {
+                this.particleShit.Run(60);
             }
 
             // is enemy moving?
@@ -106,6 +112,7 @@ namespace Nazdar.Objects
 
             // particles
             this.particleBlood.Draw(spriteBatch);
+            this.particleShit.Draw(spriteBatch);
         }
     }
 }

@@ -46,6 +46,7 @@ namespace Nazdar.Screens
             // game objects
             this.UpdateEnemies();
             this.UpdatePigs();
+            this.UpdateLenins();
             this.UpdateSoldiers();
             this.UpdatePeasants();
             this.UpdateFarmers();
@@ -67,8 +68,7 @@ namespace Nazdar.Screens
             this.UpdateRails();
 
             // collisions
-            this.UpdateEnemiesCollisions();
-            this.UpdatePigsCollisions();
+            this.UpdateAllEnemiesCollisions();
             this.UpdateActionsCollisions();
             this.UpdateThingsCollisions();
 
@@ -123,7 +123,7 @@ namespace Nazdar.Screens
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
-            int randomBase = this.GetNewEnemyProbability() * 4; // for pigs
+            int randomBase = this.GetNewEnemyProbability() * 4; // for pigs = rare
 
             if (this.dayPhase == DayPhase.Night && this.Game.Village >= 3 && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
@@ -140,11 +140,11 @@ namespace Nazdar.Screens
                 // at last level, create enemies only on the left
                 if (this.Game.Village == MaxVillage || Tools.RandomChance(2))
                 {
-                    this.pigs.Add(new Pig(0, Offset.Floor3, Direction.Right, caliber: newPigCaliber));
+                    this.pigs.Add(new Pig(0, Offset.FloorPig, Direction.Right, caliber: newPigCaliber));
                 }
                 else
                 {
-                    this.pigs.Add(new Pig(MapWidth, Offset.Floor3, Direction.Left, caliber: newPigCaliber));
+                    this.pigs.Add(new Pig(MapWidth, Offset.FloorPig, Direction.Left, caliber: newPigCaliber));
                 }
             }
 
@@ -152,6 +152,37 @@ namespace Nazdar.Screens
             foreach (Pig pig in this.pigs)
             {
                 pig.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateLenins()
+        {
+            // create enemy?
+            // ONLY AT LAST LEVEL
+            // - at night
+            // - in first half on night
+            // - random - every day it gets more difficult, every village also
+
+            int randomBase = this.GetNewEnemyProbability() * 8; // for lenin = super rare
+
+            if (this.dayPhase == DayPhase.Night && this.Game.Village == this.MaxVillage && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
+            {
+                Audio.PlaySound("LeninSpawn");
+
+                // every day it gets more difficult
+                int newLeninCaliber = Lenin.DefaultCaliber + this.player.Days;
+                if (newLeninCaliber > newLeninMaxCaliber)
+                {
+                    newLeninCaliber = newLeninMaxCaliber;
+                }
+
+                this.lenins.Add(new Lenin(0, Offset.FloorLenin, Direction.Right, caliber: newLeninCaliber));
+            }
+
+            // update lenins
+            foreach (Lenin lenin in this.lenins)
+            {
+                lenin.Update(this.Game.DeltaTime);
             }
         }
 
@@ -492,28 +523,30 @@ namespace Nazdar.Screens
             }
         }
 
-        private void UpdateEnemiesCollisions()
+        private void UpdateAllEnemiesCollisions()
         {
             // enemies and player bullets
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Bullet bullet in this.player.Bullets.Where(bullet => bullet.ToDelete == false))
                 {
                     if (enemy.Hitbox.Intersects(bullet.Hitbox))
                     {
                         bullet.ToDelete = true;
 
-                        if (!enemy.TakeHit(bullet.Caliber))
+                        if (!enemy.TakeHit(bullet.Caliber / caliberDivider))
                         {
-                            this.EnemyDie(enemy);
+                            this.UniEnemyDie(enemy);
                         }
                     }
                 }
             }
 
             // enemies and tower bullets
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Tower tower in this.towers)
                 {
                     foreach (Bullet bullet in tower.Bullets.Where(bullet => bullet.ToDelete == false))
@@ -522,9 +555,9 @@ namespace Nazdar.Screens
                         {
                             bullet.ToDelete = true;
 
-                            if (!enemy.TakeHit(bullet.Caliber))
+                            if (!enemy.TakeHit(bullet.Caliber / caliberDivider))
                             {
-                                this.EnemyDie(enemy);
+                                this.UniEnemyDie(enemy);
                             }
                         }
                     }
@@ -532,8 +565,9 @@ namespace Nazdar.Screens
             }
 
             // enemies and soldiers bullets
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Soldier soldier in this.soldiers)
                 {
                     foreach (Bullet bullet in soldier.Bullets.Where(bullet => bullet.ToDelete == false))
@@ -542,9 +576,9 @@ namespace Nazdar.Screens
                         {
                             bullet.ToDelete = true;
 
-                            if (!enemy.TakeHit(bullet.Caliber))
+                            if (!enemy.TakeHit(bullet.Caliber / caliberDivider))
                             {
-                                this.EnemyDie(enemy);
+                                this.UniEnemyDie(enemy);
                             }
                         }
                     }
@@ -554,8 +588,9 @@ namespace Nazdar.Screens
             // enemies and player
             if (Game1.NextLevelAnimation == false)
             {
-                foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+                foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
                 {
+                    int caliberDivider = this.GetCaliberDivider(enemy);
                     if (this.player.Hitbox.Intersects(enemy.Hitbox))
                     {
                         MyShake.Shake();
@@ -567,9 +602,9 @@ namespace Nazdar.Screens
                             continue;
                         }
 
-                        if (!enemy.TakeHit(this.player.Caliber))
+                        if (!enemy.TakeHit(this.player.Caliber / caliberDivider))
                         {
-                            this.EnemyDie(enemy);
+                            this.UniEnemyDie(enemy);
                         }
                         // player is mega strong
                         if (!this.player.TakeHit(enemy.Caliber / 2))
@@ -583,8 +618,9 @@ namespace Nazdar.Screens
             // enemies and golden treasure
             if (Game1.NextLevelAnimation == false && this.treasure != null)
             {
-                foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+                foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
                 {
+                    int caliberDivider = this.GetCaliberDivider(enemy);
                     if (this.treasure.Hitbox.Intersects(enemy.Hitbox) && this.treasure.Health > 0)
                     {
                         MyShake.Shake();
@@ -606,8 +642,9 @@ namespace Nazdar.Screens
             }
 
             // enemies and soldiers
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Soldier soldier in this.soldiers.Where(soldier => soldier.Dead == false))
                 {
                     if (!enemy.Dead && !soldier.Dead && enemy.Hitbox.Intersects(soldier.Hitbox))
@@ -618,13 +655,13 @@ namespace Nazdar.Screens
                             continue;
                         }
 
-                        if (!enemy.TakeHit(soldier.Caliber))
+                        if (!enemy.TakeHit(soldier.Caliber / caliberDivider))
                         {
-                            this.EnemyDie(enemy);
+                            this.UniEnemyDie(enemy);
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Heroic soldier killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Heroic soldier killed by " + enemy.Name, MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             soldier.Dead = true;
                         }
@@ -633,8 +670,9 @@ namespace Nazdar.Screens
             }
 
             // enemies and peasants
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Peasant peasant in this.peasants.Where(peasant => peasant.Dead == false))
                 {
                     if (!enemy.Dead && !peasant.Dead && enemy.Hitbox.Intersects(peasant.Hitbox))
@@ -645,13 +683,13 @@ namespace Nazdar.Screens
                             continue;
                         }
 
-                        if (!enemy.TakeHit(peasant.Caliber))
+                        if (!enemy.TakeHit(peasant.Caliber / caliberDivider))
                         {
-                            this.EnemyDie(enemy);
+                            this.UniEnemyDie(enemy);
                         }
                         if (!peasant.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Innocent peasant killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Innocent peasant killed by " + enemy.Name, MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             peasant.Dead = true;
                         }
@@ -660,8 +698,9 @@ namespace Nazdar.Screens
             }
 
             // enemies and farmers
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Farmer farmer in this.farmers.Where(farmer => farmer.Dead == false))
                 {
                     if (!enemy.Dead && !farmer.Dead && enemy.Hitbox.Intersects(farmer.Hitbox))
@@ -672,13 +711,13 @@ namespace Nazdar.Screens
                             continue;
                         }
 
-                        if (!enemy.TakeHit(farmer.Caliber))
+                        if (!enemy.TakeHit(farmer.Caliber / caliberDivider))
                         {
-                            this.EnemyDie(enemy);
+                            this.UniEnemyDie(enemy);
                         }
                         if (!farmer.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Innocent farmer killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Innocent farmer killed by " + enemy.Name, MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             farmer.Dead = true;
                         }
@@ -687,8 +726,9 @@ namespace Nazdar.Screens
             }
 
             // enemies and medics
-            foreach (Enemy enemy in this.enemies.Where(enemy => enemy.Dead == false))
+            foreach (BasePerson enemy in this.allEnemies.Where(enemy => enemy.Dead == false))
             {
+                int caliberDivider = this.GetCaliberDivider(enemy);
                 foreach (Medic medic in this.medics.Where(medic => medic.Dead == false))
                 {
                     if (!enemy.Dead && !medic.Dead && enemy.Hitbox.Intersects(medic.Hitbox))
@@ -699,13 +739,13 @@ namespace Nazdar.Screens
                             continue;
                         }
 
-                        if (!enemy.TakeHit(medic.Caliber))
+                        if (!enemy.TakeHit(medic.Caliber / caliberDivider))
                         {
-                            this.EnemyDie(enemy);
+                            this.UniEnemyDie(enemy);
                         }
                         if (!medic.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Innocent medic killed by enemy", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage("Innocent medic killed by " + enemy.Name, MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             medic.Dead = true;
                         }
@@ -715,234 +755,8 @@ namespace Nazdar.Screens
 
             this.soldiers.RemoveAll(p => p.ToDelete);
             this.enemies.RemoveAll(p => p.ToDelete);
-            this.peasants.RemoveAll(p => p.ToDelete);
-            this.farmers.RemoveAll(p => p.ToDelete);
-            this.medics.RemoveAll(p => p.ToDelete);
-        }
-
-        private void UpdatePigsCollisions()
-        {
-            // pigs and player bullets
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Bullet bullet in this.player.Bullets.Where(bullet => bullet.ToDelete == false))
-                {
-                    if (pig.Hitbox.Intersects(bullet.Hitbox))
-                    {
-                        bullet.ToDelete = true;
-
-                        if (!pig.TakeHit(bullet.Caliber / 2))
-                        {
-                            this.PigDie(pig);
-                        }
-                    }
-                }
-            }
-
-            // pigs and tower bullets
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Tower tower in this.towers)
-                {
-                    foreach (Bullet bullet in tower.Bullets.Where(bullet => bullet.ToDelete == false))
-                    {
-                        if (pig.Hitbox.Intersects(bullet.Hitbox))
-                        {
-                            bullet.ToDelete = true;
-
-                            if (!pig.TakeHit(bullet.Caliber / 2))
-                            {
-                                this.PigDie(pig);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // pigs and soldiers bullets
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Soldier soldier in this.soldiers)
-                {
-                    foreach (Bullet bullet in soldier.Bullets.Where(bullet => bullet.ToDelete == false))
-                    {
-                        if (pig.Hitbox.Intersects(bullet.Hitbox))
-                        {
-                            bullet.ToDelete = true;
-
-                            if (!pig.TakeHit(bullet.Caliber / 2))
-                            {
-                                this.PigDie(pig);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // pigs and player
-            if (Game1.NextLevelAnimation == false)
-            {
-                foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-                {
-                    if (this.player.Hitbox.Intersects(pig.Hitbox))
-                    {
-                        MyShake.Shake();
-                        MyVibration.Vibrate();
-
-                        // random collision?
-                        if (this.RandomPeoplesCollision())
-                        {
-                            continue;
-                        }
-
-                        if (!pig.TakeHit(this.player.Caliber / 2))
-                        {
-                            this.PigDie(pig);
-                        }
-                        // player is mega strong
-                        if (!this.player.TakeHit(pig.Caliber / 2))
-                        {
-                            this.GameOver();
-                        }
-                    }
-                }
-            }
-
-            // pigs and golden treasure
-            if (Game1.NextLevelAnimation == false && this.treasure != null)
-            {
-                foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-                {
-                    if (this.treasure.Hitbox.Intersects(pig.Hitbox) && this.treasure.Health > 0)
-                    {
-                        MyShake.Shake();
-                        MyVibration.Vibrate();
-
-                        // random collision?
-                        if (this.RandomPeoplesCollision())
-                        {
-                            continue;
-                        }
-
-                        if (!this.treasure.CoinTheft(pig.Caliber))
-                        {
-                            Game1.MessageBuffer.AddMessage("The Golden Treasure was stolen", MessageType.Fail);
-                            this.GameOver();
-                        }
-                    }
-                }
-            }
-
-            // pigs and soldiers
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Soldier soldier in this.soldiers.Where(soldier => soldier.Dead == false))
-                {
-                    if (!pig.Dead && !soldier.Dead && pig.Hitbox.Intersects(soldier.Hitbox))
-                    {
-                        // random collision?
-                        if (this.RandomPeoplesCollision())
-                        {
-                            continue;
-                        }
-
-                        if (!pig.TakeHit(soldier.Caliber / 2))
-                        {
-                            this.PigDie(pig);
-                        }
-                        if (!soldier.TakeHit(pig.Caliber))
-                        {
-                            Game1.MessageBuffer.AddMessage("Heroic soldier killed by pig rider", MessageType.Fail);
-                            Audio.PlayRandomSound("SoldierDeaths");
-                            soldier.Dead = true;
-                        }
-                    }
-                }
-            }
-
-            // pigs and peasants
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Peasant peasant in this.peasants.Where(peasant => peasant.Dead == false))
-                {
-                    if (!pig.Dead && !peasant.Dead && pig.Hitbox.Intersects(peasant.Hitbox))
-                    {
-                        // random collision?
-                        if (this.RandomPeoplesCollision())
-                        {
-                            continue;
-                        }
-
-                        if (!pig.TakeHit(peasant.Caliber / 2))
-                        {
-                            this.PigDie(pig);
-                        }
-                        if (!peasant.TakeHit(pig.Caliber))
-                        {
-                            Game1.MessageBuffer.AddMessage("Innocent peasant killed by pig rider", MessageType.Fail);
-                            Audio.PlayRandomSound("SoldierDeaths");
-                            peasant.Dead = true;
-                        }
-                    }
-                }
-            }
-
-            // pigs and farmers
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Farmer farmer in this.farmers.Where(farmer => farmer.Dead == false))
-                {
-                    if (!pig.Dead && !farmer.Dead && pig.Hitbox.Intersects(farmer.Hitbox))
-                    {
-                        // random collision?
-                        if (this.RandomPeoplesCollision())
-                        {
-                            continue;
-                        }
-
-                        if (!pig.TakeHit(farmer.Caliber / 2))
-                        {
-                            this.PigDie(pig);
-                        }
-                        if (!farmer.TakeHit(pig.Caliber))
-                        {
-                            Game1.MessageBuffer.AddMessage("Innocent farmer killed by pig rider", MessageType.Fail);
-                            Audio.PlayRandomSound("SoldierDeaths");
-                            farmer.Dead = true;
-                        }
-                    }
-                }
-            }
-
-            // pigs and medics
-            foreach (Pig pig in this.pigs.Where(pig => pig.Dead == false))
-            {
-                foreach (Medic medic in this.medics.Where(medic => medic.Dead == false))
-                {
-                    if (!pig.Dead && !medic.Dead && pig.Hitbox.Intersects(medic.Hitbox))
-                    {
-                        // random collision?
-                        if (this.RandomPeoplesCollision())
-                        {
-                            continue;
-                        }
-
-                        if (!pig.TakeHit(medic.Caliber / 2))
-                        {
-                            this.PigDie(pig);
-                        }
-                        if (!medic.TakeHit(pig.Caliber))
-                        {
-                            Game1.MessageBuffer.AddMessage("Innocent medic killed by pig rider", MessageType.Fail);
-                            Audio.PlayRandomSound("SoldierDeaths");
-                            medic.Dead = true;
-                        }
-                    }
-                }
-            }
-
-            this.soldiers.RemoveAll(p => p.ToDelete);
             this.pigs.RemoveAll(p => p.ToDelete);
+            this.lenins.RemoveAll(p => p.ToDelete);
             this.peasants.RemoveAll(p => p.ToDelete);
             this.farmers.RemoveAll(p => p.ToDelete);
             this.medics.RemoveAll(p => p.ToDelete);
@@ -1657,6 +1471,21 @@ namespace Nazdar.Screens
         private bool RandomPeoplesCollision()
         {
             return Game1.GlobalTimer % 5 != 0 || Tools.RandomChance(2);
+        }
+
+        private int GetCaliberDivider(BasePerson enemy)
+        {
+            if (enemy is Pig)
+            {
+                return 2;
+            }
+            if (enemy is Lenin)
+            {
+                return 8;
+            }
+
+            // normal enemy
+            return 1;
         }
     }
 }
