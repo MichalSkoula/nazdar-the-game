@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended;
 using Nazdar.Shared;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Nazdar.Objects
@@ -12,6 +12,8 @@ namespace Nazdar.Objects
         {
             this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
         }
+
+        public string Name { get; protected set; }
 
         protected int Speed { get; set; }
 

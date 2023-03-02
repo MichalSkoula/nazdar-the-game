@@ -23,6 +23,7 @@ namespace Nazdar.Objects
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
+            this.Name = "Pig Rider";
 
             this.animations.Add(new Animation(Assets.Images["PigRight"], 6, 8));
             this.animations.Add(new Animation(Assets.Images["PigRight"], 6, 8));

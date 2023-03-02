@@ -61,6 +61,22 @@ namespace Nazdar.Screens
             ));
         }
 
+        private void UniEnemyDie(BasePerson enemy)
+        {
+            if (enemy is Enemy)
+            {
+                this.EnemyDie((Enemy)enemy);
+            }
+            else if (enemy is Pig)
+            {
+                this.PigDie((Pig)enemy);
+            }
+            else if (enemy is Lenin)
+            {
+                this.LeninDie((Lenin)enemy);
+            }
+        }
+
         private void EnemyDie(Enemy enemy)
         {
             // maybe drop something?
@@ -85,6 +101,19 @@ namespace Nazdar.Screens
             Audio.PlayRandomSound("PigDeaths");
             this.player.Kills++;
             pig.Dead = true;
+        }
+
+        private void LeninDie(Lenin lenin)
+        {
+            // maybe drop something?
+            if (Tools.RandomChance(this.leninDropProbability))
+            {
+                this.coins.Add(new Coin(lenin.X, Offset.Floor2));
+            }
+
+            Audio.PlaySound("LeninDeath");
+            this.player.Kills++;
+            lenin.Dead = true;
         }
 
         private int GetUpgradeAttackAddition()

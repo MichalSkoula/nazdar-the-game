@@ -26,6 +26,7 @@ namespace Nazdar.Screens
         private Player player;
         private List<Enemy> enemies = new List<Enemy>();
         private List<Pig> pigs = new List<Pig>();
+        private List<Lenin> lenins = new List<Lenin>();
         private List<Soldier> soldiers = new List<Soldier>();
         private List<Farmer> farmers = new List<Farmer>();
         private List<Medic> medics = new List<Medic>();
@@ -68,10 +69,12 @@ namespace Nazdar.Screens
         private static int newHomelessDefaultProbability = 512 * 4;
         private int newHomelessProbabilityLowLimit = 768;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
-        private int newPigMaxCaliber = Pig.DefaultCaliber * 5;
+        private int newPigMaxCaliber = Pig.DefaultCaliber * 4;
+        private int newLeninMaxCaliber = Lenin.DefaultCaliber * 4;
         private int newCoinProbability = 512 * 3;
         private int enemyDropProbability = 8;
         private int pigDropProbability = 4;
+        private int leninDropProbability = 2;
         private int homelessLimit = 16;
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 2;
@@ -90,6 +93,7 @@ namespace Nazdar.Screens
             {
                 var list = (from x in this.pigs select (BasePerson)x).ToList();
                 list.AddRange((from x in this.enemies select (BasePerson)x).ToList());
+                list.AddRange((from x in this.lenins select (BasePerson)x).ToList());
                 return list;
             }
         }
@@ -222,6 +226,14 @@ namespace Nazdar.Screens
                 foreach (var data in saveData.GetValue("pigs"))
                 {
                     this.pigs.Add(new Pig((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
+                }
+            }
+
+            if (saveData.ContainsKey("lenins"))
+            {
+                foreach (var data in saveData.GetValue("lenins"))
+                {
+                    this.lenins.Add(new Lenin((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction, (int)data.Health, (int)data.Caliber));
                 }
             }
 
@@ -393,6 +405,7 @@ namespace Nazdar.Screens
                 player = this.player.GetSaveData(),
                 enemies = this.enemies.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 pigs = this.pigs.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
+                lenins = this.lenins.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 soldiers = this.soldiers.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 farmers = this.farmers.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
                 homelesses = this.homelesses.Where(item => item.Dead == false).Select(item => item.GetSaveData()).ToList(),
