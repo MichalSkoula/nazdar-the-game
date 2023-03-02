@@ -31,14 +31,20 @@ namespace Nazdar.Objects
             );
 
             // every village adds one potentional enemy type (sprite)
-            int maxAnimIndex = 5; // number of sprites
+            int maxAnimIndex = 4; // number of sprites
             int villages = Assets.TilesetGroups.Count;
-            int randomAnimIndex = Tools.GetRandom(villages > maxAnimIndex ? maxAnimIndex : villageNumber);
+            int randomAnimIndex = Tools.GetRandom(villages > maxAnimIndex ? maxAnimIndex : villageNumber) + 2;
+            // first village? only hungarians
+            if (villageNumber == 1)
+            {
+                randomAnimIndex = 1;
+            }
+            
             // choose random enemy animation and set it for all directions
-            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Right"], 4, 10));
-            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Right"], 4, 10));
-            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Left"], 4, 10));
-            this.animations.Add(new Animation(Assets.Images["Enemy" + (randomAnimIndex + 1) + "Left"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Right"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Right"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Left"], 4, 10));
+            this.animations.Add(new Animation(Assets.Images["Enemy" + randomAnimIndex + "Left"], 4, 10));
 
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
