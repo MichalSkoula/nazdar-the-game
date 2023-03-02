@@ -92,3 +92,14 @@ https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Mill
 
 ### other
 * http://legie100.com/legiovlak/
+
+## LEVEL DESIGN
+
+1	Arsenal	Armory	Farms								
+2	Arsenal	Armory	Farms	Hospital							
+3	Arsenal			Farms	Hospital	Tower			Rails			
+4	Arsenal	Armory	Farms	Hospital	Tower					Disease		
+5	Arsenal	Armory			Hospital	Tower	Market	Rails			
+6			Armory	Farms	Hospital	Tower	Market			Disease		
+7	Arsenal	Armory	Farms	Hospital	Tower	Market	Rails	Disease	Gold Treasure	
+8	Arsenal	Armory	Farms	Hospital	Tower	Market									Ship
