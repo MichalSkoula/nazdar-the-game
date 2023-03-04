@@ -36,18 +36,7 @@ dotnet mgcb-editor
 
 ## LICENCE
 
-GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md
-
-## LEVEL DESIGN
-
-1	Arsenal	Armory	Farms								
-2	Arsenal	Armory	Farms	Hospital							
-3	Arsenal			Farms	Hospital	Tower			Rails			
-4	Arsenal	Armory	Farms	Hospital	Tower					Disease		
-5	Arsenal	Armory			Hospital	Tower	Market	Rails			
-6			Armory	Farms	Hospital	Tower	Market			Disease		
-7	Arsenal	Armory	Farms	Hospital	Tower	Market	Rails	Disease	Gold Treasure	
-8	Arsenal	Armory	Farms	Hospital	Tower	Market									Ship
+**GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**
 
 ## CREDITS 
 
