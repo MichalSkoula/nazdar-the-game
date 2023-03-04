@@ -9,12 +9,12 @@
   <Identity
     Name="43177Michalkoula.NazdarTheGame"
     Publisher="CN=0FC37EF8-26B5-492F-87A3-AECF73C84ABB"
-    Version="0.9.2.0" />
+    Version="0.9.7.0" />
   
   <mp:PhoneIdentity PhoneProductId="ecbc90a2-b1cd-41d2-9093-0607a0a688e4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Nazdar! The Game</DisplayName>
+    <DisplayName>NAZDAR! The Game</DisplayName>
     <PublisherDisplayName>Michal Škoula</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -36,8 +36,8 @@
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
         Description="Nazdar.UWP"
-        BackgroundColor="#464646">
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        BackgroundColor="#212123">
+        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="#212103"/>
         <uap:DefaultTile Square71x71Logo="Assets\SmallTile.png" Wide310x150Logo="Assets\WideTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>

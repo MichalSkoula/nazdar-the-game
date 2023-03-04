@@ -140,7 +140,7 @@ namespace Nazdar.Screens
                     "",
                     "TIPS",
                     "Damned Bolsheviks will attact only from the left side.",
-                    "With all they got.",
+                    "With all they got. Even Lenins.",
                 }
             },
         };
@@ -246,7 +246,7 @@ namespace Nazdar.Screens
             foreach (string line in this.villageDescriptions[this.Game.Village])
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + 18 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + 18 * i), MyColor.Gray1);
             }
 
             this.Game.DrawEnd();

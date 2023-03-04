@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Shared;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Nazdar.Objects

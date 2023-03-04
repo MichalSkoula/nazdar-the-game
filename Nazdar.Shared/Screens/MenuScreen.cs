@@ -169,7 +169,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Start the game", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR! The Game", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             int i = 0;

@@ -1,4 +1,4 @@
-﻿# Nazdar! The Game
+﻿# NAZDAR! The Game
 
 Monogame platform/strategic game (awesome).
 

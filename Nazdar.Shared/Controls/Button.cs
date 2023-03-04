@@ -20,6 +20,8 @@ namespace Nazdar.Controls
 
         public bool Focus = false;
 
+        private Color bgColorDefault;
+
         private bool clicked = false;
         public bool Clicked
         {
@@ -48,17 +50,21 @@ namespace Nazdar.Controls
             this.Data = data;
             this.Active = active;
 
+
             // add font
             switch (size)
             {
                 case Enums.ButtonSize.Small:
                     this.font = Assets.Fonts["Small"];
+                    this.bgColorDefault = MyColor.Purple;
                     break;
                 case Enums.ButtonSize.Medium:
                     this.font = Assets.Fonts["Medium"];
+                    this.bgColorDefault = MyColor.Purple;
                     break;
                 case Enums.ButtonSize.Large:
                     this.font = Assets.Fonts["Large"];
+                    this.bgColorDefault = MyColor.Green;
                     break;
             }
 
@@ -108,7 +114,7 @@ namespace Nazdar.Controls
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            var bgColor = MyColor.Purple;
+            var bgColor = this.bgColorDefault;
 
             if (this.Active == false)
             {
