@@ -123,6 +123,7 @@ namespace Nazdar
             Assets.Fonts["Small"] = content.Load<SpriteFont>("Fonts/fontSmall");
             Assets.Fonts["Medium"] = content.Load<SpriteFont>("Fonts/fontMedium");
             Assets.Fonts["Large"] = content.Load<SpriteFont>("Fonts/fontLarge");
+            Assets.Fonts["Largest"] = content.Load<SpriteFont>("Fonts/fontLargest");
 
             // load sounds
             Assets.Sounds["Coin"] = content.Load<SoundEffect>("Sounds/coinsplash");

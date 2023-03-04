@@ -13,7 +13,7 @@ namespace Nazdar.Screens
     {
         private new Game1 Game => (Game1)base.Game;
 
-        private double timer = 30;
+        private double timer = 35;
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
@@ -125,8 +125,8 @@ namespace Nazdar.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Nazdar!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.Green);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.Purple);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Credits", new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 95), MyColor.White);
 

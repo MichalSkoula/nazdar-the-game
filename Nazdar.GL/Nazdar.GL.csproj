@@ -11,14 +11,18 @@
 
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
-    <Title>Nazdar! The Game</Title>
+    <Title>NAZDAR! The Game</Title>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <PackageIcon>logo1_square.png</PackageIcon>
+    <PackageProjectUrl>https://skoula.cz/nazdar</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

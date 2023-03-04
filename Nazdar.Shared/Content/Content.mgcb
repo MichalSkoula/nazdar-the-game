@@ -723,6 +723,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/fontLarge.spritefont
 
+#begin Fonts/fontLargest.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/fontLargest.spritefont
+
 #begin Fonts/fontMedium.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

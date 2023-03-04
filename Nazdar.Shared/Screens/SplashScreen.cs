@@ -13,23 +13,21 @@ namespace Nazdar.Screens
     {
         private new Game1 Game => (Game1)base.Game;
 
-        private double timer = 30;
+        private double timer = 35;
 
         private readonly string[] intro =
         {
             "The Czechoslovak Legion were volunteer armed forces of Czech and Slovaks, fighting ",
-            "on the side of the Allied Powers during World War I, to win the support of the",
-            "Allied Powers for the independence of Bohemia, Moravia and Slovak territories",
-            "from the Austro-Hungarian Empire.",
+            "on the side of the Allied Powers during World War I, to win the support of the Allied",
+            "Powers for the independence of Czechoslovakia from the Austro-Hungarian Empire.",
             "",
             "Czechoslovak Legion fought in the Russian Civil War against Bolshevik authorities,",
-            "beginning in May 1918, clearing Bolshevik forces from the entire length of the ",
-            "Trans-Siberian Railway by September 1918 and persisting through evacuation of",
-            "the Legion from Siberia to Europe in 1920.",
+            "beginning in May 1918, clearing Bolshevik forces from the entire Trans-Siberian ",
+            "Railway by September 1918 and persisting through evacuation to Europe in 1920.",
         };
         private float descriptionY = 350;
-        private readonly int descriptionYStop = 160;
-        private readonly int descriptionSpeed = 40;
+        private readonly int descriptionYStop = 190;
+        private readonly int descriptionSpeed = 25;
 
         public SplashScreen(Game1 game) : base(game) { }
 
@@ -74,9 +72,13 @@ namespace Nazdar.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            string title = "Nazdar! The Game";
-            int textWidth = (int)Assets.Fonts["Large"].MeasureString(title).X;
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], title, new Vector2((Enums.Screen.Width - textWidth) / 2, 80), MyColor.White);
+            string title = "NAZDAR";
+            int textWidthTitle = (int)Assets.Fonts["Largest"].MeasureString(title).X;
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Largest"], title + "!", new Vector2((Enums.Screen.Width - textWidthTitle) / 2, 50), MyColor.Green);
+
+            string subtitle = "The Game";
+            int textWidthSubtitle = (int)Assets.Fonts["Large"].MeasureString(subtitle).X;
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], subtitle, new Vector2((Enums.Screen.Width - textWidthSubtitle) / 2, 90), MyColor.Purple);
 
             string action = Game1.CurrentPlatform switch
             {
@@ -86,15 +88,15 @@ namespace Nazdar.Screens
                 _ => throw new System.NotImplementedException(),
             };
 
-            textWidth = (int)Assets.Fonts["Medium"].MeasureString(action).X;
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], action, new Vector2((Enums.Screen.Width - textWidth) / 2, 120), MyColor.White);
+            int textWidth = (int)Assets.Fonts["Medium"].MeasureString(action).X;
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], action, new Vector2((Enums.Screen.Width - textWidth) / 2, 140), MyColor.White);
 
             // intro up
             int i = 0;
             foreach (string line in this.intro)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX, descriptionY + 18 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX, descriptionY + 18 * i), MyColor.Gray1);
             }
 
             this.Game.DrawEnd();
