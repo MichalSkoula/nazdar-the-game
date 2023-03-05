@@ -12,28 +12,6 @@ Homepage + Download: https://skoula.cz/nazdar
 <a href="https://www.buymeacoffee.com/mskoula"><img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg" height="40"></a>
 <a href="https://paypal.me/truehipstercz?country.x=CZ&locale.x=en_US"><img src="https://raw.githubusercontent.com/andreostrovsky/donate-with-paypal/master/blue.svg" height="40"></a>
 
-## PACKAGING
-
-https://docs.monogame.net/articles/packaging_games.html
-
-Short (depends on project settings):
-
-* dotnet publish -c Release -r win-x64
-* dotnet publish -c Release -r linux-x64
-
-Full:
-
-* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-
-#### note ####
-Nazdar.GL.Packaging - x84 (Desktop)
-Nazdar.UWP - x64, x84, ARM (bundle, Xbox uses x64)
-
-### run mgcb: ###
-
-dotnet mgcb-editor
-
 ## LICENCE
 
 **GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**
@@ -93,3 +71,30 @@ https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Mill
 
 ### other
 * http://legie100.com/legiovlak/
+
+## NOTES
+
+### Packaging
+
+https://docs.monogame.net/articles/packaging_games.html
+
+Short (depends on project settings):
+
+* dotnet publish -c Release -r win-x64
+* dotnet publish -c Release -r linux-x64
+
+Full:
+
+* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+
+Store: 
+
+Nazdar.GL.Packaging	 x86 (Desktop)
+Nazdar.UWP			 x64 (Xbox)
+
+### MGCB
+
+run mgcb:
+
+dotnet mgcb-editor
