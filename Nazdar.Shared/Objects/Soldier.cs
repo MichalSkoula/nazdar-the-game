@@ -11,6 +11,7 @@ namespace Nazdar.Objects
     public class Soldier : BasePerson
     {
         private bool isFast = true;
+        private bool stopBecauseOfShooting = false;
         private int shootRate = 70; // 0 fastest, 100 slowest
 
         public const int DefaultHealth = 100;
@@ -65,7 +66,7 @@ namespace Nazdar.Objects
 
             // is soldier moving?
             bool isMoving = false;
-            if (Tools.RandomChance(4) || this.isFast)
+            if ((Tools.RandomChance(4) || this.isFast) && !this.stopBecauseOfShooting)
             {
                 if (this.Direction == Direction.Right)
                 {
@@ -82,7 +83,6 @@ namespace Nazdar.Objects
             if (isMoving)
             {
                 this.Anim.Loop = true;
-                this.Anim = this.animations[(int)this.Direction];
             }
             else
             {
@@ -90,9 +90,11 @@ namespace Nazdar.Objects
                 this.Anim.ResetLoop();
             }
 
+            this.Anim = this.animations[(int)this.Direction];
             this.Anim.Update(deltaTime);
 
             this.isFast = true;
+            this.stopBecauseOfShooting = false;
 
             if (this.DeploymentBuilding == null)
             {
@@ -147,6 +149,7 @@ namespace Nazdar.Objects
         public void PrepareToShoot(Direction direction)
         {
             this.isFast = false;
+            this.stopBecauseOfShooting = true;
             this.Direction = direction;
 
             if (Game1.GlobalTimer % this.shootRate == 0)

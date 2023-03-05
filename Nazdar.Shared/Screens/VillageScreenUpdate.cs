@@ -294,32 +294,29 @@ namespace Nazdar.Screens
                 medic.DeploymentPerson = null;
             }
 
-            if (this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            // make list of all wounded
+            List<BasePerson> wounded = new List<BasePerson>();
+            wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && i.Dead == false));
+            wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
+            wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
+            if (this.player.Health < 100)
             {
-                // make list of all wounded
-                List<BasePerson> wounded = new List<BasePerson>();
-                wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && i.Dead == false));
-                wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
-                wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
-                if (this.player.Health < 100)
-                {
-                    wounded.Add(this.player);
-                }
-                wounded = wounded.OrderBy(w => w.Health.RoundOff()).ToList();
+                wounded.Add(this.player);
+            }
+            wounded = wounded.OrderBy(w => w.Health.RoundOff()).ToList();
 
-                if (wounded.Count > 0)
+            if (wounded.Count > 0)
+            {
+                // distribute medics to wounded
+                int w = 0; // wounded index
+                int[] woundedLimitArray = new int[wounded.Count];
+                for (int i = 0; i < medics.Count; i++, w++)
                 {
-                    // distribute medics to wounded
-                    int w = 0; // wounded index
-                    int[] woundedLimitArray = new int[wounded.Count];
-                    for (int i = 0; i < medics.Count; i++, w++)
+                    w %= wounded.Count;
+                    if (woundedLimitArray[w] == 0)
                     {
-                        w %= wounded.Count;
-                        if (woundedLimitArray[w] == 0)
-                        {
-                            this.medics.ElementAt(i).DeploymentPerson = wounded[w];
-                            woundedLimitArray[w]++;
-                        }
+                        this.medics.ElementAt(i).DeploymentPerson = wounded[w];
+                        woundedLimitArray[w]++;
                     }
                 }
             }

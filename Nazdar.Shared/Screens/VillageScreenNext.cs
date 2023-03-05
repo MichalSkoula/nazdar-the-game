@@ -85,11 +85,12 @@ namespace Nazdar.Screens
             this.player.X = MapWidth / 2;
             this.center.X = MapWidth / 2 - this.center.Width / 2; // center is always in the centre
 
-            // take every other person with me + reset caliber
+            // take every other person with me + reset caliber + heal a bit
             this.peasants = this.peasants.Where((x, i) => i % 2 == 0).ToList();
             foreach (var p in this.peasants)
             {
                 p.Caliber = Peasant.DefaultCaliber;
+                p.Health += 25;
             }
 
             this.soldiers = this.soldiers.Where((x, i) => i % 2 == 0).ToList();
@@ -97,18 +98,21 @@ namespace Nazdar.Screens
             {
                 s.Caliber = Soldier.DefaultCaliber;
                 s.Bullets.Clear();
+                s.Health += 25;
             }
 
             this.farmers = this.farmers.Where((x, i) => i % 2 == 0).ToList();
             foreach (var f in this.farmers)
             {
                 f.Caliber = Farmer.DefaultCaliber;
+                f.Health += 25;
             }
 
             this.medics = this.medics.Where((x, i) => i % 2 == 0).ToList();
             foreach (var m in this.medics)
             {
                 m.Caliber = Medic.DefaultCaliber;
+                m.Health += 50;
             }
 
             // reset dayphase
