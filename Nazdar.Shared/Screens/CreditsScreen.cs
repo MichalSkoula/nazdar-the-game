@@ -23,7 +23,6 @@ namespace Nazdar.Screens
             "Michal Skoula",
             "",
             "ART",
-            "Michal Skoula",
             "0x72 (Robert Norenberg)",
             "Essssam",
             "Sirnosir",
@@ -36,6 +35,7 @@ namespace Nazdar.Screens
             "JohnMartPixel25",
             "Anokolisa",
             "Disven",
+            "Michal Skoula",
             "",
             "MUSIC",
             "Tad Miller",
@@ -59,6 +59,10 @@ namespace Nazdar.Screens
             "",
             "FONT",
             "Roberto Mocci",
+            "",
+            "TECH",
+            "Monogame Framework",
+            ".NET 6"
         };
         private float descriptionY = 350;
         private readonly int descriptionSpeed = 25;
@@ -69,12 +73,8 @@ namespace Nazdar.Screens
         {
             Audio.SongTransition(0.25f, "Menu");
 
-            if (Game1.CurrentPlatform != Platform.UWP)
-            {
-                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 110, null, ButtonSize.Medium, "Official page"));
-                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 110 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
-                buttons.Add("monogame", new Button(Offset.MenuX, Offset.MenuY + 110 + 27 * 2, null, ButtonSize.Medium, "Monogame"));
-            }
+            buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 110, null, ButtonSize.Medium, "Official page"));
+            buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 110 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
 
             base.Initialize();
@@ -104,10 +104,6 @@ namespace Nazdar.Screens
             if (this.buttons.ContainsKey("coffee") && this.buttons.GetValueOrDefault("coffee").HasBeenClicked())
             {
                 Tools.OpenLinkAsync("https://www.buymeacoffee.com/mskoula");
-            }
-            if (this.buttons.ContainsKey("monogame") && this.buttons.GetValueOrDefault("monogame").HasBeenClicked())
-            {
-                Tools.OpenLinkAsync("https://www.monogame.net");
             }
 
             timer -= Game.DeltaTime;

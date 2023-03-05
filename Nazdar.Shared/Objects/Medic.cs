@@ -136,7 +136,7 @@ namespace Nazdar.Objects
                     }
 
                     // heal?
-                    if (Game1.GlobalTimer % 30 == 0)
+                    if (Game1.GlobalTimer % 20 == 0)
                     {
                         this.DeploymentPerson.Health++;
                         this.particleHeal.Run(50);

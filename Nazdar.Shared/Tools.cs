@@ -63,11 +63,12 @@ namespace Nazdar.Shared
         }
 
         /// <summary>
-        /// Rounds int to tenths
+        /// Rounds int to tenths/x
         /// </summary>
         public static int RoundOff(this int i)
         {
-            return ((int)Math.Round(i / 10.0)) * 10;
+            int result = ((int)Math.Round(i / 20.0)) * 20;
+            return result;
         }
 
         public static int GetScore(int days, int money, int peasants, int soldiers, int kills, int centerLevel)
