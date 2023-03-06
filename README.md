@@ -90,8 +90,9 @@ Full:
 
 Store: 
 
-Nazdar.GL.Packaging	 x86 (Desktop)
-Nazdar.UWP			 x64 (Xbox)
+Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package
+Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package
+Nazdar.Android						Change version in AndroidManifest, then Archive
 
 ### MGCB
 
