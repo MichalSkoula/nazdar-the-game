@@ -1167,7 +1167,7 @@ namespace Nazdar.Screens
                         if (tower.Status == Building.Status.Built && Game1.TowersLevel < this.Game.Village)
                         {
                             this.player.Action = Enums.PlayerAction.Upgrade;
-                            this.player.ActionCost = (Tower.Cost / 2) + Game1.TowersLevel * 2;
+                            this.player.ActionCost = Game1.TowersLevel * 2;
                             this.player.ActionName = Tower.Name;
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
