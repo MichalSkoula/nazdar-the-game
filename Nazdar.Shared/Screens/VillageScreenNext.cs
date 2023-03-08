@@ -76,9 +76,12 @@ namespace Nazdar.Screens
             this.markets.Clear();
             this.homelesses.Clear();
             this.coins.Clear();
+
+            // player
             this.player.Kills = 0;
             this.player.Caliber = Player.DefaultCaliber;
             this.player.Bullets.Clear();
+            this.player.Health += 25;
 
             // set new center based on new map size
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();

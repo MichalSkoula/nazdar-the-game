@@ -1285,10 +1285,6 @@ namespace Nazdar.Screens
                         }
                         else
                         {
-                            // save
-                            this.saveFile.Save(this.GetSaveData());
-                            Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
-
                             // start building
                             Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
                             Audio.PlaySound("Rock");
