@@ -66,6 +66,7 @@ namespace Nazdar.Screens
             Game1.CenterLevel = 1;
             Game1.TowersLevel = 1;
             this.locomotive = null;
+            this.treasure = null;
             this.enemies.Clear();
             this.pigs.Clear();
             this.armories.Clear();

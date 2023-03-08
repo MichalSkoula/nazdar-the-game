@@ -40,8 +40,6 @@ namespace Nazdar.Screens
 
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Controls", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
-            //this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Keyboard", new Vector2(Offset.MenuX, Offset.MenuY + 55), MyColor.White);
-
             int topOffset = -50;
 
             this.Game.SpriteBatch.Draw(Assets.Images["KeyboardLeft"], new Vector2(Offset.MenuX, 120 + topOffset), Color.White);
@@ -53,8 +51,6 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "jump", new Vector2(Offset.MenuX + 130, 255 + topOffset), MyColor.White);
             this.Game.SpriteBatch.Draw(Assets.Images["KeyboardDown"], new Vector2(Offset.MenuX, 300 + topOffset), Color.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "action", new Vector2(Offset.MenuX + 130, 315 + topOffset), MyColor.White);
-
-            //this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Gamepad", new Vector2(Offset.MenuX + 300, Offset.MenuY + 55), MyColor.White);
 
             this.Game.SpriteBatch.Draw(Assets.Images["GamepadLeftStick"], new Vector2(Offset.MenuX + 300, 116 + topOffset), Color.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "movement", new Vector2(Offset.MenuX + 370, 131 + topOffset), MyColor.White);
