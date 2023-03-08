@@ -18,12 +18,6 @@ Homepage + Download: https://skoula.cz/nazdar
 
 ## CREDITS 
 
-### tech
-
-* MonoGame 3.8
-* MonoGame.Extended 3.7
-* C# 8 (UWP), .NET 6
-
 ### images
 * CC-29 color palette - https://lospec.com/palette-list/cc-29
 * characters based on https://0x72.itch.io/pixeldudesmaker  Robert Norenberg
@@ -71,31 +65,6 @@ https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Mill
 
 ### other
 * http://legie100.com/legiovlak/
-
-## NOTES
-
-### Packaging
-
-https://docs.monogame.net/articles/packaging_games.html
-
-Short (depends on project settings):
-
-* dotnet publish -c Release -r win-x64
-* dotnet publish -c Release -r linux-x64
-
-Full:
-
-* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-
-Store: 
-
-Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package
-Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package
-Nazdar.Android						Change version in AndroidManifest, then Archive
-
-### MGCB
-
-run mgcb:
-
-dotnet mgcb-editor
+* MonoGame
+* MonoGame.Extended
+* .NET

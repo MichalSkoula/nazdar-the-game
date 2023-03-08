@@ -9,7 +9,7 @@
   <Identity
     Name="43177Michalkoula.NazdarTheGame"
     Publisher="CN=0FC37EF8-26B5-492F-87A3-AECF73C84ABB"
-    Version="0.9.8.0" />
+    Version="0.9.9.0" />
   
   <mp:PhoneIdentity PhoneProductId="ecbc90a2-b1cd-41d2-9093-0607a0a688e4" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

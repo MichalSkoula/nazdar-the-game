@@ -14,12 +14,9 @@
                     this.Power = 1;
                     break;
                 case 6:
+                case 8:
                     this.Status = true;
                     this.Power = 2;
-                    break;
-                case 7:
-                    this.Status = true;
-                    this.Power = 3;
                     break;
             }
         }

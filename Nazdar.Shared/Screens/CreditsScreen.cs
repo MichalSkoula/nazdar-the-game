@@ -13,9 +13,13 @@ namespace Nazdar.Screens
     {
         private new Game1 Game => (Game1)base.Game;
 
-        private double timer = 35;
-
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+
+        private const string wwwSkoula = "https://skoula.cz/nazdar";
+        private const string wwwSkoulaShort = "skoula.cz/nazdar";
+
+        private const string wwwCoffee = "https://www.buymeacoffee.com/mskoula";
+        private const string wwwCoffeeShort = "buymeacoffee.com/mskoula";
 
         private readonly string[] intro =
         {
@@ -73,8 +77,12 @@ namespace Nazdar.Screens
         {
             Audio.SongTransition(0.25f, "Menu");
 
-            buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 110, null, ButtonSize.Medium, "Official page"));
-            buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 110 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
+            if (Game1.CurrentPlatform != Platform.UWP)
+            {
+                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 110, null, ButtonSize.Medium, "Official page"));
+                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 110 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
+            }
+
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
 
             base.Initialize();
@@ -99,17 +107,11 @@ namespace Nazdar.Screens
             // www 
             if (this.buttons.ContainsKey("skoula") && this.buttons.GetValueOrDefault("skoula").HasBeenClicked())
             {
-                Tools.OpenLinkAsync("https://skoula.cz/nazdar");
+                Tools.OpenLinkAsync(wwwSkoula);
             }
             if (this.buttons.ContainsKey("coffee") && this.buttons.GetValueOrDefault("coffee").HasBeenClicked())
             {
-                Tools.OpenLinkAsync("https://www.buymeacoffee.com/mskoula");
-            }
-
-            timer -= Game.DeltaTime;
-            if (timer < 0)
-            {
-                this.Game.LoadScreen(typeof(Screens.MenuScreen));
+                Tools.OpenLinkAsync(wwwCoffee);
             }
 
             // move description
@@ -124,7 +126,13 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.Green);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.Purple);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Credits", new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 95), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 105), MyColor.White);
+
+            if (Game1.CurrentPlatform == Platform.UWP)
+            {
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], wwwSkoulaShort, new Vector2(Offset.MenuX, Offset.MenuY + 120), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], wwwCoffeeShort, new Vector2(Offset.MenuX, Offset.MenuY + 135), MyColor.White);
+            }
 
             // intro up
             int i = 0;
