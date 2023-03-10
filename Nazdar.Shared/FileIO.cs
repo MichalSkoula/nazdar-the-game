@@ -15,7 +15,7 @@ namespace Nazdar
         public FileIO(string file = null)
         {
             this.File = file;
-            this.isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User | IsolatedStorageScope.Assembly, null, null);
+            this.isoStore = IsolatedStorageFile.GetUserStoreForApplication();
         }
 
         public object Load()

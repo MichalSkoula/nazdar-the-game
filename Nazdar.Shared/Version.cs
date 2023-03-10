@@ -2,6 +2,6 @@
 {
     public class Version
     {
-        public const string Number = "0.12";
+        public const string Number = "0.13";
     }
 }

@@ -208,11 +208,11 @@ namespace Nazdar.Screens
             foreach (Tower tower in this.towers)
             {
                 tower.Draw(this.Game.SpriteBatch);
-            }
+            }          
 
-            foreach (Enemy enemy in this.enemies)
+            foreach (Lenin lenin in this.lenins)
             {
-                enemy.Draw(this.Game.SpriteBatch);
+                lenin.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Pig pig in this.pigs)
@@ -220,9 +220,9 @@ namespace Nazdar.Screens
                 pig.Draw(this.Game.SpriteBatch);
             }
 
-            foreach (Lenin lenin in this.lenins)
+            foreach (Enemy enemy in this.enemies)
             {
-                lenin.Draw(this.Game.SpriteBatch);
+                enemy.Draw(this.Game.SpriteBatch);
             }
 
             foreach (Soldier soldier in this.soldiers)

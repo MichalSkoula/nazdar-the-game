@@ -204,12 +204,12 @@ namespace Nazdar.Screens
                 left = !left;
 
                 soldier.DeploymentBuilding = null;
-                if (left && this.leftmostTower != null && this.leftmostTower.Status == Building.Status.Built)
+                if (left && this.leftmostTower != null)
                 {
                     // leftmost tower exists?
                     soldier.DeploymentBuilding = this.leftmostTower;
                 }
-                else if (!left && this.rightmostTower != null && this.rightmostTower.Status == Building.Status.Built)
+                else if (!left && this.rightmostTower != null)
                 {
                     // rightmost tower exists?
                     soldier.DeploymentBuilding = this.rightmostTower;
@@ -483,22 +483,22 @@ namespace Nazdar.Screens
 
             foreach (Tower tower in this.towers)
             {
-                // is it left or rightmost tower (to send soldiers to this tower)
-                if (this.center != null)
-                {
-                    if (tower.X < this.center.X && (this.leftmostTower == null || tower.X < this.leftmostTower.X))
-                    {
-                        this.leftmostTower = tower;
-                    }
-                    else if (tower.X > (this.center.X + this.center.Width) && (this.rightmostTower == null || tower.X > this.rightmostTower.X))
-                    {
-                        this.rightmostTower = tower;
-                    }
-                }
-
-                // can shoot at closest enemy?
                 if (tower.Status == Building.Status.Built)
                 {
+                    // is it left or rightmost tower (to send soldiers to this tower)
+                    if (this.center != null)
+                    {
+                        if (tower.X < this.center.X && (this.leftmostTower == null || tower.X < this.leftmostTower.X))
+                        {
+                            this.leftmostTower = tower;
+                        }
+                        else if (tower.X > (this.center.X + this.center.Width) && (this.rightmostTower == null || tower.X > this.rightmostTower.X))
+                        {
+                            this.rightmostTower = tower;
+                        }
+                    }
+
+                    // can shoot at closest enemy?
                     tower.CanFire = false;
                     int range = Enums.Screen.Width / 2; // half of the visible screen
                     foreach (var uniEnemy in this.allEnemies.Where(enemy => enemy.Dead == false).OrderBy(e => Math.Abs(e.X - tower.X)))

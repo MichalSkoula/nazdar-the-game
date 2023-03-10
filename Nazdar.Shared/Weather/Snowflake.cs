@@ -8,6 +8,8 @@ namespace Nazdar.Weather
 {
     public class Snowflake : BaseObject, IDrop
     {
+        private int speed;
+
         public Snowflake(int x, int y)
         {
             bool small = Tools.RandomChance(2);
@@ -15,6 +17,7 @@ namespace Nazdar.Weather
             this.Hitbox = new Rectangle(x, y, small ? 2 : 3, small ? 2 : 3);
             this.Alpha = 0.75f;
             this.Color = MyColor.White;
+            this.speed = 1 + Tools.GetRandom(3);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -24,7 +27,7 @@ namespace Nazdar.Weather
 
         public void Fall()
         {
-            this.Y += 2;
+            this.Y += this.speed;
         }
     }
 }
