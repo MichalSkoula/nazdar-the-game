@@ -8,11 +8,14 @@ namespace Nazdar.Weather
 {
     public class Raindrop : BaseObject, IDrop
     {
+        private int speed;
+
         public Raindrop(int x, int y)
         {
             this.Hitbox = new Rectangle(x, y, Tools.RandomChance(2) ? 1 : 2, 6);
             this.Alpha = 0.5f;
             this.Color = MyColor.White;
+            this.speed = 5 + Tools.GetRandom(3);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -22,7 +25,7 @@ namespace Nazdar.Weather
 
         public void Fall()
         {
-            this.Y += 6;
+            this.Y += this.speed;
         }
     }
 }
