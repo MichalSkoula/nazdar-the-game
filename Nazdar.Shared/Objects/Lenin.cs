@@ -11,7 +11,7 @@ namespace Nazdar.Objects
     public class Lenin : BasePerson
     {
         public const int DefaultHealth = 100;
-        public const int DefaultCaliber = 64;
+        public const int DefaultCaliber = 48;
 
         private List<Animation> animations = new List<Animation>();
 

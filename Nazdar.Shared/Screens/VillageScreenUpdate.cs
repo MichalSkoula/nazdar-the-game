@@ -1474,7 +1474,7 @@ namespace Nazdar.Screens
             }
             if (enemy is Lenin)
             {
-                return 8;
+                return 4;
             }
 
             // normal enemy
