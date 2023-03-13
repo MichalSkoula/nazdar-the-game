@@ -20,6 +20,8 @@ Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package
 Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package
 Nazdar.Android						Change version in AndroidManifest, then Archive
 
+(sometimes visual studio restart is required...)
+
 ## MGCB
 
 run mgcb:
