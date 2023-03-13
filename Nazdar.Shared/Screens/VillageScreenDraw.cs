@@ -208,7 +208,7 @@ namespace Nazdar.Screens
             foreach (Tower tower in this.towers)
             {
                 tower.Draw(this.Game.SpriteBatch);
-            }          
+            }
 
             foreach (Lenin lenin in this.lenins)
             {

@@ -48,7 +48,7 @@ namespace Nazdar.Shared.Parallax
         {
             for (int i = -1; i <= this.mapWidth / this.texture.Width + 1; i++)
             {
-                spriteBatch.Draw(this.texture, new Vector2((int)(this.position.X + this.texture.Width * i), this.position.Y), this.FinalColor);
+                spriteBatch.Draw(this.texture, new Vector2((this.position.X + this.texture.Width * i), this.position.Y), this.FinalColor);
             }
         }
     }
