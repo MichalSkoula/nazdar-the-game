@@ -79,8 +79,8 @@ namespace Nazdar.Screens
 
             if (Game1.CurrentPlatform != Platform.UWP)
             {
-                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 110, null, ButtonSize.Medium, "Official page"));
-                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 110 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
+                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 120, null, ButtonSize.Medium, "Official page"));
+                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 120 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
             }
 
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
