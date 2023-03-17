@@ -1,45 +1,51 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using System.IO.IsolatedStorage;
-using System.Reflection;
+using static System.Environment;
 
 namespace Nazdar
 {
     public class FileIO
     {
         public string File { get; set; }
-        private IsolatedStorageFile isoStore;
-        private IsolatedStorageFileStream isoStream;
+        public string Folder { get; private set; }
+        private string FullPath
+        {
+            get { return Path.Combine(this.Folder, File); }
+        }
 
         public FileIO(string file = null)
         {
             this.File = file;
-            this.isoStore = IsolatedStorageFile.GetUserStoreForApplication();
+
+#if __ANDROID__
+            this.Folder = GetFolderPath(SpecialFolder.ApplicationData);
+#elif NETFX_CORE
+            this.Folder = Windows.Storage.ApplicationData.Current.RoamingFolder.Path;
+#else
+            this.Folder = Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "NazdarTheGame");
+#endif
+
+            if (!Directory.Exists(this.Folder))
+            {
+                Directory.CreateDirectory(this.Folder);
+            }
         }
 
         public object Load()
         {
-            if (isoStore.FileExists(this.File))
+            if (System.IO.File.Exists(this.FullPath))
             {
-                this.isoStream = new IsolatedStorageFileStream(this.File, FileMode.Open, this.isoStore);
-                using (this.isoStream)
-                {
-                    using (StreamReader reader = new StreamReader(isoStream))
-                    {
-                        string json = reader.ReadToEnd();
-                        this.isoStream.Close();
+                string json = System.IO.File.ReadAllText(FullPath);
 
-                        try
-                        {
-                            dynamic data = JObject.Parse(json);
-                            return data;
-                        }
-                        catch
-                        {
-                            return null;
-                        }
-                    }
+                try
+                {
+                    dynamic data = JObject.Parse(json);
+                    return data;
+                }
+                catch
+                {
+                    return null;
                 }
             }
 
@@ -48,51 +54,13 @@ namespace Nazdar
 
         public void Save(object data)
         {
-            FileMode fm = this.isoStore.FileExists(this.File) ? FileMode.Truncate : FileMode.Create;
-            this.isoStream = new IsolatedStorageFileStream(this.File, fm, this.isoStore);
-            using (this.isoStream)
-            {
-                using (StreamWriter writer = new StreamWriter(isoStream))
-                {
-                    string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-                    writer.WriteLine(json);
-
-                }
-                this.isoStream.Close();
-            }
+            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            System.IO.File.WriteAllText(this.FullPath, json);
         }
 
         public void Delete()
         {
-            this.isoStore.DeleteFile(this.File);
-        }
-
-        public string GetPath()
-        {
-            IsolatedStorageFileStream tempIsoFileStream = this.isoStream;
-
-            if (tempIsoFileStream == null)
-            {
-                tempIsoFileStream = new IsolatedStorageFileStream(this.File, FileMode.OpenOrCreate, this.isoStore);
-            }
-
-            string result = typeof(IsolatedStorageFileStream)
-                .GetField("_fullPath", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue(tempIsoFileStream)
-                .ToString();
-
-            tempIsoFileStream.Close();
-
-            return result;
-        }
-
-        public string GetFolder()
-        {
-            string filePath = this.GetPath();
-            int index = filePath.LastIndexOf('\\');
-            filePath = filePath.Remove(index + 1);
-
-            return filePath;
+            System.IO.File.Delete(this.FullPath);
         }
     }
 }
