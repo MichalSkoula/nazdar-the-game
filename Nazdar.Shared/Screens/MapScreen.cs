@@ -26,61 +26,58 @@ namespace Nazdar.Screens
         {
             {
                 1, new string[] {
+                    "May 1918. We were attacked by the Hungarians",
+                    "loyal to the Central Powers! Defend the train!",
+                    "",
                     "MISSION GOALS",
                     "Repair the locomotive and head east",
-                    "",
-                    "May 1918, Chelyabinsk. An eastbound train bearing",
-                    "Legion forces encountered a westbound train",
-                    "bearing Hungarians, who were loyal to the Central",
-                    "Powers and who regarded Legion troops as traitors.",
-                    "An armed conflict ensued at close range.",
                 }
             },
             {
                 2, new string[] {
+                    "May 1918. The damned Bolsheviks attacked",
+                    "the Legion train at the station! Defend!",
+                    "",
                     "MISSION GOALS",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
-                    "New wagon - Hospital",
-                    "",
-                    "May 1918, Omsk. The damned Bolsheviks attacked",
-                    "the Legion train at the Maryanovka station.",
+                    "New wagon - Hospital",                    
                 }
             },
             {
                 3, new string[] {
+                    "May 1918. The damned Bolsheviks blew up the rails!",
+                    "",
                     "MISSION GOALS",
                     "Repair damaged rails",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
                     "New wagon - Defense Tower",
-                    "Absence of an Armory will make this mission very",
-                    "difficult - you must defend the people only with",
-                    "your gun.",
-                    "",
-                    "May 1918, Penza. The Legion must gain control over",
-                    "the Penze train station, to be able to continue.",
+                    "Absence of an Armory will make you defend your",
+                    "people on your own.",                    
                 }
             },
             {
                 4, new string[] {
+                    "June 1918. A great battle is coming. You must ",
+                    "capture the city of Lipjag, where a large number",
+                    "of those Bolsheviks are gathered.",
+                    "",
                     "MISSION GOALS",
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
                     "Cholera epidemic struck! Make sure to have",
-                    "lot of medics.",
-                    "",
-                    "June 1918, Lipjag. A great battle is coming.",
-                    "The Legion must capture the city of Lipjag,",
-                    "where a large number of those damned Bolsheviks",
-                    "are gathered...",
+                    "a lot of medics.",
                 }
             },
             {
                 5, new string[] {
+                    "June 1918. You must capture the city of Ufa and ",
+                    "take control over near villages.",
+                    "",
                     "MISSION GOALS",
                     "Repair damaged rails",
                     "Repair the locomotive and head east",
@@ -89,13 +86,14 @@ namespace Nazdar.Screens
                     "New wagon - Market",
                     "A hard winter struck, you will have to find other",
                     "sources of money than farming.",
-                    "",
-                    "June 1918, Ufa. The Legion must capture the city",
-                    "of Ufa and take control over near villages.",
                 }
             },
             {
                 6, new string[] {
+                    "July 1918. You arrived late. Only a week earlier,",
+                    "the Bolsheviks had murdered the Russian Tsar and",
+                    "his entire family.",
+                    "",
                     "MISSION GOALS",
                     "Repair the locomotive and head east",
                     "",
@@ -103,15 +101,15 @@ namespace Nazdar.Screens
                     "Cannot build Arsenal - your future depends on your",
                     "heroic soldiers.",
                     "Cholera epidemic struck! Make sure to have",
-                    "lot of medics.",
-                    "",
-                    "July 1918, Yekaterinburg. The Legion arrived late.",
-                    "Only a week earlier, the Bolsheviks had killed",
-                    "the Russian Tsar and his entire family.",
+                    "lot of medics.",                    
                 }
             },
             {
                 7, new string[] {
+                    "August 1918. You must conquer the city of Kazan and",
+                    "defend the Russian Golden Treasure. It will serve",
+                    "the White Guards to finance the fight.",
+                    "",
                     "MISSION GOALS",
                     "Defend the Golden Treasure",
                     "Repair damaged rails",
@@ -119,15 +117,14 @@ namespace Nazdar.Screens
                     "",
                     "TIPS",
                     "The Golden Treasure cannot be lost!!",
-                    "",
-                    "August 6 1918, Kazan. The Legion must conquer the city",
-                    "of Kazan and defend the Russian Golden Treasure. This ",
-                    "will then serve the White Guards to finance the fight",
-                    "against the Bolsheviks.",
                 }
             },
             {
                 8, new string[] {
+                    "January 1919. Time to go home. You took control the",
+                    "entire Trans-Siberian Railway, but the promised help",
+                    "from the Allied Powers did not come.",
+                    "",
                     "MISSION GOALS",
                     "Buy the ship and go home",
                     "",
@@ -136,12 +133,6 @@ namespace Nazdar.Screens
                     "With all they got. Even with Mechanized Lenins.",
                     "Cholera epidemic struck! Make sure to have",
                     "lot of medics.",
-                    "",
-                    "January 1919, Vladivostok. The Legionnaires want to go",
-                    "home. They control the entire Trans-Siberian Railway, ",
-                    "but the promised help from the Allied Powers does not ",
-                    "come. They must seize Vladivostok and make their way",
-                    "home by ships.",
                 }
             },
         };

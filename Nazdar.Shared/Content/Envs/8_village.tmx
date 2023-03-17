@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="70">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="240" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="71">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="3" name="background" width="240" height="23">
   <data encoding="csv">
@@ -57,7 +57,7 @@
  </layer>
  <objectgroup id="2" name="objects">
   <object id="21" name="Center" class="BuildingSpot" x="1848" y="142" width="144" height="48"/>
-  <object id="51" name="Slum" class="Other" x="2896" y="168" width="48" height="24"/>
+  <object id="51" name="Slum" class="Other" x="3152" y="168" width="48" height="24"/>
   <object id="52" name="Slum" class="Other" x="3024" y="168" width="48" height="24"/>
   <object id="53" name="Slum" class="Other" x="1184" y="168" width="48" height="24"/>
   <object id="54" name="Armory" class="BuildingSpot" x="1992" y="150" width="112" height="40"/>
@@ -76,5 +76,6 @@
   <object id="67" name="Slum" class="Other" x="1064" y="168" width="48" height="24"/>
   <object id="68" name="Slum" class="Other" x="144" y="168" width="48" height="24"/>
   <object id="69" name="Slum" class="Other" x="3296" y="168" width="48" height="24"/>
+  <object id="70" name="Farm" class="BuildingSpot" x="2792" y="168" width="160" height="24"/>
  </objectgroup>
 </map>
