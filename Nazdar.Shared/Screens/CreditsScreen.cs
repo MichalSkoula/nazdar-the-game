@@ -49,6 +49,7 @@ namespace Nazdar.Screens
             "The Real Monoton Artist",
             "Tri-Tachyon",
             "GTDStudio aka Palrom",
+            "SCaydi",
             "",
             "SOUNDS",
             "LordTomorrow",

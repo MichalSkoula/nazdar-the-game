@@ -16,11 +16,11 @@ Homepage + Download: https://skoula.cz/nazdar
 
 **GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**
 
-## CREDITS 
+## CREDITS
 
-### images
+### art
 * CC-29 color palette - https://lospec.com/palette-list/cc-29
-* characters based on https://0x72.itch.io/pixeldudesmaker  Robert Norenberg
+* characters based on https://0x72.itch.io/pixeldudesmaker Robert Norenberg
 * https://essssam.itch.io/rocky-roads env Essssam
 * https://sirnosir.itch.io/sideview-pixel-farming-asset-pack wheat.png sirnosir
 * https://eggboycolor.itch.io/free-pixel-gamepad-buttons gamepad eggboycolor Andrew G. Crowell
@@ -32,12 +32,13 @@ Homepage + Download: https://skoula.cz/nazdar
 * https://johnmartpixel25.itch.io/free-16x16-grassdirt-tileset another grass JohnMartPixel25
 * https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16 pig Anokolisa
 * https://disven.itch.io/pixel-swords-assets-16x16 sword Disven
+* https://opengameart.org/content/settlements Vladivostok buildings SCaydi
 
 ### music
 * https://opengameart.org/content/lofi-compilation cup_of_tea, bartender, cue Tad Miller
 * https://opengameart.org/content/iced-village Tad Miller
 * https://opengameart.org/content/thawing-village Tad Miller
-https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Miller
+* https://opengameart.org/content/the-settlement-of-the-frontier-loop-ver Tad Miller
 * https://opengameart.org/content/chill-lofi-inspired chill_lofi omfgdude
 * https://opengameart.org/content/lofi-again lofiagain omfgdude
 * https://opengameart.org/content/the-reach-of-hunger all metal songs Zander Noriega
