@@ -62,7 +62,7 @@ namespace Nazdar.Shared
 
         internal static string GetPath()
         {
-            return settingsFile.GetFolder();
+            return settingsFile.Folder;
         }
     }
 }
