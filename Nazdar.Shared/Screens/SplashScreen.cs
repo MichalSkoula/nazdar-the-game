@@ -17,13 +17,13 @@ namespace Nazdar.Screens
 
         private readonly string[] intro =
         {
-            "The Czechoslovak Legion were volunteer armed forces of Czech and Slovaks, fighting ",
-            "on the side of the Allied Powers during World War I, to win the support of the Allied",
-            "Powers for the independence of Czechoslovakia from the Austro-Hungarian Empire.",
+            "The Czechoslovak Legion was a military force fighting for the Allies during WWI.",
+            "The main goal was to win the support of the Allies for the independence of",
+            "Czechoslovakia from the Austria-Hungary. The Legion's efforts during the ",
+            "Russian Civil War included clearing the entire Trans-Siberian Railway of ",
+            "Bolshevik forces. They evacuated to Europe by 1920.",
             "",
-            "Czechoslovak Legion fought in the Russian Civil War against Bolshevik authorities,",
-            "beginning in May 1918, clearing Bolshevik forces from the entire Trans-Siberian ",
-            "Railway by September 1918 and persisting through evacuation to Europe in 1920.",
+            "This game is intended for entertainment purposes and is not historically accurate."
         };
         private float descriptionY = 350;
         private readonly int descriptionYStop = 190;
@@ -96,7 +96,16 @@ namespace Nazdar.Screens
             foreach (string line in this.intro)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX, descriptionY + 18 * i), MyColor.Gray1);
+
+                int textWidthLine = (int)Assets.Fonts["Small"].MeasureString(line).X;
+
+                this.Game.SpriteBatch.DrawString(
+                    Assets.Fonts["Small"],
+                    line,
+                    new Vector2((Enums.Screen.Width - textWidthLine) / 2, descriptionY + 18 * i),
+                    i < this.intro.Length ? MyColor.Gray1 : MyColor.White
+                );
+                
             }
 
             this.Game.DrawEnd();

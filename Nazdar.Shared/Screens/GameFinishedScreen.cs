@@ -20,13 +20,13 @@ namespace Nazdar.Screens
 
         private readonly string[] outro =
         {
-            "You did it. The legionnaires took over the entire",
-            "Trans-Siberian Railway, but they didn't stop those",
-            "rotten Bolsheviks from taking control of all Russia.",
+            "You took over the entire Trans-Siberian Railway,",
+            "but you didn't stop those rotten Bolsheviks from",
+            "taking control of all Russia.",
             "",
-            "However they achieved their main goal.",
-            "They convinced the Allied Powers about the project",
-            "of an independent Czechoslovakia."
+            "However you achieved the main goal - convinced the",
+            "Allied Powers about the project of an independent",
+            "Czechoslovakia."
         };
         private float descriptionY = 300;
         private readonly int descriptionYStop = 110;
@@ -80,7 +80,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "YOU WON", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "YOU WON!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
@@ -104,7 +104,7 @@ namespace Nazdar.Screens
             foreach (string line in this.outro)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 250, descriptionY + 18 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 250, descriptionY + 18 * i), MyColor.Gray1);
             }
 
             this.Game.DrawEnd();
