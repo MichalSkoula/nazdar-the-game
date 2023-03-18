@@ -40,6 +40,7 @@ namespace Nazdar
         public static MessageBuffer MessageBuffer = new MessageBuffer();
         public static int GlobalTimer { get; private set; }
         public static bool NextLevelAnimation { get; set; } = false;
+        public static bool WonAnimation { get; set; } = false;
         public bool FirstRun { get; set; } = false;
         public static int CenterLevel { get; set; } = 1;
         public static int TowersLevel { get; set; } = 1;
@@ -85,7 +86,7 @@ namespace Nazdar
 
             // start it with this scene
 #if DEBUG
-            this.LoadScreen(typeof(Screens.SplashScreen));
+            this.LoadScreen(typeof(Screens.SplashScreen), true, false);
 
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);
@@ -93,7 +94,7 @@ namespace Nazdar
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.PresentationParameters.BackBufferWidth + " " + GraphicsDevice.PresentationParameters.BackBufferHeight);
 #else
             IsMouseVisible = false;
-            this.LoadScreen(typeof(Screens.SplashScreen));
+            this.LoadScreen(typeof(Screens.SplashScreen), true, true);
 #endif
         }
 
@@ -126,12 +127,12 @@ namespace Nazdar
             base.Update(gameTime);
         }
 
-        public void LoadScreen(Type type, bool transition = true)
+        public void LoadScreen(Type type, bool transition = true, bool transitionLong = false)
         {
             var screen = Activator.CreateInstance(type, this);
             if (transition)
             {
-                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, MyColor.Black, 0.5f));
+                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, MyColor.Black, transitionLong ? 2f : 0.5f));
             }
             else
             {

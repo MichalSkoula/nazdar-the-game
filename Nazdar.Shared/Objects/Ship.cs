@@ -7,7 +7,7 @@ namespace Nazdar.Objects
     {
         public const int Cost = 48;
         public const string Name = "Roma Ship";
-        public bool Bought = false;
+        public Enums.Building.Status Status { get; set; } = Enums.Building.Status.InProcess;
 
         public Ship(int x, int y) : base()
         {

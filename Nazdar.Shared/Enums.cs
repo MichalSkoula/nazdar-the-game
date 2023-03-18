@@ -94,7 +94,6 @@ namespace Nazdar
                 Locomotive,
                 Market,
                 Rails,      // when "built", it "disappears"
-                Ship,
                 Treasure    // is always built
             }
 

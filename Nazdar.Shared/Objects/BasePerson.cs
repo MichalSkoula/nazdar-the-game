@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Nazdar.Screens;
 using Nazdar.Shared;
 using System.Linq;
 
@@ -19,6 +20,16 @@ namespace Nazdar.Objects
         public BasePerson DeploymentPerson = null;
         public BaseBuilding DeploymentBuilding = null;
         public int? DeploymentX = null;
+
+        public void ToTheShip()
+        {
+            this.Direction = Enums.Direction.Right;
+            if (this.X > VillageScreen.MapWidth)
+            {
+                this.ToDelete = true;
+                Assets.Sounds["SoldierSpawn"].Play();
+            }
+        }
 
         public void DrawCaliber(SpriteBatch spriteBatch)
         {

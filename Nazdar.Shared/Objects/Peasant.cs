@@ -96,7 +96,11 @@ namespace Nazdar.Objects
 
             this.isFast = true;
 
-            if (this.IsBuildingHere.HasValue)
+            if (Game1.WonAnimation)
+            {
+                this.ToTheShip();
+            }
+            else if (this.IsBuildingHere.HasValue)
             {
                 // 1/ is he building something? should run there
                 if (this.X < IsBuildingHere.GetValueOrDefault().X)

@@ -39,7 +39,7 @@ namespace Nazdar.Screens
 #endif
 
             // player, camera, parallax stuff
-            this.player.Update(this.Game.DeltaTime, this.camera);
+            this.player.Update(this.Game.DeltaTime);
             this.camera.Follow(this.player);
             this.parallaxManager.Update(this.player.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));
 
@@ -1297,7 +1297,7 @@ namespace Nazdar.Screens
             }
 
             // Ship? Is it really happening?
-            if (this.ship != null && this.ship.X - this.player.X < 50)
+            if (this.ship != null && this.ship.X - this.player.X < 50 && !Game1.WonAnimation)
             {
                 // we can buy it
                 this.player.Action = Enums.PlayerAction.Buy;
@@ -1324,8 +1324,9 @@ namespace Nazdar.Screens
                     else
                     {
                         // ok
-                        this.ship.Bought = true;
+                        this.ship.Status = Building.Status.Built;
                         Game1.MessageBuffer.AddMessage("Ship bought", MessageType.Info);
+                        Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
                         Audio.PlaySound("Rock");
                         this.player.Money -= this.player.ActionCost;
                     }

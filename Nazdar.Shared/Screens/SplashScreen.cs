@@ -105,7 +105,7 @@ namespace Nazdar.Screens
                     new Vector2((Enums.Screen.Width - textWidthLine) / 2, descriptionY + 18 * i),
                     i < this.intro.Length ? MyColor.Gray1 : MyColor.White
                 );
-                
+
             }
 
             this.Game.DrawEnd();

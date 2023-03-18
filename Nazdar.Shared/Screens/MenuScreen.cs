@@ -41,7 +41,7 @@ namespace Nazdar.Screens
 #if DEBUG
             if (Game1.CurrentPlatform != Platform.Android)
             {
-                buttons.Add("openFolderButton", new Button(Offset.MenuX + 500, Offset.MenuFooter - 10, null, ButtonSize.Small, "saves"));
+                buttons.Add("openFolderButton", new Button(Offset.MenuX + 500, Offset.MenuFooter, null, ButtonSize.Small, "saves"));
             }
 #endif
 
