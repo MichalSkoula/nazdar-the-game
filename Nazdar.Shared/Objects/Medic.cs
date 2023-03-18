@@ -95,8 +95,11 @@ namespace Nazdar.Objects
 
             this.isFast = true;
 
-            // go somewhere
-            if (this.DeploymentPerson == null)
+            if (Game1.WonAnimation)
+            {
+                this.ToTheShip();
+            }
+            else if (this.DeploymentPerson == null)
             {
                 // run towards town center
                 if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)

@@ -160,14 +160,18 @@ namespace Nazdar.Objects
             };
         }
 
-        public void Update(float deltaTime, Camera camera)
+        public void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
             // moving?
             bool isMoving = false;
 
-            if (Game1.NextLevelAnimation)
+            if (Game1.WonAnimation)
+            {
+                // dont move
+            }
+            else if (Game1.NextLevelAnimation)
             {
                 if (this.Direction == Direction.Left)
                 {

@@ -11,20 +11,11 @@ namespace Nazdar.Screens
     {
         public void CheckIfWeCanGoToAnotherVillageOrWeWon()
         {
-            // locomotive built - start animation
+            // locomotive built - start animation ---------------------------------
             if (this.locomotive?.Status == Building.Status.Built)
             {
                 Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
                 this.locomotive.Status = Building.Status.Finished;
-            }
-            // ship bought - won the game
-            else if (this.ship != null && this.ship.Bought && this.Game.Village == MaxVillage)
-            {
-                if (!this.won)
-                {
-                    this.won = true;
-                    this.Won();
-                }
             }
 
             Game1.NextLevelAnimation = false;
@@ -46,6 +37,29 @@ namespace Nazdar.Screens
                     // to another village
                     Game1.MessageBuffer.DeleteSuperMessage();
                     this.ToAnotherVillage();
+                }
+            }
+
+            // ship bought? -------------------------------------------------------
+            if (this.ship?.Status == Building.Status.Built)
+            {
+                Game1.MessageBuffer.SetSuperMessage("We did it! Nazdar!", 30);
+                this.ship.Status = Building.Status.Finished;
+            }
+
+            Game1.WonAnimation = false;
+            if (this.ship?.Status == Building.Status.Finished)
+            {
+                Game1.WonAnimation = true;
+
+                // everyone aboard?
+                if (this.allLegionnaires.Count == 0)
+                {
+                    if (!this.won)
+                    {
+                        this.won = true;
+                        this.Won();
+                    }
                 }
             }
         }
@@ -137,7 +151,7 @@ namespace Nazdar.Screens
             Game1.MessageBuffer.AddMessage("YOU WON. Beginner's luck.", MessageType.Success);
 
             // Outro
-            this.Game.LoadScreen(typeof(Screens.GameFinishedScreen));
+            this.Game.LoadScreen(typeof(Screens.GameFinishedScreen), true, true);
         }
 
         private void GameOver()

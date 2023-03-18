@@ -42,7 +42,7 @@ namespace Nazdar.Screens
                     "Repair the locomotive and head east",
                     "",
                     "TIPS",
-                    "New wagon - Hospital",                    
+                    "New wagon - Hospital",
                 }
             },
             {
@@ -56,7 +56,7 @@ namespace Nazdar.Screens
                     "TIPS",
                     "New wagon - Defense Tower",
                     "Absence of an Armory will make you defend your",
-                    "people on your own.",                    
+                    "people on your own.",
                 }
             },
             {
@@ -101,7 +101,7 @@ namespace Nazdar.Screens
                     "Cannot build Arsenal - your future depends on your",
                     "heroic soldiers.",
                     "Cholera epidemic struck! Make sure to have",
-                    "lot of medics.",                    
+                    "lot of medics.",
                 }
             },
             {

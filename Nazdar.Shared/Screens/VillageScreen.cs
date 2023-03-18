@@ -98,6 +98,18 @@ namespace Nazdar.Screens
             }
         }
 
+        private List<BasePerson> allLegionnaires
+        {
+            get
+            {
+                var list = (from x in this.peasants select (BasePerson)x).ToList();
+                list.AddRange((from x in this.farmers select (BasePerson)x).ToList());
+                list.AddRange((from x in this.soldiers select (BasePerson)x).ToList());
+                list.AddRange((from x in this.medics select (BasePerson)x).ToList());
+                return list;
+            }
+        }
+
         public override void Initialize()
         {
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
