@@ -35,6 +35,11 @@ namespace Nazdar.Screens
                 this.player.Health = 100;
                 this.player.Cartridges = 100;
                 this.player.Money = 100;
+                this.CreateHomeless();
+            }
+            if (Keyboard.HasBeenPressed(Keys.K) || Gamepad.HasBeenPressed(Buttons.LeftTrigger))
+            {
+                this.soldiers.OrderBy(f => Math.Abs(f.X - player.X)).First().ToDelete = true;
             }
 #endif
 
@@ -288,35 +293,58 @@ namespace Nazdar.Screens
                 return;
             }
 
-            // remove deployment
-            foreach (Medic medic in this.medics)
-            {
-                medic.DeploymentPerson = null;
-            }
-
-            // make list of all wounded
+            // make list of all wounded, in prioritized order
             List<BasePerson> wounded = new List<BasePerson>();
-            wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && i.Dead == false));
-            wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
-            wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
             if (this.player.Health < 100)
             {
                 wounded.Add(this.player);
             }
-            wounded = wounded.OrderBy(w => w.Health.RoundOff()).ToList();
+            wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && i.Dead == false));
+            wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
+            wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
 
+            // maybe free medics?
+            foreach (Medic medic in this.medics)
+            {
+                // does the patient exists??
+                if (!wounded.Where(w => w == medic.DeploymentPerson).Any())
+                {
+                    medic.DeploymentPerson = null;
+                }
+
+                // remove deployment, it the job is done
+                if (medic.DeploymentPerson?.Health == 100)
+                {
+                    medic.DeploymentPerson = null;
+                }
+            }
+
+            // pair medics to wounded
             if (wounded.Count > 0)
             {
-                // distribute medics to wounded
-                int w = 0; // wounded index
-                int[] woundedLimitArray = new int[wounded.Count];
-                for (int i = 0; i < medics.Count; i++, w++)
+                foreach (var w in wounded)
                 {
-                    w %= wounded.Count;
-                    if (woundedLimitArray[w] == 0)
+                    // already being healed?
+                    bool alreadyBeingHealed = false;
+                    foreach (var medic in this.medics)
                     {
-                        this.medics.ElementAt(i).DeploymentPerson = wounded[w];
-                        woundedLimitArray[w]++;
+                        if (medic.DeploymentPerson == w)
+                        {
+                            alreadyBeingHealed = true;
+                            break;
+                        }
+                    }
+
+                    if (alreadyBeingHealed)
+                    {
+                        continue;
+                    }
+
+                    // get nearest medic
+                    var nearestMedic = this.medics.Where(m => m.DeploymentPerson == null).OrderBy(m => Math.Abs(m.X - w.X)).FirstOrDefault();
+                    if (nearestMedic != null)
+                    {
+                        nearestMedic.DeploymentPerson = w;
                     }
                 }
             }

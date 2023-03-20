@@ -63,11 +63,11 @@ namespace Nazdar.Shared
         }
 
         /// <summary>
-        /// Rounds int to tenths/x
+        /// Rounds int to tenths
         /// </summary>
-        public static int RoundOff(this int i)
+        public static int FloorOff(this int i)
         {
-            int result = ((int)Math.Round(i / 20.0)) * 20;
+            int result = ((int)Math.Floor(i / 20.0)) * 20;
             return result;
         }
 
