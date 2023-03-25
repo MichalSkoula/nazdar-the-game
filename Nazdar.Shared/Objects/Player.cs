@@ -61,7 +61,7 @@ namespace Nazdar.Objects
             {
                 if (value > cartridgeLimit)
                 {
-                    Game1.MessageBuffer.AddMessage("Cant hold all this cartridges", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage("Cant hold all these cartridges", MessageType.Danger);
                     this.cartridges = cartridgeLimit;
                 }
                 else
