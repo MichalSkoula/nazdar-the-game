@@ -157,17 +157,14 @@ namespace Nazdar.Screens
             dynamic saveData = saveFile.Load();
             this.saveDataLines = Tools.ParseSaveData(saveData);
 
-            if (saveData != null)
+            if (saveData != null && saveData.ContainsKey("village"))
             {
-                // focus on current village & active accessed villages
-                if (saveData.ContainsKey("village"))
-                {
-                    this.Game.Village = (int)saveData.village;
-                }
+                this.Game.Village = (int)saveData.village;
             }
             else
             {
                 buttons.GetValueOrDefault("deleteButton").Active = false;
+                this.Game.Village = 1;
             }
         }
 
