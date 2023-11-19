@@ -15,6 +15,10 @@ namespace Nazdar.Shared.Parallax
 
             switch (village)
             {
+                case 0: // grass
+                    this.AddLayer(new Layer(Assets.Images["MountainGrass"], 1, 0.05f, 0, mapWidth, 2));
+                    this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.1f, 0, mapWidth, 1));
+                    break;
                 case 1: // grass
                     this.AddLayer(new Layer(Assets.Images["MountainGrass"], 1, 0.05f, 0, mapWidth, 2));
                     this.AddLayer(new Layer(Assets.Images["Trees"], 2, 0.1f, 0, mapWidth, 1));

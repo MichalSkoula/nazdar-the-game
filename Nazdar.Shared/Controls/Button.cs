@@ -137,6 +137,8 @@ namespace Nazdar.Controls
 
         /// <summary>
         /// Updates, iterates and "click" buttons
+        /// Down + Right => next
+        /// Up + Left => previous
         /// </summary>
         public static void UpdateButtons(Dictionary<string, Button> buttons)
         {
@@ -147,11 +149,13 @@ namespace Nazdar.Controls
             }
 
             // iterate through buttons up/down
-            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Down))
+            if (Controls.Keyboard.HasBeenPressed(Keys.Down) || Controls.Gamepad.HasBeenPressed(Buttons.DPadDown) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Down)
+                || Controls.Keyboard.HasBeenPressed(Keys.Right) || Controls.Gamepad.HasBeenPressed(Buttons.DPadRight) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Right))
             {
                 Tools.ButtonsIterateWithKeys(Enums.Direction.Down, buttons);
             }
-            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Up))
+            else if (Controls.Keyboard.HasBeenPressed(Keys.Up) || Controls.Gamepad.HasBeenPressed(Buttons.DPadUp) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Up)
+                || Controls.Keyboard.HasBeenPressed(Keys.Left) || Controls.Gamepad.HasBeenPressed(Buttons.DPadLeft) || Controls.Gamepad.HasBeenPressedThumbstick(Enums.Direction.Left))
             {
                 Tools.ButtonsIterateWithKeys(Enums.Direction.Up, buttons);
             }

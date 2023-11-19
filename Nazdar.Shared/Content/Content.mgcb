@@ -626,6 +626,9 @@
 /processorParam:TextureFormat=Color
 /build:Enemy/enemy5_right.png
 
+#begin Envs/0_village.tmx
+/copy:Envs/0_village.tmx
+
 #begin Envs/1_village.tmx
 /copy:Envs/1_village.tmx
 

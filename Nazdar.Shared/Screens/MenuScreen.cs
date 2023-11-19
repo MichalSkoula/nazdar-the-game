@@ -24,18 +24,24 @@ namespace Nazdar.Screens
             buttons.Add("startButton1", new Button(Offset.MenuX, 55, null, ButtonSize.Large, "Slot #1", true));
             buttons.Add("startButton2", new Button(Offset.MenuX, 90, null, ButtonSize.Large, "Slot #2"));
             buttons.Add("startButton3", new Button(Offset.MenuX, 125, null, ButtonSize.Large, "Slot #3"));
+            buttons.Add("sandboxButton", new Button(Offset.MenuX, 160, null, ButtonSize.Large, "Sandbox"));
 
             // add other buttons
-            buttons.Add("controlsButton", new Button(Offset.MenuX, 160 + 0 * 27, null, ButtonSize.Medium, "Controls"));
-            buttons.Add("creditsButton", new Button(Offset.MenuX, 160 + 1 * 27, null, ButtonSize.Medium, "Credits"));
-            buttons.Add("musicButton", new Button(Offset.MenuX, 160 + 2 * 27, null, ButtonSize.Medium, "Music:", text: "Off"));
-            buttons.Add("soundsButton", new Button(Offset.MenuX, 160 + 3 * 27, null, ButtonSize.Medium, "Sounds:", text: "Off"));
-            buttons.Add("vibrationsButton", new Button(Offset.MenuX, 160 + 4 * 27, null, ButtonSize.Medium, "Vibrations:", text: "Off"));
+            var controlsButton = new Button(Offset.MenuX, 225 + 0 * 27, null, ButtonSize.Medium, "Controls");
+            buttons.Add("controlsButton", controlsButton);
+            buttons.Add("creditsButton", new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, "Credits"));
+
+            var musicButton = new Button(Offset.MenuX, 225 + 1 * 27, null, ButtonSize.Medium, "Music:", text: "Off");
+            buttons.Add("musicButton", musicButton);
+            buttons.Add("soundsButton", new Button(Offset.MenuX + musicButton.Hitbox.Width + 10, 225 + 1 * 27, null, ButtonSize.Medium, "Sounds:", text: "Off"));
+
+            var vibrationsButton = new Button(Offset.MenuX, 225 + 2 * 27, null, ButtonSize.Medium, "Vibrations:", text: "Off");
+            buttons.Add("vibrationsButton", vibrationsButton);
 
             // fullscreen - only on desktop = GL
             if (Game1.CurrentPlatform == Platform.GL)
             {
-                buttons.Add("fullscreenButton", new Button(Offset.MenuX, 160 + 5 * 27, null, ButtonSize.Medium, "Fullscreen:", text: "Off"));
+                buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + 2 * 27, null, ButtonSize.Medium, "Fullscreen:", text: "Off"));
             }
             buttons.Add("exitButton", new Button(Offset.MenuX, 160 + 6 * 27, null, ButtonSize.Medium, "Exit"));
 #if DEBUG
@@ -83,6 +89,11 @@ namespace Nazdar.Screens
             {
                 this.Game.SaveSlot = Save.Slot3;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
+            }
+            else if (this.buttons.GetValueOrDefault("sandboxButton").HasBeenClicked())
+            {
+                this.Game.SaveSlot = Save.Sandbox;
+                this.Game.LoadScreen(typeof(Screens.SandboxScreen));
             }
 
             // settings - fullscreen
@@ -169,7 +180,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR! The Game", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             int i = 0;

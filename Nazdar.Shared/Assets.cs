@@ -257,6 +257,9 @@ namespace Nazdar
             // load tilesets -----------------------------------------------------------------------------------
             Assets.TilesetType = new Dictionary<int, WeatherType>()
             {
+                // sandbox
+                { 0, WeatherType.Grass },
+                // villages
                 { 1, WeatherType.Grass },
                 { 2, WeatherType.Snow },
                 { 3, WeatherType.Grass },
@@ -270,6 +273,7 @@ namespace Nazdar
             // streams are here because Android, but TitleContainer is cross platform so cool
             foreach (var tilesetType in Assets.TilesetType)
             {
+                Tools.Dump(tilesetType.Key);
                 Assets.TilesetGroups["village" + tilesetType.Key] = new TilesetGroup(
                     TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Key + "_village.tmx"),
                     TitleContainer.OpenStream(@"Content/Envs/tileset.tsx"),

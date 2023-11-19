@@ -53,6 +53,11 @@ namespace Nazdar.Screens
 
         private void CreateHomeless()
         {
+            if (this.slums.Count == 0)
+            {
+                return;
+            }
+
             var randomSlum = this.slums[Tools.GetRandom(this.slums.Count)];
             this.homelesses.Add(new Homeless(
                 randomSlum.X + randomSlum.Width / 2,

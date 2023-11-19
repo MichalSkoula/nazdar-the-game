@@ -200,6 +200,11 @@ namespace Nazdar.Shared
             System.Diagnostics.Debug.WriteLine(number.ToString());
         }
 
+        public static void Dump(bool boolean)
+        {
+            System.Diagnostics.Debug.WriteLine(boolean.ToString());
+        }
+
         public static async Task OpenLinkAsync(string link)
         {
             if (Game1.CurrentPlatform == Enums.Platform.GL)
