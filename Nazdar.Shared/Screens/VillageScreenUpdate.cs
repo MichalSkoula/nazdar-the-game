@@ -25,7 +25,14 @@ namespace Nazdar.Screens
                 Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
 
                 // back to menu
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                if (this.Game.Village == 0)
+                {
+                    this.Game.LoadScreen(typeof(Screens.SandboxScreen));
+                } 
+                else
+                {
+                    this.Game.LoadScreen(typeof(Screens.MapScreen));
+                }
             }
 
 #if DEBUG
@@ -895,7 +902,7 @@ namespace Nazdar.Screens
                             }
                         }
                     }
-                    else if (this.center.Status == Building.Status.Built && Game1.CenterLevel < this.Game.Village && this.center.HasBeenUpgradedToday == false)
+                    else if (this.center.Status == Building.Status.Built && (Game1.CenterLevel < this.Game.Village || this.Game.Village == 0) && this.center.HasBeenUpgradedToday == false)
                     {
                         // center is built - level up?
                         this.player.Action = Enums.PlayerAction.Upgrade;
@@ -1192,7 +1199,7 @@ namespace Nazdar.Screens
                     else
                     {
                         var tower = towers.First();
-                        if (tower.Status == Building.Status.Built && Game1.TowersLevel < this.Game.Village)
+                        if (tower.Status == Building.Status.Built && (Game1.TowersLevel < this.Game.Village) || this.Game.Village == 0)
                         {
                             this.player.Action = Enums.PlayerAction.Upgrade;
                             this.player.ActionCost = Game1.TowersLevel * 2;
@@ -1469,7 +1476,7 @@ namespace Nazdar.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - this.Game.Village * 128;
+            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - (this.Game.Village == 0 ? 1 : this.Game.Village) * 128;
             if (randomBase < this.newHomelessProbabilityLowLimit)
             {
                 randomBase = this.newHomelessProbabilityLowLimit;

@@ -58,7 +58,7 @@ namespace Nazdar.Screens
 
         private Disease disease;
 
-        public readonly int MaxVillage = Assets.TilesetGroups.Count;
+        public readonly int MaxVillage = Assets.TilesetGroups.Count - 1;
 
         // some settings - random 0-X == 1 ----------------------------------------------
         // new enemy settings

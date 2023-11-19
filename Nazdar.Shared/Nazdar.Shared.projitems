@@ -66,6 +66,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\CreditsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameFinishedScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\SandboxScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreenDeleteSave.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreenNewGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreen.cs" />

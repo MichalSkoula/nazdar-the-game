@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.skoula.nazdar.android" android:versionCode="8" android:versionName="0.16">
-  <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="31" />
-  <uses-feature android:glEsVersion="0x00020000" android:required="true" />
-  <uses-permission android:name="android.permission.VIBRATE"/>
-  <application android:label="Nazdar.Android"></application>
+	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="33" />
+	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<application android:label="Nazdar.Android"></application>
 </manifest>
