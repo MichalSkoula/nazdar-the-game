@@ -11,6 +11,8 @@ namespace Nazdar.Screens
     {
         public void CheckIfWeCanGoToAnotherVillageOrWeWon()
         {
+            // sandbox is sempiternal - no need to continue -----------------------
+
             // locomotive built - start animation ---------------------------------
             if (this.locomotive?.Status == Building.Status.Built)
             {
@@ -40,7 +42,7 @@ namespace Nazdar.Screens
                 }
             }
 
-            // ship bought? -------------------------------------------------------
+            // ship bought? --------------------------------------------------------
             if (this.ship?.Status == Building.Status.Built)
             {
                 Game1.MessageBuffer.SetSuperMessage("We did it! Nazdar!", 30);

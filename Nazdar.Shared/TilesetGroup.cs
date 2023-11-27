@@ -28,7 +28,7 @@ namespace Nazdar.Shared
             this.TilesetTexture = texture;
         }
 
-        
+
         public IEnumerable<TiledObject> GetObjects(string layerName, string className)
         {
             var layer = this.TilesetMap.Layers.First(l => l.name == layerName);
