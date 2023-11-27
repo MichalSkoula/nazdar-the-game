@@ -28,7 +28,7 @@ namespace Nazdar.Screens
                 if (this.Game.Village == 0)
                 {
                     this.Game.LoadScreen(typeof(Screens.SandboxScreen));
-                } 
+                }
                 else
                 {
                     this.Game.LoadScreen(typeof(Screens.MapScreen));
@@ -1476,7 +1476,7 @@ namespace Nazdar.Screens
         private void UpdateHomelesses()
         {
             // create new?
-            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - (this.Game.Village == 0 ? 1 : this.Game.Village) * 128;
+            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - this.Game.Village * 128;
             if (randomBase < this.newHomelessProbabilityLowLimit)
             {
                 randomBase = this.newHomelessProbabilityLowLimit;

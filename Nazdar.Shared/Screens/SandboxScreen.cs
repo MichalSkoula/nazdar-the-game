@@ -52,7 +52,7 @@ namespace Nazdar.Screens
             // sandbox = village 0
             this.Game.Village = 0;
 
-            if (saveData == null || ! saveData.ContainsKey("village"))
+            if (saveData == null || !saveData.ContainsKey("village"))
             {
                 buttons.GetValueOrDefault("deleteButton").Active = false;
             }
