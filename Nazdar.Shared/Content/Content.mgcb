@@ -1341,6 +1341,54 @@
 /processorParam:Quality=Best
 /build:Sounds/soldiers/metal_03.ogg
 
+#begin Sounds/voice/final_round.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/final_round.ogg
+
+#begin Sounds/voice/game_over.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/game_over.ogg
+
+#begin Sounds/voice/prepare_yourself.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/prepare_yourself.ogg
+
+#begin Sounds/voice/ready.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/ready.ogg
+
+#begin Sounds/voice/story_mode.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/story_mode.ogg
+
+#begin Sounds/voice/survival_mode.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/survival_mode.ogg
+
+#begin Sounds/voice/winner.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/winner.ogg
+
+#begin Sounds/voice/you_win.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/voice/you_win.ogg
+
 #begin Sounds/zombies/Death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

@@ -118,7 +118,7 @@ namespace Nazdar.Shared
                 }
 
                 return new string[] {
-                    village + ". " + (Villages)village,
+                    village == 0 ? ((Villages)village).ToString() : village + ". " + (Villages)village,
                     "Day " + days,
                     "Score: " + score,
                     "Money: " + money,

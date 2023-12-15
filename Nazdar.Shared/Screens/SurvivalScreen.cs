@@ -8,11 +8,11 @@ using static Nazdar.Enums;
 
 namespace Nazdar.Screens
 {
-    public class SandboxScreen : GameScreen
+    public class SurvivalScreen : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
-        public SandboxScreen(Game1 game) : base(game) { }
+        public SurvivalScreen(Game1 game) : base(game) { }
 
         private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
@@ -24,7 +24,7 @@ namespace Nazdar.Screens
         private readonly int descriptionSpeed = 40;
         private readonly string[] description = new string[] {
             "This is",
-            "sandbox",
+            "survival",
             "",
             "MISSION GOALS",
             "Have fun",
@@ -49,7 +49,7 @@ namespace Nazdar.Screens
 
             dynamic saveData = saveFile.Load();
             this.saveDataLines = Tools.ParseSaveData(saveData);
-            // sandbox = village 0
+            // survival = village 0
             this.Game.Village = 0;
 
             if (saveData == null || !saveData.ContainsKey("village"))

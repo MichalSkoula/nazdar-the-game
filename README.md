@@ -60,6 +60,7 @@ Homepage + Download: https://skoula.cz/nazdar
 * https://opengameart.org/content/6-zombie-sounds zombies ChibiBagu
 * https://opengameart.org/content/pig-sfx-pack pigs Vladislav Krotov Vinrax
 * https://opengameart.org/content/click-car-blinker clicks j1987
+* https://opengameart.org/content/voiceover-pack-fighter-40-taunts voice Kenney.nl
 
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika

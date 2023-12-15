@@ -61,6 +61,7 @@ namespace Nazdar.Screens
             "ChibiBagu",
             "Vinrax (Vladislav Krotov)",
             "j1987",
+            "Kenney.nl",
             "",
             "FONT",
             "Roberto Mocci",

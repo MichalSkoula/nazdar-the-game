@@ -20,11 +20,34 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            // add big start buttons
-            buttons.Add("startButton1", new Button(Offset.MenuX, 55, null, ButtonSize.Large, "Slot #1", true));
-            buttons.Add("startButton2", new Button(Offset.MenuX, 90, null, ButtonSize.Large, "Slot #2"));
-            buttons.Add("startButton3", new Button(Offset.MenuX, 125, null, ButtonSize.Large, "Slot #3"));
-            buttons.Add("sandboxButton", new Button(Offset.MenuX, 160, null, ButtonSize.Large, "Sandbox"));
+            // load saves & add big start buttons
+            string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3, Save.Survival };
+            for (int i = 0; i < 4; i++)
+            {
+                FileIO saveFile = new FileIO(slots[i]);
+                dynamic saveData = saveFile.Load();
+                string[] data = Tools.ParseSaveData(saveData);
+
+                // create button
+                string buttonText = data[0] == " " ? "New game" : data[0];
+                if (i == 3)
+                {
+                    buttonText = "Survival";
+                }
+
+                buttons.Add(
+                    "startButton" + (i + 1),
+                    new Button(
+                        Offset.MenuX, 
+                        55 + i * 35, 
+                        null, 
+                        ButtonSize.Large,
+                        buttonText, 
+                        i == 0, 
+                        data
+                    )
+                );
+            }
 
             // add other buttons
             var controlsButton = new Button(Offset.MenuX, 225 + 0 * 27, null, ButtonSize.Medium, "Controls");
@@ -51,15 +74,6 @@ namespace Nazdar.Screens
             }
 #endif
 
-            // load saves to show info next to slot button
-            string[] slots = new[] { Save.Slot1, Save.Slot2, Save.Slot3 };
-            for (int i = 0; i < 3; i++)
-            {
-                FileIO saveFile = new FileIO(slots[i]);
-                dynamic saveData = saveFile.Load();
-                this.buttons.GetValueOrDefault("startButton" + (i + 1)).Data = Tools.ParseSaveData(saveData);
-            }
-
             Audio.SongTransition(0.25f, "Menu");
 
             base.Initialize();
@@ -77,23 +91,27 @@ namespace Nazdar.Screens
             // start game
             if (this.buttons.GetValueOrDefault("startButton1").HasBeenClicked())
             {
+                Audio.PlaySound("Story");
                 this.Game.SaveSlot = Save.Slot1;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
             else if (this.buttons.GetValueOrDefault("startButton2").HasBeenClicked())
             {
+                Audio.PlaySound("Story");
                 this.Game.SaveSlot = Save.Slot2;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
             else if (this.buttons.GetValueOrDefault("startButton3").HasBeenClicked())
             {
+                Audio.PlaySound("Story");
                 this.Game.SaveSlot = Save.Slot3;
                 this.Game.LoadScreen(typeof(Screens.MapScreen));
             }
-            else if (this.buttons.GetValueOrDefault("sandboxButton").HasBeenClicked())
+            else if (this.buttons.GetValueOrDefault("startButton4").HasBeenClicked())
             {
-                this.Game.SaveSlot = Save.Sandbox;
-                this.Game.LoadScreen(typeof(Screens.SandboxScreen));
+                Audio.PlaySound("Survival");
+                this.Game.SaveSlot = Save.Survival;
+                this.Game.LoadScreen(typeof(Screens.SurvivalScreen));
             }
 
             // settings - fullscreen
@@ -194,18 +212,18 @@ namespace Nazdar.Screens
                 {
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
-                        button.Value.Data[0],
-                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y),
-                        MyColor.White);
-                    this.Game.SpriteBatch.DrawString(
-                        Assets.Fonts["Small"],
                         button.Value.Data[1],
-                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 10),
+                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y),
                         MyColor.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[2],
-                        new Vector2(2 * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 20),
+                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 10),
+                        MyColor.White);
+                    this.Game.SpriteBatch.DrawString(
+                        Assets.Fonts["Small"],
+                        button.Value.Data[3],
+                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 20),
                         MyColor.White);
                 }
                 i++;

@@ -6,13 +6,22 @@ https://docs.monogame.net/articles/packaging_games.html
 
 Short (depends on project settings):
 
-* dotnet publish -c Release -r win-x64
-* dotnet publish -c Release -r linux-x64
+```
+dotnet publish -c Release -r win-x64
+```
+```
+dotnet publish -c Release -r linux-x64
+```
 
 Full:
 
-* dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
-* dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+```
+dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+```
+
+```
+dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
+```
 
 Store: 
 
@@ -24,9 +33,11 @@ Nazdar.Android						Change version in AndroidManifest, then Archive
 
 ## MGCB
 
-run mgcb:
+run mgcb (must be inside project folder, not solution folder)
 
+```
 dotnet mgcb-editor
+```
 
 ## Tech
 
