@@ -177,7 +177,7 @@ namespace Nazdar.Screens
             if (this.buttons.GetValueOrDefault("startButton").HasBeenClicked() || Controls.Gamepad.HasBeenPressed(Buttons.Start))
             {
                 // last village? play different sound (last village = villages count - 1 because of survival)
-                if (this.Game.Village == Enum.GetValues(typeof(Enums.Villages)).Length - 1)
+                if (this.Game.Village == Game1.MaxVillage)
                 {
                     Audio.PlaySound("FinalRound");
                 }

@@ -45,6 +45,8 @@ namespace Nazdar
         public static int CenterLevel { get; set; } = 1;
         public static int TowersLevel { get; set; } = 1;
 
+        public static int MaxVillage = Assets.TilesetGroups.Count - 1;
+
         public Game1()
         {
             this.Graphics = new GraphicsDeviceManager(this);

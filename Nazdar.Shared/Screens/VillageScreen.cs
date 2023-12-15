@@ -58,8 +58,6 @@ namespace Nazdar.Screens
 
         private Disease disease;
 
-        public readonly int MaxVillage = Assets.TilesetGroups.Count - 1;
-
         // some settings - random 0-X == 1 ----------------------------------------------
         // new enemy settings
         // every day, it gets -2
@@ -167,12 +165,20 @@ namespace Nazdar.Screens
             this.saveFile.File = Game.SaveSlot;
             if (!this.Load() || this.Game.FirstRun)
             {
+                // increase probability
+                int probability = this.Game.Village;
+                // @survivalMode
+                if (this.Game.Village == 0)
+                {
+                    probability = 16;
+                }
+
                 // spark some coins and homelesses
-                for (int i = 0; i < 12 + this.Game.Village + Tools.GetRandom(6); i++)
+                for (int i = 0; i < 12 + probability + Tools.GetRandom(6); i++)
                 {
                     this.coins.Add(new Coin(Tools.GetRandom(VillageScreen.MapWidth), Offset.Floor2));
                 }
-                for (int i = 0; i < 2 + this.Game.Village + Tools.GetRandom(3); i++)
+                for (int i = 0; i < 2 + probability + Tools.GetRandom(3); i++)
                 {
                     this.CreateHomeless();
                 }

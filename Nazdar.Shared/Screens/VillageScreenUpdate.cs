@@ -98,6 +98,12 @@ namespace Nazdar.Screens
             // - random - every day it gets more difficult, every village also
 
             int randomBase = this.GetNewEnemyProbability();
+            // @survivalMode
+            if (this.Game.Village == 0)
+            {
+                randomBase = (int)(this.GetNewEnemyProbability() / 4);
+            }
+
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
                 Audio.PlayRandomSound("EnemySpawns");
@@ -111,7 +117,7 @@ namespace Nazdar.Screens
 
                 // choose direction
                 // at last level, create enemies only on the left
-                if (this.Game.Village == MaxVillage || Tools.RandomChance(2))
+                if (this.Game.Village == Game1.MaxVillage || Tools.RandomChance(2))
                 {
                     this.enemies.Add(new Enemy(0, Offset.Floor, Direction.Right, caliber: newEnemyCaliber, villageNumber: this.Game.Village));
                 }
@@ -130,14 +136,21 @@ namespace Nazdar.Screens
 
         private void UpdatePigs()
         {
-            // create enemy?
+            // create pigs?
             // - at night
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
+            // pigs only in survival mode or village >= 3
             int randomBase = this.GetNewEnemyProbability() * 4; // for pigs = rare
+            bool pigsEnabled = false;
+            // @survivalMode
+            if (this.Game.Village >= 3 || (this.Game.Village == 0 && player.Days >= 3))
+            {
+                pigsEnabled = true;
+            }
 
-            if (this.dayPhase == DayPhase.Night && this.Game.Village >= 3 && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
+            if (this.dayPhase == DayPhase.Night && pigsEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
                 Audio.PlayRandomSound("PigSpawns");
 
@@ -150,7 +163,7 @@ namespace Nazdar.Screens
 
                 // choose direction
                 // at last level, create enemies only on the left
-                if (this.Game.Village == MaxVillage || Tools.RandomChance(2))
+                if (this.Game.Village == Game1.MaxVillage || Tools.RandomChance(2))
                 {
                     this.pigs.Add(new Pig(0, Offset.FloorPig, Direction.Right, caliber: newPigCaliber));
                 }
@@ -169,15 +182,21 @@ namespace Nazdar.Screens
 
         private void UpdateLenins()
         {
-            // create enemy?
-            // ONLY AT LAST LEVEL
+            // create lenin?
             // - at night
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
+            // ONLY AT LAST LEVEL or survival days > 5
+            bool leninEnabled = false;
             int randomBase = this.GetNewEnemyProbability() * 8; // for lenin = super rare
+            // @survivalMode
+            if (this.Game.Village == Game1.MaxVillage || (this.Game.Village == 0 && player.Days >= 6))
+            {
+                leninEnabled = true;
+            }
 
-            if (this.dayPhase == DayPhase.Night && this.Game.Village == this.MaxVillage && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
+            if (this.dayPhase == DayPhase.Night && leninEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
                 Audio.PlaySound("LeninSpawn");
 
@@ -228,7 +247,7 @@ namespace Nazdar.Screens
                 }
 
                 // last level? everyone on the left
-                if (this.MaxVillage == this.Game.Village)
+                if (Game1.MaxVillage == this.Game.Village)
                 {
                     soldier.DeploymentBuilding = null;
                     if (this.leftmostTower != null && this.leftmostTower.Status == Building.Status.Built)
@@ -1475,8 +1494,15 @@ namespace Nazdar.Screens
 
         private void UpdateHomelesses()
         {
-            // create new?
-            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - this.Game.Village * 128;
+            // create new homeless - get probability
+            int villageCoeff = this.Game.Village;
+            // @survivalMode
+            if (this.Game.Village == 0)
+            {
+                villageCoeff = 6;
+            }
+
+            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - villageCoeff * 128;
             if (randomBase < this.newHomelessProbabilityLowLimit)
             {
                 randomBase = this.newHomelessProbabilityLowLimit;
