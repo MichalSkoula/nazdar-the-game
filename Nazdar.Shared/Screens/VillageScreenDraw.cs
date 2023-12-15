@@ -48,12 +48,11 @@ namespace Nazdar.Screens
                 MyColor.White,
                 4
             );
-            Tools.Dump((int)(this.player.Health));
-            this.Game.SpriteBatch.DrawRectangle(
+            this.Game.SpriteBatch.FillRectangle(
                 new Rectangle(leftOffset + 1, Offset.StatusBarY + 2, this.player.Health, 8),
-                MyColor.Green,
-                4
+                MyColor.Green
             );
+            
 
             // attack power
             this.Game.SpriteBatch.Draw(
