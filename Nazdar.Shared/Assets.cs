@@ -194,6 +194,14 @@ namespace Nazdar
                 content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click5"),
                 content.Load<SoundEffect>("Sounds/clicks/j1987 blinkers click6"),
             };
+            Assets.Sounds["Win"] = content.Load<SoundEffect>("Sounds/voice/you_win");
+            Assets.Sounds["GameOver"] = content.Load<SoundEffect>("Sounds/voice/game_over");
+            Assets.Sounds["Story"] = content.Load<SoundEffect>("Sounds/voice/story_mode");
+            Assets.Sounds["Survival"] = content.Load<SoundEffect>("Sounds/voice/survival_mode");
+            Assets.Sounds["Winner"] = content.Load<SoundEffect>("Sounds/voice/winner");
+            Assets.Sounds["Ready"] = content.Load<SoundEffect>("Sounds/voice/ready");
+            Assets.Sounds["FinalRound"] = content.Load<SoundEffect>("Sounds/voice/final_round");
+            Assets.Sounds["PrepareYourself"] = content.Load<SoundEffect>("Sounds/voice/prepare_yourself");
 
             // load songs
             Assets.SongsCollection["Menu"] = new List<Song> {
@@ -257,7 +265,7 @@ namespace Nazdar
             // load tilesets -----------------------------------------------------------------------------------
             Assets.TilesetType = new Dictionary<int, WeatherType>()
             {
-                // sandbox
+                // survival
                 { 0, WeatherType.Grass },
                 // villages
                 { 1, WeatherType.Grass },

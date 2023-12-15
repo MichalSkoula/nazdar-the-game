@@ -11,7 +11,7 @@ namespace Nazdar.Screens
     {
         public void CheckIfWeCanGoToAnotherVillageOrWeWon()
         {
-            // sandbox is sempiternal - no need to continue -----------------------
+            // survival is sempiternal - no need to continue -----------------------
 
             // locomotive built - start animation ---------------------------------
             if (this.locomotive?.Status == Building.Status.Built)
@@ -45,6 +45,8 @@ namespace Nazdar.Screens
             // ship bought? --------------------------------------------------------
             if (this.ship?.Status == Building.Status.Built)
             {
+                Audio.SongVolume = 0.25f;
+                Audio.PlaySound("Winner");
                 Game1.MessageBuffer.SetSuperMessage("We did it! Nazdar!", 30);
                 this.ship.Status = Building.Status.Finished;
             }
@@ -68,6 +70,7 @@ namespace Nazdar.Screens
 
         private void ToAnotherVillage()
         {
+            Audio.PlaySound("Win");
             Game1.MessageBuffer.AddMessage("Lets go to another village!", MessageType.Success);
 
             this.Game.Village++;
@@ -162,6 +165,8 @@ namespace Nazdar.Screens
             // to be able to show it on game over screen
             // the same way as if it was from a file
             Game1.SaveTempData = JObject.FromObject(this.GetSaveData());
+
+            Audio.PlaySound("GameOver");
 
             // load screen
             this.Game.LoadScreen(typeof(Screens.GameOverScreen));

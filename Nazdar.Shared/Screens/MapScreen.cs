@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using System;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -175,6 +176,16 @@ namespace Nazdar.Screens
             // start game - villages
             if (this.buttons.GetValueOrDefault("startButton").HasBeenClicked() || Controls.Gamepad.HasBeenPressed(Buttons.Start))
             {
+                // last village? play different sound (last village = villages count - 1 because of survival)
+                if (this.Game.Village == Enum.GetValues(typeof(Enums.Villages)).Length - 1)
+                {
+                    Audio.PlaySound("FinalRound");
+                }
+                // not last village - play only ready sound
+                else
+                {
+                    Audio.PlaySound("Ready");
+                }
                 this.Game.LoadScreen(typeof(Screens.VillageScreen));
             }
 

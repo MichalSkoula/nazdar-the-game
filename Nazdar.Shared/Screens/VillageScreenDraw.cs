@@ -40,18 +40,19 @@ namespace Nazdar.Screens
 
             // healthbar
             this.Game.SpriteBatch.DrawRectangle(
-                new Rectangle(leftOffset, Offset.StatusBarY + 1, 100, 10),
+                new Rectangle(leftOffset, Offset.StatusBarY + 1, 102, 10),
                 MyColor.Black
             );
             this.Game.SpriteBatch.DrawRectangle(
-                new Rectangle(leftOffset + 1, Offset.StatusBarY + 2, 98, 8),
+                new Rectangle(leftOffset + 1, Offset.StatusBarY + 2, 100, 8),
                 MyColor.White,
-                8
+                4
             );
+            Tools.Dump((int)(this.player.Health));
             this.Game.SpriteBatch.DrawRectangle(
-                new Rectangle(leftOffset + 1, Offset.StatusBarY + 2, (int)((this.player.Health / 100f) * 98), 8),
+                new Rectangle(leftOffset + 1, Offset.StatusBarY + 2, this.player.Health, 8),
                 MyColor.Green,
-                8
+                4
             );
 
             // attack power

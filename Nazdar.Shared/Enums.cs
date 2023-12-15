@@ -110,7 +110,7 @@ namespace Nazdar
             public const string Slot1 = "save_slot_1.json";
             public const string Slot2 = "save_slot_2.json";
             public const string Slot3 = "save_slot_3.json";
-            public const string Sandbox = "sandbox.json";
+            public const string Survival = "survival.json";
         }
 
         public static class Offset
@@ -153,7 +153,7 @@ namespace Nazdar
 
         public enum Villages
         {
-            Sandbox = 0,
+            Survival = 0,
             Chelyabinsk = 1,
             Omsk = 2,
             Pemza = 3,

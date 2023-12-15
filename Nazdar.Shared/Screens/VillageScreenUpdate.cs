@@ -27,7 +27,7 @@ namespace Nazdar.Screens
                 // back to menu
                 if (this.Game.Village == 0)
                 {
-                    this.Game.LoadScreen(typeof(Screens.SandboxScreen));
+                    this.Game.LoadScreen(typeof(Screens.SurvivalScreen));
                 }
                 else
                 {
@@ -1407,9 +1407,9 @@ namespace Nazdar.Screens
             this.dayPhaseTimer -= this.Game.DeltaTime;
             if (this.dayPhaseTimer <= 0)
             {
-
                 if (this.dayPhase == DayPhase.Day)
                 {
+                    Audio.PlaySound("PrepareYourself");
                     Game1.MessageBuffer.AddMessage("Brace yourselfs, enemies are coming", MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
