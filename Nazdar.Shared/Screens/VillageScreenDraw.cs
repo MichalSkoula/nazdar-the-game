@@ -90,7 +90,7 @@ namespace Nazdar.Screens
             // top left stats
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                this.Game.Village + ". " + (Villages)this.Game.Village + ", day " + this.player.Days.ToString() + ".",
+                (this.Game.Village > 0 ? (this.Game.Village + "/") : "") + (Villages)this.Game.Village + ", day " + this.player.Days.ToString() + ".",
                 new Vector2(leftOffset, 10),
                 MyColor.White);
             this.Game.SpriteBatch.DrawString(

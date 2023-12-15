@@ -9,6 +9,10 @@
         {
             switch (village)
             {
+                case 0:
+                    this.Status = true;
+                    this.Power = 2;
+                    break;
                 case 4:
                     this.Status = true;
                     this.Power = 1;
