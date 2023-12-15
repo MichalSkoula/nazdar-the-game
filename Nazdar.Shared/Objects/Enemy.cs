@@ -21,7 +21,7 @@ namespace Nazdar.Objects
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
-            this.Name = "Average Bolshevik";
+            this.Name = "Rogue Bolshevik";
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
