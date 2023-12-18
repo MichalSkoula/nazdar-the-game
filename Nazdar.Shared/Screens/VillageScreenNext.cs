@@ -75,9 +75,6 @@ namespace Nazdar.Screens
 
             this.Game.Village++;
 
-            // save score from previous levels
-            this.player.BaseScore += Tools.GetScore(this.player.Days, this.player.Money, this.peasants.Count, this.soldiers.Count, this.player.Kills, Game1.CenterLevel);
-
             // enable sparking homelesses and coins at the start of next village
             this.Game.FirstRun = true;
 

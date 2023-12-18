@@ -45,7 +45,7 @@ namespace Nazdar.Screens
 
         private void Load()
         {
-            // try to get current score etc to show
+            // try to get current stats to show
             FileIO saveFile = new FileIO(Game.SaveSlot);
 
             dynamic saveData = saveFile.Load();

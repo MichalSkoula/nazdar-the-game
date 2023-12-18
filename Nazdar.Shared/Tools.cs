@@ -71,42 +71,18 @@ namespace Nazdar.Shared
             return result;
         }
 
-        public static int GetScore(int days, int money, int peasants, int soldiers, int kills, int centerLevel)
-        {
-            return
-                days
-                + money
-                + peasants
-                + soldiers
-                + kills
-                + centerLevel
-            ;
-        }
-
         public static string[] ParseSaveData(dynamic saveData)
         {
             if (saveData != null)
             {
-                int score = 0;
                 int village = 1;
                 int days = 0;
                 int money = 0;
                 int kills = 0;
 
-                // try to get score and other data from save slots
+                // try to get stats and other data from save slots
                 try
                 {
-                    score = saveData.ContainsKey("player") ? (int)saveData.GetValue("player").BaseScore : -1;
-
-                    score += GetScore(
-                        saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Days : 0,
-                        saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Money : 0,
-                        saveData.ContainsKey("player") ? (int)saveData.GetValue("player").Kills : 0,
-                        saveData.ContainsKey("peasants") ? (int)saveData.GetValue("peasants").Count : 0,
-                        saveData.ContainsKey("soldiers") ? (int)saveData.GetValue("soldiers").Count : 0,
-                        saveData.ContainsKey("centerLevel") ? (int)saveData.GetValue("centerLevel") : 0
-                    );
-
                     days = saveData.GetValue("player").Days;
                     money = saveData.GetValue("player").Money;
                     village = saveData.GetValue("village");
@@ -120,13 +96,12 @@ namespace Nazdar.Shared
                 return new string[] {
                     village == 0 ? ((Villages)village).ToString() : village + "/" + (Villages)village,
                     "Day " + days,
-                    "Score: " + score,
+                    "Kills: " + kills,
                     "Money: " + money,
-                    "Kills: " + kills
                 };
             }
 
-            return new string[] { " ", " ", " ", " ", " " };
+            return new string[] { " ", " ", " ", " " };
         }
 
         /// <summary>

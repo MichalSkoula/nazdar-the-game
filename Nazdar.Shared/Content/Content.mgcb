@@ -771,7 +771,7 @@
 /processorParam:TextureFormat=Color
 /build:Homeless/homeless_right.png
 
-#begin Lenin/lenin.png
+#begin Lenin/lenin_left.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -781,7 +781,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Lenin/lenin.png
+/build:Lenin/lenin_left.png
+
+#begin Lenin/lenin_right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Lenin/lenin_right.png
 
 #begin Medic/medic_left.png
 /importer:TextureImporter

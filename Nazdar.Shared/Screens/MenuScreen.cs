@@ -218,12 +218,12 @@ namespace Nazdar.Screens
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[2],
-                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 10),
+                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 11),
                         MyColor.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[3],
-                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 20),
+                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 22),
                         MyColor.White);
                 }
                 i++;
