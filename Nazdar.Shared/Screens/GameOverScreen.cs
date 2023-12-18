@@ -33,7 +33,7 @@ namespace Nazdar.Screens
 
         private void Load()
         {
-            // try to get current score etc to show
+            // try to get current stats to show
             this.saveDataLines = Tools.ParseSaveData(Game1.SaveTempData);
         }
 

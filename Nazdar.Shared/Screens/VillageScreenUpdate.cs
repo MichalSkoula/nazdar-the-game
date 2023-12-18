@@ -98,10 +98,10 @@ namespace Nazdar.Screens
             // - random - every day it gets more difficult, every village also
 
             int randomBase = this.GetNewEnemyProbability();
-            // @survivalMode
+            // @survivalMode x4
             if (this.Game.Village == 0)
             {
-                randomBase = (int)(this.GetNewEnemyProbability() / 4);
+                randomBase = (int)(randomBase / 4);
             }
 
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
@@ -144,10 +144,11 @@ namespace Nazdar.Screens
             // pigs only in survival mode or village >= 3
             int randomBase = this.GetNewEnemyProbability() * 4; // for pigs = rare
             bool pigsEnabled = false;
-            // @survivalMode
+            // @survivalMode x4
             if (this.Game.Village >= 3 || (this.Game.Village == 0 && player.Days >= 3))
             {
                 pigsEnabled = true;
+                randomBase /= 4;
             }
 
             if (this.dayPhase == DayPhase.Night && pigsEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
@@ -190,10 +191,11 @@ namespace Nazdar.Screens
             // ONLY AT LAST LEVEL or survival days > 5
             bool leninEnabled = false;
             int randomBase = this.GetNewEnemyProbability() * 8; // for lenin = super rare
-            // @survivalMode
+            // @survivalMode x4
             if (this.Game.Village == Game1.MaxVillage || (this.Game.Village == 0 && player.Days >= 6))
             {
                 leninEnabled = true;
+                randomBase /= 4;
             }
 
             if (this.dayPhase == DayPhase.Night && leninEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
@@ -207,7 +209,17 @@ namespace Nazdar.Screens
                     newLeninCaliber = newLeninMaxCaliber;
                 }
 
-                this.lenins.Add(new Lenin(0, Offset.FloorLenin, Direction.Right, caliber: newLeninCaliber));
+                // choose direction
+                // at last level, create enemies only on the left
+                // otherwise it is survival, so on both sides
+                if (this.Game.Village == Game1.MaxVillage || Tools.RandomChance(2))
+                {
+                    this.lenins.Add(new Lenin(0, Offset.FloorLenin, Direction.Right, caliber: newLeninCaliber));
+                }
+                else
+                {
+                    this.lenins.Add(new Lenin(MapWidth, Offset.FloorLenin, Direction.Left, caliber: newLeninCaliber));
+                }
             }
 
             // update lenins
@@ -219,7 +231,7 @@ namespace Nazdar.Screens
 
         private int GetNewEnemyProbability()
         {
-            int randomBase = newEnemyDefaultProbability - this.Game.Village * 20 - this.player.Days * 2;
+            int randomBase = newEnemyDefaultProbability - this.Game.Village * 10 - this.player.Days * 4;
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;
@@ -1432,6 +1444,7 @@ namespace Nazdar.Screens
                     Game1.MessageBuffer.AddMessage("Brace yourselfs, enemies are coming", MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
+                    Tools.Dump("enemy probability: " + this.GetNewEnemyProbability());
                 }
                 else
                 {

@@ -25,10 +25,10 @@ namespace Nazdar.Objects
             this.Speed = 61;
             this.Name = "Lenin Tractor";
 
-            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
-            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
-            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
-            this.animations.Add(new Animation(Assets.Images["Lenin"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["LeninRight"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["LeninRight"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["LeninLeft"], 3, 8));
+            this.animations.Add(new Animation(Assets.Images["LeninLeft"], 3, 8));
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
 

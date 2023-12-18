@@ -42,4 +42,4 @@ dotnet mgcb-editor
 ## Tech
 
 * MonoGame.Extended 3.7 (3.8 is bugged)
-* C#8 because of UWP
+* C# 8 because of UWP (Xbox)

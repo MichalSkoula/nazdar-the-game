@@ -63,7 +63,7 @@ namespace Nazdar.Screens
         // every day, it gets -2
         // every village, it gets -20
         private static int newEnemyDefaultProbability = 260;
-        private int newEnemyProbabilityLowLimit = 32;
+        private int newEnemyProbabilityLowLimit = 16;
         private static int newHomelessDefaultProbability = 512 * 4;
         private int newHomelessProbabilityLowLimit = 768;
         private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
