@@ -70,7 +70,7 @@ namespace Nazdar.Screens
         private int newPigMaxCaliber = Pig.DefaultCaliber * 4;
         private int newLeninMaxCaliber = Lenin.DefaultCaliber * 4;
         private int newCoinProbability = 512 * 3;
-        private int enemyDropProbability = 8;
+        private int enemyDropProbability = 4;
         private int pigDropProbability = 4;
         private int leninDropProbability = 2;
         private int homelessLimit = 16;

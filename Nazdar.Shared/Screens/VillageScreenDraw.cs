@@ -52,7 +52,7 @@ namespace Nazdar.Screens
                 new Rectangle(leftOffset + 1, Offset.StatusBarY + 2, this.player.Health, 8),
                 MyColor.Green
             );
-            
+
 
             // attack power
             this.Game.SpriteBatch.Draw(

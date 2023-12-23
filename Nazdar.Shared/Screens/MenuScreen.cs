@@ -38,12 +38,12 @@ namespace Nazdar.Screens
                 buttons.Add(
                     "startButton" + (i + 1),
                     new Button(
-                        Offset.MenuX, 
-                        55 + i * 35, 
-                        null, 
+                        Offset.MenuX,
+                        55 + i * 35,
+                        null,
                         ButtonSize.Large,
-                        buttonText, 
-                        i == 0, 
+                        buttonText,
+                        i == 0,
                         data
                     )
                 );
