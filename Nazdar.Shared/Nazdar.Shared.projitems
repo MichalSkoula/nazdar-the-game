@@ -66,6 +66,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\CreditsScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameFinishedScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreen.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SurvivalScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\MapScreenDeleteSave.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\GameOverScreenNewGame.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tutorial.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Version.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MyVibration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Weather\IDrop.cs" />
