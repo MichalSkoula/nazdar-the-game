@@ -88,6 +88,7 @@ namespace Nazdar.Screens
             this.UpdateDayPhaseAndSky();
             this.UpdateDisease();
             this.CheckIfWeCanGoToAnotherVillageOrWeWon();
+            this.Tutorial();
         }
 
         private void UpdateEnemies()
@@ -1554,6 +1555,55 @@ namespace Nazdar.Screens
 
             // normal enemy
             return 1;
+        }
+
+        private void Tutorial()
+        {
+            if (this.Game.Village != 1)
+            {
+                return;
+            }
+
+            // no base yet?
+            if (this.player.Days == 0 && this.dayPhaseTimer < 60 && this.center == null)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should build the Base", 4);
+            }
+
+            if (this.center == null)
+            {
+                return;
+            }
+
+            // base building started but no peasants?
+            if (this.center.Status == Building.Status.InProcess && this.peasants.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Base", 4);
+            }
+
+            // no farms?
+            if (this.center.Status == Building.Status.Built && this.farms.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should built some farms to generate money", 4);
+            }
+
+            // first farm to be built but no peasants?
+            if (this.peasants.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.InProcess)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the farm", 4);
+            }
+
+            // first farm built but no farmers or tools
+            if (this.farmers.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.Built && this.farms[0].Tools.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should create some farm tools to get farmers.", 4);
+            }
+
+            // first farm built but no farmers or tools
+            if (this.farmers.Count == 0 && this.peasants.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.Built && this.farms[0].Tools.Count > 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to become the farmers.", 4);
+            }
         }
     }
 }
