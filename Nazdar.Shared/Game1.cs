@@ -88,7 +88,7 @@ namespace Nazdar
 
             // start it with this scene
 #if DEBUG
-            this.LoadScreen(typeof(Screens.SplashScreen), true, false);
+            this.LoadScreen(typeof(Screens.MenuScreen), true, false);
 
             System.Diagnostics.Debug.WriteLine(this.Window.ClientBounds.Width + " " + this.Window.ClientBounds.Height);
             System.Diagnostics.Debug.WriteLine(GraphicsDevice.Viewport.Width + " " + this.GraphicsDevice.Viewport.Height);
