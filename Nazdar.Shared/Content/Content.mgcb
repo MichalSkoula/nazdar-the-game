@@ -495,16 +495,10 @@
 /build:Controls/keyboard/up.png
 
 #begin Effects/AllWhite.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Effects/AllWhite.fx
+/copy:Effects/AllWhite.fx
 
 #begin Effects/Pixelate.fx
-/importer:EffectImporter
-/processor:EffectProcessor
-/processorParam:DebugMode=Auto
-/build:Effects/Pixelate.fx
+/copy:Effects/Pixelate.fx
 
 #begin Enemy/enemy1_left.png
 /importer:TextureImporter

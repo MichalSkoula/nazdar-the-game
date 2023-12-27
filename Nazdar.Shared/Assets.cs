@@ -234,9 +234,12 @@ namespace Nazdar
             };
 
             // load effects
+            /*
+             * we are not using effects anymore. They are set to only copy in MGCB
             Assets.Effects["AllWhite"] = content.Load<Effect>("Effects/AllWhite");
             Assets.Effects["Pixelate"] = content.Load<Effect>("Effects/Pixelate");
             Assets.Effects["Pixelate"].Parameters["pixelation"].SetValue(5);
+            */
 
             // load particle textures
             Texture2D blood = new Texture2D(graphicsDevice, 1, 1);
