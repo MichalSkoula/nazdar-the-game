@@ -1566,7 +1566,7 @@ namespace Nazdar.Screens
                 return;
             }
 
-            // no base yet?
+            // no base yet? ---------------------------------------------------------------------
             if (this.player.Days == 0 && this.dayPhaseTimer < 60 && this.center == null)
             {
                 Game1.MessageBuffer.SetSuperMessage("I should build the Base", messageTime, true);
@@ -1583,7 +1583,7 @@ namespace Nazdar.Screens
                 Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Base", messageTime, true);
             }
 
-            // no farms?
+            // no farms? -------------------------------------------------------------------------
             if (this.center.Status == Building.Status.Built && this.farms.Count == 0)
             {
                 Game1.MessageBuffer.SetSuperMessage("I should built some farms to generate money", messageTime, true);
@@ -1598,13 +1598,64 @@ namespace Nazdar.Screens
             // first farm built but no farmers or tools
             if (this.farmers.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.Built && this.farms[0].Tools.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should create some farm tools to get farmers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should create some farm tools to be able to recruit farmers.", messageTime, true);
             }
 
             // first farm built but no farmers or tools
             if (this.farmers.Count == 0 && this.peasants.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.Built && this.farms[0].Tools.Count > 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to become the farmers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to become farmers.", messageTime, true);
+            }
+
+            if (this.farmers.Count == 0)
+            {
+                return;
+            }
+
+            // build Armory -----------------------------------------------------------------------
+            if (this.farms.Count > 0 && this.armories.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should build the Armory to be able to recruit soliders.", messageTime, true);
+            }
+
+            // first armory to be built but no peasants?
+            if (this.peasants.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.InProcess)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Armory", messageTime, true);
+            }
+
+            // first armory built but no soldiers or weapons
+            if (this.soldiers.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.Built && this.armories[0].Weapons.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should create some weapons to be able to recruit soldiers.", messageTime, true);
+            }
+
+            // first armory built but no soldiers or tools
+            if (this.soldiers.Count == 0 && this.peasants.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.Built && this.armories[0].Weapons.Count > 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to become soldiers.", messageTime, true);
+            }
+
+            if (this.soldiers.Count == 0)
+            {
+                return;
+            }
+
+            // build Arsenal -----------------------------------------------------------------------
+            if (this.arsenals.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should build the Arsenal to be able to buy cartridges.", messageTime, true);
+            }
+
+            if (this.arsenals.Count > 0 && this.arsenals[0].Status == Building.Status.InProcess && this.peasants.Count == 0)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Arsenal", messageTime, true);
+            }
+
+            // enought of this
+            if (this.arsenals.Count > 0 && this.arsenals[0].Status == Building.Status.Built)
+            {
+                Game1.MessageBuffer.SetSuperMessage("I should defend the base and make enought money to repair the Locomotive.", messageTime, true);
             }
         }
     }
