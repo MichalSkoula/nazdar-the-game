@@ -10,15 +10,17 @@ namespace Nazdar.Messages
         private List<Message> messages = new List<Message>();
         private Message superMessage = null;
         private int messagesLimit = 7;
+        private bool superMessageSmall = false;
 
         public void AddMessage(string text, MessageType? messageType = MessageType.Info, double? ttl = 7)
         {
             this.messages.Add(new Message(text, (double)ttl, (MessageType)messageType));
         }
 
-        public void SetSuperMessage(string text, double? ttl = 7)
+        public void SetSuperMessage(string text, double ttl = 7, bool small = false)
         {
-            this.superMessage = new Message(text, (double)ttl);
+            this.superMessage = new Message(text, ttl);
+            this.superMessageSmall = small;
         }
 
         public void DeleteSuperMessage()
@@ -67,12 +69,13 @@ namespace Nazdar.Messages
 
             if (this.superMessage != null)
             {
-                float textWidth = Assets.Fonts["Medium"].MeasureString(this.superMessage.Text).X;
+                var fontSize = this.superMessageSmall ? "Small" : "Medium";
+                float textWidth = Assets.Fonts[fontSize].MeasureString(this.superMessage.Text).X;
 
                 spriteBatch.DrawString(
-                    Assets.Fonts["Medium"],
+                    Assets.Fonts[fontSize],
                     this.superMessage.Text,
-                    new Vector2((Enums.Screen.Width - textWidth) / 2 - translationX, Enums.Offset.SuperMessageY),
+                    new Vector2((int)((Enums.Screen.Width - textWidth) / 2 - translationX), Enums.Offset.SuperMessageY),
                     this.superMessage.Color
                 );
             }
