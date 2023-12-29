@@ -23,11 +23,18 @@ namespace Nazdar.Screens
         private readonly int descriptionYStop = 62;
         private readonly int descriptionSpeed = 40;
         private readonly string[] description = new string[] {
-            "This is",
-            "survival",
+            "Endless farming.",
+            "Endless slaughter.",
+            "This is the life of a legionnaire.",
+            "This is the survival.",
             "",
             "MISSION GOALS",
-            "Have fun",
+            "Unlimited time. Survive as long as you can.",
+            "",
+            "TIPS",
+            "Cholera epidemic struck hard! Make sure to have",
+            "a lot of medics.",
+            "Stronger enemies will attack very soon."
         };
 
         public override void Initialize()

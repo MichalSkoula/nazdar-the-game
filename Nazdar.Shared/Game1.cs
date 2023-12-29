@@ -45,7 +45,7 @@ namespace Nazdar
         public static int CenterLevel { get; set; } = 1;
         public static int TowersLevel { get; set; } = 1;
 
-        public static int MaxVillage = Assets.TilesetGroups.Count - 1;
+        public static int MaxVillage;
 
         public Game1()
         {
@@ -104,6 +104,9 @@ namespace Nazdar
         {
             // load all assets
             this.assetsLoader.Load(this.Content, this.GraphicsDevice);
+
+            // set max village
+            MaxVillage = Assets.TilesetGroups.Count - 1;
         }
 
         protected override void Update(GameTime gameTime)

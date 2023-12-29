@@ -267,10 +267,11 @@ namespace Nazdar
             Assets.ParticleTextureRegions["Construction"] = new TextureRegion2D(construction);
 
             // load tilesets -----------------------------------------------------------------------------------
+            // Grass or Snow? This is for the edges. The center must be update in Tiled maps.
             Assets.TilesetType = new Dictionary<int, WeatherType>()
             {
                 // survival
-                { 0, WeatherType.Grass },
+                { 0, WeatherType.Snow },
                 // villages
                 { 1, WeatherType.Grass },
                 { 2, WeatherType.Snow },
@@ -282,10 +283,9 @@ namespace Nazdar
                 { 8, WeatherType.Grass },
             };
             // Set build action to Copy in MGCB
-            // streams are here because Android, but TitleContainer is cross platform so cool
+            // streams are here because of Android, but TitleContainer is cross platform so cool
             foreach (var tilesetType in Assets.TilesetType)
             {
-                Tools.Dump(tilesetType.Key);
                 Assets.TilesetGroups["village" + tilesetType.Key] = new TilesetGroup(
                     TitleContainer.OpenStream(@"Content/Envs/" + tilesetType.Key + "_village.tmx"),
                     TitleContainer.OpenStream(@"Content/Envs/tileset.tsx"),

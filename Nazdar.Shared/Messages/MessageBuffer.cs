@@ -55,7 +55,7 @@ namespace Nazdar.Messages
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, float translationX = 0)
+        public void Draw(SpriteBatch spriteBatch, float translationX = 0, bool drawSupperMessage = false)
         {
             for (int i = 0; i < this.messages.Count; i++)
             {
@@ -67,7 +67,7 @@ namespace Nazdar.Messages
                 );
             }
 
-            if (this.superMessage != null)
+            if (this.superMessage != null && drawSupperMessage)
             {
                 var fontSize = this.superMessageSmall ? "Small" : "Medium";
                 float textWidth = Assets.Fonts[fontSize].MeasureString(this.superMessage.Text).X;
