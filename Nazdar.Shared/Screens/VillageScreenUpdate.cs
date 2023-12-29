@@ -1231,10 +1231,15 @@ namespace Nazdar.Screens
                     else
                     {
                         var tower = towers.First();
-                        if (tower.Status == Building.Status.Built && (Game1.TowersLevel < this.Game.Village) || this.Game.Village == 0)
+                        // upgrade is possible, if:
+                        // - tower is built
+                        // AND tower level is less then village level
+                        // OR village is 0 (survival) and tower level is less then max village
+                        if (tower.Status == Building.Status.Built && ((Game1.TowersLevel < this.Game.Village) || (this.Game.Village == 0 && Game1.TowersLevel < Game1.MaxVillage)))
                         {
                             this.player.Action = Enums.PlayerAction.Upgrade;
-                            this.player.ActionCost = Game1.TowersLevel * 2;
+                            // upgrade costs tower level *2 (for survival, *4)
+                            this.player.ActionCost = Game1.TowersLevel * (this.Game.Village == 0 ? 4 : 2);
                             this.player.ActionName = Tower.Name;
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())

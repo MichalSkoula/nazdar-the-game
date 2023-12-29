@@ -152,7 +152,7 @@ namespace Nazdar.Screens
                 true);
 
             // messages
-            Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
+            Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X, true);
 
             // touch controls
             TouchControls.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);

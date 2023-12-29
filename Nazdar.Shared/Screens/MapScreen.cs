@@ -100,7 +100,7 @@ namespace Nazdar.Screens
                     "TIPS",
                     "Cannot build Arsenal - your future depends on your",
                     "heroic soldiers.",
-                    "Cholera epidemic struck! Make sure to have",
+                    "Cholera epidemic struck hard! Make sure to have",
                     "lot of medics.",
                 }
             },
@@ -131,7 +131,7 @@ namespace Nazdar.Screens
                     "TIPS",
                     "Damned Bolsheviks will attact only from the left side.",
                     "With all they got. Even with Mechanized Lenins.",
-                    "Cholera epidemic struck! Make sure to have",
+                    "Cholera epidemic struck hard! Make sure to have",
                     "lot of medics.",
                 }
             },
