@@ -11,10 +11,10 @@
     <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Framework.Content.Pipeline" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="TiledCS" Version="3.3.3" />
-	<PackageReference Include="Xamarin.Essentials" Version="1.8.0" />
+	<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
   </ItemGroup>
   <Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
