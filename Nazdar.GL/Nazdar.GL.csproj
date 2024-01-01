@@ -44,6 +44,8 @@
 
 	<ItemGroup>
 		<Content Include="readme.txt" CopyToPublishDirectory="Always" />
+		<Content Include="install.sh" CopyToPublishDirectory="Always" />
+		<Content Include="uninstall.sh" CopyToPublishDirectory="Always" />
 	</ItemGroup>
 
 
