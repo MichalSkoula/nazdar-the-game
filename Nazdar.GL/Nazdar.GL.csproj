@@ -42,13 +42,13 @@
     <MonoGameContentReference Update="..\Nazdar.Shared\Content\Content.mgcb" Link="Content\Content.mgcb" />
   </ItemGroup>
 
+  <!-- linux publishing - install scripts & icon -->
 	<ItemGroup>
 		<Content Include="readme.txt" CopyToPublishDirectory="Always" />
 		<Content Include="install.sh" CopyToPublishDirectory="Always" />
 		<Content Include="uninstall.sh" CopyToPublishDirectory="Always" />
+    <Content Include="Icon.ico" CopyToPublishDirectory="Always" />
 	</ItemGroup>
-
-
 
 	<Target Name="RestoreDotnetTools" BeforeTargets="Restore">
     <Message Text="Restoring dotnet tools" Importance="High" />
