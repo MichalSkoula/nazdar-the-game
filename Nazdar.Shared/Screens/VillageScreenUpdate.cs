@@ -1585,19 +1585,19 @@ namespace Nazdar.Screens
             // base building started but no peasants?
             if (this.center.Status == Building.Status.InProcess && this.peasants.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Base", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the Base", messageTime, true);
             }
 
             // no farms? -------------------------------------------------------------------------
             if (this.center.Status == Building.Status.Built && this.farms.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should built some farms to generate money", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should build some farms to generate money", messageTime, true);
             }
 
             // first farm to be built but no peasants?
             if (this.peasants.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.InProcess)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the farm", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the farm", messageTime, true);
             }
 
             // first farm built but no farmers or tools
@@ -1620,13 +1620,13 @@ namespace Nazdar.Screens
             // build Armory -----------------------------------------------------------------------
             if (this.farms.Count > 0 && this.armories.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should build the Armory to be able to recruit soliders.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should build the Armory to be able to recruit soldiers.", messageTime, true);
             }
 
             // first armory to be built but no peasants?
             if (this.peasants.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.InProcess)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Armory", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the Armory", messageTime, true);
             }
 
             // first armory built but no soldiers or weapons
@@ -1654,7 +1654,7 @@ namespace Nazdar.Screens
 
             if (this.arsenals.Count > 0 && this.arsenals[0].Status == Building.Status.InProcess && this.peasants.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to built the Arsenal", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the Arsenal", messageTime, true);
             }
 
             // enought of this
