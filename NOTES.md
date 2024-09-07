@@ -2,7 +2,7 @@
 
 ## Packaging
 
-https://docs.monogame.net/articles/packaging_games.html
+https://docs.monogame.net/articles/getting_started/packaging_games.html
 
 Short (depends on project settings):
 
