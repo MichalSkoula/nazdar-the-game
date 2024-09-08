@@ -1,6 +1,6 @@
 # NOTES
 
-## Packaging
+## Packaging 🤖
 
 https://docs.monogame.net/articles/getting_started/packaging_games.html
 
@@ -25,15 +25,15 @@ dotnet publish -c Release -r win-x64 /p:PublishReadyToRun=false /p:TieredCompila
 dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompilation=false /p:PublishSingleFile=true --self-contained
 ```
 
-### Linux enthusiast
+### Linux enthusiasts ❤️
 
 You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora) or the ```libfreetype6``` packages (on Debian) in order to build the Nazdar.GL project.
 
-Store: 
+### Store 🦄
 
-Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package
-Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package
-Nazdar.Android						Change version in AndroidManifest, then Archive
+* Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package
+* Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package
+* Nazdar.Android						Change version in AndroidManifest, then Archive
 
 (sometimes Visual Studio restart is required...)
 
