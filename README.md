@@ -9,9 +9,6 @@ Monogame platform/strategic game (awesome).
 
 Homepage + Download: https://skoula.cz/nazdar
 
-<a href="https://www.buymeacoffee.com/mskoula"><img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-1.svg" height="40"></a>
-<a href="https://paypal.me/truehipstercz?country.x=CZ&locale.x=en_US"><img src="https://raw.githubusercontent.com/andreostrovsky/donate-with-paypal/master/blue.svg" height="40"></a>
-
 ## LICENCE
 
 **GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**
