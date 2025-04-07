@@ -1,17 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0-android</TargetFramework>
-    <SupportedOSPlatformVersion>28.0</SupportedOSPlatformVersion>
+    <TargetFramework>net8.0-android</TargetFramework>
     <OutputType>Exe</OutputType>
     <ApplicationId>cz.skoula.Nazdar.Android</ApplicationId>
     <ApplicationVersion>1</ApplicationVersion>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <SupportedOSPlatformVersion>26.0</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.1.303" />
-    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
+    <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="TiledCS" Version="3.3.3" />
 	<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
