@@ -36,6 +36,7 @@ You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora
 * Nazdar.Android						Change version in AndroidManifest, then Archive
 
 (sometimes Visual Studio restart is required...)
+(to update packages in partner.microsoft.com, first upload UWP package and then GL package (with different version strings), otherwise it will prefer the UWP version for every device)
 
 ## MGCB
 
