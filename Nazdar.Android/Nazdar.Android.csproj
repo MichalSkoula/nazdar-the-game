@@ -7,6 +7,18 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <SupportedOSPlatformVersion>26.0</SupportedOSPlatformVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AndroidUseAapt2>True</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
+    <AndroidUseAapt2>True</AndroidUseAapt2>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <RunAOTCompilation>False</RunAOTCompilation>
+    <PublishTrimmed>False</PublishTrimmed>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Extended" Version="3.7.0" />
     <PackageReference Include="MonoGame.Extended.Particles" Version="3.7.0" />
