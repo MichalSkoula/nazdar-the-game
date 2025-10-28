@@ -14,7 +14,8 @@ namespace Nazdar.Shared
                 fullscreen = Game.Graphics.IsFullScreen,
                 musicMuted = MediaPlayer.IsMuted,
                 soundsVolume = SoundEffect.MasterVolume,
-                vibrations = Game1.Vibrations
+                vibrations = Game1.Vibrations,
+                language = Translation.CurrentLanguage
             });
         }
 
@@ -33,6 +34,9 @@ namespace Nazdar.Shared
                 Game.Graphics.IsFullScreen = true;
 #endif
                 Game.Graphics.ApplyChanges();
+                
+                // Initialize translation with system language
+                Translation.Initialize();
 
                 return;
             }
@@ -57,6 +61,16 @@ namespace Nazdar.Shared
             if (settings.ContainsKey("vibrations"))
             {
                 Game1.Vibrations = (bool)settings.vibrations;
+            }
+            
+            if (settings.ContainsKey("language"))
+            {
+                Translation.CurrentLanguage = (string)settings.language;
+            }
+            else
+            {
+                // Initialize translation with system language if not in settings
+                Translation.Initialize();
             }
         }
 

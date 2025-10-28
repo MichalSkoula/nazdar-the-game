@@ -81,11 +81,11 @@ namespace Nazdar.Screens
 
             if (Game1.CurrentPlatform != Platform.UWP)
             {
-                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 120, null, ButtonSize.Medium, "Official page"));
-                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 120 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
+                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 120, null, ButtonSize.Medium, Translation.Get("credits.officialPage")));
+                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 120 + 27, null, ButtonSize.Medium, Translation.Get("credits.coffee")));
             }
 
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu"), true));
 
             base.Initialize();
         }
@@ -127,7 +127,7 @@ namespace Nazdar.Screens
 
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.Green);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.Purple);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Credits", new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("credits.title"), new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 105), MyColor.White);
 
             if (Game1.CurrentPlatform == Platform.UWP)

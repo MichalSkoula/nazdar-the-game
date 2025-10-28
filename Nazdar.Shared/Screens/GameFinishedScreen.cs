@@ -34,7 +34,7 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu"), true));
 
             this.Load();
 
@@ -80,7 +80,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "YOU WON!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], Translation.Get("gameFinished.title"), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
