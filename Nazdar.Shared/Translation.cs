@@ -140,8 +140,8 @@ namespace Nazdar.Shared
                     { "message.peasantToMedic", "Peasant => medic" },
                     { "message.buildingStarted", "Building started" },
                     { "message.notEnoughMoney", "Not enough money" },
-                    { "message.cantHoldMoney", "Cant hold all this money" },
-                    { "message.cantHoldCartridges", "Cant hold all these cartridges" },
+                    { "message.cantHoldMoney", "Can't hold all this money" },
+                    { "message.cantHoldCartridges", "Can't hold all these cartridges" },
                     { "message.noCartridges", "No cartridges" },
                     { "message.buildingBuilt", "{0} built" },
                     { "message.buildingUpgraded", "Building upgraded" },
@@ -155,7 +155,7 @@ namespace Nazdar.Shared
                     { "message.cartridgePurchased", "Cartridge purchased" },
                     { "message.shipBought", "Ship bought" },
                     { "message.homelessHired", "Homeless hired => peasant" },
-                    { "message.enemiesComing", "Brace yourselfs, enemies are coming" },
+                    { "message.enemiesComing", "Brace yourselves, enemies are coming" },
                     { "message.newDawn", "New dawn" },
                     { "message.newHomelessAvailable", "New homeless available to hire!" },
                 };
@@ -260,9 +260,8 @@ namespace Nazdar.Shared
 
         public static string Get(string key, params object[] args)
         {
-            if (translations.ContainsKey(key))
+            if (translations.TryGetValue(key, out string value))
             {
-                string value = translations[key];
                 if (args.Length > 0)
                 {
                     return string.Format(value, args);
