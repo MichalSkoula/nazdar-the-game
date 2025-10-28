@@ -139,9 +139,9 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Start", true));
-            buttons.Add("deleteButton", new Button(Offset.MenuX, 100, null, ButtonSize.Medium, "Delete save"));
-            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu"));
+            buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("map.start"), true));
+            buttons.Add("deleteButton", new Button(Offset.MenuX, 100, null, ButtonSize.Medium, Translation.Get("map.deleteSave")));
+            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu")));
 
             this.Load();
 

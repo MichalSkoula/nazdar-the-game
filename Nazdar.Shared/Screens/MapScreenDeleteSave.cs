@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
+using Nazdar.Shared;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -17,8 +18,8 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("yes", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Yes"));
-            buttons.Add("no", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "No", true));
+            buttons.Add("yes", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("gameOver.yes")));
+            buttons.Add("no", new Button(Offset.MenuX, 100, null, ButtonSize.Large, Translation.Get("gameOver.no"), true));
 
             base.Initialize();
         }
@@ -54,7 +55,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Really delete this save?", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], Translation.Get("mapDeleteSave.title"), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

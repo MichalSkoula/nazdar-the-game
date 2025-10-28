@@ -402,7 +402,7 @@ namespace Nazdar.Screens
                 }
             }
 
-            Game1.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
+            Game1.MessageBuffer.AddMessage(Translation.Get("message.gameLoaded"), MessageType.Info);
 
             return true;
         }

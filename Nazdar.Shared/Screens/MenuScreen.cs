@@ -29,10 +29,10 @@ namespace Nazdar.Screens
                 string[] data = Tools.ParseSaveData(saveData);
 
                 // create button
-                string buttonText = data[0] == " " ? "New game" : data[0];
+                string buttonText = data[0] == " " ? Translation.Get("menu.newGame") : data[0];
                 if (i == 3)
                 {
-                    buttonText = "Survival";
+                    buttonText = Translation.Get("menu.survival");
                 }
 
                 buttons.Add(
@@ -50,23 +50,28 @@ namespace Nazdar.Screens
             }
 
             // add other buttons
-            var controlsButton = new Button(Offset.MenuX, 225 + 0 * 27, null, ButtonSize.Medium, "Controls");
+            var controlsButton = new Button(Offset.MenuX, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.controls"));
             buttons.Add("controlsButton", controlsButton);
-            buttons.Add("creditsButton", new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, "Credits"));
+            buttons.Add("creditsButton", new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.credits")));
 
-            var musicButton = new Button(Offset.MenuX, 225 + 1 * 27, null, ButtonSize.Medium, "Music:", text: "Off");
+            var musicButton = new Button(Offset.MenuX, 225 + 1 * 27, null, ButtonSize.Medium, Translation.Get("menu.music"), text: Translation.Get("menu.off"));
             buttons.Add("musicButton", musicButton);
-            buttons.Add("soundsButton", new Button(Offset.MenuX + musicButton.Hitbox.Width + 10, 225 + 1 * 27, null, ButtonSize.Medium, "Sounds:", text: "Off"));
+            buttons.Add("soundsButton", new Button(Offset.MenuX + musicButton.Hitbox.Width + 10, 225 + 1 * 27, null, ButtonSize.Medium, Translation.Get("menu.sounds"), text: Translation.Get("menu.off")));
 
-            var vibrationsButton = new Button(Offset.MenuX, 225 + 2 * 27, null, ButtonSize.Medium, "Vibrations:", text: "Off");
+            var vibrationsButton = new Button(Offset.MenuX, 225 + 2 * 27, null, ButtonSize.Medium, Translation.Get("menu.vibrations"), text: Translation.Get("menu.off"));
             buttons.Add("vibrationsButton", vibrationsButton);
 
             // fullscreen - only on desktop = GL
             if (Game1.CurrentPlatform == Platform.GL)
             {
-                buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + 2 * 27, null, ButtonSize.Medium, "Fullscreen:", text: "Off"));
+                buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + 2 * 27, null, ButtonSize.Medium, Translation.Get("menu.fullscreen"), text: Translation.Get("menu.off")));
             }
-            buttons.Add("exitButton", new Button(Offset.MenuX, 160 + 6 * 27, null, ButtonSize.Medium, "Exit"));
+            
+            // language button
+            var languageButton = new Button(Offset.MenuX, 225 + 3 * 27, null, ButtonSize.Medium, Translation.Get("menu.language"), text: Translation.GetLanguageName(Translation.CurrentLanguage));
+            buttons.Add("languageButton", languageButton);
+            
+            buttons.Add("exitButton", new Button(Offset.MenuX, 160 + 6 * 27, null, ButtonSize.Medium, Translation.Get("menu.exit")));
 #if DEBUG
             if (Game1.CurrentPlatform != Platform.Android)
             {
@@ -124,7 +129,7 @@ namespace Nazdar.Screens
                     Settings.SaveSettings(Game);
                 }
 
-                this.buttons.GetValueOrDefault("fullscreenButton").Text = this.Game.Graphics.IsFullScreen ? "On" : "Off";
+                this.buttons.GetValueOrDefault("fullscreenButton").Text = this.Game.Graphics.IsFullScreen ? Translation.Get("menu.on") : Translation.Get("menu.off");
             }
 
             // settings - vibrations
@@ -136,7 +141,7 @@ namespace Nazdar.Screens
                     Settings.SaveSettings(Game);
                 }
 
-                this.buttons.GetValueOrDefault("vibrationsButton").Text = Game1.Vibrations ? "On" : "Off";
+                this.buttons.GetValueOrDefault("vibrationsButton").Text = Game1.Vibrations ? Translation.Get("menu.on") : Translation.Get("menu.off");
             }
 
             // settings - music
@@ -145,7 +150,7 @@ namespace Nazdar.Screens
                 MediaPlayer.IsMuted = !MediaPlayer.IsMuted;
                 Settings.SaveSettings(Game);
             }
-            this.buttons.GetValueOrDefault("musicButton").Text = MediaPlayer.IsMuted ? "Off" : "On";
+            this.buttons.GetValueOrDefault("musicButton").Text = MediaPlayer.IsMuted ? Translation.Get("menu.off") : Translation.Get("menu.on");
 
             // settings - sounds
             if (Controls.Keyboard.HasBeenPressed(Keys.S) || this.buttons.GetValueOrDefault("soundsButton").HasBeenClicked())
@@ -160,7 +165,24 @@ namespace Nazdar.Screens
                 }
                 Settings.SaveSettings(Game);
             }
-            this.buttons.GetValueOrDefault("soundsButton").Text = SoundEffect.MasterVolume == 1 ? "On" : "Off";
+            this.buttons.GetValueOrDefault("soundsButton").Text = SoundEffect.MasterVolume == 1 ? Translation.Get("menu.on") : Translation.Get("menu.off");
+
+            // settings - language
+            if (this.buttons.ContainsKey("languageButton") && this.buttons.GetValueOrDefault("languageButton").HasBeenClicked())
+            {
+                // Toggle between English and Czech
+                Translation.CurrentLanguage = Translation.CurrentLanguage == "en" ? "cs" : "en";
+                Settings.SaveSettings(Game);
+                
+                // Reload menu to apply translations
+                this.Game.LoadScreen(typeof(Screens.MenuScreen));
+                return;
+            }
+
+            if (this.buttons.ContainsKey("languageButton"))
+            {
+                this.buttons.GetValueOrDefault("languageButton").Text = Translation.GetLanguageName(Translation.CurrentLanguage);
+            }
 
             // exit game from menu
             if (Controls.Keyboard.HasBeenPressed(Keys.Escape) || this.buttons.GetValueOrDefault("exitButton").HasBeenClicked())
