@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.skoula.Nazdar</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>AGPL-3.0-or-later</project_license>
+  <name>NAZDAR! The Game</name>
+  <summary>Build your armored train and defend it against the bloody Bolsheviks</summary>
+  <description>
+    <p>
+      NAZDAR! The Game is a MonoGame platform/strategic game where you build and 
+      defend your armored train. Experience unique gameplay combining strategy and 
+      action elements.
+    </p>
+    <p>
+      Features:
+    </p>
+    <ul>
+      <li>Build and customize your armored train</li>
+      <li>Defend against waves of enemies</li>
+      <li>Strategic resource management</li>
+      <li>Retro pixel art graphics</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">org.skoula.Nazdar.desktop</launchable>
+  <url type="homepage">https://skoula.cz/nazdar</url>
+  <url type="bugtracker">https://github.com/MichalSkoula/nazdar-the-game/issues</url>
+  <url type="vcs-browser">https://github.com/MichalSkoula/nazdar-the-game</url>
+  <developer id="cz.skoula">
+    <name>Michal Skoula</name>
+  </developer>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">moderate</content_attribute>
+    <content_attribute id="violence-fantasy">moderate</content_attribute>
+  </content_rating>
+  <screenshots>
+    <screenshot type="default">
+      <image>https://user-images.githubusercontent.com/5922575/222933670-7b954089-ec0c-4266-b41f-a0a178cca233.png</image>
+    </screenshot>
+  </screenshots>
+  <releases>
+    <release version="1.0.0" date="2024-01-01">
+      <description>
+        <p>Initial Flatpak release</p>
+      </description>
+    </release>
+  </releases>
+  <categories>
+    <category>Game</category>
+    <category>StrategyGame</category>
+  </categories>
+  <keywords>
+    <keyword>game</keyword>
+    <keyword>strategy</keyword>
+    <keyword>train</keyword>
+    <keyword>defense</keyword>
+  </keywords>
+</component>

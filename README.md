@@ -9,6 +9,30 @@ Monogame platform/strategic game (awesome).
 
 Homepage + Download: https://skoula.cz/nazdar
 
+## INSTALLATION
+
+### Linux - Flatpak (recommended)
+
+The game is available as a Flatpak package, which works on all major Linux distributions without downloading binaries from external sources.
+
+See [flatpak/README.md](flatpak/README.md) for detailed instructions on building and installing the Flatpak package.
+
+Quick install from source:
+```bash
+cd flatpak
+flatpak-builder --user --install --force-clean build-dir org.skoula.Nazdar.yml
+flatpak run org.skoula.Nazdar
+```
+
+### Linux - Manual Installation
+
+If you prefer manual installation, download the Linux build and run the install script:
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
 ## LICENCE
 
 **GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**

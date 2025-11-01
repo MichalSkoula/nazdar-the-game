@@ -29,6 +29,18 @@ dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompi
 
 You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora) or the ```libfreetype6``` packages (on Debian) in order to build the Nazdar.GL project.
 
+### Flatpak Package 📦
+
+A Flatpak package configuration is available in the `flatpak/` directory. This allows Linux users to install the game without downloading binaries from external sources.
+
+To build the Flatpak:
+```bash
+cd flatpak
+flatpak-builder --user --install --force-clean build-dir org.skoula.Nazdar.yml
+```
+
+See [flatpak/README.md](flatpak/README.md) for detailed instructions.
+
 ### Store 🦄
 
 * Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package

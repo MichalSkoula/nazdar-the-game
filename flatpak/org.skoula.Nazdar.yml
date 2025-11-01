@@ -1,0 +1,43 @@
+app-id: org.skoula.Nazdar
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.dotnet8
+command: nazdar-launcher.sh
+finish-args:
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --share=ipc
+  - --device=dri
+  - --persist=.nazdar
+build-options:
+  append-path: /usr/lib/sdk/dotnet8/bin
+  append-ld-library-path: /usr/lib/sdk/dotnet8/lib
+  env:
+    PKG_CONFIG_PATH: /app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/usr/lib/sdk/dotnet8/lib/pkgconfig
+modules:
+  - name: nazdar-the-game
+    buildsystem: simple
+    build-commands:
+      - dotnet publish Nazdar.GL/Nazdar.GL.csproj -c Release -r linux-x64 --self-contained
+        -p:PublishSingleFile=false -p:PublishReadyToRun=false -p:TieredCompilation=false
+        -o /app/bin/nazdar
+      - install -Dm644 flatpak/org.skoula.Nazdar.desktop /app/share/applications/org.skoula.Nazdar.desktop
+      - install -Dm644 flatpak/org.skoula.Nazdar.metainfo.xml /app/share/metainfo/org.skoula.Nazdar.metainfo.xml
+      - install -Dm644 Nazdar.Android/Resources/Drawable/Icon.png /app/share/icons/hicolor/256x256/apps/org.skoula.Nazdar.png
+      - |
+        cat > /app/bin/nazdar-launcher.sh << 'EOF'
+        #!/bin/sh
+        cd /app/bin/nazdar
+        exec ./Nazdar.GL "$@"
+        EOF
+      - chmod +x /app/bin/nazdar-launcher.sh
+    sources:
+      - type: dir
+        path: ..
+      - type: file
+        path: org.skoula.Nazdar.desktop
+      - type: file
+        path: org.skoula.Nazdar.metainfo.xml

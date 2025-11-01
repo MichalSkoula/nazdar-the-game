@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=NAZDAR! The Game
+GenericName=Strategy Game
+Comment=Build your armored train and defend it against the bloody Bolsheviks
+Exec=nazdar-launcher.sh
+Icon=org.skoula.Nazdar
+Terminal=false
+Categories=Game;StrategyGame;
+Keywords=game;strategy;train;defense;
+StartupNotify=true
