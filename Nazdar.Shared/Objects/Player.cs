@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Controls;
 using Nazdar.Screens;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System;
 using System.Collections.Generic;
 using System.Linq;

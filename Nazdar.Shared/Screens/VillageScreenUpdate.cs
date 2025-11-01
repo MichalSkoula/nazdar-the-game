@@ -4,6 +4,7 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using Nazdar.Weather;
 using System;
 using System.Collections.Generic;

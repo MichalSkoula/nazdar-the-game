@@ -2,6 +2,7 @@
 using Nazdar.Objects;
 using Nazdar.Shared;
 using Nazdar.Shared.Parallax;
+using Nazdar.Shared.Translation;
 using Nazdar.Weather;
 using System.Collections.Generic;
 using System.Linq;
