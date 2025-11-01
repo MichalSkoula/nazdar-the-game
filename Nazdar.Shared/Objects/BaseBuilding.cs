@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using static Nazdar.Enums;
 
 namespace Nazdar.Objects

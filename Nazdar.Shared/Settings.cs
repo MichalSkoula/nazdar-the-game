@@ -15,7 +15,7 @@ namespace Nazdar.Shared
                 musicMuted = MediaPlayer.IsMuted,
                 soundsVolume = SoundEffect.MasterVolume,
                 vibrations = Game1.Vibrations,
-                language = Translation.CurrentLanguage
+                language = Nazdar.Shared.Translation.Translation.CurrentLanguage
             });
         }
 
@@ -36,7 +36,7 @@ namespace Nazdar.Shared
                 Game.Graphics.ApplyChanges();
                 
                 // Initialize translation with system language
-                Translation.Initialize();
+                Nazdar.Shared.Translation.Translation.Initialize();
 
                 return;
             }
@@ -65,12 +65,12 @@ namespace Nazdar.Shared
             
             if (settings.ContainsKey("language"))
             {
-                Translation.CurrentLanguage = (string)settings.language;
+                Nazdar.Shared.Translation.Translation.CurrentLanguage = (string)settings.language;
             }
             else
             {
                 // Initialize translation with system language if not in settings
-                Translation.Initialize();
+                Nazdar.Shared.Translation.Translation.Initialize();
             }
         }
 

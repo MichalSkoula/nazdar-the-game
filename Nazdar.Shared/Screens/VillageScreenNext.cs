@@ -1,6 +1,7 @@
 ﻿using MonoGame.Extended.Screens;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using static Nazdar.Enums;

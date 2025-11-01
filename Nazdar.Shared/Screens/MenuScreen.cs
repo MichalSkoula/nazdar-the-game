@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
