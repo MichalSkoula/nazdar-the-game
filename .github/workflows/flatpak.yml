@@ -10,6 +10,8 @@ jobs:
   flatpak:
     name: Build Flatpak Package
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for creating releases and uploading assets
     container:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
       options: --privileged
