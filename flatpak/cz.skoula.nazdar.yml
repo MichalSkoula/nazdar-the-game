@@ -1,4 +1,4 @@
-app-id: org.skoula.Nazdar
+app-id: cz.skoula.nazdar
 runtime: org.freedesktop.Platform
 runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
@@ -24,9 +24,9 @@ modules:
       - dotnet publish Nazdar.GL/Nazdar.GL.csproj -c Release -r linux-x64 --self-contained
         -p:PublishSingleFile=false -p:PublishReadyToRun=false -p:TieredCompilation=false
         -o /app/bin/nazdar
-      - install -Dm644 flatpak/org.skoula.Nazdar.desktop /app/share/applications/org.skoula.Nazdar.desktop
-      - install -Dm644 flatpak/org.skoula.Nazdar.metainfo.xml /app/share/metainfo/org.skoula.Nazdar.metainfo.xml
-      - install -Dm644 Nazdar.Android/Resources/Drawable/Icon.png /app/share/icons/hicolor/256x256/apps/org.skoula.Nazdar.png
+      - install -Dm644 flatpak/cz.skoula.nazdar.desktop /app/share/applications/cz.skoula.nazdar.desktop
+      - install -Dm644 flatpak/cz.skoula.nazdar.metainfo.xml /app/share/metainfo/cz.skoula.nazdar.metainfo.xml
+      - install -Dm644 Nazdar.Android/Resources/Drawable/Icon.png /app/share/icons/hicolor/256x256/apps/cz.skoula.nazdar.png
       - |
         cat > /app/bin/nazdar-launcher.sh << 'EOF'
         #!/bin/sh
@@ -38,6 +38,6 @@ modules:
       - type: dir
         path: ..
       - type: file
-        path: org.skoula.Nazdar.desktop
+        path: cz.skoula.nazdar.desktop
       - type: file
-        path: org.skoula.Nazdar.metainfo.xml
+        path: cz.skoula.nazdar.metainfo.xml

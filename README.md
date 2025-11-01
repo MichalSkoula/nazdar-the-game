@@ -20,8 +20,8 @@ See [flatpak/README.md](flatpak/README.md) for detailed instructions on building
 Quick install from source:
 ```bash
 cd flatpak
-flatpak-builder --user --install --force-clean build-dir org.skoula.Nazdar.yml
-flatpak run org.skoula.Nazdar
+flatpak-builder --user --install --force-clean build-dir cz.skoula.nazdar.yml
+flatpak run cz.skoula.nazdar
 ```
 
 ### Linux - Manual Installation

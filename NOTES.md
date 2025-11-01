@@ -36,7 +36,7 @@ A Flatpak package configuration is available in the `flatpak/` directory. This a
 To build the Flatpak:
 ```bash
 cd flatpak
-flatpak-builder --user --install --force-clean build-dir org.skoula.Nazdar.yml
+flatpak-builder --user --install --force-clean build-dir cz.skoula.nazdar.yml
 ```
 
 See [flatpak/README.md](flatpak/README.md) for detailed instructions.

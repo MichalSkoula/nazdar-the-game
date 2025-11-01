@@ -8,9 +8,9 @@ Flatpak is a universal package format for Linux that provides sandboxed applicat
 
 ## Files
 
-- `org.skoula.Nazdar.yml` - The Flatpak manifest that defines how to build the application
-- `org.skoula.Nazdar.desktop` - Desktop entry file for application launcher
-- `org.skoula.Nazdar.metainfo.xml` - AppData metadata for application stores
+- `cz.skoula.nazdar.yml` - The Flatpak manifest that defines how to build the application
+- `cz.skoula.nazdar.desktop` - Desktop entry file for application launcher
+- `cz.skoula.nazdar.metainfo.xml` - AppData metadata for application stores
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ From the repository root directory, run:
 
 ```bash
 cd flatpak
-flatpak-builder --force-clean --repo=repo build-dir org.skoula.Nazdar.yml
+flatpak-builder --force-clean --repo=repo build-dir cz.skoula.nazdar.yml
 ```
 
 This will:
@@ -59,14 +59,14 @@ This will:
 After building, you can install the Flatpak locally:
 
 ```bash
-flatpak-builder --user --install --force-clean build-dir org.skoula.Nazdar.yml
+flatpak-builder --user --install --force-clean build-dir cz.skoula.nazdar.yml
 ```
 
 Or from the repository:
 
 ```bash
 flatpak --user remote-add --no-gpg-verify nazdar-repo repo
-flatpak --user install nazdar-repo org.skoula.Nazdar
+flatpak --user install nazdar-repo cz.skoula.nazdar
 ```
 
 ## Running the Application
@@ -74,7 +74,7 @@ flatpak --user install nazdar-repo org.skoula.Nazdar
 After installation, you can run the application:
 
 ```bash
-flatpak run org.skoula.Nazdar
+flatpak run cz.skoula.nazdar
 ```
 
 Or launch it from your application menu.
@@ -84,7 +84,7 @@ Or launch it from your application menu.
 To create a single-file bundle for distribution:
 
 ```bash
-flatpak build-bundle repo nazdar-the-game.flatpak org.skoula.Nazdar
+flatpak build-bundle repo nazdar-the-game.flatpak cz.skoula.nazdar
 ```
 
 Users can then install this bundle:
@@ -98,7 +98,7 @@ flatpak install nazdar-the-game.flatpak
 When updating the manifest for a new release:
 
 1. Update the `tag` and `commit` fields in the manifest to point to the new release
-2. Update the version in `org.skoula.Nazdar.metainfo.xml`
+2. Update the version in `cz.skoula.nazdar.metainfo.xml`
 3. Add release notes to the metainfo file
 
 ## Publishing to Flathub
@@ -122,7 +122,7 @@ flatpak install flathub org.freedesktop.Sdk.Extension.dotnet8
 
 Check the logs:
 ```bash
-flatpak run --command=sh org.skoula.Nazdar
+flatpak run --command=sh cz.skoula.nazdar
 journalctl --user -xe | grep nazdar
 ```
 

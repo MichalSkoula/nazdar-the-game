@@ -1,0 +1,43 @@
+name: Build Flatpak
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  flatpak:
+    name: Build Flatpak Package
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:freedesktop-23.08
+      options: --privileged
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build Flatpak
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: nazdar-the-game.flatpak
+          manifest-path: flatpak/cz.skoula.nazdar.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+
+      - name: Upload Flatpak Bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: nazdar-the-game-flatpak
+          path: nazdar-the-game.flatpak
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: nazdar-the-game.flatpak
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
