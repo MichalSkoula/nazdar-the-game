@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -18,8 +19,8 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("yes", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Yes"));
-            buttons.Add("no", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "No", true));
+            buttons.Add("yes", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("gameOver.yes")));
+            buttons.Add("no", new Button(Offset.MenuX, 100, null, ButtonSize.Large, Translation.Get("gameOver.no"), true));
 
             Audio.SongVolume = 0.25f;
 
@@ -57,7 +58,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "Start a new game?", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], Translation.Get("gameOver.confirmTitle"), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using Keyboard = Nazdar.Controls.Keyboard;
 using Mouse = Nazdar.Controls.Mouse;
 
@@ -14,16 +15,24 @@ namespace Nazdar.Screens
 
         private double timer = 16;
 
-        private readonly string[] intro =
+        private string[] GetIntro()
         {
-            "The Czechoslovak Legion was a military force fighting for the Allies during WWI.",
-            "The main goal was to win the support of the Allies for the independence of",
-            "Czechoslovakia from the Austria-Hungary. The Legion's efforts during the ",
-            "Russian Civil War included clearing the entire Trans-Siberian Railway of ",
-            "Bolshevik forces. They evacuated to Europe by 1920.",
-            "",
-            "This game is intended for entertainment purposes and is not historically accurate."
-        };
+            return new string[]
+            {
+                Translation.Get("splash2.line1"),
+                Translation.Get("splash2.line2"),
+                Translation.Get("splash2.line3"),
+                Translation.Get("splash2.line4"),
+                Translation.Get("splash2.line5"),
+                Translation.Get("splash2.line6"),
+                Translation.Get("splash2.line7"),
+                Translation.Get("splash2.line8"),
+                Translation.Get("splash2.line9"),
+                "",
+                Translation.Get("splash2.disclaimer")
+            };
+        }
+        
         private float descriptionY = 350;
         private readonly int descriptionYStop = 100;
         private readonly int descriptionSpeed = 25;
@@ -73,7 +82,8 @@ namespace Nazdar.Screens
 
             // intro up
             int i = 0;
-            foreach (string line in this.intro)
+            string[] intro = GetIntro();
+            foreach (string line in intro)
             {
                 i++;
 
@@ -83,7 +93,7 @@ namespace Nazdar.Screens
                     Assets.Fonts["Small"],
                     line,
                     new Vector2((Enums.Screen.Width - textWidthLine) / 2, descriptionY + 18 * i),
-                    i < this.intro.Length ? MyColor.Gray1 : MyColor.White
+                    i < intro.Length ? MyColor.Gray1 : MyColor.White
                 );
 
             }
