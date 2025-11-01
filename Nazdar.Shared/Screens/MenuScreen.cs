@@ -53,8 +53,13 @@ namespace Nazdar.Screens
             // add other buttons
             var controlsButton = new Button(Offset.MenuX, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.controls"));
             buttons.Add("controlsButton", controlsButton);
-            buttons.Add("creditsButton", new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.credits")));
+            var creditsButton = new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.credits"));
+            buttons.Add("creditsButton", creditsButton);
 
+            var languageButton = new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10 + creditsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.language"), text: Translation.GetLanguageName(Translation.CurrentLanguage));
+            buttons.Add("languageButton", languageButton);
+
+            // another row
             var musicButton = new Button(Offset.MenuX, 225 + 1 * 27, null, ButtonSize.Medium, Translation.Get("menu.music"), text: Translation.Get("menu.off"));
             buttons.Add("musicButton", musicButton);
             buttons.Add("soundsButton", new Button(Offset.MenuX + musicButton.Hitbox.Width + 10, 225 + 1 * 27, null, ButtonSize.Medium, Translation.Get("menu.sounds"), text: Translation.Get("menu.off")));
@@ -67,10 +72,6 @@ namespace Nazdar.Screens
             {
                 buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + 2 * 27, null, ButtonSize.Medium, Translation.Get("menu.fullscreen"), text: Translation.Get("menu.off")));
             }
-            
-            // language button
-            var languageButton = new Button(Offset.MenuX, 225 + 3 * 27, null, ButtonSize.Medium, Translation.Get("menu.language"), text: Translation.GetLanguageName(Translation.CurrentLanguage));
-            buttons.Add("languageButton", languageButton);
             
             buttons.Add("exitButton", new Button(Offset.MenuX, 160 + 6 * 27, null, ButtonSize.Medium, Translation.Get("menu.exit")));
 #if DEBUG

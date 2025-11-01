@@ -88,7 +88,6 @@ namespace Nazdar.Shared.Translation
                 { "message.newHomelessAvailable", "New homeless available to hire!" },
                 
                 // Splash Screen
-                { "splash.theGame", "The Game" },
                 { "splash.pressEnter", "Press ENTER" },
                 { "splash.pressButtonA", "Press button A" },
                 { "splash.touchToContinue", "Touch to continue" },
