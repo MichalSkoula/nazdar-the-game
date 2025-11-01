@@ -130,7 +130,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.Green);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("splash.theGame"), new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.Purple);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.Purple);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("credits.title"), new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 105), MyColor.White);
 

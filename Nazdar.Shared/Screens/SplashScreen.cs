@@ -52,7 +52,7 @@ namespace Nazdar.Screens
             int textWidthTitle = (int)Assets.Fonts["Largest"].MeasureString(title).X;
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Largest"], title + "!", new Vector2((Enums.Screen.Width - textWidthTitle) / 2, 110), MyColor.Green);
 
-            string subtitle = Translation.Get("splash.theGame");
+            string subtitle = "The Game";
             int textWidthSubtitle = (int)Assets.Fonts["Large"].MeasureString(subtitle).X;
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], subtitle, new Vector2((Enums.Screen.Width - textWidthSubtitle) / 2, 150), MyColor.Purple);
 

@@ -88,7 +88,6 @@ namespace Nazdar.Shared.Translation
                 { "message.newHomelessAvailable", "Novy bezdomovec k dispozici!" },
                 
                 // Splash Screen
-                { "splash.theGame", "Hra" },
                 { "splash.pressEnter", "Stiskni ENTER" },
                 { "splash.pressButtonA", "Stiskni tlacitko A" },
                 { "splash.touchToContinue", "Pokracuj dotykem" },
@@ -98,7 +97,7 @@ namespace Nazdar.Shared.Translation
                 { "splash2.line2", "jednotka bojujici za spojence v 1. sv. valce." },
                 { "splash2.line3", "Hlavnim cilem bylo ziskat podporu" },
                 { "splash2.line4", "pro nezavislost Ceskoslovenska" },
-                { "splash2.line5", "od Rakouska-Uherska. Usilí legie" },
+                { "splash2.line5", "od Rakouska-Uherska. Usili legie" },
                 { "splash2.line6", "behem ruske obcanske valky zahrnovalo" },
                 { "splash2.line7", "vycisteni cele Transsibirske magistraly" },
                 { "splash2.line8", "od bolseviku. Do Evropy se evakuovali" },
@@ -121,7 +120,7 @@ namespace Nazdar.Shared.Translation
                 { "mission1.goal1", "Oprav lokomotivu a jed na vychod" },
                 
                 // Map Mission 2
-                { "mission2.line1", "Kveten 1918. Prokleti bolsevici zaútocili" },
+                { "mission2.line1", "Kveten 1918. Prokleti bolsevici zautocili" },
                 { "mission2.line2", "na vlak legie na stanici! Branit!" },
                 { "mission2.goals", "CILE MISE" },
                 { "mission2.goal1", "Oprav lokomotivu a jed na vychod" },
@@ -130,7 +129,7 @@ namespace Nazdar.Shared.Translation
                 
                 // Map Mission 3
                 { "mission3.line1", "Kveten 1918. Prokleti bolsevici vyhodili" },
-                { "mission3.line2", "do povětri koleje!" },
+                { "mission3.line2", "do povetri koleje!" },
                 { "mission3.goals", "CILE MISE" },
                 { "mission3.goal1", "Oprav poskozene koleje" },
                 { "mission3.goal2", "Oprav lokomotivu a jed na vychod" },
@@ -169,7 +168,7 @@ namespace Nazdar.Shared.Translation
                 { "mission6.goal1", "Oprav lokomotivu a jed na vychod" },
                 { "mission6.tips", "TIPY" },
                 { "mission6.tip1", "Nelze postavit Arsenal - tva budoucnost" },
-                { "mission6.tip2", "zavisi na tvych hrdinskvch vojacich." },
+                { "mission6.tip2", "zavisi na tvych hrdinskych vojacich." },
                 { "mission6.tip3", "Cholera uderila tvrde! Mel bys mit" },
                 { "mission6.tip4", "hodne mediku." },
                 
