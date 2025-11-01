@@ -2,6 +2,7 @@
 using Nazdar.Objects;
 using Nazdar.Shared;
 using Nazdar.Shared.Parallax;
+using Nazdar.Shared.Translation;
 using Nazdar.Weather;
 using System.Collections.Generic;
 using System.Linq;
@@ -402,7 +403,7 @@ namespace Nazdar.Screens
                 }
             }
 
-            Game1.MessageBuffer.AddMessage("Game loaded", MessageType.Info);
+            Game1.MessageBuffer.AddMessage(Translation.Get("message.gameLoaded"), MessageType.Info);
 
             return true;
         }

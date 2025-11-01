@@ -1,6 +1,7 @@
 ﻿using MonoGame.Extended.Screens;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using static Nazdar.Enums;
@@ -71,7 +72,7 @@ namespace Nazdar.Screens
         private void ToAnotherVillage()
         {
             Audio.PlaySound("Win");
-            Game1.MessageBuffer.AddMessage("Lets go to another village!", MessageType.Success);
+            Game1.MessageBuffer.AddMessage(Translation.Get("message.goToAnotherVillage"), MessageType.Success);
 
             this.Game.Village++;
 
@@ -142,7 +143,7 @@ namespace Nazdar.Screens
 
             // save
             this.saveFile.Save(this.GetSaveData());
-            Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
+            Game1.MessageBuffer.AddMessage(Translation.Get("message.gameSaved"), MessageType.Info);
 
             // back to map menu
             this.Game.LoadScreen(typeof(Screens.MapScreen));
@@ -150,7 +151,7 @@ namespace Nazdar.Screens
 
         private void Won()
         {
-            Game1.MessageBuffer.AddMessage("YOU WON. Beginner's luck.", MessageType.Success);
+            Game1.MessageBuffer.AddMessage(Translation.Get("message.youWon"), MessageType.Success);
 
             // Outro
             this.Game.LoadScreen(typeof(Screens.GameFinishedScreen), true, true);

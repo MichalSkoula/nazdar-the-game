@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -20,9 +21,9 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Load last save", true));
-            buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, "New game"));
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu"));
+            buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("gameOver.loadLastSave"), true));
+            buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, Translation.Get("gameOver.newGame")));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu")));
 
             this.Load();
 
@@ -66,7 +67,7 @@ namespace Nazdar.Screens
             this.Game.DrawStart();
 
             // title
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "GAME OVER", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], Translation.Get("gameOver.title"), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)

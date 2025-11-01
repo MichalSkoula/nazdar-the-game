@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -22,126 +23,135 @@ namespace Nazdar.Screens
         private float descriptionY = 300;
         private readonly int descriptionYStop = 62;
         private readonly int descriptionSpeed = 40;
-        private readonly Dictionary<int, string[]> villageDescriptions = new Dictionary<int, string[]>()
-        {
-            {
-                1, new string[] {
-                    "May 1918. We were attacked by the Hungarians",
-                    "loyal to the Central Powers! Defend the train!",
-                    "",
-                    "MISSION GOALS",
-                    "Repair the locomotive and head east",
-                }
-            },
-            {
-                2, new string[] {
-                    "May 1918. The damned Bolsheviks attacked",
-                    "the Legion train at the station! Defend!",
-                    "",
-                    "MISSION GOALS",
-                    "Repair the locomotive and head east",
-                    "",
-                    "TIPS",
-                    "New wagon - Hospital",
-                }
-            },
-            {
-                3, new string[] {
-                    "May 1918. The damned Bolsheviks blew up the rails!",
-                    "",
-                    "MISSION GOALS",
-                    "Repair damaged rails",
-                    "Repair the locomotive and head east",
-                    "",
-                    "TIPS",
-                    "New wagon - Defense Tower",
-                    "Absence of an Armory will make you defend your",
-                    "people on your own.",
-                }
-            },
-            {
-                4, new string[] {
-                    "June 1918. A great battle is coming. You must ",
-                    "capture the city of Lipjag, where a large number",
-                    "of those Bolsheviks are gathered.",
-                    "",
-                    "MISSION GOALS",
-                    "Repair the locomotive and head east",
-                    "",
-                    "TIPS",
-                    "Cholera epidemic struck! Make sure to have",
-                    "a lot of medics.",
-                }
-            },
-            {
-                5, new string[] {
-                    "June 1918. You must capture the city of Ufa and ",
-                    "take control over near villages.",
-                    "",
-                    "MISSION GOALS",
-                    "Repair damaged rails",
-                    "Repair the locomotive and head east",
-                    "",
-                    "TIPS",
-                    "New wagon - Market",
-                    "A hard winter struck, you will have to find other",
-                    "sources of money than farming.",
-                }
-            },
-            {
-                6, new string[] {
-                    "July 1918. You arrived late. Only a week earlier,",
-                    "the Bolsheviks had murdered the Russian Tsar and",
-                    "his entire family.",
-                    "",
-                    "MISSION GOALS",
-                    "Repair the locomotive and head east",
-                    "",
-                    "TIPS",
-                    "Cannot build Arsenal - your future depends on your",
-                    "heroic soldiers.",
-                    "Cholera epidemic struck hard! Make sure to have",
-                    "lot of medics.",
-                }
-            },
-            {
-                7, new string[] {
-                    "August 1918. You must conquer the city of Kazan and",
-                    "defend the Russian Golden Treasure. It will serve",
-                    "the White Guards to finance the fight.",
-                    "",
-                    "MISSION GOALS",
-                    "Defend the Golden Treasure",
-                    "Repair damaged rails",
-                    "Repair the locomotive and head east",
-                    "",
-                    "TIPS",
-                    "The Golden Treasure cannot be lost!!",
-                }
-            },
-            {
-                8, new string[] {
-                    "January 1919. Time to go home. You took control the",
-                    "entire Trans-Siberian Railway, but the promised help",
-                    "from the Allied Powers did not come.",
-                    "",
-                    "MISSION GOALS",
-                    "Buy the ship and go home",
-                    "",
-                    "TIPS",
-                    "Damned Bolsheviks will attact only from the left side.",
-                    "With all they got. Even with Mechanized Lenins.",
-                    "Cholera epidemic struck hard! Make sure to have",
-                    "lot of medics.",
-                }
-            },
-        };
+        private Dictionary<int, string[]> villageDescriptions;
 
         public override void Initialize()
         {
-            buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, "Start", true));
-            buttons.Add("deleteButton", new Button(Offset.MenuX, 100, null, ButtonSize.Medium, "Delete save"));
-            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu"));
+            // Initialize mission descriptions with translations
+            villageDescriptions = new Dictionary<int, string[]>()
+            {
+                {
+                    1, new string[] {
+                        Translation.Get("mission1.line1"),
+                        Translation.Get("mission1.line2"),
+                        Translation.Get("mission1.line3"),
+                        "",
+                        Translation.Get("mission1.goals"),
+                        Translation.Get("mission1.goal1"),
+                    }
+                },
+                {
+                    2, new string[] {
+                        Translation.Get("mission2.line1"),
+                        Translation.Get("mission2.line2"),
+                        "",
+                        Translation.Get("mission2.goals"),
+                        Translation.Get("mission2.goal1"),
+                        "",
+                        Translation.Get("mission2.tips"),
+                        Translation.Get("mission2.tip1"),
+                    }
+                },
+                {
+                    3, new string[] {
+                        Translation.Get("mission3.line1"),
+                        Translation.Get("mission3.line2"),
+                        "",
+                        Translation.Get("mission3.goals"),
+                        Translation.Get("mission3.goal1"),
+                        Translation.Get("mission3.goal2"),
+                        "",
+                        Translation.Get("mission3.tips"),
+                        Translation.Get("mission3.tip1"),
+                        Translation.Get("mission3.tip2"),
+                        Translation.Get("mission3.tip3"),
+                    }
+                },
+                {
+                    4, new string[] {
+                        Translation.Get("mission4.line1"),
+                        Translation.Get("mission4.line2"),
+                        Translation.Get("mission4.line3"),
+                        Translation.Get("mission4.line4"),
+                        "",
+                        Translation.Get("mission4.goals"),
+                        Translation.Get("mission4.goal1"),
+                        "",
+                        Translation.Get("mission4.tips"),
+                        Translation.Get("mission4.tip1"),
+                        Translation.Get("mission4.tip2"),
+                    }
+                },
+                {
+                    5, new string[] {
+                        Translation.Get("mission5.line1"),
+                        Translation.Get("mission5.line2"),
+                        "",
+                        Translation.Get("mission5.goals"),
+                        Translation.Get("mission5.goal1"),
+                        Translation.Get("mission5.goal2"),
+                        "",
+                        Translation.Get("mission5.tips"),
+                        Translation.Get("mission5.tip1"),
+                        Translation.Get("mission5.tip2"),
+                        Translation.Get("mission5.tip3"),
+                    }
+                },
+                {
+                    6, new string[] {
+                        Translation.Get("mission6.line1"),
+                        Translation.Get("mission6.line2"),
+                        Translation.Get("mission6.line3"),
+                        "",
+                        Translation.Get("mission6.goals"),
+                        Translation.Get("mission6.goal1"),
+                        "",
+                        Translation.Get("mission6.tips"),
+                        Translation.Get("mission6.tip1"),
+                        Translation.Get("mission6.tip2"),
+                        Translation.Get("mission6.tip3"),
+                        Translation.Get("mission6.tip4"),
+                    }
+                },
+                {
+                    7, new string[] {
+                        Translation.Get("mission7.line1"),
+                        Translation.Get("mission7.line2"),
+                        Translation.Get("mission7.line3"),
+                        Translation.Get("mission7.line4"),
+                        "",
+                        Translation.Get("mission7.goals"),
+                        Translation.Get("mission7.goal1"),
+                        Translation.Get("mission7.goal2"),
+                        Translation.Get("mission7.goal3"),
+                        "",
+                        Translation.Get("mission7.tips"),
+                        Translation.Get("mission7.tip1"),
+                    }
+                },
+                {
+                    8, new string[] {
+                        Translation.Get("mission8.line1"),
+                        Translation.Get("mission8.line2"),
+                        Translation.Get("mission8.line3"),
+                        Translation.Get("mission8.line4"),
+                        "",
+                        Translation.Get("mission8.goals"),
+                        Translation.Get("mission8.goal1"),
+                        "",
+                        Translation.Get("mission8.tips"),
+                        Translation.Get("mission8.tip1"),
+                        Translation.Get("mission8.tip2"),
+                        Translation.Get("mission8.tip3"),
+                        Translation.Get("mission8.tip4"),
+                        Translation.Get("mission8.tip5"),
+                    }
+                },
+            };
+
+            buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("map.start"), true));
+            buttons.Add("deleteButton", new Button(Offset.MenuX, 100, null, ButtonSize.Medium, Translation.Get("map.deleteSave")));
+            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu")));
 
             this.Load();
 

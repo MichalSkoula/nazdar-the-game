@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using static Nazdar.Enums;
 using Keyboard = Nazdar.Controls.Keyboard;
 using Mouse = Nazdar.Controls.Mouse;
@@ -57,9 +58,9 @@ namespace Nazdar.Screens
 
             string action = Game1.CurrentPlatform switch
             {
-                Platform.GL => "Press ENTER",
-                Platform.UWP => "Press button A",
-                Platform.Android => "Touch to continue",
+                Platform.GL => Translation.Get("splash.pressEnter"),
+                Platform.UWP => Translation.Get("splash.pressButtonA"),
+                Platform.Android => Translation.Get("splash.touchToContinue"),
                 _ => throw new System.NotImplementedException(),
             };
 

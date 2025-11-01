@@ -4,6 +4,7 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using Nazdar.Weather;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Nazdar.Screens
             {
                 // save
                 this.saveFile.Save(this.GetSaveData());
-                Game1.MessageBuffer.AddMessage("Game saved", MessageType.Info);
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.gameSaved"), MessageType.Info);
 
                 // back to menu
                 if (this.Game.Village == 0)
@@ -698,7 +699,7 @@ namespace Nazdar.Screens
 
                         if (!this.treasure.CoinTheft(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("The Golden Treasure was stolen", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.treasureStolen"), MessageType.Fail);
                             this.GameOver();
                         }
                     }
@@ -725,7 +726,7 @@ namespace Nazdar.Screens
                         }
                         if (!soldier.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Heroic soldier killed by " + enemy.Name, MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.soldierKilled", enemy.Name), MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             soldier.Dead = true;
                         }
@@ -753,7 +754,7 @@ namespace Nazdar.Screens
                         }
                         if (!peasant.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Innocent peasant killed by " + enemy.Name, MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.peasantKilled", enemy.Name), MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             peasant.Dead = true;
                         }
@@ -781,7 +782,7 @@ namespace Nazdar.Screens
                         }
                         if (!farmer.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Innocent farmer killed by " + enemy.Name, MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.farmerKilled", enemy.Name), MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             farmer.Dead = true;
                         }
@@ -809,7 +810,7 @@ namespace Nazdar.Screens
                         }
                         if (!medic.TakeHit(enemy.Caliber))
                         {
-                            Game1.MessageBuffer.AddMessage("Innocent medic killed by " + enemy.Name, MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.medicKilled", enemy.Name), MessageType.Fail);
                             Audio.PlayRandomSound("SoldierDeaths");
                             medic.Dead = true;
                         }
@@ -849,7 +850,7 @@ namespace Nazdar.Screens
                     if (peasant.Hitbox.Intersects(armory.Hitbox) && armory.WeaponsCount > 0)
                     {
                         // ok, peasant get weapon and turns into soldier
-                        Game1.MessageBuffer.AddMessage("Peasant => soldier", MessageType.Success);
+                        Game1.MessageBuffer.AddMessage(Translation.Get("message.peasantToSoldier"), MessageType.Success);
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         armory.DropWeapon();
@@ -866,7 +867,7 @@ namespace Nazdar.Screens
                     if (peasant.Hitbox.Intersects(farm.Hitbox) && farm.ToolsCount > 0)
                     {
                         // ok, peasant get tool and turns into farmer
-                        Game1.MessageBuffer.AddMessage("Peasant => farmer", MessageType.Success);
+                        Game1.MessageBuffer.AddMessage(Translation.Get("message.peasantToFarmer"), MessageType.Success);
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         farm.DropTool();
@@ -883,7 +884,7 @@ namespace Nazdar.Screens
                     if (peasant.Hitbox.Intersects(hospital.Hitbox) && hospital.MedicalKitsCount > 0)
                     {
                         // ok, peasant get medical kit and turns into medic
-                        Game1.MessageBuffer.AddMessage("Peasant => medic", MessageType.Success);
+                        Game1.MessageBuffer.AddMessage(Translation.Get("message.peasantToMedic"), MessageType.Success);
                         Audio.PlaySound("SoldierSpawn");
                         peasant.ToDelete = true;
                         hospital.DropMedicalKit();
@@ -923,14 +924,14 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money >= this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.center = new Center(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                         }
                     }
@@ -949,7 +950,7 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money >= this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Building upgraded", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingUpgraded"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 Game1.CenterLevel++;
@@ -959,7 +960,7 @@ namespace Nazdar.Screens
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                         }
                     }
@@ -987,11 +988,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.armories.Add(new Armory(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -1014,18 +1015,18 @@ namespace Nazdar.Screens
                                 {
                                     if (armory.AddWeapon())
                                     {
-                                        Game1.MessageBuffer.AddMessage("Weapon kit purchased", MessageType.Info);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.weaponKitPurchased"), MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
                                         this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
-                                        Game1.MessageBuffer.AddMessage("Armory is full", MessageType.Fail);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.armoryFull"), MessageType.Fail);
                                     }
                                 }
                                 else
                                 {
-                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                                 }
                             }
                         }
@@ -1047,11 +1048,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.hospitals.Add(new Hospital(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -1074,18 +1075,18 @@ namespace Nazdar.Screens
                                 {
                                     if (hospital.AddMedicalKit())
                                     {
-                                        Game1.MessageBuffer.AddMessage("Medical kit purchased", MessageType.Info);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.medicalKitPurchased"), MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
                                         this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
-                                        Game1.MessageBuffer.AddMessage("Can't buy any more medical kits", MessageType.Fail);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.cantBuyMoreMedicalKits"), MessageType.Fail);
                                     }
                                 }
                                 else
                                 {
-                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                                 }
                             }
                         }
@@ -1107,11 +1108,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.markets.Add(new Market(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -1135,11 +1136,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.rails.Add(new Rails(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -1163,11 +1164,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.arsenals.Add(new Arsenal(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -1189,13 +1190,13 @@ namespace Nazdar.Screens
                                 if (this.player.Money >= this.player.ActionCost)
                                 {
                                     this.player.Cartridges += Arsenal.CartridgesCount;
-                                    Game1.MessageBuffer.AddMessage("Cartridge purchased", MessageType.Info);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.cartridgePurchased"), MessageType.Info);
                                     Audio.PlaySound("SoldierSpawn");
                                     this.player.Money -= this.player.ActionCost;
                                 }
                                 else
                                 {
-                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                                 }
                             }
                         }
@@ -1217,11 +1218,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess, caliber: Tower.DefaultCaliber + this.GetUpgradeAttackAdditionTowers()));
@@ -1246,7 +1247,7 @@ namespace Nazdar.Screens
                             {
                                 if (this.player.Money >= this.player.ActionCost)
                                 {
-                                    Game1.MessageBuffer.AddMessage("Tower upgraded", MessageType.Info);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.towerUpgraded"), MessageType.Info);
                                     Audio.PlaySound("Rock");
                                     this.player.Money -= this.player.ActionCost;
                                     Game1.TowersLevel++;
@@ -1256,7 +1257,7 @@ namespace Nazdar.Screens
                                 }
                                 else
                                 {
-                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                                 }
                             }
                         }
@@ -1278,11 +1279,11 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money < this.player.ActionCost)
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
                                 this.farms.Add(new Farm(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
@@ -1305,18 +1306,18 @@ namespace Nazdar.Screens
                                 {
                                     if (farm.AddTool())
                                     {
-                                        Game1.MessageBuffer.AddMessage("Tool purchased", MessageType.Info);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.toolPurchased"), MessageType.Info);
                                         Audio.PlaySound("SoldierSpawn");
                                         this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
-                                        Game1.MessageBuffer.AddMessage("Farm is full", MessageType.Fail);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.farmFull"), MessageType.Fail);
                                     }
                                 }
                                 else
                                 {
-                                    Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                                 }
                             }
                         }
@@ -1353,12 +1354,12 @@ namespace Nazdar.Screens
                         }
                         else if (this.player.Money < this.player.ActionCost)
                         {
-                            Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                         }
                         else
                         {
                             // start building
-                            Game1.MessageBuffer.AddMessage("Building started", MessageType.Info);
+                            Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                             Audio.PlaySound("Rock");
                             this.player.Money -= this.player.ActionCost;
                             this.locomotive = new Locomotive(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess);
@@ -1391,13 +1392,13 @@ namespace Nazdar.Screens
                     }
                     else if (this.player.Money < this.player.ActionCost)
                     {
-                        Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                        Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                     }
                     else
                     {
                         // ok
                         this.ship.Status = Building.Status.Built;
-                        Game1.MessageBuffer.AddMessage("Ship bought", MessageType.Info);
+                        Game1.MessageBuffer.AddMessage(Translation.Get("message.shipBought"), MessageType.Info);
                         Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
                         Audio.PlaySound("Rock");
                         this.player.Money -= this.player.ActionCost;
@@ -1421,7 +1422,7 @@ namespace Nazdar.Screens
                         {
                             if (this.player.Money >= Homeless.Cost)
                             {
-                                Game1.MessageBuffer.AddMessage("Homeless hired => peasant", MessageType.Success);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.homelessHired"), MessageType.Success);
                                 Audio.PlaySound("SoldierSpawn");
                                 homeless.ToDelete = true;
                                 this.player.Money -= Homeless.Cost;
@@ -1429,7 +1430,7 @@ namespace Nazdar.Screens
                             }
                             else
                             {
-                                Game1.MessageBuffer.AddMessage("Not enough money", MessageType.Fail);
+                                Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                             }
                         }
                         break;
@@ -1447,7 +1448,7 @@ namespace Nazdar.Screens
                 if (this.dayPhase == DayPhase.Day)
                 {
                     Audio.PlaySound("PrepareYourself");
-                    Game1.MessageBuffer.AddMessage("Brace yourselfs, enemies are coming", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage(Translation.Get("message.enemiesComing"), MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
                     Tools.Dump("enemy probability: " + this.GetNewEnemyProbability());
@@ -1459,7 +1460,7 @@ namespace Nazdar.Screens
                         this.center.HasBeenUpgradedToday = false;
                     }
 
-                    Game1.MessageBuffer.AddMessage("New dawn", MessageType.Success);
+                    Game1.MessageBuffer.AddMessage(Translation.Get("message.newDawn"), MessageType.Success);
                     this.player.Days++;
                     this.dayPhase = DayPhase.Day;
                     this.dayPhaseTimer = (int)DayNightLength.Day;
@@ -1529,7 +1530,7 @@ namespace Nazdar.Screens
 
             if (Tools.RandomChance(randomBase) && this.homelesses.Count < this.homelessLimit)
             {
-                Game1.MessageBuffer.AddMessage("New homeless available to hire!", MessageType.Opportunity);
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.newHomelessAvailable"), MessageType.Opportunity);
                 this.CreateHomeless();
             }
 

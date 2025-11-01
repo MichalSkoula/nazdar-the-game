@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using static Nazdar.Enums;
 
 namespace Nazdar.Objects
@@ -37,7 +38,7 @@ namespace Nazdar.Objects
             {
                 this.Status = Building.Status.Built;
                 this.TimeToBuild = 0;
-                Game1.MessageBuffer.AddMessage(this.Type.ToString() + " built", MessageType.Success);
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingBuilt", this.Type.ToString()), MessageType.Success);
 
                 // if market, peasant becomes merchant => die
                 if (this.Type == Building.Type.Market)

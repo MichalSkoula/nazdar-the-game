@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 using Keyboard = Nazdar.Controls.Keyboard;
@@ -21,55 +22,7 @@ namespace Nazdar.Screens
         private const string wwwCoffee = "https://www.buymeacoffee.com/mskoula";
         private const string wwwCoffeeShort = "buymeacoffee.com/mskoula";
 
-        private readonly string[] intro =
-        {
-            "A GAME BY",
-            "Michal Skoula",
-            "",
-            "ART",
-            "0x72 (Robert Norenberg)",
-            "Essssam",
-            "Sirnosir",
-            "eggboycolor (Andrew G. Crowell)",
-            "Dream Mix (Justin Sink)",
-            "Vnitti (Vicente Nitti)",
-            "Ansimuz",
-            "Abetusk",
-            "Trix",
-            "JohnMartPixel25",
-            "Anokolisa",
-            "Disven",
-            "Michal Skoula",
-            "",
-            "MUSIC",
-            "Tad Miller",
-            "Omfgdude",
-            "Zander Noriega",
-            "Rizy",
-            "The Real Monoton Artist",
-            "Tri-Tachyon",
-            "GTDStudio aka Palrom",
-            "SCaydi",
-            "",
-            "SOUNDS",
-            "LordTomorrow",
-            "Spookymodem",
-            "Iwan Gabovitch",
-            "Ogrebane",
-            "rubberduck",
-            "Thimras (Eike Germann)",
-            "ChibiBagu",
-            "Vinrax (Vladislav Krotov)",
-            "j1987",
-            "Kenney.nl",
-            "",
-            "FONT",
-            "Roberto Mocci",
-            "",
-            "TECH",
-            "Monogame Framework",
-            ".NET 6"
-        };
+        private string[] intro;
         private float descriptionY = 350;
         private readonly int descriptionSpeed = 25;
 
@@ -79,13 +32,64 @@ namespace Nazdar.Screens
         {
             Audio.SongTransition(0.25f, "Menu");
 
+            // Initialize credits with translations
+            intro = new string[]
+            {
+                Translation.Get("credits.gameBy"),
+                "Michal Skoula",
+                "",
+                Translation.Get("credits.art"),
+                "0x72 (Robert Norenberg)",
+                "Essssam",
+                "Sirnosir",
+                "eggboycolor (Andrew G. Crowell)",
+                "Dream Mix (Justin Sink)",
+                "Vnitti (Vicente Nitti)",
+                "Ansimuz",
+                "Abetusk",
+                "Trix",
+                "JohnMartPixel25",
+                "Anokolisa",
+                "Disven",
+                "Michal Skoula",
+                "",
+                Translation.Get("credits.music"),
+                "Tad Miller",
+                "Omfgdude",
+                "Zander Noriega",
+                "Rizy",
+                "The Real Monoton Artist",
+                "Tri-Tachyon",
+                "GTDStudio aka Palrom",
+                "SCaydi",
+                "",
+                Translation.Get("credits.sounds"),
+                "LordTomorrow",
+                "Spookymodem",
+                "Iwan Gabovitch",
+                "Ogrebane",
+                "rubberduck",
+                "Thimras (Eike Germann)",
+                "ChibiBagu",
+                "Vinrax (Vladislav Krotov)",
+                "j1987",
+                "Kenney.nl",
+                "",
+                Translation.Get("credits.font"),
+                "Roberto Mocci",
+                "",
+                Translation.Get("credits.tech"),
+                "Monogame Framework",
+                ".NET 6"
+            };
+
             if (Game1.CurrentPlatform != Platform.UWP)
             {
-                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 120, null, ButtonSize.Medium, "Official page"));
-                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 120 + 27, null, ButtonSize.Medium, "Buy me a coffee"));
+                buttons.Add("skoula", new Button(Offset.MenuX, Offset.MenuY + 120, null, ButtonSize.Medium, Translation.Get("credits.officialPage")));
+                buttons.Add("coffee", new Button(Offset.MenuX, Offset.MenuY + 120 + 27, null, ButtonSize.Medium, Translation.Get("credits.coffee")));
             }
 
-            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, "Back to Menu", true));
+            buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu"), true));
 
             base.Initialize();
         }
@@ -127,7 +131,7 @@ namespace Nazdar.Screens
 
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], "NAZDAR!", new Vector2(Offset.MenuX, Offset.MenuY), MyColor.Green);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "The Game", new Vector2(Offset.MenuX, Offset.MenuY + 30), MyColor.Purple);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], "Credits", new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
+            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("credits.title"), new Vector2(Offset.MenuX, Offset.MenuY + 53), MyColor.White);
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], "Links", new Vector2(Offset.MenuX, Offset.MenuY + 105), MyColor.White);
 
             if (Game1.CurrentPlatform == Platform.UWP)

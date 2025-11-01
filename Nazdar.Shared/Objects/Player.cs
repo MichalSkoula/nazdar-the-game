@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Controls;
 using Nazdar.Screens;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace Nazdar.Objects
             {
                 if (value > moneyLimit)
                 {
-                    Game1.MessageBuffer.AddMessage("Cant hold all this money", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage(Translation.Get("message.cantHoldMoney"), MessageType.Danger);
                     this.money = moneyLimit;
                 }
                 else
@@ -61,7 +62,7 @@ namespace Nazdar.Objects
             {
                 if (value > cartridgeLimit)
                 {
-                    Game1.MessageBuffer.AddMessage("Cant hold all these cartridges", MessageType.Danger);
+                    Game1.MessageBuffer.AddMessage(Translation.Get("message.cantHoldCartridges"), MessageType.Danger);
                     this.cartridges = cartridgeLimit;
                 }
                 else
@@ -224,7 +225,7 @@ namespace Nazdar.Objects
                     }
                     else
                     {
-                        Game1.MessageBuffer.AddMessage("No cartridges", MessageType.Danger);
+                        Game1.MessageBuffer.AddMessage(Translation.Get("message.noCartridges"), MessageType.Danger);
                     }
                 }
             }
