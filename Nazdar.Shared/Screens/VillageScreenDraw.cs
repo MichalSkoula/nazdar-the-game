@@ -15,15 +15,17 @@ namespace Nazdar.Screens
     {
         public override void Draw(GameTime gameTime)
         {
-            this.Game.Matrix = this.camera.Transform;
             this.Game.DrawStart();
 
             // day or night sky - color transition
             Color currentColor = Sky.GetSkyColor(this.dayPhase, this.dayPhaseTimer);
             this.GraphicsDevice.Clear(currentColor);
 
-            // parallax
+            // parallax - draw WITHOUT camera transform
             this.parallaxManager.Draw(this.Game.SpriteBatch);
+
+            // NOW apply camera transform for the rest of the world
+            this.Game.Matrix = this.camera.Transform;
 
             // background - railways
             Assets.TilesetGroups["village" + this.Game.Village].Draw("background", this.Game.SpriteBatch);
