@@ -6,11 +6,14 @@ namespace Nazdar
     public class Camera
     {
         public Matrix Transform { get; private set; }
+        public Vector2 Position { get; private set; }
 
         public void Follow(Objects.Player target)
         {
+            Position = new Vector2(target.Hitbox.X + (target.Hitbox.Width / 2), 0);
+
             Matrix offset = Matrix.CreateTranslation(
-                -target.Hitbox.X - (target.Hitbox.Width / 2) + (MyShake.Active ? Tools.GetRandom(4) - 2 : 0),
+                -Position.X + (MyShake.Active ? Tools.GetRandom(4) - 2 : 0),
                 0 + (MyShake.Active ? Tools.GetRandom(4 - 2) : 0),
                 0
             );

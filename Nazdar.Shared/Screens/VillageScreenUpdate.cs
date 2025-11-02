@@ -54,7 +54,7 @@ namespace Nazdar.Screens
             // player, camera, parallax stuff
             this.player.Update(this.Game.DeltaTime);
             this.camera.Follow(this.player);
-            this.parallaxManager.Update(this.player.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));
+            this.parallaxManager.Update((int)this.camera.Position.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));
 
             // game objects
             this.UpdateEnemies();
