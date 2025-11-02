@@ -18,7 +18,7 @@ namespace Nazdar
         public float DeltaTime;
 
         private readonly ScreenManager screenManager;
-        private AssetsLoader assetsLoader = new AssetsLoader();
+        private readonly AssetsLoader assetsLoader = new AssetsLoader();
 
         public static Enums.Platform CurrentPlatform;
 

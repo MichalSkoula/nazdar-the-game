@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace Nazdar.Controls
 {
-    class Touch
+    internal class Touch
     {
         private static List<TouchLocation> previousTouchLocations = new List<TouchLocation>();
-        private static List<TouchLocation> currentTouchLocations = new List<TouchLocation>();
+        private static readonly List<TouchLocation> currentTouchLocations = new List<TouchLocation>();
 
         public static void GetState(bool isActive)
         {

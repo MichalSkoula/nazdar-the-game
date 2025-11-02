@@ -9,7 +9,7 @@ namespace Nazdar.Weather
 {
     public class Sky
     {
-        private List<IDrop> drops = new List<IDrop>();
+        private readonly List<IDrop> drops = new List<IDrop>();
         public double Ttl = 0;
         public DropType Type = DropType.Raining;
         public int DropCount
@@ -77,7 +77,7 @@ namespace Nazdar.Weather
 
         private void AddDrop(bool randomY = false)
         {
-            int x = Tools.GetRandom(VillageScreen.MapWidth + Enums.Screen.Width) - Enums.Screen.Width / 2;
+            int x = Tools.GetRandom(VillageScreen.MapWidth + Enums.Screen.Width) - (Enums.Screen.Width / 2);
             int y = -10;
             if (randomY)
             {

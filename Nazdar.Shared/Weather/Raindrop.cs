@@ -8,7 +8,7 @@ namespace Nazdar.Weather
 {
     public class Raindrop : BaseObject, IDrop
     {
-        private int speed;
+        private readonly int speed;
 
         public Raindrop(int x, int y)
         {

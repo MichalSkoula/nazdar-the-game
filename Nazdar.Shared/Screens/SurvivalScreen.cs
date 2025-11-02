@@ -15,7 +15,7 @@ namespace Nazdar.Screens
 
         public SurvivalScreen(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         private string[] saveDataLines;
 
@@ -24,18 +24,18 @@ namespace Nazdar.Screens
         private readonly int descriptionYStop = 62;
         private readonly int descriptionSpeed = 40;
         private readonly string[] description = new string[] {
-            "Endless farming.",
-            "Endless slaughter.",
-            "This is the life of a legionnaire.",
-            "This is the survival.",
+ Translation.Get("survival.line1"),
+            Translation.Get("survival.line2"),
+          Translation.Get("survival.line3"),
+            Translation.Get("survival.line4"),
             "",
-            "MISSION GOALS",
-            "Unlimited time. Survive as long as you can.",
-            "",
-            "TIPS",
-            "Cholera epidemic struck hard! Make sure to have",
-            "a lot of medics.",
-            "Stronger enemies will attack very soon."
+         Translation.Get("survival.goals"),
+            Translation.Get("survival.goal1"),
+         "",
+            Translation.Get("survival.tips"),
+        Translation.Get("survival.tip1"),
+    Translation.Get("survival.tip2"),
+            Translation.Get("survival.tip3")
         };
 
         public override void Initialize()
@@ -125,7 +125,7 @@ namespace Nazdar.Screens
                 {
                     continue;
                 }
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 72 + 28 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 72 + (28 * i)), MyColor.White);
             }
 
             // descriptions
@@ -133,7 +133,7 @@ namespace Nazdar.Screens
             foreach (string line in this.description)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + 18 * i), MyColor.Gray1);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + (18 * i)), MyColor.Gray1);
             }
 
             this.Game.DrawEnd();

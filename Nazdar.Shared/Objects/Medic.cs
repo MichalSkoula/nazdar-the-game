@@ -17,7 +17,7 @@ namespace Nazdar.Objects
 
         protected ParticleSource particleHeal;
 
-        private List<Animation> animations = new List<Animation>()
+        private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["MedicRight"], 4, 10),
             new Animation(Assets.Images["MedicRight"], 4, 10),
@@ -102,11 +102,11 @@ namespace Nazdar.Objects
             else if (this.DeploymentPerson == null)
             {
                 // run towards town center
-                if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)
+                if (this.X < (VillageScreen.MapWidth / 2) - Center.CenterRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + Center.CenterRadius)
+                else if (this.X > (VillageScreen.MapWidth / 2) + Center.CenterRadius)
                 {
                     this.Direction = Direction.Left;
                 }
@@ -122,11 +122,11 @@ namespace Nazdar.Objects
             else
             {
                 // is deployed on someone
-                if (this.X < this.DeploymentPerson.X - this.DeploymentPerson.Width / 4)
+                if (this.X < this.DeploymentPerson.X - (this.DeploymentPerson.Width / 4))
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > this.DeploymentPerson.X + this.DeploymentPerson.Width / 4)
+                else if (this.X > this.DeploymentPerson.X + (this.DeploymentPerson.Width / 4))
                 {
                     this.Direction = Direction.Left;
                 }

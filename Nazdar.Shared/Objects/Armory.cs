@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
 
@@ -8,10 +9,9 @@ namespace Nazdar.Objects
     public class Armory : BaseBuilding
     {
         public const int Cost = 4;
-        public const string Name = "Armory";
 
         public const int WeaponCost = 2;
-        private int weaponLimit = 6;
+        private readonly int weaponLimit = 6;
         public List<Weapon> Weapons { get; private set; } = new List<Weapon>();
         public int WeaponsCount => Weapons.Count;
 
@@ -67,7 +67,7 @@ namespace Nazdar.Objects
             int i = 0;
             foreach (var weapon in this.Weapons)
             {
-                weapon.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - weapon.Height);
+                weapon.SetPosition(this.X + 6 + (i * 12), this.Y + this.Height - weapon.Height);
                 i++;
             }
             base.Update(deltaTime);
@@ -83,5 +83,7 @@ namespace Nazdar.Objects
                 this.TimeToBuild
             };
         }
+
+        public override string Name => Translation.Get("building.armory");
     }
 }

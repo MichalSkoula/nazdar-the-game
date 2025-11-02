@@ -10,9 +10,8 @@ namespace Nazdar.Objects
     public class Tower : BaseBuilding
     {
         public const int Cost = 8;
-        public const string Name = "Defense Tower";
         private int shootPower = 1;
-        private int shootRate = 95; // 0 fastest, 100 slowest
+        private readonly int shootRate = 95; // 0 fastest, 100 slowest
         public bool CanFire { get; set; }
         public const int DefaultCaliber = 20;
 
@@ -71,7 +70,7 @@ namespace Nazdar.Objects
             {
                 this.Bullets.Add(new Bullet(
                     this.X + (int)(this.Width * (this.Direction == Direction.Left ? 0.25f : 0.75f)),
-                    this.Y + this.Height / 4,
+                    this.Y + (this.Height / 4),
                     this.Direction,
                     this.Caliber,
                     BulletType.Cannonball,
@@ -119,5 +118,7 @@ namespace Nazdar.Objects
                 this.Caliber,
             };
         }
+
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.defenseTower");
     }
 }

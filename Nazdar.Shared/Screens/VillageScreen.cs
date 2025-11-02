@@ -25,37 +25,37 @@ namespace Nazdar.Screens
 
         // game components
         private Player player;
-        private List<Enemy> enemies = new List<Enemy>();
-        private List<Pig> pigs = new List<Pig>();
-        private List<Lenin> lenins = new List<Lenin>();
+        private readonly List<Enemy> enemies = new List<Enemy>();
+        private readonly List<Pig> pigs = new List<Pig>();
+        private readonly List<Lenin> lenins = new List<Lenin>();
         private List<Soldier> soldiers = new List<Soldier>();
         private List<Farmer> farmers = new List<Farmer>();
         private List<Medic> medics = new List<Medic>();
-        private List<Homeless> homelesses = new List<Homeless>();
+        private readonly List<Homeless> homelesses = new List<Homeless>();
         private List<Peasant> peasants = new List<Peasant>();
 
-        private List<Coin> coins = new List<Coin>();
+        private readonly List<Coin> coins = new List<Coin>();
 
-        private List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
-        private List<BuildingSpot> slums = new List<BuildingSpot>();
+        private readonly List<BuildingSpot> buildingSpots = new List<BuildingSpot>();
+        private readonly List<BuildingSpot> slums = new List<BuildingSpot>();
         private Ship ship;
         private Treasure treasure;
         private Center center;
         private Locomotive locomotive;
-        private List<Armory> armories = new List<Armory>();
-        private List<Arsenal> arsenals = new List<Arsenal>();
-        private List<Tower> towers = new List<Tower>();
-        private List<Farm> farms = new List<Farm>();
-        private List<Hospital> hospitals = new List<Hospital>();
-        private List<Market> markets = new List<Market>();
-        private List<Rails> rails = new List<Rails>();
+        private readonly List<Armory> armories = new List<Armory>();
+        private readonly List<Arsenal> arsenals = new List<Arsenal>();
+        private readonly List<Tower> towers = new List<Tower>();
+        private readonly List<Farm> farms = new List<Farm>();
+        private readonly List<Hospital> hospitals = new List<Hospital>();
+        private readonly List<Market> markets = new List<Market>();
+        private readonly List<Rails> rails = new List<Rails>();
 
         private DayPhase dayPhase = DayPhase.Day;
         private double dayPhaseTimer = (int)DayNightLength.Day;
         private bool won = false;
-        private Sky sky = new Sky();
+        private readonly Sky sky = new Sky();
 
-        private ParallaxManager parallaxManager = new ParallaxManager();
+        private readonly ParallaxManager parallaxManager = new ParallaxManager();
 
         private Disease disease;
 
@@ -63,22 +63,22 @@ namespace Nazdar.Screens
         // new enemy settings
         // every day, it gets -2
         // every village, it gets -20
-        private static int newEnemyDefaultProbability = 260;
-        private int newEnemyProbabilityLowLimit = 16;
-        private static int newHomelessDefaultProbability = 512 * 4;
-        private int newHomelessProbabilityLowLimit = 768;
-        private int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
-        private int newPigMaxCaliber = Pig.DefaultCaliber * 4;
-        private int newLeninMaxCaliber = Lenin.DefaultCaliber * 4;
-        private int newCoinProbability = 512 * 3;
-        private int enemyDropProbability = 4;
-        private int pigDropProbability = 4;
-        private int leninDropProbability = 2;
-        private int homelessLimit = 16;
+        private static readonly int newEnemyDefaultProbability = 260;
+        private readonly int newEnemyProbabilityLowLimit = 16;
+        private static readonly int newHomelessDefaultProbability = 512 * 4;
+        private readonly int newHomelessProbabilityLowLimit = 768;
+        private readonly int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;
+        private readonly int newPigMaxCaliber = Pig.DefaultCaliber * 4;
+        private readonly int newLeninMaxCaliber = Lenin.DefaultCaliber * 4;
+        private readonly int newCoinProbability = 512 * 3;
+        private readonly int enemyDropProbability = 4;
+        private readonly int pigDropProbability = 4;
+        private readonly int leninDropProbability = 2;
+        private readonly int homelessLimit = 16;
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 2;
-        private int newSkyApocalypseProbability = 512 * 6;
-        private int diseaseProbability = 512 * 2;
+        private readonly int newSkyApocalypseProbability = 512 * 6;
+        private readonly int diseaseProbability = 512 * 2;
         private readonly int farmLimit = 4;
 
         // X positions for deployments

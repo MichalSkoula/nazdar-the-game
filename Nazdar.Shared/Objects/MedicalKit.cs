@@ -5,7 +5,7 @@ namespace Nazdar.Objects
 {
     public class MedicalKit : BaseObject
     {
-        public const string Name = "MedicalKit";
+        public string Name => Nazdar.Shared.Translation.Translation.Get("item.medicalKit");
 
         public MedicalKit()
         {

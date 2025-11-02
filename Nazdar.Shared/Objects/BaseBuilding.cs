@@ -13,6 +13,8 @@ namespace Nazdar.Objects
         public Building.Type Type;
         public Building.Status Status = Building.Status.InProcess;
 
+        public abstract string Name { get; }
+
         public BaseBuilding()
         {
             this.Color = MyColor.UniversalColors[Tools.GetRandom(MyColor.UniversalColors.Length)];
@@ -38,7 +40,7 @@ namespace Nazdar.Objects
             {
                 this.Status = Building.Status.Built;
                 this.TimeToBuild = 0;
-                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingBuilt", this.Type.ToString()), MessageType.Success);
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingBuilt", this.Name), MessageType.Success);
 
                 // if market, peasant becomes merchant => die
                 if (this.Type == Building.Type.Market)
@@ -59,15 +61,15 @@ namespace Nazdar.Objects
             int textureWidth = Assets.Images["Construction"].Width;
             int textureHeight = Assets.Images["Construction"].Height;
             int howManyDraws = this.Hitbox.Width / textureWidth;
-            int howManyDrawsOffset = (this.Hitbox.Width % textureWidth) / 2;
+            int howManyDrawsOffset = this.Hitbox.Width % textureWidth / 2;
 
             for (int i = 0; i < howManyDraws; i++)
             {
                 spriteBatch.Draw(
                     Assets.Images["Construction"],
                     new Rectangle(
-                        this.Hitbox.X + howManyDrawsOffset + i * textureWidth,
-                        this.Hitbox.Y + this.Hitbox.Height / 2 - textureHeight / 2,
+                        this.Hitbox.X + howManyDrawsOffset + (i * textureWidth),
+                        this.Hitbox.Y + (this.Hitbox.Height / 2) - (textureHeight / 2),
                         textureWidth,
                         textureHeight),
                     Color.White);

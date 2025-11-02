@@ -7,7 +7,6 @@ namespace Nazdar.Objects
     public class Rails : BaseBuilding
     {
         public const int Cost = 8;
-        public const string Name = "Rails";
 
         public Rails(int x, int y, Building.Status status, float ttb = 6) : base()
         {
@@ -33,5 +32,7 @@ namespace Nazdar.Objects
                 this.TimeToBuild
             };
         }
+
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.rails");
     }
 }

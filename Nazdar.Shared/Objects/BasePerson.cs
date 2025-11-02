@@ -48,7 +48,7 @@ namespace Nazdar.Objects
         public bool TakeHit(int caliber)
         {
             // 20% random +/-
-            caliber += Tools.GetRandom((int)(caliber * 0.2f)) * (Tools.GetRandom(2) * 2 - 1);
+            caliber += Tools.GetRandom((int)(caliber * 0.2f)) * ((Tools.GetRandom(2) * 2) - 1);
 
             this.particleBlood.Run(100);
 

@@ -8,7 +8,7 @@ namespace Nazdar.Objects
 {
     public class Homeless : BasePerson
     {
-        private List<Animation> animations = new List<Animation>()
+        private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["HomelessRight"], 4, 10),
             new Animation(Assets.Images["HomelessRight"], 4, 10),
@@ -62,17 +62,17 @@ namespace Nazdar.Objects
             this.Anim.Update(deltaTime);
 
             // go around slum
-            if (this.X < this.DeploymentX - Center.CenterRadius / 2)
+            if (this.X < this.DeploymentX - (Center.CenterRadius / 2))
             {
                 this.Direction = Direction.Right;
             }
-            else if (this.X > this.DeploymentX + Center.CenterRadius / 2)
+            else if (this.X > this.DeploymentX + (Center.CenterRadius / 2))
             {
                 this.Direction = Direction.Left;
             }
 
             // when near the slum, can be slow and randomly change direction
-            if (this.X < this.DeploymentX + Center.CenterRadius / 2 && this.X > this.DeploymentX - Center.CenterRadius / 2)
+            if (this.X < this.DeploymentX + (Center.CenterRadius / 2) && this.X > this.DeploymentX - (Center.CenterRadius / 2))
             {
                 if (Tools.RandomChance(128))
                 {

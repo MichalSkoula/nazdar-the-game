@@ -9,13 +9,13 @@ using static Nazdar.Enums;
 
 namespace Nazdar.Screens
 {
-    class GameOverScreenNewGame : GameScreen
+    internal class GameOverScreenNewGame : GameScreen
     {
         private new Game1 Game => (Game1)base.Game;
 
         public GameOverScreenNewGame(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         public override void Initialize()
         {

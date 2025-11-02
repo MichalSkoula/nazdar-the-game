@@ -5,7 +5,7 @@ namespace Nazdar.Objects
 {
     public class Tool : BaseObject
     {
-        public const string Name = "Tool";
+        public string Name => Nazdar.Shared.Translation.Translation.Get("item.tool");
 
         public Tool()
         {

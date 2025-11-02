@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
-using Nazdar.Shared;
 using Nazdar.Shared.Translation;
 using System.Collections.Generic;
 using static Nazdar.Enums;
@@ -15,7 +14,7 @@ namespace Nazdar.Screens
 
         public ControlsScreen(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         public override void Initialize()
         {

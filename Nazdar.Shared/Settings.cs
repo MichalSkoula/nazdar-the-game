@@ -5,7 +5,7 @@ namespace Nazdar.Shared
 {
     public static class Settings
     {
-        private static FileIO settingsFile = new FileIO("settings.json");
+        private static readonly FileIO settingsFile = new FileIO("settings.json");
 
         public static void SaveSettings(Game1 Game)
         {
@@ -34,7 +34,7 @@ namespace Nazdar.Shared
                 Game.Graphics.IsFullScreen = true;
 #endif
                 Game.Graphics.ApplyChanges();
-                
+
                 // Initialize translation with system language
                 Nazdar.Shared.Translation.Translation.Initialize();
 
@@ -62,7 +62,7 @@ namespace Nazdar.Shared
             {
                 Game1.Vibrations = (bool)settings.vibrations;
             }
-            
+
             if (settings.ContainsKey("language"))
             {
                 Nazdar.Shared.Translation.Translation.CurrentLanguage = (string)settings.language;

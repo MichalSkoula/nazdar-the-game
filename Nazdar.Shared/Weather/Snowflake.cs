@@ -8,7 +8,7 @@ namespace Nazdar.Weather
 {
     public class Snowflake : BaseObject, IDrop
     {
-        private int speed;
+        private readonly int speed;
 
         public Snowflake(int x, int y)
         {

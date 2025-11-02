@@ -5,12 +5,12 @@ namespace Nazdar
 {
     public class Animation
     {
-        private int count;
+        private readonly int count;
         private int step;
-        private int fps;
+        private readonly int fps;
         private float timeElapsed;
-        private float timeToUpdate;
-        private Texture2D tiles;
+        private readonly float timeToUpdate;
+        private readonly Texture2D tiles;
 
         public bool Loop
         {

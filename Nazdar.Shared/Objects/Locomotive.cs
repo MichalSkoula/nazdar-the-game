@@ -7,7 +7,7 @@ namespace Nazdar.Objects
     public class Locomotive : BaseBuilding
     {
         public const int Cost = 16;
-        public const string Name = "Locomotive";
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.locomotive");
 
         public Locomotive(int x, int y, Building.Status status, float ttb = 20) : base()
         {

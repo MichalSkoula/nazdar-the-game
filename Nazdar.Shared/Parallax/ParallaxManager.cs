@@ -7,7 +7,7 @@ namespace Nazdar.Shared.Parallax
 {
     internal class ParallaxManager
     {
-        private List<Layer> layers = new List<Layer>();
+        private readonly List<Layer> layers = new List<Layer>();
 
         public void Init(int mapWidth, int village)
         {

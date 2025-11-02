@@ -14,7 +14,7 @@ namespace Nazdar.Screens
     {
         private new Game1 Game => (Game1)base.Game;
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         private const string wwwSkoula = "https://skoula.cz/nazdar";
         private const string wwwSkoulaShort = "skoula.cz/nazdar";
@@ -145,7 +145,7 @@ namespace Nazdar.Screens
             foreach (string line in this.intro)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 300, descriptionY + 18 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 300, descriptionY + (18 * i)), MyColor.White);
             }
 
             // buttons

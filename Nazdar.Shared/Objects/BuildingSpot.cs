@@ -10,6 +10,8 @@ namespace Nazdar.Objects
     {
         public bool Hide { get; set; }
 
+        public override string Name => this.Type.ToString(); // nebo přeložené, ale prozatím toto
+
         public BuildingSpot(int x, int y, int width, int height, string type, bool hide = false)
         {
             this.Hitbox = new Rectangle(x, y, width, height);

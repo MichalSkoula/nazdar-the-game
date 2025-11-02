@@ -7,7 +7,7 @@ namespace Nazdar.Controls
     {
         private static Rectangle left = new Rectangle(20, 290, 44, 48);
         private static Rectangle right = new Rectangle(90, 290, 44, 48);
-        private static Rectangle select = new Rectangle(Enums.Screen.Width / 2 - 22, 290, 44, 48);
+        private static Rectangle select = new Rectangle((Enums.Screen.Width / 2) - 22, 290, 44, 48);
 
         private static Rectangle jump = new Rectangle(575, 225, 44, 48);
         private static Rectangle shoot = new Rectangle(515, 290, 44, 48);
