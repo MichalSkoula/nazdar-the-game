@@ -80,7 +80,11 @@ namespace Nazdar.Screens
                 "",
                 Translation.Get("credits.tech"),
                 "Monogame Framework",
-                ".NET 6"
+                ".NET 8",
+                "",
+                Translation.Get("credits.communityHelp"),
+                "xgimp",
+                "ddonatek",
             };
 
             if (Game1.CurrentPlatform != Platform.UWP)

@@ -111,6 +111,7 @@ namespace Nazdar.Shared.Translation
                 { "credits.sounds", "SOUNDS" },
                 { "credits.font", "FONT" },
                 { "credits.tech", "TECH" },
+                { "credits.communityHelp", "CONTRIBUTORS"},
      
                 // Map Mission 1
                 { "mission1.line1", "May 1918. We were attacked by" },
