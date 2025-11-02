@@ -60,7 +60,7 @@ namespace Nazdar.Screens
 
             var randomSlum = this.slums[Tools.GetRandom(this.slums.Count)];
             this.homelesses.Add(new Homeless(
-                randomSlum.X + randomSlum.Width / 2,
+                randomSlum.X + (randomSlum.Width / 2),
                 Offset.Floor,
                 Direction.Right
             ));

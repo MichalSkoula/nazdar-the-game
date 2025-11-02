@@ -4,8 +4,8 @@ namespace Nazdar.Controls
 {
     public class Keyboard
     {
-        static KeyboardState currentKeyState;
-        static KeyboardState previousKeyState;
+        private static KeyboardState currentKeyState;
+        private static KeyboardState previousKeyState;
 
         public static KeyboardState GetState(bool isActive)
         {

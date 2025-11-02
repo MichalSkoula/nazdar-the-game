@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using static Nazdar.Enums;
 
 namespace Nazdar.Objects
@@ -8,7 +9,7 @@ namespace Nazdar.Objects
     // treasure is already built and has a health
     public class Treasure : BaseBuilding
     {
-        public const string Name = "Golden Treasure";
+        public override string Name => Translation.Get("building.treasure");
 
         public Treasure(int x, int y, int health = 100) : base()
         {
@@ -60,7 +61,7 @@ namespace Nazdar.Objects
             caliber /= 16;
 
             // 20% random +/-
-            caliber += Tools.GetRandom((int)(caliber * 0.2f)) * (Tools.GetRandom(2) * 2 - 1);
+            caliber += Tools.GetRandom((int)(caliber * 0.2f)) * ((Tools.GetRandom(2) * 2) - 1);
 
             if (this.Health - caliber > 0)
             {

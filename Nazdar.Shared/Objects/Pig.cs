@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Screens;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System;
 using System.Collections.Generic;
 using static Nazdar.Enums;
@@ -13,7 +14,7 @@ namespace Nazdar.Objects
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 32;
 
-        private List<Animation> animations = new List<Animation>();
+        private readonly List<Animation> animations = new List<Animation>();
 
         protected ParticleSource particleShit;
 
@@ -23,7 +24,7 @@ namespace Nazdar.Objects
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
-            this.Name = "Pig Rider";
+            this.Name = Translation.Get("enemy.pigRider");
 
             this.animations.Add(new Animation(Assets.Images["PigRight"], 6, 8));
             this.animations.Add(new Animation(Assets.Images["PigRight"], 6, 8));

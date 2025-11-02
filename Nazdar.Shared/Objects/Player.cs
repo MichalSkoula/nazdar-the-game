@@ -18,7 +18,7 @@ namespace Nazdar.Objects
         private static readonly int moneyLimit = 48;
         private static readonly int cartridgeLimit = 32;
 
-        private List<Animation> animations = new List<Animation>()
+        private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["PlayerRight"], 4, 10),
             new Animation(Assets.Images["PlayerRight"], 4, 10),
@@ -274,7 +274,7 @@ namespace Nazdar.Objects
             if (this.Action != null)
             {
                 // can afford?
-                float alpha = (this.ActionCost <= this.Money && this.ActionEnabled ? 1f : 0.5f);
+                float alpha = this.ActionCost <= this.Money && this.ActionEnabled ? 1f : 0.5f;
 
                 // coins
                 spriteBatch.Draw(
@@ -289,9 +289,19 @@ namespace Nazdar.Objects
                  );
 
                 // text
+                string actionText = this.Action switch
+                {
+                    Enums.PlayerAction.Build => Translation.Get("action.build"),
+                    Enums.PlayerAction.Hire => Translation.Get("action.hire"),
+                    Enums.PlayerAction.Create => Translation.Get("action.create"),
+                    Enums.PlayerAction.Upgrade => Translation.Get("action.upgrade"),
+                    Enums.PlayerAction.Buy => Translation.Get("action.buy"),
+                    Enums.PlayerAction.Repair => Translation.Get("action.repair"),
+                    _ => this.Action.ToString()
+                };
                 spriteBatch.DrawString(
                     Assets.Fonts["Small"],
-                    this.Action.ToString() + " " + this.ActionName,
+                    actionText + " " + this.ActionName,
                     new Vector2(this.X, this.Y - 10),
                     MyColor.White * alpha
                 );
@@ -316,7 +326,7 @@ namespace Nazdar.Objects
             for (int i = 0; i < 200; i++)
             {
                 float t = i / timeDivider;
-                int newY = h0 - (int)(v0 * t - 0.5 * g * Math.Pow(t, 2));
+                int newY = h0 - (int)((v0 * t) - (0.5 * g * Math.Pow(t, 2)));
                 if (newY > h0)
                 {
                     this.Y = h0;

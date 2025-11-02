@@ -17,7 +17,7 @@ namespace Nazdar.Screens
 
         public MenuScreen(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         public override void Initialize()
         {
@@ -40,7 +40,7 @@ namespace Nazdar.Screens
                     "startButton" + (i + 1),
                     new Button(
                         Offset.MenuX,
-                        55 + i * 35,
+                        55 + (i * 35),
                         null,
                         ButtonSize.Large,
                         buttonText,
@@ -51,29 +51,29 @@ namespace Nazdar.Screens
             }
 
             // add other buttons
-            var controlsButton = new Button(Offset.MenuX, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.controls"));
+            var controlsButton = new Button(Offset.MenuX, 225 + (0 * 27), null, ButtonSize.Medium, Translation.Get("menu.controls"));
             buttons.Add("controlsButton", controlsButton);
-            var creditsButton = new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.credits"));
+            var creditsButton = new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10, 225 + (0 * 27), null, ButtonSize.Medium, Translation.Get("menu.credits"));
             buttons.Add("creditsButton", creditsButton);
 
-            var languageButton = new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10 + creditsButton.Hitbox.Width + 10, 225 + 0 * 27, null, ButtonSize.Medium, Translation.Get("menu.language"), text: Translation.GetLanguageName(Translation.CurrentLanguage));
+            var languageButton = new Button(Offset.MenuX + controlsButton.Hitbox.Width + 10 + creditsButton.Hitbox.Width + 10, 225 + (0 * 27), null, ButtonSize.Medium, Translation.Get("menu.language"), text: Translation.GetLanguageName(Translation.CurrentLanguage));
             buttons.Add("languageButton", languageButton);
 
             // another row
-            var musicButton = new Button(Offset.MenuX, 225 + 1 * 27, null, ButtonSize.Medium, Translation.Get("menu.music"), text: Translation.Get("menu.off"));
+            var musicButton = new Button(Offset.MenuX, 225 + (1 * 27), null, ButtonSize.Medium, Translation.Get("menu.music"), text: Translation.Get("menu.off"));
             buttons.Add("musicButton", musicButton);
-            buttons.Add("soundsButton", new Button(Offset.MenuX + musicButton.Hitbox.Width + 10, 225 + 1 * 27, null, ButtonSize.Medium, Translation.Get("menu.sounds"), text: Translation.Get("menu.off")));
+            buttons.Add("soundsButton", new Button(Offset.MenuX + musicButton.Hitbox.Width + 10, 225 + (1 * 27), null, ButtonSize.Medium, Translation.Get("menu.sounds"), text: Translation.Get("menu.off")));
 
-            var vibrationsButton = new Button(Offset.MenuX, 225 + 2 * 27, null, ButtonSize.Medium, Translation.Get("menu.vibrations"), text: Translation.Get("menu.off"));
+            var vibrationsButton = new Button(Offset.MenuX, 225 + (2 * 27), null, ButtonSize.Medium, Translation.Get("menu.vibrations"), text: Translation.Get("menu.off"));
             buttons.Add("vibrationsButton", vibrationsButton);
 
             // fullscreen - only on desktop = GL
             if (Game1.CurrentPlatform == Platform.GL)
             {
-                buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + 2 * 27, null, ButtonSize.Medium, Translation.Get("menu.fullscreen"), text: Translation.Get("menu.off")));
+                buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + (2 * 27), null, ButtonSize.Medium, Translation.Get("menu.fullscreen"), text: Translation.Get("menu.off")));
             }
-            
-            buttons.Add("exitButton", new Button(Offset.MenuX, 160 + 6 * 27, null, ButtonSize.Medium, Translation.Get("menu.exit")));
+
+            buttons.Add("exitButton", new Button(Offset.MenuX, 160 + (6 * 27), null, ButtonSize.Medium, Translation.Get("menu.exit")));
 #if DEBUG
             if (Game1.CurrentPlatform != Platform.Android)
             {
@@ -175,7 +175,7 @@ namespace Nazdar.Screens
                 // Toggle between English and Czech
                 Translation.CurrentLanguage = Translation.CurrentLanguage == "en" ? "cs" : "en";
                 Settings.SaveSettings(Game);
-                
+
                 // Reload menu to apply translations
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
                 return;
@@ -237,17 +237,17 @@ namespace Nazdar.Screens
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[1],
-                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y),
+                        new Vector2((1.5f * Offset.MenuX) + button.Value.Hitbox.Width, button.Value.Hitbox.Y),
                         MyColor.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[2],
-                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 11),
+                        new Vector2((1.5f * Offset.MenuX) + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 11),
                         MyColor.White);
                     this.Game.SpriteBatch.DrawString(
                         Assets.Fonts["Small"],
                         button.Value.Data[3],
-                        new Vector2(1.5f * Offset.MenuX + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 22),
+                        new Vector2((1.5f * Offset.MenuX) + button.Value.Hitbox.Width, button.Value.Hitbox.Y + 22),
                         MyColor.White);
                 }
                 i++;

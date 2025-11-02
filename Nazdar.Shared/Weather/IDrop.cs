@@ -2,7 +2,7 @@
 
 namespace Nazdar.Weather
 {
-    interface IDrop
+    internal interface IDrop
     {
         int Y { get; }
 

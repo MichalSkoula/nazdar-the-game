@@ -5,7 +5,7 @@ namespace Nazdar
     public static class Program
     {
         [STAThread]
-        static void Main()
+        private static void Main()
         {
             using (var game = new Game1())
             {

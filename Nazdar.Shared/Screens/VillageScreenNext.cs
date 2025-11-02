@@ -17,7 +17,7 @@ namespace Nazdar.Screens
             // locomotive built - start animation ---------------------------------
             if (this.locomotive?.Status == Building.Status.Built)
             {
-                Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("action.offWeGo"), 30);
                 this.locomotive.Status = Building.Status.Finished;
             }
 
@@ -48,7 +48,7 @@ namespace Nazdar.Screens
             {
                 Audio.SongVolume = 0.25f;
                 Audio.PlaySound("Winner");
-                Game1.MessageBuffer.SetSuperMessage("We did it! Nazdar!", 30);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("action.weDidIt"), 30);
                 this.ship.Status = Building.Status.Finished;
             }
 
@@ -104,7 +104,7 @@ namespace Nazdar.Screens
             // set new center based on new map size
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
             this.player.X = MapWidth / 2;
-            this.center.X = MapWidth / 2 - this.center.Width / 2; // center is always in the centre
+            this.center.X = (MapWidth / 2) - (this.center.Width / 2); // center is always in the centre
 
             // take every other person with me + reset caliber + heal a bit
             this.peasants = this.peasants.Where((x, i) => i % 2 == 0).ToList();

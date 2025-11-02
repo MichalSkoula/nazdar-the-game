@@ -12,12 +12,12 @@ namespace Nazdar.Objects
     {
         private bool isFast = true;
         private bool stopBecauseOfShooting = false;
-        private int shootRate = 70; // 0 fastest, 100 slowest
+        private readonly int shootRate = 70; // 0 fastest, 100 slowest
 
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 16;
 
-        private List<Animation> animations = new List<Animation>()
+        private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["SoldierRight"], 4, 10),
             new Animation(Assets.Images["SoldierRight"], 4, 10),
@@ -103,11 +103,11 @@ namespace Nazdar.Objects
             else if (this.DeploymentBuilding == null)
             {
                 // run towards town center
-                if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)
+                if (this.X < (VillageScreen.MapWidth / 2) - Center.CenterRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + Center.CenterRadius)
+                else if (this.X > (VillageScreen.MapWidth / 2) + Center.CenterRadius)
                 {
                     this.Direction = Direction.Left;
                 }
@@ -123,11 +123,11 @@ namespace Nazdar.Objects
             else
             {
                 // soldier is deployed somewhere
-                if (this.X < this.DeploymentBuilding.X - this.DeploymentBuilding.Width / 2)
+                if (this.X < this.DeploymentBuilding.X - (this.DeploymentBuilding.Width / 2))
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > this.DeploymentBuilding.X + this.DeploymentBuilding.Width + this.DeploymentBuilding.Width / 2)
+                else if (this.X > this.DeploymentBuilding.X + this.DeploymentBuilding.Width + (this.DeploymentBuilding.Width / 2))
                 {
                     this.Direction = Direction.Left;
                 }
@@ -159,8 +159,8 @@ namespace Nazdar.Objects
             if (Game1.GlobalTimer % this.shootRate == 0)
             {
                 this.Bullets.Add(new Bullet(
-                    this.X + this.Width / 2,
-                    this.Y + this.Height / 4 + Tools.GetRandom(4) - 2,
+                    this.X + (this.Width / 2),
+                    this.Y + (this.Height / 4) + Tools.GetRandom(4) - 2,
                     this.Direction,
                     this.Caliber
                 ));

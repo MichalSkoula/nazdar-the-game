@@ -15,7 +15,7 @@ namespace Nazdar.Objects
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 4;
 
-        private List<Animation> animations = new List<Animation>()
+        private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["FarmerRight"], 4, 10),
             new Animation(Assets.Images["FarmerRight"], 4, 10),
@@ -91,11 +91,11 @@ namespace Nazdar.Objects
             else if (this.DeploymentBuilding == null)
             {
                 // run towards town center
-                if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)
+                if (this.X < (VillageScreen.MapWidth / 2) - Center.CenterRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + Center.CenterRadius)
+                else if (this.X > (VillageScreen.MapWidth / 2) + Center.CenterRadius)
                 {
                     this.Direction = Direction.Left;
                 }
@@ -125,7 +125,7 @@ namespace Nazdar.Objects
 
                     if (Tools.RandomChance(VillageScreen.farmingMoneyProbability))
                     {
-                        coins.Add(new Coin(this.X + this.Width / 2, Offset.Floor2));
+                        coins.Add(new Coin(this.X + (this.Width / 2), Offset.Floor2));
                     }
 
                     if (Tools.RandomChance(128))

@@ -17,7 +17,7 @@ namespace Nazdar.Objects
         public const int DefaultCaliber = 2;
         public ParticleSource particleConstruction;
 
-        private List<Animation> animations = new List<Animation>()
+        private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["PeasantRight"], 4, 10),
             new Animation(Assets.Images["PeasantRight"], 4, 10),
@@ -127,11 +127,11 @@ namespace Nazdar.Objects
             else
             {
                 // 3/ otherwise always run towards town center
-                if (this.X < VillageScreen.MapWidth / 2 - Center.CenterRadius)
+                if (this.X < (VillageScreen.MapWidth / 2) - Center.CenterRadius)
                 {
                     this.Direction = Direction.Right;
                 }
-                else if (this.X > VillageScreen.MapWidth / 2 + Center.CenterRadius)
+                else if (this.X > (VillageScreen.MapWidth / 2) + Center.CenterRadius)
                 {
                     this.Direction = Direction.Left;
                 }

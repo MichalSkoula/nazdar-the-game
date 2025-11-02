@@ -6,7 +6,7 @@ namespace Nazdar.Objects
     public class Ship : BaseObject
     {
         public const int Cost = 48;
-        public const string Name = "Roma Ship";
+        public string Name => Nazdar.Shared.Translation.Translation.Get("building.ship");
         public Enums.Building.Status Status { get; set; } = Enums.Building.Status.InProcess;
 
         public Ship(int x, int y) : base()

@@ -5,7 +5,7 @@ namespace Nazdar.Objects
 {
     public class Coin : BaseObject
     {
-        private Animation anim;
+        private readonly Animation anim;
 
         public Coin(int x, int y)
         {

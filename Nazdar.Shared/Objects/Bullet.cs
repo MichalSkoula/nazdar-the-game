@@ -11,13 +11,13 @@ namespace Nazdar.Objects
         private readonly int speed = 400;
         private readonly int g = 10;
 
-        private int h0;
+        private readonly int h0;
         private float t0;
-        private BulletType type;
+        private readonly BulletType type;
 
         // 1 close, 4 faaar - bigger shootPower => farther it falls (it falls less often)
         // only for cannonbal
-        private int shootPower = 1;
+        private readonly int shootPower = 1;
 
         public Bullet(int x, int y, Direction direction, int caliber, BulletType type = BulletType.Bullet, int shootPower = 1)
         {
@@ -62,7 +62,7 @@ namespace Nazdar.Objects
             if (this.type == BulletType.Bullet)
             {
                 this.t0 += deltaTime / 1.5f;
-                this.Y = (int)(this.h0 + 0.5f * g * Math.Pow(this.t0, 2));
+                this.Y = (int)(this.h0 + (0.5f * g * Math.Pow(this.t0, 2)));
             }
             else if (this.type == BulletType.Cannonball)
             {

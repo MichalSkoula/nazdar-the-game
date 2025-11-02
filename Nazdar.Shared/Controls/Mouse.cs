@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Nazdar.Controls
 {
-    class Mouse
+    internal class Mouse
     {
         private static MouseState currentMouseState;
         private static MouseState previousMouseState;

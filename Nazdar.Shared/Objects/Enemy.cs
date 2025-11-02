@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Screens;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using System;
 using System.Collections.Generic;
 using static Nazdar.Enums;
@@ -13,7 +14,7 @@ namespace Nazdar.Objects
         public const int DefaultHealth = 100;
         public const int DefaultCaliber = 16;
 
-        private List<Animation> animations = new List<Animation>();
+        private readonly List<Animation> animations = new List<Animation>();
 
         public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber, int villageNumber = 1) : base()
         {
@@ -21,7 +22,7 @@ namespace Nazdar.Objects
             this.Health = health;
             this.Caliber = caliber;
             this.Speed = 110;
-            this.Name = "Rogue Bolshevik";
+            this.Name = Translation.Get("enemy.rogueBolshevik"); // "Rogue Bolshevik";
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),

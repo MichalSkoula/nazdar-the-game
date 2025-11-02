@@ -32,7 +32,7 @@ namespace Nazdar.Screens
                 Translation.Get("splash2.disclaimer")
             };
         }
-        
+
         private float descriptionY = 350;
         private readonly int descriptionYStop = 100;
         private readonly int descriptionSpeed = 25;
@@ -92,7 +92,7 @@ namespace Nazdar.Screens
                 this.Game.SpriteBatch.DrawString(
                     Assets.Fonts["Small"],
                     line,
-                    new Vector2((Enums.Screen.Width - textWidthLine) / 2, descriptionY + 18 * i),
+                    new Vector2((Enums.Screen.Width - textWidthLine) / 2, descriptionY + (18 * i)),
                     i < intro.Length ? MyColor.Gray1 : MyColor.White
                 );
 

@@ -15,7 +15,7 @@ namespace Nazdar.Screens
 
         public GameFinishedScreen(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         private string[] saveDataLines;
 
@@ -97,7 +97,7 @@ namespace Nazdar.Screens
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + (28 * i)), MyColor.White);
             }
 
             // outro up
@@ -105,7 +105,7 @@ namespace Nazdar.Screens
             foreach (string line in this.outro)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 250, descriptionY + 18 * i), MyColor.Gray1);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 250, descriptionY + (18 * i)), MyColor.Gray1);
             }
 
             this.Game.DrawEnd();

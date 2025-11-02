@@ -11,8 +11,8 @@ namespace Nazdar.Shared.Parallax
         private Vector2 position;
         private readonly float speed;
         public readonly int Depth;
-        private int mapWidth;
-        private float defaultSpeed;
+        private readonly int mapWidth;
+        private readonly float defaultSpeed;
 
         public Layer(Texture2D texture, int depth, float speed, float defaultSpeed, int mapWidth, float alpha)
         {
@@ -46,9 +46,9 @@ namespace Nazdar.Shared.Parallax
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            for (int i = -1; i <= this.mapWidth / this.texture.Width + 1; i++)
+            for (int i = -1; i <= (this.mapWidth / this.texture.Width) + 1; i++)
             {
-                spriteBatch.Draw(this.texture, new Vector2((this.position.X + this.texture.Width * i), this.position.Y), this.FinalColor);
+                spriteBatch.Draw(this.texture, new Vector2(this.position.X + (this.texture.Width * i), this.position.Y), this.FinalColor);
             }
         }
     }

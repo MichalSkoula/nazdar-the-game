@@ -6,8 +6,8 @@ namespace Nazdar.Controls
 {
     public class Gamepad
     {
-        static GamePadState currentState;
-        static GamePadState previousState;
+        private static GamePadState currentState;
+        private static GamePadState previousState;
 
         public static GamePadState GetState(bool isActive)
         {

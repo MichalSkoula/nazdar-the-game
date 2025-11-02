@@ -73,7 +73,7 @@ namespace Nazdar.Screens
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                " x " + (this.player.Money).ToString(),
+                " x " + this.player.Money.ToString(),
                 new Vector2(leftOffset + 15, Offset.StatusBarY + 22),
                 MyColor.White);
 
@@ -83,7 +83,7 @@ namespace Nazdar.Screens
                 Color.White);
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
-                " x " + (this.player.Cartridges).ToString(),
+                " x " + this.player.Cartridges.ToString(),
                 new Vector2(leftOffset + 15, Offset.StatusBarY + 46),
                 MyColor.White);
 
@@ -273,11 +273,11 @@ namespace Nazdar.Screens
 
             // frame - always the same
             this.Game.SpriteBatch.DrawRectangle(
-                new Rectangle(offset - 2, Offset.StatusBarY + offset1 - 2, frame.Width / 4 + 4, frame.Height + 4),
+                new Rectangle(offset - 2, Offset.StatusBarY + offset1 - 2, (frame.Width / 4) + 4, frame.Height + 4),
                 MyColor.Gray3,
                 10);
             this.Game.SpriteBatch.DrawRectangle(
-                new Rectangle(offset - 2, Offset.StatusBarY + offset1 - 2, frame.Width / 4 + 4, frame.Height + 4),
+                new Rectangle(offset - 2, Offset.StatusBarY + offset1 - 2, (frame.Width / 4) + 4, frame.Height + 4),
                 MyColor.DarkerViolet);
 
             // sprite and count
@@ -300,7 +300,7 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 " x " + count.ToString(),
-                new Vector2(offset + 20, Offset.StatusBarY + offset1 + frame.Height / 2),
+                new Vector2(offset + 20, Offset.StatusBarY + offset1 + (frame.Height / 2)),
                 MyColor.White);
 
             // sword and attack power
@@ -312,7 +312,7 @@ namespace Nazdar.Screens
             this.Game.SpriteBatch.DrawString(
                 Assets.Fonts["Small"],
                 caliber.ToString(),
-                new Vector2(offset + 90, Offset.StatusBarY + offset1 + frame.Height / 2),
+                new Vector2(offset + 90, Offset.StatusBarY + offset1 + (frame.Height / 2)),
                 MyColor.White);
         }
     }

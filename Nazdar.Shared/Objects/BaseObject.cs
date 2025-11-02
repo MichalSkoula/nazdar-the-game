@@ -170,7 +170,7 @@ namespace Nazdar.Objects
             spriteBatch.DrawRectangle(new Rectangle(this.X + 1, this.Y - 5, this.Width - 2, 2), MyColor.White * this.Alpha);
 
             // inside
-            int inside = (int)((this.Health / 100f) * (this.Width - 2));
+            int inside = (int)(this.Health / 100f * (this.Width - 2));
             spriteBatch.DrawRectangle(
                 new Rectangle(this.X + 1, this.Y - 5, inside, 2),
                 (gold ? MyColor.Yellow : MyColor.Green) * this.Alpha

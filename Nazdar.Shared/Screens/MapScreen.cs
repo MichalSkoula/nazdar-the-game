@@ -15,7 +15,7 @@ namespace Nazdar.Screens
 
         public MapScreen(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         private string[] saveDataLines;
 
@@ -247,7 +247,7 @@ namespace Nazdar.Screens
                 {
                     continue;
                 }
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 72 + 28 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 72 + (28 * i)), MyColor.White);
             }
 
             // descriptions
@@ -255,7 +255,7 @@ namespace Nazdar.Screens
             foreach (string line in this.villageDescriptions[this.Game.Village])
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + 18 * i), MyColor.Gray1);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + (18 * i)), MyColor.Gray1);
             }
 
             this.Game.DrawEnd();

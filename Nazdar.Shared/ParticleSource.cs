@@ -14,9 +14,9 @@ namespace Nazdar.Shared
 {
     public class ParticleSource
     {
-        private ParticleEffect particleEffect;
+        private readonly ParticleEffect particleEffect;
 
-        private Tuple<int, int> offset;
+        private readonly Tuple<int, int> offset;
 
         // ttl - time to live of one particle
         public ParticleSource(Vector2 position, Tuple<int, int> offset, Enums.Direction direction, float ttl, TextureRegion2D textureRegion, Color? startColor = null, Color? endColor = null, float gravity = 30)

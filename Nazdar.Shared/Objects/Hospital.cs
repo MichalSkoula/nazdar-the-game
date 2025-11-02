@@ -8,10 +8,9 @@ namespace Nazdar.Objects
     public class Hospital : BaseBuilding
     {
         public const int Cost = 4;
-        public const string Name = "Hospital";
 
         public const int MedicalKitCost = 4;
-        private int medicalKitLimit = 6;
+        private readonly int medicalKitLimit = 6;
         public List<MedicalKit> MedicalKits { get; private set; } = new List<MedicalKit>();
         public int MedicalKitsCount => MedicalKits.Count;
 
@@ -67,7 +66,7 @@ namespace Nazdar.Objects
             int i = 0;
             foreach (var medicalKit in this.MedicalKits)
             {
-                medicalKit.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - medicalKit.Height);
+                medicalKit.SetPosition(this.X + 6 + (i * 12), this.Y + this.Height - medicalKit.Height);
                 i++;
             }
             base.Update(deltaTime);
@@ -83,5 +82,7 @@ namespace Nazdar.Objects
                 this.TimeToBuild
             };
         }
+
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.hospital");
     }
 }

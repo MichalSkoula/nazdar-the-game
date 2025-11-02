@@ -8,7 +8,6 @@ namespace Nazdar.Objects
     {
         public const int Cost = 2;
         public const int CostMax = 32;
-        public const string Name = "Base";
         public const int CenterRadius = 96;
         public bool HasBeenUpgradedToday = false;
 
@@ -45,5 +44,7 @@ namespace Nazdar.Objects
                 this.HasBeenUpgradedToday
             };
         }
+
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.base");
     }
 }

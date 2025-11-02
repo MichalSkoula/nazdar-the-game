@@ -95,9 +95,9 @@ namespace Nazdar.Shared
 
                 return new string[] {
                     village == 0 ? ((Villages)village).ToString() : village + "/" + (Villages)village,
-                    "Day " + days,
-                    "Kills: " + kills,
-                    "Money: " + money,
+                    Translation.Translation.Get("stats.day") + days,
+                    Translation.Translation.Get("stats.kills") + kills,
+                    Translation.Translation.Get("stats.money") + money,
                 };
             }
 
@@ -116,7 +116,7 @@ namespace Nazdar.Shared
                 double progress = ((double)DayNightLength.Day - dayPhaseTimer) / (double)DayNightLength.Day;
                 hours = 6 + (int)Math.Floor(16 * progress); // starting at 6:00
 
-                progressMinutes = Math.Floor(16 * progress) - 16 * progress;
+                progressMinutes = Math.Floor(16 * progress) - (16 * progress);
             }
             else
             {
@@ -135,7 +135,7 @@ namespace Nazdar.Shared
                     hours -= 2;
                 }
 
-                progressMinutes = Math.Floor(8 * progress) - 8 * progress;
+                progressMinutes = Math.Floor(8 * progress) - (8 * progress);
             }
 
             // make minutes and convert it into quarters

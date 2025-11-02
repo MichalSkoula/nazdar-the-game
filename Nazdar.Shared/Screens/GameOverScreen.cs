@@ -15,7 +15,7 @@ namespace Nazdar.Screens
 
         public GameOverScreen(Game1 game) : base(game) { }
 
-        private Dictionary<string, Button> buttons = new Dictionary<string, Button>();
+        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
 
         private string[] saveDataLines;
 
@@ -83,7 +83,7 @@ namespace Nazdar.Screens
             foreach (string line in this.saveDataLines)
             {
                 i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + 28 * i), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 100 + (28 * i)), MyColor.White);
 
             }
 

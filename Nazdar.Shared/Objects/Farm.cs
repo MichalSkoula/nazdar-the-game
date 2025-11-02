@@ -8,10 +8,10 @@ namespace Nazdar.Objects
     public class Farm : BaseBuilding
     {
         public const int Cost = 4;
-        public const string Name = "Farm";
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.farm");
 
         public List<Tool> Tools { get; private set; } = new List<Tool>();
-        private int toolLimit = 6;
+        private readonly int toolLimit = 6;
         public const int ToolCost = 1;
         public int ToolsCount => Tools.Count;
 
@@ -68,7 +68,7 @@ namespace Nazdar.Objects
             int i = 0;
             foreach (var tool in this.Tools)
             {
-                tool.SetPosition(this.X + 6 + i * 12, this.Y + this.Height - tool.Height);
+                tool.SetPosition(this.X + 6 + (i * 12), this.Y + this.Height - tool.Height);
                 i++;
             }
 

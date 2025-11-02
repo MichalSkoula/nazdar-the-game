@@ -233,7 +233,7 @@ namespace Nazdar.Screens
 
         private int GetNewEnemyProbability()
         {
-            int randomBase = newEnemyDefaultProbability - this.Game.Village * 10 - this.player.Days * 4;
+            int randomBase = newEnemyDefaultProbability - (this.Game.Village * 10) - (this.player.Days * 4);
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;
@@ -276,7 +276,7 @@ namespace Nazdar.Screens
                 {
                     if (Math.Abs(uniEnemy.X - soldier.X) < range)
                     {
-                        soldier.PrepareToShoot((uniEnemy.X + uniEnemy.Width / 2) < (soldier.X + soldier.Width / 2) ? Direction.Left : Direction.Right);
+                        soldier.PrepareToShoot((uniEnemy.X + (uniEnemy.Width / 2)) < (soldier.X + (soldier.Width / 2)) ? Direction.Left : Direction.Right);
                         break;
                     }
                 }
@@ -575,7 +575,7 @@ namespace Nazdar.Screens
                         {
                             tower.CanFire = true;
                             tower.PrepareToShoot(
-                                (uniEnemy.X + uniEnemy.Width / 2) < (tower.X + tower.Width / 2) ? Direction.Left : Direction.Right,
+                                (uniEnemy.X + (uniEnemy.Width / 2)) < (tower.X + (tower.Width / 2)) ? Direction.Left : Direction.Right,
                                 uniEnemy.X,
                                 range
                             );
@@ -918,7 +918,7 @@ namespace Nazdar.Screens
                         // no center - we can build it
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Center.Cost;
-                        this.player.ActionName = Center.Name;
+                        this.player.ActionName = Translation.Get("building.base");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -944,7 +944,7 @@ namespace Nazdar.Screens
                         {
                             this.player.ActionCost = Center.CostMax;
                         }
-                        this.player.ActionName = Center.Name;
+                        this.player.ActionName = this.center?.Name ?? Translation.Get("building.base");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -982,7 +982,7 @@ namespace Nazdar.Screens
                         // no armory here - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Armory.Cost;
-                        this.player.ActionName = Armory.Name;
+                        this.player.ActionName = Translation.Get("building.armory");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1007,7 +1007,7 @@ namespace Nazdar.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Create;
                             this.player.ActionCost = Armory.WeaponCost;
-                            this.player.ActionName = Weapon.Name;
+                            this.player.ActionName = Translation.Get("item.weapon");
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -1042,7 +1042,7 @@ namespace Nazdar.Screens
                         // no hospital here - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Hospital.Cost;
-                        this.player.ActionName = Hospital.Name;
+                        this.player.ActionName = Translation.Get("building.hospital");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1067,7 +1067,7 @@ namespace Nazdar.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Create;
                             this.player.ActionCost = Hospital.MedicalKitCost;
-                            this.player.ActionName = MedicalKit.Name;
+                            this.player.ActionName = Translation.Get("item.medicalKit");
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -1102,7 +1102,7 @@ namespace Nazdar.Screens
                         // no market here - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Market.Cost;
-                        this.player.ActionName = Market.Name;
+                        this.player.ActionName = Translation.Get("building.market");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1130,7 +1130,7 @@ namespace Nazdar.Screens
                         // no rails here - we can build them
                         this.player.Action = Enums.PlayerAction.Repair;
                         this.player.ActionCost = Rails.Cost;
-                        this.player.ActionName = Rails.Name;
+                        this.player.ActionName = Translation.Get("building.rails");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1158,7 +1158,7 @@ namespace Nazdar.Screens
                         // no arsenal here - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Arsenal.Cost;
-                        this.player.ActionName = Arsenal.Name;
+                        this.player.ActionName = Translation.Get("building.arsenal");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1183,7 +1183,7 @@ namespace Nazdar.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Buy;
                             this.player.ActionCost = Arsenal.CartridgesCost;
-                            this.player.ActionName = Arsenal.CartridgeName;
+                            this.player.ActionName = arsenal.CartridgeName;
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -1212,7 +1212,7 @@ namespace Nazdar.Screens
                         // no tower - we can build something
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Tower.Cost;
-                        this.player.ActionName = Tower.Name;
+                        this.player.ActionName = Translation.Get("building.defenseTower");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1241,7 +1241,7 @@ namespace Nazdar.Screens
                             this.player.Action = Enums.PlayerAction.Upgrade;
                             // upgrade costs tower level *2 (for survival, *4)
                             this.player.ActionCost = Game1.TowersLevel * (this.Game.Village == 0 ? 4 : 2);
-                            this.player.ActionName = Tower.Name;
+                            this.player.ActionName = Translation.Get("building.defenseTower");
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -1273,7 +1273,7 @@ namespace Nazdar.Screens
                         // no farm here on building spot, we can build it
                         this.player.Action = Enums.PlayerAction.Build;
                         this.player.ActionCost = Farm.Cost;
-                        this.player.ActionName = Farm.Name;
+                        this.player.ActionName = Translation.Get("building.farm");
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -1298,7 +1298,7 @@ namespace Nazdar.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Create;
                             this.player.ActionCost = Farm.ToolCost;
-                            this.player.ActionName = Tool.Name;
+                            this.player.ActionName = new Tool().Name;
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -1329,21 +1329,21 @@ namespace Nazdar.Screens
                 {
                     // we can build it
                     this.player.Action = Enums.PlayerAction.Repair;
-                    this.player.ActionCost = Locomotive.Cost + this.Game.Village * 4;
-                    this.player.ActionName = Locomotive.Name;
+                    this.player.ActionCost = Locomotive.Cost + (this.Game.Village * 4);
+                    this.player.ActionName = Translation.Get("building.locomotive");
                     string actionEnabledText = "";
 
                     // only if center is maxed up
                     if (Game1.CenterLevel < this.Game.Village)
                     {
                         this.player.ActionEnabled = false;
-                        actionEnabledText = "First you need to upgrade the base";
+                        actionEnabledText = Translation.Get("action.firstUpgradeBase");
                     }
                     // and rails are repaired
                     else if (this.buildingSpots.Where(bs => bs.Hide == false && bs.Type == Building.Type.Rails).Any())
                     {
                         this.player.ActionEnabled = false;
-                        actionEnabledText = "First you need to repair all rails";
+                        actionEnabledText = Translation.Get("action.firstRepairRails");
                     }
 
                     if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
@@ -1375,12 +1375,12 @@ namespace Nazdar.Screens
                 // we can buy it
                 this.player.Action = Enums.PlayerAction.Buy;
                 this.player.ActionCost = Ship.Cost;
-                this.player.ActionName = Ship.Name;
+                this.player.ActionName = Translation.Get("building.ship");
                 string actionEnabledText = "";
                 if (Game1.CenterLevel < this.Game.Village)
                 {
                     this.player.ActionEnabled = false;
-                    actionEnabledText = "First you need to upgrade the base";
+                    actionEnabledText = Translation.Get("action.firstUpgradeBase");
                 }
 
                 // only if center is maxed up
@@ -1399,7 +1399,7 @@ namespace Nazdar.Screens
                         // ok
                         this.ship.Status = Building.Status.Built;
                         Game1.MessageBuffer.AddMessage(Translation.Get("message.shipBought"), MessageType.Info);
-                        Game1.MessageBuffer.SetSuperMessage("Off we go!", 30);
+                        Game1.MessageBuffer.SetSuperMessage(Translation.Get("action.offWeGo"), 30);
                         Audio.PlaySound("Rock");
                         this.player.Money -= this.player.ActionCost;
                     }
@@ -1415,7 +1415,7 @@ namespace Nazdar.Screens
                     {
                         this.player.Action = Enums.PlayerAction.Hire;
                         this.player.ActionCost = Homeless.Cost;
-                        this.player.ActionName = Homeless.Name;
+                        this.player.ActionName = Translation.Get("people.homeless");
 
                         // hire homeless man? create peasant
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
@@ -1522,7 +1522,7 @@ namespace Nazdar.Screens
                 villageCoeff = 6;
             }
 
-            int randomBase = newHomelessDefaultProbability - this.slums.Count * 128 - villageCoeff * 128;
+            int randomBase = newHomelessDefaultProbability - (this.slums.Count * 128) - (villageCoeff * 128);
             if (randomBase < this.newHomelessProbabilityLowLimit)
             {
                 randomBase = this.newHomelessProbabilityLowLimit;
@@ -1575,7 +1575,7 @@ namespace Nazdar.Screens
             // no base yet? ---------------------------------------------------------------------
             if (this.player.Days == 0 && this.dayPhaseTimer < 60 && this.center == null)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should build the Base", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.buildBase"), messageTime, true);
             }
 
             if (this.center == null)
@@ -1586,31 +1586,31 @@ namespace Nazdar.Screens
             // base building started but no peasants?
             if (this.center.Status == Building.Status.InProcess && this.peasants.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the Base", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.hirePeopleForBase"), messageTime, true);
             }
 
             // no farms? -------------------------------------------------------------------------
             if (this.center.Status == Building.Status.Built && this.farms.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should build some farms to generate money", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.buildFarms"), messageTime, true);
             }
 
             // first farm to be built but no peasants?
             if (this.peasants.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.InProcess)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the farm", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.hirePeopleForFarm"), messageTime, true);
             }
 
             // first farm built but no farmers or tools
             if (this.farmers.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.Built && this.farms[0].Tools.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should create some farm tools to be able to recruit farmers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.createTools"), messageTime, true);
             }
 
             // first farm built but no farmers or tools
             if (this.farmers.Count == 0 && this.peasants.Count == 0 && this.farms.Count > 0 && this.farms[0].Status == Building.Status.Built && this.farms[0].Tools.Count > 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to become farmers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.hireFarmers"), messageTime, true);
             }
 
             if (this.farmers.Count == 0)
@@ -1621,25 +1621,25 @@ namespace Nazdar.Screens
             // build Armory -----------------------------------------------------------------------
             if (this.farms.Count > 0 && this.armories.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should build the Armory to be able to recruit soldiers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.buildArmory"), messageTime, true);
             }
 
             // first armory to be built but no peasants?
             if (this.peasants.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.InProcess)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the Armory", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.hirePeopleForArmory"), messageTime, true);
             }
 
             // first armory built but no soldiers or weapons
             if (this.soldiers.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.Built && this.armories[0].Weapons.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should create some weapons to be able to recruit soldiers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.createWeapons"), messageTime, true);
             }
 
             // first armory built but no soldiers or tools
             if (this.soldiers.Count == 0 && this.peasants.Count == 0 && this.armories.Count > 0 && this.armories[0].Status == Building.Status.Built && this.armories[0].Weapons.Count > 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to become soldiers.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.hireSoldiers"), messageTime, true);
             }
 
             if (this.soldiers.Count == 0)
@@ -1650,18 +1650,18 @@ namespace Nazdar.Screens
             // build Arsenal -----------------------------------------------------------------------
             if (this.arsenals.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should build the Arsenal to be able to buy cartridges.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.buildArsenal"), messageTime, true);
             }
 
             if (this.arsenals.Count > 0 && this.arsenals[0].Status == Building.Status.InProcess && this.peasants.Count == 0)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should hire some people to build the Arsenal", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.hirePeopleForArsenal"), messageTime, true);
             }
 
             // enought of this
             if (this.arsenals.Count > 0 && this.arsenals[0].Status == Building.Status.Built)
             {
-                Game1.MessageBuffer.SetSuperMessage("I should defend the base and make enought money to repair the Locomotive.", messageTime, true);
+                Game1.MessageBuffer.SetSuperMessage(Translation.Get("tutorial.defendAndEarn"), messageTime, true);
             }
         }
     }

@@ -7,8 +7,6 @@ namespace Nazdar.Objects
     public class Arsenal : BaseBuilding
     {
         public const int Cost = 4;
-        public const string Name = "Arsenal";
-        public const string CartridgeName = "Cartridge";
 
         public const int CartridgesCost = 3;
         public const int CartridgesCount = 6;
@@ -42,5 +40,8 @@ namespace Nazdar.Objects
                 this.TimeToBuild
             };
         }
+
+        public override string Name => Nazdar.Shared.Translation.Translation.Get("building.arsenal");
+        public string CartridgeName => Nazdar.Shared.Translation.Translation.Get("item.cartridge");
     }
 }
