@@ -66,7 +66,7 @@
 	  </None>
 	</ItemGroup>
 
-	<Target Name="RestoreDotnetTools" BeforeTargets="Restore">
+	<Target Name="RestoreDotnetTools" BeforeTargets="Restore" Condition="'$(RestoreDotnetToolsDisabled)' != 'true'">
 		<Message Text="Restoring dotnet tools" Importance="High" />
 		<Exec Command="dotnet tool restore" />
 	</Target>
