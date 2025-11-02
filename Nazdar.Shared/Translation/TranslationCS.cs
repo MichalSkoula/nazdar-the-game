@@ -111,6 +111,7 @@ namespace Nazdar.Shared.Translation
                     { "credits.sounds", "ZVUKY" },
                     { "credits.font", "FONTY" },
                     { "credits.tech", "TECHNOLOGIE" },
+                    { "credits.communityHelp", "KONTRIBUTORI"},
 
                     // Map Mission 1
                     { "mission1.line1", "Kveten 1918. Byli jsme napadeni" },
