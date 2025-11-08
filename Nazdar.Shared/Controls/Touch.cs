@@ -21,7 +21,7 @@ namespace Nazdar.Controls
 
         public static void GetState(bool isActive)
         {
-            previousTouchLocations = currentTouchLocations.GetRange(0, previousTouchLocations.Count); // create shallow copy
+            previousTouchLocations = new List<TouchLocation>(currentTouchLocations); // create shallow copy
             currentTouchLocations.Clear();
 
             if (!isActive)
