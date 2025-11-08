@@ -31,7 +31,7 @@ namespace Nazdar.Controls
 
         private static Point CalculatePosition(TouchLocation touch)
         {
-            // Touch is only for android .. so we put there barwidth or barheight for android
+            // Calculate touch position accounting for screen bars and scaling
             int posX = (int)((touch.Position.X - Game1.BarWidth) / Game1.Scale);
             int posY = (int)((touch.Position.Y - Game1.BarHeight) / Game1.Scale);
             Tools.Dump(posX + " " + posY);
@@ -40,11 +40,6 @@ namespace Nazdar.Controls
 
         public static bool HasBeenPressed(Rectangle hitbox)
         {
-            if (Game1.CurrentPlatform != Enums.Platform.Android)
-            {
-                return false;
-            }
-
             // if hitbox was not "released" previous iteration by any finger, go on
             foreach (var touch in previousTouchLocations)
             {
@@ -69,11 +64,6 @@ namespace Nazdar.Controls
 
         public static bool HasBeenPressedAnywhere()
         {
-            if (Game1.CurrentPlatform != Enums.Platform.Android)
-            {
-                return false;
-            }
-
             // if hitbox was not "released" previous iteration by any finger, go on
             foreach (var touch in previousTouchLocations)
             {
@@ -98,11 +88,6 @@ namespace Nazdar.Controls
 
         public static bool IsPressed(Rectangle hitbox)
         {
-            if (Game1.CurrentPlatform != Enums.Platform.Android)
-            {
-                return false;
-            }
-
             // at least one finger is touching it
             foreach (var touch in currentTouchLocations)
             {

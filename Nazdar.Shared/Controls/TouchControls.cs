@@ -45,11 +45,6 @@ namespace Nazdar.Controls
 
         public static void Draw(SpriteBatch spriteBatch, float leftOffset)
         {
-            if (Game1.CurrentPlatform != Enums.Platform.Android)
-            {
-                return;
-            }
-
             spriteBatch.Draw(Assets.Images["GamepadLeft"], new Rectangle(left.X - (int)leftOffset, left.Y, left.Width, left.Height), Color.White * 0.75f);
             spriteBatch.Draw(Assets.Images["GamepadRight"], new Rectangle(right.X - (int)leftOffset, right.Y, right.Width, right.Height), Color.White * 0.75f);
             spriteBatch.Draw(Assets.Images["GamepadSelect"], new Rectangle(select.X - (int)leftOffset, select.Y, select.Width, select.Height), Color.White * 0.75f);
