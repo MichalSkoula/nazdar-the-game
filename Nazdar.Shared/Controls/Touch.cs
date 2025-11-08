@@ -9,10 +9,14 @@ namespace Nazdar.Controls
     {
         private static List<TouchLocation> previousTouchLocations = new List<TouchLocation>();
         private static readonly List<TouchLocation> currentTouchLocations = new List<TouchLocation>();
+        private static bool touchDetected = false;
 
         public static bool IsAvailable()
         {
-            return TouchPanel.GetCapabilities().IsConnected;
+            // Check if touch has been detected at any point during this session
+            // This is more reliable than TouchPanel.GetCapabilities().IsConnected
+            // which may not work correctly on all platforms
+            return touchDetected || TouchPanel.GetCapabilities().IsConnected;
         }
 
         public static void GetState(bool isActive)
@@ -30,6 +34,8 @@ namespace Nazdar.Controls
                 if (touch.State != TouchLocationState.Invalid)
                 {
                     currentTouchLocations.Add(touch);
+                    // Mark that we've detected touch input at least once
+                    touchDetected = true;
                 }
             }
         }
