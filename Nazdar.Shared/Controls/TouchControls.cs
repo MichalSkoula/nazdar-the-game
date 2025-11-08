@@ -45,6 +45,12 @@ namespace Nazdar.Controls
 
         public static void Draw(SpriteBatch spriteBatch, float leftOffset)
         {
+            // Only draw touch controls if touch input is available on the device
+            if (!Touch.IsAvailable())
+            {
+                return;
+            }
+
             spriteBatch.Draw(Assets.Images["GamepadLeft"], new Rectangle(left.X - (int)leftOffset, left.Y, left.Width, left.Height), Color.White * 0.75f);
             spriteBatch.Draw(Assets.Images["GamepadRight"], new Rectangle(right.X - (int)leftOffset, right.Y, right.Width, right.Height), Color.White * 0.75f);
             spriteBatch.Draw(Assets.Images["GamepadSelect"], new Rectangle(select.X - (int)leftOffset, select.Y, select.Width, select.Height), Color.White * 0.75f);

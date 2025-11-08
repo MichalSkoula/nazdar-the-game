@@ -10,6 +10,11 @@ namespace Nazdar.Controls
         private static List<TouchLocation> previousTouchLocations = new List<TouchLocation>();
         private static readonly List<TouchLocation> currentTouchLocations = new List<TouchLocation>();
 
+        public static bool IsAvailable()
+        {
+            return TouchPanel.GetCapabilities().IsConnected;
+        }
+
         public static void GetState(bool isActive)
         {
             previousTouchLocations = currentTouchLocations.GetRange(0, previousTouchLocations.Count); // create shallow copy
