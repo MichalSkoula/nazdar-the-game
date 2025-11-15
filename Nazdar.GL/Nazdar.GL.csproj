@@ -75,6 +75,9 @@
 	  <None Update="SDL2.dll">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="libopenal.so">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 	<Target Name="RestoreDotnetTools" BeforeTargets="Restore">
