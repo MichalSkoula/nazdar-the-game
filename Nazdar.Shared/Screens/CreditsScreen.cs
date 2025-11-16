@@ -80,7 +80,7 @@ namespace Nazdar.Screens
                 "",
                 Translation.Get("credits.tech"),
                 "Monogame Framework",
-                ".NET 8",
+                ".NET 9",
                 "",
                 Translation.Get("credits.communityHelp"),
                 "xgimp",

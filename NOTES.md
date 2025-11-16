@@ -1,4 +1,4 @@
-# NOTES
+# DEVELOPER NOTES
 
 ## Packaging 🤖
 
@@ -27,7 +27,7 @@ dotnet publish -c Release -r linux-x64 /p:PublishReadyToRun=false /p:TieredCompi
 
 ### Linux enthusiasts ❤️
 
-You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora) or the ```libfreetype6``` packages (on Debian) in order to build the Nazdar.GL project.
+You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora) or the ```libfreetype6``` packages (on Debian) in order to **build the Nazdar.GL project**.
 
 ### Store 🦄
 
@@ -48,5 +48,6 @@ dotnet mgcb-editor
 
 ## Tech
 
-* MonoGame.Extended 3.7 (3.8 is bugged)
+* .NET 9
+* MonoGame.Extended 3.7 + MonoGame.Extended.Particles (3.8 is bugged and newer versions does not support UWP)
 * C# 8 because of UWP (Xbox)
