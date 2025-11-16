@@ -16,6 +16,9 @@
 
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+<ItemGroup>
+		<TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
+	</ItemGroup>
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.*" />
 
@@ -26,9 +29,10 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="TiledCS" Version="3.3.3" />
 		<PackageReference Include="Xamarin.Essentials" Version="1.8.1" />
+<MonoGameContentReference Update="..\Nazdar.Shared\Content\Content.mgcb" Link="Content\Content.mgcb" />
 	</ItemGroup>
 	<Import Project="..\Nazdar.Shared\Nazdar.Shared.projitems" Label="Shared" />
-	<ItemGroup>
-		<MonoGameContentReference Update="..\Nazdar.Shared\Content\Content.mgcb" Link="Content\Content.mgcb" />
-	</ItemGroup>
+
+		
+
 </Project>
