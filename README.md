@@ -62,8 +62,12 @@ Homepage + Download: https://skoula.cz/nazdar
 ### fonts
 * https://www.dafont.com/profile.php?user=1243624 dogika
 
-### other
+### tech
 * http://legie100.com/legiovlak/
 * MonoGame
 * MonoGame.Extended
 * .NET
+
+### contributors
+* xgimp
+* ddonatek
