@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32414.318
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11206.111
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Nazdar.Shared", "Nazdar.Shared\Nazdar.Shared.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
 EndProject
@@ -19,7 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.UWP", "Nazdar.UWP\Na
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nazdar.Android", "Nazdar.Android\Nazdar.Android.csproj", "{C6FFE90C-F9A2-4FAE-8BB0-9D0D34B7182F}"
 EndProject
-Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Nazdar.GL.Packaging", "Nazdar.GL.Packaging\Nazdar.GL.Packaging.wapproj", "{A53E9BE2-1654-4622-A75D-BFC2228F6CFF}"
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Nazdar.DX.Packaging", "Nazdar.DX.Packaging\Nazdar.DX.Packaging.wapproj", "{A53E9BE2-1654-4622-A75D-BFC2228F6CFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.DX", "Nazdar.DX\Nazdar.DX.csproj", "{344E2CC5-7846-483D-949E-EF4AE51B5B5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -194,6 +196,36 @@ Global
 		{A53E9BE2-1654-4622-A75D-BFC2228F6CFF}.Release|x86.ActiveCfg = Release|x86
 		{A53E9BE2-1654-4622-A75D-BFC2228F6CFF}.Release|x86.Build.0 = Release|x86
 		{A53E9BE2-1654-4622-A75D-BFC2228F6CFF}.Release|x86.Deploy.0 = Release|x86
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|Any CPU.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|Any CPU.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|ARM.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|ARM.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|ARM64.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|ARM64.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|x64.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|x64.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|x86.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug Xbox|x86.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|ARM.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|x64.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Debug|x86.Build.0 = Debug|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|ARM.Build.0 = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|ARM64.Build.0 = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x64.ActiveCfg = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x64.Build.0 = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x86.ActiveCfg = Release|Any CPU
+		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +236,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Nazdar.Shared\Nazdar.Shared.projitems*{20ca00e9-b8a1-4832-a84f-7e50eb85100d}*SharedItemsImports = 5
 		Nazdar.Shared\Nazdar.Shared.projitems*{269b6713-e3e3-44ff-8cce-2156f9065089}*SharedItemsImports = 4
+		Nazdar.Shared\Nazdar.Shared.projitems*{344e2cc5-7846-483d-949e-ef4ae51b5b5e}*SharedItemsImports = 5
 		Nazdar.Shared\Nazdar.Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
 		Nazdar.Shared\Nazdar.Shared.projitems*{c6ffe90c-f9a2-4fae-8bb0-9d0d34b7182f}*SharedItemsImports = 5
 	EndGlobalSection

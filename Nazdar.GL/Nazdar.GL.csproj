@@ -25,6 +25,7 @@
 		<Title>NAZDAR! The Game</Title>
 		<PackageIcon>logo1_square.png</PackageIcon>
 		<PackageProjectUrl>https://skoula.cz/nazdar</PackageProjectUrl>
+		<SupportedOSPlatformVersion>10.0.19041.1</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Platform)' == 'x64'">
 		<PlatformTarget>x64</PlatformTarget>
