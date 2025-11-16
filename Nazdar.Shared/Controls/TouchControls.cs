@@ -45,7 +45,8 @@ namespace Nazdar.Controls
 
         public static void Draw(SpriteBatch spriteBatch, float leftOffset)
         {
-            if (Game1.CurrentPlatform != Enums.Platform.Android)
+            // don't render controls unless touch is available on this device
+            if (!Touch.Available)
             {
                 return;
             }

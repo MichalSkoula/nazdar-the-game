@@ -36,8 +36,12 @@ namespace Nazdar.Screens
             Assets.TilesetEdges["right" + this.Game.Village].Draw("background", this.Game.SpriteBatch, MapWidth);
             Assets.TilesetEdges["right" + this.Game.Village].Draw("ground", this.Game.SpriteBatch, MapWidth);
 
-            // stats --------------------------------------------------------------------------
-            int leftOffset = Offset.StatusBarX - (int)this.camera.Transform.Translation.X;
+            // End world-space batch and switch to screen-space to draw UI elements fixed to the screen
+            this.Game.Matrix = null;
+            this.Game.EffectStart();
+
+            // stats (screen-space)
+            int leftOffset = Offset.StatusBarX;
             int rightOffset = Game1.CurrentPlatform == Enums.Platform.Android ? 370 : 490;
 
             // healthbar
@@ -154,10 +158,14 @@ namespace Nazdar.Screens
                 true);
 
             // messages
-            Game1.MessageBuffer.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X, true);
+            Game1.MessageBuffer.Draw(this.Game.SpriteBatch, 0, true);
 
-            // touch controls
-            TouchControls.Draw(this.Game.SpriteBatch, this.camera.Transform.Translation.X);
+            // touch controls (screen-space)
+            TouchControls.Draw(this.Game.SpriteBatch, leftOffset);
+
+            // resume world-space drawing
+            this.Game.Matrix = this.camera.Transform;
+            this.Game.EffectStart();
 
             // game objects
             foreach (BuildingSpot buildingSpot in this.buildingSpots)
