@@ -31,12 +31,13 @@ You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora
 
 ### Store 🦄
 
-* Nazdar.GL.Packaging	 x86 (Desktop)	Publish -> Create App Package
-* Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package
+* Nazdar.DX.Packaging	 x86 (Windows)	Publish -> Create App Package; it will package DX version for 
+* Nazdar.UWP			 x64 (Xbox)		Publish -> Create App Package; it will package UWP version for Windows Store - Xbox
+* Nazdar.GL				 x64 (Linux)	dotnet publish -c Release -r linux-x64
 * Nazdar.Android						Change version in AndroidManifest; Switch to Release; then Archive
 
 (sometimes Visual Studio restart is required...)
-(to update packages in partner.microsoft.com, first upload UWP package and then GL package (with different version strings), otherwise it will prefer the UWP version for every device)
+(to update packages in partner.microsoft.com, first upload UWP x64 package and then DX x86 package (with different version strings), otherwise it will prefer the UWP version for every device)
 
 ## MGCB
 
