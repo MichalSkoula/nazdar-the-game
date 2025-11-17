@@ -182,7 +182,7 @@ namespace Nazdar.Shared
 
         public static async Task OpenLinkAsync(string link)
         {
-            if (Game1.CurrentPlatform == Enums.Platform.GL)
+            if (Game1.CurrentPlatform == Enums.Platform.GL || Game1.CurrentPlatform == Enums.Platform.DX)
             {
                 Process.Start(new ProcessStartInfo(link) { UseShellExecute = true });
             }

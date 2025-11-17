@@ -9,7 +9,7 @@ namespace Nazdar
         {
             using (var game = new Game1())
             {
-                Game1.CurrentPlatform = Enums.Platform.GL;
+                Game1.CurrentPlatform = Enums.Platform.DX;
                 game.Run();
             }
 

@@ -146,8 +146,9 @@ namespace Nazdar
 
         public enum Platform
         {
-            GL, // Linux, but also Windows (DX)
-            UWP,
+            GL,     // Linux
+            DX,     // Windows
+            UWP,    // Xbox
             Android
         }
 

@@ -11,6 +11,7 @@ namespace Nazdar.Shared
         {
             settingsFile.Save(new
             {
+                fullscreen = Game.Graphics.IsFullScreen,
                 musicMuted = MediaPlayer.IsMuted,
                 soundsVolume = SoundEffect.MasterVolume,
                 vibrations = Game1.Vibrations,
@@ -27,12 +28,24 @@ namespace Nazdar.Shared
                 MediaPlayer.IsMuted = false;
                 SoundEffect.MasterVolume = 1;
                 Game1.Vibrations = true;
+#if DEBUG
+                Game.Graphics.IsFullScreen = false;
+#else
+                Game.Graphics.IsFullScreen = true;
+#endif
                 Game.Graphics.ApplyChanges();
 
                 // Initialize translation with system language
                 Nazdar.Shared.Translation.Translation.Initialize();
 
                 return;
+            }
+
+            // OR load values from settings file
+            if (settings.ContainsKey("fullscreen") && Game.Graphics.IsFullScreen != (bool)settings.fullscreen)
+            {
+                Game.Graphics.IsFullScreen = !Game.Graphics.IsFullScreen;
+                Game.Graphics.ApplyChanges();
             }
 
             if (settings.ContainsKey("musicMuted"))

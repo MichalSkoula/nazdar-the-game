@@ -67,6 +67,12 @@ namespace Nazdar.Screens
             var vibrationsButton = new Button(Offset.MenuX, 225 + (2 * 27), null, ButtonSize.Medium, Translation.Get("menu.vibrations"), text: Translation.Get("menu.off"));
             buttons.Add("vibrationsButton", vibrationsButton);
 
+            // fullscreen - only on desktop
+            if (Game1.CurrentPlatform == Platform.GL || Game1.CurrentPlatform == Platform.DX)
+            {
+                buttons.Add("fullscreenButton", new Button(Offset.MenuX + vibrationsButton.Hitbox.Width + 10, 225 + (2 * 27), null, ButtonSize.Medium, Translation.Get("menu.fullscreen"), text: Translation.Get("menu.off")));
+            }
+
             buttons.Add("exitButton", new Button(Offset.MenuX, 160 + (6 * 27), null, ButtonSize.Medium, Translation.Get("menu.exit")));
 #if DEBUG
             if (Game1.CurrentPlatform != Platform.Android)
@@ -113,6 +119,19 @@ namespace Nazdar.Screens
                 Audio.PlaySound("Survival");
                 this.Game.SaveSlot = Save.Survival;
                 this.Game.LoadScreen(typeof(Screens.SurvivalScreen));
+            }
+
+            // settings - fullscreen
+            if (this.buttons.ContainsKey("fullscreenButton"))
+            {
+                if (Controls.Keyboard.HasBeenPressed(Keys.F) || Controls.Keyboard.HasBeenPressed(Keys.F11) || this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked())
+                {
+                    this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
+                    this.Game.Graphics.ApplyChanges();
+                    Settings.SaveSettings(Game);
+                }
+
+                this.buttons.GetValueOrDefault("fullscreenButton").Text = this.Game.Graphics.IsFullScreen ? Translation.Get("menu.on") : Translation.Get("menu.off");
             }
 
             // settings - vibrations
