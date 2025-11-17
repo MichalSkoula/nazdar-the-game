@@ -13,11 +13,8 @@ namespace Nazdar.Shared.Translation
             get { return currentLanguage; }
             set
             {
-                if (currentLanguage != value)
-                {
-                    currentLanguage = value;
-                    LoadLanguage(value);
-                }
+                currentLanguage = value;
+                LoadLanguage(value);
             }
         }
 

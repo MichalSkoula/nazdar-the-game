@@ -67,8 +67,20 @@ namespace Nazdar
             // Load settings first to determine fullscreen state
             Settings.LoadSettings(this);
 
-            // Platform-specific fullscreen setup based on loaded settings
-            if (CurrentPlatform == Enums.Platform.DX)
+            if (CurrentPlatform == Enums.Platform.Android)
+            {
+                // on Android, lets go fullscreen
+                this.Graphics.IsFullScreen = true;
+                this.Graphics.ApplyChanges();
+            }
+            else if (CurrentPlatform == Enums.Platform.GL)
+            {
+                // on pc, adjust default window size
+                this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
+                this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
+                this.Graphics.ApplyChanges();
+            }
+            else if (CurrentPlatform == Enums.Platform.DX)
             {
                 // Use borderless windowed fullscreen for DX platform only
                 // This prevents minimization on first input in DirectX
