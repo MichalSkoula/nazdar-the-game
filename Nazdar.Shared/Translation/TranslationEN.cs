@@ -16,7 +16,6 @@ namespace Nazdar.Shared.Translation
                 { "menu.music", "Music:" },
                 { "menu.sounds", "Sounds:" },
                 { "menu.vibrations", "Vibrations:" },
-                { "menu.fullscreen", "Fullscreen:" },
                 { "menu.language", "Language:" },
                 { "menu.exit", "Exit" },
                 { "menu.on", "On" },

@@ -64,19 +64,18 @@ namespace Nazdar
 
             base.Initialize();
 
-            if (CurrentPlatform == Enums.Platform.Android)
+            // Platform-specific fullscreen setup
+            if (CurrentPlatform == Enums.Platform.GL)
             {
-                // on Android, lets go fullscreen
-                this.Graphics.IsFullScreen = true;
-                this.Graphics.ApplyChanges();
+                // Use borderless windowed fullscreen for GL/DX platform
+                // This prevents minimization on first input in DirectX
+                this.Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                this.Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                this.Graphics.HardwareModeSwitch = false; // Important: prevents true fullscreen mode switch
             }
-            else if (CurrentPlatform == Enums.Platform.GL)
-            {
-                // on pc, adjust default window size
-                this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
-                this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
-                this.Graphics.ApplyChanges();
-            }
+
+            this.Graphics.IsFullScreen = true;
+            this.Graphics.ApplyChanges();
 
             this.SpriteBatch = new SpriteBatch(this.GraphicsDevice);
 
@@ -116,7 +115,6 @@ namespace Nazdar
             Controls.Keyboard.GetState(this.IsActive);
             Controls.Gamepad.GetState(this.IsActive);
             Controls.Mouse.GetState(this.IsActive);
-            Controls.Touch.GetState(this.IsActive);
 
             MessageBuffer.Update(this.DeltaTime);
 
