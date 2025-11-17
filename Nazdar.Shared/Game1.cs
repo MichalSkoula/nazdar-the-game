@@ -64,25 +64,29 @@ namespace Nazdar
 
             base.Initialize();
 
-            if (CurrentPlatform == Enums.Platform.Android)
+            // Load settings first to determine fullscreen state
+            Settings.LoadSettings(this);
+
+            // Platform-specific fullscreen setup based on loaded settings
+            if (CurrentPlatform == Enums.Platform.DX)
             {
-                // on Android, lets go fullscreen
-                this.Graphics.IsFullScreen = true;
-                this.Graphics.ApplyChanges();
-            }
-            else if (CurrentPlatform == Enums.Platform.GL)
-            {
-                // on pc, adjust default window size
-                this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
-                this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
-                this.Graphics.ApplyChanges();
-            }
-            else if (CurrentPlatform == Enums.Platform.DX)
-            {
-                // on pc, adjust default window size
-                this.Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-                this.Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                // Use borderless windowed fullscreen for DX platform only
+                // This prevents minimization on first input in DirectX
                 this.Graphics.HardwareModeSwitch = false; // Important: prevents true fullscreen mode switch
+                
+                if (this.Graphics.IsFullScreen)
+                {
+                    // If fullscreen is enabled, use full screen resolution
+                    this.Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                    this.Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                }
+                else
+                {
+                    // If windowed mode, use default window size
+                    this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
+                    this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
+                }
+                
                 this.Graphics.ApplyChanges();
             }
 
@@ -90,9 +94,6 @@ namespace Nazdar
 
             // internal resolution
             this.RenderTarget = new RenderTarget2D(this.GraphicsDevice, Enums.Screen.Width, Enums.Screen.Height);
-
-            // load settings
-            Settings.LoadSettings(this);
 
             // start it with this scene
 #if DEBUG
@@ -151,6 +152,32 @@ namespace Nazdar
             {
                 this.screenManager.LoadScreen((Screen)screen);
             }
+        }
+
+        /// <summary>
+        /// Toggle fullscreen mode with proper handling for DX platform
+        /// </summary>
+        public void ToggleFullscreen()
+        {
+            if (CurrentPlatform == Enums.Platform.DX)
+            {
+                // For DX platform, we need to adjust window size when toggling fullscreen
+                if (this.Graphics.IsFullScreen)
+                {
+                    // Switching to windowed mode - use default window size
+                    this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
+                    this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
+                }
+                else
+                {
+                    // Switching to fullscreen - use full screen resolution
+                    this.Graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+                    this.Graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+                }
+            }
+
+            this.Graphics.IsFullScreen = !this.Graphics.IsFullScreen;
+            this.Graphics.ApplyChanges();
         }
 
         // draw renderTarget to screen

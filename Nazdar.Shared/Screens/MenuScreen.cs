@@ -126,8 +126,7 @@ namespace Nazdar.Screens
             {
                 if (Controls.Keyboard.HasBeenPressed(Keys.F) || Controls.Keyboard.HasBeenPressed(Keys.F11) || this.buttons.GetValueOrDefault("fullscreenButton").HasBeenClicked())
                 {
-                    this.Game.Graphics.IsFullScreen = !this.Game.Graphics.IsFullScreen;
-                    this.Game.Graphics.ApplyChanges();
+                    this.Game.ToggleFullscreen();
                     Settings.SaveSettings(Game);
                 }
 
