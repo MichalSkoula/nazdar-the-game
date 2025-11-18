@@ -72,9 +72,4 @@
 		<Content Include="Icon.ico" CopyToPublishDirectory="Always" />
 		<Content Include="README.md" CopyToPublishDirectory="Always" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Update="SDL2.dll">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
-	</ItemGroup>
 </Project>

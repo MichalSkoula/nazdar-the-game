@@ -59,6 +59,7 @@ namespace Nazdar.Screens
             string action = Game1.CurrentPlatform switch
             {
                 Platform.GL => Translation.Get("splash.pressEnter"),
+                Platform.DX => Translation.Get("splash.pressEnter"),
                 Platform.UWP => Translation.Get("splash.pressButtonA"),
                 Platform.Android => Translation.Get("splash.touchToContinue"),
                 _ => throw new System.NotImplementedException(),
