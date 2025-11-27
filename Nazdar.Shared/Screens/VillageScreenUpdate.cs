@@ -334,7 +334,7 @@ namespace Nazdar.Screens
                 return;
             }
 
-            // make list of all wounded, in prioritized order
+            // make list of all wounded
             List<BasePerson> wounded = new List<BasePerson>();
             if (this.player.Health < 100)
             {
@@ -344,48 +344,54 @@ namespace Nazdar.Screens
             wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
             wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
 
-            // maybe free medics?
+            // free medics from patients that no longer exist or are fully healed
             foreach (Medic medic in this.medics)
             {
-                // does the patient exists??
-                if (!wounded.Where(w => w == medic.DeploymentPerson).Any())
+                if (!wounded.Contains(medic.DeploymentPerson))
                 {
                     medic.DeploymentPerson = null;
                 }
 
-                // remove deployment, it the job is done
                 if (medic.DeploymentPerson?.Health == 100)
                 {
                     medic.DeploymentPerson = null;
                 }
             }
 
-            // pair medics to wounded
+            // pair medics to wounded using priority scoring
             if (wounded.Count > 0)
             {
-                foreach (var w in wounded)
+                // prioritize player first - always get a medic if wounded
+                if (this.player.Health < 100)
                 {
-                    // already being healed?
-                    bool alreadyBeingHealed = false;
-                    foreach (var medic in this.medics)
+                    bool playerBeingHealed = this.medics.Any(m => m.DeploymentPerson == this.player);
+                    if (!playerBeingHealed)
                     {
-                        if (medic.DeploymentPerson == w)
+                        var nearestToPlayer = this.medics.Where(m => m.DeploymentPerson == null).OrderBy(m => Math.Abs(m.X - this.player.X)).FirstOrDefault();
+                        if (nearestToPlayer != null)
                         {
-                            alreadyBeingHealed = true;
-                            break;
+                            nearestToPlayer.DeploymentPerson = this.player;
                         }
                     }
+                }
 
-                    if (alreadyBeingHealed)
+                // for other wounded, use priority scoring
+                var freeMedics = this.medics.Where(m => m.DeploymentPerson == null).ToList();
+                foreach (var medic in freeMedics)
+                {
+                    var unassignedWounded = wounded.Where(w => 
+                        w != this.player && 
+                        !this.medics.Any(m => m.DeploymentPerson == w)
+                    ).Select(w => new
                     {
-                        continue;
-                    }
+                        Person = w,
+                        // optimized priority: health (0-100) * 1.5 - distance normalized (0-100)
+                        Priority = (100 - w.Health) * 1.5f - (Math.Abs(w.X - medic.X) / (float)MapWidth * 100)
+                    }).OrderByDescending(x => x.Priority).FirstOrDefault();
 
-                    // get nearest medic
-                    var nearestMedic = this.medics.Where(m => m.DeploymentPerson == null).OrderBy(m => Math.Abs(m.X - w.X)).FirstOrDefault();
-                    if (nearestMedic != null)
+                    if (unassignedWounded != null)
                     {
-                        nearestMedic.DeploymentPerson = w;
+                        medic.DeploymentPerson = unassignedWounded.Person;
                     }
                 }
             }
