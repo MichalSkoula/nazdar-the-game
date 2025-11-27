@@ -42,7 +42,8 @@ namespace Nazdar.Screens
 
             // stats (screen-space)
             int leftOffset = Offset.StatusBarX;
-            int rightOffset = Game1.CurrentPlatform == Enums.Platform.Android ? 370 : 490;
+            // space for touch controls
+            int rightOffset = Touch.Available ? 360 : 490;
 
             // healthbar
             this.Game.SpriteBatch.DrawRectangle(
