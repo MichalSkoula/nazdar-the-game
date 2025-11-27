@@ -243,20 +243,21 @@ namespace Nazdar.Screens
 
         private void UpdateSoldiers()
         {
-            bool left = true;
-            foreach (Soldier soldier in this.soldiers)
+            // one half to left tower, other to right tower
+            int halfCount = this.soldiers.Count / 2;
+            
+            for (int i = 0; i < this.soldiers.Count; i++)
             {
-                left = !left;
+                Soldier soldier = this.soldiers[i];
+                bool isLeftSide = i < halfCount;
 
                 soldier.DeploymentBuilding = null;
-                if (left && this.leftmostTower != null)
+                if (isLeftSide && this.leftmostTower != null)
                 {
-                    // leftmost tower exists?
                     soldier.DeploymentBuilding = this.leftmostTower;
                 }
-                else if (!left && this.rightmostTower != null)
+                else if (!isLeftSide && this.rightmostTower != null)
                 {
-                    // rightmost tower exists?
                     soldier.DeploymentBuilding = this.rightmostTower;
                 }
 
