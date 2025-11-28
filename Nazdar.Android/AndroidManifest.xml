@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.skoula.nazdar.android" android:versionCode="16" android:versionName="0.20">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.skoula.nazdar.android" android:versionCode="17" android:versionName="0.21">
 	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<application android:label="Nazdar.Android"></application>
