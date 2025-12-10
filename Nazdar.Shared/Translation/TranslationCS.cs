@@ -168,7 +168,7 @@ namespace Nazdar.Shared.Translation
                     { "mission6.goals", "CILE MISE" },
                     { "mission6.goal1", "Oprav lokomotivu a jed na vychod" },
                     { "mission6.tips", "TIPY" },
-                    { "mission6.tip1", "Nelze postavit Munièní sklad - tva budoucnost" },
+                    { "mission6.tip1", "Nelze postavit Municni sklad - tva budoucnost" },
                     { "mission6.tip2", "zavisi na tvych hrdinskych vojacich." },
                     { "mission6.tip3", "Cholera uderila tvrde! Mel bych mit" },
                     { "mission6.tip4", "hodne mediku." },
