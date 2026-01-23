@@ -11,7 +11,7 @@ Homepage + Download: https://skoula.cz/nazdar
 
 ## LICENCE
 
-**GPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**
+**AGPL3 https://github.com/MichalSkoula/nazdar-the-game/blob/master/LICENSE.md**
 
 ## CREDITS
 
