@@ -200,6 +200,10 @@ namespace Nazdar.Screens
         private bool Load()
         {
             dynamic saveData = this.saveFile.Load();
+
+            // statics survive screen transitions - a fresh game (no save) must start from level 1
+            Game1.CenterLevel = 1;
+            Game1.TowersLevel = 1;
             if (saveData == null)
             {
                 return false;
@@ -210,13 +214,11 @@ namespace Nazdar.Screens
                 this.Game.Village = (int)saveData.village;
             }
 
-            Game1.CenterLevel = 1;
             if (saveData.ContainsKey("centerLevel"))
             {
                 Game1.CenterLevel = (int)saveData.centerLevel;
             }
 
-            Game1.TowersLevel = 1;
             if (saveData.ContainsKey("towersLevel"))
             {
                 Game1.TowersLevel = (int)saveData.towersLevel;
