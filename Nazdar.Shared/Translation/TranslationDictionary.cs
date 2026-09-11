@@ -239,6 +239,7 @@ namespace Nazdar.Shared.Translation
             { "action.upgrade", (cs: "Vylepsit", en: "Upgrade") },
             { "action.buy", (cs: "Koupit", en: "Buy") },
             { "action.repair", (cs: "Opravit", en: "Repair") },
+            { "tower.upgrade", (cs: "tuto vez - sila {0} => {1}", en: "this tower - strength: {0} => {1}") },
 
             // Building names
             { "building.base", (cs: "Zakladnu", en: "Base") },

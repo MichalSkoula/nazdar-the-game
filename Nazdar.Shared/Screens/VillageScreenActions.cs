@@ -126,11 +126,6 @@ namespace Nazdar.Screens
             return Game1.CenterLevel * 2;
         }
 
-        private int GetUpgradeAttackAdditionTowers()
-        {
-            return Game1.TowersLevel * 2;
-        }
-
         private void Upgrade()
         {
             // upgrade soldiers etc
@@ -156,12 +151,6 @@ namespace Nazdar.Screens
 
             // only one upgrade a day
             this.center.HasBeenUpgradedToday = true;
-
-            // also towers
-            foreach (Tower tower in this.towers)
-            {
-                tower.Caliber = Tower.DefaultCaliber + this.GetUpgradeAttackAdditionTowers();
-            }
         }
     }
 }

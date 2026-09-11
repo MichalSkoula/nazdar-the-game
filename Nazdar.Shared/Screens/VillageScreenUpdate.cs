@@ -1232,23 +1232,18 @@ namespace Nazdar.Screens
                                 Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingStarted"), MessageType.Info);
                                 Audio.PlaySound("Rock");
                                 this.player.Money -= this.player.ActionCost;
-                                this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess, caliber: Tower.DefaultCaliber + this.GetUpgradeAttackAdditionTowers()));
+                                this.towers.Add(new Tower(buildingSpot.X, buildingSpot.Y, Building.Status.InProcess));
                             }
                         }
                     }
                     else
                     {
                         var tower = towers.First();
-                        // upgrade is possible, if:
-                        // - tower is built
-                        // AND tower level is less then village level
-                        // OR village is 0 (survival) and tower level is less then max village
-                        if (tower.Status == Building.Status.Built && ((Game1.TowersLevel < this.Game.Village) || (this.Game.Village == 0 && Game1.TowersLevel < Game1.MaxVillage)))
+                        if (tower.Status == Building.Status.Built && tower.Level < Tower.MaxLevel)
                         {
                             this.player.Action = Enums.PlayerAction.Upgrade;
-                            // upgrade costs tower level *2 (for survival, *4)
-                            this.player.ActionCost = Game1.TowersLevel * (this.Game.Village == 0 ? 4 : 2);
-                            this.player.ActionName = Translation.Get("building.defenseTower");
+                            this.player.ActionCost = Tower.UpgradeCost;
+                            this.player.ActionName = Translation.Get("tower.upgrade", tower.Caliber, Tower.UpgradedCaliber);
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
@@ -1257,10 +1252,7 @@ namespace Nazdar.Screens
                                     Game1.MessageBuffer.AddMessage(Translation.Get("message.towerUpgraded"), MessageType.Info);
                                     Audio.PlaySound("Rock");
                                     this.player.Money -= this.player.ActionCost;
-                                    Game1.TowersLevel++;
-
-                                    // upgrade caliber
-                                    this.Upgrade();
+                                    tower.Upgrade();
                                 }
                                 else
                                 {

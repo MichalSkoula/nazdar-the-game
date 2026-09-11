@@ -13,16 +13,19 @@ namespace Nazdar.Objects
         private int shootPower = 1;
         private readonly int shootRate = 95; // 0 fastest, 100 slowest
         public bool CanFire { get; set; }
-        public const int DefaultCaliber = 20;
+        public const int UpgradeCost = 8;
+        public const int DefaultCaliber = 22;
+        public const int UpgradedCaliber = 24;
+        public const int DefaultLevel = 1;
+        public const int MaxLevel = 2;
+        public int Level { get; private set; }
 
-        public Tower(int x, int y, Building.Status status, float ttb = 4, int caliber = DefaultCaliber) : base()
+        public Tower(int x, int y, Building.Status status, float ttb = 4, int level = DefaultLevel) : base()
         {
-            this.Sprite = Assets.Images["Tower"];
-            this.Anim = new Animation(Assets.Images["TowerFiring"], 4, 6);
+            this.SetLevel(level);
             this.Hitbox = new Rectangle(x, y, this.Sprite.Width, this.Sprite.Height);
             this.Status = status;
             this.TimeToBuild = ttb;
-            this.Caliber = caliber;
             this.Type = Building.Type.Tower;
 
             this.particleSmoke = new ParticleSource(
@@ -32,6 +35,26 @@ namespace Nazdar.Objects
                0.5f,
                Assets.ParticleTextureRegions["Smoke"]
             );
+        }
+
+        public bool Upgrade()
+        {
+            if (this.Level >= MaxLevel)
+            {
+                return false;
+            }
+
+            this.SetLevel(this.Level + 1);
+            return true;
+        }
+
+        private void SetLevel(int level)
+        {
+            this.Level = level >= MaxLevel ? MaxLevel : DefaultLevel;
+            bool upgraded = this.Level == MaxLevel;
+            this.Sprite = Assets.Images[upgraded ? "TowerUpgraded" : "Tower"];
+            this.Anim = new Animation(Assets.Images[upgraded ? "TowerUpgradedFiring" : "TowerFiring"], 4, 6);
+            this.Caliber = upgraded ? UpgradedCaliber : DefaultCaliber;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -115,7 +138,7 @@ namespace Nazdar.Objects
                 this.Status,
                 Bullets = this.Bullets.Select(b => new { b.Hitbox, b.Direction, b.Caliber }).ToList(),
                 this.TimeToBuild,
-                this.Caliber,
+                this.Level,
             };
         }
 

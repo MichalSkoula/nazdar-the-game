@@ -203,7 +203,6 @@ namespace Nazdar.Screens
 
             // statics survive screen transitions - a fresh game (no save) must start from level 1
             Game1.CenterLevel = 1;
-            Game1.TowersLevel = 1;
             if (saveData == null)
             {
                 return false;
@@ -217,11 +216,6 @@ namespace Nazdar.Screens
             if (saveData.ContainsKey("centerLevel"))
             {
                 Game1.CenterLevel = (int)saveData.centerLevel;
-            }
-
-            if (saveData.ContainsKey("towersLevel"))
-            {
-                Game1.TowersLevel = (int)saveData.towersLevel;
             }
 
             if (saveData.ContainsKey("firstRun"))
@@ -396,7 +390,8 @@ namespace Nazdar.Screens
             {
                 foreach (var data in saveData.GetValue("towers"))
                 {
-                    var newTower = new Tower((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild, (int)data.Caliber);
+                    int level = data.ContainsKey("Level") ? (int)data.Level : Tower.DefaultLevel;
+                    var newTower = new Tower((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (float)data.TimeToBuild, level);
                     foreach (var bulletData in data.GetValue("Bullets"))
                     {
                         newTower.Bullets.Add(new Bullet((int)bulletData.Hitbox.X, (int)bulletData.Hitbox.Y, (Direction)bulletData.Direction, (int)bulletData.Caliber, BulletType.Cannonball));
@@ -418,7 +413,6 @@ namespace Nazdar.Screens
                 this.dayPhaseTimer,
                 village = this.Game.Village,
                 centerLevel = Game1.CenterLevel,
-                towersLevel = Game1.TowersLevel,
                 firstRun = this.Game.FirstRun,
                 skyTtl = this.sky.Ttl,
                 skyDropType = this.sky.Type,

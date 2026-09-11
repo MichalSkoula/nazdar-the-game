@@ -77,8 +77,10 @@ namespace Nazdar
             Assets.Images["Arsenal"] = content.Load<Texture2D>("Buildings/Arsenal");
             Assets.Images["ArsenalRuins"] = content.Load<Texture2D>("Buildings/ArsenalRuins");
             Assets.Images["Tower"] = content.Load<Texture2D>("Buildings/Tower");
+            Assets.Images["TowerUpgraded"] = content.Load<Texture2D>("Buildings/Tower");
             Assets.Images["TowerRuins"] = content.Load<Texture2D>("Buildings/TowerRuins");
             Assets.Images["TowerFiring"] = content.Load<Texture2D>("Buildings/Tower_firing");
+            Assets.Images["TowerUpgradedFiring"] = content.Load<Texture2D>("Buildings/Tower_firing");
             Assets.Images["Farm"] = content.Load<Texture2D>("Buildings/Farm");
             Assets.Images["FarmRuins"] = content.Load<Texture2D>("Buildings/FarmRuins");
             Assets.Images["Hospital"] = content.Load<Texture2D>("Buildings/Hospital");
