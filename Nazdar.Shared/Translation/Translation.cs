@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using System.Globalization;
 
 namespace Nazdar.Shared.Translation
 {
     public static class Translation
     {
-        private static Dictionary<string, string> translations = new Dictionary<string, string>();
         private static string currentLanguage = "en";
 
         public static string CurrentLanguage
@@ -13,16 +11,17 @@ namespace Nazdar.Shared.Translation
             get { return currentLanguage; }
             set
             {
-                currentLanguage = value;
-                LoadLanguage(value);
+                currentLanguage = value == "cs" ? "cs" : "en";
             }
         }
 
         public static void Initialize()
         {
+            TranslationDictionary.Validate();
+
             // Detect system language
             string systemLanguage = DetectSystemLanguage();
-            LoadLanguage(systemLanguage);
+            CurrentLanguage = systemLanguage;
         }
 
         private static string DetectSystemLanguage()
@@ -43,26 +42,11 @@ namespace Nazdar.Shared.Translation
             return "en";
         }
 
-        private static void LoadLanguage(string language)
-        {
-            currentLanguage = language;
-            translations.Clear();
-
-            // Load translations from appropriate class
-            if (language == "cs")
-            {
-                translations = TranslationCS.GetTranslations();
-            }
-            else
-            {
-                translations = TranslationEN.GetTranslations();
-            }
-        }
-
         public static string Get(string key, params object[] args)
         {
-            if (translations.TryGetValue(key, out string value))
+            if (TranslationDictionary.Values.TryGetValue(key, out var values))
             {
+                string value = currentLanguage == "cs" ? values.cs : values.en;
                 if (args.Length > 0)
                 {
                     return string.Format(value, args);

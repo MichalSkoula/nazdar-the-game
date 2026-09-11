@@ -85,7 +85,7 @@ namespace Nazdar
                 // Use borderless windowed fullscreen for DX platform only
                 // This prevents minimization on first input in DirectX
                 this.Graphics.HardwareModeSwitch = false; // Important: prevents true fullscreen mode switch
-                
+
                 if (this.Graphics.IsFullScreen)
                 {
                     // If fullscreen is enabled, use full screen resolution
@@ -98,7 +98,7 @@ namespace Nazdar
                     this.Graphics.PreferredBackBufferWidth = Enums.Screen.WidthDefault;
                     this.Graphics.PreferredBackBufferHeight = Enums.Screen.HeightDefault;
                 }
-                
+
                 this.Graphics.ApplyChanges();
             }
 

@@ -61,8 +61,8 @@ namespace Nazdar.Screens
 
         // some settings - random 0-X == 1 ----------------------------------------------
         // new enemy settings
-        // every day, it gets -2
-        // every village, it gets -20
+        // every day, it gets -4
+        // every village, it gets -10
         private static readonly int newEnemyDefaultProbability = 260;
         private readonly int newEnemyProbabilityLowLimit = 16;
         private static readonly int newHomelessDefaultProbability = 512 * 4;

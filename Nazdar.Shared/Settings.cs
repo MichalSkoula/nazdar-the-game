@@ -28,7 +28,7 @@ namespace Nazdar.Shared
                 MediaPlayer.IsMuted = false;
                 SoundEffect.MasterVolume = 1;
                 Game1.Vibrations = true;
-                
+
                 // Set default fullscreen state
 #if DEBUG
                 Game.Graphics.IsFullScreen = false;

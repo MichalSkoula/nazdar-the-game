@@ -245,7 +245,7 @@ namespace Nazdar.Screens
         {
             // one half to left tower, other to right tower
             int halfCount = this.soldiers.Count / 2;
-            
+
             for (int i = 0; i < this.soldiers.Count; i++)
             {
                 Soldier soldier = this.soldiers[i];
@@ -379,8 +379,8 @@ namespace Nazdar.Screens
                 var freeMedics = this.medics.Where(m => m.DeploymentPerson == null).ToList();
                 foreach (var medic in freeMedics)
                 {
-                    var unassignedWounded = wounded.Where(w => 
-                        w != this.player && 
+                    var unassignedWounded = wounded.Where(w =>
+                        w != this.player &&
                         !this.medics.Any(m => m.DeploymentPerson == w)
                     ).Select(w => new
                     {
