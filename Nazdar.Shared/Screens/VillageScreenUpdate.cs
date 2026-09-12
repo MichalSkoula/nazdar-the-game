@@ -57,6 +57,7 @@ namespace Nazdar.Screens
             this.parallaxManager.Update((int)this.camera.Position.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));
 
             // game objects
+            this.UpdateEnemyContactStates();
             this.UpdateEnemies();
             this.UpdatePigs();
             this.UpdateLenins();
@@ -133,6 +134,20 @@ namespace Nazdar.Screens
             foreach (Enemy enemy in this.enemies)
             {
                 enemy.Update(this.Game.DeltaTime);
+            }
+        }
+
+        private void UpdateEnemyContactStates()
+        {
+            foreach (Enemy enemy in this.enemies)
+            {
+                enemy.InContact = !enemy.Dead && (
+                    (!this.player.Dead && enemy.Hitbox.Intersects(this.player.Hitbox)) ||
+                    this.soldiers.Any(soldier => !soldier.Dead && enemy.Hitbox.Intersects(soldier.Hitbox)) ||
+                    this.peasants.Any(peasant => !peasant.Dead && enemy.Hitbox.Intersects(peasant.Hitbox)) ||
+                    this.farmers.Any(farmer => !farmer.Dead && enemy.Hitbox.Intersects(farmer.Hitbox)) ||
+                    this.medics.Any(medic => !medic.Dead && enemy.Hitbox.Intersects(medic.Hitbox))
+                );
             }
         }
 

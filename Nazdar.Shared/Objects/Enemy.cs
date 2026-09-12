@@ -15,6 +15,13 @@ namespace Nazdar.Objects
         public const int DefaultCaliber = 16;
 
         private readonly List<Animation> animations = new List<Animation>();
+        private float contactMovementRemainder;
+
+        /// <summary>
+        /// Set by VillageScreen before this enemy moves. A live defender whose
+        /// hitbox overlaps this enemy reduces only this enemy's movement.
+        /// </summary>
+        public bool InContact { get; set; }
 
         public Enemy(int x, int y, Direction direction, int health = DefaultHealth, int caliber = DefaultCaliber, int villageNumber = 1) : base()
         {
@@ -66,13 +73,28 @@ namespace Nazdar.Objects
 
             // is enemy moving?
             bool isMoving = true;
+            int movement = (int)(deltaTime * this.Speed);
+            if (this.InContact)
+            {
+                // Positions are integral pixels. Preserve an exact 50% ratio
+                // over consecutive updates rather than rounding the slowed
+                // distance to zero every frame at the 60 FPS target rate.
+                this.contactMovementRemainder += movement * 0.5f;
+                movement = (int)this.contactMovementRemainder;
+                this.contactMovementRemainder -= movement;
+            }
+            else
+            {
+                this.contactMovementRemainder = 0;
+            }
+
             if (this.Direction == Direction.Right)
             {
-                this.X += (int)(deltaTime * this.Speed);
+                this.X += movement;
             }
             else if (this.Direction == Direction.Left)
             {
-                this.X -= (int)(deltaTime * this.Speed);
+                this.X -= movement;
             }
             else
             {
