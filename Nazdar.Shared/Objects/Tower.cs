@@ -18,6 +18,7 @@ namespace Nazdar.Objects
         public const int UpgradedCaliber = 24;
         public const int DefaultLevel = 1;
         public const int MaxLevel = 2;
+        private const int FiringFrameCount = 5;
         public int Level { get; private set; }
 
         public Tower(int x, int y, Building.Status status, float ttb = 4, int level = DefaultLevel) : base()
@@ -53,7 +54,11 @@ namespace Nazdar.Objects
             this.Level = level >= MaxLevel ? MaxLevel : DefaultLevel;
             bool upgraded = this.Level == MaxLevel;
             this.Sprite = Assets.Images[upgraded ? "TowerUpgraded" : "Tower"];
-            this.Anim = new Animation(Assets.Images[upgraded ? "TowerUpgradedFiring" : "TowerFiring"], 4, 6);
+            this.Anim = new Animation(
+                Assets.Images[upgraded ? "TowerUpgradedFiring" : "TowerFiring"],
+                FiringFrameCount,
+                8
+            );
             this.Caliber = upgraded ? UpgradedCaliber : DefaultCaliber;
         }
 

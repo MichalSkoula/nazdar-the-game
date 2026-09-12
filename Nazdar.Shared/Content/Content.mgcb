@@ -254,6 +254,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Tower_firing.png
 
+#begin Buildings/Tower2_firing.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Tower2_firing.png
+
 #begin Buildings/Tower.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -265,6 +277,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Buildings/Tower.png
+
+#begin Buildings/Tower2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Tower2.png
 
 #begin Buildings/TowerRuins.png
 /importer:TextureImporter
