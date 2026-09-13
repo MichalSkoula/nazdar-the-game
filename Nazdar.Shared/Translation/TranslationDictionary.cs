@@ -239,7 +239,7 @@ namespace Nazdar.Shared.Translation
             { "action.upgrade", (cs: "Vylepsit", en: "Upgrade") },
             { "action.buy", (cs: "Koupit", en: "Buy") },
             { "action.repair", (cs: "Opravit", en: "Repair") },
-            { "tower.upgrade", (cs: "tuto vez - sila {0} => {1}", en: "this tower - strength: {0} => {1}") },
+            { "tower.upgradeEffect", (cs: "Utok: {0} => {1}", en: "Attack: {0} => {1}") },
             { "center.upgradeEffect", (cs: "Utok vsech legionaru: +{0}", en: "All legionnaires' attack: +{0}") },
 
             // Building names

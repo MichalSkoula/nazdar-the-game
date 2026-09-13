@@ -1260,7 +1260,8 @@ namespace Nazdar.Screens
                         {
                             this.player.Action = Enums.PlayerAction.Upgrade;
                             this.player.ActionCost = Tower.UpgradeCost;
-                            this.player.ActionName = Translation.Get("tower.upgrade", tower.Caliber, Tower.UpgradedCaliber);
+                            this.player.ActionName = Translation.Get("building.defenseTower");
+                            this.player.ActionDescription = Translation.Get("tower.upgradeEffect", tower.Caliber, Tower.UpgradedCaliber);
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
