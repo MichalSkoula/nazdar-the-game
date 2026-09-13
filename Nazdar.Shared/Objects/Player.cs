@@ -81,6 +81,7 @@ namespace Nazdar.Objects
         public Enums.PlayerAction? Action { get; set; }
         public int ActionCost { get; set; }
         public string ActionName { get; set; }
+        public string ActionDescription { get; set; }
         public bool ActionEnabled { get; set; } = true;
 
         private bool canJump = true;
@@ -275,16 +276,17 @@ namespace Nazdar.Objects
             {
                 // can afford?
                 float alpha = this.ActionCost <= this.Money && this.ActionEnabled ? 1f : 0.5f;
+                int descriptionOffset = string.IsNullOrEmpty(this.ActionDescription) ? 0 : 12;
 
                 // coins
                 spriteBatch.Draw(
                     Assets.Images["CoinStatic"],
-                    new Vector2(this.X - 2, this.Y - 26),
+                    new Vector2(this.X - 2, this.Y - 26 - descriptionOffset),
                     Color.White * alpha);
                 spriteBatch.DrawString(
                      Assets.Fonts["Small"],
                      " x " + this.ActionCost.ToString(),
-                     new Vector2(this.X + 13, this.Y - 24),
+                     new Vector2(this.X + 13, this.Y - 24 - descriptionOffset),
                      MyColor.White * alpha
                  );
 
@@ -302,9 +304,19 @@ namespace Nazdar.Objects
                 spriteBatch.DrawString(
                     Assets.Fonts["Small"],
                     actionText + " " + this.ActionName,
-                    new Vector2(this.X, this.Y - 10),
+                    new Vector2(this.X, this.Y - 10 - descriptionOffset),
                     MyColor.White * alpha
                 );
+
+                if (!string.IsNullOrEmpty(this.ActionDescription))
+                {
+                    spriteBatch.DrawString(
+                        Assets.Fonts["Small"],
+                        this.ActionDescription,
+                        new Vector2(this.X, this.Y - 10),
+                        MyColor.White * alpha
+                    );
+                }
             }
         }
 

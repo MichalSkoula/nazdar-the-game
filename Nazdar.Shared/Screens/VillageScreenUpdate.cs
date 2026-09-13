@@ -923,6 +923,7 @@ namespace Nazdar.Screens
             this.player.Action = null;
             this.player.ActionCost = 0;
             this.player.ActionName = null;
+            this.player.ActionDescription = null;
             this.player.ActionEnabled = true;
 
             foreach (var buildingSpot in this.buildingSpots)
@@ -967,6 +968,7 @@ namespace Nazdar.Screens
                             this.player.ActionCost = Center.CostMax;
                         }
                         this.player.ActionName = this.center?.Name ?? Translation.Get("building.base");
+                        this.player.ActionDescription = Translation.Get("center.upgradeEffect", 2);
 
                         if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                         {
@@ -978,7 +980,7 @@ namespace Nazdar.Screens
                                 Game1.CenterLevel++;
 
                                 // upgrade, to another village, etc
-                                this.Upgrade();
+                                this.UpgradeCenter();
                             }
                             else
                             {

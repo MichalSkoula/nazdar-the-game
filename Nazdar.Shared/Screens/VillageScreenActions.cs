@@ -123,10 +123,10 @@ namespace Nazdar.Screens
 
         private int GetUpgradeAttackAddition()
         {
-            return Game1.CenterLevel * 2;
+            return (Game1.CenterLevel - 1) * 2;
         }
 
-        private void Upgrade()
+        private void UpgradeCenter()
         {
             // upgrade soldiers etc
             foreach (Soldier soldier in this.soldiers)
