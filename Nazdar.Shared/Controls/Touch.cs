@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using Nazdar.Shared;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -91,7 +90,7 @@ namespace Nazdar.Controls
             }
 
             // diagnostic: show how many touches detected
-            Tools.Dump("Touch count: " + currentTouchLocations.Count);
+            // Tools.Dump("Touch count: " + currentTouchLocations.Count);
 
             // Determine if any of the touches are actually inside the game's internal resolution
             bool hasInGameTouch = currentTouchLocations.Any(t =>

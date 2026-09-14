@@ -8,18 +8,29 @@ namespace Nazdar.Objects
     public class Farm : BaseBuilding
     {
         public const int Cost = 4;
+        public const int UpgradeCost = 8;
+        public const int DefaultLevel = 1;
+        public const int MaxLevel = 2;
+        public const int DefaultFarmerCapacity = 4;
+        public const int UpgradedFarmerCapacity = 6;
         public override string Name => Nazdar.Shared.Translation.Translation.Get("building.farm");
 
         public List<Tool> Tools { get; private set; } = new List<Tool>();
         private readonly int toolLimit = 6;
         public const int ToolCost = 1;
         public int ToolsCount => Tools.Count;
+        public int Level { get; private set; }
+        public int FarmerCapacity => this.Level == MaxLevel ? UpgradedFarmerCapacity : DefaultFarmerCapacity;
 
-        public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5) : base()
+        // The left two thirds contain the field and tool crates. The right third is reserved for the upgrade house.
+        private int FieldWidth => (this.Width * 2) / 3;
+        public Rectangle ToolZone => new Rectangle(this.X, this.Y, this.FieldWidth, this.Height);
+        public Rectangle UpgradeZone => new Rectangle(this.X + this.FieldWidth, this.Y, this.Width - this.FieldWidth, this.Height);
+
+        public Farm(int x, int y, Building.Status status, int? toolsCount = 0, float ttb = 5, int level = DefaultLevel) : base()
         {
-            this.Sprite = Assets.Images["Farm"];
-            this.Anim = new Animation(Assets.Images["Farm"], 3, 3);
-            this.Hitbox = new Rectangle(x, y, this.Sprite.Width / 3, this.Sprite.Height);
+            this.SetLevel(level);
+            this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Status = status;
             this.TimeToBuild = ttb;
             this.Type = Building.Type.Farm;
@@ -28,6 +39,24 @@ namespace Nazdar.Objects
             {
                 this.Tools.Add(new Tool());
             }
+        }
+
+        public bool Upgrade()
+        {
+            if (this.Level >= MaxLevel)
+            {
+                return false;
+            }
+
+            this.SetLevel(this.Level + 1);
+            return true;
+        }
+
+        private void SetLevel(int level)
+        {
+            this.Level = level >= MaxLevel ? MaxLevel : DefaultLevel;
+            this.Sprite = Assets.Images[this.Level == MaxLevel ? "FarmUpgraded" : "Farm"];
+            this.Anim = new Animation(this.Sprite, 3, 3);
         }
 
         public bool AddTool()
@@ -86,7 +115,8 @@ namespace Nazdar.Objects
                 this.Hitbox,
                 this.Status,
                 this.ToolsCount,
-                this.TimeToBuild
+                this.TimeToBuild,
+                this.Level
             };
         }
     }

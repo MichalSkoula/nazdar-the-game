@@ -110,6 +110,18 @@
 /processorParam:TextureFormat=Color
 /build:Buildings/Farm.png
 
+#begin Buildings/Farm2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Buildings/Farm2.png
+
 #begin Buildings/FarmRuins.png
 /importer:TextureImporter
 /processor:TextureProcessor

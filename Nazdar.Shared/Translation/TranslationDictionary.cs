@@ -241,6 +241,7 @@ namespace Nazdar.Shared.Translation
             { "action.repair", (cs: "Opravit", en: "Repair") },
             { "tower.upgradeEffect", (cs: "Utok: {0} => {1}", en: "Attack: {0} => {1}") },
             { "center.upgradeEffect", (cs: "Utok vsech legionaru: +{0}", en: "All legionnaires' attack: +{0}") },
+            { "farm.upgradeEffect", (cs: "Pracovni mista: {0} => {1}", en: "Worker capacity: {0} => {1}") },
 
             // Building names
             { "building.base", (cs: "Zakladnu", en: "Base") },

@@ -320,17 +320,26 @@ namespace Nazdar.Screens
 
                 if (builtFarms.Count > 0)
                 {
-                    // distribute farmers to farms
-                    int f = 0; // farm index
-                    int[] farmLimitArray = new int[builtFarms.Count];
-                    for (int i = 0; i < farmers.Count; i++, f++)
+                    // Distribute farmers in turn while respecting each farm's own level-dependent capacity.
+                    int farmIndex = 0;
+                    int[] farmerCounts = new int[builtFarms.Count];
+                    foreach (Farmer farmer in this.farmers)
                     {
-                        f %= builtFarms.Count;
-                        if (farmLimitArray[f] < this.farmLimit)
+                        int farmsChecked = 0;
+                        while (farmsChecked < builtFarms.Count && farmerCounts[farmIndex] >= builtFarms[farmIndex].FarmerCapacity)
                         {
-                            this.farmers.ElementAt(i).DeploymentBuilding = builtFarms[f];
-                            farmLimitArray[f]++;
+                            farmIndex = (farmIndex + 1) % builtFarms.Count;
+                            farmsChecked++;
                         }
+
+                        if (farmsChecked == builtFarms.Count)
+                        {
+                            break;
+                        }
+
+                        farmer.DeploymentBuilding = builtFarms[farmIndex];
+                        farmerCounts[farmIndex]++;
+                        farmIndex = (farmIndex + 1) % builtFarms.Count;
                     }
                 }
             }
@@ -475,7 +484,7 @@ namespace Nazdar.Screens
             // something to get?
             foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
             {
-                this.Pick(farm, false, farm.Tools.Count);
+                this.Pick(farm, false, farm.Tools.Count, farm.ToolZone);
                 break;
             }
             foreach (var armory in this.armories.Where(a => a.WeaponsCount > 0))
@@ -886,7 +895,7 @@ namespace Nazdar.Screens
             {
                 foreach (var peasant in this.peasants)
                 {
-                    if (peasant.Hitbox.Intersects(farm.Hitbox) && farm.ToolsCount > 0)
+                    if (peasant.Hitbox.Intersects(farm.ToolZone) && farm.ToolsCount > 0)
                     {
                         // ok, peasant get tool and turns into farmer
                         Game1.MessageBuffer.AddMessage(Translation.Get("message.peasantToFarmer"), MessageType.Success);
@@ -1313,28 +1322,59 @@ namespace Nazdar.Screens
                         var farm = farms.First();
                         if (farm.Status == Building.Status.Built)
                         {
-                            this.player.Action = Enums.PlayerAction.Create;
-                            this.player.ActionCost = Farm.ToolCost;
-                            this.player.ActionName = new Tool().Name;
+                            // The right third belongs to the upgrade house; the left two thirds contain the tool crates.
+                            bool atUpgradeZone = this.player.Hitbox.Center.X >= farm.UpgradeZone.X;
 
-                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                            // Offer the local farm upgrade only at the house and only while another level is available.
+                            if (atUpgradeZone && farm.Level < Farm.MaxLevel)
                             {
-                                if (this.player.Money >= this.player.ActionCost)
+                                this.player.Action = Enums.PlayerAction.Upgrade;
+                                this.player.ActionCost = Farm.UpgradeCost;
+                                this.player.ActionName = farm.Name;
+                                this.player.ActionDescription = Translation.Get("farm.upgradeEffect", farm.FarmerCapacity, Farm.UpgradedFarmerCapacity);
+
+                                if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                                 {
-                                    if (farm.AddTool())
+                                    if (this.player.Money >= this.player.ActionCost)
                                     {
-                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.toolPurchased"), MessageType.Info);
-                                        Audio.PlaySound("SoldierSpawn");
+                                        farm.Upgrade();
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.buildingUpgraded"), MessageType.Info);
+                                        Audio.PlaySound("Rock");
                                         this.player.Money -= this.player.ActionCost;
                                     }
                                     else
                                     {
-                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.farmFull"), MessageType.Fail);
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
                                     }
                                 }
-                                else
+                            }
+                            // At maximum level the house side intentionally offers no action.
+                            // The field side keeps the original action for producing farmer tools.
+                            else if (!atUpgradeZone)
+                            {
+                                this.player.Action = Enums.PlayerAction.Create;
+                                this.player.ActionCost = Farm.ToolCost;
+                                this.player.ActionName = new Tool().Name;
+
+                                if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                                 {
-                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
+                                    if (this.player.Money >= this.player.ActionCost)
+                                    {
+                                        if (farm.AddTool())
+                                        {
+                                            Game1.MessageBuffer.AddMessage(Translation.Get("message.toolPurchased"), MessageType.Info);
+                                            Audio.PlaySound("SoldierSpawn");
+                                            this.player.Money -= this.player.ActionCost;
+                                        }
+                                        else
+                                        {
+                                            Game1.MessageBuffer.AddMessage(Translation.Get("message.farmFull"), MessageType.Fail);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
+                                    }
                                 }
                             }
                         }
@@ -1554,7 +1594,7 @@ namespace Nazdar.Screens
             // update 
             foreach (Homeless homeless in this.homelesses)
             {
-                // get nearest slum and szukaj around it
+                // Get the nearest slum and search around it.
                 homeless.DeploymentX = this.slums.OrderBy(s => Math.Abs(s.X - homeless.X)).FirstOrDefault().X;
                 homeless.Update(this.Game.DeltaTime);
             }

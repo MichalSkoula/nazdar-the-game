@@ -33,8 +33,9 @@ namespace Nazdar.Screens
             }
         }
 
-        private void Pick(BaseBuilding building, bool always, int things)
+        private void Pick(BaseBuilding building, bool always, int things, Microsoft.Xna.Framework.Rectangle? itemHitbox = null)
         {
+            Microsoft.Xna.Framework.Rectangle targetHitbox = itemHitbox ?? building.Hitbox;
             if (this.peasants.Count > 0 && (always || (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)))
             {
                 var nearestPeasants = this.peasants.OrderBy(p => Math.Abs(p.X - building.X));
@@ -46,7 +47,7 @@ namespace Nazdar.Screens
                         break;
                     }
                     i++;
-                    peasant.IsRunningForItem = building.Hitbox;
+                    peasant.IsRunningForItem = targetHitbox;
                 }
             }
         }

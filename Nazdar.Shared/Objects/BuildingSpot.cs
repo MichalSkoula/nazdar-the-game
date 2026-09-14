@@ -10,7 +10,7 @@ namespace Nazdar.Objects
     {
         public bool Hide { get; set; }
 
-        public override string Name => this.Type.ToString(); // nebo přeložené, ale prozatím toto
+        public override string Name => this.Type.ToString(); // This can be translated later; use the enum name for now.
 
         public BuildingSpot(int x, int y, int width, int height, string type, bool hide = false)
         {

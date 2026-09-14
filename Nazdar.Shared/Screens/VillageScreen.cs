@@ -79,7 +79,6 @@ namespace Nazdar.Screens
         public static int marketMoneyProbability = 512 * 2;
         private readonly int newSkyApocalypseProbability = 512 * 6;
         private readonly int diseaseProbability = 512 * 2;
-        private readonly int farmLimit = 4;
 
         // X positions for deployments
         private Tower? leftmostTower;
@@ -366,7 +365,8 @@ namespace Nazdar.Screens
             {
                 foreach (var data in saveData.GetValue("farms"))
                 {
-                    this.farms.Add(new Farm((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.ToolsCount, (float)data.TimeToBuild));
+                    int level = data.ContainsKey("Level") ? (int)data.Level : Farm.DefaultLevel;
+                    this.farms.Add(new Farm((int)data.Hitbox.X, (int)data.Hitbox.Y, (Building.Status)data.Status, (int)data.ToolsCount, (float)data.TimeToBuild, level));
                 }
             }
 
