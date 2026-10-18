@@ -41,7 +41,7 @@ namespace Nazdar.Screens
             if (Keyboard.HasBeenPressed(Keys.C) || Gamepad.HasBeenPressed(Buttons.RightTrigger))
             {
                 this.player.Health = 100;
-                this.player.Cartridges = 100;
+                this.player.Cartridges = Player.CartridgeLimit;
                 this.player.Money = 100;
                 this.CreateHomeless();
             }
@@ -292,7 +292,9 @@ namespace Nazdar.Screens
                 {
                     if (Math.Abs(uniEnemy.X - soldier.X) < range)
                     {
-                        soldier.PrepareToShoot((uniEnemy.X + (uniEnemy.Width / 2)) < (soldier.X + (soldier.Width / 2)) ? Direction.Left : Direction.Right);
+                        soldier.PrepareToShoot(
+                            (uniEnemy.X + (uniEnemy.Width / 2)) < (soldier.X + (soldier.Width / 2)) ? Direction.Left : Direction.Right,
+                            this.player);
                         break;
                     }
                 }
@@ -1152,6 +1154,40 @@ namespace Nazdar.Screens
                             }
                         }
                     }
+                    else
+                    {
+                        // A completed market always offers more expensive imported ammunition.
+                        var market = markets.First();
+                        if (market.Status == Building.Status.Built)
+                        {
+                            this.player.Action = Enums.PlayerAction.Buy;
+                            this.player.ActionCost = Market.ImportedCartridgesCost;
+                            this.player.ActionName = Translation.Get("item.importedCartridges");
+                            this.player.ActionEnabled = this.player.CanAddCartridges(Market.ImportedCartridgesCount);
+                            this.player.ActionDescription = this.player.ActionEnabled
+                                ? Translation.Get("ammunition.sharedIncrease", Market.ImportedCartridgesCount)
+                                : Translation.Get("ammunition.notEnoughCapacity", Market.ImportedCartridgesCount);
+
+                            if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
+                            {
+                                if (!this.player.ActionEnabled)
+                                {
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.cantHoldCartridges"), MessageType.Fail);
+                                }
+                                else if (this.player.Money < this.player.ActionCost)
+                                {
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.notEnoughMoney"), MessageType.Fail);
+                                }
+                                else
+                                {
+                                    this.player.Cartridges += Market.ImportedCartridgesCount;
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.cartridgePurchased"), MessageType.Info);
+                                    Audio.PlaySound("SoldierSpawn");
+                                    this.player.Money -= this.player.ActionCost;
+                                }
+                            }
+                        }
+                    }
                     break;
                 }
                 // Rails?
@@ -1212,15 +1248,23 @@ namespace Nazdar.Screens
                     {
                         // arsenal exists - buy bullets?
                         var arsenal = arsenals.First();
-                        if (arsenal.Status == Building.Status.Built && this.player.CanAddCartridge())
+                        if (arsenal.Status == Building.Status.Built)
                         {
                             this.player.Action = Enums.PlayerAction.Buy;
                             this.player.ActionCost = Arsenal.CartridgesCost;
-                            this.player.ActionName = arsenal.CartridgeName;
+                            this.player.ActionName = Translation.Get("item.cartridgesForLegion");
+                            this.player.ActionEnabled = this.player.CanAddCartridges(Arsenal.CartridgesCount);
+                            this.player.ActionDescription = this.player.ActionEnabled
+                                ? Translation.Get("ammunition.sharedIncrease", Arsenal.CartridgesCount)
+                                : Translation.Get("ammunition.notEnoughCapacity", Arsenal.CartridgesCount);
 
                             if (Keyboard.HasBeenPressed(ControlKeys.Action) || Gamepad.HasBeenPressed(ControlButtons.Action) || TouchControls.HasBeenPressedAction())
                             {
-                                if (this.player.Money >= this.player.ActionCost)
+                                if (!this.player.ActionEnabled)
+                                {
+                                    Game1.MessageBuffer.AddMessage(Translation.Get("message.cantHoldCartridges"), MessageType.Fail);
+                                }
+                                else if (this.player.Money >= this.player.ActionCost)
                                 {
                                     this.player.Cartridges += Arsenal.CartridgesCount;
                                     Game1.MessageBuffer.AddMessage(Translation.Get("message.cartridgePurchased"), MessageType.Info);

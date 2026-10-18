@@ -10,6 +10,8 @@ namespace Nazdar.Objects
     public class Market : BaseBuilding
     {
         public const int Cost = 8;
+        public const int ImportedCartridgesCost = 4;
+        public const int ImportedCartridgesCount = 48;
         public override string Name => Nazdar.Shared.Translation.Translation.Get("building.market");
 
         public Market(int x, int y, Building.Status status, float ttb = 8) : base()

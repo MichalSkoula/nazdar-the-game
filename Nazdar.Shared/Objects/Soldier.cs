@@ -150,13 +150,13 @@ namespace Nazdar.Objects
             this.particleSmoke.Update(deltaTime, new Vector2(this.X + (this.Direction == Direction.Left ? 0 : this.Width), this.Y));
         }
 
-        public void PrepareToShoot(Direction direction)
+        public void PrepareToShoot(Direction direction, Player ammunitionSource)
         {
             this.isFast = false;
             this.stopBecauseOfShooting = true;
             this.Direction = direction;
 
-            if (Game1.GlobalTimer % this.shootRate == 0)
+            if (Game1.GlobalTimer % this.shootRate == 0 && ammunitionSource.TryConsumeCartridge())
             {
                 this.Bullets.Add(new Bullet(
                     this.X + (this.Width / 2),

@@ -20,7 +20,8 @@
 		<TrimmerRootAssembly Include="Microsoft.Xna.Framework.Content.ContentTypeReader" Visible="false" />
 	</ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.*" />
+    <!-- Pinned because 3.8.6 fails to load Song with E_NOINTERFACE; revisit after https://github.com/MonoGame/MonoGame/issues/9577 is fixed. -->
+    <PackageReference Include="MonoGame.Framework.WindowsDX" Version="3.8.5.1" />
 
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.6901" />
 		<PackageReference Include="MonoGame.Extended" Version="3.7.0" />

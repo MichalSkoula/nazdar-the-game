@@ -15,8 +15,9 @@ namespace Nazdar.Objects
 {
     public class Player : BasePerson
     {
-        private static readonly int moneyLimit = 48;
-        private static readonly int cartridgeLimit = 32;
+        private static readonly int moneyLimit = 64;
+        public const int CartridgeLimit = 384;
+        public const int DefaultCartridges = 24;
 
         private readonly List<Animation> animations = new List<Animation>()
         {
@@ -52,6 +53,7 @@ namespace Nazdar.Objects
         }
 
         private int cartridges;
+        private bool noCartridgesMessageShown;
         public int Cartridges
         {
             get
@@ -60,20 +62,43 @@ namespace Nazdar.Objects
             }
             set
             {
-                if (value > cartridgeLimit)
+                if (value > CartridgeLimit)
                 {
                     Game1.MessageBuffer.AddMessage(Translation.Get("message.cantHoldCartridges"), MessageType.Danger);
-                    this.cartridges = cartridgeLimit;
+                    this.cartridges = CartridgeLimit;
                 }
                 else
                 {
                     this.cartridges = value;
                 }
+
+                if (this.cartridges > 0)
+                {
+                    this.noCartridgesMessageShown = false;
+                }
             }
         }
-        public bool CanAddCartridge()
+
+        public bool CanAddCartridges(int count)
         {
-            return this.Cartridges < cartridgeLimit;
+            return count > 0 && this.Cartridges <= CartridgeLimit - count;
+        }
+
+        public bool TryConsumeCartridge()
+        {
+            if (this.Cartridges > 0)
+            {
+                this.Cartridges--;
+                return true;
+            }
+
+            if (!this.noCartridgesMessageShown)
+            {
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.noCartridges"), MessageType.Danger);
+                this.noCartridgesMessageShown = true;
+            }
+
+            return false;
         }
 
         public int Days { get; set; }
@@ -100,7 +125,7 @@ namespace Nazdar.Objects
             this.Days = 0;
             this.Speed = 121;
             this.Money = 4;
-            this.Cartridges = 15;
+            this.Cartridges = DefaultCartridges;
 
             this.particleBlood = new ParticleSource(
                 new Vector2(this.X, this.Y),
@@ -208,7 +233,7 @@ namespace Nazdar.Objects
                 // fire
                 if (Keyboard.HasBeenPressed(ControlKeys.Shoot) || Gamepad.HasBeenPressed(ControlButtons.Shoot) || TouchControls.HasBeenPressedShoot())
                 {
-                    if (this.Cartridges > 0)
+                    if (this.TryConsumeCartridge())
                     {
                         MyShake.Shake();
                         MyVibration.Vibrate();
@@ -222,11 +247,6 @@ namespace Nazdar.Objects
                             )
                         );
                         this.particleSmoke.Run(50);
-                        this.Cartridges--;
-                    }
-                    else
-                    {
-                        Game1.MessageBuffer.AddMessage(Translation.Get("message.noCartridges"), MessageType.Danger);
                     }
                 }
             }

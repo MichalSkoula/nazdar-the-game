@@ -98,6 +98,7 @@ namespace Nazdar.Screens
             this.player.Kills = 0;
             this.player.Caliber = Player.DefaultCaliber;
             this.player.Bullets.Clear();
+            this.player.Cartridges = (this.player.Cartridges + 1) / 2;
             this.player.Health += 25;
 
             // set new center based on new map size

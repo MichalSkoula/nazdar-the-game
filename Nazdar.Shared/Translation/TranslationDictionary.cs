@@ -80,7 +80,7 @@ namespace Nazdar.Shared.Translation
             { "message.farmFull", (cs: "Farma je plna", en: "Farm is full") },
             { "message.medicalKitPurchased", (cs: "Lekarnicka zakoupena", en: "Medical kit purchased") },
             { "message.cantBuyMoreMedicalKits", (cs: "Nelze koupit dalsi lekarnicku", en: "Can't buy any more medical kits") },
-            { "message.cartridgePurchased", (cs: "Naboje zakoupeny", en: "Cartridge purchased") },
+            { "message.cartridgePurchased", (cs: "Naboje zakoupeny", en: "Cartridges purchased") },
             { "message.shipBought", (cs: "Lod zakoupena", en: "Ship bought") },
             { "message.homelessHired", (cs: "Bezdomovec => sedlak", en: "Homeless hired => peasant") },
             { "message.enemiesComing", (cs: "Pripravte se, prichazi nepratele", en: "Brace yourselves, enemies are coming") },
@@ -168,8 +168,8 @@ namespace Nazdar.Shared.Translation
             { "mission6.goals", (cs: "CILE MISE", en: "MISSION GOALS") },
             { "mission6.goal1", (cs: "Oprav lokomotivu a jed na vychod", en: "Repair the locomotive and head east") },
             { "mission6.tips", (cs: "TIPY", en: "TIPS") },
-            { "mission6.tip1", (cs: "Nelze postavit Municni sklad - tva budoucnost", en: "Cannot build Arsenal - your future depends") },
-            { "mission6.tip2", (cs: "zavisi na tvych hrdinskych vojacich.", en: "on your heroic soldiers.") },
+            { "mission6.tip1", (cs: "Municni sklad nelze postavit - drazsi naboje", en: "The Arsenal cannot be built - buy more expensive") },
+            { "mission6.tip2", (cs: "muzes kupovat v prodejnach.", en: "ammunition from Markets.") },
             { "mission6.tip3", (cs: "Cholera uderila tvrde! Mel bych mit", en: "Cholera epidemic struck hard! Make sure") },
             { "mission6.tip4", (cs: "hodne mediku.", en: "to have lot of medics.") },
 
@@ -222,7 +222,7 @@ namespace Nazdar.Shared.Translation
             { "tutorial.hirePeopleForArmory", (cs: "Mel bych najat lidi na vystavbu zbrojnice", en: "I should hire some people to build the Armory") },
             { "tutorial.createWeapons", (cs: "Mel bych vyrobit zbrane, abych mohl nabrat vojaky", en: "I should create some weapons to be able to recruit soldiers") },
             { "tutorial.hireSoldiers", (cs: "Mel bych najat lidi, kteri se stanou vojaky", en: "I should hire some people to become soldiers") },
-            { "tutorial.buildArsenal", (cs: "Mel bych postavit municni sklad, abych mohl kupovat naboje", en: "I should build the Arsenal to be able to buy cartridges") },
+            { "tutorial.buildArsenal", (cs: "Naboje sdilim s vojaky. Mel bych postavit municni sklad", en: "I share ammunition with soldiers. I should build an Arsenal") },
             { "tutorial.hirePeopleForArsenal", (cs: "Mel bych najat lidi na vystavbu municniho skladu", en: "I should hire some people to build the Arsenal") },
             { "tutorial.defendAndEarn", (cs: "Mel bych branit zakladnu a vydelat dost penez na opravu lokomotivy", en: "I should defend the base and make enough money to repair the Locomotive") },
 
@@ -242,6 +242,8 @@ namespace Nazdar.Shared.Translation
             { "tower.upgradeEffect", (cs: "Utok: {0} => {1}", en: "Attack: {0} => {1}") },
             { "center.upgradeEffect", (cs: "Utok vsech legionaru: +{0}", en: "All legionnaires' attack: +{0}") },
             { "farm.upgradeEffect", (cs: "Pracovni mista: {0} => {1}", en: "Worker capacity: {0} => {1}") },
+            { "ammunition.sharedIncrease", (cs: "Spolecna munice: +{0}", en: "Shared ammunition: +{0}") },
+            { "ammunition.notEnoughCapacity", (cs: "Neni misto na cely balik ({0})", en: "Not enough room for a full pack ({0})") },
 
             // Building names
             { "building.base", (cs: "Zakladnu", en: "Base") },
@@ -260,7 +262,9 @@ namespace Nazdar.Shared.Translation
             { "item.weapon", (cs: "Zbrane", en: "Weapon") },
             { "item.tool", (cs: "Naradi", en: "Tool") },
             { "item.medicalKit", (cs: "Lekarnicku", en: "Medical Kit") },
-            { "item.cartridge", (cs: "Naboje", en: "Cartridge") },
+            { "item.cartridge", (cs: "Naboje", en: "Cartridges") },
+            { "item.cartridgesForLegion", (cs: "naboje pro legii", en: "cartridges for the legion") },
+            { "item.importedCartridges", (cs: "dovezene naboje", en: "imported cartridges") },
 
             // Enemies
             { "enemy.rogueBolshevik", (cs: "Proradny bolsevik", en: "Rogue Bolshevik") },

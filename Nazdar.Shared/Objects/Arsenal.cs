@@ -8,8 +8,8 @@ namespace Nazdar.Objects
     {
         public const int Cost = 4;
 
-        public const int CartridgesCost = 3;
-        public const int CartridgesCount = 6;
+        public const int CartridgesCost = 2;
+        public const int CartridgesCount = 48;
 
         public Arsenal(int x, int y, Building.Status status, float ttb = 5) : base()
         {
