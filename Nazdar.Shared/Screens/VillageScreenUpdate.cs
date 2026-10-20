@@ -158,14 +158,15 @@ namespace Nazdar.Screens
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
-            // pigs only in survival mode or village >= 3
-            int randomBase = this.GetNewEnemyProbability() * 4; // for pigs = rare
-            bool pigsEnabled = false;
-            // @survivalMode x4
-            if (this.Game.Village >= 3 || (this.Game.Village == 0 && player.Days >= 3))
+            // Campaign pigs spawn half as often as infantry, starting in village 3.
+            int randomBase = this.GetNewEnemyProbability() * 2;
+            bool pigsEnabled = this.Game.Village >= 3;
+
+            // Keep survival's existing pig frequency and unlock day.
+            if (this.Game.Village == 0 && this.player.Days >= 3)
             {
                 pigsEnabled = true;
-                randomBase /= 4;
+                randomBase /= 2;
             }
 
             if (this.dayPhase == DayPhase.Night && pigsEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
@@ -248,7 +249,7 @@ namespace Nazdar.Screens
 
         private int GetNewEnemyProbability()
         {
-            int randomBase = newEnemyDefaultProbability - (this.Game.Village * 10) - (this.player.Days * 4);
+            int randomBase = newEnemyDefaultProbability - (this.Game.Village * 10) - (this.player.Days * 3);
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;
@@ -315,20 +316,22 @@ namespace Nazdar.Screens
                 farmer.DeploymentBuilding = null;
             }
 
-            if (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0 && this.farms.Count > 0)
+            if (this.dayPhase == DayPhase.Day && this.farms.Count > 0)
             {
-                // take only built farms
-                List<Farm> builtFarms = this.farms.Where(f => f.Status == Building.Status.Built).ToList();
+                // Resume work on cleared sides without waiting for the whole map to be safe.
+                List<Farm> builtFarms = this.farms.Where(f => f.Status == Building.Status.Built && this.CanWorkAt(f.Hitbox)).ToList();
 
                 if (builtFarms.Count > 0)
                 {
                     // Distribute farmers in turn while respecting each farm's own level-dependent capacity.
                     int farmIndex = 0;
                     int[] farmerCounts = new int[builtFarms.Count];
-                    foreach (Farmer farmer in this.farmers)
+                    foreach (Farmer farmer in this.farmers.Where(f => !f.Dead))
                     {
                         int farmsChecked = 0;
-                        while (farmsChecked < builtFarms.Count && farmerCounts[farmIndex] >= builtFarms[farmIndex].FarmerCapacity)
+                        while (farmsChecked < builtFarms.Count && (
+                            farmerCounts[farmIndex] >= builtFarms[farmIndex].FarmerCapacity ||
+                            !this.CanWorkAt(builtFarms[farmIndex].Hitbox, farmer.Hitbox)))
                         {
                             farmIndex = (farmIndex + 1) % builtFarms.Count;
                             farmsChecked++;
@@ -336,7 +339,8 @@ namespace Nazdar.Screens
 
                         if (farmsChecked == builtFarms.Count)
                         {
-                            break;
+                            // A different farmer may already be on a safe route to a remaining farm.
+                            continue;
                         }
 
                         farmer.DeploymentBuilding = builtFarms[farmIndex];
@@ -431,6 +435,20 @@ namespace Nazdar.Screens
 
         private void UpdatePeasants()
         {
+            // Clear last frame's builders even when a site is now unsafe or it is night.
+            // Otherwise a filtered-out site could keep building with a stale worker reference.
+            var constructionSites = this.armories.Cast<BaseBuilding>()
+                .Concat(this.hospitals)
+                .Concat(this.arsenals)
+                .Concat(this.towers)
+                .Concat(this.farms)
+                .Concat(this.markets)
+                .Concat(this.rails);
+            foreach (var building in constructionSites.Where(b => b.Status == Building.Status.InProcess))
+            {
+                building.WorkingPeasant = null;
+            }
+
             // reset his intentions
             foreach (Peasant peasant in this.peasants)
             {
@@ -439,27 +457,27 @@ namespace Nazdar.Screens
             }
 
             // something to build?
-            foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var armory in this.armories.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(armory);
                 break;
             }
-            foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var hospital in this.hospitals.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(hospital);
                 break;
             }
-            foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var arsenal in this.arsenals.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(arsenal);
                 break;
             }
-            foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var tower in this.towers.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(tower);
                 break;
             }
-            foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var farm in this.farms.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(farm);
                 break;
@@ -472,19 +490,19 @@ namespace Nazdar.Screens
             {
                 this.Build(this.locomotive);
             }
-            foreach (var market in this.markets.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var market in this.markets.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(market);
                 break;
             }
-            foreach (var rails in this.rails.Where(a => a.Status == Building.Status.InProcess))
+            foreach (var rails in this.rails.Where(a => a.Status == Building.Status.InProcess && this.CanWorkAt(a.Hitbox)))
             {
                 this.Build(rails);
                 break;
             }
 
             // something to get?
-            foreach (var farm in this.farms.Where(a => a.ToolsCount > 0))
+            foreach (var farm in this.farms.Where(a => a.ToolsCount > 0 && this.CanWorkAt(a.ToolZone)))
             {
                 this.Pick(farm, false, farm.Tools.Count, farm.ToolZone);
                 break;

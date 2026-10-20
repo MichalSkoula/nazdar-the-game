@@ -9,15 +9,50 @@ namespace Nazdar.Screens
 {
     public partial class VillageScreen : GameScreen
     {
+        // Allows daytime work on a cleared side of the base (or map midpoint); enemies at the base block both sides.
+        // Work at the base requires both sides clear; an optional worker area also checks their starting side.
+        private bool CanWorkAt(Microsoft.Xna.Framework.Rectangle workArea, Microsoft.Xna.Framework.Rectangle? workerArea = null)
+        {
+            if (this.dayPhase != DayPhase.Day)
+            {
+                return false;
+            }
+
+            int centerLeft = this.center?.X ?? MapWidth / 2;
+            int centerRight = this.center?.Hitbox.Right ?? centerLeft + 1;
+            bool needsLeftSide = workArea.Center.X < centerLeft;
+            bool needsRightSide = workArea.Center.X >= centerRight;
+
+            // Work at the base itself requires both approaches to be clear.
+            if (!needsLeftSide && !needsRightSide)
+            {
+                needsLeftSide = needsRightSide = true;
+            }
+
+            // A worker may leave the base, but must not cross an uncleared side to reach the job.
+            if (workerArea.HasValue)
+            {
+                needsLeftSide |= workerArea.Value.Center.X < centerLeft;
+                needsRightSide |= workerArea.Value.Center.X >= centerRight;
+            }
+
+            return !this.allEnemies.Any(enemy => !enemy.Dead && (
+                // Enemies inside the base threaten work on either side.
+                (enemy.Hitbox.Right > centerLeft && enemy.X < centerRight) ||
+                (needsLeftSide && enemy.X < centerLeft) ||
+                (needsRightSide && enemy.Hitbox.Right > centerRight)));
+        }
+
         private void Build(BaseBuilding building)
         {
             // is someone building it?
             building.WorkingPeasant = null;
 
-            // if the air is clean, he could do something
-            if (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)
+            // The opposite side may still be fighting while this construction site is safe.
+            if (this.CanWorkAt(building.Hitbox))
             {
-                foreach (var peasant in this.peasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
+                var availablePeasants = this.peasants.Where(p => !p.Dead && this.CanWorkAt(building.Hitbox, p.Hitbox));
+                foreach (var peasant in availablePeasants.Where(p => p.Hitbox.Intersects(building.Hitbox)))
                 {
                     building.WorkingPeasant = peasant;
                     peasant.IsBuildingHere = building.Hitbox;
@@ -25,10 +60,13 @@ namespace Nazdar.Screens
                 }
 
                 // no one is building it
-                if (building.WorkingPeasant == null && this.peasants.Count > 0)
+                if (building.WorkingPeasant == null)
                 {
-                    var nearestPeasant = this.peasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
-                    nearestPeasant.IsBuildingHere = building.Hitbox;
+                    var nearestPeasant = availablePeasants.OrderBy(p => Math.Abs(p.X - building.X)).FirstOrDefault();
+                    if (nearestPeasant != null)
+                    {
+                        nearestPeasant.IsBuildingHere = building.Hitbox;
+                    }
                 }
             }
         }
@@ -36,9 +74,11 @@ namespace Nazdar.Screens
         private void Pick(BaseBuilding building, bool always, int things, Microsoft.Xna.Framework.Rectangle? itemHitbox = null)
         {
             Microsoft.Xna.Framework.Rectangle targetHitbox = itemHitbox ?? building.Hitbox;
-            if (this.peasants.Count > 0 && (always || (this.dayPhase == DayPhase.Day && this.allEnemies.Where(enemy => enemy.Dead == false).Count() == 0)))
+            if (this.peasants.Count > 0 && (always || this.CanWorkAt(targetHitbox)))
             {
-                var nearestPeasants = this.peasants.OrderBy(p => Math.Abs(p.X - building.X));
+                var nearestPeasants = this.peasants
+                    .Where(p => !p.Dead && (always || this.CanWorkAt(targetHitbox, p.Hitbox)))
+                    .OrderBy(p => Math.Abs(p.X - building.X));
                 int i = 0;
                 foreach (var peasant in nearestPeasants)
                 {
