@@ -2,8 +2,8 @@
 using Nazdar.Objects;
 using Nazdar.Shared;
 using Nazdar.Shared.Parallax;
-using Nazdar.Shared.Translation;
 using Nazdar.Weather;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using static Nazdar.Enums;
@@ -16,9 +16,16 @@ namespace Nazdar.Screens
 
         public VillageScreen(Game1 game) : base(game) { }
 
-        private readonly Camera camera = new Camera();
+        internal VillageScreen(Game1 game, JObject saveData) : base(game)
+        {
+            this.initialSaveData = saveData;
+        }
 
-        private readonly FileIO saveFile = new FileIO();
+        private readonly JObject initialSaveData;
+        private bool initialized;
+        private bool paused;
+
+        private readonly Camera camera = new Camera();
 
         // will be calculated
         public static int MapWidth;
@@ -61,7 +68,7 @@ namespace Nazdar.Screens
 
         // some settings - random 0-X == 1 ----------------------------------------------
         // new enemy settings
-        // every day, it gets -3
+        // every day, it gets -4
         // every village, it gets -10
         private static readonly int newEnemyDefaultProbability = 260;
         private readonly int newEnemyProbabilityLowLimit = 16;
@@ -110,6 +117,12 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
+            // ScreenManager initializes reused screens again; a resumed mission must keep its live objects.
+            if (this.initialized)
+            {
+                return;
+            }
+
             MapWidth = Assets.TilesetGroups["village" + this.Game.Village].GetTilesetMapWidth();
 
             // create player in the center of the map
@@ -161,8 +174,7 @@ namespace Nazdar.Screens
                 );
             }
 
-            // set save slot and maybe load?
-            this.saveFile.File = Game.SaveSlot;
+            // Restore the supplied save, or populate a fresh mission.
             if (!this.Load() || this.Game.FirstRun)
             {
                 // increase probability
@@ -190,15 +202,36 @@ namespace Nazdar.Screens
             // add parallax layers
             parallaxManager.Init(MapWidth, this.Game.Village);
 
+            // Transitions draw the scene before its first update; prepare the view without advancing gameplay.
+            this.camera.Follow(this.player);
+            this.parallaxManager.Update((int)this.camera.Position.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));
+
             // maybe add some disease hahaha
             this.disease = new Disease(this.Game.Village);
 
             base.Initialize();
+            this.initialized = true;
+        }
+
+        internal void PauseForMenu()
+        {
+            this.paused = true;
+        }
+
+        internal void ResumeFromMenu()
+        {
+            this.paused = false;
+            Audio.SongTransition(0.5f, this.dayPhase == DayPhase.Day ? "Day" : "Night");
+        }
+
+        internal JObject CaptureSaveData()
+        {
+            return JObject.FromObject(this.GetSaveData());
         }
 
         private bool Load()
         {
-            dynamic saveData = this.saveFile.Load();
+            dynamic saveData = this.initialSaveData;
 
             // statics survive screen transitions - a fresh game (no save) must start from level 1
             Game1.CenterLevel = 1;
@@ -399,8 +432,6 @@ namespace Nazdar.Screens
                     this.towers.Add(newTower);
                 }
             }
-
-            Game1.MessageBuffer.AddMessage(Translation.Get("message.gameLoaded"), MessageType.Info);
 
             return true;
         }

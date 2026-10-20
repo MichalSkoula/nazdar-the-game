@@ -9,7 +9,7 @@ using System;
 
 namespace Nazdar
 {
-    public class Game1 : Game
+    public partial class Game1 : Game
     {
         public GraphicsDeviceManager Graphics;
         public SpriteBatch SpriteBatch;
@@ -19,6 +19,7 @@ namespace Nazdar
 
         private readonly ScreenManager screenManager;
         private readonly AssetsLoader assetsLoader = new AssetsLoader();
+        internal bool IsChangingScreen { get; private set; }
 
         public static Enums.Platform CurrentPlatform;
 
@@ -154,14 +155,41 @@ namespace Nazdar
 
         public void LoadScreen(Type type, bool transition = true, bool transitionLong = false)
         {
-            var screen = Activator.CreateInstance(type, this);
+            if (this.IsChangingScreen)
+            {
+                return;
+            }
+
+            if (type == typeof(Screens.VillageScreen))
+            {
+                this.ContinueMission();
+                return;
+            }
+
+            var screen = (Screen)Activator.CreateInstance(type, this);
+            this.ShowScreen(screen, transition, transitionLong);
+        }
+
+        private void ShowScreen(Screen screen, bool transition = true, bool transitionLong = false)
+        {
             if (transition)
             {
-                this.screenManager.LoadScreen((Screen)screen, new FadeTransition(this.GraphicsDevice, MyColor.Black, transitionLong ? 2f : 0.5f));
+                var fade = new FadeTransition(this.GraphicsDevice, MyColor.Black, transitionLong ? 2f : 0.5f);
+                this.IsChangingScreen = true;
+                fade.Completed += (sender, args) => this.IsChangingScreen = false;
+                try
+                {
+                    this.screenManager.LoadScreen(screen, fade);
+                }
+                catch
+                {
+                    this.IsChangingScreen = false;
+                    throw;
+                }
             }
             else
             {
-                this.screenManager.LoadScreen((Screen)screen);
+                this.screenManager.LoadScreen(screen);
             }
         }
 

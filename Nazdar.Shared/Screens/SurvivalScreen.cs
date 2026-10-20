@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
-using Nazdar.Controls;
 using Nazdar.Shared;
 using Nazdar.Shared.Translation;
-using System.Collections.Generic;
 using static Nazdar.Enums;
 
 namespace Nazdar.Screens
@@ -15,9 +12,7 @@ namespace Nazdar.Screens
 
         public SurvivalScreen(Game1 game) : base(game) { }
 
-        private readonly Dictionary<string, Button> buttons = new Dictionary<string, Button>();
-
-        private string[] saveDataLines;
+        private MissionMenu missionMenu;
 
         // every mission (village) should have a description
         private float descriptionY = 300;
@@ -40,52 +35,18 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("startButton", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("map.start"), true));
-            buttons.Add("deleteButton", new Button(Offset.MenuX, 100, null, ButtonSize.Medium, Translation.Get("map.deleteSave")));
-            buttons.Add("menuButton", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu")));
-
-            this.Load();
+            this.missionMenu = new MissionMenu(this.Game);
 
             Audio.SongVolume = 0.25f;
 
             base.Initialize();
         }
 
-        private void Load()
-        {
-            FileIO saveFile = new FileIO(Game.SaveSlot);
-
-            dynamic saveData = saveFile.Load();
-            this.saveDataLines = Tools.ParseSaveData(saveData);
-            // survival = village 0
-            this.Game.Village = 0;
-
-            if (saveData == null || !saveData.ContainsKey("village"))
-            {
-                buttons.GetValueOrDefault("deleteButton").Active = false;
-            }
-        }
-
         public override void Update(GameTime gameTime)
         {
-            Button.UpdateButtons(this.buttons);
-
-            // start game - villages
-            if (this.buttons.GetValueOrDefault("startButton").HasBeenClicked() || Controls.Gamepad.HasBeenPressed(Buttons.Start))
+            if (this.missionMenu.Update())
             {
-                this.Game.LoadScreen(typeof(Screens.VillageScreen));
-            }
-
-            // delete save
-            if (this.buttons.GetValueOrDefault("deleteButton").HasBeenClicked())
-            {
-                this.Game.LoadScreen(typeof(Screens.MapScreenDeleteSave));
-            }
-
-            // Back to Menu
-            if (this.buttons.GetValueOrDefault("menuButton").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.B))
-            {
-                this.Game.LoadScreen(typeof(Screens.MenuScreen));
+                return;
             }
 
             // move description
@@ -105,27 +66,28 @@ namespace Nazdar.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], ((Villages)this.Game.Village).ToString(), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
-
-            // buttons
-            foreach (KeyValuePair<string, Button> button in this.buttons)
+            if (!this.missionMenu.IsConfirmingLoad)
             {
-                button.Value.Draw(this.Game.SpriteBatch);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], ((Villages)this.Game.Village).ToString(), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
             }
 
-            // messages
-            Game1.MessageBuffer.Draw(Game.SpriteBatch);
+            this.missionMenu.Draw();
+            if (this.missionMenu.IsConfirmingLoad)
+            {
+                this.Game.DrawEnd();
+                return;
+            }
 
             // save data - show only some things
             int i = 0;
-            foreach (string line in this.saveDataLines)
+            foreach (string line in this.missionMenu.SaveDataLines)
             {
                 i++;
                 if (i == 1)
                 {
                     continue;
                 }
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 72 + (28 * i)), MyColor.White);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 130 + (24 * i)), MyColor.White);
             }
 
             // descriptions

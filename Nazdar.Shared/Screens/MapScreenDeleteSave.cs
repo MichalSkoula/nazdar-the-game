@@ -31,7 +31,8 @@ namespace Nazdar.Screens
             // main menu - NO
             if (this.buttons.GetValueOrDefault("no").HasBeenClicked() || Controls.Keyboard.HasBeenPressed(Keys.Escape) || Controls.Gamepad.HasBeenPressed(Buttons.B))
             {
-                this.Game.LoadScreen(typeof(Screens.MapScreen));
+                this.Game.LoadScreen(this.Game.SaveSlot == Save.Survival ? typeof(SurvivalScreen) : typeof(MapScreen));
+                return;
             }
 
             // new game - YES
@@ -40,6 +41,7 @@ namespace Nazdar.Screens
                 // delete save
                 FileIO saveFile = new FileIO(Game.SaveSlot);
                 saveFile.Delete();
+                this.Game.ForgetPausedMission();
 
                 // reset some variables
                 this.Game.Village = 1;

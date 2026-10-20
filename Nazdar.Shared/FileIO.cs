@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 using static System.Environment;
 
@@ -9,6 +10,7 @@ namespace Nazdar
     {
         public string File { get; set; }
         public string Folder { get; private set; }
+        public bool Exists => System.IO.File.Exists(this.FullPath);
         private string FullPath
         {
             get { return Path.Combine(this.Folder, File); }
@@ -36,10 +38,9 @@ namespace Nazdar
         {
             if (System.IO.File.Exists(this.FullPath))
             {
-                string json = System.IO.File.ReadAllText(FullPath);
-
                 try
                 {
+                    string json = System.IO.File.ReadAllText(FullPath);
                     dynamic data = JObject.Parse(json);
                     return data;
                 }
@@ -55,7 +56,32 @@ namespace Nazdar
         public void Save(object data)
         {
             string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-            System.IO.File.WriteAllText(this.FullPath, json);
+            string temporaryPath = this.FullPath + "." + Guid.NewGuid().ToString("N") + ".tmp";
+            try
+            {
+                // Replace only after serialization and the complete write succeed, preserving the previous save on failure.
+                System.IO.File.WriteAllText(temporaryPath, json);
+                if (this.Exists)
+                {
+                    System.IO.File.Replace(temporaryPath, this.FullPath, null);
+                }
+                else
+                {
+                    System.IO.File.Move(temporaryPath, this.FullPath);
+                }
+            }
+            finally
+            {
+                try
+                {
+                    if (System.IO.File.Exists(temporaryPath))
+                    {
+                        System.IO.File.Delete(temporaryPath);
+                    }
+                }
+                catch (IOException) { }
+                catch (UnauthorizedAccessException) { }
+            }
         }
 
         public void Delete()

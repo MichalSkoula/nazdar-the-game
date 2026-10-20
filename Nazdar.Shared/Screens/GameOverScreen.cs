@@ -21,8 +21,8 @@ namespace Nazdar.Screens
 
         public override void Initialize()
         {
-            buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("gameOver.loadLastSave"), true));
-            buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, Translation.Get("gameOver.newGame")));
+            buttons.Add("load", new Button(Offset.MenuX, 60, null, ButtonSize.Large, Translation.Get("gameOver.loadLastSave"), true, active: this.Game.HasMissionSave));
+            buttons.Add("new", new Button(Offset.MenuX, 100, null, ButtonSize.Large, Translation.Get("gameOver.newGame"), !this.Game.HasMissionSave));
             buttons.Add("menu", new Button(Offset.MenuX, 310, null, ButtonSize.Medium, Translation.Get("menu.backToMenu")));
 
             this.Load();

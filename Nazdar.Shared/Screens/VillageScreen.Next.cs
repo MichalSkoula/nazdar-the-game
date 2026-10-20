@@ -141,9 +141,14 @@ namespace Nazdar.Screens
             dayPhaseTimer = (int)DayNightLength.Day;
             this.center.HasBeenUpgradedToday = false;
 
-            // save
-            this.saveFile.Save(this.GetSaveData());
-            Game1.MessageBuffer.AddMessage(Translation.Get("message.gameSaved"), MessageType.Info);
+            // Keep the next village recoverable in memory if its automatic save fails.
+            var checkpoint = this.CaptureSaveData();
+            this.Game.ForgetPausedMission();
+            if (!this.Game.TrySaveMissionData(checkpoint))
+            {
+                this.Game.KeepMissionCheckpoint(checkpoint);
+            }
+            this.paused = true;
 
             // back to map menu
             this.Game.LoadScreen(typeof(Screens.MapScreen));
@@ -151,6 +156,8 @@ namespace Nazdar.Screens
 
         private void Won()
         {
+            this.Game.ForgetPausedMission();
+            this.paused = true;
             Game1.MessageBuffer.AddMessage(Translation.Get("message.youWon"), MessageType.Success);
 
             // Outro
@@ -159,6 +166,8 @@ namespace Nazdar.Screens
 
         private void GameOver()
         {
+            this.Game.ForgetPausedMission();
+            this.paused = true;
             // save current state to global static variable as json
             // to be able to show it on game over screen
             // the same way as if it was from a file

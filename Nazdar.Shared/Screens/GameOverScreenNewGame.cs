@@ -43,6 +43,7 @@ namespace Nazdar.Screens
                 // delete save
                 FileIO saveFile = new FileIO(Game.SaveSlot);
                 saveFile.Delete();
+                this.Game.ForgetPausedMission();
 
                 // reset some variables
                 this.Game.Village = 1;

@@ -18,22 +18,16 @@ namespace Nazdar.Screens
     {
         public override void Update(GameTime gameTime)
         {
-            // save & back to menu
+            if (this.paused || this.Game.IsChangingScreen)
+            {
+                return;
+            }
+
+            // Pause in memory; only the menu's explicit save action writes to disk.
             if (Keyboard.HasBeenPressed(Keys.Escape) || Gamepad.HasBeenPressed(Buttons.Start) || Gamepad.HasBeenPressed(Buttons.B) || TouchControls.HasBeenPressedSelect())
             {
-                // save
-                this.saveFile.Save(this.GetSaveData());
-                Game1.MessageBuffer.AddMessage(Translation.Get("message.gameSaved"), MessageType.Info);
-
-                // back to menu
-                if (this.Game.Village == 0)
-                {
-                    this.Game.LoadScreen(typeof(Screens.SurvivalScreen));
-                }
-                else
-                {
-                    this.Game.LoadScreen(typeof(Screens.MapScreen));
-                }
+                this.Game.PauseMission(this);
+                return;
             }
 
 #if DEBUG
@@ -206,15 +200,12 @@ namespace Nazdar.Screens
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
-            // ONLY AT LAST LEVEL or survival days > 5
-            bool leninEnabled = false;
-            int randomBase = this.GetNewEnemyProbability() * 8; // for lenin = super rare
-            // @survivalMode x4
-            if (this.Game.Village == Game1.MaxVillage || (this.Game.Village == 0 && player.Days >= 6))
-            {
-                leninEnabled = true;
-                randomBase /= 4;
-            }
+            bool isSurvival = this.Game.Village == 0;
+            bool leninEnabled = isSurvival ? this.player.Days >= 6 : this.Game.Village == Game1.MaxVillage;
+
+            // Survival uses 2 * B from day 6; the final campaign village uses 4 * B.
+            // At the same B, 2 * B gives twice the spawn probability of 4 * B.
+            int randomBase = this.GetNewEnemyProbability() * (isSurvival ? 2 : 4);
 
             if (this.dayPhase == DayPhase.Night && leninEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
@@ -249,7 +240,7 @@ namespace Nazdar.Screens
 
         private int GetNewEnemyProbability()
         {
-            int randomBase = newEnemyDefaultProbability - (this.Game.Village * 10) - (this.player.Days * 3);
+            int randomBase = newEnemyDefaultProbability - (this.Game.Village * 10) - (this.player.Days * 4);
             if (randomBase < this.newEnemyProbabilityLowLimit)
             {
                 randomBase = this.newEnemyProbabilityLowLimit;

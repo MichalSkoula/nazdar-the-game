@@ -58,6 +58,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Mouse.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Game1.Missions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\MissionMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parallax\Layer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Parallax\ParallaxManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ParticleSource.cs" />
@@ -75,10 +77,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Screens\SplashScreen.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FileIO.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenActions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenDraw.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenNext.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreenUpdate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.Actions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.Draw.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.Next.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Screens\VillageScreen.Update.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TilesetGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tools.cs" />

@@ -15,6 +15,8 @@ namespace Nazdar.Screens
     {
         public override void Draw(GameTime gameTime)
         {
+            // Start in screen space, regardless of the previous screen or frame's camera transform.
+            this.Game.Matrix = null;
             this.Game.DrawStart();
 
             // day or night sky - color transition
@@ -26,6 +28,7 @@ namespace Nazdar.Screens
 
             // NOW apply camera transform for the rest of the world
             this.Game.Matrix = this.camera.Transform;
+            this.Game.EffectStart();
 
             // background - railways
             Assets.TilesetGroups["village" + this.Game.Village].Draw("background", this.Game.SpriteBatch);

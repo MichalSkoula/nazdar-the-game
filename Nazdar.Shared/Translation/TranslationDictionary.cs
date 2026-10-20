@@ -37,6 +37,12 @@ namespace Nazdar.Shared.Translation
 
             // Map
             { "map.start", (cs: "Start", en: "Start") },
+            { "map.continue", (cs: "Pokracovat", en: "Continue") },
+            { "map.loadGame", (cs: "Nacist hru", en: "Load game") },
+            { "map.confirmLoadTitle", (cs: "Nacist hru?", en: "Load game?") },
+            { "map.saveGame", (cs: "Ulozit hru", en: "Save game") },
+            { "map.confirmLoad1", (cs: "Zahodit neulozeny prubeh", en: "Discard unsaved progress") },
+            { "map.confirmLoad2", (cs: "a nacist posledni pozici?", en: "and load the last save?") },
             { "map.deleteSave", (cs: "Smazat pozici", en: "Delete save") },
 
             // Game Over
@@ -56,6 +62,8 @@ namespace Nazdar.Shared.Translation
             // In-game messages
             { "message.gameLoaded", (cs: "Hra nactena", en: "Game loaded") },
             { "message.gameSaved", (cs: "Hra ulozena", en: "Game saved") },
+            { "message.saveFailed", (cs: "Hru se nepodarilo ulozit", en: "Could not save the game") },
+            { "message.loadFailed", (cs: "Pozici se nepodarilo nacist", en: "Could not load the save") },
             { "message.goToAnotherVillage", (cs: "Pojdme do dalsi vesnice!", en: "Lets go to another village!") },
             { "message.youWon", (cs: "VYHRAL JSI. Stesti zacatecnika?", en: "YOU WON. Beginner's luck.") },
             { "message.treasureStolen", (cs: "Zlaty poklad byl ukraden!", en: "The Golden Treasure was stolen") },
