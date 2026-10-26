@@ -4,6 +4,7 @@ using Nazdar.Shared;
 using Nazdar.Shared.Parallax;
 using Nazdar.Weather;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Nazdar.Enums;
@@ -76,7 +77,7 @@ namespace Nazdar.Screens
         private readonly int enemyDropProbability = 4;
         private readonly int pigDropProbability = 4;
         private readonly int leninDropProbability = 2;
-        private readonly int homelessLimit = 16;
+        private const int HomelessPerSlumLimit = 6;
         public static int farmingMoneyProbability = 512 * 3;
         public static int marketMoneyProbability = 512 * 2;
         private readonly int newSkyApocalypseProbability = 512 * 6;
@@ -296,7 +297,11 @@ namespace Nazdar.Screens
             {
                 foreach (var data in saveData.GetValue("homelesses"))
                 {
-                    this.homelesses.Add(new Homeless((int)data.Hitbox.X, (int)data.Hitbox.Y, (Direction)data.Direction));
+                    int homelessX = (int)data.Hitbox.X;
+                    // Older saves have no home cave; assign the nearest one without removing anyone.
+                    int savedSlumX = (int?)data["SlumX"] ?? homelessX;
+                    int? slumX = this.slums.OrderBy(s => Math.Abs(s.X - savedSlumX)).FirstOrDefault()?.X;
+                    this.homelesses.Add(new Homeless(homelessX, (int)data.Hitbox.Y, (Direction)data.Direction, slumX));
                 }
             }
 

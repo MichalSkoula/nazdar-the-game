@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Nazdar.Shared;
 using System.Collections.Generic;
+using System.Linq;
 using static Nazdar.Enums;
 
 namespace Nazdar.Objects
@@ -19,13 +20,28 @@ namespace Nazdar.Objects
         public const int Cost = 1;
         public const string Name = "Homeless";
 
-        public Homeless(int x, int y, Direction direction) : base()
+        public Homeless(int x, int y, Direction direction, int? slumX = null) : base()
         {
             this.Anim = this.animations[(int)Direction.Left];
             this.Hitbox = new Rectangle(x, y, this.Anim.FrameWidth, this.Anim.FrameHeight);
             this.Direction = direction;
+            this.DeploymentX = slumX;
             this.Health = 100;
             this.Speed = 61;
+        }
+
+        // Preserve the home cave so nearby caves do not exchange residents after loading.
+        public new object GetSaveData()
+        {
+            return new
+            {
+                this.Hitbox,
+                this.Direction,
+                this.Health,
+                this.Caliber,
+                Bullets = this.Bullets.Select(b => new { b.Hitbox, b.Direction, b.Caliber }).ToList(),
+                SlumX = this.DeploymentX
+            };
         }
 
         public new void Update(float deltaTime)

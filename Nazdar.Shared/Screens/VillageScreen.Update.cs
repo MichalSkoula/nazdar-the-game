@@ -1616,17 +1616,14 @@ namespace Nazdar.Screens
                 randomBase = this.newHomelessProbabilityLowLimit;
             }
 
-            if (Tools.RandomChance(randomBase) && this.homelesses.Count < this.homelessLimit)
+            if (Tools.RandomChance(randomBase) && this.CreateHomeless())
             {
                 Game1.MessageBuffer.AddMessage(Translation.Get("message.newHomelessAvailable"), MessageType.Opportunity);
-                this.CreateHomeless();
             }
 
             // update 
             foreach (Homeless homeless in this.homelesses)
             {
-                // Get the nearest slum and search around it.
-                homeless.DeploymentX = this.slums.OrderBy(s => Math.Abs(s.X - homeless.X)).FirstOrDefault().X;
                 homeless.Update(this.Game.DeltaTime);
             }
         }

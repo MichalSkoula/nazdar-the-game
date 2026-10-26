@@ -92,19 +92,30 @@ namespace Nazdar.Screens
             }
         }
 
-        private void CreateHomeless()
+        private bool CreateHomeless()
         {
             if (this.slums.Count == 0)
             {
-                return;
+                return false;
             }
 
-            var randomSlum = this.slums[Tools.GetRandom(this.slums.Count)];
+            var waitingHomelesses = this.homelesses.Where(h => !h.Dead && !h.ToDelete).ToList();
+            // Count home-cave residents, not nearby positions: caves can have overlapping walking areas.
+            var availableSlums = this.slums.Where(slum =>
+                waitingHomelesses.Count(h => h.DeploymentX == slum.X) < HomelessPerSlumLimit).ToList();
+            if (availableSlums.Count == 0)
+            {
+                return false;
+            }
+
+            var randomSlum = availableSlums[Tools.GetRandom(availableSlums.Count)];
             this.homelesses.Add(new Homeless(
                 randomSlum.X + (randomSlum.Width / 2),
                 Offset.Floor,
-                Direction.Right
+                Direction.Right,
+                randomSlum.X
             ));
+            return true;
         }
 
         private void UniEnemyDie(BasePerson enemy)
