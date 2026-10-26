@@ -119,7 +119,7 @@ namespace Nazdar.Shared.Translation
             { "credits.sounds", (cs: "ZVUKY", en: "SOUNDS") },
             { "credits.font", (cs: "FONTY", en: "FONT") },
             { "credits.tech", (cs: "TECHNOLOGIE", en: "TECH") },
-            { "credits.communityHelp", (cs: "KONTRIBUTORI", en: "CONTRIBUTORS") },
+            { "credits.communityHelp", (cs: "S POMOCI KOMUNITY", en: "COMMUNITY HELP") },
 
             // Map Mission 1
             { "mission1.line1", (cs: "Kveten 1918. Byli jsme napadeni", en: "May 1918. We were attacked by") },

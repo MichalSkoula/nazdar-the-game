@@ -24,7 +24,7 @@ namespace Nazdar.Screens
 
         private string[] intro;
         private float descriptionY = 350;
-        private readonly int descriptionSpeed = 25;
+        private readonly int descriptionSpeed = 45;
 
         public CreditsScreen(Game1 game) : base(game) { }
 
@@ -37,6 +37,10 @@ namespace Nazdar.Screens
             {
                 Translation.Get("credits.gameBy"),
                 "Michal Skoula",
+                "",
+                Translation.Get("credits.communityHelp"),
+                "xgimp",
+                "ddonatek",
                 "",
                 Translation.Get("credits.art"),
                 "0x72 (Robert Norenberg)",
@@ -81,10 +85,6 @@ namespace Nazdar.Screens
                 Translation.Get("credits.tech"),
                 "Monogame Framework",
                 ".NET 9",
-                "",
-                Translation.Get("credits.communityHelp"),
-                "xgimp",
-                "ddonatek",
             };
 
             if (Game1.CurrentPlatform != Platform.UWP)
