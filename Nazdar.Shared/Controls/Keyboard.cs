@@ -23,5 +23,23 @@ namespace Nazdar.Controls
         {
             return currentKeyState.IsKeyDown(key) && !previousKeyState.IsKeyDown(key);
         }
+
+        public static bool HasBeenPressed(Keys[] keys)
+        {
+            foreach (Keys key in keys)
+            {
+                if (HasBeenPressed(key))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool IsAnyPressed()
+        {
+            return currentKeyState.GetPressedKeyCount() > 0;
+        }
     }
 }

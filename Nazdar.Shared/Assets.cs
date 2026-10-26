@@ -105,6 +105,7 @@ namespace Nazdar
             Assets.Images["KeyboardDown"] = content.Load<Texture2D>("Controls/keyboard/down");
             Assets.Images["KeyboardLeft"] = content.Load<Texture2D>("Controls/keyboard/left");
             Assets.Images["KeyboardSpace"] = content.Load<Texture2D>("Controls/keyboard/space");
+            Assets.Images["KeyboardCtrl"] = content.Load<Texture2D>("Controls/keyboard/ctrl");
 
             Assets.Images["GamepadLeftStick"] = content.Load<Texture2D>("Controls/gamepad/left_stick");
             Assets.Images["GamepadLeft"] = content.Load<Texture2D>("Controls/gamepad/left");

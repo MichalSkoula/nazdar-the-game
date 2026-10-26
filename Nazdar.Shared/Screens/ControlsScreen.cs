@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
@@ -41,26 +42,7 @@ namespace Nazdar.Screens
 
             this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], Translation.Get("controls.title"), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
 
-            int topOffset = -50;
-
-            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardLeft"], new Vector2(Offset.MenuX, 120 + topOffset), Color.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardRight"], new Vector2(Offset.MenuX + 60, 120 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(Offset.MenuX + 130, 135 + topOffset), MyColor.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardSpace"], new Vector2(Offset.MenuX, 180 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.shoot"), new Vector2(Offset.MenuX + 130, 195 + topOffset), MyColor.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardUp"], new Vector2(Offset.MenuX, 240 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.jump"), new Vector2(Offset.MenuX + 130, 255 + topOffset), MyColor.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["KeyboardDown"], new Vector2(Offset.MenuX, 300 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.action"), new Vector2(Offset.MenuX + 130, 315 + topOffset), MyColor.White);
-
-            this.Game.SpriteBatch.Draw(Assets.Images["GamepadLeftStick"], new Vector2(Offset.MenuX + 300, 116 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(Offset.MenuX + 370, 131 + topOffset), MyColor.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["GamepadX"], new Vector2(Offset.MenuX + 304, 180 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.shoot"), new Vector2(Offset.MenuX + 370, 195 + topOffset), MyColor.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["GamepadY"], new Vector2(Offset.MenuX + 304, 240 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.jump"), new Vector2(Offset.MenuX + 370, 255 + topOffset), MyColor.White);
-            this.Game.SpriteBatch.Draw(Assets.Images["GamepadA"], new Vector2(Offset.MenuX + 304, 300 + topOffset), Color.White);
-            this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.action"), new Vector2(Offset.MenuX + 370, 315 + topOffset), MyColor.White);
+            DrawScheme(this.Game.SpriteBatch, Offset.MenuX, 70);
 
             // buttons
             foreach (KeyValuePair<string, Button> button in this.buttons)
@@ -69,6 +51,31 @@ namespace Nazdar.Screens
             }
 
             this.Game.DrawEnd();
+        }
+
+        // keyboard and gamepad scheme, also shown over the village before the first mission
+        public static void DrawScheme(SpriteBatch spriteBatch, int x, int y)
+        {
+            spriteBatch.Draw(Assets.Images["KeyboardLeft"], new Vector2(x, y), Color.White);
+            spriteBatch.Draw(Assets.Images["KeyboardRight"], new Vector2(x + 60, y), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(x + 182, y + 15), MyColor.White);
+            spriteBatch.Draw(Assets.Images["KeyboardSpace"], new Vector2(x, y + 60), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.shoot"), new Vector2(x + 182, y + 75), MyColor.White);
+            spriteBatch.Draw(Assets.Images["KeyboardUp"], new Vector2(x, y + 120), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.jump"), new Vector2(x + 182, y + 135), MyColor.White);
+            spriteBatch.Draw(Assets.Images["KeyboardDown"], new Vector2(x, y + 180), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], "/", new Vector2(x + 57, y + 195), MyColor.White);
+            spriteBatch.Draw(Assets.Images["KeyboardCtrl"], new Vector2(x + 72, y + 180), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.action"), new Vector2(x + 182, y + 195), MyColor.White);
+
+            spriteBatch.Draw(Assets.Images["GamepadLeftStick"], new Vector2(x + 320, y - 4), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(x + 390, y + 11), MyColor.White);
+            spriteBatch.Draw(Assets.Images["GamepadX"], new Vector2(x + 324, y + 60), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.shoot"), new Vector2(x + 390, y + 75), MyColor.White);
+            spriteBatch.Draw(Assets.Images["GamepadY"], new Vector2(x + 324, y + 120), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.jump"), new Vector2(x + 390, y + 135), MyColor.White);
+            spriteBatch.Draw(Assets.Images["GamepadA"], new Vector2(x + 324, y + 180), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.action"), new Vector2(x + 390, y + 195), MyColor.White);
         }
     }
 }

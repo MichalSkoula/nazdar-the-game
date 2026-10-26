@@ -33,6 +33,8 @@ namespace Nazdar
         public string SaveSlot { get; set; }
 
         public static bool Vibrations { get; set; } = true;
+        public static bool ControlsHintShown { get; set; } = false;
+        public static bool LastInputWasTouch { get; private set; } = false;
 
         public static JObject SaveTempData { get; set; }
 
@@ -138,6 +140,16 @@ namespace Nazdar
             Controls.Gamepad.GetState(this.IsActive);
             Controls.Mouse.GetState(this.IsActive);
             Controls.Touch.GetState(this.IsActive);
+
+            // remember the last used input device (touch on Windows also emulates mouse, so ignore mouse)
+            if (Controls.Touch.HasBeenPressedAnywhere())
+            {
+                LastInputWasTouch = true;
+            }
+            else if (Controls.Keyboard.IsAnyPressed() || Controls.Gamepad.IsAnyPressed())
+            {
+                LastInputWasTouch = false;
+            }
 
             MessageBuffer.Update(this.DeltaTime);
 

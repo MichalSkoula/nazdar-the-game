@@ -32,6 +32,19 @@ namespace Nazdar.Controls
             return currentState.IsButtonDown(btn) && !previousState.IsButtonDown(btn);
         }
 
+        public static bool IsAnyPressed()
+        {
+            foreach (Buttons btn in System.Enum.GetValues(typeof(Buttons)))
+            {
+                if (currentState.IsButtonDown(btn))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool IsPressedThumbstick(Direction direction)
         {
             if (direction == Direction.Left)

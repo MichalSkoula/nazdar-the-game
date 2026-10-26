@@ -15,6 +15,7 @@ namespace Nazdar.Shared
                 musicMuted = MediaPlayer.IsMuted,
                 soundsVolume = SoundEffect.MasterVolume,
                 vibrations = Game1.Vibrations,
+                controlsHintShown = Game1.ControlsHintShown,
                 language = Nazdar.Shared.Translation.Translation.CurrentLanguage
             });
         }
@@ -61,6 +62,11 @@ namespace Nazdar.Shared
             if (settings.ContainsKey("vibrations"))
             {
                 Game1.Vibrations = (bool)settings.vibrations;
+            }
+
+            if (settings.ContainsKey("controlsHintShown"))
+            {
+                Game1.ControlsHintShown = (bool)settings.controlsHintShown;
             }
 
             if (settings.ContainsKey("language"))

@@ -5,6 +5,7 @@ using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Objects;
 using Nazdar.Shared;
+using Nazdar.Shared.Translation;
 using Nazdar.Weather;
 using System.Linq;
 using static Nazdar.Enums;
@@ -274,6 +275,21 @@ namespace Nazdar.Screens
 
             // raining - most front
             this.sky.Draw(Game.SpriteBatch);
+
+            // controls scheme before the first mission (screen-space, over everything)
+            if (this.controlsOverlay)
+            {
+                this.Game.Matrix = null;
+                this.Game.EffectStart();
+
+                this.Game.SpriteBatch.FillRectangle(new Rectangle(0, 0, Enums.Screen.Width, Enums.Screen.Height), MyColor.Black * 0.8f);
+                this.Game.SpriteBatch.DrawString(Assets.Fonts["Large"], Translation.Get("controls.title"), new Vector2(Offset.MenuX, Offset.MenuY), MyColor.White);
+                ControlsScreen.DrawScheme(this.Game.SpriteBatch, Offset.MenuX, 70);
+                if (this.controlsOverlayTimer >= ControlsOverlayDelay)
+                {
+                    this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.continue"), new Vector2(Offset.MenuX, 320), MyColor.Gray1);
+                }
+            }
 
             this.Game.DrawEnd();
         }

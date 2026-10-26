@@ -26,6 +26,12 @@ namespace Nazdar.Screens
         private bool initialized;
         private bool paused;
 
+        // controls scheme shown once before the first mission (campaign or survival)
+        private const float ControlsOverlayDelay = 1f;
+        private bool controlsOverlay;
+        private bool controlsOverlayArmed;
+        private float controlsOverlayTimer;
+
         private readonly Camera camera = new Camera();
 
         // will be calculated
@@ -204,6 +210,9 @@ namespace Nazdar.Screens
 
             // maybe add some disease hahaha
             this.disease = new Disease(this.Game.Village);
+
+            // touch players see the touch buttons directly, no need for keyboard/gamepad scheme
+            this.controlsOverlay = !Game1.ControlsHintShown && Game1.CurrentPlatform != Platform.Android && !Game1.LastInputWasTouch;
 
             base.Initialize();
             this.initialized = true;

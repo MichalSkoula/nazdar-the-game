@@ -29,6 +29,7 @@ namespace Nazdar.Shared.Translation
             { "controls.shoot", (cs: "strelba", en: "shoot") },
             { "controls.jump", (cs: "skok", en: "jump") },
             { "controls.action", (cs: "akce", en: "action") },
+            { "controls.continue", (cs: "Pro pokracovani stiskni cokoli", en: "Press any button to continue") },
 
             // Credits
             { "credits.title", (cs: "Autori", en: "Credits") },

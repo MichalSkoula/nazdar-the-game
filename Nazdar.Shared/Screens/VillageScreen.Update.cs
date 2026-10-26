@@ -16,10 +16,39 @@ namespace Nazdar.Screens
 {
     public partial class VillageScreen : GameScreen
     {
+        private void UpdateControlsOverlay()
+        {
+            this.controlsOverlayTimer += this.Game.DeltaTime;
+            if (this.controlsOverlayTimer < ControlsOverlayDelay)
+            {
+                return;
+            }
+
+            // close on release, so the dismissing key does not also jump, shoot or act
+            if (Keyboard.IsAnyPressed() || Gamepad.IsAnyPressed() || Nazdar.Controls.Mouse.IsPressed())
+            {
+                this.controlsOverlayArmed = true;
+                return;
+            }
+
+            if (this.controlsOverlayArmed || Touch.HasBeenPressedAnywhere())
+            {
+                this.controlsOverlay = false;
+                Game1.ControlsHintShown = true;
+                Settings.SaveSettings(this.Game);
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             if (this.paused || this.Game.IsChangingScreen)
             {
+                return;
+            }
+
+            if (this.controlsOverlay)
+            {
+                this.UpdateControlsOverlay();
                 return;
             }
 
