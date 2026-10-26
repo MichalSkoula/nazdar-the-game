@@ -333,66 +333,71 @@ namespace Nazdar.Screens
                 return;
             }
 
-            // make list of all wounded
+            var activeMedics = this.medics.Where(m => !m.Dead && !m.ToDelete).ToList();
+
+            // Regular patients keep priority over wounded medics.
             List<BasePerson> wounded = new List<BasePerson>();
-            if (this.player.Health < 100)
+            if (this.player.Health < 100 && !this.player.Dead && !this.player.ToDelete)
             {
                 wounded.Add(this.player);
             }
-            wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && i.Dead == false));
-            wounded.AddRange(this.farmers.Where(i => i.Health < 100 && i.Dead == false));
-            wounded.AddRange(this.peasants.Where(i => i.Health < 100 && i.Dead == false));
+            wounded.AddRange(this.soldiers.Where(i => i.Health < 100 && !i.Dead && !i.ToDelete));
+            wounded.AddRange(this.farmers.Where(i => i.Health < 100 && !i.Dead && !i.ToDelete));
+            wounded.AddRange(this.peasants.Where(i => i.Health < 100 && !i.Dead && !i.ToDelete));
+            var woundedMedics = activeMedics.Where(m => m.Health < 100).ToList();
+            var allWounded = new HashSet<BasePerson>(wounded);
+            allWounded.UnionWith(woundedMedics);
 
-            // free medics from patients that no longer exist or are fully healed
+            // Release invalid assignments and keep at most one living healer per patient.
+            var assignedPatients = new HashSet<BasePerson>();
             foreach (Medic medic in this.medics)
             {
-                if (!wounded.Contains(medic.DeploymentPerson))
-                {
-                    medic.DeploymentPerson = null;
-                }
-
-                if (medic.DeploymentPerson?.Health == 100)
+                if (medic.Dead || medic.ToDelete || medic.DeploymentPerson == medic ||
+                    !allWounded.Contains(medic.DeploymentPerson) || !assignedPatients.Add(medic.DeploymentPerson))
                 {
                     medic.DeploymentPerson = null;
                 }
             }
 
-            // pair medics to wounded using priority scoring
-            if (wounded.Count > 0)
+            BasePerson FindUnassignedPatient(Medic medic, IEnumerable<BasePerson> patients)
             {
-                // prioritize player first - always get a medic if wounded
-                if (this.player.Health < 100)
-                {
-                    bool playerBeingHealed = this.medics.Any(m => m.DeploymentPerson == this.player);
-                    if (!playerBeingHealed)
-                    {
-                        var nearestToPlayer = this.medics.Where(m => m.DeploymentPerson == null).OrderBy(m => Math.Abs(m.X - this.player.X)).FirstOrDefault();
-                        if (nearestToPlayer != null)
-                        {
-                            nearestToPlayer.DeploymentPerson = this.player;
-                        }
-                    }
-                }
+                return patients.Where(patient => patient != medic &&
+                        !activeMedics.Any(other => other.DeploymentPerson == patient))
+                    // Keep the existing injury/distance score within each priority group.
+                    .OrderByDescending(patient => (100 - patient.Health) * 1.5f
+                        - Math.Abs(patient.X - medic.X) / (float)MapWidth * 100)
+                    .FirstOrDefault();
+            }
 
-                // for other wounded, use priority scoring
-                var freeMedics = this.medics.Where(m => m.DeploymentPerson == null).ToList();
-                foreach (var medic in freeMedics)
+            // A wounded player takes priority, even when all medics already have patients.
+            if (wounded.Contains(this.player) && !activeMedics.Any(m => m.DeploymentPerson == this.player))
+            {
+                var nearestToPlayer = activeMedics
+                    .OrderBy(m => m.DeploymentPerson == null ? 0 : m.DeploymentPerson is Medic ? 1 : 2)
+                    .ThenBy(m => Math.Abs(m.X - this.player.X)).FirstOrDefault();
+                if (nearestToPlayer != null)
                 {
-                    var unassignedWounded = wounded.Where(w =>
-                        w != this.player &&
-                        !this.medics.Any(m => m.DeploymentPerson == w)
-                    ).Select(w => new
-                    {
-                        Person = w,
-                        // optimized priority: health (0-100) * 1.5 - distance normalized (0-100)
-                        Priority = (100 - w.Health) * 1.5f - (Math.Abs(w.X - medic.X) / (float)MapWidth * 100)
-                    }).OrderByDescending(x => x.Priority).FirstOrDefault();
-
-                    if (unassignedWounded != null)
-                    {
-                        medic.DeploymentPerson = unassignedWounded.Person;
-                    }
+                    nearestToPlayer.DeploymentPerson = this.player;
                 }
+            }
+
+            // Use free medics first; interrupt healing a colleague only for an unassigned regular patient.
+            var medicsForRegularPatients = activeMedics
+                .Where(m => m.DeploymentPerson == null || m.DeploymentPerson is Medic)
+                .OrderBy(m => m.DeploymentPerson != null).ToList();
+            foreach (var medic in medicsForRegularPatients)
+            {
+                var patient = FindUnassignedPatient(medic, wounded.Where(w => w != this.player));
+                if (patient != null)
+                {
+                    medic.DeploymentPerson = patient;
+                }
+            }
+
+            // Only remaining free medics may heal colleagues; self-healing is excluded above.
+            foreach (var medic in activeMedics.Where(m => m.DeploymentPerson == null))
+            {
+                medic.DeploymentPerson = FindUnassignedPatient(medic, woundedMedics);
             }
 
             // update them
