@@ -11,6 +11,10 @@
     Also clears the global NuGet cache (shared by all .NET projects on this machine).
     Packages are downloaded again on the next restore.
 
+.PARAMETER Force
+    Runs even when Visual Studio is open. Visual Studio keeps stale build state after obj/
+    is deleted and may skip the next build; restart it afterwards.
+
 .EXAMPLE
     .\clean.ps1 -WhatIf     # show what would be deleted
     .\clean.ps1             # delete build outputs
@@ -18,10 +22,16 @@
 #>
 [CmdletBinding(SupportsShouldProcess = $true)]
 param(
-    [switch]$NuGet
+    [switch]$NuGet,
+    [switch]$Force
 )
 
 $ErrorActionPreference = 'Stop'
+
+if (-not $Force -and -not $WhatIfPreference -and (Get-Process -Name devenv -ErrorAction SilentlyContinue)) {
+    Write-Warning 'Visual Studio is running. Close it first (it would skip the next build), or use -Force and restart it afterwards.'
+    return
+}
 
 $targetNames = @('bin', 'obj', 'AppPackages', 'BundleArtifacts')
 
