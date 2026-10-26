@@ -49,6 +49,6 @@ dotnet mgcb-editor
 
 ## Tech
 
-* .NET 9
+* .NET 10 (DX, GL, Android); UWP stays on legacy UAP (.NET Native)
 * MonoGame.Extended 3.7 + MonoGame.Extended.Particles (3.8 is bugged and newer versions does not support UWP)
 * C# 8 because of UWP (Xbox)

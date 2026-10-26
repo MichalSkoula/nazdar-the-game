@@ -84,7 +84,7 @@ namespace Nazdar.Screens
                 "",
                 Translation.Get("credits.tech"),
                 "Monogame Framework",
-                ".NET 9",
+                ".NET 10",
             };
 
             if (Game1.CurrentPlatform != Platform.UWP)
