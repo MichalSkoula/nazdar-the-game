@@ -75,6 +75,7 @@ namespace Nazdar.Screens
 #endif
 
             // player, camera, parallax stuff
+            this.player.LowCartridges = Player.GetLowCartridges(this.Game.Village, this.player.Days);
             this.player.Update(this.Game.DeltaTime);
             this.camera.Follow(this.player);
             this.parallaxManager.Update((int)this.camera.Position.X, Sky.GetParallaxColor(this.dayPhase, this.dayPhaseTimer));

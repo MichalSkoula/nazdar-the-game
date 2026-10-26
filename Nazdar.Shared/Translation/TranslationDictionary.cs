@@ -79,6 +79,7 @@ namespace Nazdar.Shared.Translation
             { "message.notEnoughMoney", (cs: "Nedostatek penez", en: "Not enough money") },
             { "message.cantHoldMoney", (cs: "Neuneses vsechny ty penize", en: "Can't hold all this money") },
             { "message.cantHoldCartridges", (cs: "Neuneses vsechny ty naboje", en: "Can't hold all these cartridges") },
+            { "message.lowCartridges", (cs: "Dochazi naboje", en: "Running low on cartridges") },
             { "message.noCartridges", (cs: "Zadne naboje", en: "No cartridges") },
             { "message.buildingBuilt", (cs: "Postavili jsme {0}", en: "{0} built") },
             { "message.buildingUpgraded", (cs: "Budova vylepsena", en: "Building upgraded") },

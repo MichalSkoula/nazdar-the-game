@@ -19,6 +19,20 @@ namespace Nazdar.Objects
         public const int CartridgeLimit = 512;
         public const int DefaultCartridges = 24;
 
+        // low ammunition warning threshold by village (index 0 unused, survival maps days to villages)
+        private static readonly int[] lowCartridgesByVillage = { 0, 16, 32, 48, 64, 96, 128, 160, 200 };
+        public int LowCartridges { get; set; } = lowCartridgesByVillage[1];
+
+        public static int GetLowCartridges(int village, int days)
+        {
+            if (village == 0)
+            {
+                village = days < 3 ? 1 : days < 6 ? 3 : days < 10 ? 5 : 8;
+            }
+
+            return lowCartridgesByVillage[Math.Clamp(village, 1, lowCartridgesByVillage.Length - 1)];
+        }
+
         private readonly List<Animation> animations = new List<Animation>()
         {
             new Animation(Assets.Images["PlayerRight"], 4, 10),
@@ -53,6 +67,8 @@ namespace Nazdar.Objects
         }
 
         private int cartridges;
+        // each warning once per consumption cycle; both re-armed only after refilling to LowCartridges
+        private bool lowCartridgesMessageShown;
         private bool noCartridgesMessageShown;
         public int Cartridges
         {
@@ -72,10 +88,37 @@ namespace Nazdar.Objects
                     this.cartridges = value;
                 }
 
-                if (this.cartridges > 0)
+                if (this.cartridges >= this.LowCartridges)
                 {
+                    this.lowCartridgesMessageShown = false;
                     this.noCartridgesMessageShown = false;
                 }
+                else if (this.cartridges > 0)
+                {
+                    this.ShowLowCartridgesMessage();
+                }
+                else
+                {
+                    this.ShowNoCartridgesMessage();
+                }
+            }
+        }
+
+        private void ShowLowCartridgesMessage()
+        {
+            if (!this.lowCartridgesMessageShown)
+            {
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.lowCartridges"), MessageType.Danger);
+                this.lowCartridgesMessageShown = true;
+            }
+        }
+
+        private void ShowNoCartridgesMessage()
+        {
+            if (!this.noCartridgesMessageShown)
+            {
+                Game1.MessageBuffer.AddMessage(Translation.Get("message.noCartridges"), MessageType.Fail);
+                this.noCartridgesMessageShown = true;
             }
         }
 
@@ -92,11 +135,7 @@ namespace Nazdar.Objects
                 return true;
             }
 
-            if (!this.noCartridgesMessageShown)
-            {
-                Game1.MessageBuffer.AddMessage(Translation.Get("message.noCartridges"), MessageType.Danger);
-                this.noCartridgesMessageShown = true;
-            }
+            this.ShowNoCartridgesMessage();
 
             return false;
         }
@@ -152,7 +191,10 @@ namespace Nazdar.Objects
             this.Health = (int)saveData.Health;
             this.Days = (int)saveData.Days;
             this.Money = (int)saveData.Money;
-            this.Cartridges = (int)saveData.Cartridges;
+            // restore silently; a low or empty supply warns on the next shot
+            this.cartridges = Math.Min((int)saveData.Cartridges, CartridgeLimit);
+            this.lowCartridgesMessageShown = false;
+            this.noCartridgesMessageShown = false;
             this.Kills = (int)saveData.Kills;
             this.Caliber = (int)saveData.Caliber;
 
