@@ -6,7 +6,14 @@ namespace Nazdar.Objects
 {
     public class Locomotive : BaseBuilding
     {
-        public const int Cost = 16;
+        // 24 in the first mission (just above the coins lying around at start), +4 per mission (48 in mission 7, same as the ship)
+        public const int Cost = 24;
+        public const int CostPerVillage = 4;
+
+        public static int GetCost(int village)
+        {
+            return Cost + ((village - 1) * CostPerVillage);
+        }
         public override string Name => Nazdar.Shared.Translation.Translation.Get("building.locomotive");
 
         public Locomotive(int x, int y, Building.Status status, float ttb = 20) : base()

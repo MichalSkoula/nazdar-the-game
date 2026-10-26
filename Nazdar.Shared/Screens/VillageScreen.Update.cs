@@ -1452,7 +1452,7 @@ namespace Nazdar.Screens
                 {
                     // we can build it
                     this.player.Action = Enums.PlayerAction.Repair;
-                    this.player.ActionCost = Locomotive.Cost + (this.Game.Village * 4);
+                    this.player.ActionCost = Locomotive.GetCost(this.Game.Village);
                     this.player.ActionName = Translation.Get("building.locomotive");
                     string actionEnabledText = "";
 
