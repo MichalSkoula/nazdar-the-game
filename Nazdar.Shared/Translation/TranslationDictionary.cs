@@ -103,15 +103,7 @@ namespace Nazdar.Shared.Translation
             { "splash.touchToContinue", (cs: "Pokracuj dotykem", en: "Touch to continue") },
 
             // Splash Screen 2
-            { "splash2.line1", (cs: "Ceskoslovenske legie byly vojenske", en: "The Czechoslovak Legion was a military force") },
-            { "splash2.line2", (cs: "jednotky bojujici za spojence v 1. sv. valce.", en: "fighting for the Allies during WWI.") },
-            { "splash2.line3", (cs: "Hlavnim cilem bylo ziskat podporu", en: "The main goal was to win the support of the") },
-            { "splash2.line4", (cs: "pro nezavislost Ceskoslovenska", en: "Allies for the independence of Czechoslovakia") },
-            { "splash2.line5", (cs: "na Rakousko-Uhersku. Usili legie", en: "from the Austria-Hungary. The Legion's efforts") },
-            { "splash2.line6", (cs: "behem ruske obcanske valky zahrnovalo", en: "during the Russian Civil War included clearing") },
-            { "splash2.line7", (cs: "obsazeni cele Transsibirske magistraly", en: "the entire Trans-Siberian Railway of") },
-            { "splash2.line8", (cs: "z ruk bolseviku. Do Evropy se legionari", en: "Bolshevik forces. They evacuated to") },
-            { "splash2.line9", (cs: "dostali az v roce 1920.", en: "Europe by 1920.") },
+            { "splash2.text", (cs: "Ceskoslovenske legie byly vojenske jednotky bojujici za spojence v 1. sv. valce. Hlavnim cilem bylo ziskat podporu pro nezavislost Ceskoslovenska na Rakousko-Uhersku. Usili legie behem ruske obcanske valky zahrnovalo obsazeni cele Transsibirske magistraly z ruk bolseviku. Do Evropy se legionari dostali az v roce 1920.", en: "The Czechoslovak Legion was a military force fighting for the Allies during WWI. The main goal was to win the support of the Allies for the independence of Czechoslovakia from Austria-Hungary. The Legion's efforts during the Russian Civil War included clearing the entire Trans-Siberian Railway of Bolshevik forces. They evacuated to Europe by 1920.") },
             { "splash2.disclaimer", (cs: "Tato hra je urcena pro zabavu a neni historicky presna.", en: "This game is for entertainment and is not historically accurate.") },
 
             // Credits

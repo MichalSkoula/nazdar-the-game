@@ -1,9 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using Nazdar.Controls;
 using Nazdar.Shared;
 using Nazdar.Shared.Translation;
+using System;
+using System.Collections.Generic;
 using Keyboard = Nazdar.Controls.Keyboard;
 using Mouse = Nazdar.Controls.Mouse;
 
@@ -15,27 +18,43 @@ namespace Nazdar.Screens
 
         private double timer = 16;
 
+        private string[] intro;
+
+        // the intro paragraph is wrapped to the panel width
         private string[] GetIntro()
         {
-            return new string[]
+            string paragraph = Translation.Get("splash2.text");
+
+            List<string> lines = new List<string>();
+            string current = "";
+            foreach (string word in paragraph.Split(' ', StringSplitOptions.RemoveEmptyEntries))
             {
-                Translation.Get("splash2.line1"),
-                Translation.Get("splash2.line2"),
-                Translation.Get("splash2.line3"),
-                Translation.Get("splash2.line4"),
-                Translation.Get("splash2.line5"),
-                Translation.Get("splash2.line6"),
-                Translation.Get("splash2.line7"),
-                Translation.Get("splash2.line8"),
-                Translation.Get("splash2.line9"),
-                "",
-                Translation.Get("splash2.disclaimer")
-            };
+                string candidate = current == "" ? word : current + " " + word;
+                if (current != "" && Assets.Fonts["Small"].MeasureString(candidate).X > IntroTextWidth)
+                {
+                    lines.Add(current);
+                    current = word;
+                }
+                else
+                {
+                    current = candidate;
+                }
+            }
+            lines.Add(current);
+
+            lines.Add("");
+            lines.Add(Translation.Get("splash2.disclaimer"));
+
+            return lines.ToArray();
         }
 
-        private float descriptionY = 350;
-        private readonly int descriptionYStop = 100;
-        private readonly int descriptionSpeed = 25;
+        // intro revealed line by line in a centered panel (same style as mission descriptions)
+        private const int IntroPadding = 14;
+        private const int IntroTextWidth = Enums.Screen.Width - 80 - (2 * IntroPadding);
+        private const int IntroLineHeight = 18;
+        private const float IntroLineDelay = 1f;
+        private const float IntroLineFade = 0.4f;
+        private float introTimer;
 
         public SplashScreen2(Game1 game) : base(game) { }
 
@@ -63,16 +82,7 @@ namespace Nazdar.Screens
                 this.Game.LoadScreen(typeof(Screens.MenuScreen));
             }
 
-            // move description
-            if (this.descriptionY > descriptionYStop)
-            {
-                this.descriptionY -= this.Game.DeltaTime * descriptionSpeed;
-            }
-            else
-            {
-                // to be precise
-                this.descriptionY = descriptionYStop;
-            }
+            this.introTimer += this.Game.DeltaTime;
         }
 
         public override void Draw(GameTime gameTime)
@@ -80,22 +90,31 @@ namespace Nazdar.Screens
             this.Game.Matrix = null;
             this.Game.DrawStart();
 
-            // intro up
-            int i = 0;
-            string[] intro = GetIntro();
-            foreach (string line in intro)
+            string[] intro = this.intro ??= GetIntro();
+            float lineHeight = Assets.Fonts["Small"].MeasureString("A").Y;
+            // panel almost as wide as the screen, height fitted to the text, centered
+            int panelWidth = IntroTextWidth + (2 * IntroPadding);
+            int panelHeight = (int)((IntroLineHeight * (intro.Length - 1)) + lineHeight) + (2 * IntroPadding);
+            Rectangle panel = new Rectangle((Enums.Screen.Width - panelWidth) / 2, (Enums.Screen.Height - panelHeight) / 2, panelWidth, panelHeight);
+            this.Game.SpriteBatch.FillRectangle(panel, MyColor.DarkViolet * 0.5f);
+            this.Game.SpriteBatch.DrawRectangle(panel, MyColor.Gray4);
+
+            // lines appear one by one, the last one (disclaimer) is highlighted
+            for (int i = 0; i < intro.Length; i++)
             {
-                i++;
+                float alpha = MathHelper.Clamp((this.introTimer - (i * IntroLineDelay)) / IntroLineFade, 0, 1);
+                if (alpha <= 0)
+                {
+                    break;
+                }
 
-                int textWidthLine = (int)Assets.Fonts["Small"].MeasureString(line).X;
-
+                int textWidthLine = (int)Assets.Fonts["Small"].MeasureString(intro[i]).X;
                 this.Game.SpriteBatch.DrawString(
                     Assets.Fonts["Small"],
-                    line,
-                    new Vector2((Enums.Screen.Width - textWidthLine) / 2, descriptionY + (18 * i)),
-                    i < intro.Length ? MyColor.Gray1 : MyColor.White
+                    intro[i],
+                    new Vector2((Enums.Screen.Width - textWidthLine) / 2, panel.Y + IntroPadding + (IntroLineHeight * i)),
+                    (i < intro.Length - 1 ? MyColor.Gray1 : MyColor.White) * alpha
                 );
-
             }
 
             this.Game.DrawEnd();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using Nazdar.Shared;
 using Nazdar.Shared.Translation;
@@ -15,11 +16,16 @@ namespace Nazdar.Screens
 
         private MissionMenu missionMenu;
 
-        // every mission (village) should have a description
-        private float descriptionY = 300;
-        private readonly int descriptionYStop = 62;
-        private readonly int descriptionSpeed = 40;
+        // every mission (village) should have a description, revealed line by line in a panel
+        // aligned with the mission menu: top of the first button (60) to the bottom of "Back to menu" (332)
+        private static readonly Rectangle descriptionPanel = new Rectangle(272, 60, 358, 272);
+        private const int DescriptionPadding = 12;
+        private const int DescriptionLineHeight = 18;
+        private const float DescriptionLineDelay = 0.4f;
+        private const float DescriptionLineFade = 0.3f;
+        private float descriptionTimer;
         private Dictionary<int, string[]> villageDescriptions;
+        private List<(string Text, bool Heading)> descriptionLines;
 
         public override void Initialize()
         {
@@ -159,16 +165,36 @@ namespace Nazdar.Screens
                 return;
             }
 
-            // move description
-            if (this.descriptionY > descriptionYStop)
+            this.descriptionTimer += this.Game.DeltaTime;
+        }
+
+        // a line after an empty one is a section heading (goals, tips); lines too long for the panel are wrapped
+        private List<(string Text, bool Heading)> GetDescriptionLines()
+        {
+            int maxWidth = descriptionPanel.Width - (2 * DescriptionPadding);
+            string[] source = this.villageDescriptions[this.Game.Village];
+            List<(string Text, bool Heading)> lines = new List<(string Text, bool Heading)>();
+            for (int j = 0; j < source.Length; j++)
             {
-                this.descriptionY -= this.Game.DeltaTime * descriptionSpeed;
+                bool heading = j > 0 && source[j - 1] == "";
+                string current = "";
+                foreach (string word in source[j].Split(' '))
+                {
+                    string candidate = current == "" ? word : current + " " + word;
+                    if (current != "" && Assets.Fonts["Small"].MeasureString(candidate).X > maxWidth)
+                    {
+                        lines.Add((current, heading));
+                        current = word;
+                    }
+                    else
+                    {
+                        current = candidate;
+                    }
+                }
+                lines.Add((current, heading));
             }
-            else
-            {
-                // to be precise
-                this.descriptionY = descriptionYStop;
-            }
+
+            return lines;
         }
 
         public override void Draw(GameTime gameTime)
@@ -200,12 +226,25 @@ namespace Nazdar.Screens
                 this.Game.SpriteBatch.DrawString(Assets.Fonts["Medium"], line, new Vector2(Offset.MenuX, Offset.MenuY + 130 + (24 * i)), MyColor.White);
             }
 
-            // descriptions
-            i = 0;
-            foreach (string line in this.villageDescriptions[this.Game.Village])
+            // description panel
+            this.Game.SpriteBatch.FillRectangle(descriptionPanel, MyColor.DarkViolet * 0.5f);
+            this.Game.SpriteBatch.DrawRectangle(descriptionPanel, MyColor.Gray4);
+
+            // lines appear one by one
+            List<(string Text, bool Heading)> lines = this.descriptionLines ??= this.GetDescriptionLines();
+            for (int j = 0; j < lines.Count; j++)
             {
-                i++;
-                this.Game.SpriteBatch.DrawString(Assets.Fonts["Small"], line, new Vector2(Offset.MenuX + 225, Offset.MenuY + descriptionY + (18 * i)), MyColor.Gray1);
+                float alpha = MathHelper.Clamp((this.descriptionTimer - (j * DescriptionLineDelay)) / DescriptionLineFade, 0, 1);
+                if (alpha <= 0)
+                {
+                    break;
+                }
+
+                this.Game.SpriteBatch.DrawString(
+                    Assets.Fonts["Small"],
+                    lines[j].Text,
+                    new Vector2(descriptionPanel.X + DescriptionPadding, descriptionPanel.Y + DescriptionPadding + (DescriptionLineHeight * j)),
+                    (lines[j].Heading ? MyColor.Yellow : MyColor.Gray1) * alpha);
             }
 
             this.Game.DrawEnd();
