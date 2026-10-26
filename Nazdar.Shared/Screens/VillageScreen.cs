@@ -66,12 +66,7 @@ namespace Nazdar.Screens
 
         private Disease disease;
 
-        // some settings - random 0-X == 1 ----------------------------------------------
-        // new enemy settings
-        // every day, it gets -4
-        // every village, it gets -10
-        private static readonly int newEnemyDefaultProbability = 260;
-        private readonly int newEnemyProbabilityLowLimit = 16;
+        // Spawn bases and unlocks are tuned in EnemyDifficulty.
         private static readonly int newHomelessDefaultProbability = 512 * 4;
         private readonly int newHomelessProbabilityLowLimit = 768;
         private readonly int newEnemyMaxCaliber = Enemy.DefaultCaliber * 5;

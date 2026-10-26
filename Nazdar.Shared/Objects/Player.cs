@@ -16,7 +16,7 @@ namespace Nazdar.Objects
     public class Player : BasePerson
     {
         private static readonly int moneyLimit = 64;
-        public const int CartridgeLimit = 384;
+        public const int CartridgeLimit = 512;
         public const int DefaultCartridges = 24;
 
         private readonly List<Animation> animations = new List<Animation>()

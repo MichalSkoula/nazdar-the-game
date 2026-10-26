@@ -94,12 +94,7 @@ namespace Nazdar.Screens
             // - in first half on night
             // - random - every day it gets more difficult, every village also
 
-            int randomBase = this.GetNewEnemyProbability();
-            // @survivalMode x4
-            if (this.Game.Village == 0)
-            {
-                randomBase = (int)(randomBase / 4);
-            }
+            int randomBase = EnemyDifficulty.GetInfantryRandomBase(this.Game.Village, this.player.Days);
 
             if (this.dayPhase == DayPhase.Night && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
@@ -150,20 +145,14 @@ namespace Nazdar.Screens
             // create pigs?
             // - at night
             // - in first half on night
-            // - random - every day it gets more difficult, every village also
+            // - campaign probability grows linearly with days, using a starting chance per village
 
-            // Campaign pigs spawn half as often as infantry, starting in village 3.
-            int randomBase = this.GetNewEnemyProbability() * 2;
-            bool pigsEnabled = this.Game.Village >= 3;
+            double spawnChance = EnemyDifficulty.GetPigSpawnChance(this.Game.Village, this.player.Days);
+            bool pigsEnabled = this.Game.Village == 0
+                ? this.player.Days >= EnemyDifficulty.SurvivalPigsFirstDay
+                : this.Game.Village >= EnemyDifficulty.CampaignPigsFirstVillage;
 
-            // Keep survival's existing pig frequency and unlock day.
-            if (this.Game.Village == 0 && this.player.Days >= 3)
-            {
-                pigsEnabled = true;
-                randomBase /= 2;
-            }
-
-            if (this.dayPhase == DayPhase.Night && pigsEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
+            if (this.dayPhase == DayPhase.Night && pigsEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(spawnChance))
             {
                 Audio.PlayRandomSound("PigSpawns");
 
@@ -201,11 +190,10 @@ namespace Nazdar.Screens
             // - random - every day it gets more difficult, every village also
 
             bool isSurvival = this.Game.Village == 0;
-            bool leninEnabled = isSurvival ? this.player.Days >= 6 : this.Game.Village == Game1.MaxVillage;
-
-            // Survival uses 2 * B from day 6; the final campaign village uses 4 * B.
-            // At the same B, 2 * B gives twice the spawn probability of 4 * B.
-            int randomBase = this.GetNewEnemyProbability() * (isSurvival ? 2 : 4);
+            bool leninEnabled = isSurvival
+                ? this.player.Days >= EnemyDifficulty.SurvivalTractorsFirstDay
+                : this.Game.Village == Game1.MaxVillage;
+            int randomBase = EnemyDifficulty.GetTractorRandomBase(this.Game.Village, this.player.Days);
 
             if (this.dayPhase == DayPhase.Night && leninEnabled && this.dayPhaseTimer >= (int)Enums.DayNightLength.Night / 2 && Tools.RandomChance(randomBase))
             {
@@ -236,16 +224,6 @@ namespace Nazdar.Screens
             {
                 lenin.Update(this.Game.DeltaTime);
             }
-        }
-
-        private int GetNewEnemyProbability()
-        {
-            int randomBase = newEnemyDefaultProbability - (this.Game.Village * 10) - (this.player.Days * 4);
-            if (randomBase < this.newEnemyProbabilityLowLimit)
-            {
-                randomBase = this.newEnemyProbabilityLowLimit;
-            }
-            return randomBase;
         }
 
         private void UpdateSoldiers()
@@ -1561,7 +1539,7 @@ namespace Nazdar.Screens
                     Game1.MessageBuffer.AddMessage(Translation.Get("message.enemiesComing"), MessageType.Danger);
                     this.dayPhase = DayPhase.Night;
                     this.dayPhaseTimer = (int)DayNightLength.Night;
-                    Tools.Dump("enemy probability: " + this.GetNewEnemyProbability());
+                    Tools.Dump("infantry random base: " + EnemyDifficulty.GetInfantryRandomBase(this.Game.Village, this.player.Days));
                 }
                 else
                 {

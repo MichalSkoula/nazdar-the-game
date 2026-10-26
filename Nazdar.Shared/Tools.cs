@@ -62,6 +62,12 @@ namespace Nazdar.Shared
             return Rand.Next(limit) == 0;
         }
 
+        // Probability is a fraction between 0 and 1; 0.01 means a 1% chance per call.
+        public static bool RandomChance(double probability)
+        {
+            return Rand.NextDouble() < probability;
+        }
+
         /// <summary>
         /// Rounds int to tenths
         /// </summary>
