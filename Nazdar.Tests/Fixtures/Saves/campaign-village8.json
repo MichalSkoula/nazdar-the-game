@@ -1,0 +1,982 @@
+{
+  "dayPhase": 0,
+  "dayPhaseTimer": 0,
+  "village": 8,
+  "centerLevel": 1,
+  "firstRun": false,
+  "skyTtl": -3.183320691809058,
+  "skyDropType": 0,
+  "skyDropCount": 0,
+  "player": {
+    "Hitbox": {
+      "X": 2154,
+      "Y": 172,
+      "Width": 16,
+      "Height": 20
+    },
+    "Direction": 1,
+    "Health": 100,
+    "Days": 41,
+    "Money": 43,
+    "Cartridges": 32,
+    "Kills": 0,
+    "Caliber": 32,
+    "Bullets": []
+  },
+  "enemies": [],
+  "pigs": [],
+  "lenins": [],
+  "soldiers": [
+    {
+      "Hitbox": {
+        "X": 1974,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1857,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1882,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 98,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1824,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1939,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1978,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 2013,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 98,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1887,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 98,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1947,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1833,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1905,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1878,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 94,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1841,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1918,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1825,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1979,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    }
+  ],
+  "farmers": [
+    {
+      "Hitbox": {
+        "X": 1981,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 98,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1977,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 98,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 2006,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 94,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1957,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 98,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1892,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 96,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1921,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 94,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1862,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 94,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1974,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 96,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1961,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 96,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1843,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 94,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1917,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1845,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 4,
+      "Bullets": []
+    }
+  ],
+  "homelesses": [
+    {
+      "Hitbox": {
+        "X": 1020,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3016,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1170,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 441,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3070,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3665,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3028,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1048,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3013,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3035,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3674,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3613,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 3065,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 0,
+      "Bullets": []
+    }
+  ],
+  "peasants": [
+    {
+      "Hitbox": {
+        "X": 1981,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1944,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 92,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1859,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 92,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1900,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 94,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1917,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1910,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1925,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1904,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 96,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1884,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 98,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1783,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 92,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1861,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 98,
+      "Caliber": 2,
+      "Bullets": []
+    }
+  ],
+  "medics": [
+    {
+      "Hitbox": {
+        "X": 1924,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 1788,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 4,
+      "Bullets": []
+    }
+  ],
+  "center": {
+    "Hitbox": {
+      "X": 1848,
+      "Y": 142,
+      "Width": 144,
+      "Height": 48
+    },
+    "Status": 1,
+    "TimeToBuild": 0.0,
+    "HasBeenUpgradedToday": false
+  },
+  "locomotive": null,
+  "treasure": null,
+  "armories": [
+    {
+      "Hitbox": {
+        "X": 1992,
+        "Y": 150,
+        "Width": 112,
+        "Height": 40
+      },
+      "Status": 1,
+      "WeaponsCount": 0,
+      "TimeToBuild": 0.0
+    }
+  ],
+  "arsenals": [],
+  "hospitals": [
+    {
+      "Hitbox": {
+        "X": 1736,
+        "Y": 150,
+        "Width": 112,
+        "Height": 40
+      },
+      "Status": 0,
+      "MedicalKitsCount": 0,
+      "TimeToBuild": 5.6500664
+    }
+  ],
+  "markets": [],
+  "towers": [],
+  "farms": [],
+  "rails": [
+    {
+      "Hitbox": {
+        "X": 1680,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 2400,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 3080,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 2624,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 3568,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 3688,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 2944,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    },
+    {
+      "Hitbox": {
+        "X": 2784,
+        "Y": 176,
+        "Width": 96,
+        "Height": 16
+      },
+      "Status": 1,
+      "TimeToBuild": 0.0
+    }
+  ],
+  "coins": [
+    {
+      "Hitbox": {
+        "X": 591,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 545,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3555,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 60,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3071,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3113,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 2713,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 969,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3696,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3469,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3333,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 482,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 183,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 279,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 1478,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 3066,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 1168,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 1711,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 1380,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 341,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    },
+    {
+      "Hitbox": {
+        "X": 1509,
+        "Y": 180,
+        "Width": 12,
+        "Height": 12
+      }
+    }
+  ]
+}

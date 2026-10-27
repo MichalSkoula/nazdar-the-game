@@ -28,6 +28,19 @@ namespace Nazdar
             this.Folder = Path.Combine(GetFolderPath(SpecialFolder.ApplicationData), "NazdarTheGame");
 #endif
 
+            this.EnsureFolder();
+        }
+
+        // Tests use their own folder so they never touch real saves.
+        internal FileIO(string file, string folder)
+        {
+            this.File = file;
+            this.Folder = folder;
+            this.EnsureFolder();
+        }
+
+        private void EnsureFolder()
+        {
             if (!Directory.Exists(this.Folder))
             {
                 Directory.CreateDirectory(this.Folder);

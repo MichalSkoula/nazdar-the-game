@@ -1,0 +1,178 @@
+{
+  "dayPhase": 1,
+  "dayPhaseTimer": 64.0,
+  "village": 2,
+  "centerLevel": 1,
+  "firstRun": true,
+  "skyTtl": -30.883107440546155,
+  "skyDropType": 0,
+  "skyDropCount": 0,
+  "player": {
+    "Hitbox": {
+      "X": 960,
+      "Y": 172,
+      "Width": 16,
+      "Height": 20
+    },
+    "Direction": 1,
+    "Health": 100,
+    "Days": 5,
+    "Money": 18,
+    "Cartridges": 49,
+    "Kills": 0,
+    "Caliber": 32,
+    "Bullets": []
+  },
+  "enemies": [],
+  "pigs": [],
+  "lenins": [],
+  "soldiers": [
+    {
+      "Hitbox": {
+        "X": 608,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 598,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 611,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 16,
+      "Bullets": []
+    }
+  ],
+  "farmers": [
+    {
+      "Hitbox": {
+        "X": 428,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 380,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 92,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 386,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 427,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 4,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 613,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 4,
+      "Bullets": []
+    }
+  ],
+  "homelesses": [],
+  "peasants": [
+    {
+      "Hitbox": {
+        "X": 699,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 3,
+      "Health": 100,
+      "Caliber": 2,
+      "Bullets": []
+    },
+    {
+      "Hitbox": {
+        "X": 612,
+        "Y": 172,
+        "Width": 16,
+        "Height": 20
+      },
+      "Direction": 1,
+      "Health": 100,
+      "Caliber": 2,
+      "Bullets": []
+    }
+  ],
+  "medics": [],
+  "center": {
+    "Hitbox": {
+      "X": 888,
+      "Y": 142,
+      "Width": 144,
+      "Height": 48
+    },
+    "Status": 1,
+    "TimeToBuild": 0.0,
+    "HasBeenUpgradedToday": false
+  },
+  "locomotive": null,
+  "treasure": null,
+  "armories": [],
+  "arsenals": [],
+  "hospitals": [],
+  "markets": [],
+  "towers": [],
+  "farms": [],
+  "rails": [],
+  "coins": []
+}

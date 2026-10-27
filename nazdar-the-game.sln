@@ -24,6 +24,8 @@ Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Nazdar.DX.Packaging", "Nazd
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.DX", "Nazdar.DX\Nazdar.DX.csproj", "{344E2CC5-7846-483D-949E-EF4AE51B5B5E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nazdar.Tests", "Nazdar.Tests\Nazdar.Tests.csproj", "{1C4D4B60-4916-2777-36C7-EF0C66BEC813}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,26 @@ Global
 		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x64.Build.0 = Release|Any CPU
 		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x86.ActiveCfg = Release|Any CPU
 		{344E2CC5-7846-483D-949E-EF4AE51B5B5E}.Release|x86.Build.0 = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|ARM.Build.0 = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|x64.Build.0 = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Debug|x86.Build.0 = Debug|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|ARM.Build.0 = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|ARM64.Build.0 = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|x64.ActiveCfg = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|x64.Build.0 = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|x86.ActiveCfg = Release|Any CPU
+		{1C4D4B60-4916-2777-36C7-EF0C66BEC813}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +193,7 @@ Global
 		SolutionGuid = {251B7899-8685-482B-9E77-7CC466A5B17B}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Nazdar.Shared\Nazdar.Shared.projitems*{1c4d4b60-4916-2777-36c7-ef0c66bec813}*SharedItemsImports = 5
 		Nazdar.Shared\Nazdar.Shared.projitems*{20ca00e9-b8a1-4832-a84f-7e50eb85100d}*SharedItemsImports = 5
 		Nazdar.Shared\Nazdar.Shared.projitems*{269b6713-e3e3-44ff-8cce-2156f9065089}*SharedItemsImports = 4
 		Nazdar.Shared\Nazdar.Shared.projitems*{344e2cc5-7846-483d-949e-ef4ae51b5b5e}*SharedItemsImports = 5

@@ -39,6 +39,24 @@ You must install the ```freetype``` and ```freetype-devel``` packages (on Fedora
 (sometimes Visual Studio restart is required...)
 (to update packages in partner.microsoft.com, first upload UWP x64 package and then DX x86 package (with different version strings), otherwise it will prefer the UWP version for every device)
 
+## Tests 🧪
+
+Unit tests live in `Nazdar.Tests` (xUnit). The project compiles the shared code directly, so `internal` members are testable; it never loads textures or sounds. `Fixtures/Saves` holds real saves; when the save format changes on purpose, replace them with fresh saves.
+
+```
+.\check.ps1             # tests + DX/GL build incl. content, builds go to a temp folder and are deleted
+.\check.ps1 -SkipBuild  # tests only (or: dotnet test Nazdar.Tests)
+.\check.ps1 -Clean      # then run clean.ps1
+```
+
+## Cleaning 🧹
+
+```
+.\clean.ps1 -WhatIf     # show what would be deleted
+.\clean.ps1             # delete outdated builds (old target frameworks, old package versions), keep the current ones
+.\clean.ps1 -All        # delete all build outputs
+```
+
 ## MGCB
 
 run mgcb (must be inside project folder, not solution folder)
