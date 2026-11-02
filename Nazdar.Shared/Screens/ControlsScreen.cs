@@ -58,15 +58,15 @@ namespace Nazdar.Screens
         {
             spriteBatch.Draw(Assets.Images["KeyboardLeft"], new Vector2(x, y), Color.White);
             spriteBatch.Draw(Assets.Images["KeyboardRight"], new Vector2(x + 60, y), Color.White);
-            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(x + 182, y + 15), MyColor.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(x + 140, y + 15), MyColor.White);
             spriteBatch.Draw(Assets.Images["KeyboardSpace"], new Vector2(x, y + 60), Color.White);
-            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.shoot"), new Vector2(x + 182, y + 75), MyColor.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.shoot"), new Vector2(x + 140, y + 75), MyColor.White);
             spriteBatch.Draw(Assets.Images["KeyboardUp"], new Vector2(x, y + 120), Color.White);
-            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.jump"), new Vector2(x + 182, y + 135), MyColor.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.jump"), new Vector2(x + 140, y + 135), MyColor.White);
             spriteBatch.Draw(Assets.Images["KeyboardDown"], new Vector2(x, y + 180), Color.White);
             spriteBatch.DrawString(Assets.Fonts["Medium"], "/", new Vector2(x + 57, y + 195), MyColor.White);
-            spriteBatch.Draw(Assets.Images["KeyboardCtrl"], new Vector2(x + 72, y + 180), Color.White);
-            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.action"), new Vector2(x + 182, y + 195), MyColor.White);
+            spriteBatch.Draw(Assets.Images["KeyboardE"], new Vector2(x + 72, y + 180), Color.White);
+            spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.action"), new Vector2(x + 140, y + 195), MyColor.White);
 
             spriteBatch.Draw(Assets.Images["GamepadLeftStick"], new Vector2(x + 320, y - 4), Color.White);
             spriteBatch.DrawString(Assets.Fonts["Medium"], Translation.Get("controls.movement"), new Vector2(x + 390, y + 11), MyColor.White);

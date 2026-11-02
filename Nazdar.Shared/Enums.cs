@@ -69,7 +69,7 @@ namespace Nazdar
             public const Keys Left = Keys.Left;
             public const Keys Right = Keys.Right;
             public const Keys Jump = Keys.Up;
-            public static readonly Keys[] Action = { Keys.Down, Keys.LeftControl, Keys.RightControl };
+            public static readonly Keys[] Action = { Keys.Down, Keys.E, Keys.F };
             public const Keys Shoot = Keys.Space;
         }
 

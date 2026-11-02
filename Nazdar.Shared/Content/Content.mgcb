@@ -470,7 +470,7 @@
 /processorParam:TextureFormat=Color
 /build:Controls/gamepad/y.png
 
-#begin Controls/keyboard/ctrl.png
+#begin Controls/keyboard/e.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -480,7 +480,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Controls/keyboard/ctrl.png
+/build:Controls/keyboard/e.png
 
 #begin Controls/keyboard/down.png
 /importer:TextureImporter
