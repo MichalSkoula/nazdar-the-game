@@ -49,6 +49,19 @@ Unit tests live in `Nazdar.Tests` (xUnit). The project compiles the shared code 
 .\check.ps1 -Clean      # then run clean.ps1
 ```
 
+## Debugging 🐞
+
+Nazdar.DX is built as x86 with an unsigned `Nazdar.DX.exe`. Running it (`dotnet run`, F5 in Visual Studio) requires:
+
+* Smart App Control turned off. When it is on, the exe fails with "An Application Control policy has blocked this file". Check with `Get-MpComputerStatus | Select-Object SmartAppControlState`.
+* x86 .NET runtime in `C:\Program Files (x86)\dotnet` (x64 alone is not enough).
+
+If Smart App Control stays on or the x86 runtime is missing, run it as x64 through the signed `dotnet.exe` instead (inside `Nazdar.DX`):
+
+```
+dotnet run -p:PlatformTarget=AnyCPU -p:UseAppHost=false
+```
+
 ## Cleaning 🧹
 
 ```
