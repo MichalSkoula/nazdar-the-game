@@ -18,7 +18,6 @@ namespace Nazdar.Objects
         };
 
         public const int Cost = 1;
-        public const string Name = "Homeless";
 
         public Homeless(int x, int y, Direction direction, int? slumX = null) : base()
         {

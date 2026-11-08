@@ -225,7 +225,7 @@ namespace Nazdar.Objects
             };
         }
 
-        public void Update(float deltaTime)
+        public new void Update(float deltaTime)
         {
             base.Update(deltaTime);
 

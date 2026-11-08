@@ -117,11 +117,11 @@ namespace Nazdar.Screens
             // www 
             if (this.buttons.ContainsKey("skoula") && this.buttons.GetValueOrDefault("skoula").HasBeenClicked())
             {
-                Tools.OpenLinkAsync(wwwSkoula);
+                _ = Tools.OpenLinkAsync(wwwSkoula);
             }
             if (this.buttons.ContainsKey("coffee") && this.buttons.GetValueOrDefault("coffee").HasBeenClicked())
             {
-                Tools.OpenLinkAsync(wwwCoffee);
+                _ = Tools.OpenLinkAsync(wwwCoffee);
             }
 
             // move description
